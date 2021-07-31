@@ -16,7 +16,6 @@ git branch --delete --force gh-pages
 git checkout --orphan gh-pages
 git add -f ./html/
 git commit -m "Deploy docs (commit '$latest_tag' )to GitHub pages [ci skip]"
-# git filter-branch -f --prune-empty --subdirectory-filter ./html/ &&
-git push -f origin gh-pages
+git filter-branch -f --prune-empty --subdirectory-filter ./html/ && git push -f origin gh-pages
 git checkout $MAIN_BRANCH
 git stash apply || :
