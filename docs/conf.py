@@ -132,5 +132,6 @@ extensions += [
     'sphinx.ext.todo',
     'sphinx.ext.mathjax',
     'sphinxjsondomain',
-    'sphinxcontrib.plantuml'
+    'sphinxcontrib.plantuml',
+    'sphinx.ext.githubpages',
 ]
