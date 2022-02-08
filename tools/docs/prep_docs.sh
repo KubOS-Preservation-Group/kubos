@@ -13,3 +13,6 @@ echo "Generating new docs"
 ./tools/docs/gendocs.py --version $latest_tag
 
 chmod a+rw -R html/
+
+# put version config back so it doesnt get accidentally committed
+sed -i "s/$latest_tag/0.0.0/g" docs/conf.py
