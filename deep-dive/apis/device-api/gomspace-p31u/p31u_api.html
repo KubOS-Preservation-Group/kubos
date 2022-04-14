@@ -1,0 +1,994 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>GOMspace NanoPower P31u API &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../../../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../../../../index.html"/>
+        <link rel="up" title="Kubos Device APIs" href="../index.html"/>
+        <link rel="next" title="NovAtel OEM6 API" href="../novatel-oem6.html"/>
+        <link rel="prev" title="ISIS TRXVU Radio API" href="../isis-trxvu/trxvu_api.html"/> 
+
+  
+  <script src="../../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../getting-started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../obc-docs/index.html">Working with an OBC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ecosystem/index.html">KubOS Ecosystem</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Under the Hood</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../../index.html#apis">APIs</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../device-api-guide.html">Kubos Device API Creation Guide</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html">Device Interfaces</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../mai400.html">MAI-400 ADACS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../clydespace-3g-eps.html">Clyde Space 3G EPS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../isis-ants/ants.html">ISIS Antenna Systems</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../isis-imtq/imtq.html">ISIS iMTQ</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../isis-trxvu/trxvu.html">ISIS TRXVU Radio</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">GOMspace NanoPower P31u</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../novatel-oem6.html">NovAtel OEM6 GPS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../nsl-duplex-d2.html">NSL EyeStar-D2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../pumpkin-mcu.html">Pumpkin MCUs</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../obc-api/index.html">OBC APIs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../kubos-hal/index.html">Kubos HAL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../kubos-libs.html">Kubos Libraries</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#protocols">Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#kubos-linux">Kubos Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#design-decisions">Design Decisions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../sdk-docs/index.html">Kubos SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contributing/index.html">Contributing to KubOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../index.html">Under the Hood of KubOS</a> &raquo;</li>
+        
+          <li><a href="../index.html">Kubos Device APIs</a> &raquo;</li>
+        
+      <li>GOMspace NanoPower P31u API</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../../_sources/deep-dive/apis/device-api/gomspace-p31u/p31u_api.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="gomspace-nanopower-p31u-api">
+<h1>GOMspace NanoPower P31u API<a class="headerlink" href="#gomspace-nanopower-p31u-api" title="Permalink to this headline">¶</a></h1>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Enums</p>
+<dl class="enum">
+<dt id="_CPPv410KEPSStatus">
+<span id="_CPPv310KEPSStatus"></span><span id="_CPPv210KEPSStatus"></span><span class="target" id="group__NANOPOWER__API_1gadd4cfa9e4d9334986ca026c0fc2da918"></span><em class="property">enum </em><code class="descname">KEPSStatus</code><a class="headerlink" href="#_CPPv410KEPSStatus" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>EPS function return values. </p>
+<p><em>Values:</em></p>
+<dl class="enumerator">
+<dt id="_CPPv46EPS_OK">
+<span id="_CPPv36EPS_OK"></span><span id="_CPPv26EPS_OK"></span><span class="target" id="group__NANOPOWER__API_1ggadd4cfa9e4d9334986ca026c0fc2da918afcde843dacf47b5c637219d6411cd9c9"></span><code class="descname">EPS_OK</code><a class="headerlink" href="#_CPPv46EPS_OK" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Requested function completed successfully. </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv49EPS_ERROR">
+<span id="_CPPv39EPS_ERROR"></span><span id="_CPPv29EPS_ERROR"></span><span class="target" id="group__NANOPOWER__API_1ggadd4cfa9e4d9334986ca026c0fc2da918aa6920105257d57445c255f71b36ec6bc"></span><code class="descname">EPS_ERROR</code><a class="headerlink" href="#_CPPv49EPS_ERROR" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Generic error. </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv413EPS_I2C_ERROR">
+<span id="_CPPv313EPS_I2C_ERROR"></span><span id="_CPPv213EPS_I2C_ERROR"></span><span class="target" id="group__NANOPOWER__API_1ggadd4cfa9e4d9334986ca026c0fc2da918a738928be3d80e3bc65c7ce49bdc0a579"></span><code class="descname">EPS_I2C_ERROR</code><a class="headerlink" href="#_CPPv413EPS_I2C_ERROR" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>I2C error. </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv416EPS_ERROR_CONFIG">
+<span id="_CPPv316EPS_ERROR_CONFIG"></span><span id="_CPPv216EPS_ERROR_CONFIG"></span><span class="target" id="group__NANOPOWER__API_1ggadd4cfa9e4d9334986ca026c0fc2da918ac8dbc86f280361842c4661f67d0aeea6"></span><code class="descname">EPS_ERROR_CONFIG</code><a class="headerlink" href="#_CPPv416EPS_ERROR_CONFIG" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Configuration error. </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv418EPS_ERROR_INTERNAL">
+<span id="_CPPv318EPS_ERROR_INTERNAL"></span><span id="_CPPv218EPS_ERROR_INTERNAL"></span><span class="target" id="group__NANOPOWER__API_1ggadd4cfa9e4d9334986ca026c0fc2da918afb603683fed5c319d6e4503eda3d5587"></span><code class="descname">EPS_ERROR_INTERNAL</code><a class="headerlink" href="#_CPPv418EPS_ERROR_INTERNAL" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>An error was thrown by the subsystem. </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Functions</p>
+<dl class="function">
+<dt id="_CPPv410k_eps_init8KEPSConf">
+<span id="_CPPv310k_eps_init8KEPSConf"></span><span id="_CPPv210k_eps_init8KEPSConf"></span><span id="k_eps_init__KEPSConf"></span><span class="target" id="group__NANOPOWER__API_1gaf311d198219e454521802583b8df77dd"></span><a class="reference internal" href="#_CPPv410KEPSStatus" title="KEPSStatus">KEPSStatus</a> <code class="descname">k_eps_init</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv48KEPSConf" title="KEPSConf">KEPSConf</a> <em>config</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv410k_eps_init8KEPSConf" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Initialize the interface with the EPS. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KEPSStatus EPS_OK if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">config</span></code>: Interface configuration values </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv415k_eps_terminatev">
+<span id="_CPPv315k_eps_terminatev"></span><span id="_CPPv215k_eps_terminatev"></span><span id="k_eps_terminate__void"></span><span class="target" id="group__NANOPOWER__API_1gac24e43bad902e7fa9f82b93e02051ce1"></span>void <code class="descname">k_eps_terminate</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv415k_eps_terminatev" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Terminate the EPS interface. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv410k_eps_pingv">
+<span id="_CPPv310k_eps_pingv"></span><span id="_CPPv210k_eps_pingv"></span><span id="k_eps_ping__void"></span><span class="target" id="group__NANOPOWER__API_1gaf3c39fbaf7c82bd85c00ffeaa5dad0e5"></span><a class="reference internal" href="#_CPPv410KEPSStatus" title="KEPSStatus">KEPSStatus</a> <code class="descname">k_eps_ping</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv410k_eps_pingv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Ping the EPS. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KEPSStatus EPS_OK if OK, error otherwise </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv411k_eps_resetv">
+<span id="_CPPv311k_eps_resetv"></span><span id="_CPPv211k_eps_resetv"></span><span id="k_eps_reset__void"></span><span class="target" id="group__NANOPOWER__API_1ga208dcac38d34b4f08b244dc0afd052ab"></span><a class="reference internal" href="#_CPPv410KEPSStatus" title="KEPSStatus">KEPSStatus</a> <code class="descname">k_eps_reset</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv411k_eps_resetv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Hard reset the EPS. </p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>It will wait 400ms before re-powering </dd>
+<dt><strong>Return</strong></dt>
+<dd>KEPSStatus EPS_OK if OK, error otherwise </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv412k_eps_rebootv">
+<span id="_CPPv312k_eps_rebootv"></span><span id="_CPPv212k_eps_rebootv"></span><span id="k_eps_reboot__void"></span><span class="target" id="group__NANOPOWER__API_1ga99ae2bac8ef3a8ff136b0a0cc170dce5"></span><a class="reference internal" href="#_CPPv410KEPSStatus" title="KEPSStatus">KEPSStatus</a> <code class="descname">k_eps_reboot</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv412k_eps_rebootv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Reboot the EPS (soft reset) </p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>Output power will not be affected </dd>
+<dt><strong>Return</strong></dt>
+<dd>KEPSStatus EPS_OK if OK, error otherwise </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv422k_eps_configure_systemPK19eps_system_config_t">
+<span id="_CPPv322k_eps_configure_systemPK19eps_system_config_t"></span><span id="_CPPv222k_eps_configure_systemPK19eps_system_config_t"></span><span id="k_eps_configure_system__eps_system_config_tCP"></span><span class="target" id="group__NANOPOWER__API_1gacd0f6d942ec281a3ec383432293dd1e1"></span><a class="reference internal" href="#_CPPv410KEPSStatus" title="KEPSStatus">KEPSStatus</a> <code class="descname">k_eps_configure_system</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv419eps_system_config_t" title="eps_system_config_t">eps_system_config_t</a> *<em>config</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv422k_eps_configure_systemPK19eps_system_config_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Configure the NanoPower’s system. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KEPSStatus EPS_OK if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">config</span></code>: Pointer to system configuration values </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv423k_eps_configure_batteryPK20eps_battery_config_t">
+<span id="_CPPv323k_eps_configure_batteryPK20eps_battery_config_t"></span><span id="_CPPv223k_eps_configure_batteryPK20eps_battery_config_t"></span><span id="k_eps_configure_battery__eps_battery_config_tCP"></span><span class="target" id="group__NANOPOWER__API_1ga5af3398afd5431ff2a296e79751257f6"></span><a class="reference internal" href="#_CPPv410KEPSStatus" title="KEPSStatus">KEPSStatus</a> <code class="descname">k_eps_configure_battery</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv420eps_battery_config_t" title="eps_battery_config_t">eps_battery_config_t</a> *<em>config</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv423k_eps_configure_batteryPK20eps_battery_config_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Configure the NanoPower’s battery. </p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>Configuration must be saved using <a class="reference internal" href="#group__NANOPOWER__API_1gab040adf6a838196fe558e93ef4f95503"><span class="std std-ref">k_eps_save_battery_config</span></a> between 1 and 30 seconds after calling this function, otherwise the changes will be erased. </dd>
+<dt><strong>Return</strong></dt>
+<dd>KEPSStatus EPS_OK if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">config</span></code>: Pointer to battery configuration values </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv425k_eps_save_battery_configv">
+<span id="_CPPv325k_eps_save_battery_configv"></span><span id="_CPPv225k_eps_save_battery_configv"></span><span id="k_eps_save_battery_config__void"></span><span class="target" id="group__NANOPOWER__API_1gab040adf6a838196fe558e93ef4f95503"></span><a class="reference internal" href="#_CPPv410KEPSStatus" title="KEPSStatus">KEPSStatus</a> <code class="descname">k_eps_save_battery_config</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv425k_eps_save_battery_configv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Save the current battery configuration to EEPROM. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KEPSStatus EPS_OK if OK, error otherwise </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv416k_eps_set_output7uint8_t">
+<span id="_CPPv316k_eps_set_output7uint8_t"></span><span id="_CPPv216k_eps_set_output7uint8_t"></span><span id="k_eps_set_output__uint8_t"></span><span class="target" id="group__NANOPOWER__API_1ga124fe9215bdb031ef75c2c3fa6909041"></span><a class="reference internal" href="#_CPPv410KEPSStatus" title="KEPSStatus">KEPSStatus</a> <code class="descname">k_eps_set_output</code><span class="sig-paren">(</span>uint8_t <em>channel_mask</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv416k_eps_set_output7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Turn on/off the NanoPower outputs. </p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>Cannot be used to control heaters </dd>
+<dt><strong>Return</strong></dt>
+<dd>KEPSStatus EPS_OK if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">channel_mask</span></code>: Bitmask for output channels (<em>MSB [X X 3.3V 3.3V 3.3V 5V 5V 5V] LSB</em>). 0 = Off, 1 = On </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv423k_eps_set_single_output7uint8_t7uint8_t7int16_t">
+<span id="_CPPv323k_eps_set_single_output7uint8_t7uint8_t7int16_t"></span><span id="_CPPv223k_eps_set_single_output7uint8_t7uint8_t7int16_t"></span><span id="k_eps_set_single_output__uint8_t.uint8_t.int16_t"></span><span class="target" id="group__NANOPOWER__API_1ga70708e584e00aeccd92dadd9577c5a7c"></span><a class="reference internal" href="#_CPPv410KEPSStatus" title="KEPSStatus">KEPSStatus</a> <code class="descname">k_eps_set_single_output</code><span class="sig-paren">(</span>uint8_t <em>channel</em>, uint8_t <em>value</em>, int16_t <em>delay</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv423k_eps_set_single_output7uint8_t7uint8_t7int16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Turn on/off a single output. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KEPSStatus EPS_OK if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">channel</span></code>: Output to control. 0-5 = Output channels, 6 = BP4 heater, 7 = BP4 switch </li>
+<li><code class="docutils literal notranslate"><span class="pre">value</span></code>: Desired output value. 0 = Off, 1 = On </li>
+<li><code class="docutils literal notranslate"><span class="pre">delay</span></code>: Amount of time, in seconds, to wait before changing the output’s value </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv421k_eps_set_input_value8uint16_t8uint16_t8uint16_t">
+<span id="_CPPv321k_eps_set_input_value8uint16_t8uint16_t8uint16_t"></span><span id="_CPPv221k_eps_set_input_value8uint16_t8uint16_t8uint16_t"></span><span id="k_eps_set_input_value__uint16_t.uint16_t.uint16_t"></span><span class="target" id="group__NANOPOWER__API_1ga236b50dd5df91473c6c66f4ba472e858"></span><a class="reference internal" href="#_CPPv410KEPSStatus" title="KEPSStatus">KEPSStatus</a> <code class="descname">k_eps_set_input_value</code><span class="sig-paren">(</span>uint16_t <em>in1_voltage</em>, uint16_t <em>in2_voltage</em>, uint16_t <em>in3_voltage</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv421k_eps_set_input_value8uint16_t8uint16_t8uint16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set photovoltaic input voltages. </p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>Only used when <a class="reference internal" href="#structeps__hk__t_1ab93eb36a60c1f4677e22f40ee2b3b92e"><span class="std std-ref">eps_hk_t.ppt_mode</span></a> is <code class="docutils literal notranslate"><span class="pre">Fixed</span></code> </dd>
+<dt><strong>Return</strong></dt>
+<dd>KEPSStatus EPS_OK if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">in1_voltage</span></code>: Voltage value for PV1 [mV] </li>
+<li><code class="docutils literal notranslate"><span class="pre">in2_voltage</span></code>: Voltage value for PV2 [mV] </li>
+<li><code class="docutils literal notranslate"><span class="pre">in3_voltage</span></code>: Voltage value for PV3 [mV] </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv420k_eps_set_input_mode7uint8_t">
+<span id="_CPPv320k_eps_set_input_mode7uint8_t"></span><span id="_CPPv220k_eps_set_input_mode7uint8_t"></span><span id="k_eps_set_input_mode__uint8_t"></span><span class="target" id="group__NANOPOWER__API_1ga14a09b37c0408ef7124273ae8de6eacd"></span><a class="reference internal" href="#_CPPv410KEPSStatus" title="KEPSStatus">KEPSStatus</a> <code class="descname">k_eps_set_input_mode</code><span class="sig-paren">(</span>uint8_t <em>mode</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv420k_eps_set_input_mode7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set photovoltaic inputs’ power-point tracking mode. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KEPSStatus EPS_OK if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">mode</span></code>: PPT mode. 0 = hardware default power points, 1 = maximum power-point tracking, 2 = software-defined power points (set with <a class="reference internal" href="#group__NANOPOWER__API_1ga236b50dd5df91473c6c66f4ba472e858"><span class="std std-ref">k_eps_set_input_value</span></a>) </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv416k_eps_set_heater7uint8_t7uint8_t7uint8_t">
+<span id="_CPPv316k_eps_set_heater7uint8_t7uint8_t7uint8_t"></span><span id="_CPPv216k_eps_set_heater7uint8_t7uint8_t7uint8_t"></span><span id="k_eps_set_heater__uint8_t.uint8_t.uint8_t"></span><span class="target" id="group__NANOPOWER__API_1ga071587d7189a6d667d67bcd77ed03d03"></span><a class="reference internal" href="#_CPPv410KEPSStatus" title="KEPSStatus">KEPSStatus</a> <code class="descname">k_eps_set_heater</code><span class="sig-paren">(</span>uint8_t <em>cmd</em>, uint8_t <em>heater</em>, uint8_t <em>mode</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv416k_eps_set_heater7uint8_t7uint8_t7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Control heaters. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KEPSStatus EPS_OK if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">cmd</span></code>: Heater control command (should always be <code class="docutils literal notranslate"><span class="pre">0</span></code> for now) </li>
+<li><code class="docutils literal notranslate"><span class="pre">heater</span></code>: Heater to control </li>
+<li><code class="docutils literal notranslate"><span class="pre">mode</span></code>: State to set heater to. 0 = Off, 1 = On </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv425k_eps_reset_system_configv">
+<span id="_CPPv325k_eps_reset_system_configv"></span><span id="_CPPv225k_eps_reset_system_configv"></span><span id="k_eps_reset_system_config__void"></span><span class="target" id="group__NANOPOWER__API_1ga54ed340d0062b872229bdd1199d4fd82"></span><a class="reference internal" href="#_CPPv410KEPSStatus" title="KEPSStatus">KEPSStatus</a> <code class="descname">k_eps_reset_system_config</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv425k_eps_reset_system_configv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Reset system configuration to default values. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KEPSStatus EPS_OK if OK, error otherwise </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv426k_eps_reset_battery_configv">
+<span id="_CPPv326k_eps_reset_battery_configv"></span><span id="_CPPv226k_eps_reset_battery_configv"></span><span id="k_eps_reset_battery_config__void"></span><span class="target" id="group__NANOPOWER__API_1gab84ebb2b12391a2c1d10acaa7bacd6eb"></span><a class="reference internal" href="#_CPPv410KEPSStatus" title="KEPSStatus">KEPSStatus</a> <code class="descname">k_eps_reset_battery_config</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv426k_eps_reset_battery_configv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Reset battery configuration to default values. </p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>Values must be saved using <a class="reference internal" href="#group__NANOPOWER__API_1gab040adf6a838196fe558e93ef4f95503"><span class="std std-ref">k_eps_save_battery_config</span></a> between 1 and 30 seconds after calling this function, otherwise the changes will be erased </dd>
+<dt><strong>Return</strong></dt>
+<dd>KEPSStatus EPS_OK if OK, error otherwise </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv420k_eps_reset_countersv">
+<span id="_CPPv320k_eps_reset_countersv"></span><span id="_CPPv220k_eps_reset_countersv"></span><span id="k_eps_reset_counters__void"></span><span class="target" id="group__NANOPOWER__API_1gac95cabf5d22a6e90b6786f6fdb9b5aab"></span><a class="reference internal" href="#_CPPv410KEPSStatus" title="KEPSStatus">KEPSStatus</a> <code class="descname">k_eps_reset_counters</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv420k_eps_reset_countersv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Reset system counters (boot count, watchdog reboot counts, etc) </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KEPSStatus EPS_OK if OK, error otherwise </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv422k_eps_get_housekeepingP8eps_hk_t">
+<span id="_CPPv322k_eps_get_housekeepingP8eps_hk_t"></span><span id="_CPPv222k_eps_get_housekeepingP8eps_hk_t"></span><span id="k_eps_get_housekeeping__eps_hk_tP"></span><span class="target" id="group__NANOPOWER__API_1ga64f60ec53e393279b5bf0b84d2e3f2bb"></span><a class="reference internal" href="#_CPPv410KEPSStatus" title="KEPSStatus">KEPSStatus</a> <code class="descname">k_eps_get_housekeeping</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv48eps_hk_t" title="eps_hk_t">eps_hk_t</a> *<em>buff</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv422k_eps_get_housekeepingP8eps_hk_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get system housekeeping data. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KEPSStatus EPS_OK if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">buff</span></code>: Pointer to storage structure </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv423k_eps_get_system_configP19eps_system_config_t">
+<span id="_CPPv323k_eps_get_system_configP19eps_system_config_t"></span><span id="_CPPv223k_eps_get_system_configP19eps_system_config_t"></span><span id="k_eps_get_system_config__eps_system_config_tP"></span><span class="target" id="group__NANOPOWER__API_1gac928988c1a125c5505353fa17c7aca69"></span><a class="reference internal" href="#_CPPv410KEPSStatus" title="KEPSStatus">KEPSStatus</a> <code class="descname">k_eps_get_system_config</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv419eps_system_config_t" title="eps_system_config_t">eps_system_config_t</a> *<em>buff</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv423k_eps_get_system_configP19eps_system_config_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get system configuration values. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KEPSStatus EPS_OK if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">buff</span></code>: Pointer to storage structure </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv424k_eps_get_battery_configP20eps_battery_config_t">
+<span id="_CPPv324k_eps_get_battery_configP20eps_battery_config_t"></span><span id="_CPPv224k_eps_get_battery_configP20eps_battery_config_t"></span><span id="k_eps_get_battery_config__eps_battery_config_tP"></span><span class="target" id="group__NANOPOWER__API_1ga73d56b052e8e0cde5e0b5cbec9596000"></span><a class="reference internal" href="#_CPPv410KEPSStatus" title="KEPSStatus">KEPSStatus</a> <code class="descname">k_eps_get_battery_config</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv420eps_battery_config_t" title="eps_battery_config_t">eps_battery_config_t</a> *<em>buff</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv424k_eps_get_battery_configP20eps_battery_config_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get battery configuration values. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KEPSStatus EPS_OK if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">buff</span></code>: Pointer to storage structure </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv416k_eps_get_heaterP7uint8_tP7uint8_t">
+<span id="_CPPv316k_eps_get_heaterP7uint8_tP7uint8_t"></span><span id="_CPPv216k_eps_get_heaterP7uint8_tP7uint8_t"></span><span id="k_eps_get_heater__uint8_tP.uint8_tP"></span><span class="target" id="group__NANOPOWER__API_1gaf5e1f60185274e00cd1cd6eb62aedeff"></span><a class="reference internal" href="#_CPPv410KEPSStatus" title="KEPSStatus">KEPSStatus</a> <code class="descname">k_eps_get_heater</code><span class="sig-paren">(</span>uint8_t *<em>bp4</em>, uint8_t *<em>onboard</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv416k_eps_get_heaterP7uint8_tP7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get heaters’ statuses. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KEPSStatus EPS_OK if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">bp4</span></code>: Status of BP4 heater. 0 = Off, 1 = On </li>
+<li><code class="docutils literal notranslate"><span class="pre">onboard</span></code>: Status of onboard heater. 0 = Off, 1 = On </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv419k_eps_watchdog_kickv">
+<span id="_CPPv319k_eps_watchdog_kickv"></span><span id="_CPPv219k_eps_watchdog_kickv"></span><span id="k_eps_watchdog_kick__void"></span><span class="target" id="group__NANOPOWER__API_1gaba8e57dbaa66797ae3ea4ccd27f885db"></span><a class="reference internal" href="#_CPPv410KEPSStatus" title="KEPSStatus">KEPSStatus</a> <code class="descname">k_eps_watchdog_kick</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419k_eps_watchdog_kickv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Kick the EPS’s watchdog once. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KEPSStatus <code class="docutils literal notranslate"><span class="pre">EPS_OK</span></code> if OK, error otherwise </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv420k_eps_watchdog_start8uint32_t">
+<span id="_CPPv320k_eps_watchdog_start8uint32_t"></span><span id="_CPPv220k_eps_watchdog_start8uint32_t"></span><span id="k_eps_watchdog_start__uint32_t"></span><span class="target" id="group__NANOPOWER__API_1gac84fdf169526ad0b9558bbc7840478c0"></span><a class="reference internal" href="#_CPPv410KEPSStatus" title="KEPSStatus">KEPSStatus</a> <code class="descname">k_eps_watchdog_start</code><span class="sig-paren">(</span>uint32_t <em>interval</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv420k_eps_watchdog_start8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Start a thread to kick the EPS’s watchdog. </p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>The watchdog kick requires a write to EEPROM, which has a limited lifespan. It is recommended that the watchdog interval be very large (ex. 48 <strong>hours</strong>) </dd>
+<dt><strong>Return</strong></dt>
+<dd>KEPSStatus <code class="docutils literal notranslate"><span class="pre">EPS_OK</span></code> if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">interval</span></code>: Time to sleep in between kicks [seconds] </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv419k_eps_watchdog_stopv">
+<span id="_CPPv319k_eps_watchdog_stopv"></span><span id="_CPPv219k_eps_watchdog_stopv"></span><span id="k_eps_watchdog_stop__void"></span><span class="target" id="group__NANOPOWER__API_1ga1ecc363b412cc73ed9f35a497270994b"></span><a class="reference internal" href="#_CPPv410KEPSStatus" title="KEPSStatus">KEPSStatus</a> <code class="descname">k_eps_watchdog_stop</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419k_eps_watchdog_stopv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Stop the watchdog thread. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KEPSStatus <code class="docutils literal notranslate"><span class="pre">EPS_OK</span></code> if OK, error otherwise </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv417k_eps_passthroughPK7uint8_tiP7uint8_ti">
+<span id="_CPPv317k_eps_passthroughPK7uint8_tiP7uint8_ti"></span><span id="_CPPv217k_eps_passthroughPK7uint8_tiP7uint8_ti"></span><span id="k_eps_passthrough__uint8_tCP.i.uint8_tP.i"></span><span class="target" id="group__NANOPOWER__API_1ga305ac6714f255410e7d1c8a73920d69d"></span><a class="reference internal" href="#_CPPv410KEPSStatus" title="KEPSStatus">KEPSStatus</a> <code class="descname">k_eps_passthrough</code><span class="sig-paren">(</span><em class="property">const</em> uint8_t *<em>tx</em>, int <em>tx_len</em>, uint8_t *<em>rx</em>, int <em>rx_len</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv417k_eps_passthroughPK7uint8_tiP7uint8_ti" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Pass a command packet directly through to the EPS. </p>
+<p>Useful for executing commands which have not been implemented in this API <dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KEPSStatus EPS_OK if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">tx</span></code>: Pointer to command packet to send </li>
+<li><code class="docutils literal notranslate"><span class="pre">tx_len</span></code>: Size of command packet </li>
+<li><code class="docutils literal notranslate"><span class="pre">rx</span></code>: Pointer to storage for command response </li>
+<li><code class="docutils literal notranslate"><span class="pre">rx_len</span></code>: Expected length of command response </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv417kprv_eps_transferPK7uint8_tiP7uint8_ti">
+<span id="_CPPv317kprv_eps_transferPK7uint8_tiP7uint8_ti"></span><span id="_CPPv217kprv_eps_transferPK7uint8_tiP7uint8_ti"></span><span id="kprv_eps_transfer__uint8_tCP.i.uint8_tP.i"></span><span class="target" id="group__NANOPOWER__API_1ga0343bc4e60da3582faec30475ff47b89"></span><a class="reference internal" href="#_CPPv410KEPSStatus" title="KEPSStatus">KEPSStatus</a> <code class="descname">kprv_eps_transfer</code><span class="sig-paren">(</span><em class="property">const</em> uint8_t *<em>tx</em>, int <em>tx_len</em>, uint8_t *<em>rx</em>, int <em>rx_len</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv417kprv_eps_transferPK7uint8_tiP7uint8_ti" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Write command to EPS and read back a response. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KEPSStatus EPS_OK if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">tx</span></code>: Pointer to command packet to send </li>
+<li><code class="docutils literal notranslate"><span class="pre">tx_len</span></code>: Size of command packet </li>
+<li><code class="docutils literal notranslate"><span class="pre">rx</span></code>: Pointer to storage for command response </li>
+<li><code class="docutils literal notranslate"><span class="pre">rx_len</span></code>: Expected length of command response </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<dl class="class">
+<dt id="_CPPv48KEPSConf">
+<span id="_CPPv38KEPSConf"></span><span id="_CPPv28KEPSConf"></span><span id="KEPSConf"></span><span class="target" id="structKEPSConf"></span><em class="property">struct </em><code class="descname">KEPSConf</code><a class="headerlink" href="#_CPPv48KEPSConf" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;gomspace-p31u-api.h&gt;</em><p>Kubos -&gt; EPS Configuration. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv4N8KEPSConf3busE">
+<span id="_CPPv3N8KEPSConf3busE"></span><span id="_CPPv2N8KEPSConf3busE"></span><span id="KEPSConf::bus__cP"></span><span class="target" id="structKEPSConf_1a79ada37dc48b2054d98342d6cd72305d"></span>char *<code class="descname">bus</code><a class="headerlink" href="#_CPPv4N8KEPSConf3busE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>I2C bus device EPS is connected to. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N8KEPSConf4addrE">
+<span id="_CPPv3N8KEPSConf4addrE"></span><span id="_CPPv2N8KEPSConf4addrE"></span><span id="KEPSConf::addr__uint8_t"></span><span class="target" id="structKEPSConf_1a17e1d7fc62331a4fada854cf9f24c817"></span>uint8_t <code class="descname">addr</code><a class="headerlink" href="#_CPPv4N8KEPSConf4addrE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>EPS I2C slave address. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv415eps_resp_header">
+<span id="_CPPv315eps_resp_header"></span><span id="_CPPv215eps_resp_header"></span><span id="eps_resp_header"></span><span class="target" id="structeps__resp__header"></span><em class="property">struct </em><code class="descname">eps_resp_header</code><a class="headerlink" href="#_CPPv415eps_resp_header" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;gomspace-p31u-api.h&gt;</em><p>Response header structure. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv4N15eps_resp_header3cmdE">
+<span id="_CPPv3N15eps_resp_header3cmdE"></span><span id="_CPPv2N15eps_resp_header3cmdE"></span><span id="eps_resp_header::cmd__uint8_t"></span><span class="target" id="structeps__resp__header_1acdaed5eb17cfa55c2f7ffae4672d90b7"></span>uint8_t <code class="descname">cmd</code><a class="headerlink" href="#_CPPv4N15eps_resp_header3cmdE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Command which produced this response. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N15eps_resp_header6statusE">
+<span id="_CPPv3N15eps_resp_header6statusE"></span><span id="_CPPv2N15eps_resp_header6statusE"></span><span id="eps_resp_header::status__uint8_t"></span><span class="target" id="structeps__resp__header_1afe7f9541190ef2c4aee6da6b12bde3d8"></span>uint8_t <code class="descname">status</code><a class="headerlink" href="#_CPPv4N15eps_resp_header6statusE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Status/Error byte. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv419eps_system_config_t">
+<span id="_CPPv319eps_system_config_t"></span><span id="_CPPv219eps_system_config_t"></span><span id="eps_system_config_t"></span><span class="target" id="structeps__system__config__t"></span><em class="property">struct </em><code class="descname">eps_system_config_t</code><a class="headerlink" href="#_CPPv419eps_system_config_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;gomspace-p31u-api.h&gt;</em><p>System configuration. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv4N19eps_system_config_t8ppt_modeE">
+<span id="_CPPv3N19eps_system_config_t8ppt_modeE"></span><span id="_CPPv2N19eps_system_config_t8ppt_modeE"></span><span id="eps_system_config_t::ppt_mode__uint8_t"></span><span class="target" id="structeps__system__config__t_1a7c2dd7ce14dbf642bfd336383981f8e1"></span>uint8_t <code class="descname">ppt_mode</code><a class="headerlink" href="#_CPPv4N19eps_system_config_t8ppt_modeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Mode for power-point tracking [1 = Automatic maximum, 2 = Fixed]. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N19eps_system_config_t15battheater_modeE">
+<span id="_CPPv3N19eps_system_config_t15battheater_modeE"></span><span id="_CPPv2N19eps_system_config_t15battheater_modeE"></span><span id="eps_system_config_t::battheater_mode__uint8_t"></span><span class="target" id="structeps__system__config__t_1a1f175d9fa8d6c3d8f58b5f7b9015d585"></span>uint8_t <code class="descname">battheater_mode</code><a class="headerlink" href="#_CPPv4N19eps_system_config_t15battheater_modeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Mode for battery heater activation [0 = Manual, 1 = Auto]. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N19eps_system_config_t14battheater_lowE">
+<span id="_CPPv3N19eps_system_config_t14battheater_lowE"></span><span id="_CPPv2N19eps_system_config_t14battheater_lowE"></span><span id="eps_system_config_t::battheater_low__int8_t"></span><span class="target" id="structeps__system__config__t_1aa98dc613702449b6cdf1d219fa6926c1"></span>int8_t <code class="descname">battheater_low</code><a class="headerlink" href="#_CPPv4N19eps_system_config_t14battheater_lowE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Turn heater on at [degC] (auto mode) </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N19eps_system_config_t15battheater_highE">
+<span id="_CPPv3N19eps_system_config_t15battheater_highE"></span><span id="_CPPv2N19eps_system_config_t15battheater_highE"></span><span id="eps_system_config_t::battheater_high__int8_t"></span><span class="target" id="structeps__system__config__t_1a31184b4574f8afa2a27526bff6949a0a"></span>int8_t <code class="descname">battheater_high</code><a class="headerlink" href="#_CPPv4N19eps_system_config_t15battheater_highE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Turn heater off at [degC] (auto mode) </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N19eps_system_config_t19output_normal_valueE">
+<span id="_CPPv3N19eps_system_config_t19output_normal_valueE"></span><span id="_CPPv2N19eps_system_config_t19output_normal_valueE"></span><span id="eps_system_config_t::output_normal_value__uint8_tA"></span><span class="target" id="structeps__system__config__t_1a901f73c57ad1b78eb965e6270d33474a"></span>uint8_t <code class="descname">output_normal_value</code>[8]<a class="headerlink" href="#_CPPv4N19eps_system_config_t19output_normal_valueE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Normal mode output values [0 = Off, 1 = On]. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N19eps_system_config_t17output_safe_valueE">
+<span id="_CPPv3N19eps_system_config_t17output_safe_valueE"></span><span id="_CPPv2N19eps_system_config_t17output_safe_valueE"></span><span id="eps_system_config_t::output_safe_value__uint8_tA"></span><span class="target" id="structeps__system__config__t_1ae796ad3e0aa0847ea468a191f8fafc87"></span>uint8_t <code class="descname">output_safe_value</code>[8]<a class="headerlink" href="#_CPPv4N19eps_system_config_t17output_safe_valueE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Safe mode output values [0 = Off, 1 = On]. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N19eps_system_config_t23output_initial_on_delayE">
+<span id="_CPPv3N19eps_system_config_t23output_initial_on_delayE"></span><span id="_CPPv2N19eps_system_config_t23output_initial_on_delayE"></span><span id="eps_system_config_t::output_initial_on_delay__uint16_tA"></span><span class="target" id="structeps__system__config__t_1afeaf0cc2263bd5aa9e4f60377506635d"></span>uint16_t <code class="descname">output_initial_on_delay</code>[8]<a class="headerlink" href="#_CPPv4N19eps_system_config_t23output_initial_on_delayE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Default output power on delays [seconds]. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N19eps_system_config_t24output_initial_off_delayE">
+<span id="_CPPv3N19eps_system_config_t24output_initial_off_delayE"></span><span id="_CPPv2N19eps_system_config_t24output_initial_off_delayE"></span><span id="eps_system_config_t::output_initial_off_delay__uint16_tA"></span><span class="target" id="structeps__system__config__t_1a0a9ee0a5d8ea3b66eb6f33029ef0df71"></span>uint16_t <code class="descname">output_initial_off_delay</code>[8]<a class="headerlink" href="#_CPPv4N19eps_system_config_t24output_initial_off_delayE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Default output power off delays [seconds]. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N19eps_system_config_t6vboostE">
+<span id="_CPPv3N19eps_system_config_t6vboostE"></span><span id="_CPPv2N19eps_system_config_t6vboostE"></span><span id="eps_system_config_t::vboost__uint16_tA"></span><span class="target" id="structeps__system__config__t_1acd103808ed4b09835647e315265ba3a6"></span>uint16_t <code class="descname">vboost</code>[3]<a class="headerlink" href="#_CPPv4N19eps_system_config_t6vboostE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Fixed PPT point for boost converters [mV]. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv420eps_battery_config_t">
+<span id="_CPPv320eps_battery_config_t"></span><span id="_CPPv220eps_battery_config_t"></span><span id="eps_battery_config_t"></span><span class="target" id="structeps__battery__config__t"></span><em class="property">struct </em><code class="descname">eps_battery_config_t</code><a class="headerlink" href="#_CPPv420eps_battery_config_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;gomspace-p31u-api.h&gt;</em><p>Battery mode configuration (Config2) </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv4N20eps_battery_config_t15batt_maxvoltageE">
+<span id="_CPPv3N20eps_battery_config_t15batt_maxvoltageE"></span><span id="_CPPv2N20eps_battery_config_t15batt_maxvoltageE"></span><span id="eps_battery_config_t::batt_maxvoltage__uint16_t"></span><span class="target" id="structeps__battery__config__t_1a506822ba291f973470106231bb22499f"></span>uint16_t <code class="descname">batt_maxvoltage</code><a class="headerlink" href="#_CPPv4N20eps_battery_config_t15batt_maxvoltageE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Voltage threshold to be in FULL mode. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N20eps_battery_config_t16batt_safevoltageE">
+<span id="_CPPv3N20eps_battery_config_t16batt_safevoltageE"></span><span id="_CPPv2N20eps_battery_config_t16batt_safevoltageE"></span><span id="eps_battery_config_t::batt_safevoltage__uint16_t"></span><span class="target" id="structeps__battery__config__t_1a52e6e6d4a94f8a52de81f582fc23d85b"></span>uint16_t <code class="descname">batt_safevoltage</code><a class="headerlink" href="#_CPPv4N20eps_battery_config_t16batt_safevoltageE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Voltage threshold to trigger NORMAL -&gt; SAFE mode. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N20eps_battery_config_t20batt_criticalvoltageE">
+<span id="_CPPv3N20eps_battery_config_t20batt_criticalvoltageE"></span><span id="_CPPv2N20eps_battery_config_t20batt_criticalvoltageE"></span><span id="eps_battery_config_t::batt_criticalvoltage__uint16_t"></span><span class="target" id="structeps__battery__config__t_1ae4ccbadd6df489f0e106d0b763e58f7a"></span>uint16_t <code class="descname">batt_criticalvoltage</code><a class="headerlink" href="#_CPPv4N20eps_battery_config_t20batt_criticalvoltageE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Lowest allowable voltage (below -&gt; CRITICAL mode) </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N20eps_battery_config_t18batt_normalvoltageE">
+<span id="_CPPv3N20eps_battery_config_t18batt_normalvoltageE"></span><span id="_CPPv2N20eps_battery_config_t18batt_normalvoltageE"></span><span id="eps_battery_config_t::batt_normalvoltage__uint16_t"></span><span class="target" id="structeps__battery__config__t_1a345e608797016197bfed79da66a4484f"></span>uint16_t <code class="descname">batt_normalvoltage</code><a class="headerlink" href="#_CPPv4N20eps_battery_config_t18batt_normalvoltageE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Voltage threshold to trigger SAFE -&gt; NORMAL mode. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N20eps_battery_config_t9reserved1E">
+<span id="_CPPv3N20eps_battery_config_t9reserved1E"></span><span id="_CPPv2N20eps_battery_config_t9reserved1E"></span><span id="eps_battery_config_t::reserved1__uint32_tA"></span><span class="target" id="structeps__battery__config__t_1ad49bea2bf09f503d5d05dcfdd871b5d2"></span>uint32_t <code class="descname">reserved1</code>[2]<a class="headerlink" href="#_CPPv4N20eps_battery_config_t9reserved1E" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Reserved. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N20eps_battery_config_t9reserved2E">
+<span id="_CPPv3N20eps_battery_config_t9reserved2E"></span><span id="_CPPv2N20eps_battery_config_t9reserved2E"></span><span id="eps_battery_config_t::reserved2__uint8_tA"></span><span class="target" id="structeps__battery__config__t_1a418fe054135db60c93b847999c778919"></span>uint8_t <code class="descname">reserved2</code>[4]<a class="headerlink" href="#_CPPv4N20eps_battery_config_t9reserved2E" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Reserved. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv48eps_hk_t">
+<span id="_CPPv38eps_hk_t"></span><span id="_CPPv28eps_hk_t"></span><span id="eps_hk_t"></span><span class="target" id="structeps__hk__t"></span><em class="property">struct </em><code class="descname">eps_hk_t</code><a class="headerlink" href="#_CPPv48eps_hk_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;gomspace-p31u-api.h&gt;</em><p>P31u-8 housekeeping. </p>
+<p>NOTE that some changes have been made from the GomSpace datasheet due to the complier mis-matches the bytes in the data structure 1) Changed counter_wdt_gnd and counter_boot from uint32_t to uint16_t 2) The <strong>attribute</strong>((packed)) attribute is removed</p>
+<p>The data sizes at other parts of this API are changed accordingly </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv4N8eps_hk_t6vboostE">
+<span id="_CPPv3N8eps_hk_t6vboostE"></span><span id="_CPPv2N8eps_hk_t6vboostE"></span><span id="eps_hk_t::vboost__uint16_tA"></span><span class="target" id="structeps__hk__t_1a413a7ab65574cbc4779d1cdc38185b86"></span>uint16_t <code class="descname">vboost</code>[3]<a class="headerlink" href="#_CPPv4N8eps_hk_t6vboostE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Voltage of input voltage boost converters [mV]. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N8eps_hk_t5vbattE">
+<span id="_CPPv3N8eps_hk_t5vbattE"></span><span id="_CPPv2N8eps_hk_t5vbattE"></span><span id="eps_hk_t::vbatt__uint16_t"></span><span class="target" id="structeps__hk__t_1a8467837aee079125b07f5e886be78ff3"></span>uint16_t <code class="descname">vbatt</code><a class="headerlink" href="#_CPPv4N8eps_hk_t5vbattE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Voltage of battery [mV]. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N8eps_hk_t5curinE">
+<span id="_CPPv3N8eps_hk_t5curinE"></span><span id="_CPPv2N8eps_hk_t5curinE"></span><span id="eps_hk_t::curin__uint16_tA"></span><span class="target" id="structeps__hk__t_1ac6a0b780cfd07bdaec7b60131c736465"></span>uint16_t <code class="descname">curin</code>[3]<a class="headerlink" href="#_CPPv4N8eps_hk_t5curinE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Input currents [mA]. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N8eps_hk_t6cursunE">
+<span id="_CPPv3N8eps_hk_t6cursunE"></span><span id="_CPPv2N8eps_hk_t6cursunE"></span><span id="eps_hk_t::cursun__uint16_t"></span><span class="target" id="structeps__hk__t_1a71695732d89bc520dc359ba6983e7068"></span>uint16_t <code class="descname">cursun</code><a class="headerlink" href="#_CPPv4N8eps_hk_t6cursunE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Current from boost converters [mA]. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N8eps_hk_t6cursysE">
+<span id="_CPPv3N8eps_hk_t6cursysE"></span><span id="_CPPv2N8eps_hk_t6cursysE"></span><span id="eps_hk_t::cursys__uint16_t"></span><span class="target" id="structeps__hk__t_1a4c4a64034a02be47faa65d8271a41974"></span>uint16_t <code class="descname">cursys</code><a class="headerlink" href="#_CPPv4N8eps_hk_t6cursysE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Current out of battery [mA]. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N8eps_hk_t9reserved1E">
+<span id="_CPPv3N8eps_hk_t9reserved1E"></span><span id="_CPPv2N8eps_hk_t9reserved1E"></span><span id="eps_hk_t::reserved1__uint16_t"></span><span class="target" id="structeps__hk__t_1a6c3f0caa468a463728f57e65befe25f7"></span>uint16_t <code class="descname">reserved1</code><a class="headerlink" href="#_CPPv4N8eps_hk_t9reserved1E" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Reserved for future use. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N8eps_hk_t6curoutE">
+<span id="_CPPv3N8eps_hk_t6curoutE"></span><span id="_CPPv2N8eps_hk_t6curoutE"></span><span id="eps_hk_t::curout__uint16_tA"></span><span class="target" id="structeps__hk__t_1a2725d2bd2ab91552c3ed4d7757b3b59a"></span>uint16_t <code class="descname">curout</code>[6]<a class="headerlink" href="#_CPPv4N8eps_hk_t6curoutE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Output currents [mA]. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N8eps_hk_t6outputE">
+<span id="_CPPv3N8eps_hk_t6outputE"></span><span id="_CPPv2N8eps_hk_t6outputE"></span><span id="eps_hk_t::output__uint8_tA"></span><span class="target" id="structeps__hk__t_1aad8a8d5b52e88a291c8abfc1a192b178"></span>uint8_t <code class="descname">output</code>[8]<a class="headerlink" href="#_CPPv4N8eps_hk_t6outputE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Output statuses [0 = Off, 1 = On]. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N8eps_hk_t15output_on_deltaE">
+<span id="_CPPv3N8eps_hk_t15output_on_deltaE"></span><span id="_CPPv2N8eps_hk_t15output_on_deltaE"></span><span id="eps_hk_t::output_on_delta__uint16_tA"></span><span class="target" id="structeps__hk__t_1a1f9fedcc63cf469c65f414afeea5905d"></span>uint16_t <code class="descname">output_on_delta</code>[8]<a class="headerlink" href="#_CPPv4N8eps_hk_t15output_on_deltaE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Time until output power on [seconds]. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N8eps_hk_t16output_off_deltaE">
+<span id="_CPPv3N8eps_hk_t16output_off_deltaE"></span><span id="_CPPv2N8eps_hk_t16output_off_deltaE"></span><span id="eps_hk_t::output_off_delta__uint16_tA"></span><span class="target" id="structeps__hk__t_1aa4169745fe567ba45f60399b96c2dc55"></span>uint16_t <code class="descname">output_off_delta</code>[8]<a class="headerlink" href="#_CPPv4N8eps_hk_t16output_off_deltaE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Time until output power off [seconds]. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N8eps_hk_t7latchupE">
+<span id="_CPPv3N8eps_hk_t7latchupE"></span><span id="_CPPv2N8eps_hk_t7latchupE"></span><span id="eps_hk_t::latchup__uint16_tA"></span><span class="target" id="structeps__hk__t_1a4a0c688968e6606e854b6dfa6dc3d5d5"></span>uint16_t <code class="descname">latchup</code>[6]<a class="headerlink" href="#_CPPv4N8eps_hk_t7latchupE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Number of output latch-up events. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N8eps_hk_t17wdt_i2c_time_leftE">
+<span id="_CPPv3N8eps_hk_t17wdt_i2c_time_leftE"></span><span id="_CPPv2N8eps_hk_t17wdt_i2c_time_leftE"></span><span id="eps_hk_t::wdt_i2c_time_left__uint32_t"></span><span class="target" id="structeps__hk__t_1aeedaf79d847eadc1bc68b75de6607da3"></span>uint32_t <code class="descname">wdt_i2c_time_left</code><a class="headerlink" href="#_CPPv4N8eps_hk_t17wdt_i2c_time_leftE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Time left for I2C watchdog [seconds]. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N8eps_hk_t17wdt_gnd_time_leftE">
+<span id="_CPPv3N8eps_hk_t17wdt_gnd_time_leftE"></span><span id="_CPPv2N8eps_hk_t17wdt_gnd_time_leftE"></span><span id="eps_hk_t::wdt_gnd_time_left__uint32_t"></span><span class="target" id="structeps__hk__t_1a9f96857d3da07a041afe8d583540fa9b"></span>uint32_t <code class="descname">wdt_gnd_time_left</code><a class="headerlink" href="#_CPPv4N8eps_hk_t17wdt_gnd_time_leftE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Time left for dedicated watchdog [seconds]. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N8eps_hk_t18wdt_csp_pings_leftE">
+<span id="_CPPv3N8eps_hk_t18wdt_csp_pings_leftE"></span><span id="_CPPv2N8eps_hk_t18wdt_csp_pings_leftE"></span><span id="eps_hk_t::wdt_csp_pings_left__uint8_tA"></span><span class="target" id="structeps__hk__t_1a1ca4e1f9f60bf69b6f79cd5085f61800"></span>uint8_t <code class="descname">wdt_csp_pings_left</code>[2]<a class="headerlink" href="#_CPPv4N8eps_hk_t18wdt_csp_pings_leftE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Pings left for CSP watchdog. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N8eps_hk_t15counter_wdt_i2cE">
+<span id="_CPPv3N8eps_hk_t15counter_wdt_i2cE"></span><span id="_CPPv2N8eps_hk_t15counter_wdt_i2cE"></span><span id="eps_hk_t::counter_wdt_i2c__uint32_t"></span><span class="target" id="structeps__hk__t_1a946f58825b19a992fc323366e090fe0c"></span>uint32_t <code class="descname">counter_wdt_i2c</code><a class="headerlink" href="#_CPPv4N8eps_hk_t15counter_wdt_i2cE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Number of I2C watchdog reboots. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N8eps_hk_t15counter_wdt_gndE">
+<span id="_CPPv3N8eps_hk_t15counter_wdt_gndE"></span><span id="_CPPv2N8eps_hk_t15counter_wdt_gndE"></span><span id="eps_hk_t::counter_wdt_gnd__uint16_t"></span><span class="target" id="structeps__hk__t_1a1221c22f4b4e7a155db264a9fd261fab"></span>uint16_t <code class="descname">counter_wdt_gnd</code><a class="headerlink" href="#_CPPv4N8eps_hk_t15counter_wdt_gndE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Number of dedicated watchdog reboots. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N8eps_hk_t15counter_wdt_cspE">
+<span id="_CPPv3N8eps_hk_t15counter_wdt_cspE"></span><span id="_CPPv2N8eps_hk_t15counter_wdt_cspE"></span><span id="eps_hk_t::counter_wdt_csp__uint32_tA"></span><span class="target" id="structeps__hk__t_1a8adb11623960b59a4be66736f39d4919"></span>uint32_t <code class="descname">counter_wdt_csp</code>[2]<a class="headerlink" href="#_CPPv4N8eps_hk_t15counter_wdt_cspE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Number of CSP watchdog reboots. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N8eps_hk_t12counter_bootE">
+<span id="_CPPv3N8eps_hk_t12counter_bootE"></span><span id="_CPPv2N8eps_hk_t12counter_bootE"></span><span id="eps_hk_t::counter_boot__uint16_t"></span><span class="target" id="structeps__hk__t_1ad7178143b6eaaa46577a21afbcbe9097"></span>uint16_t <code class="descname">counter_boot</code><a class="headerlink" href="#_CPPv4N8eps_hk_t12counter_bootE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Number of EPS reboots. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N8eps_hk_t4tempE">
+<span id="_CPPv3N8eps_hk_t4tempE"></span><span id="_CPPv2N8eps_hk_t4tempE"></span><span id="eps_hk_t::temp__int16_tA"></span><span class="target" id="structeps__hk__t_1ab05c7fd0a22ac0cbb3127fbbc98a0c0b"></span>int16_t <code class="descname">temp</code>[6]<a class="headerlink" href="#_CPPv4N8eps_hk_t4tempE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Temperatures [degC] [0 = Temp1, Temp2, Temp3, Temp4, BP4a, BP4b]. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N8eps_hk_t10boot_causeE">
+<span id="_CPPv3N8eps_hk_t10boot_causeE"></span><span id="_CPPv2N8eps_hk_t10boot_causeE"></span><span id="eps_hk_t::boot_cause__uint8_t"></span><span class="target" id="structeps__hk__t_1a22c17c9eb37aeb282d98a029e30569d0"></span>uint8_t <code class="descname">boot_cause</code><a class="headerlink" href="#_CPPv4N8eps_hk_t10boot_causeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Cause of last EPS reset. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N8eps_hk_t9batt_modeE">
+<span id="_CPPv3N8eps_hk_t9batt_modeE"></span><span id="_CPPv2N8eps_hk_t9batt_modeE"></span><span id="eps_hk_t::batt_mode__uint8_t"></span><span class="target" id="structeps__hk__t_1a46aee47f9dd9b9f538b87ec3cbc3ef27"></span>uint8_t <code class="descname">batt_mode</code><a class="headerlink" href="#_CPPv4N8eps_hk_t9batt_modeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Mode for battery [0 = Initial, 1 = Critical, 2 = Safe, 3 = Normal, 4 = Full]. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N8eps_hk_t8ppt_modeE">
+<span id="_CPPv3N8eps_hk_t8ppt_modeE"></span><span id="_CPPv2N8eps_hk_t8ppt_modeE"></span><span id="eps_hk_t::ppt_mode__uint8_t"></span><span class="target" id="structeps__hk__t_1ab93eb36a60c1f4677e22f40ee2b3b92e"></span>uint8_t <code class="descname">ppt_mode</code><a class="headerlink" href="#_CPPv4N8eps_hk_t8ppt_modeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Mode of power-point tracker [1 = Automatic maximum, 2 = Fixed]. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N8eps_hk_t9reserved2E">
+<span id="_CPPv3N8eps_hk_t9reserved2E"></span><span id="_CPPv2N8eps_hk_t9reserved2E"></span><span id="eps_hk_t::reserved2__uint16_t"></span><span class="target" id="structeps__hk__t_1acabc35cfa542aade03ddc24d83d4dffb"></span>uint16_t <code class="descname">reserved2</code><a class="headerlink" href="#_CPPv4N8eps_hk_t9reserved2E" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Reserved. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../novatel-oem6.html" class="btn btn-neutral float-right" title="NovAtel OEM6 API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../isis-trxvu/trxvu_api.html" class="btn btn-neutral" title="ISIS TRXVU Radio API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../../../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

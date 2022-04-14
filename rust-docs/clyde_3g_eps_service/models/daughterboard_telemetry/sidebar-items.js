@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["Type","Daughterboard telemetry values"]],"struct":[["Telemetry","Daughterboard telemetry structure"]]});

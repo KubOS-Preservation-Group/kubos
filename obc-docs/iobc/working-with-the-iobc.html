@@ -1,0 +1,677 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Working with the ISIS-OBC &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../../index.html"/>
+        <link rel="up" title="KubOS for the ISIS-OBC" href="index.html"/>
+        <link rel="next" title="KubOS for the Pumpkin MBM2" href="../mbm2/index.html"/>
+        <link rel="prev" title="Installing Kubos Linux on an ISIS-OBC" href="installing-linux-iobc.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Working with an OBC</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../cross-compile.html">Compiling Code for a Target OBC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../comms-setup.html">Communicating with an OBC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bbb/index.html">KubOS for the Beaglebone Black</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">KubOS for the ISIS-OBC</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="installing-linux-iobc.html">Installing Kubos Linux on an ISIS-OBC</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Working with the ISIS-OBC</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#reference-documents">Reference Documents</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#status-leds">Status LEDs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#debug-console-connection">Debug Console Connection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#peripherals">Peripherals</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#user-data-partition">User Data Partition</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#reference-documents">Reference Documents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#debug-connection">Debug Connection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#peripherals">Peripherals</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../mbm2/index.html">KubOS for the Pumpkin MBM2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../porting-kubos.html">Porting KubOS to a New OBC</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ecosystem/index.html">KubOS Ecosystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deep-dive/index.html">Under the Hood</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sdk-docs/index.html">Kubos SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Contributing to KubOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Working with KubOS and an OBC</a> &raquo;</li>
+        
+          <li><a href="index.html">KubOS for the ISIS-OBC</a> &raquo;</li>
+        
+      <li>Working with the ISIS-OBC</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/obc-docs/iobc/working-with-the-iobc.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="working-with-the-isis-obc">
+<h1>Working with the ISIS-OBC<a class="headerlink" href="#working-with-the-isis-obc" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>This document covers the Kubos Linux features which are specific to the
+ISIS-OBC target, also known as the iOBC.</p>
+<p>Please refer to <a class="reference internal" href="../../ecosystem/linux-docs/using-kubos-linux.html"><span class="doc">Using Kubos Linux</span></a> for a general guide to using Kubos Linux.</p>
+</div>
+<div class="section" id="reference-documents">
+<h2>Reference Documents<a class="headerlink" href="#reference-documents" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="iobc-documentation">
+<h3>iOBC Documentation<a class="headerlink" href="#iobc-documentation" title="Permalink to this headline">¶</a></h3>
+<p>The <cite>ISIS-OBC Quickstart Guide</cite> should have been packaged with the iOBC
+and is a useful document for learning what each of the hardware
+components are, how to connect them, and what drivers need to be
+installed to support them.</p>
+</div>
+<div class="section" id="kubos-documentation">
+<h3>Kubos Documentation<a class="headerlink" href="#kubos-documentation" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference internal" href="../../tutorials/first-obc-project.html"><span class="doc">Running a KubOS Project on an OBC</span></a> - Basic tutorial for creating your first KubOS project</li>
+<li><a class="reference internal" href="../../ecosystem/linux-docs/using-kubos-linux.html"><span class="doc">Using Kubos Linux</span></a> - General guide for interacting with Kubos Linux</li>
+<li><a class="reference internal" href="../../deep-dive/klb/kubos-linux-on-iobc.html"><span class="doc">Building Kubos Linux for the ISIS-OBC</span></a> - Steps to build Kubos Linux for the iOBC</li>
+<li><a class="reference internal" href="installing-linux-iobc.html"><span class="doc">Installing Kubos Linux on an ISIS-OBC</span></a> - Steps to install Kubos Linux</li>
+</ul>
+</div>
+</div>
+<div class="section" id="status-leds">
+<h2>Status LEDs<a class="headerlink" href="#status-leds" title="Permalink to this headline">¶</a></h2>
+<p>There are four yellow LEDs present on the iOBC which give some indication of what state
+the board is in, along with one red LED which is lit when the system is powered:</p>
+<ul class="simple">
+<li>Three LEDS (solid) - The system is currently running U-Boot</li>
+<li>One LED (blinking) - The system is currently running Kubos Linux</li>
+</ul>
+</div>
+<div class="section" id="debug-console-connection">
+<h2>Debug Console Connection<a class="headerlink" href="#debug-console-connection" title="Permalink to this headline">¶</a></h2>
+<p>The iOBC should be shipped with an FTDI cable. This cable should be
+connected to the programming adapter, which should then be connected to
+the iOBC, to create the debug UART connection. User file transfer will
+take place using this connection.</p>
+<p>Additionally, a SAM-ICE JTAG must also be connected in order to successfully
+connect with an iOBC.</p>
+</div>
+<div class="section" id="peripherals">
+<h2>Peripherals<a class="headerlink" href="#peripherals" title="Permalink to this headline">¶</a></h2>
+<p>The iOBC has several different ports available for interacting with
+peripheral devices. Currently, users should interact with these devices
+using the standard Linux functions. A Kubos HAL will be added in the
+future for the iOBC.</p>
+<div class="section" id="adc">
+<h3>ADC<a class="headerlink" href="#adc" title="Permalink to this headline">¶</a></h3>
+<p>The iOBC has four analog input pins available:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="46%" />
+<col width="54%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">iOBC</th>
+<th class="head">Linux</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>AIN4</td>
+<td>0</td>
+</tr>
+<tr class="row-odd"><td>AIN5</td>
+<td>1</td>
+</tr>
+<tr class="row-even"><td>AIN6</td>
+<td>2</td>
+</tr>
+<tr class="row-odd"><td>AIN7</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<p>The pins are available through the Linux device <code class="docutils literal notranslate"><span class="pre">/sys/bus/iio/devices/iio\:device0/</span></code>.</p>
+<p>A single raw output value can be read from each of the pins via
+<code class="docutils literal notranslate"><span class="pre">/sys/bus/iio/devices/iio\:device0/in_voltage{n}_raw</span></code>, where <cite>{n}</cite> corresponds to the
+Linux AIN number.</p>
+<p>This raw value can then be converted to microvolts by multiplying it by the value
+found in <code class="docutils literal notranslate"><span class="pre">/sys/bus/iio/devices/iio\:device0/in_voltage_scale</span></code>.</p>
+<p>More information about the capture and use of ADC can be found in
+<a class="reference external" href="https://www.at91.com/linux4sam/bin/view/Linux4SAM/IioAdcDriver">this guide from Atmel</a>.</p>
+<p>An <a class="reference external" href="http://github.com/kubos/kubos/tree/master/examples/adc-thermistor">ADC example</a> is
+also available for reference in the Kubos repo.</p>
+</div>
+<div class="section" id="gpio">
+<h3>GPIO<a class="headerlink" href="#gpio" title="Permalink to this headline">¶</a></h3>
+<p>The iOBC has 27 GPIO pins available. These pins can be dynamically
+controlled via the <a class="reference external" href="https://www.kernel.org/doc/Documentation/gpio/sysfs.txt">Linux GPIO Sysfs Interface for
+Userspace</a>
+as long as they have not already been assigned to another peripheral.</p>
+<p>To interact with a pin, the user will first need to generate the pin’s
+device name:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ echo {pin} &gt; /sys/class/gpio/export
+</pre></div>
+</div>
+<p>The {pin} value can be found in the below chart:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="43%" />
+<col width="57%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">iOBC GPIO #</th>
+<th class="head">Linux GPIO Value</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>42</td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>43</td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>44</td>
+</tr>
+<tr class="row-odd"><td>3</td>
+<td>45</td>
+</tr>
+<tr class="row-even"><td>4</td>
+<td>52</td>
+</tr>
+<tr class="row-odd"><td>5</td>
+<td>53</td>
+</tr>
+<tr class="row-even"><td>6</td>
+<td>54</td>
+</tr>
+<tr class="row-odd"><td>7</td>
+<td>55</td>
+</tr>
+<tr class="row-even"><td>8</td>
+<td>56</td>
+</tr>
+<tr class="row-odd"><td>9</td>
+<td>57</td>
+</tr>
+<tr class="row-even"><td>10</td>
+<td>58</td>
+</tr>
+<tr class="row-odd"><td>11</td>
+<td>59</td>
+</tr>
+<tr class="row-even"><td>12</td>
+<td>60</td>
+</tr>
+<tr class="row-odd"><td>13</td>
+<td>61</td>
+</tr>
+<tr class="row-even"><td>14</td>
+<td>62</td>
+</tr>
+<tr class="row-odd"><td>15</td>
+<td>63</td>
+</tr>
+<tr class="row-even"><td>16</td>
+<td>12</td>
+</tr>
+<tr class="row-odd"><td>17</td>
+<td>13</td>
+</tr>
+<tr class="row-even"><td>18</td>
+<td>14</td>
+</tr>
+<tr class="row-odd"><td>19</td>
+<td>15</td>
+</tr>
+<tr class="row-even"><td>20</td>
+<td>16</td>
+</tr>
+<tr class="row-odd"><td>21</td>
+<td>17</td>
+</tr>
+<tr class="row-even"><td>22</td>
+<td>18</td>
+</tr>
+<tr class="row-odd"><td>23</td>
+<td>19</td>
+</tr>
+<tr class="row-even"><td>24</td>
+<td>20</td>
+</tr>
+<tr class="row-odd"><td>25</td>
+<td>21</td>
+</tr>
+<tr class="row-even"><td>26</td>
+<td>22</td>
+</tr>
+</tbody>
+</table>
+<p>For example, to interact with the iOBC’s GPIO5 pin, which has a Linux
+GPIO value of 53, the user will use:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ echo 53 &gt; /sys/class/gpio/export
+</pre></div>
+</div>
+<p>Once this command has been issued, the pin will be defined to the system
+as ‘/sys/class/gpio/gpio{pin}’. The user can then set and check the pins
+direction and value.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Set GPIO5 as output:
+$ echo out &gt; /sys/class/gpio/gpio53/direction
+
+Set GPIO23&#39;s value to 1:
+$ echo 1 &gt; /sys/class/gpio/gpio19/value
+
+Get GPIO10&#39;s value:
+$ cat /sys/class/gpio/gpio58/value
+</pre></div>
+</div>
+</div>
+<div class="section" id="i2c">
+<h3>I2C<a class="headerlink" href="#i2c" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="http://www.nxp.com/documents/user_manual/UM10204.pdf">I2C Standards
+Doc</a></p>
+<p>Kubos Linux is currently configured to support the I2C standard-mode
+speed of 100kHz.</p>
+<p>The I2C bus is available as <code class="docutils literal notranslate"><span class="pre">/dev/i2c-0</span></code>, or through the Kubos C HAL as <code class="docutils literal notranslate"><span class="pre">K_I2C1</span></code>.</p>
+<p>For examples and instructions, see the <a class="reference internal" href="../../deep-dive/apis/kubos-hal/i2c-hal/index.html"><span class="doc">I2C HAL documentation</span></a>.</p>
+</div>
+<div class="section" id="pwm">
+<h3>PWM<a class="headerlink" href="#pwm" title="Permalink to this headline">¶</a></h3>
+<p>The iOBC has 6 PWM pins available for use, grouped into three pairs:</p>
+<blockquote>
+<div><ul class="simple">
+<li>PWM0 and PWM1</li>
+<li>PWM2 and PWM3</li>
+<li>PWM4 and PWM5</li>
+</ul>
+</div></blockquote>
+<p>Users can interact with these pins through the <a class="reference external" href="https://www.kernel.org/doc/Documentation/pwm.txt">PWM sysfs interface</a>,
+and the <code class="docutils literal notranslate"><span class="pre">/sys/class/pwm/pwmchip0/</span></code> directory</p>
+<p>In order to make a pin available for use, the PWM number should be passed to the <code class="docutils literal notranslate"><span class="pre">pwmchip0/export</span></code> file.
+For example, the following would be done in order to enable access to PWM0:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ echo 0 &gt; /sys/class/pwm/pwmchip0/export
+</pre></div>
+</div>
+<p>After doing so, a new subdirectory will be available, <code class="docutils literal notranslate"><span class="pre">pwmchip0/pwm0</span></code>.</p>
+<p>From here, the pin’s properties can be configured and then it can be enabled.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Due to the underlying hardware, each pair of pins must use the same period value.
+They may, however, have differing duty cycles.</p>
+<p class="last">The nanosecond value specified for period and duty cycle will be internally converted to the nearest clock divider value.</p>
+</div>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>/* Set the period of the generated wave to 1 millisecond */
+$ echo 1000000 &gt; /sys/class/pwm/pwmchip0/pwm0/period
+
+/* Set the duty cycle to 50% (.5 millisecond) */
+$ echo 500000 &gt; /sys/class/pwm/pwmchip0/pwm0/duty_cycle
+
+/* Turn on the signal */
+$ echo 1 &gt; enable
+</pre></div>
+</div>
+<p>Then, to turn the signal off:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ echo 0 &gt; enable
+</pre></div>
+</div>
+</div>
+<div class="section" id="spi">
+<h3>SPI<a class="headerlink" href="#spi" title="Permalink to this headline">¶</a></h3>
+<p>The iOBC has one SPI bus available for external use with three pre-allocated chip select pins.
+All pins are exposed via either an iOBC daughterboard (J5 connection) or optional iOBC header (J3 connection).</p>
+<p><strong>SPI Bus 1</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="67%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Pin</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>MOSI</td>
+<td>SPI1_MOSI</td>
+</tr>
+<tr class="row-odd"><td>MISO</td>
+<td>SPI1_MISO</td>
+</tr>
+<tr class="row-even"><td>SCLK</td>
+<td>SPI1_SPCK</td>
+</tr>
+<tr class="row-odd"><td>CS0</td>
+<td>SPI1_NPCS0</td>
+</tr>
+<tr class="row-even"><td>CS1</td>
+<td>SPI1_NPCS1</td>
+</tr>
+<tr class="row-odd"><td>CS2</td>
+<td>SPI1_NPCS2</td>
+</tr>
+</tbody>
+</table>
+<p>Users can interact a device on this bus using Linux’s <a class="reference external" href="https://www.kernel.org/doc/Documentation/spi/spidev">spidev interface</a>
+The device name will be <code class="docutils literal notranslate"><span class="pre">/dev/spidev1.n</span></code>, where <em>n</em> corresponds to the chip select number.</p>
+<p>An example user program to read a value might look like this:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;fcntl.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;sys/ioctl.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;linux/types.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;linux/spi/spidev.h&gt;</span><span class="cp"></span>
+
+<span class="cp">#define SPI_DEV &quot;/dev/spidev1.0&quot;</span>
+
+<span class="kt">int</span> <span class="n">fd</span><span class="p">;</span>
+<span class="kt">uint8_t</span> <span class="n">mode</span> <span class="o">=</span> <span class="n">SPI_MODE_0</span><span class="p">;</span>
+<span class="kt">uint8_t</span> <span class="n">bits</span> <span class="o">=</span> <span class="mi">8</span><span class="p">;</span>
+<span class="kt">uint32_t</span> <span class="n">speed</span> <span class="o">=</span> <span class="mi">1000000</span><span class="p">;</span>
+<span class="kt">uint16_t</span> <span class="n">delay</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="kt">uint8_t</span> <span class="n">tx</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+<span class="kt">uint8_t</span> <span class="n">rx</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+
+<span class="kt">uint8_t</span> <span class="n">value</span><span class="p">;</span>
+
+<span class="n">fd</span> <span class="o">=</span> <span class="n">open</span><span class="p">(</span><span class="n">SPI_DEV</span><span class="p">,</span> <span class="n">O_RDWR</span><span class="p">);</span>
+
+<span class="cm">/* Register to read from */</span>
+<span class="n">tx</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mh">0xD0</span><span class="p">;</span>
+
+<span class="cm">/* Set up communication configuration */</span>
+<span class="k">struct</span> <span class="n">spi_ioc_transfer</span> <span class="n">tr</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="p">.</span><span class="n">tx_buf</span> <span class="o">=</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">long</span><span class="p">)</span><span class="n">tx</span><span class="p">,</span>
+    <span class="p">.</span><span class="n">rx_buf</span> <span class="o">=</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">long</span><span class="p">)</span><span class="n">rx</span><span class="p">,</span>
+    <span class="p">.</span><span class="n">len</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="p">.</span><span class="n">speed_hz</span> <span class="o">=</span> <span class="n">speed</span><span class="p">,</span>
+    <span class="p">.</span><span class="n">bits_per_word</span> <span class="o">=</span> <span class="n">bits</span><span class="p">,</span>
+    <span class="p">.</span><span class="n">cs_change</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="p">.</span><span class="n">delay_usecs</span> <span class="o">=</span> <span class="n">delay</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="cm">/* Send request to read */</span>
+<span class="n">ioctl</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="n">SPI_IOC_MESSAGE</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="o">&amp;</span><span class="n">tr</span><span class="p">);</span>
+
+<span class="cm">/* Grab result from response buffer */</span>
+<span class="n">value</span> <span class="o">=</span> <span class="n">rx</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+
+<span class="n">close</span><span class="p">(</span><span class="n">fd</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="uart">
+<h3>UART<a class="headerlink" href="#uart" title="Permalink to this headline">¶</a></h3>
+<p>The iOBC has 2 UART ports available for use in varying capacities:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="37%" />
+<col width="15%" />
+<col width="15%" />
+<col width="17%" />
+<col width="17%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Linux Device</th>
+<th class="head">TX Pin</th>
+<th class="head">RX Pin</th>
+<th class="head">RTS Pin</th>
+<th class="head">CTS Pin</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>/dev/ttyS1 (SLIP)</td>
+<td>TX0</td>
+<td>RX0</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>/dev/ttyS3</td>
+<td>TX2</td>
+<td>RX2</td>
+<td>RTS2</td>
+<td>CTS2</td>
+</tr>
+</tbody>
+</table>
+<p>Users can interact with these ports using Linux’s <a class="reference external" href="http://man7.org/linux/man-pages/man3/termios.3.html">termios</a> interface.</p>
+<p><a class="reference external" href="http://tldp.org/HOWTO/Serial-Programming-HOWTO/x115.html">A tutorial on this interface can be found here</a></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">/dev/ttyS1</span></code> device has been preconfigured to be used for SLIP connections.
+Please refer to the <a class="reference internal" href="../comms-setup.html#slip"><span class="std std-ref">SLIP instructions</span></a> for more information.</p>
+</div>
+</div>
+<div class="section" id="user-data-partition">
+<h2>User Data Partition<a class="headerlink" href="#user-data-partition" title="Permalink to this headline">¶</a></h2>
+<p>The iOBC has a single user data partition which maps to the <cite>/home</cite>
+directory.</p>
+<p>The home directories of all user accounts, except root, should live
+under this directory.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Any files not residing under the /home directory will be destroyed
+during an upgrade/downgrade</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../mbm2/index.html" class="btn btn-neutral float-right" title="KubOS for the Pumpkin MBM2" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="installing-linux-iobc.html" class="btn btn-neutral" title="Installing Kubos Linux on an ISIS-OBC" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

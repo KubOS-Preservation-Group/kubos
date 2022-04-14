@@ -1,0 +1,592 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Telemetry Database Service &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../../index.html"/>
+        <link rel="up" title="Core Services" href="core-services.html"/>
+        <link rel="next" title="Hardware Services" href="hardware-services.html"/>
+        <link rel="prev" title="Shell Service" href="shell.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../obc-docs/index.html">Working with an OBC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">KubOS Ecosystem</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#mission-applications">Mission Applications</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#services">Services</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="core-services.html">Core Services</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="app-service.html">Applications Service</a></li>
+<li class="toctree-l4"><a class="reference internal" href="comms-framework.html">Communications Service</a></li>
+<li class="toctree-l4"><a class="reference internal" href="file.html">File Transfer Service</a></li>
+<li class="toctree-l4"><a class="reference internal" href="monitor-service.html">Monitor Service</a></li>
+<li class="toctree-l4"><a class="reference internal" href="scheduler.html">Scheduler Service</a></li>
+<li class="toctree-l4"><a class="reference internal" href="shell.html">Shell Service</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Telemetry Database Service</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="hardware-services.html">Hardware Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="payload-services.html">Payload Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="service-config.html">Service Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="service-dev.html">Service Development</a></li>
+<li class="toctree-l3"><a class="reference internal" href="service-outline-guide.html">KubOS Service Outline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphql.html">GraphQL</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#kubos-linux">Kubos Linux</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../deep-dive/index.html">Under the Hood</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sdk-docs/index.html">Kubos SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Contributing to KubOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">KubOS Ecosystem</a> &raquo;</li>
+        
+          <li><a href="core-services.html">Core Services</a> &raquo;</li>
+        
+      <li>Telemetry Database Service</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/ecosystem/services/telemetry-db.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="telemetry-database-service">
+<h1>Telemetry Database Service<a class="headerlink" href="#telemetry-database-service" title="Permalink to this headline">¶</a></h1>
+<p>KubOS utilizes a <a class="reference external" href="https://www.sqlite.org/about.html">SQLite database</a> to store telemetry data generated by the
+hardware and payload services until it is requested for transmission by the ground station.</p>
+<p>SQLite only allows one process to make changes to a database at a time, so the telemetry database service acts as a
+single point of contact for interacting with the underlying telemetry database.</p>
+<div class="section" id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<p>The service has the following available configuration parameters which may be specified in the
+<a class="reference internal" href="service-config.html"><span class="doc">config.toml</span></a> file:</p>
+<blockquote>
+<div><ul>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">database</span></code> - (Default: “/home/system/kubos/telemetry.db”) The path to the telemetry database
+file. The file will be created if it does not already exist.</p>
+</li>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">[telemetry-service.addr]</span></code></p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">ip</span></code> - The IP address of the service</li>
+<li><code class="docutils literal notranslate"><span class="pre">port</span></code> - The port the service will listen on for GraphQL requests over HTTP</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="interface-details">
+<h2>Interface Details<a class="headerlink" href="#interface-details" title="Permalink to this headline">¶</a></h2>
+<p>Specific details about the available GraphQL queries can be found in the <a href="../../rust-docs/telemetry_service/index.html" target="_blank">telemetry database service</a> Rust docs.</p>
+<blockquote>
+<div></div></blockquote>
+<div class="section" id="benchmark">
+<h3>Benchmark<a class="headerlink" href="#benchmark" title="Permalink to this headline">¶</a></h3>
+<p>The Kubos repo contains a <a class="reference external" href="https://github.com/kubos/kubos/tree/master/test/benchmark/db-test">database benchmark project</a>
+which we have used to measure various behaviors of the telemetry database service.</p>
+<p>Because each OBC has its own unique system resources, we recommend <a class="reference internal" href="../../sdk-docs/sdk-rust.html"><span class="doc">compiling and running</span></a>
+the test project on your OBC to obtain the most accurate results.</p>
+<p>When run on a Beaglebone Black, we gathered the following benchmark statistics:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">kubos</span> <span class="c1"># ./db-test -c tlmdb-config.toml -i 1000</span>
+</pre></div>
+</div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="54%" />
+<col width="21%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">NAME</th>
+<th class="head">Avg (us)</th>
+<th class="head">Total (us)</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>local_db_api_insert</td>
+<td>50460</td>
+<td>50460353</td>
+</tr>
+<tr class="row-odd"><td>local_db_api_insert_bulk</td>
+<td>213</td>
+<td>213957</td>
+</tr>
+<tr class="row-even"><td>remote_gql_insert</td>
+<td>64356</td>
+<td>64356103</td>
+</tr>
+<tr class="row-odd"><td>remote_gql_insert_bulk</td>
+<td>9608</td>
+<td>9608876</td>
+</tr>
+<tr class="row-even"><td>remote_udp_insert</td>
+<td>87</td>
+<td>87930</td>
+</tr>
+</tbody>
+</table>
+<p>In summary:</p>
+<ul>
+<li><p class="first">Sending UDP request takes ~87 microseconds</p>
+<blockquote>
+<div><ul class="simple">
+<li>This means that a client can send UDP requests up to a rate of 11,494 requests per second, if
+they don’t wait for a response. Note: This is far faster than the rate at which the service
+processes requests, meaning that packets will be dropped if this maximum speed is used.</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Individual telemetry database inserts take ~50 milliseconds per entry, while bulk telemetry
+database insertions take 213 microseconds per entry on average.</p>
+</li>
+<li><p class="first">Individual GraphQL inserts (including GraphQL receive request, database insert, and
+GraphQL send response) take ~64 milliseconds per entry, while bulk inserts (many entries at once)
+take 9.6 milliseconds per entry.</p>
+<blockquote>
+<div><ul class="simple">
+<li>This means that the GraphQL service can process roughly 104 database insert requests per
+second, while providing acknowledgement and transaction status.</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="querying-the-service">
+<h2>Querying the Service<a class="headerlink" href="#querying-the-service" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">telemetry</span></code> query can be used to fetch a certain selection of data from the telemetry database.
+It will return an array of database entries.</p>
+<p>The query has the following schema:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>query {
+    telemetry(timestampGe: Float, timestampLe: Float, subsystem: String, parameter: String, parameters: [String], limit: Integer): [{
+        timestamp: Float!
+        subsystem: String!
+        parameter: String!
+        value: String!
+    }]
+}
+</pre></div>
+</div>
+<p>Each of the query arguments acts as a filter for the database query:</p>
+<blockquote>
+<div><ul class="simple">
+<li>timestampGe - Return entries with timestamps occurring on or after the given value</li>
+<li>timestampLe - Return entries with timestamps occurring on or before the given value</li>
+<li>subsystem - Return entries which match the given subsystem name</li>
+<li>parameter - (Mutually exlusive with <code class="docutils literal notranslate"><span class="pre">parameters</span></code>) Return entries which match the given
+parameter name</li>
+<li>parameters - (Mutually exlusive with <code class="docutils literal notranslate"><span class="pre">parameter</span></code>) Return entries which match any of the
+given parameter names</li>
+<li>limit - Return only the first <cite>n</cite> entries found</li>
+</ul>
+</div></blockquote>
+<p>Note: <code class="docutils literal notranslate"><span class="pre">timestampGe</span></code> and <code class="docutils literal notranslate"><span class="pre">timestampLe</span></code> can be combined to create a timestamp selection range.
+For example, entries with timestamps after <code class="docutils literal notranslate"><span class="pre">1000</span></code>, but before <code class="docutils literal notranslate"><span class="pre">5000</span></code>.</p>
+</div>
+<div class="section" id="saving-results-for-later-processing">
+<h2>Saving Results for Later Processing<a class="headerlink" href="#saving-results-for-later-processing" title="Permalink to this headline">¶</a></h2>
+<p>Immediate, large query results might consume more downlink bandwidth than is allowable.
+Alternatively, downlink and uplink could be asynchronous from each other.</p>
+<p>In this case, we can use the <code class="docutils literal notranslate"><span class="pre">routedTelemetry</span></code> query to write our results to an on-system file.
+This way, we can choose the specific time at which to downlink the results using the
+<a class="reference internal" href="file.html"><span class="doc">file transfer service</span></a>. Additionally, by default, the output file will be in a
+compressed format, reducing the amount of data which needs to be transferred.</p>
+<p>The query has the following schema:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>query {
+    telemetry(timestampGe: Float, timestampLe: Float, subsystem: String, parameter: String, parameters: [String], output: String!, compress: Boolean = true): String!
+}
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">output</span></code> argument specifies the output file to write the query results to. It may be a relative or absolute path.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">compress</span></code> argument specifies whether the service should compress the output file after writing the results to it.</p>
+<p>The other arguments are the same as in the <code class="docutils literal notranslate"><span class="pre">telemetry</span></code> query.</p>
+<p>The query will return a single field echoing the file that was written to.
+If the <code class="docutils literal notranslate"><span class="pre">compress</span></code> argument is true (which is the default), then the result will be the output file name suffixed with “.tar.gz” to indicate
+that the file was compressed using <a class="reference external" href="https://www.gnu.org/software/gzip/manual/gzip.html">Gzip</a>.</p>
+<p>The results file will contain an array of database entries in JSON format.
+This matches the return fields of the <code class="docutils literal notranslate"><span class="pre">telemetry</span></code> query.</p>
+</div>
+<div class="section" id="adding-entries-to-the-database">
+<h2>Adding Entries to the Database<a class="headerlink" href="#adding-entries-to-the-database" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">insert</span></code> mutation can be used to add an entry to the telemetry database.</p>
+<p>It has the following schema:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>mutation {
+    insert(timestamp: Float, subsystem: String!, parameter: String!, value: String!): {
+        success: Boolean!,
+        errors: String!
+    }
+}
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">timestamp</span></code> argument is optional. If it is not specified, one will be generated based on the current system time,
+in fractional seconds.</p>
+</div>
+<div class="section" id="adding-multiple-entries-to-the-database">
+<h2>Adding Multiple Entries to the Database<a class="headerlink" href="#adding-multiple-entries-to-the-database" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">insertBulk</span></code> mutation can be used to add multiple entries to the telemetry database at the
+same time. It has the following schema:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>type InsertEntry {
+   timestamp: Float,
+   subsystem: String!,
+   parameter: String!,
+   value: String!
+}
+
+mutation {
+   insertBulk(timestamp: Float, entries: [InsertEntry!]!): {
+      success: Boolean!,
+      errors: String!
+   }
+}
+</pre></div>
+</div>
+<p>Each individual telemetry entry has an optional <code class="docutils literal notranslate"><span class="pre">timestamp</span></code> field. If it is not specified, the optional
+<code class="docutils literal notranslate"><span class="pre">timestamp</span></code> argument to this function will be used if it is specified, otherwise one will be
+generated based on the current system time in fractional seconds.</p>
+<p>For example, to insert multiple telemetry data points all with the same current system time:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mutation</span> <span class="p">{</span>
+   <span class="n">insertBulk</span><span class="p">(</span><span class="n">entries</span><span class="p">:</span> <span class="p">[</span>
+       <span class="p">{</span> <span class="n">subsystem</span><span class="p">:</span> <span class="s2">&quot;adcs&quot;</span><span class="p">,</span> <span class="n">parameter</span><span class="p">:</span> <span class="s2">&quot;voltage&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="s2">&quot;3.3&quot;</span> <span class="p">},</span>
+       <span class="p">{</span> <span class="n">subsystem</span><span class="p">:</span> <span class="s2">&quot;eps&quot;</span><span class="p">,</span> <span class="n">parameter</span><span class="p">:</span> <span class="s2">&quot;voltage&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="s2">&quot;5.0&quot;</span> <span class="p">},</span>
+       <span class="p">{</span> <span class="n">subsystem</span><span class="p">:</span> <span class="s2">&quot;obc&quot;</span><span class="p">,</span> <span class="n">parameter</span><span class="p">:</span> <span class="s2">&quot;cpu&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="s2">&quot;45.1&quot;</span> <span class="p">}</span>
+   <span class="p">])</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Or to insert multiple entries with a single pre-generated timestamp:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mutation</span> <span class="p">{</span>
+   <span class="n">insertBulk</span><span class="p">(</span>
+      <span class="n">timestamp</span><span class="p">:</span> <span class="mf">1559594402.0</span><span class="p">,</span>
+      <span class="n">entries</span><span class="p">:</span> <span class="p">[</span>
+          <span class="p">{</span> <span class="n">subsystem</span><span class="p">:</span> <span class="s2">&quot;adcs&quot;</span><span class="p">,</span> <span class="n">parameter</span><span class="p">:</span> <span class="s2">&quot;voltage&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="s2">&quot;3.3&quot;</span> <span class="p">},</span>
+          <span class="p">{</span> <span class="n">subsystem</span><span class="p">:</span> <span class="s2">&quot;eps&quot;</span><span class="p">,</span> <span class="n">parameter</span><span class="p">:</span> <span class="s2">&quot;voltage&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="s2">&quot;5.0&quot;</span> <span class="p">},</span>
+          <span class="p">{</span> <span class="n">subsystem</span><span class="p">:</span> <span class="s2">&quot;obc&quot;</span><span class="p">,</span> <span class="n">parameter</span><span class="p">:</span> <span class="s2">&quot;cpu&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="s2">&quot;45.1&quot;</span> <span class="p">}</span>
+      <span class="p">])</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="section" id="limitations">
+<h3>Limitations<a class="headerlink" href="#limitations" title="Permalink to this headline">¶</a></h3>
+<p>The generated timestamp value will be the current system time in fractional seconds.
+The database uses the combination of <code class="docutils literal notranslate"><span class="pre">timestamp</span></code>, <code class="docutils literal notranslate"><span class="pre">subsystem</span></code>, and <code class="docutils literal notranslate"><span class="pre">parameter</span></code> as the primary key.
+This primary key must be unique for each entry.</p>
+</div>
+</div>
+<div class="section" id="adding-entries-to-the-database-asynchronously">
+<h2>Adding Entries to the Database Asynchronously<a class="headerlink" href="#adding-entries-to-the-database-asynchronously" title="Permalink to this headline">¶</a></h2>
+<p>If you would like to add many entries to the database quickly, and don’t care about verifying that the request
+was successful, the service’s direct UDP port may be used.
+This UDP port is configured with the <code class="docutils literal notranslate"><span class="pre">direct_port</span></code> value in the system’s <code class="docutils literal notranslate"><span class="pre">config.toml</span></code> file.</p>
+<p>Individual or bulk insert requests should be sent as single UDP messages in JSON format.</p>
+<p>Individual requests have the following schema:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>{
+    &quot;timestamp&quot;: Float,
+    &quot;subsystem&quot;: String!,
+    &quot;parameter&quot;: String!,
+    &quot;value&quot;: String!,
+}
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">timestamp</span></code> argument is optional (one will be generated based on the current system time), but the other parameters are all required.</p>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;subsystem&quot;</span><span class="p">:</span> <span class="s2">&quot;eps&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;parameter&quot;</span><span class="p">:</span> <span class="s2">&quot;voltage&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;3.5&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If the top-level is a JSON array, the request is a bulk insert. Timestamps are again optional. Be sure to verify that the JSON
+message will fit in a single UDP packet. (The default UDP payload size limit is 4096 bytes.) Here is a bulk insert example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[
+    {
+        &quot;timestamp&quot;: Float,
+        &quot;subsystem&quot;: String!,
+        &quot;parameter&quot;: String!,
+        &quot;value&quot;: String!,
+    },
+    ...
+]
+</pre></div>
+</div>
+<div class="section" id="id1">
+<h3>Limitations<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>The generated timestamp value will be the current system time in fractional seconds.
+The database uses the combination of <code class="docutils literal notranslate"><span class="pre">timestamp</span></code>, <code class="docutils literal notranslate"><span class="pre">subsystem</span></code>, and <code class="docutils literal notranslate"><span class="pre">parameter</span></code> as the primary key.
+This primary key must be unique for each entry.</p>
+<p>This asynchronous method sends requests to the telemetry database service much more quickly than time needed for the
+service to process each request. The service’s direct UDP socket buffer can store up to 256 packets at a time.</p>
+<blockquote>
+<div><ul class="simple">
+<li>As a result, no more than 256 messages should be sent (from any and all sources) using this direct method in the time
+period required for the service to process them (this can be calculated by multiplying 256 by the amount of time required
+to process a single message. See the <a class="reference internal" href="#benchmark">Benchmark</a> section for more information).</li>
+</ul>
+</div></blockquote>
+<p>The service processes requests from both the direct UDP method and the traditional GraphQL method one at a time,
+rather than simultaneously.</p>
+<blockquote>
+<div><ul class="simple">
+<li>As a result, if the service is receiving requests from both methods at the same time, the time period required
+to process 256 direct UDP messages should be doubled.</li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="removing-entries-from-the-database">
+<h2>Removing Entries from the Database<a class="headerlink" href="#removing-entries-from-the-database" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">delete</span></code> mutation can be used to remove a selection of entries from the telemetry database.</p>
+<p>It has the following schema:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>mutation {
+    delete(timestampGe: Float, timestampLe: Float, subsystem: String, parameter: String): [{
+        success: Boolean!,
+        errors: String!,
+        entriesDeleted: Integer
+    }]
+}
+</pre></div>
+</div>
+<p>Each of the mutation arguments acts as a filter for the database query:</p>
+<blockquote>
+<div><ul class="simple">
+<li>timestampGe - Delete entries with timestamps occurring on or after the given value</li>
+<li>timestampLe - Delete entries with timestamps occurring on or before the given value</li>
+<li>subsystem - Delete entries which match the given subsystem name</li>
+<li>parameter - Delete entries which match the given parameter name</li>
+</ul>
+</div></blockquote>
+<p>The mutation has the following response fields:</p>
+<blockquote>
+<div><ul class="simple">
+<li>success - Indicates whether the delete operation was successful</li>
+<li>errors - Any errors encountered by the delete operation</li>
+<li>entriesDeleted - The number of entries deleted by the operation</li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="hardware-services.html" class="btn btn-neutral float-right" title="Hardware Services" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="shell.html" class="btn btn-neutral" title="Shell Service" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

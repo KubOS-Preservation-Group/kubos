@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["StandardTelemetry","Standard telemetry packet sent by the MAI-400 every 250ms"]]});

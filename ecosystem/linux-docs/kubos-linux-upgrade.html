@@ -1,0 +1,409 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Upgrading Kubos Linux &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../../index.html"/>
+        <link rel="up" title="KubOS Ecosystem" href="../index.html"/>
+        <link rel="next" title="Kubos Linux Recovery Architecture" href="kubos-linux-recovery.html"/>
+        <link rel="prev" title="Process Monitoring" href="monitoring.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../obc-docs/index.html">Working with an OBC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">KubOS Ecosystem</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#mission-applications">Mission Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#services">Services</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#kubos-linux">Kubos Linux</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="kubos-linux-overview.html">Kubos Linux Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="using-kubos-linux.html">Using Kubos Linux</a></li>
+<li class="toctree-l3"><a class="reference internal" href="logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="monitoring.html">Process Monitoring</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Kubos Linux Upgrades</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#upgrade-installation">Upgrade Installation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#upgrade-rollback">Upgrade Rollback</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#upgrade-creation">Upgrade Creation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="kubos-linux-recovery.html">Kubos Linux Recovery</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../deep-dive/index.html">Under the Hood</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sdk-docs/index.html">Kubos SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Contributing to KubOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">KubOS Ecosystem</a> &raquo;</li>
+        
+      <li>Upgrading Kubos Linux</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/ecosystem/linux-docs/kubos-linux-upgrade.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="upgrading-kubos-linux">
+<h1>Upgrading Kubos Linux<a class="headerlink" href="#upgrading-kubos-linux" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>Kubos Linux upgrades are distributed as <cite>kpack-{YYYY.MM.DD}.itb</cite> files.
+ITB stands for ‘Image Tree Blob’ and allows Kubos to utilize the
+existing DFU utility currently available in U-Boot.</p>
+<p>Within each file will be a new version of the kernel image and root
+filesystem.</p>
+<p>To upgrade a board currently running Kubos Linux, an upgrade package
+should be loaded into the upgrade partition of the board.
+For now, this is done by manually copying the package into the upgrade
+partition and then setting the <code class="docutils literal notranslate"><span class="pre">kubos_updatefile</span></code> environment variable.</p>
+<p>Once the board is rebooted, U-Boot will take the package and then
+install each component into the appropriate partition (kernel/rootfs).
+If installation completes successfully, then the board will be rebooted
+and then boot into the new version of Kubos Linux.</p>
+<p>The overall flow looks like this:</p>
+<div class="figure" id="id4">
+<img alt="Kubos Linux Upgrade" src="../../_images/kubos_linux_upgrade.png" />
+<p class="caption"><span class="caption-text">Kubos Linux Upgrade</span></p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>User files should not be impacted by upgrade installation as long as
+they remain under the /home directory. This directory maps to the
+user space partition.</p>
+<p class="last">However, some future releases may cause the Kubos libraries to undergo
+significant changes. In this case, backwards compatilibity is not
+guaranteed and user applications may need to be rebuilt.</p>
+</div>
+</div>
+<div class="section" id="upgrade-installation">
+<span id="id1"></span><h2>Upgrade Installation<a class="headerlink" href="#upgrade-installation" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="pre-requisites">
+<h3>Pre-Requisites<a class="headerlink" href="#pre-requisites" title="Permalink to this headline">¶</a></h3>
+<p>The host computer should be connected to the target board, which should
+be on and running Kubos Linux.</p>
+</div>
+<div class="section" id="installation">
+<h3>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h3>
+<p>Contact a Kubos team member for an upgrade file for your desired Kubos Linux version.
+Alternatively, create one yourself following the directions in the <a class="reference internal" href="#upgrade-creation"><span class="std std-ref">upgrade creation</span></a>
+section.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Not all releases can be installed via upgrade. Some releases contain
+changes which massively alter the system, causing a full install to be
+required instead.</p>
+</div>
+<p>Transfer the package to the target system using <code class="docutils literal notranslate"><span class="pre">scp</span></code> or other <a class="reference internal" href="../../obc-docs/comms-setup.html#file-transfer"><span class="std std-ref">file transfer</span></a>
+method of choice:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ scp kpack-{version}.itb kubos@{target_ip}:/upgrade/
+</pre></div>
+</div>
+<p>Once the transfer has completed successfully, log into the board and set the <code class="docutils literal notranslate"><span class="pre">kubos_updatefile</span></code>
+variable with the name of the upgrade file like so:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ fw_setenv kubos_updatefile kpack-{version}.itb
+</pre></div>
+</div>
+<p>Now, trigger a reboot of the board. This can be done with the Linux <code class="docutils literal notranslate"><span class="pre">reboot</span></code> command.</p>
+<p>When the board boots into U-Boot, the new package will be detected and
+loaded. If the loading is successful, the board will reboot into the
+newly installed Kubos Linux. The U-Boot console messages will look
+similar to this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Processing</span> <span class="n">upgrade</span> <span class="s1">&#39;kernel@1&#39;</span> <span class="p">:</span><span class="n">crc32</span><span class="o">+</span> <span class="n">sha1</span><span class="o">+</span>
+<span class="c1">###writing kernel</span>
+<span class="mi">1154936</span> <span class="nb">bytes</span> <span class="n">written</span>
+<span class="n">Processing</span> <span class="n">upgrade</span> <span class="s1">&#39;rootfs@1&#39;</span> <span class="p">:</span><span class="n">crc32</span><span class="o">+</span> <span class="n">sha1</span><span class="o">+</span>
+<span class="c1">##########################Un-Protected 1 sectors</span>
+<span class="n">Erasing</span> <span class="n">Flash</span><span class="o">...</span>
+<span class="o">.</span> <span class="n">done</span>
+<span class="n">Erased</span> <span class="mi">1</span> <span class="n">sectors</span>
+<span class="n">Writing</span> <span class="n">to</span> <span class="n">Flash</span><span class="o">...</span> <span class="n">done</span>
+<span class="n">Protected</span> <span class="mi">1</span> <span class="n">sectors</span>
+<span class="n">resetting</span> <span class="o">...</span>
+<span class="n">reset_cpu</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="upgrade-rollback">
+<span id="id2"></span><h2>Upgrade Rollback<a class="headerlink" href="#upgrade-rollback" title="Permalink to this headline">¶</a></h2>
+<p>If for some reason you need to rollback to a previous version of Kubos
+Linux, you don’t need to reflash the board with the correct upgrade
+package. Previous packages are not deleted once they have been loaded.
+As a result, you can simply specify which package you would like to boot
+into and then restart your system.</p>
+<p>From the Kubos Linux shell:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ fw_setenv kubos_updatefile kpack-{desired version}.itb
+$ reboot
+</pre></div>
+</div>
+</div>
+<div class="section" id="upgrade-creation">
+<span id="id3"></span><h2>Upgrade Creation<a class="headerlink" href="#upgrade-creation" title="Permalink to this headline">¶</a></h2>
+<p>This section is for developers who have made changes to Kubos Linux and
+want to generate an upgrade package.</p>
+<div class="section" id="pre-requisite">
+<h3>Pre-Requisite<a class="headerlink" href="#pre-requisite" title="Permalink to this headline">¶</a></h3>
+<p>Build the new OS.
+Refer to the appropriate <a class="reference internal" href="../../deep-dive/index.html#custom-klb"><span class="std std-ref">Building Kubos Linux for the {OBC}</span></a> instructions.</p>
+</div>
+<div class="section" id="run-the-packaging-script">
+<h3>Run the Packaging Script<a class="headerlink" href="#run-the-packaging-script" title="Permalink to this headline">¶</a></h3>
+<p>From the ‘kubos-linux-build/tools’ folder, run the <code class="docutils literal notranslate"><span class="pre">kubos-package.sh</span></code>
+script.
+This takes the <cite>rootfs.img</cite> and <cite>kubos-kernel.itb</cite> files which were created during the build
+process and uses the <cite>kpack.its</cite> file to bundle them into an <cite>*.itb</cite> file.
+This is the file that will be distributed to customers when an upgrade is needed.</p>
+<p>The automatically generated naming convention for the package is
+kpack-<em>yyyy</em>-<em>mm</em>-<em>dd</em>.itb</p>
+<div class="section" id="custom-files">
+<h4>Custom Files<a class="headerlink" href="#custom-files" title="Permalink to this headline">¶</a></h4>
+<p>If you’d like to customize the upgrade file, there are a few different
+options available through the script:</p>
+<ul class="simple">
+<li>-t {target} : <strong>Required</strong> Specifies the name of the target board,
+as named in the corresponding <cite>kubos-linux-build/board/kubos/{target}</cite>
+directory.</li>
+<li>-i : Sets the name and location of the input <cite>*.its</cite> file. Use if you
+want to create a custom package. The default is <em>kpack.its</em>.</li>
+<li>-o {folder} : Specifies the name of the buildroot output folder. The
+default is ‘output’</li>
+<li>-v : Sets the version information for the package. The output file
+will be <cite>kpack-{version}.itb</cite>.</li>
+<li>-b {branch} : Specifies the branch/version name of U-Boot that has been
+built. The default is ‘1.1’. This option should not need to be
+used outside of development. U-Boot contains files which are used in
+the package generation process.</li>
+</ul>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ./kubos-package.sh -t beaglebone-black -i /home/test/custom.its -v 2.0
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="kubos-linux-recovery.html" class="btn btn-neutral float-right" title="Kubos Linux Recovery Architecture" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="monitoring.html" class="btn btn-neutral" title="Process Monitoring" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

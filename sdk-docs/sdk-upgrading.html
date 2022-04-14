@@ -1,0 +1,308 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Upgrading Your Kubos Development Environment &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../index.html"/>
+        <link rel="up" title="Kubos SDK Docs" href="index.html"/>
+        <link rel="next" title="Advanced Rust Cross Compiling" href="sdk-advanced-cross-compiling.html"/>
+        <link rel="prev" title="Using C with the Kubos SDK" href="sdk-c.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../obc-docs/index.html">Working with an OBC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ecosystem/index.html">KubOS Ecosystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deep-dive/index.html">Under the Hood</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Kubos SDK</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="sdk-installing.html">Installing the Kubos SDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sdk-rust.html">Using Rust with the Kubos SDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sdk-python.html">Using Python with the Kubos SDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sdk-c.html">Using C with the Kubos SDK</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Upgrading the Kubos SDK</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#upgrading-the-vagrant-box">Upgrading the Vagrant Box</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sdk-advanced-cross-compiling.html">Advanced Rust Cross Compiling</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing to KubOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Kubos SDK Docs</a> &raquo;</li>
+        
+      <li>Upgrading Your Kubos Development Environment</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/sdk-docs/sdk-upgrading.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="upgrading-your-kubos-development-environment">
+<h1>Upgrading Your Kubos Development Environment<a class="headerlink" href="#upgrading-your-kubos-development-environment" title="Permalink to this headline">¶</a></h1>
+<p>New updates will be announced to the Kubos community and the new releases will
+be published through GitHub.
+If there are any special steps required to upgrade to the newest release, they will be listed in the
+release details.</p>
+<div class="section" id="upgrading-the-vagrant-box">
+<h2>Upgrading the Vagrant Box<a class="headerlink" href="#upgrading-the-vagrant-box" title="Permalink to this headline">¶</a></h2>
+<p>Occasionally there will be an update or addition to one of the
+components of the Vagrant environment. When any of these
+components is changes we will package and release a new version of the
+<cite>kubos-dev</cite> box.</p>
+<p>If there’s a new version of the box available you will see something
+similar to the following when you start the box:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ vagrant up
+...
+==&gt; default: A newer version of the box &#39;kubos/kubos-dev&#39; is available! You currently
+==&gt; default: have version &#39;0.2.2&#39;. The latest is version &#39;0.2.3&#39;. Run
+==&gt; default: `vagrant box update` to update.
+...
+</pre></div>
+</div>
+<p>To manually check if your box is up-to-date you can run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ vagrant box outdated
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Updating your box will overwrite the filesystem inside the environment.</p>
+</div>
+<p>Moving projects into synced folders prevents them from being overwritten
+since their actual location is external to the box. For more information
+on setting up synced folders see the <a class="reference internal" href="sdk-installing.html#mount-directory"><span class="std std-ref">Mounting a Host Directory</span></a> section.</p>
+<p>To update the box run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ vagrant box update
+$ vagrant destroy
+$ vagrant up
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><code class="docutils literal notranslate"><span class="pre">vagrant</span> <span class="pre">destroy</span></code> must be used if you want your current box to be
+updated to use the new version.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="sdk-advanced-cross-compiling.html" class="btn btn-neutral float-right" title="Advanced Rust Cross Compiling" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="sdk-c.html" class="btn btn-neutral" title="Using C with the Kubos SDK" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

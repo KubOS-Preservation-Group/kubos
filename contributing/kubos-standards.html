@@ -1,0 +1,794 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Kubos Coding and Documentation Standards &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../index.html"/>
+        <link rel="up" title="Contributing to KubOS" href="index.html"/>
+        <link rel="next" title="Documentation" href="documentation.html"/>
+        <link rel="prev" title="Kubos Contribution Process" href="contribution-process.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../obc-docs/index.html">Working with an OBC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ecosystem/index.html">KubOS Ecosystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deep-dive/index.html">Under the Hood</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sdk-docs/index.html">Kubos SDK</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Contributing to KubOS</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="reporting-bugs.html">Reporting Bugs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="feature-request.html">Requesting New Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contribution-process.html">Contributor Guidelines</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Coding and Documentation Standards</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#product-names">Product Names</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#component-names">Component Names</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#file-naming">File Naming</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#code-rs-py-c-h-scripts-etc">Code (*.rs, *.py, *.c, *.h, scripts, etc)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#docs-rst-md">Docs (*.rst, *.md)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#folders">Folders</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#special-files">Special Files</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#documentation-standards">Documentation Standards</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#consider-your-audience">Consider Your Audience</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#headers">Headers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#content">Content</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#coding-standards">Coding Standards</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rust-standards">Rust Standards</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#python-standards">Python Standards</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#c-standards">C Standards</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#working-with-external-projects">Working with External Projects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#other-languages">Other Languages</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#consistency">CONSISTENCY</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="documentation.html">Documentation Guides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html">Testing Guides</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Contributing to KubOS</a> &raquo;</li>
+        
+      <li>Kubos Coding and Documentation Standards</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/contributing/kubos-standards.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="kubos-coding-and-documentation-standards">
+<h1>Kubos Coding and Documentation Standards<a class="headerlink" href="#kubos-coding-and-documentation-standards" title="Permalink to this headline">¶</a></h1>
+<p>This is a doc to maintain the current naming and coding standards when
+working with the Kubos products.</p>
+<div class="section" id="product-names">
+<h2>Product Names<a class="headerlink" href="#product-names" title="Permalink to this headline">¶</a></h2>
+<p>The general naming scheme for products is “Kubos {component}”. Note that there is a space separating the two words.</p>
+<p>The component should be capitalized like a normal proper noun. First
+letter capitalized if the component is a word, all letters capitalized
+if the component is an initialism. For example:</p>
+<ul class="simple">
+<li>Kubos Linux</li>
+<li>Kubos SDK</li>
+<li>Kubos CLI</li>
+</ul>
+<p>KubOS (note the capitalization) refers to the entire system, not a specific component.</p>
+</div>
+<div class="section" id="component-names">
+<h2>Component Names<a class="headerlink" href="#component-names" title="Permalink to this headline">¶</a></h2>
+<p>Components within Kubos breakdown as follows:</p>
+<ul class="simple">
+<li>API - A library exposing an interface to some hardware or software functionality.</li>
+<li>Service - A persistent process that is used to interact with the system. These typically utilize APIs.</li>
+<li>Application - Makes decisions and uses the services.</li>
+</ul>
+<p>Components added to the system should be referred to/labeled accordingly. See the <a class="reference internal" href="../ecosystem/index.html"><span class="doc">KubOS Ecosystem</span></a> document for more information on each component’s roll.</p>
+</div>
+<div class="section" id="file-naming">
+<h2>File Naming<a class="headerlink" href="#file-naming" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="code-rs-py-c-h-scripts-etc">
+<h3>Code (*.rs, *.py, *.c, *.h, scripts, etc)<a class="headerlink" href="#code-rs-py-c-h-scripts-etc" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>No spaces</li>
+<li>Use underscores to separate words</li>
+<li>All lowercase</li>
+</ul>
+</div>
+<div class="section" id="docs-rst-md">
+<h3>Docs (*.rst, *.md)<a class="headerlink" href="#docs-rst-md" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>No spaces</li>
+<li>Use hyphens to separate words</li>
+<li>All lowercase</li>
+</ul>
+</div>
+<div class="section" id="folders">
+<h3>Folders<a class="headerlink" href="#folders" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>No spaces</li>
+<li>Use hyphens to separate words</li>
+<li>All lowercase</li>
+</ul>
+</div>
+<div class="section" id="special-files">
+<h3>Special Files<a class="headerlink" href="#special-files" title="Permalink to this headline">¶</a></h3>
+<p>The CONTRIUBUTING, LICENSE, and README files should all be uppercased.</p>
+<p>‘Vagrantfile’, ‘Makefile’, ‘CMake’, and other similar files should all
+be cased to match industry standards.</p>
+</div>
+</div>
+<div class="section" id="documentation-standards">
+<h2>Documentation Standards<a class="headerlink" href="#documentation-standards" title="Permalink to this headline">¶</a></h2>
+<p>While creating clean and maintainable code is a high priority for our
+organization, writing successful documentation can be considered even
+more important. Documentation is a vital part of the user experience
+and, in most cases, will be a major component of a new customer’s first
+impression of us.</p>
+<p>Each document should be concise and well-written, and should fill some
+logical gap missing from the current documentation set.</p>
+<p>Our user docs are written using <a class="reference external" href="http://docutils.sourceforge.net/rst.html">reStructuredText</a>.
+This gives us a standardized way to construct and present user content.</p>
+<div class="section" id="consider-your-audience">
+<h3>Consider Your Audience<a class="headerlink" href="#consider-your-audience" title="Permalink to this headline">¶</a></h3>
+<p>When writing a new document, consider who the expected reader is.</p>
+<p>For a doc like “Installing the Kubos SDK”, we can assume that the reader
+is a brand new user. Therefore, few assumptions should be made about
+their current knowledge and, instead, the doc should have a great deal
+more handholding. This means more explicit explanations, more links to
+external resources, and more screenshots and example commands.</p>
+<p>In contrast, with a doc like “Developing Kubos Modules” we can expect
+the reader to be a) familiar with our products and b) familiar with
+development in general. In this case, while handholding is still
+appreciated, the content can be more brief. Essential components are
+still fleshed out, but peripheral knowledge can be mentioned by simply
+linking to a relevant resource.</p>
+</div>
+<div class="section" id="headers">
+<h3>Headers<a class="headerlink" href="#headers" title="Permalink to this headline">¶</a></h3>
+<p>Headers should be considered the same as section titles. As a result,
+they should follow the same capitalization rules as titles. When in
+doubt, <a class="reference external" href="https://capitalizemytitle.com/">use this tool</a> to check what
+should be capitalized.</p>
+</div>
+<div class="section" id="content">
+<h3>Content<a class="headerlink" href="#content" title="Permalink to this headline">¶</a></h3>
+<p>The start of each document (and preferrably each high-level section)
+should have an overview blurb which describes what information the doc
+covers.</p>
+<p>Some items to remember:</p>
+<ul class="simple">
+<li>Single space after periods and colons</li>
+<li>All commands which are not in a code block should be encased in
+backticks (`command`), rather than single or double quotes.</li>
+<li>Use things like bullet points, bold or italicized text, and images to
+break up and highlight your content (no one likes a giant blob of
+text)</li>
+<li>Oxford commas should <strong>always</strong> be used</li>
+</ul>
+</div>
+</div>
+<div class="section" id="coding-standards">
+<h2>Coding Standards<a class="headerlink" href="#coding-standards" title="Permalink to this headline">¶</a></h2>
+<p>This section covers the styling and standards for the various languages
+and tools that we use.</p>
+<div class="section" id="rust-standards">
+<h3>Rust Standards<a class="headerlink" href="#rust-standards" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference external" href="https://github.com/rust-lang-nursery/fmt-rfcs">Rust code formatting RFCs</a>
+are our preferred source for Rust styling.</p>
+<p><a class="reference external" href="https://github.com/rust-lang-nursery/rustfmt">rustfmt</a> is our preferred tool
+for formatting code and enforcing these standards. It comes included in our
+SDK’s Vagrant box and compliance is a required part of our CI checks.</p>
+<p><a class="reference external" href="https://github.com/rust-lang/rust-clippy">Clippy</a> is our preferred tool for
+linting our Rust code. It comes included in our SDK’s Vagrant box and compliance
+is a required part of our CI checks.</p>
+<div class="section" id="formatting">
+<h4>Formatting<a class="headerlink" href="#formatting" title="Permalink to this headline">¶</a></h4>
+<p>To format your Rust code:</p>
+<ul>
+<li><p class="first">Install <code class="docutils literal notranslate"><span class="pre">rustfmt</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ rustup component add rustfmt-preview
+</pre></div>
+</div>
+</li>
+<li><p class="first">Navigate to your project folder</p>
+</li>
+<li><p class="first">Run the formatting tool via Cargo:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cargo fmt
+</pre></div>
+</div>
+</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Kubos is currently using the <code class="docutils literal notranslate"><span class="pre">1.0.0-stable</span></code> version of <code class="docutils literal notranslate"><span class="pre">rustfmt</span></code></p>
+</div>
+</div>
+<div class="section" id="linting">
+<h4>Linting<a class="headerlink" href="#linting" title="Permalink to this headline">¶</a></h4>
+<p>To run the <code class="docutils literal notranslate"><span class="pre">clippy</span></code> linter on your Rust code:</p>
+<ul>
+<li><p class="first">Install <code class="docutils literal notranslate"><span class="pre">clippy</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ rustup component add clippy
+</pre></div>
+</div>
+</li>
+<li><p class="first">Navigate to your project folder</p>
+</li>
+<li><p class="first">Start with a clean build:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cargo clean
+</pre></div>
+</div>
+</li>
+<li><p class="first">Run the linter via Cargo:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cargo clippy
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="python-standards">
+<h3>Python Standards<a class="headerlink" href="#python-standards" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://www.python.org/dev/peps/pep-0008/">Python’s PEP8 Style
+Guide</a> is our preferred
+Python styling.</p>
+<p><a class="reference external" href="https://pylint.readthedocs.io/en/latest/">PyLint</a> is a great tool
+which can be used to check the style and validity of your python files.
+It has support for a variety of <a class="reference external" href="https://pylint.readthedocs.io/en/latest/user_guide/ide-integration.html">editors and
+IDEs</a>.</p>
+<ul class="simple">
+<li><a class="reference external" href="http://www.pydev.org/manual_adv_pylint.html">PyLint via PyDev for
+Eclipse</a></li>
+<li><a class="reference external" href="https://atom.io/packages/linter-pylint">PyLint for Atom</a></li>
+<li><a class="reference external" href="https://www.mantidproject.org/How_to_run_Pylint">PyLint for Visual
+Studio</a></li>
+</ul>
+<p><a class="reference external" href="https://pypi.python.org/pypi/autopep8">Autopep8</a> can be used to
+automatically format your code to conform with the Python PEP8 standard.</p>
+<ul class="simple">
+<li><a class="reference external" href="https://marketplace.eclipse.org/content/pydev-python-ide-eclipse">Autopep8 via PyDev for
+Eclipse</a></li>
+<li><a class="reference external" href="https://atom.io/packages/python-autopep8">Autopep8 for Atom</a></li>
+<li><a class="reference external" href="https://marketplace.visualstudio.com/items?itemName=himanoa.Python-autopep8">Autopep8 for Visual
+Studio</a></li>
+</ul>
+</div>
+<div class="section" id="c-standards">
+<h3>C Standards<a class="headerlink" href="#c-standards" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://clang.llvm.org/docs/ClangFormat.html">ClangFormat</a> is a
+series of tools that can be used to automatically correct any C coding
+inconsistencies. A stand-alone tool is available, which can then be used
+with a variety of IDEs. We have created a ‘.clang-format’ file in the
+<a class="reference external" href="https://github.com/kubos/kubos/blob/master/.clang-format">Kubos
+repo</a>
+which can be used to automatically correct C code files to conform with
+our styling.</p>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/wangzw/CppStyle">Clang-format with Eclipse</a></li>
+<li><a class="reference external" href="https://atom.io/packages/clang-format">Clang-format with Atom</a></li>
+<li><a class="reference external" href="https://marketplace.visualstudio.com/items?itemName=xaver.clang-format">Clang-format with Visual
+Studio</a></li>
+</ul>
+<p><em>The following subsections are based on a doc generated 2017-04-18 by
+Coding Standard Generator version 1.13.</em></p>
+<div class="section" id="files">
+<h4>Files<a class="headerlink" href="#files" title="Permalink to this headline">¶</a></h4>
+<p>Each file must start with a copyright notice.</p>
+<p>Header files must have a <code class="docutils literal notranslate"><span class="pre">#pragma</span> <span class="pre">once</span></code> statement. This causes the
+file to be included only once. If for some reason you encounter a
+scenario where the pragma statements are not supported, use include
+guards instead. The name used in the include guard should be the same
+name as the file (excluding the extension) followed by the suffix “_H”.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#pragma once</span>
+
+<span class="n">OR</span>
+
+<span class="c1">#ifndef FILE_H</span>
+<span class="c1">#define FILE_H</span>
+<span class="o">...</span>
+<span class="c1">#endif</span>
+</pre></div>
+</div>
+<p>System header files should be included with &lt;&gt; and project headers with
+“”.</p>
+<p>Put all #include directives at the top of files. Having all #include
+directives in one place makes it easy to find them. Do not use absolute
+directory names in #include directives.</p>
+<p>Put all #define statements immediately after any #include statements.</p>
+<p>Put all function prototypes after any #define statements.</p>
+</div>
+<div class="section" id="comments">
+<h4>Comments<a class="headerlink" href="#comments" title="Permalink to this headline">¶</a></h4>
+<p>All functions should be fully documented in the header file that they
+belong to. Use the ‘/** … */’ comment style so that Doxygen can add
+the function to the generated API documenation.</p>
+<p>The function comment block should include:</p>
+<blockquote>
+<div><ul class="simple">
+<li>A brief description of the function</li>
+<li>The name, type, and purpose of all input variables</li>
+<li>The name, type, and purpose of the returned value/s</li>
+</ul>
+</div></blockquote>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/**</span>
+ <span class="o">*</span> <span class="n">Read</span> <span class="n">data</span> <span class="n">over</span> <span class="n">i2c</span> <span class="n">bus</span> <span class="kn">from</span> <span class="nn">specified</span> <span class="n">address</span>
+ <span class="o">*</span>
+ <span class="o">*</span> <span class="n">In</span> <span class="n">order</span> <span class="n">to</span> <span class="n">ensure</span> <span class="n">safe</span> <span class="n">i2c</span> <span class="n">sharing</span><span class="p">,</span> <span class="n">this</span> <span class="n">function</span> <span class="ow">is</span> <span class="n">semaphore</span> <span class="n">locked</span><span class="o">.</span>
+ <span class="o">*</span> <span class="n">There</span> <span class="ow">is</span> <span class="n">one</span> <span class="n">semaphore</span> <span class="n">per</span> <span class="n">bus</span><span class="o">.</span> <span class="n">This</span> <span class="n">function</span> <span class="n">will</span> <span class="n">block</span> <span class="n">indefinitely</span>
+ <span class="o">*</span> <span class="k">while</span> <span class="n">waiting</span> <span class="k">for</span> <span class="n">the</span> <span class="n">semaphore</span><span class="o">.</span>
+ <span class="o">*</span>
+ <span class="o">*</span> <span class="nd">@param</span> <span class="n">i2c</span> <span class="n">i2c</span> <span class="n">bus</span> <span class="n">to</span> <span class="n">read</span> <span class="kn">from</span>
+ <span class="o">*</span> <span class="nd">@param</span> <span class="n">addr</span> <span class="n">address</span> <span class="n">of</span> <span class="n">target</span> <span class="n">i2c</span> <span class="n">device</span>
+ <span class="o">*</span> <span class="nd">@param</span> <span class="n">ptr</span> <span class="n">pointer</span> <span class="n">to</span> <span class="n">data</span> <span class="n">buffer</span>
+ <span class="o">*</span> <span class="nd">@param</span> <span class="nb">len</span> <span class="n">length</span> <span class="n">of</span> <span class="n">data</span> <span class="n">to</span> <span class="n">read</span>
+ <span class="o">*</span> <span class="nd">@return</span> <span class="nb">int</span> <span class="n">I2C_OK</span> <span class="n">on</span> <span class="n">success</span><span class="p">,</span> <span class="n">I2C_ERROR</span> <span class="n">on</span> <span class="n">error</span>
+ <span class="o">*/</span>
+<span class="n">KI2CStatus</span> <span class="n">k_i2c_read</span><span class="p">(</span><span class="n">KI2CNum</span> <span class="n">i2c</span><span class="p">,</span> <span class="n">uint16_t</span> <span class="n">addr</span><span class="p">,</span> <span class="n">uint8_t</span> <span class="o">*</span><span class="n">ptr</span><span class="p">,</span> <span class="nb">int</span> <span class="nb">len</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>For large and/or complex functions, it is helpful to also include the
+function comment block just above where the function is actually
+implemented. This way the developer can quickly review what the function
+is and how it’s supposed to work. The regular ‘/* … */’ comment
+styling is acceptable in this case.</p>
+<p>All code comments should be placed above the line the comment describes,
+indented identically, as opposed to allowing in-line comments.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/*</span> <span class="n">comment</span> <span class="n">here</span> <span class="o">*/</span>
+<span class="n">call_function</span><span class="p">(</span><span class="n">do</span><span class="p">,</span> <span class="n">stuff</span><span class="p">)</span> <span class="o">/*</span> <span class="n">instead</span> <span class="n">of</span> <span class="n">here</span> <span class="o">*/</span>
+</pre></div>
+</div>
+<p>Code comments should cover the ‘what’ and ‘why’ of the following code,
+rather than the ‘how’.</p>
+<p>Use #ifdef instead of /* … */ to comment out blocks of code. The
+code that is commented out may already contain comments which then
+terminate the block comment and causes lots of compile errors or other
+harder to find errors.</p>
+<p><strong>However</strong>, code should not be left permanently commented out; “#ifdef
+0” is fine when creating and testing code, but has no place in the final
+product. Make sure to remove all dead code before merging changes into
+the master branch.</p>
+<p><strong>Do not leave comments like ‘TODO’ or ‘FIX ME’ in your final code
+changes unless absolutely necessary.</strong> Just do whatever it is that
+you’re trying to procrastinate on. If you must leave a to-do, THERE
+BETTER BE A STORY FOR IT IN TRELLO AND IT BETTER BE AT THE TOP OF THE
+BACKLOG. “Oh, I’ll create a story for it later”. NO, YOU WON’T. DO IT
+NOW.</p>
+</div>
+<div class="section" id="names">
+<h4>Names<a class="headerlink" href="#names" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Constants, enumerators, and macros should be all upper case.</li>
+<li>All other names should be all lower case.</li>
+<li>Words should be separated by underscore (_).</li>
+</ul>
+<p>Use sensible, descriptive names. Do not use short cryptic names or names
+based on internal jokes. It should be easy to type a name without
+looking up how it is spelt. Exception: Scratch variables used for
+temporary storage or indices are best kept short. A programmer reading
+such variables should be able to assume that its value is not used
+outside a few lines of code. Common scratch variables for integers are
+i, j, k, m, n and for characters c and d.</p>
+<p>Use name prefixes for identifiers declared in different modules. For
+example, ‘csp_buffer_free’ indicates that the function belongs to the
+CSP directory.</p>
+</div>
+<div class="section" id="indentation-and-spacing">
+<h4>Indentation and Spacing<a class="headerlink" href="#indentation-and-spacing" title="Permalink to this headline">¶</a></h4>
+<p><strong>Do not use tabs. Instead, use 4 spaces.</strong> Kubos developers and
+contributors use a variety of operating systems and development
+environments. Using spaces ensures that multiple people can contribute
+to the same file and all indentions will remain the same width,
+improving readability and cohesion.</p>
+<p>Braces should follow “Exdented Style”.</p>
+<p>The Exdented Bracing Style means that the curly brace pair are lined up
+with the surrounding statement. Statements and declarations between the
+braces are indented relative to the braces. Braces should be indented 4
+columns to the right of the starting position of the enclosing statement
+or declaration.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">f</span><span class="p">(</span><span class="nb">int</span> <span class="n">a</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nb">int</span> <span class="n">i</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">a</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">a</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+    <span class="p">{</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">a</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Loop and conditional statements (<code class="docutils literal notranslate"><span class="pre">if</span></code>, <code class="docutils literal notranslate"><span class="pre">for</span></code>, <code class="docutils literal notranslate"><span class="pre">while</span></code>) should
+always have brace enclosed sub-statements. The code looks more
+consistent if all conditional and loop statements have braces. Even if
+there is only a single statement after the condition or loop statement
+today, there might be a need for more code in the future.</p>
+<p>Braces without any content may be placed on the same line.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">while</span> <span class="p">(</span><span class="o">...</span><span class="p">)</span> <span class="p">{</span><span class="o">//</span><span class="n">do</span> <span class="n">nothing</span><span class="p">};</span>
+</pre></div>
+</div>
+<p>Each statement should be placed on its own line. There is no need to
+make code compact. Putting several statements on the same line only
+makes the code cryptic to read.</p>
+<p>Declare each variable in a separate declaration. This makes it easier to
+see all variables. It also avoids the problem of knowing which variables
+are pointers. int* p, i; It is easy to forget that the star belongs to
+the declared name, not the type, and look at this and say that the type
+is “pointer to int” and both p and i are declared to this type.</p>
+<p>All binary arithmetic, bitwise and assignment operators and the ternary
+conditional operator (?:) should be surrounded by spaces; the comma
+operator should be followed by a space but not preceded. <strong>Exception:</strong>
+No spaces around pre/postfix increment and decrement operators (‘++’,
+‘–’).</p>
+<p>Loop and conditional statements should have a single space preceding the
+condition in parenthesis.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="n">condition</span><span class="p">)</span> <span class="o">/*</span> <span class="n">correct</span> <span class="o">*/</span>
+<span class="k">if</span><span class="p">(</span><span class="n">condition</span><span class="p">)</span>  <span class="o">/*</span> <span class="n">wrong</span> <span class="o">*/</span>
+</pre></div>
+</div>
+<p>Lines should not exceed 78 characters. Even if your editor handles long
+lines, other people may have set up their editors differently. Long
+lines in the code may also cause problems for other programs and
+printers.</p>
+</div>
+<div class="section" id="declarations">
+<h4>Declarations<a class="headerlink" href="#declarations" title="Permalink to this headline">¶</a></h4>
+<p>Provide names of parameters in function declarations. Parameter names
+are useful to document what the parameter is used for. The parameter
+names should be the same in all declarations and definitions of the
+function.</p>
+<p>Always provide the return type explicitly.</p>
+<p>Use a typedef to define a pointer to a function. Pointers to functions
+have a strange syntax. The code becomes much clearer if you use a
+typedef for the pointer to function type. This typedef name can then be
+used to declare variables etc.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">double</span> <span class="n">sin</span><span class="p">(</span><span class="n">double</span> <span class="n">arg</span><span class="p">);</span>
+<span class="n">typedef</span> <span class="n">double</span> <span class="p">(</span><span class="o">*</span><span class="n">trig_func</span><span class="p">)(</span><span class="n">double</span> <span class="n">arg</span><span class="p">);</span>
+
+<span class="o">/*</span> <span class="n">Usage</span> <span class="n">examples</span> <span class="o">*/</span>
+<span class="n">trig_func</span> <span class="n">my_func</span> <span class="o">=</span> <span class="n">sin</span><span class="p">;</span>
+<span class="n">void</span> <span class="n">call_func</span><span class="p">(</span><span class="n">trig_func</span> <span class="n">callback</span><span class="p">);</span>
+<span class="n">trig_func</span> <span class="n">func_table</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+</pre></div>
+</div>
+<p>If not previously defined in a header file, declare variables as close
+to the first use as is useful. This is opposed to the old C requirement
+where all variables in a function needed to be declared before all
+instruction lines.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">int</span> <span class="n">doing_stuff</span><span class="p">(</span><span class="nb">int</span> <span class="n">parameter</span><span class="p">)</span>
+<span class="p">{</span>
+
+    <span class="o">/*</span> <span class="n">declaring</span> <span class="s1">&#39;ret&#39;</span> <span class="n">here</span> <span class="n">since</span> <span class="n">it</span><span class="s1">&#39;s needed for both cases */</span>
+    <span class="nb">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="n">ALL_OK</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">condition</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="o">/*</span> <span class="n">declaring</span> <span class="s1">&#39;val&#39;</span> <span class="n">here</span><span class="p">,</span> <span class="n">since</span> <span class="n">it</span><span class="s1">&#39;s only used in this one case */</span>
+        <span class="nb">int</span> <span class="n">val</span> <span class="o">=</span> <span class="n">doing_things</span><span class="p">();</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">doing_things_with_val</span><span class="p">(</span><span class="n">val</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+    <span class="p">{</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">ERROR_CODE</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">ret</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="statements">
+<h4>Statements<a class="headerlink" href="#statements" title="Permalink to this headline">¶</a></h4>
+<p>Never use gotos.</p>
+<p>All switch statements should have a <code class="docutils literal notranslate"><span class="pre">default</span></code> label. Even if there is
+no action for the default label, it should be included to show that the
+programmer has considered values not covered by case labels. It is
+normally useful to place an error message in the default label in this
+case.</p>
+</div>
+<div class="section" id="return-values">
+<h4>Return Values<a class="headerlink" href="#return-values" title="Permalink to this headline">¶</a></h4>
+<p>In most cases, it is preferable to return an error code, rather than a
+value. If an output value is desired, a pointer to the desired storage
+area should be added to the function’s arguments. This allows us to be
+consistent in our declarations.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">int</span> <span class="n">length</span><span class="p">;</span>
+<span class="nb">int</span> <span class="n">ret</span><span class="p">;</span>
+
+<span class="o">/*</span> <span class="n">Don</span><span class="s1">&#39;t do this */</span>
+<span class="n">length</span> <span class="o">=</span> <span class="n">get_length</span><span class="p">(</span><span class="nb">input</span><span class="p">);</span>
+<span class="o">/*</span> <span class="n">Do</span> <span class="n">this</span> <span class="n">instead</span> <span class="o">*/</span>
+<span class="n">ret</span> <span class="o">=</span> <span class="n">get_length</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">length</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="other-typographical-issues">
+<h4>Other Typographical Issues<a class="headerlink" href="#other-typographical-issues" title="Permalink to this headline">¶</a></h4>
+<p>Avoid macros; most macros can be replaced by constants, enumerations or
+inline functions. Using macros can lead to decreased readability and
+increased chance of bugs.</p>
+<p>Do not use literal numbers other than 0 and 1. Use constants instead of
+literal numbers to make the code consistent and easy to maintain. The
+name of the constant is also used to document the purpose of the number.</p>
+<p>Do not rely on implicit conversion to bool in conditions.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="n">ptr</span><span class="p">)</span>         <span class="o">//</span> <span class="n">wrong</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">ptr</span> <span class="o">!=</span> <span class="n">NULL</span><span class="p">)</span> <span class="o">//</span> <span class="n">ok</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="working-with-external-projects">
+<h3>Working with External Projects<a class="headerlink" href="#working-with-external-projects" title="Permalink to this headline">¶</a></h3>
+<p>Some of the Kubos code uses or extends external projects. In this case
+where you are adding a new file, use the Kubos standards. If you are
+modifying an existing file, try to match the formatting of the
+surrounding code.</p>
+<div class="section" id="linux-kernel">
+<h4>Linux Kernel<a class="headerlink" href="#linux-kernel" title="Permalink to this headline">¶</a></h4>
+<p><a class="reference external" href="https://01.org/linuxgraphics/gfx-docs/drm/process/coding-style.html">Linux kernel coding
+style</a></p>
+<p>Notably:</p>
+<ul class="simple">
+<li>8 space indentation</li>
+<li>Torvalds disagrees with us on basically everything</li>
+</ul>
+</div>
+<div class="section" id="u-boot">
+<h4>U-Boot<a class="headerlink" href="#u-boot" title="Permalink to this headline">¶</a></h4>
+<p><a class="reference external" href="http://www.denx.de/wiki/U-Boot/CodingStyle">U-Boot coding style</a></p>
+<p>Notably:</p>
+<ul class="simple">
+<li>Mostly follows the Linux coding style</li>
+<li>Tabs, not spaces</li>
+<li>No C++ style comments (use /* */, not //)</li>
+</ul>
+</div>
+</div>
+<div class="section" id="other-languages">
+<h3>Other Languages<a class="headerlink" href="#other-languages" title="Permalink to this headline">¶</a></h3>
+<p>Bash - Refer to <a class="reference external" href="https://google.github.io/styleguide/shell.xml">Google’s style
+guide</a>. <strong>Exception:</strong>
+Use 4 spaces, since that’s what we do in all of our other languages.</p>
+<p>KConfig is the language used by Buildroot and the other OS-related components for defining configuration options used in builds.
+You should refer to this <a class="reference external" href="https://www.kernel.org/doc/Documentation/kbuild/kconfig-language.txt">documentation</a>
+when writing or modifying KConfig files.</p>
+</div>
+</div>
+<div class="section" id="consistency">
+<h2>CONSISTENCY<a class="headerlink" href="#consistency" title="Permalink to this headline">¶</a></h2>
+<p>BE CONSISTENT. I DON’T CARE IF YOU IGNORE EVERY OTHER RULE IN THIS DOC
+(okay, I do care, but I’m trying to make a point), JUST MAKE SURE THAT
+WHATEVER YOU DO, IT LOOKS AND SMELLS THE SAME AS EVERYTHING ELSE YOU DO
+AND/OR EVERYTHING ELSE AROUND IT.</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="documentation.html" class="btn btn-neutral float-right" title="Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="contribution-process.html" class="btn btn-neutral" title="Kubos Contribution Process" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

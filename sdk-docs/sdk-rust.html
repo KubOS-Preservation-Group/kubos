@@ -1,0 +1,361 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Using Rust with the Kubos SDK &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../index.html"/>
+        <link rel="up" title="Kubos SDK Docs" href="index.html"/>
+        <link rel="next" title="Using Python with the Kubos SDK" href="sdk-python.html"/>
+        <link rel="prev" title="Installing the Kubos SDK" href="sdk-installing.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../obc-docs/index.html">Working with an OBC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ecosystem/index.html">KubOS Ecosystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deep-dive/index.html">Under the Hood</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Kubos SDK</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="sdk-installing.html">Installing the Kubos SDK</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Using Rust with the Kubos SDK</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#cross-compilation">Cross-compilation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#making-rust-binaries-smaller">Making Rust Binaries Smaller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#transferring-to-target">Transferring to Target</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#running-on-target">Running on Target</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sdk-python.html">Using Python with the Kubos SDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sdk-c.html">Using C with the Kubos SDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sdk-upgrading.html">Upgrading the Kubos SDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sdk-advanced-cross-compiling.html">Advanced Rust Cross Compiling</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing to KubOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Kubos SDK Docs</a> &raquo;</li>
+        
+      <li>Using Rust with the Kubos SDK</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/sdk-docs/sdk-rust.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="using-rust-with-the-kubos-sdk">
+<h1>Using Rust with the Kubos SDK<a class="headerlink" href="#using-rust-with-the-kubos-sdk" title="Permalink to this headline">¶</a></h1>
+<p>The Kubos SDK comes with pre-built support for <a class="reference external" href="https://www.rust-lang.org/">Rust</a> and
+<a class="reference external" href="https://doc.rust-lang.org/cargo/">Cargo</a>.
+Additionally, it includes tooling to assist with cross-compiling for a target OBC and to build
+projects which use both Rust and C.</p>
+<div class="section" id="cross-compilation">
+<span id="rust-targets"></span><h2>Cross-compilation<a class="headerlink" href="#cross-compilation" title="Permalink to this headline">¶</a></h2>
+<p>The Kubos SDK provides Rust cross-compilation targets for each of the supported OBCs.</p>
+<p>The target name varies depending which command is used to compile the project.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="23%" />
+<col width="39%" />
+<col width="38%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>OBC</td>
+<td><code class="docutils literal notranslate"><span class="pre">cargo</span> <span class="pre">build</span></code> target</td>
+<td><code class="docutils literal notranslate"><span class="pre">cargo</span> <span class="pre">kubos</span></code> target</td>
+</tr>
+<tr class="row-even"><td>Beaglebone Black</td>
+<td>arm-unknown-linux-gnueabihf</td>
+<td>kubos-linux-beaglebone-gcc</td>
+</tr>
+<tr class="row-odd"><td>ISIS-OBC</td>
+<td>armv5te-unknown-linux-gnueabi</td>
+<td>kubos-linux-isis-gcc</td>
+</tr>
+<tr class="row-even"><td>Pumpkin MBM2</td>
+<td>arm-unknown-linux-gnueabihf</td>
+<td>kubos-linux-pumpkin-mbm2-gcc</td>
+</tr>
+</tbody>
+</table>
+<p>Some Rust crates require that the C compiler be explicitly declared when cross-compiling.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="28%" />
+<col width="72%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>OBC</td>
+<td>Compiler Path</td>
+</tr>
+<tr class="row-even"><td>Beaglebone Black</td>
+<td>/usr/bin/bbb_toolchain/usr/bin/arm-linux-gcc</td>
+</tr>
+<tr class="row-odd"><td>ISIS-OBC</td>
+<td>/usr/bin/iobc_toolchain/usr/bin/arm-linux-gcc</td>
+</tr>
+<tr class="row-even"><td>Pumpkin MBM2</td>
+<td>/usr/bin/bbb_toolchain/usr/bin/arm-linux-gcc</td>
+</tr>
+</tbody>
+</table>
+<p>To simplify development when cross-compiling, use the <code class="docutils literal notranslate"><span class="pre">cargo</span> <span class="pre">kubos</span></code> command to automatically setup
+the build environment. The <code class="docutils literal notranslate"><span class="pre">cargo</span> <span class="pre">kubos</span></code> command takes a required cargo sub-command (i.e. <code class="docutils literal notranslate"><span class="pre">build</span></code>,
+<code class="docutils literal notranslate"><span class="pre">test</span></code>), and a target. For example, to build a project for the ISIS iOBC:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cargo kubos -c build -t kubos-linux-isis-gcc
+</pre></div>
+</div>
+<p>Cross compiling can also be done manually by specifying the C compiler path in the <code class="docutils literal notranslate"><span class="pre">CC</span></code>
+environment variable like so:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ CC={path} cargo build --target {target}
+</pre></div>
+</div>
+<p>For example, the equivalent command as above using <code class="docutils literal notranslate"><span class="pre">cargo</span> <span class="pre">build</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ CC=/usr/bin/iobc_toolchain/usr/bin/arm-linux-gcc cargo build --target armv5te-unknown-linux-gnueabi
+</pre></div>
+</div>
+<p>Some crates also depend on pkg-config, which requires that an additional environment variable,
+<code class="docutils literal notranslate"><span class="pre">PKG_CONFIG_ALLOW_CROSS</span></code>, be set in order to enable cross-compiling:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ PKG_CONFIG_ALLOW_CROSS=1 CC=/usr/bin/iobc_toolchain/usr/bin/arm-linux-gcc cargo build --target armv5te-unknown-linux-gnueabi
+</pre></div>
+</div>
+</div>
+<div class="section" id="making-rust-binaries-smaller">
+<h2>Making Rust Binaries Smaller<a class="headerlink" href="#making-rust-binaries-smaller" title="Permalink to this headline">¶</a></h2>
+<p>By default, Rust binaries can be quite large.
+<a class="reference internal" href="../getting-started/using-rust.html#rust-opt"><span class="std std-ref">Check out our Rust optimization tips</span></a> for suggestions on how to make your compiled
+Rust projects smaller.</p>
+</div>
+<div class="section" id="transferring-to-target">
+<span id="rust-transfer"></span><h2>Transferring to Target<a class="headerlink" href="#transferring-to-target" title="Permalink to this headline">¶</a></h2>
+<p>Rust binaries can be transferred to the target OBC <a class="reference internal" href="../obc-docs/comms-setup.html#file-transfer"><span class="std std-ref">via a supported file transfer
+method</span></a>.</p>
+<p>Binaries may be transferred to any location on the target board, however, they should be copied
+to <cite>/home/system/usr/bin</cite> if you would like them to be automatically accessible via the system PATH.</p>
+</div>
+<div class="section" id="running-on-target">
+<h2>Running on Target<a class="headerlink" href="#running-on-target" title="Permalink to this headline">¶</a></h2>
+<p>Once transferred, the binary can be started with <code class="docutils literal notranslate"><span class="pre">/path/to/binary-name</span></code>, or by simply specifying
+the binary name if the file was transferred to a system PATH directory.</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="sdk-python.html" class="btn btn-neutral float-right" title="Using Python with the Kubos SDK" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="sdk-installing.html" class="btn btn-neutral" title="Installing the Kubos SDK" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,358 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Typical Required Mission Applications &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../index.html"/>
+        <link rel="up" title="Kubos Mission Development" href="index.html"/>
+        <link rel="next" title="Deployment Application Guide" href="deployment.html"/>
+        <link rel="prev" title="Kubos Mission Development" href="index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../obc-docs/index.html">Working with an OBC</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Mission Development</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#hardware-integrations">1. Hardware Integrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#payload-integration-s">2. Payload Integration(s)</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#mission-applications">3. Mission Applications</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Typical Required Mission Applications</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#telemetry-collection">Telemetry Collection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#housekeeping">Housekeeping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#deployment">Deployment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#beacon">Beacon</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#operations">Operations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="deployment.html">Deployment Application Guide</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#scheduling-tasks">4. Scheduling Tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#update-and-recovery">5. Update and Recovery</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#flight-readiness">6. Flight Readiness</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ecosystem/index.html">KubOS Ecosystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deep-dive/index.html">Under the Hood</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sdk-docs/index.html">Kubos SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing to KubOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Kubos Mission Development</a> &raquo;</li>
+        
+      <li>Typical Required Mission Applications</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/mission-dev/mission-needs.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="typical-required-mission-applications">
+<h1>Typical Required Mission Applications<a class="headerlink" href="#typical-required-mission-applications" title="Permalink to this headline">¶</a></h1>
+<p>Every mission is unique, but with this doc, we’ve attempted to highlight what applications your mission will most likely need.</p>
+<div class="section" id="telemetry-collection">
+<h2>Telemetry Collection<a class="headerlink" href="#telemetry-collection" title="Permalink to this headline">¶</a></h2>
+<p>Since all <a class="reference internal" href="../ecosystem/index.html#service-docs"><span class="std std-ref">services are passive</span></a>, it falls to an application to collect and store telemetry in the telemetry database.
+Generally, this should poll all hardware services on a regular basis and pull all available telemetry.
+A one-minute polling cycle is generally sufficient for most telemetry items.</p>
+</div>
+<div class="section" id="housekeeping">
+<h2>Housekeeping<a class="headerlink" href="#housekeeping" title="Permalink to this headline">¶</a></h2>
+<p>For each critical piece of avionics hardware or critical mission aspect, there should be an accompanying housekeeping mission application.
+It is essential to separate these out as much as possible to reduce the complexity of a given application,
+and to reduce possibility of global failure due to an edge case in a single app.
+Some typical housekeeping applications you will most likely include are:</p>
+<ul class="simple">
+<li>OBC</li>
+<li>ADCS/GPS</li>
+<li>Power</li>
+</ul>
+<p>These are by no means the <em>only</em> housekeeping applications that should be included, but would take care of most of the housekeeping for a given mission.</p>
+<div class="section" id="obc">
+<h3>OBC<a class="headerlink" href="#obc" title="Permalink to this headline">¶</a></h3>
+<p>The OBC housekeeping application should ensure the OBC itself and the critical processes are running smoothly.
+Some suggested tasks for this application would be:</p>
+<ul class="simple">
+<li>Clean the telemetry database</li>
+<li>Check file system and memory usage</li>
+<li>Issue a test query against services</li>
+</ul>
+<p>Kubos provides an <a class="reference external" href="https://github.com/kubos/kubos/blob/master/apps/obc-hs/README.rst">example of this application</a>,
+which executes all of the above tasks on an hourly interval.</p>
+</div>
+<div class="section" id="adcs-gps">
+<h3>ADCS/GPS<a class="headerlink" href="#adcs-gps" title="Permalink to this headline">¶</a></h3>
+<p>The ADCS/GPS housekeeping app will ensure the hardware itself is behaving normally, checking critical telemetry items to ensure nothing is outside the bounds of normal operation, taking action as appropriate.
+Example action would be regularly updating the ADCS system with the latest time, position, and velocity data from the GPS.</p>
+<p>Kubos offers housekeeping apps for its supported ADCS and GPS systems.
+You can reach out to us on <a class="reference external" href="https://slack.kubos.co">Slack</a> or through the <a class="reference external" href="https://www.kubos.com/kubos/">website</a> for more information about these.</p>
+</div>
+<div class="section" id="power">
+<h3>Power<a class="headerlink" href="#power" title="Permalink to this headline">¶</a></h3>
+<p>The power management housekeeping application should monitor the Battery and EPS systems, taking critical autonomous recovery action where appropriate.
+Some examples of triggers and actions:</p>
+<ul class="simple">
+<li>Shutting off non-essential hardware when battery reaches critically low status</li>
+<li>No charging detected for X time period</li>
+<li>Cancelling operations and going into power generation state</li>
+<li>Battery temperature monitoring</li>
+</ul>
+<p>Kubos offers housekeeping apps for its supported power systems.
+You can reach out to us on <a class="reference external" href="https://slack.kubos.co">Slack</a> or through the <a class="reference external" href="https://www.kubos.com/kubos/">website</a> for more information about these.</p>
+</div>
+</div>
+<div class="section" id="deployment">
+<h2>Deployment<a class="headerlink" href="#deployment" title="Permalink to this headline">¶</a></h2>
+<p>The deployment application should handle the required sequence during the initial deployment from the launch vehicle.
+We’ve provided a guide to the recommended behavior of this application:</p>
+<ul class="simple">
+<li><a class="reference internal" href="deployment.html"><span class="doc">Deployment Application Guide</span></a></li>
+</ul>
+<p>Kubos offers configurable deployment applications for customer missions, as well as SLAs for helping develop and/or reviewing your mission’s deployment application.
+You can reach out to us on <a class="reference external" href="https://slack.kubos.co">Slack</a> or through the <a class="reference external" href="https://www.kubos.com/kubos/">website</a> for more information about these.</p>
+</div>
+<div class="section" id="beacon">
+<h2>Beacon<a class="headerlink" href="#beacon" title="Permalink to this headline">¶</a></h2>
+<p>The beacon application should regularly downlink a subset of critical telemetry data via the communication service.
+This telemetry should be the absolute minimum required to assess overall system health.</p>
+<p>Kubos offers configurable beacon applications for customer missions.
+You can reach out to us on <a class="reference external" href="https://slack.kubos.co">Slack</a> or through the <a class="reference external" href="https://www.kubos.com/kubos/">website</a> for more information about these.</p>
+</div>
+<div class="section" id="operations">
+<h2>Operations<a class="headerlink" href="#operations" title="Permalink to this headline">¶</a></h2>
+<p>All of the above applications are scoped to the core functionality of a spacecraft.
+They ensure that the spacecraft is functioning properly within operational bounds.
+But, they don’t actually <em>complete</em> your mission.
+Operations applications should deliver the functionality that is the objective of the mission itself.
+For example:</p>
+<ul class="simple">
+<li>Command the ADCS to the appropriate attitude and take a photo of a commanded location</li>
+<li>Collect, store, and downlink specialized sensor data</li>
+<li>Process onboard sensor data to generate actionable beacons</li>
+</ul>
+<p>An app can really do anything you want it to, but we suggest you keep them as simple as possible to reduce complexity.
+If you find yourself building several modes into an operational application, maybe split it into several smaller ones that are each dedicated for the specific mode.</p>
+<p>If you want help architecting or developing your operations applications, Kubos offers <a class="reference external" href="https://www.kubos.com/kubos/">SLAs</a> to aid in mission development.</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="deployment.html" class="btn btn-neutral float-right" title="Deployment Application Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Kubos Mission Development" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

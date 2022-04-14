@@ -1,0 +1,353 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>iOBC Checksum API &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../../../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../../../../index.html"/>
+        <link rel="up" title="OBC APIs" href="../index.html"/>
+        <link rel="next" title="Kubos HAL Documentation" href="../../kubos-hal/index.html"/>
+        <link rel="prev" title="iOBC Supervisor API" href="supervisor.html"/> 
+
+  
+  <script src="../../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../getting-started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../obc-docs/index.html">Working with an OBC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ecosystem/index.html">KubOS Ecosystem</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Under the Hood</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../../index.html#apis">APIs</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../device-api-guide.html">Kubos Device API Creation Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../device-api/index.html">Device Interfaces</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html">OBC APIs</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="supervisor.html">iOBC Supervisor API</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">iOBC Checksum API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../kubos-hal/index.html">Kubos HAL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../kubos-libs.html">Kubos Libraries</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#protocols">Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#kubos-linux">Kubos Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#design-decisions">Design Decisions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../sdk-docs/index.html">Kubos SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contributing/index.html">Contributing to KubOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../index.html">Under the Hood of KubOS</a> &raquo;</li>
+        
+          <li><a href="../index.html">OBC APIs</a> &raquo;</li>
+        
+      <li>iOBC Checksum API</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../../_sources/deep-dive/apis/obc-api/isis-iobc/checksum.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="iobc-checksum-api">
+<h1>iOBC Checksum API<a class="headerlink" href="#iobc-checksum-api" title="Permalink to this headline">¶</a></h1>
+<dl class="group">
+<dt>
+<span class="target" id="group__iOBC-Checksum"></span><em>group</em> <code class="descname">iOBC-Checksum</code></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Functions</p>
+<dl class="function">
+<dt id="_CPPv424checksum_prepare_LUTCRC87uint8_tP7uint8_t">
+<span id="_CPPv324checksum_prepare_LUTCRC87uint8_tP7uint8_t"></span><span id="_CPPv224checksum_prepare_LUTCRC87uint8_tP7uint8_t"></span><span id="checksum_prepare_LUTCRC8__uint8_t.uint8_tP"></span><span class="target" id="group__iOBC-Checksum_1gac095d79a3a32b4fc1c235cd8d69e855a"></span>void <code class="descname">checksum_prepare_LUTCRC8</code><span class="sig-paren">(</span>uint8_t <em>polynomial</em>, uint8_t *<em>LUT</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv424checksum_prepare_LUTCRC87uint8_tP7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Generate a LUT for CRC 8 calculations with a certain polynomial. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">polynomial</span></code>: 8-bit CRC polynomial to be used </li>
+<li><code class="docutils literal notranslate"><span class="pre">LUT</span></code>: Pointer to memory block where LUT can be stored, needs to be at least 256 * sizeof(uint8_t) </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv426checksum_calculate_CRC8LUTPK7uint8_tjPK7uint8_t7uint8_tb">
+<span id="_CPPv326checksum_calculate_CRC8LUTPK7uint8_tjPK7uint8_t7uint8_tb"></span><span id="_CPPv226checksum_calculate_CRC8LUTPK7uint8_tjPK7uint8_t7uint8_tb"></span><span id="checksum_calculate_CRC8LUT__uint8_tCP.unsigned-i.uint8_tCP.uint8_t.b"></span><span class="target" id="group__iOBC-Checksum_1gaaff725fb055aafc1a9e74c2f96a70815"></span>uint8_t <code class="descname">checksum_calculate_CRC8LUT</code><span class="sig-paren">(</span><em class="property">const</em> uint8_t *<em>data</em>, unsigned int <em>length</em>, <em class="property">const</em> uint8_t *<em>LUT</em>, uint8_t <em>start_remainder</em>, bool <em>endofdata</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv426checksum_calculate_CRC8LUTPK7uint8_tjPK7uint8_t7uint8_tb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Calculates a CRC 8 checksum according to CRC-8 CCITT, using a LUT. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>uint8_t 8-bit CRC checksum. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">data</span></code>: Pointer to data to calculate the checksum for. </li>
+<li><code class="docutils literal notranslate"><span class="pre">length</span></code>: Length of the data in bytes. </li>
+<li><code class="docutils literal notranslate"><span class="pre">LUT</span></code>: Pointer to LUT to use for CRC calculations, prepared using checksum_prepareLUTCRC8() </li>
+<li><code class="docutils literal notranslate"><span class="pre">start_remainder</span></code>: Remainder to start CRC calculation with </li>
+<li><code class="docutils literal notranslate"><span class="pre">endofdata</span></code>: Indicates whether this is the end of larger datablock (TRUE) or not yet (FALSE) </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv423checksum_calculate_CRC8PK7uint8_tj7uint8_t7uint8_tb">
+<span id="_CPPv323checksum_calculate_CRC8PK7uint8_tj7uint8_t7uint8_tb"></span><span id="_CPPv223checksum_calculate_CRC8PK7uint8_tj7uint8_t7uint8_tb"></span><span id="checksum_calculate_CRC8__uint8_tCP.unsigned-i.uint8_t.uint8_t.b"></span><span class="target" id="group__iOBC-Checksum_1ga728544e6ad4026eb536f8d8d2307b82a"></span>uint8_t <code class="descname">checksum_calculate_CRC8</code><span class="sig-paren">(</span><em class="property">const</em> uint8_t *<em>data</em>, unsigned int <em>length</em>, uint8_t <em>polynomial</em>, uint8_t <em>start_remainder</em>, bool <em>endofdata</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv423checksum_calculate_CRC8PK7uint8_tj7uint8_t7uint8_tb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Calculates a CRC 8 checksum according to CRC-8 CCITT, using bitwise calculation. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>uint8_t 8-bit CRC checksum. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">data</span></code>: Pointer to data to calculate the checksum for. </li>
+<li><code class="docutils literal notranslate"><span class="pre">length</span></code>: Length of the data in bytes. </li>
+<li><code class="docutils literal notranslate"><span class="pre">polynomial</span></code>: 8-bit CRC polynomial to be used. </li>
+<li><code class="docutils literal notranslate"><span class="pre">start_remainder</span></code>: Remainder to start CRC calculation with </li>
+<li><code class="docutils literal notranslate"><span class="pre">endofdata</span></code>: Indicates whether this is the end of larger datablock (TRUE) or not yet (FALSE) </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv424supervisor_calculate_CRCPK7uint8_tj">
+<span id="_CPPv324supervisor_calculate_CRCPK7uint8_tj"></span><span id="_CPPv224supervisor_calculate_CRCPK7uint8_tj"></span><span id="supervisor_calculate_CRC__uint8_tCP.unsigned-i"></span><span class="target" id="group__iOBC-Checksum_1gad0052a59b923a65d1c637b6b2ceb9340"></span>uint8_t <code class="descname">supervisor_calculate_CRC</code><span class="sig-paren">(</span><em class="property">const</em> uint8_t *<em>data</em>, unsigned int <em>length</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv424supervisor_calculate_CRCPK7uint8_tj" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Calculates a CRC checksum according to the algorithm used in the iOBC supervisor. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>uint8_t 8-bit CRC checksum. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">data</span></code>: Pointer to data to calculate the checksum for. </li>
+<li><code class="docutils literal notranslate"><span class="pre">length</span></code>: Length of the data in bytes </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../kubos-hal/index.html" class="btn btn-neutral float-right" title="Kubos HAL Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="supervisor.html" class="btn btn-neutral" title="iOBC Supervisor API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../../../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

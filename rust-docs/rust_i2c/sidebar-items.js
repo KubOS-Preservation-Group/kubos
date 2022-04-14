@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["Command","Struct for abstracting I2C command/data structure"],["Connection","Struct for communicating with an I2C device"],["I2CStream","An implementation of `i2c_hal::Stream` which uses the `i2c_linux` crate for communication with actual I2C hardware."]],"trait":[["Stream","High level read/write trait for I2C connections to implement"]]});

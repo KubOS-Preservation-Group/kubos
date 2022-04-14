@@ -1,0 +1,349 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Compiling Code for a Target OBC &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../index.html"/>
+        <link rel="up" title="Working with KubOS and an OBC" href="index.html"/>
+        <link rel="next" title="Communicating with an OBC" href="comms-setup.html"/>
+        <link rel="prev" title="Working with KubOS and an OBC" href="index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Working with an OBC</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Compiling Code for a Target OBC</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#download">Download</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#installation">Installation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rust">Rust</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#using-the-toolchains">Using the Toolchains</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id1">Rust</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="comms-setup.html">Communicating with an OBC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bbb/index.html">KubOS for the Beaglebone Black</a></li>
+<li class="toctree-l2"><a class="reference internal" href="iobc/index.html">KubOS for the ISIS-OBC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mbm2/index.html">KubOS for the Pumpkin MBM2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="porting-kubos.html">Porting KubOS to a New OBC</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ecosystem/index.html">KubOS Ecosystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deep-dive/index.html">Under the Hood</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sdk-docs/index.html">Kubos SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing to KubOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Working with KubOS and an OBC</a> &raquo;</li>
+        
+      <li>Compiling Code for a Target OBC</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/obc-docs/cross-compile.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="compiling-code-for-a-target-obc">
+<h1>Compiling Code for a Target OBC<a class="headerlink" href="#compiling-code-for-a-target-obc" title="Permalink to this headline">¶</a></h1>
+<p>In order for programs written using a compiled language (Rust, C, etc) to work on a target OBC,
+they will need to be compiled using the appropriate cross-compile toolchain.</p>
+<p>This document covers the process of installing the cross-compile toolchain and compiling a program
+for a target OBC using a local development environment.</p>
+<p>The Kubos SDK comes with the cross-compile toolchains pre-installed, as well as some additional
+helper tooling.
+If you are using the SDK as your development environment, please refer to <a class="reference internal" href="../sdk-docs/index.html"><span class="doc">those docs</span></a>
+for more specific information.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The toolchains have been generated and tested with a Linux-based host operating system.
+There may be issues when using them with a Mac-based operating system. If so, please use the
+<a class="reference internal" href="../sdk-docs/index.html"><span class="doc">SDK</span></a> in order to cross-compile your projectes instead.</p>
+</div>
+<div class="section" id="download">
+<h2>Download<a class="headerlink" href="#download" title="Permalink to this headline">¶</a></h2>
+<p>Below are the direct download links for the latest cross-compiling toolchains.
+These toolchains contain the majority of utilities required to build a KubOS project.
+They include things like the C and C++ compilers and linkers which are needed to generate
+executables for the target architecture, as well as tools which the host will use to assemble and
+package other OS components.
+If you need a prior version of a toolchain, please contact a Kubos team member for support.</p>
+<ul class="simple">
+<li><a class="reference external" href="https://s3.amazonaws.com/kubos-world-readable-assets/bbb_toolchain.tar.gz">Beaglebone Black / Pumpkin MBM2</a></li>
+<li><a class="reference external" href="https://s3.amazonaws.com/kubos-world-readable-assets/iobc_toolchain.tar.gz">ISIS OBC</a></li>
+</ul>
+</div>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>Uncompress the toolchain into your location of choice.
+We recommend that you choose a location which is outside of your system path, since the toolchains
+may contain binaries which have duplicate names to those which already exist in the system.</p>
+<div class="section" id="rust">
+<h3>Rust<a class="headerlink" href="#rust" title="Permalink to this headline">¶</a></h3>
+<p>If you are programming in Rust, you will now want to <a class="reference external" href="https://doc.rust-lang.org/cargo/reference/config.html">configure Cargo</a>
+to use the new toolchain.</p>
+<p>Navigate to your <code class="docutils literal notranslate"><span class="pre">.cargo</span></code> directory and edit the <code class="docutils literal notranslate"><span class="pre">config</span></code> file (or create one if it doesn’t
+already exist)</p>
+<p>Add a new <code class="docutils literal notranslate"><span class="pre">[target.*]</span></code> section with a <code class="docutils literal notranslate"><span class="pre">linker</span></code> variable which points to the toolchain’s <code class="docutils literal notranslate"><span class="pre">gcc</span></code>
+file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[target.$triple]
+linker = &quot;/path/to/{obc}_toolchain/usr/bin/{arch}-gcc&quot;
+</pre></div>
+</div>
+<p>Please refer to the Kubos SDK’s <a class="reference external" href="https://github.com/kubos/kubos-vagrant/blob/master/kubos-dev/bin/cargo_config">Cargo config file</a>
+for reference.
+You should be able to directly copy the lines pertaining to your target OBC.</p>
+</div>
+</div>
+<div class="section" id="using-the-toolchains">
+<h2>Using the Toolchains<a class="headerlink" href="#using-the-toolchains" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h3>Rust<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>The new toolchains can be used by specifying the previously-defined target triple in the
+<code class="docutils literal notranslate"><span class="pre">--target</span></code> argument when running <code class="docutils literal notranslate"><span class="pre">cargo</span> <span class="pre">build</span></code>.</p>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cargo build --target arm-unknown-linux-gnueabihf
+</pre></div>
+</div>
+<p>More specific information about how to set up and use a Rust project can be found in the
+<a class="reference internal" href="../getting-started/using-rust.html"><span class="doc">Getting Started with KubOS and Rust</span></a> doc.</p>
+<div class="section" id="c">
+<h4>C<a class="headerlink" href="#c" title="Permalink to this headline">¶</a></h4>
+<p>To use the toolchains with C, define the <code class="docutils literal notranslate"><span class="pre">CC</span></code> and <code class="docutils literal notranslate"><span class="pre">CXX</span></code> envars with the path to the appropriate
+binary prior to compiling your code.</p>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export CC=/home/user/bbb_toolchain/usr/bin/arm-linux-gcc
+$ export CXX=/home/user/bbb_toolchain/usr/bin/arm-linux-g++
+$ cmake .. &amp;&amp; make
+</pre></div>
+</div>
+<p>More specific information about how to set up and use a C project can be found in the
+<a class="reference internal" href="../sdk-docs/sdk-c.html"><span class="doc">Using C with the Kubos SDK</span></a> doc.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="comms-setup.html" class="btn btn-neutral float-right" title="Communicating with an OBC" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Working with KubOS and an OBC" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

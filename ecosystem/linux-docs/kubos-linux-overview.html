@@ -1,0 +1,568 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Kubos Linux Overview &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../../index.html"/>
+        <link rel="up" title="KubOS Ecosystem" href="../index.html"/>
+        <link rel="next" title="Using Kubos Linux" href="using-kubos-linux.html"/>
+        <link rel="prev" title="GraphQL" href="../services/graphql.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../obc-docs/index.html">Working with an OBC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">KubOS Ecosystem</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#mission-applications">Mission Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#services">Services</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#kubos-linux">Kubos Linux</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Kubos Linux Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#software-components">Software Components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#connecting-to-the-system">Connecting to the System</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#user-space">User Space</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#upgrade-process">Upgrade Process</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#recovery-process">Recovery Process</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#resetting-the-environment">Resetting the Environment</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="using-kubos-linux.html">Using Kubos Linux</a></li>
+<li class="toctree-l3"><a class="reference internal" href="logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="monitoring.html">Process Monitoring</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubos-linux-upgrade.html">Kubos Linux Upgrades</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubos-linux-recovery.html">Kubos Linux Recovery</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../deep-dive/index.html">Under the Hood</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sdk-docs/index.html">Kubos SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Contributing to KubOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">KubOS Ecosystem</a> &raquo;</li>
+        
+      <li>Kubos Linux Overview</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/ecosystem/linux-docs/kubos-linux-overview.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="kubos-linux-overview">
+<h1>Kubos Linux Overview<a class="headerlink" href="#kubos-linux-overview" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>This is intended as a higher-level overview of the Kubos Linux
+configuration, installation, and distribution for the Kubos clients’
+embedded systems.</p>
+<p>The high level components of every system will be:</p>
+<ul class="simple">
+<li>Low-level bootloader/s</li>
+<li>U-Boot (mid-level bootloader. Loads the Kubos Linux kernel)</li>
+<li>KubOS</li>
+</ul>
+<p>Ideally, all the files will be delivered to the customer as a pre-baked
+OBC. They’ll just need to upload their user app files onto the board.</p>
+<p>Boot-up UML diagram:</p>
+<div class="figure" id="id1">
+<img alt="Boot UML Diagram" src="../../_images/Linux_UML.png" />
+<p class="caption"><span class="caption-text">Boot UML Diagram</span></p>
+</div>
+<p>Boot-up with storage flow:</p>
+<div class="figure" id="id2">
+<img alt="Storage Bootup Flow Diagram" src="../../_images/Linux_Boot_Diagram.png" />
+<p class="caption"><span class="caption-text">Storage Bootup Flow Diagram</span></p>
+</div>
+</div>
+<div class="section" id="software-components">
+<h2>Software Components<a class="headerlink" href="#software-components" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="bootloader-0">
+<h3>Bootloader #0<a class="headerlink" href="#bootloader-0" title="Permalink to this headline">¶</a></h3>
+<p>Each OBC should have an initial bootloader preloaded in ROM. Its job is
+to load the next bootloader from wherever it’s living into SDRAM to
+execute. We shouldn’t have to interact directly with this much.</p>
+</div>
+<div class="section" id="bootloader-1">
+<h3>Bootloader #1<a class="headerlink" href="#bootloader-1" title="Permalink to this headline">¶</a></h3>
+<p>This will be <strong>highly non-portable</strong>. The customer will either need to
+provide one, or we’ll need to create a custom bootloader for each board
+that we come across. The main purpose of this bootloader is to load
+U-Boot from wherever it is located in storage (NOR|NAND|DataFlash|SD
+&#64; address) into some location in SDRAM (probably by default, the very
+beginning of SDRAM)</p>
+</div>
+<div class="section" id="u-boot">
+<h3>U-Boot<a class="headerlink" href="#u-boot" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Das_U-Boot">Wiki</a></p>
+<p><a class="reference external" href="http://www.denx.de/wiki/U-Boot">Site Page</a></p>
+<p><a class="reference external" href="https://github.com/kubos/uboot">Kubos U-Boot Repo</a></p>
+<p>U-Boot, at the most basic level, is responsible for loading the kernel from the
+SD card into the SDRAM. However, it also provides a basic OS and CLI which can
+be used to configure and debug the kernel before it’s loaded.</p>
+<p>Additionally, we’ve made some changes to allow us to use it as an operating system upgrade
+and recovery system. At boot time it will check for available upgrade packages
+or a corrupted Linux kernel and will then upgrade or rollback the kernel and
+root file system as necessary.</p>
+</div>
+<div class="section" id="kubos-linux-kernel">
+<h3>Kubos Linux Kernel<a class="headerlink" href="#kubos-linux-kernel" title="Permalink to this headline">¶</a></h3>
+<p>The kernel is actually composed of multiple components: the main Linux
+kernel, the libc library, and the command/utility library.</p>
+<p>Using BuildRoot allows us to include tools like BusyBox and glibc with
+the kernel and rootfs at build time.</p>
+<p>Due to the portability of Linux, we are able to primarily use a single kernel
+configuration to build the kernel for all target devices, barring a few
+architecture-specific options (ARM, OMAP, etc).</p>
+<div class="section" id="zimage">
+<h4>zImage<a class="headerlink" href="#zimage" title="Permalink to this headline">¶</a></h4>
+<p>The zImage file is unpacked from the kernel file (which contains headers
+for checksum validation) and then loaded into SDRAM by U-Boot and
+contains a compressed version of the Linux kernel. The first few hundred
+bytes of the file are not compressed and are responsible for
+uncompressing the rest of the kernel and then kicking off the main
+kernel execution.</p>
+</div>
+<div class="section" id="linux">
+<h4>Linux<a class="headerlink" href="#linux" title="Permalink to this headline">¶</a></h4>
+<p><a class="reference external" href="https://kernelnewbies.org/Linux_4.4">Linux 4.4 Overview</a></p>
+<p>We’re using Linux 4.4. This is the current long-term support version
+(LTS) and will be supported until early 2022.</p>
+</div>
+<div class="section" id="glibc">
+<h4>Glibc<a class="headerlink" href="#glibc" title="Permalink to this headline">¶</a></h4>
+<p><a class="reference external" href="https://www.gnu.org/software/libc/">Overview</a></p>
+<p>We use the standard GNU C library to build our toolchains. We are
+currently building using v2.28.</p>
+</div>
+<div class="section" id="busybox">
+<h4>BusyBox<a class="headerlink" href="#busybox" title="Permalink to this headline">¶</a></h4>
+<p><a class="reference external" href="https://busybox.net/about.html">Overview</a></p>
+<p>We’re currently using v1.29.3.</p>
+<p>BusyBox provides many of the common Linux console and shell commands,
+but in a smaller package. If there are any commands or tools that need
+to be added, they will likely be added through the busybox
+configuration.</p>
+<p>Currently enabled BusyBox commands:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[,</span> <span class="p">[[,</span> <span class="n">addgroup</span><span class="p">,</span> <span class="n">adduser</span><span class="p">,</span> <span class="n">awk</span><span class="p">,</span> <span class="n">cat</span><span class="p">,</span> <span class="n">catv</span><span class="p">,</span> <span class="n">chgrp</span><span class="p">,</span> <span class="n">chmod</span><span class="p">,</span> <span class="n">chown</span><span class="p">,</span>
+<span class="n">chpasswd</span><span class="p">,</span> <span class="n">chroot</span><span class="p">,</span> <span class="n">cksum</span><span class="p">,</span> <span class="n">clear</span><span class="p">,</span> <span class="n">cp</span><span class="p">,</span> <span class="n">cut</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="n">deallocvt</span><span class="p">,</span> <span class="n">delgroup</span><span class="p">,</span>
+<span class="n">deluser</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">dirname</span><span class="p">,</span> <span class="n">du</span><span class="p">,</span> <span class="n">dumpkmap</span><span class="p">,</span> <span class="n">echo</span><span class="p">,</span> <span class="n">egrep</span><span class="p">,</span> <span class="n">env</span><span class="p">,</span> <span class="n">expr</span><span class="p">,</span> <span class="n">false</span><span class="p">,</span>
+<span class="n">fgrep</span><span class="p">,</span> <span class="n">find</span><span class="p">,</span> <span class="n">fold</span><span class="p">,</span> <span class="n">fsync</span><span class="p">,</span> <span class="n">getty</span><span class="p">,</span> <span class="n">grep</span><span class="p">,</span> <span class="n">gzip</span><span class="p">,</span> <span class="n">halt</span><span class="p">,</span> <span class="n">hush</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">ifconfig</span><span class="p">,</span>
+<span class="n">ifdown</span><span class="p">,</span> <span class="n">ifup</span><span class="p">,</span> <span class="n">init</span><span class="p">,</span> <span class="n">inotifyd</span><span class="p">,</span> <span class="n">ionice</span><span class="p">,</span> <span class="n">iostat</span><span class="p">,</span> <span class="n">ip</span><span class="p">,</span> <span class="n">ipaddr</span><span class="p">,</span> <span class="n">iplink</span><span class="p">,</span>
+<span class="n">iproute</span><span class="p">,</span> <span class="n">iprule</span><span class="p">,</span> <span class="n">iptunnel</span><span class="p">,</span> <span class="n">kill</span><span class="p">,</span> <span class="n">killall</span><span class="p">,</span> <span class="n">killall5</span><span class="p">,</span> <span class="n">linuxrc</span><span class="p">,</span> <span class="n">ln</span><span class="p">,</span>
+<span class="n">loadkmap</span><span class="p">,</span> <span class="n">login</span><span class="p">,</span> <span class="n">logname</span><span class="p">,</span> <span class="n">ls</span><span class="p">,</span> <span class="n">lzcat</span><span class="p">,</span> <span class="n">lzma</span><span class="p">,</span> <span class="n">man</span><span class="p">,</span> <span class="n">mkdir</span><span class="p">,</span> <span class="n">mknod</span><span class="p">,</span> <span class="n">mkpasswd</span><span class="p">,</span>
+<span class="n">modinfo</span><span class="p">,</span> <span class="n">more</span><span class="p">,</span> <span class="n">mount</span><span class="p">,</span> <span class="n">mv</span><span class="p">,</span> <span class="n">nice</span><span class="p">,</span> <span class="n">passwd</span><span class="p">,</span> <span class="n">ping</span><span class="p">,</span> <span class="n">pkill</span><span class="p">,</span> <span class="n">poweroff</span><span class="p">,</span>
+<span class="n">printenv</span><span class="p">,</span> <span class="n">printf</span><span class="p">,</span> <span class="n">ps</span><span class="p">,</span> <span class="n">pwd</span><span class="p">,</span> <span class="n">readlink</span><span class="p">,</span> <span class="n">realpath</span><span class="p">,</span> <span class="n">reboot</span><span class="p">,</span> <span class="n">renice</span><span class="p">,</span> <span class="n">reset</span><span class="p">,</span>
+<span class="n">resize</span><span class="p">,</span> <span class="n">rm</span><span class="p">,</span> <span class="n">rmdir</span><span class="p">,</span> <span class="n">sed</span><span class="p">,</span> <span class="n">seq</span><span class="p">,</span> <span class="n">setserial</span><span class="p">,</span> <span class="n">sh</span><span class="p">,</span> <span class="n">sha256sum</span><span class="p">,</span> <span class="n">sha512sum</span><span class="p">,</span>
+<span class="n">sleep</span><span class="p">,</span> <span class="n">sort</span><span class="p">,</span> <span class="n">split</span><span class="p">,</span> <span class="n">start</span><span class="o">-</span><span class="n">stop</span><span class="o">-</span><span class="n">daemon</span><span class="p">,</span> <span class="n">stat</span><span class="p">,</span> <span class="n">stty</span><span class="p">,</span> <span class="n">sync</span><span class="p">,</span> <span class="n">tail</span><span class="p">,</span> <span class="n">tar</span><span class="p">,</span>
+<span class="n">tee</span><span class="p">,</span> <span class="n">test</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">timeout</span><span class="p">,</span> <span class="n">top</span><span class="p">,</span> <span class="n">touch</span><span class="p">,</span> <span class="n">tr</span><span class="p">,</span> <span class="n">true</span><span class="p">,</span> <span class="n">truncate</span><span class="p">,</span> <span class="n">umount</span><span class="p">,</span>
+<span class="n">uname</span><span class="p">,</span> <span class="n">uncompress</span><span class="p">,</span> <span class="n">unlink</span><span class="p">,</span> <span class="n">unlzma</span><span class="p">,</span> <span class="n">unshare</span><span class="p">,</span> <span class="n">unzip</span><span class="p">,</span> <span class="n">uptime</span><span class="p">,</span> <span class="n">usleep</span><span class="p">,</span> <span class="n">vi</span><span class="p">,</span>
+<span class="n">watch</span><span class="p">,</span> <span class="n">watchdog</span><span class="p">,</span> <span class="n">wc</span><span class="p">,</span> <span class="n">which</span><span class="p">,</span> <span class="n">whoami</span><span class="p">,</span> <span class="n">yes</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="device-tree-binary">
+<h3>Device Tree Binary<a class="headerlink" href="#device-tree-binary" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://www.devicetree.org/">Site Page</a></p>
+<p><a class="reference external" href="https://events.linuxfoundation.org/sites/events/files/slides/petazzoni-device-tree-dummies.pdf">Free Electrons
+Tutorial</a></p>
+<p>This is the memory and capability mapping file that tells Linux what
+features/peripherals are available on the board and what memory location
+they’re located at. The human-readable files are *.dts and *.dtsi
+(.dts-“include”) and are converted into one device tree binary file
+(*.dtb) at build time.</p>
+<p>This is a highly specific file for each board and has similar cases to
+U-Boot. If we’re lucky, a dtb file will already exist for the exact
+board that we want. Most likely, there will be dts* files for the CPU,
+but not the exact board, so we’ll have to modify a file that is close to
+what we want. If we’re unlucky, we’ll have to write the dts* files from
+scratch, which will be painful and take a while.</p>
+<p>Unfortunately, there isn’t one great tutorial for writing and updating
+device tree files. It’s very much trial-and-error. I recommend looking
+at the files for boards with similar processors and peripherals to see
+examples for the various component definitions.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">There is also an option to bake the data from the *.dtb file
+directly into the zImage file. However, this capability is largely
+implemented as a support option for older boards and isn’t something
+that we should need to use.</p>
+</div>
+</div>
+</div>
+<div class="section" id="connecting-to-the-system">
+<h2>Connecting to the System<a class="headerlink" href="#connecting-to-the-system" title="Permalink to this headline">¶</a></h2>
+<p>All supported OBCs have a debug UART connection which is intended as the
+primary way to connect to the system console.</p>
+<p>You’ll need to establish a serial connection with the board in order to connect
+to the console. Set up a serial connection to the board at a baudrate of 115200.</p>
+<p>If you have a Kubos Vagrant image currently running, the FTDI connection will
+be automatically passed through. You can use the included minicom configuration
+to quickly connect to the board via the <code class="docutils literal notranslate"><span class="pre">minicom</span> <span class="pre">kubos</span></code> command in the VM’s
+command console.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If a Kubos Vagrant image is running, you will be unable to establish a serial
+connection on your host machine. You must instead connect to the device
+through the VM.</p>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ minicom kubos
+</pre></div>
+</div>
+<p>If the board is already powered, hit the <code class="docutils literal notranslate"><span class="pre">Enter</span></code> key to display the login dialog.</p>
+<p>If you power the board after starting the minicom session, the end of the boot
+messages will look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">...</span>
+<span class="n">Freeing</span> <span class="n">unused</span> <span class="n">kernel</span> <span class="n">memory</span><span class="p">:</span> <span class="mi">172</span><span class="n">K</span> <span class="p">(</span><span class="n">c0401000</span> <span class="o">-</span> <span class="n">c042c000</span><span class="p">)</span>
+<span class="n">EXT4</span><span class="o">-</span><span class="n">fs</span> <span class="p">(</span><span class="n">mmcblk1p2</span><span class="p">):</span> <span class="n">re</span><span class="o">-</span><span class="n">mounted</span><span class="o">.</span> <span class="n">Opts</span><span class="p">:</span> <span class="n">errors</span><span class="o">=</span><span class="n">remount</span><span class="o">-</span><span class="n">ro</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">ordered</span>
+<span class="n">EXT4</span><span class="o">-</span><span class="n">fs</span> <span class="p">(</span><span class="n">mmcblk1p3</span><span class="p">):</span> <span class="n">mounted</span> <span class="n">filesystem</span> <span class="k">with</span> <span class="n">ordered</span> <span class="n">data</span> <span class="n">mode</span><span class="o">.</span> <span class="n">Opts</span><span class="p">:</span> <span class="p">(</span><span class="n">null</span><span class="p">)</span>
+<span class="n">EXT4</span><span class="o">-</span><span class="n">fs</span> <span class="p">(</span><span class="n">mmcblk0p1</span><span class="p">):</span> <span class="n">mounted</span> <span class="n">filesystem</span> <span class="k">with</span> <span class="n">ordered</span> <span class="n">data</span> <span class="n">mode</span><span class="o">.</span> <span class="n">Opts</span><span class="p">:</span> <span class="p">(</span><span class="n">null</span><span class="p">)</span>
+<span class="n">Initializing</span> <span class="n">random</span> <span class="n">number</span> <span class="n">generator</span><span class="o">...</span> <span class="n">random</span><span class="p">:</span> <span class="n">dd</span><span class="p">:</span> <span class="n">uninitialized</span> <span class="n">urandom</span> <span class="n">read</span> <span class="p">(</span><span class="mi">512</span> <span class="nb">bytes</span> <span class="n">read</span><span class="p">,</span> <span class="mi">12</span> <span class="n">bits</span> <span class="n">of</span> <span class="n">entropy</span> <span class="n">available</span><span class="p">)</span>
+<span class="n">done</span><span class="o">.</span>
+<span class="n">Starting</span> <span class="n">network</span><span class="p">:</span> <span class="n">OK</span>
+
+<span class="n">Welcome</span> <span class="n">to</span> <span class="n">Kubos</span> <span class="n">Linux</span>
+<span class="n">Kubos</span> <span class="n">login</span><span class="p">:</span>
+</pre></div>
+</div>
+<p>By default, there are two user accounts available: “root” (the superuser), and “kubos” (a normal user).
+Both have a default password of “Kubos123”. For more information, see the <a class="reference internal" href="using-kubos-linux.html#user-accounts"><span class="std std-ref">User Accounts</span></a> section.</p>
+</div>
+<div class="section" id="user-space">
+<h2>User Space<a class="headerlink" href="#user-space" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="file-system">
+<h3>File System<a class="headerlink" href="#file-system" title="Permalink to this headline">¶</a></h3>
+<p>There are a few key directories residing within the Kubos Linux user
+space</p>
+<div class="section" id="usr-sbin">
+<h4>/usr/sbin<a class="headerlink" href="#usr-sbin" title="Permalink to this headline">¶</a></h4>
+<p>All built-in Kubos services will reside in the /usr/sbin directory. This
+covers things like the hardware and core services.</p>
+</div>
+<div class="section" id="home">
+<h4>/home<a class="headerlink" href="#home" title="Permalink to this headline">¶</a></h4>
+<p>All user-created files should reside under the /home directory. This
+directory maps to a separate partition from the root file system. As a
+result, all files here will remain unchanged if the system goes through
+a kernel upgrade or downgrade.</p>
+<p>The home directories of all user accounts, except root, should live
+under this directory.</p>
+<p>A special user ‘system’ exists to hold all user application binaries,
+initialization scripts, and general flash transfer files.</p>
+<hr class="docutils" />
+<p><strong>Any files not residing under the /home directory will be destroyed
+during an upgrade/downgrade</strong></p>
+</div>
+<hr class="docutils" />
+<div class="section" id="home-system-logs">
+<h4>/home/system/logs<a class="headerlink" href="#home-system-logs" title="Permalink to this headline">¶</a></h4>
+<p>All log files generated with rsyslog reside in this directory.</p>
+</div>
+<div class="section" id="home-system-usr-bin">
+<h4>/home/system/usr/bin<a class="headerlink" href="#home-system-usr-bin" title="Permalink to this headline">¶</a></h4>
+<p>This directory is included in the system’s PATH, so applications placed
+here can be called directly from anywhere, without needing to know the
+full file path.</p>
+</div>
+<div class="section" id="home-system-etc-init-d">
+<h4>/home/system/etc/init.d<a class="headerlink" href="#home-system-etc-init-d" title="Permalink to this headline">¶</a></h4>
+<p>All user-application initialization scripts live under this directory.
+The naming format is ‘S{run-level}{application}’.</p>
+</div>
+<div class="section" id="upgrade">
+<h4>/upgrade<a class="headerlink" href="#upgrade" title="Permalink to this headline">¶</a></h4>
+<p>All *.itb files will reside in this directory. These files are used to
+upgrade the Kubos Linux kernel and root file system.</p>
+</div>
+</div>
+<div class="section" id="users">
+<h3>Users<a class="headerlink" href="#users" title="Permalink to this headline">¶</a></h3>
+<p>By default, there are only two users defined to the Kubos Linux system:
+‘root’ and ‘kubos’. To add more users, the Linux <code class="docutils literal notranslate"><span class="pre">adduser</span></code> or
+<code class="docutils literal notranslate"><span class="pre">useradd</span></code> commands should be used. Other common Linux commands related
+to setting passwords and changing permissions are also available.</p>
+<p>User home directories should be created as ‘/home/{username}’.</p>
+<p>Base user permissions are determined by the default user profile and the
+default device table, which can be found in the BuildRoot repository in
+the system/device_table.txt file.</p>
+<p><strong>NOTE:</strong> User definitions are stored in the /etc directory, which is
+part of the root file system. As a result, any user definitions that are
+added or changed will need to be re-added or changed after a system
+upgrade or downgrade. This behavior will be changed in the future.</p>
+</div>
+</div>
+<div class="section" id="upgrade-process">
+<h2>Upgrade Process<a class="headerlink" href="#upgrade-process" title="Permalink to this headline">¶</a></h2>
+<p>If you already have Kubos Linux installed on your system, but would like to
+upgrade to the latest version, check out the <a class="reference internal" href="kubos-linux-upgrade.html#upgrade-installation"><span class="std std-ref">Upgrade Installation</span></a> section.
+Alternatively, if you would like to rollback to a previously installed version,
+refer to the <a class="reference internal" href="kubos-linux-upgrade.html#upgrade-rollback"><span class="std std-ref">Upgrade Rollback</span></a> section.</p>
+</div>
+<div class="section" id="recovery-process">
+<h2>Recovery Process<a class="headerlink" href="#recovery-process" title="Permalink to this headline">¶</a></h2>
+<p>Should your Kubos Linux kernel become corrupted (as indicated by failing to
+successfully boot into Linux several times), the system will automatically try
+to recover during the next boot.</p>
+<p>It will go through the following steps, if each is present (system will reboot
+after attempting each step):</p>
+<ol class="arabic simple">
+<li>Reload the current version of Kubos Linux from the kpack*.itb file
+in the upgrade partition</li>
+<li>Reload the previous version of Kubos Linux from the kpack*.itb file
+in the upgrade partition</li>
+<li>Reload the base version of Kubos Linux from the kpack-base.itb file
+in the upgrade partition</li>
+<li>Boot into the alternate OS</li>
+</ol>
+<p>If none of these steps work, then the system will boot into the U-Boot CLI. From
+here, some basic troubleshooting and debugging abilities should be available.</p>
+<p>More information about the recovery process and architecture can be found in the
+<a class="reference internal" href="kubos-linux-recovery.html"><span class="doc">Kubos Linux Recovery doc</span></a></p>
+</div>
+<div class="section" id="resetting-the-environment">
+<span id="env-reset"></span><h2>Resetting the Environment<a class="headerlink" href="#resetting-the-environment" title="Permalink to this headline">¶</a></h2>
+<p>If the system goes through the full recovery process, you will need to reset the environment
+in order to resume the normal boot process.</p>
+<p>From the U-Boot CLI:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ env default bootcmd
+$ env default bootcount
+$ env default recovery_available
+$ saveenv
+$ reset
+</pre></div>
+</div>
+<p>These commands will:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Restore the relevant environment variables to their default values</li>
+<li>Save the new values to persistent storage</li>
+<li>Reboot the system</li>
+</ul>
+</div></blockquote>
+<p>As long as a valid kernel and rootfs are available, your system should now successfully boot
+into Kubos Linux.</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="using-kubos-linux.html" class="btn btn-neutral float-right" title="Using Kubos Linux" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../services/graphql.html" class="btn btn-neutral" title="GraphQL" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

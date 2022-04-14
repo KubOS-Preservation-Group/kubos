@@ -1,0 +1,405 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Monitor Service &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../../index.html"/>
+        <link rel="up" title="Core Services" href="core-services.html"/>
+        <link rel="next" title="Scheduler Service" href="scheduler.html"/>
+        <link rel="prev" title="File Transfer Service" href="file.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../obc-docs/index.html">Working with an OBC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">KubOS Ecosystem</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#mission-applications">Mission Applications</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#services">Services</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="core-services.html">Core Services</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="app-service.html">Applications Service</a></li>
+<li class="toctree-l4"><a class="reference internal" href="comms-framework.html">Communications Service</a></li>
+<li class="toctree-l4"><a class="reference internal" href="file.html">File Transfer Service</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Monitor Service</a></li>
+<li class="toctree-l4"><a class="reference internal" href="scheduler.html">Scheduler Service</a></li>
+<li class="toctree-l4"><a class="reference internal" href="shell.html">Shell Service</a></li>
+<li class="toctree-l4"><a class="reference internal" href="telemetry-db.html">Telemetry Database Service</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="hardware-services.html">Hardware Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="payload-services.html">Payload Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="service-config.html">Service Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="service-dev.html">Service Development</a></li>
+<li class="toctree-l3"><a class="reference internal" href="service-outline-guide.html">KubOS Service Outline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphql.html">GraphQL</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#kubos-linux">Kubos Linux</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../deep-dive/index.html">Under the Hood</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sdk-docs/index.html">Kubos SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Contributing to KubOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">KubOS Ecosystem</a> &raquo;</li>
+        
+          <li><a href="core-services.html">Core Services</a> &raquo;</li>
+        
+      <li>Monitor Service</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/ecosystem/services/monitor-service.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="monitor-service">
+<h1>Monitor Service<a class="headerlink" href="#monitor-service" title="Permalink to this headline">¶</a></h1>
+<p>The monitor service is a special hardware service which is included by default in KubOS.
+Instead of having an external hardware endpoint, this service’s endpoint is the OBC itself.</p>
+<p>The monitor service provides a way to check currently running processes and total system memory
+usage.</p>
+<div class="section" id="interface-details">
+<h2>Interface Details<a class="headerlink" href="#interface-details" title="Permalink to this headline">¶</a></h2>
+<p>Specific details about the available GraphQL queries can be found in the <a href="../../rust-docs/monitor_service/index.html" target="_blank">monitor service</a> Rust docs.</p>
+<blockquote>
+<div></div></blockquote>
+</div>
+<div class="section" id="ps-query">
+<h2>PS Query<a class="headerlink" href="#ps-query" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">ps</span></code> query allows users to get the status of running processes on their OBC.</p>
+<p>It has the following schema:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>{
+    ps(pids: [Int!] = null): [
+        {
+            pid: Int!
+            uid: Int
+            gid: Int
+            usr: String
+            grp: String
+            state: String
+            ppid: Int
+            mem: Int
+            rss: Int
+            threads: Int
+            cmd: String
+        }
+    ]
+}
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">pids</span></code> input parameter specifies an array of process ID numbers which the service should fetch
+information about. If the parameter is not specified, then information about all currently running
+processes is returned.</p>
+<p>For each requested process, the query can return the following data:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">pid</span></code> - The process ID of the process</li>
+<li><code class="docutils literal notranslate"><span class="pre">uid</span></code> - The user ID of the user or process which created this process</li>
+<li><code class="docutils literal notranslate"><span class="pre">gid</span></code> - The group ID of the user or process which created this process</li>
+<li><code class="docutils literal notranslate"><span class="pre">usr</span></code> - The user name associated with the UID</li>
+<li><code class="docutils literal notranslate"><span class="pre">grp</span></code> - The group name associated with the GID</li>
+<li><code class="docutils literal notranslate"><span class="pre">state</span></code> - A single character indicating the process’ current state. Please refer to
+<a class="reference external" href="http://man7.org/linux/man-pages/man1/ps.1.html#PROCESS_STATE_CODES">this manual</a> for a
+description of each character’s meaning</li>
+<li><code class="docutils literal notranslate"><span class="pre">ppid</span></code> - The process ID of the process which started this process</li>
+<li><code class="docutils literal notranslate"><span class="pre">mem</span></code> - The virtual memory size of the process, in bytes</li>
+<li><code class="docutils literal notranslate"><span class="pre">rss</span></code> - The current number of pages the process has in real memory</li>
+<li><code class="docutils literal notranslate"><span class="pre">threads</span></code> - The current number of threads in this process</li>
+<li><code class="docutils literal notranslate"><span class="pre">cmd</span></code> - The full command, including arguments, which was used to execute this process
+(taken from <cite>/proc/{pid}/cmdline</cite>. Defaults to the raw process name if the file cannot be read)</li>
+</ul>
+</div></blockquote>
+<p>An example query might look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="n">ps</span><span class="p">(</span><span class="n">pids</span><span class="p">:</span> <span class="p">[</span><span class="mi">473</span><span class="p">,</span> <span class="mi">477</span><span class="p">,</span> <span class="mi">501</span><span class="p">])</span> <span class="p">{</span>
+        <span class="n">pid</span><span class="p">,</span>
+        <span class="n">ppid</span><span class="p">,</span>
+        <span class="n">threads</span><span class="p">,</span>
+        <span class="n">cmd</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The response from the service might look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;errors&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;ps&quot;</span><span class="p">:[</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;cmd&quot;</span><span class="p">:</span> <span class="s2">&quot;/usr/sbin/file-service&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;pid&quot;</span><span class="p">:</span> <span class="mi">473</span><span class="p">,</span>
+                <span class="s2">&quot;ppid&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="s2">&quot;threads&quot;</span><span class="p">:</span> <span class="mi">1</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;cmd&quot;</span><span class="p">:</span> <span class="s2">&quot;/usr/sbin/telemetry-service&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;pid&quot;</span><span class="p">:</span> <span class="mi">477</span><span class="p">,</span>
+                <span class="s2">&quot;ppid&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="s2">&quot;threads&quot;</span><span class="p">:</span> <span class="mi">2</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;cmd&quot;</span><span class="p">:</span> <span class="s2">&quot;monitor-service&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;pid&quot;</span><span class="p">:</span> <span class="mi">501</span><span class="p">,</span>
+                <span class="s2">&quot;ppid&quot;</span><span class="p">:</span> <span class="mi">497</span><span class="p">,</span>
+                <span class="s2">&quot;threads&quot;</span><span class="p">:</span> <span class="mi">1</span>
+            <span class="p">}</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="meminfo-query">
+<h2>MemInfo Query<a class="headerlink" href="#meminfo-query" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">memInfo</span></code> query can be used to get information about the memory availablity and usage of the
+system as a whole. It works by reading and parsing the <cite>/proc/meminfo</cite> file.</p>
+<p>It has the following schema:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="n">memInfo</span> <span class="p">{</span>
+        <span class="n">total</span><span class="p">:</span> <span class="n">Int</span>
+        <span class="n">free</span><span class="p">:</span> <span class="n">Int</span>
+        <span class="n">available</span><span class="p">:</span> <span class="n">Int</span>
+        <span class="n">lowFree</span><span class="p">:</span> <span class="n">Int</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The query has the following response fields:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">total</span></code> - The total usable RAM of the system, in kB</li>
+<li><code class="docutils literal notranslate"><span class="pre">free</span></code> - The total amount of free memory (includes lowFree)</li>
+<li><code class="docutils literal notranslate"><span class="pre">available</span></code> - An estimate of how much memory is available for starting new applications,
+without swapping</li>
+<li><code class="docutils literal notranslate"><span class="pre">lowFree</span></code> - The amount of free memory which can be used by the kernel</li>
+</ul>
+</div></blockquote>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Not all response fields are available on all systems.
+They will be omitted from the response if they are not available.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="scheduler.html" class="btn btn-neutral float-right" title="Scheduler Service" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="file.html" class="btn btn-neutral" title="File Transfer Service" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

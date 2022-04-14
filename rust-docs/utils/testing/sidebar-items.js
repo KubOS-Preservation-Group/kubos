@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["service_query",""]],"struct":[["ServiceListener",""],["TestCommand",""],["TestService","This structure allows the creation of an instance of an actual service/binary crate for use in integration tests within the same crate."]]});

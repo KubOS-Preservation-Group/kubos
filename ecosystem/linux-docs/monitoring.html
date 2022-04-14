@@ -1,0 +1,368 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Process Monitoring &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../../index.html"/>
+        <link rel="up" title="KubOS Ecosystem" href="../index.html"/>
+        <link rel="next" title="Upgrading Kubos Linux" href="kubos-linux-upgrade.html"/>
+        <link rel="prev" title="Logging" href="logging.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../obc-docs/index.html">Working with an OBC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">KubOS Ecosystem</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#mission-applications">Mission Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#services">Services</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#kubos-linux">Kubos Linux</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="kubos-linux-overview.html">Kubos Linux Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="using-kubos-linux.html">Using Kubos Linux</a></li>
+<li class="toctree-l3"><a class="reference internal" href="logging.html">Logging</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Process Monitoring</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#monitoring-status">Monitoring Status</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuration">Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="kubos-linux-upgrade.html">Kubos Linux Upgrades</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubos-linux-recovery.html">Kubos Linux Recovery</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../deep-dive/index.html">Under the Hood</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sdk-docs/index.html">Kubos SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Contributing to KubOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">KubOS Ecosystem</a> &raquo;</li>
+        
+      <li>Process Monitoring</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/ecosystem/linux-docs/monitoring.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="process-monitoring">
+<h1>Process Monitoring<a class="headerlink" href="#process-monitoring" title="Permalink to this headline">¶</a></h1>
+<p>KubOS uses <a class="reference external" href="https://mmonit.com/monit/documentation/monit.html">Monit</a> in order to monitor its
+<a class="reference internal" href="../index.html#service-docs"><span class="std std-ref">services</span></a> and other continuous processes.</p>
+<p>Monit makes periodic checks to ensure that all defined processes are still running.
+If it finds that a process is no longer running, it issues a log message and then attempts to
+restart the process.</p>
+<p>The default behavior for Monit is defined in <code class="docutils literal notranslate"><span class="pre">/etc/monitrc</span></code>.</p>
+<p>Monit is started as a background daemon during system boot.
+The daemon will sleep for 60 seconds between each process-checking cycle.</p>
+<p>Monit has its own dedicated log file, <code class="docutils literal notranslate"><span class="pre">/var/log/monit.log</span></code>.
+If and when the log file becomes too large, it will be moved to an archive file using the
+<a class="reference internal" href="logging.html#log-rotation"><span class="std std-ref">standard log rotation method</span></a>.</p>
+<p>If, for some reason, the Monit daemon process dies, it will automatically be restarted.
+This behavior is controlled by the init system and is defined in <code class="docutils literal notranslate"><span class="pre">/etc/inittab</span></code>.</p>
+<div class="section" id="monitoring-status">
+<h2>Monitoring Status<a class="headerlink" href="#monitoring-status" title="Permalink to this headline">¶</a></h2>
+<p>The current status of everything Monit is monitoring can be viewed in one of two ways.</p>
+<p>First, the information can be viewed by executing <code class="docutils literal notranslate"><span class="pre">monit</span> <span class="pre">status</span></code> from the OBC’s command line.
+All status will then be printed to <cite>stdout</cite>.
+The output will look something like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Process</span> <span class="s1">&#39;kubos-app-service&#39;</span>
+  <span class="n">status</span>                       <span class="n">Running</span>
+  <span class="n">monitoring</span> <span class="n">status</span>            <span class="n">Monitored</span>
+  <span class="n">monitoring</span> <span class="n">mode</span>              <span class="n">active</span>
+  <span class="n">on</span> <span class="n">reboot</span>                    <span class="n">start</span>
+  <span class="n">pid</span>                          <span class="mi">478</span>
+  <span class="n">parent</span> <span class="n">pid</span>                   <span class="mi">1</span>
+  <span class="n">uid</span>                          <span class="mi">0</span>
+  <span class="n">effective</span> <span class="n">uid</span>                <span class="mi">0</span>
+  <span class="n">gid</span>                          <span class="mi">0</span>
+  <span class="n">uptime</span>                       <span class="mi">0</span><span class="n">m</span>
+  <span class="n">threads</span>                      <span class="mi">1</span>
+  <span class="n">children</span>                     <span class="mi">0</span>
+  <span class="n">cpu</span>                          <span class="mf">0.0</span><span class="o">%</span>
+  <span class="n">cpu</span> <span class="n">total</span>                    <span class="mf">0.0</span><span class="o">%</span>
+  <span class="n">memory</span>                       <span class="mf">0.6</span><span class="o">%</span> <span class="p">[</span><span class="mf">3.0</span> <span class="n">MB</span><span class="p">]</span>
+  <span class="n">memory</span> <span class="n">total</span>                 <span class="mf">0.6</span><span class="o">%</span> <span class="p">[</span><span class="mf">3.0</span> <span class="n">MB</span><span class="p">]</span>
+  <span class="n">data</span> <span class="n">collected</span>               <span class="n">Thu</span><span class="p">,</span> <span class="mi">01</span> <span class="n">Jan</span> <span class="mi">1970</span> <span class="mi">03</span><span class="p">:</span><span class="mi">13</span><span class="p">:</span><span class="mi">34</span>
+
+<span class="n">System</span> <span class="s1">&#39;Kubos&#39;</span>
+  <span class="n">status</span>                       <span class="n">Running</span>
+  <span class="n">monitoring</span> <span class="n">status</span>            <span class="n">Monitored</span>
+  <span class="n">monitoring</span> <span class="n">mode</span>              <span class="n">active</span>
+  <span class="n">on</span> <span class="n">reboot</span>                    <span class="n">start</span>
+  <span class="n">load</span> <span class="n">average</span>                 <span class="p">[</span><span class="mf">0.02</span><span class="p">]</span> <span class="p">[</span><span class="mf">0.01</span><span class="p">]</span> <span class="p">[</span><span class="mf">0.00</span><span class="p">]</span>
+  <span class="n">cpu</span>                          <span class="mf">0.0</span><span class="o">%</span><span class="n">us</span> <span class="mf">0.0</span><span class="o">%</span><span class="n">sy</span> <span class="mf">0.0</span><span class="o">%</span><span class="n">wa</span>
+  <span class="n">memory</span> <span class="n">usage</span>                 <span class="mf">6.5</span> <span class="n">MB</span> <span class="p">[</span><span class="mf">1.3</span><span class="o">%</span><span class="p">]</span>
+  <span class="n">swap</span> <span class="n">usage</span>                   <span class="mi">0</span> <span class="n">B</span> <span class="p">[</span><span class="mf">0.0</span><span class="o">%</span><span class="p">]</span>
+  <span class="n">uptime</span>                       <span class="o">-</span>
+  <span class="n">boot</span> <span class="n">time</span>                    <span class="n">Thu</span><span class="p">,</span> <span class="mi">01</span> <span class="n">Jan</span> <span class="mi">1970</span> <span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span>
+  <span class="n">data</span> <span class="n">collected</span>               <span class="n">Thu</span><span class="p">,</span> <span class="mi">01</span> <span class="n">Jan</span> <span class="mi">1970</span> <span class="mi">03</span><span class="p">:</span><span class="mi">13</span><span class="p">:</span><span class="mi">34</span>
+</pre></div>
+</div>
+<p>Alternatively, the status info can be viewed by opening a web browser on a <em>host machine</em>
+(not the OBC) and opening up a connection to port 7000 on the OBC.
+A login dialog will be presented; the login credentials are <strong>kubos/Kubos123</strong>.</p>
+<p>This will create a graphical display of the same information returned by <code class="docutils literal notranslate"><span class="pre">monit</span> <span class="pre">status</span></code>:</p>
+<img alt="../../_images/monit.png" src="../../_images/monit.png" />
+</div>
+<div class="section" id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<p>The items Monit keeps track of are defined in control files.
+We have found it easiest to create one file per process which should be monitored.
+This keeps configuration more modular and makes it easy to add or remove monitoring for a process.</p>
+<p>The files for Kubos-created services are generated automatically during the build process.
+For example, <a class="reference external" href="https://github.com/kubos/kubos-linux-build/blob/master/package/kubos/kubos-monitor/kubos-monitor.mk">you can see here</a>
+how the monitoring file will be generated for the Kubos monitor service.</p>
+<p>Please see the <a class="reference external" href="https://mmonit.com/monit/documentation/monit.html#THE-MONIT-CONTROL-FILE">Monit documentation</a>
+for information regarding the syntax of these files.</p>
+<p>If Monit’s configuration is changed, the <code class="docutils literal notranslate"><span class="pre">monit</span> <span class="pre">reload</span></code> command can be used in order to make the
+Monit daemon re-read its configuration files and process the alterations.</p>
+<div class="section" id="kubos-service-configuration">
+<h3>Kubos Service Configuration<a class="headerlink" href="#kubos-service-configuration" title="Permalink to this headline">¶</a></h3>
+<p>By default, all Kubos services are set up with the following behavior:</p>
+<ul class="simple">
+<li>If Monit sees that the service is not running, the service is restarted</li>
+<li>If Monit has already tried to restart the service 3 times within the last 10 minutes, then the
+service is assumed to be bad and is removed from Monit’s list of items to monitor
+(this count is reset with a system reboot)</li>
+</ul>
+<p>If a service has had to be restarted too many times, the <code class="docutils literal notranslate"><span class="pre">status</span></code> and <code class="docutils literal notranslate"><span class="pre">monitoring</span> <span class="pre">status</span></code> fields
+returned by <code class="docutils literal notranslate"><span class="pre">monit</span> <span class="pre">status</span></code> will both be set to <code class="docutils literal notranslate"><span class="pre">unmonitored</span></code>.</p>
+</div>
+<div class="section" id="additional-configuration-files">
+<h3>Additional Configuration Files<a class="headerlink" href="#additional-configuration-files" title="Permalink to this headline">¶</a></h3>
+<p>Users may add Monit configurations for their own services and processes in one of two places:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">/etc/monit.d</span></code> - This is the main configuration folder for system-level monitoring.
+Configuration files should be added here for services which exist and operate within the
+root file system.</li>
+<li><code class="docutils literal notranslate"><span class="pre">/home/system/etc/monit.d</span></code> - This is the secondary configuration folder for user-level
+monitoring. Configuration files should be added here for services or processes which exist
+and operate within the user data partition.</li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="kubos-linux-upgrade.html" class="btn btn-neutral float-right" title="Upgrading Kubos Linux" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="logging.html" class="btn btn-neutral" title="Logging" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

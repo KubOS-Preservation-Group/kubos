@@ -1,0 +1,554 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>File Transfer Protocol &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../../index.html"/>
+        <link rel="up" title="Under the Hood of KubOS" href="../index.html"/>
+        <link rel="next" title="Shell Protocol" href="shell-protocol.html"/>
+        <link rel="prev" title="Kubos Libraries" href="../apis/kubos-libs.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../obc-docs/index.html">Working with an OBC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ecosystem/index.html">KubOS Ecosystem</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Under the Hood</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#apis">APIs</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#protocols">Protocols</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">File Protocol Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#apis">APIs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#content-addressable-storage">Content-Addressable Storage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#messages">Messages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#common-protocol-usages">Common Protocol Usages</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="shell-protocol.html">Shell Protocol Overview</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#kubos-linux">Kubos Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#design-decisions">Design Decisions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../sdk-docs/index.html">Kubos SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Contributing to KubOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Under the Hood of KubOS</a> &raquo;</li>
+        
+      <li>File Transfer Protocol</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/deep-dive/protocols/file-protocol.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="file-transfer-protocol">
+<h1>File Transfer Protocol<a class="headerlink" href="#file-transfer-protocol" title="Permalink to this headline">¶</a></h1>
+<p>The file transfer protocol is implemented by both the
+<a class="reference internal" href="../../ecosystem/services/file.html"><span class="doc">file transfer service</span></a> and clients interacting
+with the service. This protocol uses a content-addressable
+methodology similar to Git for storing and chunking files.
+This document covers the content-addressable storage, all
+messages used in the protocol, and includes diagrams
+of common use cases.</p>
+<div class="section" id="apis">
+<h2>APIs<a class="headerlink" href="#apis" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a href="../../rust-docs/file_protocol/index.html" target="_blank">File Protocol</a></li>
+<li><a href="../../rust-docs/cbor_protocol/index.html" target="_blank">CBOR Protocol</a></li>
+</ul>
+<blockquote>
+<div></div></blockquote>
+</div>
+<div class="section" id="content-addressable-storage">
+<h2>Content-Addressable Storage<a class="headerlink" href="#content-addressable-storage" title="Permalink to this headline">¶</a></h2>
+<p>The file protocol uses a content-addressable system to store file data.
+All files are broken up into chunks prior to sending. This chunking
+is initiated either by an <code class="docutils literal notranslate"><span class="pre">export</span></code> or <code class="docutils literal notranslate"><span class="pre">import</span></code> message. A local
+storage folder is created by the file transfer service and client
+for storing the content-addressable information.
+Inside of this directory, each file has its own folder.
+The folder name is a 16-bit <a class="reference external" href="https://BLAKE2.net/">BLAKE2 hash</a> of the file’s
+contents.
+This folder is created as part of the import/export process.</p>
+<p>Inside of each file’s folder there is a <code class="docutils literal notranslate"><span class="pre">meta</span></code> file and numbered chunk files.
+Each <code class="docutils literal notranslate"><span class="pre">meta</span></code> file contains metadata describing the file
+(currently only the number of chunks).
+Each chunk file is named with its chunk number.
+Each chunk file contains the raw contents of that chunk.</p>
+<p>Here is an example content-addressable storage structure containing
+an eleven chunk file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>storage/
+└── 852f1630f4ed2c0bc934d71ada618974/ &lt;- BLAKE2 hash of file
+    ├── 0 &lt;- Each of these are file chunks
+    ├── 1
+    ├── 2
+    ├── 3
+    ├── 4
+    ├── 5
+    ├── 6
+    ├── 7
+    ├── 8
+    ├── 9
+    ├── 10
+    └── meta &lt;- Contains `{ &quot;num_chunks&quot; : 11 }` in CBOR
+</pre></div>
+</div>
+</div>
+<div class="section" id="messages">
+<h2>Messages<a class="headerlink" href="#messages" title="Permalink to this headline">¶</a></h2>
+<p>All messages in the file protocol are encoded as <a class="reference external" href="http://cbor.io/">CBOR</a> arrays and are sent
+in UDP packets.</p>
+<p>The first value in the encoded list is the <code class="docutils literal notranslate"><span class="pre">channel_id</span></code> for all messages
+and it is followed by the <code class="docutils literal notranslate"><span class="pre">hash</span></code> for content-addressable messages.</p>
+<blockquote>
+<div><ul class="simple">
+<li>The <code class="docutils literal notranslate"><span class="pre">channel_id</span></code> parameter is used to indicate a group of messages associated with
+a particular file protocol transaction.</li>
+<li>The <code class="docutils literal notranslate"><span class="pre">hash</span></code> parameter is the BLAKE2 hash for the corresponding file
+which is being transferred.</li>
+</ul>
+</div></blockquote>
+<table border="1" class="docutils">
+<colgroup>
+<col width="28%" />
+<col width="72%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Syntax</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="#metadata">Metadata</a></td>
+<td>{ <cite>channel_id</cite>, <cite>hash</cite>, <cite>num_chunks</cite> }</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#export-request">Export Request</a></td>
+<td>{ <cite>channel_id</cite>, export, <cite>hash</cite>, <cite>path</cite>, <cite>mode</cite> }</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#import-request">Import Request</a></td>
+<td>{ <cite>channel_id</cite>, import, <cite>path</cite> }</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#cleanup-request">Cleanup Request</a></td>
+<td>{ <cite>channel_id</cite>, cleanup, <cite>hash</cite> }</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#file-chunk">File Chunk</a></td>
+<td>{ <cite>channel_id</cite>, <cite>hash</cite>, <cite>chunk_index</cite>, <cite>data</cite> }</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#acknowledge-ack">Acknowledge (ACK)</a></td>
+<td>{ <cite>channel_id</cite>, <cite>hash</cite>, true, <cite>num_chunks</cite> }</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#negative-acknowledge-nak">Negative Acknowledge (NAK)</a></td>
+<td>{ <cite>channel_id</cite>, <cite>hash</cite>, false, <cite>x_start</cite>, <cite>x_end</cite>, <cite>y_start</cite>, <cite>y_end</cite>, … }</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#request-success">Request Success</a></td>
+<td>{ <cite>channel_id</cite>, true, ..`values` }</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#request-failure">Request Failure</a></td>
+<td>{ <cite>channel_id</cite>, false, <cite>error_message</cite> }</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="metadata">
+<h3>Metadata<a class="headerlink" href="#metadata" title="Permalink to this headline">¶</a></h3>
+<p>This message is sent to inform the message receiver of the metadata of a
+particular file.
+If the hash directory for that file already exists in the receiver’s
+temporary storage, then the metadata file will be updated with the new information.
+If the hash directory does not exist, then it will be created, along with
+the accompanying <code class="docutils literal notranslate"><span class="pre">meta</span></code> file.</p>
+<p>This message should be sent prior to an <code class="docutils literal notranslate"><span class="pre">export</span></code> request
+to ensure the expected number of chunks is known.</p>
+<blockquote>
+<div><code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">channel_id,</span> <span class="pre">hash,</span> <span class="pre">num_chunks</span> <span class="pre">}</span></code></div></blockquote>
+</div>
+<div class="section" id="export-request">
+<h3>Export Request<a class="headerlink" href="#export-request" title="Permalink to this headline">¶</a></h3>
+<p>This message is sent to initiate the process of transferring
+a file from the message sender to the message receiver. It
+contains the channel id, the string “export”, the file’s hash,
+the target path for the file and file’s permissions mode.</p>
+<p>The message receiver will begin waiting for file chunks after
+receiving this message. Once the timeout triggers it will
+attempt to export the file locally. If the file is incomplete then
+the receiver will request any missing chunks. Upon receiving
+all chunks it will attempt to verify and export the file to
+the local filesystem. This message is sent after the
+<code class="docutils literal notranslate"><span class="pre">sync</span></code> command as part of the export process.</p>
+<blockquote>
+<div><code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">channel_id,</span> <span class="pre">&quot;export&quot;,</span> <span class="pre">hash,</span> <span class="pre">path,</span> <span class="pre">mode</span> <span class="pre">}</span></code></div></blockquote>
+</div>
+<div class="section" id="import-request">
+<h3>Import Request<a class="headerlink" href="#import-request" title="Permalink to this headline">¶</a></h3>
+<p>This message is sent to initiate the process of transferring
+a file to the message sender from the message receiver. It
+contains the channel ID, the string “import”, and the requested
+file’s path.</p>
+<p>Upon receiving, the message receiver will import the requested
+file into the managed content-addressable storage and send a
+<code class="docutils literal notranslate"><span class="pre">success</span></code> message to the sender. This <code class="docutils literal notranslate"><span class="pre">success</span></code> message
+will contain the file`s hash and allow the original message
+sender to determine which file chunks are required.</p>
+<blockquote>
+<div><code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">channel_id,</span> <span class="pre">&quot;import&quot;,</span> <span class="pre">path</span> <span class="pre">}</span></code></div></blockquote>
+</div>
+<div class="section" id="file-chunk">
+<h3>File Chunk<a class="headerlink" href="#file-chunk" title="Permalink to this headline">¶</a></h3>
+<p>This message is sent as part of the file <code class="docutils literal notranslate"><span class="pre">import</span></code> or <code class="docutils literal notranslate"><span class="pre">export</span></code> process.
+It contains the file hash, chunk index, and raw chunk data.</p>
+<p>By default, each raw chunk is 4KB in size. Individual chunk messages will not get
+an immediate reply. However, if no chunks are received within the
+timeout window then an <code class="docutils literal notranslate"><span class="pre">ACK</span></code> or <code class="docutils literal notranslate"><span class="pre">NAK</span></code> will be sent depending
+on whether all the chunks have been received or not.</p>
+<blockquote>
+<div><code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">channel_id,</span> <span class="pre">hash,</span> <span class="pre">chunk_index,</span> <span class="pre">data</span> <span class="pre">}</span></code></div></blockquote>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Chunk size configuration is not currently available, but will be added
+in a future release.</p>
+</div>
+</div>
+<div class="section" id="acknowledge-ack">
+<h3>Acknowledge (ACK)<a class="headerlink" href="#acknowledge-ack" title="Permalink to this headline">¶</a></h3>
+<p>This message is sent to inform the message receiver that the
+message sender has all chunks for a given file. It contains the
+file’s hash, the boolean value true, and the number of
+chunks in the file.</p>
+<blockquote>
+<div><code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">channel_id,</span> <span class="pre">hash,</span> <span class="pre">true,</span> <span class="pre">num_chunks</span> <span class="pre">}</span></code></div></blockquote>
+</div>
+<div class="section" id="negative-acknowledge-nak">
+<h3>Negative Acknowledge (NAK)<a class="headerlink" href="#negative-acknowledge-nak" title="Permalink to this headline">¶</a></h3>
+<p>This message is sent to inform the message receiver that the
+message sender does not have all chunks for a given file. It
+contains the file’s hash, the boolean value <code class="docutils literal notranslate"><span class="pre">false</span></code>, and a list
+of missing chunk ranges. The ranges are pairs of numbers where
+the first number is inclusive and the second is exclusive.
+For example <code class="docutils literal notranslate"><span class="pre">0,</span> <span class="pre">2</span></code> means the first two chunks, <code class="docutils literal notranslate"><span class="pre">0</span></code> and <code class="docutils literal notranslate"><span class="pre">1</span></code>, are missing.</p>
+<p>A NAK may be sent after receiving an export request message,
+after receiving a succes message in reply to an import request message,
+or after a timeout during a file <code class="docutils literal notranslate"><span class="pre">import</span></code> or <code class="docutils literal notranslate"><span class="pre">export</span></code> operation.
+The message sender should expect the message receiver to send
+the missing file chunks upon receipt of a <code class="docutils literal notranslate"><span class="pre">NAK</span></code>.</p>
+<blockquote>
+<div><code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">channel_id,</span> <span class="pre">hash,</span> <span class="pre">false,</span> <span class="pre">1,</span> <span class="pre">4,</span> <span class="pre">6,</span> <span class="pre">7</span> <span class="pre">}</span></code></div></blockquote>
+<p>The above example <code class="docutils literal notranslate"><span class="pre">NAK</span></code> indicates that chunks 1-3 and 6
+are missing.</p>
+</div>
+<div class="section" id="request-success">
+<h3>Request Success<a class="headerlink" href="#request-success" title="Permalink to this headline">¶</a></h3>
+<p>This message is sent as part of the <code class="docutils literal notranslate"><span class="pre">import</span></code> or <code class="docutils literal notranslate"><span class="pre">export</span></code> process.
+It contains the channel ID and the boolean value <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p>
+<p>When this message is sent as part of the <code class="docutils literal notranslate"><span class="pre">export</span></code> process,
+it will be sent at the very end, indicating that all file chunks were
+successfully transmitted to the requester.</p>
+<blockquote>
+<div><code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">channel_id,</span> <span class="pre">true</span> <span class="pre">}</span></code></div></blockquote>
+<p>When this message is sent as part of the <code class="docutils literal notranslate"><span class="pre">import</span></code> process,
+it will be sent after receiving the initial import request,
+once the receiver has successfully prepared the file for transfer.
+The requester will then need to send a NAK to begin the transfer process.</p>
+<p>In this case, the message will also contain file’s hash, number of chunks,
+and mode.</p>
+<blockquote>
+<div><code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">channel_id,</span> <span class="pre">true,</span> <span class="pre">hash,</span> <span class="pre">num_chunks,</span> <span class="pre">mode</span> <span class="pre">}</span></code></div></blockquote>
+</div>
+<div class="section" id="request-failure">
+<h3>Request Failure<a class="headerlink" href="#request-failure" title="Permalink to this headline">¶</a></h3>
+<p>This message is sent if there as an error in the <code class="docutils literal notranslate"><span class="pre">import</span></code> or
+<code class="docutils literal notranslate"><span class="pre">export</span></code> process. It contains the channel ID, the boolean false
+and the error message.</p>
+<blockquote>
+<div><code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">channel_id,</span> <span class="pre">false,</span> <span class="pre">error_message</span> <span class="pre">}</span></code></div></blockquote>
+</div>
+<div class="section" id="cleanup-request">
+<h3>Cleanup Request<a class="headerlink" href="#cleanup-request" title="Permalink to this headline">¶</a></h3>
+<p>This message is sent to request that some portion of the temporary storage directory be deleted.</p>
+<p>If the <code class="docutils literal notranslate"><span class="pre">hash</span></code> parameter is specified, then the storage sub-directory associated with that ID will
+be deleted.</p>
+<p>If the <code class="docutils literal notranslate"><span class="pre">hash</span></code> parameter is omitted, then the entire temporary storage directory will be deleted.</p>
+<p>By default, the temporary directory associated with a particular file will be automatically deleted
+upon the successful completion of its transfer.
+The cleanup request is useful when a file transfer fails for some reason and the user wishes to start
+the transfer over from scratch.</p>
+<blockquote>
+<div><code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">`channel_id`,</span> <span class="pre">cleanup,</span> <span class="pre">`hash`</span> <span class="pre">}</span></code></div></blockquote>
+</div>
+</div>
+<div class="section" id="common-protocol-usages">
+<h2>Common Protocol Usages<a class="headerlink" href="#common-protocol-usages" title="Permalink to this headline">¶</a></h2>
+<p>Uploading a single chunk file from a ground station to an OBC:</p>
+<p class="plantuml">
+<img src="../../_images/plantuml-0d6ed83c9c2e68adb92f8ac6957492869f92b2cf.png" alt="&#64;startuml
+
+participant &quot;Ground Station&quot; as ground
+participant &quot;OBC&quot; as obc
+
+ground -&gt; obc : Metadata
+ground -&gt; obc : Export
+obc -&gt; ground : NAK
+ground -&gt; obc : Send Chunk
+obc -&gt; ground : ACK
+obc -&gt; ground : Success
+
+&#64;enduml"/>
+</p>
+<p>Downloading a single chunk file from an OBC to a ground station:</p>
+<p class="plantuml">
+<img src="../../_images/plantuml-bc4e870f348eea3c208bb35818af8069f3a988b6.png" alt="&#64;startuml
+
+participant &quot;Ground Station&quot; as ground
+participant &quot;OBC&quot; as obc
+
+ground -&gt; obc : Import
+obc -&gt; ground : Success
+ground -&gt; obc : NAK
+obc -&gt; ground : Send Chunk
+ground -&gt; obc : ACK
+
+&#64;enduml"/>
+</p>
+<p>Uploading a three chunk file from ground station with a chunk re-request:</p>
+<p class="plantuml">
+<img src="../../_images/plantuml-7c96d5ba00a66093cda5fa8b630e5774ea4b58cd.png" alt="&#64;startuml
+
+participant &quot;Ground Station&quot; as ground
+participant &quot;OBC&quot; as obc
+
+ground -&gt; obc : Metadata
+ground -&gt; obc : Export
+obc -&gt; ground : NAK
+ground -&gt; obc : Send Chunk
+ground -&gt; obc : Send Chunk
+obc -&gt; ground : NAK
+ground -&gt; obc : Send Chunk
+obc -&gt; ground : ACK
+obc -&gt; ground : Success
+
+&#64;enduml"/>
+</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="shell-protocol.html" class="btn btn-neutral float-right" title="Shell Protocol" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../apis/kubos-libs.html" class="btn btn-neutral" title="Kubos Libraries" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

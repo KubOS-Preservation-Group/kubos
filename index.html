@@ -1,0 +1,349 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Overview &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="#"/>
+        <link rel="next" title="KubOS Design" href="kubos-design.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="#" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="getting-started/index.html">Getting Started</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="obc-docs/index.html">Working with an OBC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ecosystem/index.html">KubOS Ecosystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deep-dive/index.html">Under the Hood</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sdk-docs/index.html">Kubos SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing/index.html">Contributing to KubOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="#">Docs</a> &raquo;</li>
+        
+      <li>Overview</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="figure align-center">
+<img alt="_images/kubos_logo.png" src="_images/kubos_logo.png" />
+</div>
+<div class="section" id="overview">
+<h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h1>
+<table border="1" class="docutils">
+<colgroup>
+<col width="26%" />
+<col width="31%" />
+<col width="12%" />
+<col width="32%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference external" href="http://docs.kubos.co">Stable Docs</a></td>
+<td><a class="reference external" href="http://docs.kubos.co/master">Nightly Docs</a></td>
+<td><a class="reference internal" href="changelog.html"><span class="doc">Kubos Changelog</span></a></td>
+<td><a class="reference external" href="https://github.com/kubos/kubos">Kubos Repo</a></td>
+</tr>
+</tbody>
+</table>
+<p>The KubOS platform provides satellite developers the tools and libraries necessary to quickly bring up space-ready software.
+We leverage multiple existing open source projects, along with our own custom framework and SDK.</p>
+<p>Just looking for an explanation of what KubOS is?
+Check out our design guide for an overview of how KubOS works and what it provides,
+and check out our ecosystem docs for a deeper explanation of each component:</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference internal" href="kubos-design.html"><span class="doc">KubOS Design</span></a></li>
+<li><a class="reference internal" href="ecosystem/index.html"><span class="doc">KubOS Ecosystem</span></a></li>
+</ul>
+</div></blockquote>
+<p>Want to get started with development?
+Follow our Getting Started guide to get your development environment set up and then check out our
+tutorials or try your own project:</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference internal" href="getting-started/index.html"><span class="doc">Getting Started</span></a></li>
+<li><a class="reference internal" href="tutorials/index.html"><span class="doc">New User Tutorials</span></a></li>
+</ul>
+</div></blockquote>
+<p>Trying to start developing your mission with KubOS?
+Check out our mission development overview:</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference internal" href="mission-dev/index.html"><span class="doc">Mission Development</span></a></li>
+</ul>
+</div></blockquote>
+<p>Having issues? <a class="reference internal" href="faq-troubleshooting.html"><span class="doc">Check out our FAQs</span></a> for your issue, or <a class="reference external" href="https://github.com/kubos/kubos/issues/new/choose">create a new issue</a> on the repo to let us know.</p>
+<p>Want a new feature? Create a <a class="reference external" href="https://github.com/kubos/kubos/issues/new/choose">feature request</a>!</p>
+<p>Just want to say hello? <a class="reference external" href="https://slack.kubos.co/">Come talk to us!</a> If for some reason Slack won’t work for you, feel free to email us at <a class="reference external" href="mailto:info&#37;&#52;&#48;kubos&#46;com">info<span>&#64;</span>kubos<span>&#46;</span>com</a>.</p>
+</div>
+<div class="section" id="supported-obcs">
+<span id="supported-boards"></span><h1>Supported OBCs<a class="headerlink" href="#supported-obcs" title="Permalink to this headline">¶</a></h1>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="83%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Vendor</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>ISIS</td>
+<td><a class="reference internal" href="obc-docs/iobc/index.html"><span class="doc">ISIS-OBC</span></a></td>
+</tr>
+<tr class="row-odd"><td>Pumpkin</td>
+<td><a class="reference internal" href="obc-docs/mbm2/index.html"><span class="doc">Pumpkin Motherboard Module 2</span></a></td>
+</tr>
+<tr class="row-even"><td>Beaglebone</td>
+<td><a class="reference internal" href="obc-docs/bbb/index.html"><span class="doc">Beaglebone Black, Rev. C</span></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="supported-hardware-devices">
+<span id="supported-hardware"></span><h1>Supported Hardware Devices<a class="headerlink" href="#supported-hardware-devices" title="Permalink to this headline">¶</a></h1>
+<p>KubOS supports a selection of hardware devices in varying capacities.</p>
+<p>Some devices have an additional <a class="reference internal" href="ecosystem/services/hardware-services.html"><span class="doc">hardware service</span></a> which can be built into
+KubOS and provides a long-running process which allows easy, streamlined communication with the device.</p>
+<p>All supported devices have a <a class="reference internal" href="deep-dive/apis/device-api/index.html"><span class="doc">device API</span></a> which may be used.</p>
+</div>
+<div class="section" id="contributing-to-kubos">
+<h1>Contributing to KubOS<a class="headerlink" href="#contributing-to-kubos" title="Permalink to this headline">¶</a></h1>
+<p>Want to get your code into space? Become a <a class="reference internal" href="contributing/index.html"><span class="doc">KubOS contributor</span></a> and you will!
+We welcome community developers, and are always looking for new people to collaborate with us.
+<a class="reference external" href="https://slack.kubos.co/">Join us on Slack</a> or visit our
+<a class="reference external" href="https://github.com/kubos/kubos/issues">GitHub Issues</a> page to participate in discussion of features
+or bugs, see what you can work on, and to give feedback.</p>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
+<li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
+</ul>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="kubos-design.html" class="btn btn-neutral float-right" title="KubOS Design" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

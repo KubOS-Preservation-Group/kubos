@@ -1,0 +1,469 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Kubos Contribution Process &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../index.html"/>
+        <link rel="up" title="Contributing to KubOS" href="index.html"/>
+        <link rel="next" title="Kubos Coding and Documentation Standards" href="kubos-standards.html"/>
+        <link rel="prev" title="Requesting New Features" href="feature-request.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../obc-docs/index.html">Working with an OBC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ecosystem/index.html">KubOS Ecosystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deep-dive/index.html">Under the Hood</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sdk-docs/index.html">Kubos SDK</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Contributing to KubOS</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="reporting-bugs.html">Reporting Bugs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="feature-request.html">Requesting New Features</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Contributor Guidelines</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#sign-the-cla">Sign the CLA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#create-or-select-an-issue">Create or Select an Issue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mark-the-issue-as-in-progress">Mark the Issue as ‘In Progress’</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#create-a-branch-of-the-code-you-want-to-work-on">Create a Branch of the Code You Want to Work On</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#make-your-changes">Make Your Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#create-a-pull-request">Create a Pull Request</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#merge-in-new-changes-from-master">Merge in New Changes From Master</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#verify-ci-tests-pass">Verify CI Tests Pass</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wait-for-pull-request-approval">Wait for Pull Request Approval</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#close-the-issue">Close the Issue</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="kubos-standards.html">Coding and Documentation Standards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="documentation.html">Documentation Guides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html">Testing Guides</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Contributing to KubOS</a> &raquo;</li>
+        
+      <li>Kubos Contribution Process</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/contributing/contribution-process.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="kubos-contribution-process">
+<h1>Kubos Contribution Process<a class="headerlink" href="#kubos-contribution-process" title="Permalink to this headline">¶</a></h1>
+<p>This is the workflow you should go through in order to create and
+complete a task to contribute to the KubOS project</p>
+<div class="section" id="sign-the-cla">
+<h2>Sign the CLA<a class="headerlink" href="#sign-the-cla" title="Permalink to this headline">¶</a></h2>
+<p>All contributors must sign the Kubos Contributor License Agreement
+before their changes can be merged into the main codebase.</p>
+<p>The Kubos CLA can be found
+<a class="reference external" href="https://cla-assistant.io/kubos/kubos">here</a>.</p>
+</div>
+<div class="section" id="create-or-select-an-issue">
+<h2>Create or Select an Issue<a class="headerlink" href="#create-or-select-an-issue" title="Permalink to this headline">¶</a></h2>
+<p>GitHub issues allow us to track what problems have been found and which
+problems are currently being addressed.</p>
+<p>If an issue does not already exist for the work you would like to contribute, please open one using
+the process layed out in the following docs:</p>
+<ul class="simple">
+<li><a class="reference internal" href="reporting-bugs.html"><span class="doc">Reporting Bugs</span></a></li>
+<li><a class="reference internal" href="feature-request.html"><span class="doc">Requesting New Features</span></a></li>
+</ul>
+<p>The issue will be automatically labeled with “bug” or “enhancement” depending on the issue template
+you use.</p>
+</div>
+<div class="section" id="mark-the-issue-as-in-progress">
+<h2>Mark the Issue as ‘In Progress’<a class="headerlink" href="#mark-the-issue-as-in-progress" title="Permalink to this headline">¶</a></h2>
+<p>In order to track what’s being worked on and by whom, for every issue you work you should:</p>
+<ul class="simple">
+<li>Click the ‘Assignees’ link and select yourself</li>
+<li>Mark the issue as ‘In Progress’ by editing the title of the project and adding “[WIP]”</li>
+</ul>
+</div>
+<div class="section" id="create-a-branch-of-the-code-you-want-to-work-on">
+<h2>Create a Branch of the Code You Want to Work On<a class="headerlink" href="#create-a-branch-of-the-code-you-want-to-work-on" title="Permalink to this headline">¶</a></h2>
+<p>All code changes should initially be made in a branch of the relavent
+Kubos repo either in the main repo, or in a personal copy (if you don’t
+have access) and then be submitted against the master branch as a pull
+request:</p>
+<p>To create your own repo:</p>
+<ul>
+<li><p class="first">Navigate to the GitHub page of the main code that you want to work
+on. For example, <a class="reference external" href="https://github.com/kubos/kubos">https://github.com/kubos/kubos</a>.</p>
+</li>
+<li><p class="first">Click the ‘Fork’ button in the upper right-hand corner.</p>
+</li>
+<li><p class="first">If you see a dialog ‘Where should we fork this repository?’, click
+the icon with your username.</p>
+</li>
+<li><p class="first">Within your development environment, create a link to your new remote
+repository:</p>
+<p>$ git remote add {remote name you create} {personal repo url}</p>
+</li>
+</ul>
+<p>Clone the repo that you want to modify onto your local machine</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git clone http://github.com/kubos/kubos
+</pre></div>
+</div>
+<p>Move into the repo folder</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd kubos
+</pre></div>
+</div>
+<p>Create a local branch to make your changes</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git checkout -b {local branch name you create}
+</pre></div>
+</div>
+</div>
+<div class="section" id="make-your-changes">
+<h2>Make Your Changes<a class="headerlink" href="#make-your-changes" title="Permalink to this headline">¶</a></h2>
+<p>The code. Write it. Test it.</p>
+<p>The <a class="reference internal" href="kubos-standards.html"><span class="doc">Kubos Standards</span></a> doc has some basic
+naming and coding standards that should be adhered to. When in doubt,
+try to match the styling of the surrounding code.</p>
+<p>Update any documentation areas that are affected by your changes.</p>
+<ul class="simple">
+<li>If you want to test your documentation changes:<ul>
+<li>Run the command ‘doxygen Doxyfile’ from the project folder with the new documentation to regenerate the html documentation</li>
+<li>Open up {project}/html/index.html in a web browser</li>
+<li>Browse to your doc updates to verify</li>
+</ul>
+</li>
+</ul>
+<p>Add or update any unit tests that are affected by your changes. For
+instance, if support for SPI is added for the Kubos Linux HAL,
+then a new test folder would be added to <cite>hal/kubos-hal/test</cite> with the
+relavent new test cases.</p>
+<p>Commit your changes and push to your remote branch (the branch will be
+created automatically if it doesn’t exist):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git add {files you changed}
+$ git commit -m &quot;Descriptive message about the changes you made&quot;
+$ git push {remote name} {local branch name}
+</pre></div>
+</div>
+<p>If you’re committing against a Kubos repo, then the remote name will
+likely be “origin”. If you’re committing against your personal fork,
+then the remote name will match what you specified in the
+<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">remote</span> <span class="pre">add</span></code> command.</p>
+<p>Commit early, commit often.</p>
+</div>
+<div class="section" id="create-a-pull-request">
+<h2>Create a Pull Request<a class="headerlink" href="#create-a-pull-request" title="Permalink to this headline">¶</a></h2>
+<p>At some point, you’ll want to create a pull request so that your changes
+can be merged into the main repo’s master branch. You will need to
+create a pull request for each repository you are making changes to.</p>
+<p>From the GitHub page for the repository that contains the changes you
+want to merge:</p>
+<ul class="simple">
+<li>Click the ‘Branch:’ dropdown on the left-hand side and select the local branch containing your changes</li>
+<li>Click the ‘New pull request’ button</li>
+<li>The title of the pull request should clearly refer to its corresponding issue</li>
+<li>In the description field, add a small summary of the changes you made. The title should have indicated the bulk of the changes you made, but it’s also good to mention things like documentation updates and any miscellaneous changes that were made (for example, fixing any bugs that you ran into while working on your code changes).</li>
+<li>Click ‘Create pull request’</li>
+</ul>
+<p>If you’d like specific people to review your code, you can either
+mention them in the description with an <code class="docutils literal notranslate"><span class="pre">&#64;{name}</span></code> tag, or by adding them
+to the ‘Reviewers’ list.</p>
+<p>You are welcome to create a pull request before your changes are entirely
+complete. Creating a pull request early in the code-creation process
+allows others to see what changes are being made and answer questions or
+offer architectural suggestions. If you do create a pull request before
+you are done making changes, add “[WIP]” to the pull request’s title.
+Remove the “[WIP]” once all code changes have been completed and the PR
+is officially ready for review.</p>
+</div>
+<div class="section" id="merge-in-new-changes-from-master">
+<h2>Merge in New Changes From Master<a class="headerlink" href="#merge-in-new-changes-from-master" title="Permalink to this headline">¶</a></h2>
+<p>After submitting your pull request, you may find that GitHub has flagged
+one or more files as being in conflict with the current version of the
+file in the master branch. This means that someone else has committed
+code in the same file and similar area as you and your changes can’t be
+automatically merged.</p>
+<p>In order to resolve the conflict, execute the following steps within
+your development environment:</p>
+<p>Merge the master branch into your local branch</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git checkout origin/master
+$ git pull origin master
+$ git checkout {local branch where your changes are}
+$ git merge origin/master
+</pre></div>
+</div>
+<p>Git will edit any files with conflicts. Conflicts will look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt;Head</span>
+<span class="go">    New local changes</span>
+<span class="go">==========</span>
+<span class="go">    New master changes</span>
+<span class="go">&lt;&lt;&lt;kubos</span>
+</pre></div>
+</div>
+<p>Edit the files to resolve the conflicts. Push the resolved changed to
+your remote repo</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git add {fixed files}
+$ git commit
+$ git push {remote name} {local branch name}
+</pre></div>
+</div>
+<p>If you navigate to your pull request, you should now see that github
+says “This branch has no conflicts with the base branch”, indicating
+that the changes okay to merge (pending pull request approval).</p>
+</div>
+<div class="section" id="verify-ci-tests-pass">
+<h2>Verify CI Tests Pass<a class="headerlink" href="#verify-ci-tests-pass" title="Permalink to this headline">¶</a></h2>
+<p>When you create a PR, our CI tests will automatically be run against your new code.
+The results of these tests are displayed at the bottom of the PR page.</p>
+<p>If all tests have passed, you will see a green checkmark icon and “All checks have passed”.</p>
+<p>If a test failed, then you will see “Some checks were not successful”.
+The test/s which failed will be marked with a red ‘X’.
+If you click on the “Details” link for a test, it will take you to the particular CI test that
+failed.
+From there, you can review the test output and determine what needs to be fixed.</p>
+<p>If you’re having a difficult time parsing the test output, or if something fails which appears to be
+unrelated to your changes, please feel free to contact a Kubos team member via
+<a class="reference external" href="https://slack.kubos.co/">Slack</a> for support.</p>
+<p>All tests must pass before your PR can be approved.</p>
+</div>
+<div class="section" id="wait-for-pull-request-approval">
+<h2>Wait for Pull Request Approval<a class="headerlink" href="#wait-for-pull-request-approval" title="Permalink to this headline">¶</a></h2>
+<p>Once your pull request has been submitted, it must be approved by at
+least one person before the request can be merged into the master
+branch.</p>
+<p>In all likelyhood, you’ll need to make changes to your code before your
+pull request can be merged. Make the changes in your local development
+environment and then commit and push them into your remote repo. As long
+as you’re still using the same local branch, these new changes will be
+automatically added to your existing pull request.</p>
+<p>Once all changes have been approved, a Kubos engineer will merge the changes
+into the master branch.</p>
+</div>
+<div class="section" id="close-the-issue">
+<h2>Close the Issue<a class="headerlink" href="#close-the-issue" title="Permalink to this headline">¶</a></h2>
+<p>Before you close the issue, verify the following:</p>
+<ul class="simple">
+<li>All features listed in the issue have been completed</li>
+<li>All relevant documentation changes have been made</li>
+<li>All relevant unit tests have been created or updated</li>
+<li>All code changes and related code have been tested</li>
+<li>All pull requests related to the issue have been approved and merged</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="kubos-standards.html" class="btn btn-neutral float-right" title="Kubos Coding and Documentation Standards" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="feature-request.html" class="btn btn-neutral" title="Requesting New Features" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

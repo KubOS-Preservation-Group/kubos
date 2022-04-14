@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["MockStream","Mock object for simulating a UART data stream"],["ReadStruct","Structure containing the output data or result to return when the MockStream's read function is called"],["WriteStruct","Structure containing the input data to verify and/or result to return when the MockStream's write function is called"]]});

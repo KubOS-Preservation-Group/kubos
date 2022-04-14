@@ -1,0 +1,314 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Using Python with the Kubos SDK &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../index.html"/>
+        <link rel="up" title="Kubos SDK Docs" href="index.html"/>
+        <link rel="next" title="Using C with the Kubos SDK" href="sdk-c.html"/>
+        <link rel="prev" title="Using Rust with the Kubos SDK" href="sdk-rust.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../obc-docs/index.html">Working with an OBC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ecosystem/index.html">KubOS Ecosystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deep-dive/index.html">Under the Hood</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Kubos SDK</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="sdk-installing.html">Installing the Kubos SDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sdk-rust.html">Using Rust with the Kubos SDK</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Using Python with the Kubos SDK</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#transferring-to-target">Transferring to Target</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#running-on-target">Running on Target</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sdk-c.html">Using C with the Kubos SDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sdk-upgrading.html">Upgrading the Kubos SDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sdk-advanced-cross-compiling.html">Advanced Rust Cross Compiling</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing to KubOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Kubos SDK Docs</a> &raquo;</li>
+        
+      <li>Using Python with the Kubos SDK</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/sdk-docs/sdk-python.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="using-python-with-the-kubos-sdk">
+<h1>Using Python with the Kubos SDK<a class="headerlink" href="#using-python-with-the-kubos-sdk" title="Permalink to this headline">¶</a></h1>
+<p>The Kubos SDK Vagrant box comes with a Python interperter and all the modules needed to develop a
+basic hardware service or mission application.
+Services can be tested locally in the Vagrant box up until the point that they need hardware
+interaction.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The SDK comes with support for both Python2.7 and Python3.7.
+However, only Python3.7 is available on OBCs running Kubos Linux.</p>
+</div>
+<div class="section" id="transferring-to-target">
+<h2>Transferring to Target<a class="headerlink" href="#transferring-to-target" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The ISIS-OBC does not currently support Python due to size constraints</p>
+</div>
+<p>There are currently two ways to add Python scripts and libraries to a system running Kubos Linux:</p>
+<ul>
+<li><p class="first">Add a new Python package to a custom Kubos Linux build</p>
+<blockquote>
+<div><ul class="simple">
+<li>Fork and clone <a class="reference external" href="https://github.com/kubos/kubos-linux-build">kubos-linux-build</a>
+and add additional Python packages to the <cite>package/python</cite> directory</li>
+<li>You can see our current system packages and how they are structured
+<a class="reference external" href="https://github.com/kubos/kubos-linux-build/tree/master/package/python">here</a>.</li>
+<li>See the <a class="reference internal" href="../deep-dive/index.html#custom-klb"><span class="std std-ref">custom Kubos Linux docs</span></a> for more information on
+building Kubos Linux.</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Add individual Python files on the fly by transferring them to an attached hardware target</p>
+</li>
+</ul>
+<p>Python project files can be transferred to the target OBC <a class="reference internal" href="../obc-docs/comms-setup.html#file-transfer"><span class="std std-ref">via a supported file transfer
+method</span></a>.</p>
+<p>Binaries may be transferred to any location on the target board, however, they should be copied
+to <cite>/home/system/usr/bin</cite> if you would like them to be automatically accessible via the system PATH.</p>
+</div>
+<div class="section" id="running-on-target">
+<h2>Running on Target<a class="headerlink" href="#running-on-target" title="Permalink to this headline">¶</a></h2>
+<p>The following steps will allow you to run Python3.7 files which have been flashed
+to a Linux target:</p>
+<ol class="arabic simple" start="0">
+<li>Make sure you can <a class="reference internal" href="../obc-docs/comms-setup.html"><span class="doc">communicate with your OBC</span></a>.</li>
+<li>Transfer your python script using a supported <a class="reference internal" href="../obc-docs/comms-setup.html#file-transfer"><span class="std std-ref">file transfer method</span></a>.</li>
+<li>Navigate to the destination folder of the transfer.</li>
+<li>Your Python files should be here. You can now run them with <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">file.py</span></code>.</li>
+</ol>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="sdk-c.html" class="btn btn-neutral float-right" title="Using C with the Kubos SDK" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="sdk-rust.html" class="btn btn-neutral" title="Using Rust with the Kubos SDK" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

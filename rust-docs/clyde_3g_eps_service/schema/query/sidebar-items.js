@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["Root","Top-level query root structure"],["Telemetry","Telemetry query structure"]]});

@@ -1,0 +1,715 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Creating Your First Mission Application &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../index.html"/>
+        <link rel="up" title="Tutorials" href="index.html"/>
+        <link rel="next" title="Running a KubOS Project on an OBC" href="first-obc-project.html"/>
+        <link rel="prev" title="Tutorials" href="index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#mission-development-tutorials">Mission Development Tutorials</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Creating Your First Mission Application</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#setup">Setup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#kubos-services-and-graphql">Kubos Services and GraphQL</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#determining-service-urls">Determining Service URLs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#querying-a-service">Querying a Service</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#writing-data-to-the-telemetry-database">Writing Data to the Telemetry Database</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#creating-the-manifest-file">Creating the Manifest File</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="first-obc-project.html">Running a KubOS Project on an OBC</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#system-interaction-tutorials">System Interaction Tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#advanced-tutorials">Advanced Tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#other-resources">Other Resources</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../obc-docs/index.html">Working with an OBC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ecosystem/index.html">KubOS Ecosystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deep-dive/index.html">Under the Hood</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sdk-docs/index.html">Kubos SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing to KubOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Tutorials</a> &raquo;</li>
+        
+      <li>Creating Your First Mission Application</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/tutorials/first-mission-app.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="creating-your-first-mission-application">
+<h1>Creating Your First Mission Application<a class="headerlink" href="#creating-your-first-mission-application" title="Permalink to this headline">¶</a></h1>
+<p>Mission applications are user-created programs which are used to control satellite behavior and
+execute mission logic.</p>
+<p>These applications are registered with the <a class="reference internal" href="../ecosystem/services/app-service.html"><span class="doc">applications service</span></a>,
+which is responsible for tracking versioning and controlling application upgrades and rollbacks.</p>
+<p>This tutorial guides the user through the process of creating a basic mission application using
+Python3.</p>
+<p>At the end of the tutorial, the user will have a mission application which is capable of querying
+the monitor service for current system memory usage and then storing that data into the telemetry
+database.</p>
+<p>You should be able to go through this tutorial entirely within your development environment.
+You do not need to have an OBC available.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The iOBC does not support Python. If this is the board which you are using,
+please refer to the <a class="reference external" href="https://github.com/kubos/kubos/blob/master/examples/rust-mission-app/src/main.rs">example Rust mission application</a>
+for the specific application code. The rest of this document should still be useful for the
+high-level concepts which are involved when developing a mission application.</p>
+</div>
+<div class="section" id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first"><a class="reference internal" href="../sdk-docs/sdk-installing.html"><span class="doc">Install the Kubos SDK</span></a> or set up the dependencies
+required for a <a class="reference internal" href="../getting-started/local-setup.html"><span class="doc">local dev environment</span></a></p>
+</li>
+<li><p class="first">If you have not done so already, create a clone of the <a class="reference external" href="https://github.com/kubos/kubos">KubOS source repo</a>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git clone https://github.com/kubos/kubos
+</pre></div>
+</div>
+</li>
+<li><p class="first">Navigate to the <cite>kubos</cite> source directory and run the following commands to start the monitor service
+and telemetry database service in the background (the services may need to be built first, which
+will take several minutes to complete):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cargo run --bin monitor-service -- -c tools/local_config.toml &amp;
+$ cargo run --bin telemetry-service -- -c tools/local_config.toml &amp;
+</pre></div>
+</div>
+</li>
+<li><p class="first">Navigate back out to the development directory of your choosing.
+This tutorial will use <code class="docutils literal notranslate"><span class="pre">/home/user/my-app</span></code> as the example development directory and will assume
+that the cloned kubos repo is in <code class="docutils literal notranslate"><span class="pre">/home/user/kubos</span></code>.</p>
+</li>
+<li><p class="first">Create a new file for this tutorial, <code class="docutils literal notranslate"><span class="pre">my-mission-app.py</span></code>.
+In order to allow the applications service to run our mission application, you’ll need to start by
+placing the following line at the top of the new file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python3</span>
+</pre></div>
+</div>
+<p>This allows the file to be run like a normal executable, <code class="docutils literal notranslate"><span class="pre">./my-mission-app.py</span></code>, rather than needing
+to explicitly call the Python interpreter with <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">my-mission-app.py</span></code>.</p>
+</li>
+<li><p class="first">Since you’ll be calling the file as an executable, you’ll also need to update the file permissions:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ chmod +x my-mission-app.py
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="kubos-services-and-graphql">
+<h2>Kubos Services and GraphQL<a class="headerlink" href="#kubos-services-and-graphql" title="Permalink to this headline">¶</a></h2>
+<p>A major component of most mission applications will be interacting with
+<a class="reference internal" href="../ecosystem/index.html#service-docs"><span class="std std-ref">Kubos services</span></a>.</p>
+<p>These services provided interfaces to underlying hardware and other system resources.</p>
+<p>All services work by consuming <a class="reference external" href="http://graphql.org/">GraphQL</a> requests over HTTP, running the
+requested operation, and then returning a JSON response.</p>
+<p>GraphQL is a query language which allows users to create readable requests which will return only
+the data they specify.</p>
+<p>GraphQL requests come in two varieties: queries and mutations.</p>
+<div class="section" id="queries">
+<h3>Queries<a class="headerlink" href="#queries" title="Permalink to this headline">¶</a></h3>
+<p>GraphQL queries perform informational, read-only operations. For example, a query might request that
+an underlying piece of hardware be contacted for its current temperature or last data reading.</p>
+<p>An example query for the telemetry database service might look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="n">telemetry</span><span class="p">(</span><span class="n">subsystem</span><span class="p">:</span> <span class="s2">&quot;EPS&quot;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">timestamp</span><span class="p">,</span>
+        <span class="n">parameter</span><span class="p">,</span>
+        <span class="n">value</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This translates to “please fetch all of the stored telemetry entries for the EPS subsystem and
+return only their timestamp, parameter, and value values.”</p>
+<p>The response might look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;telemetry&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="mi">1100</span><span class="p">,</span>
+            <span class="s2">&quot;parameter&quot;</span><span class="p">:</span> <span class="s2">&quot;voltage&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;4.4&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="mi">1100</span><span class="p">,</span>
+            <span class="s2">&quot;parameter&quot;</span><span class="p">:</span> <span class="s2">&quot;current&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;0.25&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="mi">1002</span><span class="p">,</span>
+            <span class="s2">&quot;parameter&quot;</span><span class="p">:</span> <span class="s2">&quot;voltage&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;4.5&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="mi">1002</span><span class="p">,</span>
+            <span class="s2">&quot;parameter&quot;</span><span class="p">:</span> <span class="s2">&quot;current&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;0.20&quot;</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="mutations">
+<h3>Mutations<a class="headerlink" href="#mutations" title="Permalink to this headline">¶</a></h3>
+<p>GraphQL mutations perform actions which can be invasive or destructive, for example, writing data to
+a file or rebooting a hardware device.</p>
+<p>An example mutation for the telemetry database service might look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mutation</span> <span class="p">{</span>
+    <span class="n">insert</span><span class="p">(</span><span class="n">subsystem</span><span class="p">:</span> <span class="s2">&quot;GPS&quot;</span><span class="p">,</span> <span class="n">parameter</span><span class="p">:</span> <span class="s2">&quot;lock_status&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="s2">&quot;good&quot;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">success</span><span class="p">,</span>
+        <span class="n">errors</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This translates to “please create a new telemetry database entry for the GPS subsystem’s lock status
+parameter with a value of ‘good’. Return the overall success of the operation and any errors.”</p>
+<p>Worth noting, all mutation requests are prefixed with <code class="docutils literal notranslate"><span class="pre">mutation</span></code> to quickly indicate to the service
+what kind of action is being requested.</p>
+<p>A successful response should look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;insert&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+        <span class="s2">&quot;errors&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If the request failed, the response might look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;insert&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+        <span class="s2">&quot;errors&quot;</span><span class="p">:</span> <span class="s2">&quot;Failed to connect to database&quot;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="schemas">
+<h3>Schemas<a class="headerlink" href="#schemas" title="Permalink to this headline">¶</a></h3>
+<p>Each service has a schema which defines all of its queries and mutations.</p>
+<p>Users should refer to these to determine what actions are available for each service and how their
+requests should be structured.</p>
+<p>Documentation for Kubos services can be found within the <a class="reference internal" href="../ecosystem/index.html#service-docs"><span class="std std-ref">services</span></a>
+section.</p>
+<p>For example, links to the schemas for all of the pre-built hardware services can be found
+<a class="reference internal" href="../ecosystem/services/hardware-services.html#pre-built-services"><span class="std std-ref">here</span></a>.</p>
+</div>
+</div>
+<div class="section" id="determining-service-urls">
+<h2>Determining Service URLs<a class="headerlink" href="#determining-service-urls" title="Permalink to this headline">¶</a></h2>
+<p>In order to communicate with a service, we need to know where to send our messages.</p>
+<p>All services rely on a configuration file, <code class="docutils literal notranslate"><span class="pre">config.toml</span></code>, in order to determine which IP and port
+they should bind a listener thread to.</p>
+<p>By default, this file is located in <code class="docutils literal notranslate"><span class="pre">/etc/kubos-config.toml</span></code>.
+Since we’re running these tutorials locally, that file location likely doesn’t exist, so instead we
+are using the <code class="docutils literal notranslate"><span class="pre">tools/local_config.toml</span></code> file in our cloned copy of the kubos repo.</p>
+<p>We’ll need to pass our application this path when we go to run it locally.</p>
+</div>
+<div class="section" id="querying-a-service">
+<h2>Querying a Service<a class="headerlink" href="#querying-a-service" title="Permalink to this headline">¶</a></h2>
+<p>For this tutorial, we’ll be querying the <a class="reference internal" href="../ecosystem/services/monitor-service.html"><span class="doc">monitor service</span></a>
+to make sure it is successfully up and running.</p>
+<p>The monitor service is a unique hardware service which communicates with the OBC itself in order to
+obtain information about current processes running and the amount of memory both available and
+generally present on the system.
+It is unique because it is not tied to a particular hardware device and can, instead, be run on any
+supported OBC (or in this instance, the local dev environment).
+Worth noting, the process of communicating with this service is the same as communicating with any
+other core or hardware service.</p>
+<p>We intend for this to be an ad-hoc action, so we’ll be adding code to the on-command section of
+our program.</p>
+<p>The all KubOS core services provide a <code class="docutils literal notranslate"><span class="pre">ping</span></code> query which can be used to verify that the service
+is currently running on the expected port.
+The request has the following format:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="n">ping</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The response should return a single <code class="docutils literal notranslate"><span class="pre">&quot;pong&quot;</span></code> result:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;ping&quot;</span><span class="p">:</span> <span class="s2">&quot;pong&quot;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>To make the communication process simpler, we’ll be using the <a class="reference internal" href="../ecosystem/apps/python-app-api.html"><span class="doc">Python app API</span></a>
+to send our GraphQL requests.</p>
+<p>For each request, it:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Looks up the HTTP address of the service name which is given from the system’s
+<a class="reference internal" href="../ecosystem/services/service-config.html"><span class="doc">config.toml</span></a> file</li>
+<li>Wraps the given request into a proper HTTP packet and sends it to the target service</li>
+<li>Parses the response message and checks for errors</li>
+<li>Returns the message payload in the <code class="docutils literal notranslate"><span class="pre">&quot;data&quot;</span></code> field if the request was successful</li>
+</ul>
+</div></blockquote>
+<p>To start, we’ll import the API:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">app_api</span>
+</pre></div>
+</div>
+<p>Then, we’ll add a new command line option <code class="docutils literal notranslate"><span class="pre">-c</span></code> to allow us to pass a non-default config file for
+testing purposes:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">argparse</span>
+<span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--config&#39;</span><span class="p">,</span> <span class="s1">&#39;-c&#39;</span><span class="p">)</span>
+
+<span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">config</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">SERVICES</span> <span class="o">=</span> <span class="n">app_api</span><span class="o">.</span><span class="n">Services</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">config</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">SERVICES</span> <span class="o">=</span> <span class="n">app_api</span><span class="o">.</span><span class="n">Services</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Then, we’ll create the query we want to send:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">request</span> <span class="o">=</span> <span class="s1">&#39;{ ping }&#39;</span>
+</pre></div>
+</div>
+<p>Next, we’ll send the request to the monitor service:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">SERVICES</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">service</span><span class="o">=</span><span class="s2">&quot;monitor-service&quot;</span><span class="p">,</span> <span class="n">query</span><span class="o">=</span><span class="n">request</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>And finally, we’ll parse the result to get our response string:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="p">[</span><span class="s2">&quot;ping&quot;</span><span class="p">]</span>
+<span class="k">if</span> <span class="n">data</span> <span class="o">==</span> <span class="s2">&quot;pong&quot;</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Successfully pinged monitor service&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Unexpected monitor service response: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>After adding proper structure, our program should look like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python3</span>
+
+<span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">import</span> <span class="nn">app_api</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--config&#39;</span><span class="p">,</span> <span class="s1">&#39;-c&#39;</span><span class="p">)</span>
+
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">config</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">SERVICES</span> <span class="o">=</span> <span class="n">app_api</span><span class="o">.</span><span class="n">Services</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">config</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">SERVICES</span> <span class="o">=</span> <span class="n">app_api</span><span class="o">.</span><span class="n">services</span><span class="p">()</span>
+
+    <span class="n">request</span> <span class="o">=</span> <span class="s1">&#39;{ ping }&#39;</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="n">SERVICES</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">service</span><span class="o">=</span><span class="s2">&quot;monitor-service&quot;</span><span class="p">,</span> <span class="n">query</span><span class="o">=</span><span class="n">request</span><span class="p">)</span>
+
+    <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="p">[</span><span class="s2">&quot;ping&quot;</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">data</span> <span class="o">==</span> <span class="s2">&quot;pong&quot;</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Successfully pinged monitor service&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Unexpected monitor service response: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">data</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>If we run our program, the output should look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ./my-mission-app.py -c ../kubos/tools/local_config.toml
+Successfully pinged monitor service
+</pre></div>
+</div>
+</div>
+<div class="section" id="writing-data-to-the-telemetry-database">
+<h2>Writing Data to the Telemetry Database<a class="headerlink" href="#writing-data-to-the-telemetry-database" title="Permalink to this headline">¶</a></h2>
+<p>Now that we have a data point, we need to save it somewhere useful.
+The telemetry database is the main storage location for all telemetry data.
+The <a class="reference internal" href="../ecosystem/services/telemetry-db.html"><span class="doc">telemetry database service</span></a> is the preferred interface point
+for storing and retrieving that data.</p>
+<p>We’ll be using the service’s <code class="docutils literal notranslate"><span class="pre">insert</span></code> mutation in order to add a new telemetry entry.
+This operation is a mutation rather than a query, because it will cause the system to perform a write,
+rather than simply reading data.</p>
+<p>The mutation has the following schema:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>mutation {
+    insert(timestamp: Integer, subsystem: String!, parameter: String!, value: String!) {
+        success: Boolean!,
+        errors: String!
+    }
+}
+</pre></div>
+</div>
+<p>This indicates that there are four possible input parameters, all of which are required except for
+<code class="docutils literal notranslate"><span class="pre">timestamp</span></code>, and two return fields which, when requested, will always return a value.</p>
+<p>Our mutation will have the following parameters:</p>
+<blockquote>
+<div><ul class="simple">
+<li>subsystem: “OBC” - Indicating that our data point corresponds to the main OBC
+(other subsystem names might be things like “EPS” or “payload”)</li>
+<li>parameter: “available_mem” - Indicating that our data point represents the current amount of
+available memory</li>
+<li>value - The data value which was returned from our previous query</li>
+</ul>
+</div></blockquote>
+<p>All together, our request should look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">request</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">    mutation {</span>
+<span class="s1">        insert(subsystem: &quot;OBC&quot;, parameter: &quot;status&quot;, value: &quot;</span><span class="si">%s</span><span class="s1">&quot;) {</span>
+<span class="s1">            success,</span>
+<span class="s1">            errors</span>
+<span class="s1">        }</span>
+<span class="s1">    }</span>
+<span class="s1">    &#39;&#39;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">status</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Like before, we’ll now use the app API to send our request, but this time we’ll be sending to
+the telemetry database service rather than the monitor service:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">SERVICES</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">service</span><span class="o">=</span><span class="s2">&quot;telemetry-service&quot;</span><span class="p">,</span> <span class="n">query</span><span class="o">=</span><span class="n">request</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Finally, we’ll check the response to make sure the operation finished successfully:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="p">[</span><span class="s2">&quot;insert&quot;</span><span class="p">]</span>
+<span class="n">success</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;success&quot;</span><span class="p">]</span>
+<span class="n">errors</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;errors&quot;</span><span class="p">]</span>
+
+<span class="k">if</span> <span class="n">success</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Telemetry insert encountered errors: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">errors</span><span class="p">))</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Telemetry insert completed successfully&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>With some error handling, our final application looks like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python3</span>
+
+<span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">import</span> <span class="nn">app_api</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--config&#39;</span><span class="p">,</span> <span class="s1">&#39;-c&#39;</span><span class="p">)</span>
+
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">config</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">SERVICES</span> <span class="o">=</span> <span class="n">app_api</span><span class="o">.</span><span class="n">Services</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">config</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">SERVICES</span> <span class="o">=</span> <span class="n">app_api</span><span class="o">.</span><span class="n">Services</span><span class="p">()</span>
+
+    <span class="n">request</span> <span class="o">=</span> <span class="s1">&#39;{ ping }&#39;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">SERVICES</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">service</span><span class="o">=</span><span class="s2">&quot;monitor-service&quot;</span><span class="p">,</span> <span class="n">query</span><span class="o">=</span><span class="n">request</span><span class="p">)</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="p">[</span><span class="s2">&quot;ping&quot;</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">data</span> <span class="o">==</span> <span class="s2">&quot;pong&quot;</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Successfully pinged monitor service&quot;</span><span class="p">)</span>
+            <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;Okay&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Unexpected monitor service response: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">data</span><span class="p">)</span>
+            <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;Unexpected&quot;</span>
+
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Something went wrong: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;Error&quot;</span>
+
+    <span class="n">request</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">        mutation {</span>
+<span class="s1">            insert(subsystem: &quot;OBC&quot;, parameter: &quot;status&quot;, value: &quot;</span><span class="si">%s</span><span class="s1">&quot;) {</span>
+<span class="s1">                success,</span>
+<span class="s1">                errors</span>
+<span class="s1">            }</span>
+<span class="s1">        }</span>
+<span class="s1">        &#39;&#39;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">status</span><span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">SERVICES</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">service</span><span class="o">=</span><span class="s2">&quot;telemetry-service&quot;</span><span class="p">,</span> <span class="n">query</span><span class="o">=</span><span class="n">request</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Something went wrong: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="p">[</span><span class="s2">&quot;insert&quot;</span><span class="p">]</span>
+    <span class="n">success</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;success&quot;</span><span class="p">]</span>
+    <span class="n">errors</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;errors&quot;</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">success</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Telemetry insert encountered errors: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">errors</span><span class="p">))</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Telemetry insert completed successfully&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>If we run our program, the output should look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ./my-mission-app.py -c ../kubos/tools/local_config.toml
+Successfully pinged monitor service
+Telemetry insert completed successfully
+</pre></div>
+</div>
+</div>
+<div class="section" id="creating-the-manifest-file">
+<h2>Creating the Manifest File<a class="headerlink" href="#creating-the-manifest-file" title="Permalink to this headline">¶</a></h2>
+<p>In order for the applications service to properly maintain versioning information, we’ll need to
+create a new file, <cite>manifest.toml</cite>, to accompany our mission app.</p>
+<p>This file has the following key values:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">name</span></code> - The name of the application</li>
+<li><code class="docutils literal notranslate"><span class="pre">executable</span></code> - (Optional) The name of the file to be called to begin application execution</li>
+<li><code class="docutils literal notranslate"><span class="pre">version</span></code> - The version number of the application</li>
+<li><code class="docutils literal notranslate"><span class="pre">author</span></code> - The author of the application</li>
+</ul>
+<p>Our file should look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;my-mission-app&quot;</span>
+<span class="n">executable</span> <span class="o">=</span> <span class="s2">&quot;my-mission-app.py&quot;</span>
+<span class="n">version</span> <span class="o">=</span> <span class="s2">&quot;1.0&quot;</span>
+<span class="n">author</span> <span class="o">=</span> <span class="s2">&quot;Me&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="next-steps">
+<h2>Next Steps<a class="headerlink" href="#next-steps" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference internal" href="first-obc-project.html"><span class="doc">Running an application on an OBC</span></a></li>
+<li><a class="reference internal" href="app-register.html"><span class="doc">Registering a mission application with the applications service</span></a></li>
+<li><a class="reference internal" href="querying-telemetry.html"><span class="doc">Fetching telemetry data from the database</span></a></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="first-obc-project.html" class="btn btn-neutral float-right" title="Running a KubOS Project on an OBC" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Tutorials" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

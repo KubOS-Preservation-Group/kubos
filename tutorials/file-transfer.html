@@ -1,0 +1,419 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Transferring Files to an OBC &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../index.html"/>
+        <link rel="up" title="Tutorials" href="index.html"/>
+        <link rel="next" title="Establishing a Shell Connection with an OBC" href="shell.html"/>
+        <link rel="prev" title="Fetching Telemetry Data" href="querying-telemetry.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#mission-development-tutorials">Mission Development Tutorials</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#system-interaction-tutorials">System Interaction Tutorials</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="app-register.html">Registering an Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="schedule-app.html">Scheduling an Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="querying-telemetry.html">Querying the System</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Transferring Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pre-requisites">Pre-Requisites</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#syntax">Syntax</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sending-a-file-to-an-obc">Sending a File to an OBC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#receiving-a-file-from-an-obc">Receiving a File from an OBC</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="shell.html">Creating a Shell Connection</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#advanced-tutorials">Advanced Tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#other-resources">Other Resources</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../obc-docs/index.html">Working with an OBC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ecosystem/index.html">KubOS Ecosystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deep-dive/index.html">Under the Hood</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sdk-docs/index.html">Kubos SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing to KubOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Tutorials</a> &raquo;</li>
+        
+      <li>Transferring Files to an OBC</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/tutorials/file-transfer.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="transferring-files-to-an-obc">
+<h1>Transferring Files to an OBC<a class="headerlink" href="#transferring-files-to-an-obc" title="Permalink to this headline">¶</a></h1>
+<p>Once a satellite is in orbit, the <a class="reference internal" href="../ecosystem/services/file.html"><span class="doc">file transfer service</span></a> can be used to
+transfer files both to and from the ground.</p>
+<div class="section" id="pre-requisites">
+<h2>Pre-Requisites<a class="headerlink" href="#pre-requisites" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first"><a class="reference internal" href="../sdk-docs/sdk-installing.html"><span class="doc">Install the Kubos SDK</span></a> or set up the dependencies
+required for a <a class="reference internal" href="../getting-started/local-setup.html"><span class="doc">local dev environment</span></a></p>
+</li>
+<li><p class="first">Have an OBC available with ethernet capabilities
+(preferably with an <a class="reference internal" href="../obc-docs/index.html"><span class="doc">installation of Kubos Linux</span></a>)</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference internal" href="../obc-docs/comms-setup.html#ethernet"><span class="std std-ref">Configuring Ethernet</span></a></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Have the file transfer service running on a target OBC (this happens by default when running KubOS)</p>
+</li>
+<li><p class="first">Windows users: <a class="reference internal" href="../getting-started/windows-setup.html#windows-udp"><span class="std std-ref">Make sure Windows is setup to allow UDP packets from the OBC</span></a></p>
+</li>
+</ul>
+<p>We’ll be using the <a class="reference external" href="https://github.com/kubos/kubos/tree/master/clients/kubos-file-client">file transfer client</a>
+in order to communicate with the file transfer service on our OBC, which is automatically included
+with the Kubos SDK (as of v1.8.0).</p>
+<p>If you are using a local development environment, instead of an instance of the SDK, you’ll need to
+clone the repo and navigate to the <cite>clients/kubos-file-client</cite> folder.
+You’ll then run the program with <code class="docutils literal notranslate"><span class="pre">cargo</span> <span class="pre">run</span> <span class="pre">--</span> <span class="pre">{command</span> <span class="pre">args}</span></code>.</p>
+</div>
+<div class="section" id="syntax">
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
+<p>The file transfer client has the following command syntax:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">kubos</span><span class="o">-</span><span class="n">file</span><span class="o">-</span><span class="n">client</span> <span class="p">[</span><span class="n">options</span><span class="p">]</span> <span class="p">(</span><span class="n">upload</span> <span class="o">|</span> <span class="n">download</span> <span class="o">|</span> <span class="n">cleanup</span><span class="p">)</span> <span class="n">source</span><span class="o">-</span><span class="n">file</span> <span class="p">[</span><span class="n">target</span><span class="o">-</span><span class="n">file</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Required arguments:</p>
+<blockquote>
+<div><ul>
+<li><p class="first">Operation to perform</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">upload</span></code> - Transfer <code class="docutils literal notranslate"><span class="pre">source-file</span></code> on the local host to <code class="docutils literal notranslate"><span class="pre">target-file</span></code> location
+on the remote target</li>
+<li><code class="docutils literal notranslate"><span class="pre">download</span></code> - Transfer <code class="docutils literal notranslate"><span class="pre">source-file</span></code> on the remote target to <code class="docutils literal notranslate"><span class="pre">target-file</span></code> location
+on the local host</li>
+<li><code class="docutils literal notranslate"><span class="pre">cleanup</span></code> - Cleanup the endpoint service’s temporary storage directory</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">source-file</span></code> - The file to be transferred. May be a relative or absolute path.</p>
+</li>
+</ul>
+</div></blockquote>
+<p>Optional arguments:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">target-file</span></code> - Final destination path for the transferred file.
+If not specified, the root file name from <code class="docutils literal notranslate"><span class="pre">source-file</span></code> will be used and the file will be
+placed in the current directory of the destination.</li>
+<li><code class="docutils literal notranslate"><span class="pre">-h</span> <span class="pre">{host</span> <span class="pre">IP}</span></code> - Default: <cite>0.0.0.0</cite>. IP address of the local host to use.</li>
+<li><code class="docutils literal notranslate"><span class="pre">-r</span> <span class="pre">{remote</span> <span class="pre">IP}</span></code> - Default: <cite>0.0.0.0</cite>. IP address of the file transfer service to connect to.</li>
+<li><code class="docutils literal notranslate"><span class="pre">-p</span> <span class="pre">{remote</span> <span class="pre">port}</span></code> - Default: <cite>8040</cite>. UDP port of the file transfer service to connect to.</li>
+<li><code class="docutils literal notranslate"><span class="pre">-P</span> <span class="pre">{host_port}</span></code> - Default: <cite>8080</cite>. The UDP port that the file transfer service will send responses to.</li>
+<li><code class="docutils literal notranslate"><span class="pre">-s</span> <span class="pre">{storage_prefix}</span></code> - Default: <cite>file-storage</cite>. Name of the directory which should be used
+for temporary file transfer storage.</li>
+<li><code class="docutils literal notranslate"><span class="pre">-c</span> <span class="pre">{transfer_chunk_size}</span></code> - Default: <cite>1024</cite>. Size, in bytes, of the individual chunks the
+file should be broken into before transfer.</li>
+<li><code class="docutils literal notranslate"><span class="pre">-t</span> <span class="pre">{hold_count}</span></code> - Default: <cite>6</cite>. The number of times the client should fail to receive data
+from the endpoint service before giving up and exiting.</li>
+<li><code class="docutils literal notranslate"><span class="pre">-d</span> <span class="pre">{inter_chunk_delay}</span></code> - Default: <cite>1</cite>. The delay in milliseconds between
+each chunk transmission.</li>
+<li><code class="docutils literal notranslate"><span class="pre">-m</span> <span class="pre">{max_chunks_transmit}</span></code> - Default: None. The maximum number of chunks to transmit
+before waiting for a response. The default is to transmit the whole file.</li>
+<li><code class="docutils literal notranslate"><span class="pre">--hash_chunk_size</span></code> - Default: <cite>2048</cite>: The chunk size, in bytes, to be used when
+generating the file’s hash.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="sending-a-file-to-an-obc">
+<h2>Sending a File to an OBC<a class="headerlink" href="#sending-a-file-to-an-obc" title="Permalink to this headline">¶</a></h2>
+<p>We’ll start by transferring a file to our OBC.
+For this tutorial, we’ll be transferring the application file that was created as part of the
+<a class="reference internal" href="first-obc-project.html"><span class="doc">mission application on an OBC</span></a> tutorial to the <code class="docutils literal notranslate"><span class="pre">kubos</span></code> user’s home directory on the
+OBC.</p>
+<p>We’ll need to specify the OBC’s IP address and the port that the file transfer service is listening
+on. By default, this is port 8040.</p>
+<p>We will also need to specify the port that the file transfer service will be sending data
+back on. By default, the file transfer service sends responses to port 8080.</p>
+<p>Our transfer command should look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ kubos-file-client -r 10.0.2.20 -p 8040 -P 8080 upload /home/vagrant/my-app/my-mission-app.py /home/kubos/my-mission-app.py
+</pre></div>
+</div>
+<p>Or, from your local dev environment:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cargo run -- -r 10.0.2.20 -p 8040 -P 8080 upload /home/vagrant/my-app/my-mission-app.py /home/kubos/my-mission-app.py
+</pre></div>
+</div>
+<p>The output from the client should look like this:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>16:55:56 [INFO] Starting file transfer client
+16:55:56 [INFO] Uploading local:/home/vagrant/new-user/my-mission-app.py to remote:/home/kubos/my-mission-app.py
+16:55:56 [INFO] -&gt; { 768720, 62c3491309b0bf9af5b367bea18471b8, 1 }
+16:55:56 [INFO] -&gt; { 768720, export, 62c3491309b0bf9af5b367bea18471b8, /home/kubos/my-mission-app.py, 33277 }
+16:55:56 [INFO] &lt;- { 768720, 62c3491309b0bf9af5b367bea18471b8, false, [(0, 1)] }
+16:55:56 [INFO] -&gt; { 768720, 62c3491309b0bf9af5b367bea18471b8, 0, chunk_data }
+16:55:58 [INFO] &lt;- { 62c3491309b0bf9af5b367bea18471b8, true }
+16:55:58 [INFO] &lt;- { 768720, true }
+16:55:58 [INFO] Operation successful
+</pre></div>
+</div>
+<p>The file transfer service maintains a temporary storage directory with the data from transferred files.
+As a result, if you run the upload command again, you should see a slightly truncated output:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>16:15:08 [INFO] Starting file transfer client
+16:15:08 [INFO] Uploading local:/home/vagrant/new-user/my-mission-app.py to remote:/home/kubos/my-mission-app.py
+16:15:08 [INFO] -&gt; { 184278, 62c3491309b0bf9af5b367bea18471b8, 1 }
+16:15:08 [INFO] -&gt; { 184278, export, 62c3491309b0bf9af5b367bea18471b8, /home/kubos/my-mission-app.py, 33277 }
+16:15:08 [INFO] &lt;- { 62c3491309b0bf9af5b367bea18471b8, true }
+16:15:08 [INFO] &lt;- { 184278, true }
+16:15:08 [INFO] Operation successful
+</pre></div>
+</div>
+</div>
+<div class="section" id="receiving-a-file-from-an-obc">
+<h2>Receiving a File from an OBC<a class="headerlink" href="#receiving-a-file-from-an-obc" title="Permalink to this headline">¶</a></h2>
+<p>Next, we’ll request that the OBC send us the application debug log file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ kubos-file-client -r 10.0.2.20 -p 8040 -P 8081 download /var/log/app-debug.log
+</pre></div>
+</div>
+<p>We’re not specifying a destination file, which will result in the transferred file being saved as
+<cite>app-debug.log</cite> in our current directory.</p>
+<p>The output from the client should look like this:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>17:56:27 [INFO] Starting file transfer client
+17:56:27 [INFO] Downloading remote: /var/log/app-debug.log to local: app-debug.log
+17:56:27 [INFO] -&gt; { import, /var/log/app-debug.log }
+17:56:27 [INFO] &lt;- { 796611, true, 1a564e8da7b83c2d6a2a44d447855f6d, 1, 33188 }
+17:56:27 [INFO] -&gt; { 796611, 1a564e8da7b83c2d6a2a44d447855f6d, false, [0, 1] }
+17:56:27 [INFO] &lt;- { 796611, 1a564e8da7b83c2d6a2a44d447855f6d, 0, chunk_data }
+17:56:29 [INFO] -&gt; { 796611, 1a564e8da7b83c2d6a2a44d447855f6d, true, None }
+17:56:29 [INFO] -&gt; { 796611, true }
+17:56:29 [INFO] Operation successful
+</pre></div>
+</div>
+<p>We can then check the contents of the transferred file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cat /var/log/app-debug.log
+1970-01-01T03:23:13.246358+00:00 Kubos my-mission-app:&lt;info&gt; Current available memory: 497060 kB
+1970-01-01T03:23:13.867534+00:00 Kubos my-mission-app:&lt;info&gt; Telemetry insert completed successfully
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="shell.html" class="btn btn-neutral float-right" title="Establishing a Shell Connection with an OBC" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="querying-telemetry.html" class="btn btn-neutral" title="Fetching Telemetry Data" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,314 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Running KubOS Core Services Locally &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../index.html"/>
+        <link rel="up" title="Getting Started with KubOS" href="index.html"/>
+        <link rel="next" title="Tutorials" href="../tutorials/index.html"/>
+        <link rel="prev" title="Getting Started with KubOS and Python" href="using-python.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Getting Started</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="no-board.html">I Don’t Have Hardware Yet, What Can I Do?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="local-setup.html">Setting Up Your Local Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="windows-setup.html">Setting up a Dev Environment in Windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="using-rust.html">Getting Started with KubOS and Rust</a></li>
+<li class="toctree-l2"><a class="reference internal" href="using-python.html">Getting Started with KubOS and Python</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Running KubOS Core Services Locally</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../obc-docs/index.html">Working with an OBC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ecosystem/index.html">KubOS Ecosystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deep-dive/index.html">Under the Hood</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sdk-docs/index.html">Kubos SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing to KubOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Getting Started with KubOS</a> &raquo;</li>
+        
+      <li>Running KubOS Core Services Locally</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/getting-started/local-services.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="running-kubos-core-services-locally">
+<h1>Running KubOS Core Services Locally<a class="headerlink" href="#running-kubos-core-services-locally" title="Permalink to this headline">¶</a></h1>
+<p>This document will lead you through the steps of configuring and running the KubOS core
+services locally. All of the KubOS core services are capable of being run within
+your local development environment. This will allow you to get up and running with
+KubOS before you have an OBC in hand.</p>
+<p>A prerequisite for following this document is having your
+<a class="reference internal" href="local-setup.html"><span class="doc">local environment setup</span></a> and having a copy of the
+<a class="reference external" href="https://github.com/kubos/kubos">KubOS repo</a> cloned locally.</p>
+<div class="section" id="configuring-services">
+<h2>Configuring Services<a class="headerlink" href="#configuring-services" title="Permalink to this headline">¶</a></h2>
+<p>The KubOS core services all rely on a central file for run-time configuration information.
+In a standard Kubos Linux system, that file will be located at
+<code class="docutils literal notranslate"><span class="pre">/etc/kubos-config.toml</span></code>. As a result, this is the default location
+where services will check. When running locally, it is unlikely that file location
+will exist, so we will need to create a custom config file and then
+manually pass it to the service.</p>
+<p>This central configuration file is in the <code class="docutils literal notranslate"><span class="pre">toml</span></code> format and contains a section
+for each service. Here is a <a class="reference external" href="https://github.com/kubos/kubos/blob/master/tools/default_config.toml">default config</a>
+you can use when running the core services. It can be found at <code class="docutils literal notranslate"><span class="pre">tools/default_config.toml</span></code>
+in the Kubos repo folder.</p>
+<p>In the config file each service has their own section(s). Any custom configuration
+for the service will go in a section named after the service:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">service</span><span class="o">-</span><span class="n">name</span><span class="p">]</span>
+<span class="n">config_option</span> <span class="o">=</span> <span class="s2">&quot;value&quot;</span>
+</pre></div>
+</div>
+<p>Any service which exposes a GraphQL interface will have a separate section for
+configuring the GraphQL server:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">service</span><span class="o">-</span><span class="n">name</span><span class="o">.</span><span class="n">addr</span><span class="p">]</span>
+<span class="n">ip</span> <span class="o">=</span> <span class="s2">&quot;127.0.0.1&quot;</span>
+<span class="n">port</span> <span class="o">=</span> <span class="mi">8000</span>
+</pre></div>
+</div>
+<p>All of the KubOS core services require an <code class="docutils literal notranslate"><span class="pre">.addr</span></code> section in the configuration file.</p>
+<p>A local configuration file will only need config data for the services which you
+intend to run locally. If you would like to run a hardware service, each existing
+<a class="reference internal" href="../ecosystem/services/hardware-services.html"><span class="doc">hardware service</span></a>
+provided by Kubos documents their configuration options within their respective pages.</p>
+</div>
+<div class="section" id="running-services">
+<h2>Running Services<a class="headerlink" href="#running-services" title="Permalink to this headline">¶</a></h2>
+<p>Each service can either be run from the base of the Kubos repo with this command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cargo run --bin service-name -- -c tools/default_config.toml
+</pre></div>
+</div>
+<p>Or by navigating to the service’s source folder and running this command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cargo run -- -c ../../tools/default_config.toml
+</pre></div>
+</div>
+<p>These examples point to the default config file provided with the repo with
+the argument <code class="docutils literal notranslate"><span class="pre">--</span> <span class="pre">-c</span> <span class="pre">tools/default_config.toml</span></code>, however that path can be
+changed to point to a custom config file.</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../tutorials/index.html" class="btn btn-neutral float-right" title="Tutorials" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="using-python.html" class="btn btn-neutral" title="Getting Started with KubOS and Python" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

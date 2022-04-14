@@ -1,0 +1,685 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Scheduler Service &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../../index.html"/>
+        <link rel="up" title="Core Services" href="core-services.html"/>
+        <link rel="next" title="Shell Service" href="shell.html"/>
+        <link rel="prev" title="Monitor Service" href="monitor-service.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../obc-docs/index.html">Working with an OBC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">KubOS Ecosystem</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#mission-applications">Mission Applications</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#services">Services</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="core-services.html">Core Services</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="app-service.html">Applications Service</a></li>
+<li class="toctree-l4"><a class="reference internal" href="comms-framework.html">Communications Service</a></li>
+<li class="toctree-l4"><a class="reference internal" href="file.html">File Transfer Service</a></li>
+<li class="toctree-l4"><a class="reference internal" href="monitor-service.html">Monitor Service</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Scheduler Service</a></li>
+<li class="toctree-l4"><a class="reference internal" href="shell.html">Shell Service</a></li>
+<li class="toctree-l4"><a class="reference internal" href="telemetry-db.html">Telemetry Database Service</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="hardware-services.html">Hardware Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="payload-services.html">Payload Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="service-config.html">Service Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="service-dev.html">Service Development</a></li>
+<li class="toctree-l3"><a class="reference internal" href="service-outline-guide.html">KubOS Service Outline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphql.html">GraphQL</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#kubos-linux">Kubos Linux</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../deep-dive/index.html">Under the Hood</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sdk-docs/index.html">Kubos SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Contributing to KubOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">KubOS Ecosystem</a> &raquo;</li>
+        
+          <li><a href="core-services.html">Core Services</a> &raquo;</li>
+        
+      <li>Scheduler Service</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/ecosystem/services/scheduler.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="scheduler-service">
+<span id="id1"></span><h1>Scheduler Service<a class="headerlink" href="#scheduler-service" title="Permalink to this headline">¶</a></h1>
+<p>The KubOS system includes a scheduler service to facilitate recurring
+and one time tasks with specific timing requirements, and to facilitate
+managing these tasks in groups of system-level modes.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The scheduler service is currently not included in Kubos Linux builds for the iOBC due to size constraints.
+We are working on a fix and it will be included in the next release of KubOS.</p>
+</div>
+<div class="section" id="behavior">
+<h2>Behavior<a class="headerlink" href="#behavior" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="terminology">
+<h3>Terminology<a class="headerlink" href="#terminology" title="Permalink to this headline">¶</a></h3>
+<p>The behavior of the scheduler is defined by three levels of organization: <em>mode</em>,
+<em>schedule</em>, and <em>task</em>. The <em>mode</em> determines which schedule directory is being executed.
+The <em>schedule</em> is then assembled by combining all the <em>task lists</em> in the schedule
+directory, each of which can contain one or many <em>tasks</em>.</p>
+<p class="plantuml">
+<img src="../../_images/plantuml-a4df9c7a584ed90e96c5ca0b97a3f2b49a1f5977.png" alt="&#64;startuml
+
+frame &quot;Scheduler Service&quot; {
+    folder &quot;Nominal Mode&quot; {
+        file &quot;Initial Task List&quot; {
+            rectangle [Start Applications]
+            rectangle [Deploy Solar Panels]
+        }
+
+        file &quot;Additional Task List&quot; {
+            rectangle [Capture Images]
+        }
+    }
+}
+
+&#64;enduml"/>
+</p>
+</div>
+<div class="section" id="adding-tasks">
+<h3>Adding Tasks<a class="headerlink" href="#adding-tasks" title="Permalink to this headline">¶</a></h3>
+<p>New <em>tasks</em> can be added to a <em>schedule</em> by uploading a <em>task list</em> to a location
+which is accessible to the scheduler, and importing that <em>task list</em> to the appropriate
+mode. <em>Tasks</em> can also be added directly via the GraphQL interface.</p>
+</div>
+<div class="section" id="bootup-behavior">
+<h3>Bootup Behavior<a class="headerlink" href="#bootup-behavior" title="Permalink to this headline">¶</a></h3>
+<p>Upon boot, or service start, the scheduler reads all task lists in the active
+mode directory and schedules all tasks from that mode. The default active mode directory
+is found at <code class="docutils literal notranslate"><span class="pre">/home/system/etc/schedules/active</span></code>, which is a symlink
+to the actual active mode’s directory.</p>
+</div>
+<div class="section" id="scheduler-modes">
+<h3>Scheduler Modes<a class="headerlink" href="#scheduler-modes" title="Permalink to this headline">¶</a></h3>
+<p>By default the scheduler comes with a single mode: <code class="docutils literal notranslate"><span class="pre">safe</span></code>. This mode is reserved as a
+fallback and default operating mode. Additional modes can be created and made active
+through the GraphQL interface. All modes are represented as different directories in
+the schedules directory (<code class="docutils literal notranslate"><span class="pre">/home/system/etc/schedules</span></code>).
+Only one mode can be active at any given time.</p>
+</div>
+<div class="section" id="failover-behavior">
+<h3>Failover Behavior<a class="headerlink" href="#failover-behavior" title="Permalink to this headline">¶</a></h3>
+<p>In addition to using the <code class="docutils literal notranslate"><span class="pre">safe</span></code> mode as the default operating mode, the scheduler is
+designed to automatically failover to the <code class="docutils literal notranslate"><span class="pre">safe</span></code> mode when any problems are detected.
+The following situations will cause the scheduler to activate the <code class="docutils literal notranslate"><span class="pre">safe</span></code> mode:</p>
+<blockquote>
+<div><ul class="simple">
+<li>The scheduler starts and no modes exist</li>
+<li>The scheduler starts and no mode is active</li>
+<li>The scheduler attempts to activate a mode and the mode does not exist</li>
+<li>The scheduler loads an active mode and encounters an invalid task list</li>
+</ul>
+</div></blockquote>
+<p>The only error situation that will <strong>not</strong> cause the scheduler to activate <code class="docutils literal notranslate"><span class="pre">safe</span></code> mode
+is if the scheduler encounters errors when querying the application service to start an app.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">safe</span></code> mode may also be activated using the GraphQL <code class="docutils literal notranslate"><span class="pre">safeMode</span></code> query.</p>
+</div>
+</div>
+<div class="section" id="tasks-and-how-to-make-them">
+<span id="schedule-specification"></span><h2>Tasks and How to Make Them<a class="headerlink" href="#tasks-and-how-to-make-them" title="Permalink to this headline">¶</a></h2>
+<p>Schedules are made up of tasks, which are specified through task lists in the
+<cite>json</cite> format. Each task list contains all of the necessary information for each
+task to be scheduled. Multiple task lists can coexist in the same mode folder,
+allowing for easy loading of new scheduled tasks.</p>
+<div class="section" id="task-format">
+<h3>Task format<a class="headerlink" href="#task-format" title="Permalink to this headline">¶</a></h3>
+<p>Tasks specify a <code class="docutils literal notranslate"><span class="pre">description</span></code> and a time of execution using a combination of the <code class="docutils literal notranslate"><span class="pre">delay</span></code>,
+<code class="docutils literal notranslate"><span class="pre">time</span></code>, and <code class="docutils literal notranslate"><span class="pre">period</span></code> fields. Each task has an associated <code class="docutils literal notranslate"><span class="pre">app</span></code>. The scheduler
+currently delegates the actual running of tasks to the <code class="docutils literal notranslate"><span class="pre">app-service</span></code>, so each
+<code class="docutils literal notranslate"><span class="pre">app</span></code> definition contains the necessary information needed by the
+<code class="docutils literal notranslate"><span class="pre">app-service</span></code> to run the app.</p>
+<p>An example task list:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;tasks&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Starts camera&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;delay&quot;</span><span class="p">:</span> <span class="s2">&quot;10m&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;app&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;activate-camera&quot;</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Deploys solar panels&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;time&quot;</span><span class="p">:</span> <span class="s2">&quot;2019-08-11 15:20:10&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;app&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;deploy-solar-panels&quot;</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Regular log cleanup&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;delay&quot;</span><span class="p">:</span> <span class="s2">&quot;1h&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;period&quot;</span><span class="p">:</span> <span class="s2">&quot;12h&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;app&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;clean-logs&quot;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="specifying-time-of-execution">
+<h3>Specifying Time of Execution<a class="headerlink" href="#specifying-time-of-execution" title="Permalink to this headline">¶</a></h3>
+<p>Tasks can have their scheduled time of execution specified using three different
+fields: <code class="docutils literal notranslate"><span class="pre">delay</span></code>, <code class="docutils literal notranslate"><span class="pre">time</span></code>, and <code class="docutils literal notranslate"><span class="pre">period</span></code>. The <code class="docutils literal notranslate"><span class="pre">delay</span></code> field specifies
+a delay before the task executes. The <code class="docutils literal notranslate"><span class="pre">time</span></code> field specifies a UTC date and time
+when the task will be executed. The <code class="docutils literal notranslate"><span class="pre">period</span></code> field indicates the app should
+be executed on a recurring basis and specifies the period of recurrence. The <code class="docutils literal notranslate"><span class="pre">delay</span></code>
+field is required, except when using the <code class="docutils literal notranslate"><span class="pre">time</span></code> field. The <code class="docutils literal notranslate"><span class="pre">time</span></code> and <code class="docutils literal notranslate"><span class="pre">period</span></code>
+fields may not be used together.</p>
+</div>
+<div class="section" id="delayed-tasks">
+<h3>Delayed Tasks<a class="headerlink" href="#delayed-tasks" title="Permalink to this headline">¶</a></h3>
+<p>Tasks configured with only a <code class="docutils literal notranslate"><span class="pre">delay</span></code> will be executed on boot or on schedule change.
+The actual execution time of the task will be affected by the associated delay times.
+If more than one task has the exact same delay, the execution order might be unpredictable.
+Each <code class="docutils literal notranslate"><span class="pre">delay</span></code> task is specified like so:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Task description&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;delay&quot;</span><span class="p">:</span> <span class="s2">&quot;Required start delay in Xh Ym Zs format&quot;</span>
+    <span class="s2">&quot;app&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Required registered name of app to run&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;args&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Optional&quot;</span><span class="p">,</span> <span class="s2">&quot;command&quot;</span><span class="p">,</span> <span class="s2">&quot;line&quot;</span><span class="p">,</span> <span class="s2">&quot;app&quot;</span><span class="p">,</span> <span class="s2">&quot;args&quot;</span><span class="p">],</span>
+        <span class="nt">&quot;config&quot;</span><span class="p">:</span> <span class="s2">&quot;Optional path to app config&quot;</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="one-time-tasks">
+<h3>One Time Tasks<a class="headerlink" href="#one-time-tasks" title="Permalink to this headline">¶</a></h3>
+<p>Tasks configured with a <code class="docutils literal notranslate"><span class="pre">time</span></code> field will be executed once at a set time. The designated
+time and system time are both always assumed to be in UTC. Each one time task is specified
+like so:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Task description&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;time&quot;</span><span class="p">:</span> <span class="s2">&quot;Required UTC time of execution in yyyy-mm-dd hh:mm:ss format&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;app&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Required registered name of app to run&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;args&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Optional&quot;</span><span class="p">,</span> <span class="s2">&quot;command&quot;</span><span class="p">,</span> <span class="s2">&quot;line&quot;</span><span class="p">,</span> <span class="s2">&quot;app&quot;</span><span class="p">,</span> <span class="s2">&quot;args&quot;</span><span class="p">],</span>
+        <span class="nt">&quot;config&quot;</span><span class="p">:</span> <span class="s2">&quot;Optional path to app config&quot;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="recurring-tasks">
+<h3>Recurring Tasks<a class="headerlink" href="#recurring-tasks" title="Permalink to this headline">¶</a></h3>
+<p>Tasks configured with a <code class="docutils literal notranslate"><span class="pre">period</span></code> field will be executed on a recurring basis. The task
+will first occur after <code class="docutils literal notranslate"><span class="pre">delay</span></code> and then recur each <code class="docutils literal notranslate"><span class="pre">period</span></code> thereafter.
+Each recurring task in this section is specified like so:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Task description&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;delay&quot;</span><span class="p">:</span> <span class="s2">&quot;Required start delay in Xh Ym Zs format&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;period&quot;</span><span class="p">:</span> <span class="s2">&quot;Required period of execution in Xh Ym Zs format&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;app&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Required registered name of app to run&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;args&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Optional&quot;</span><span class="p">,</span> <span class="s2">&quot;command&quot;</span><span class="p">,</span> <span class="s2">&quot;line&quot;</span><span class="p">,</span> <span class="s2">&quot;app&quot;</span><span class="p">,</span> <span class="s2">&quot;args&quot;</span><span class="p">],</span>
+        <span class="nt">&quot;config&quot;</span><span class="p">:</span> <span class="s2">&quot;Optional path to app config&quot;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="service-configuration">
+<h2>Service Configuration<a class="headerlink" href="#service-configuration" title="Permalink to this headline">¶</a></h2>
+<p>The scheduler service has the following available configuration parameter which may be
+specified in the <code class="docutils literal notranslate"><span class="pre">config.toml</span></code> file under <code class="docutils literal notranslate"><span class="pre">[scheduler-service]</span></code>:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">schedules-dir</span></code> - (Default: <code class="docutils literal notranslate"><span class="pre">/home/system/etc/schedules/</span></code>) The path to the
+directory where modes and their schedules will be stored. This directory will be
+created if it does not already exist.</li>
+</ul>
+</div></blockquote>
+<p>The scheduler service also has the standard GraphQL interface parameters available for
+configuration under <code class="docutils literal notranslate"><span class="pre">[scheduler-service.addr]</span></code>:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">ip</span></code> - The IP address of the GraphQL server</li>
+<li><code class="docutils literal notranslate"><span class="pre">port</span></code> - The port the GraphQL server will listen on</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="graphql-api">
+<h2>GraphQL API<a class="headerlink" href="#graphql-api" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="queries">
+<h3>Queries<a class="headerlink" href="#queries" title="Permalink to this headline">¶</a></h3>
+<p>The scheduler exposes two queries, <code class="docutils literal notranslate"><span class="pre">activeMode</span></code> and <code class="docutils literal notranslate"><span class="pre">availableModes</span></code>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">All names of modes and task lists are converted to lower case for usage inside
+of the scheduler service.</p>
+</div>
+</div>
+<div class="section" id="examining-the-active-mode">
+<h3>Examining the Active Mode<a class="headerlink" href="#examining-the-active-mode" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">activeMode</span></code> query  exposes information about the currently active
+mode. It has the following schema:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="n">activeMode</span><span class="p">:</span> <span class="p">{</span>
+        <span class="n">name</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+        <span class="n">path</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+        <span class="n">lastRevised</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+        <span class="n">active</span><span class="p">:</span> <span class="n">Boolean</span>
+        <span class="n">schedule</span><span class="p">:</span> <span class="p">[</span><span class="n">TaskList</span><span class="p">],</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="examining-all-modes">
+<h3>Examining All Modes<a class="headerlink" href="#examining-all-modes" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">availableModes</span></code> query  exposes information about the currently available
+modes. It has the following schema:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="n">availableModes</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="n">String</span><span class="p">):</span> <span class="p">[</span>
+        <span class="p">{</span>
+           <span class="n">name</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+           <span class="n">path</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+           <span class="n">lastRevised</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+           <span class="n">active</span><span class="p">:</span> <span class="n">Boolean</span>
+           <span class="n">schedule</span><span class="p">:</span> <span class="p">[</span><span class="n">TaskList</span><span class="p">],</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="schemas-for-task-and-lists">
+<h3>Schemas for Task and Lists<a class="headerlink" href="#schemas-for-task-and-lists" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">TaskList</span></code> object exposes metadata about individual task lists. It
+has the following schema:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="n">TaskList</span><span class="p">:</span>
+    <span class="p">{</span>
+        <span class="n">filename</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+        <span class="n">path</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+        <span class="n">timeImported</span><span class="p">:</span> <span class="n">String</span>
+        <span class="n">tasks</span><span class="p">:</span> <span class="p">[</span><span class="n">Task</span><span class="p">],</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">Task</span></code> object, and it’s sub-objects, expose information about
+individual schedule tasks. They have the following schemas:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="n">Task</span><span class="p">:</span>
+    <span class="p">{</span>
+        <span class="n">description</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+        <span class="n">delay</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+        <span class="n">time</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+        <span class="n">period</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+        <span class="n">app</span><span class="p">:</span> <span class="n">App</span>
+    <span class="p">}</span>
+
+    <span class="n">App</span><span class="p">:</span>
+    <span class="p">{</span>
+        <span class="n">name</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+        <span class="n">args</span><span class="p">:</span> <span class="p">[</span><span class="n">String</span><span class="p">],</span>
+        <span class="n">config</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="mutations">
+<h3>Mutations<a class="headerlink" href="#mutations" title="Permalink to this headline">¶</a></h3>
+<p>The scheduler also exposes the following mutations: <code class="docutils literal notranslate"><span class="pre">createMode</span></code>, <code class="docutils literal notranslate"><span class="pre">removeMode</span></code>,
+<code class="docutils literal notranslate"><span class="pre">activateMode</span></code>, <code class="docutils literal notranslate"><span class="pre">importTaskList</span></code>, <code class="docutils literal notranslate"><span class="pre">importRawTaskList</span></code>, <code class="docutils literal notranslate"><span class="pre">removeTaskList</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">safeMode</span></code>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">All names of modes and task lists are converted to lower case for usage inside
+of the scheduler service.</p>
+</div>
+</div>
+<div class="section" id="creating-modes">
+<h3>Creating Modes<a class="headerlink" href="#creating-modes" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">createMode</span></code> mutation instructs the scheduler to create a new empty schedule mode.
+It has the following schema:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>mutation {
+    createMode(name: String!) {
+        success: Boolean,
+        errors: String
+    }
+}
+</pre></div>
+</div>
+</div>
+<div class="section" id="removing-modes">
+<h3>Removing Modes<a class="headerlink" href="#removing-modes" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">removeMode</span></code> mutation instructs the scheduler to delete an existing mode’s
+directory and all schedules within. It cannot be applied to the currently active
+mode, or to the <em>safe</em> mode. It has the following schema:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>mutation {
+    removeMode(name: String!) {
+        success: Boolean,
+        errors: String
+    }
+}
+</pre></div>
+</div>
+</div>
+<div class="section" id="activating-modes">
+<h3>Activating Modes<a class="headerlink" href="#activating-modes" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">activateMode</span></code> mutation instructs the scheduler to make the specified mode
+active. It cannot be used to activate safe mode, the <code class="docutils literal notranslate"><span class="pre">safeMode</span></code> mutation is the
+only way to activate safe mode. <code class="docutils literal notranslate"><span class="pre">activateMode</span></code> has the following schema:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>mutation {
+    activateMode(name: String!): {
+        success: Boolean,
+        errors: String
+    }
+}
+</pre></div>
+</div>
+</div>
+<div class="section" id="activating-safe-mode">
+<h3>Activating Safe Mode<a class="headerlink" href="#activating-safe-mode" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">safeMode</span></code> mutation instructs the scheduler to make the <em>safe</em> mode
+active. This mutation is the only way to activate <em>safe</em> mode and can only
+activate that mode. It has the following schema:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mutation</span> <span class="p">{</span>
+    <span class="n">safeMode</span><span class="p">():</span> <span class="p">{</span>
+        <span class="n">success</span><span class="p">:</span> <span class="n">Boolean</span><span class="p">,</span>
+        <span class="n">errors</span><span class="p">:</span> <span class="n">String</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="importing-task-lists">
+<h3>Importing Task Lists<a class="headerlink" href="#importing-task-lists" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">importTaskList</span></code> mutation allows the scheduler to import a new task list into
+a specified mode. If the targeted mode is active, all tasks in the task list will be
+immediately scheduled. It has the following schema:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>mutation {
+    importTaskList(path: String!, name: String!, mode:String!): {
+        success: Boolean,
+        errors: String
+    }
+}
+</pre></div>
+</div>
+</div>
+<div class="section" id="removing-task-lists">
+<h3>Removing Task Lists<a class="headerlink" href="#removing-task-lists" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">removeTaskList</span></code> mutation allows the scheduler to remove a task list from
+a specified mode. If the mode is active, all tasks in the task list will be removed
+from the schedule. It as the following schema:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>mutation {
+    removeTaskList(name: String!, mode:String!): {
+        success: Boolean,
+        errors: String
+    }
+}
+</pre></div>
+</div>
+</div>
+<div class="section" id="importing-raw-task-lists">
+<h3>Importing Raw Task Lists<a class="headerlink" href="#importing-raw-task-lists" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">importRawTaskList</span></code> mutation allows the scheduler to directly receive raw JSON
+and import it into a task list in a mode. If the mode is active, all the tasks in
+the JSON will be immediately loaded for scheduling. It has the following schema:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>mutation {
+    importRawTaskList(name: String!, mode: String!, json: String!) {
+        success: Boolean,
+        errors: String
+    }
+}
+</pre></div>
+</div>
+<p>When using the <code class="docutils literal notranslate"><span class="pre">importRawTaskList</span></code> mutation it is important to remember to escape
+all double quotes inside of the JSON. Here is an example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mutation</span> <span class="p">{</span>
+    <span class="n">importRawTaskList</span><span class="p">(</span>
+        <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;camera&quot;</span><span class="p">,</span>
+        <span class="n">mode</span><span class="p">:</span> <span class="s2">&quot;operational&quot;</span><span class="p">,</span>
+        <span class="n">json</span><span class="p">:</span> <span class="s2">&quot;{</span><span class="se">\&quot;</span><span class="s2">tasks</span><span class="se">\&quot;</span><span class="s2">:[{</span><span class="se">\&quot;</span><span class="s2">description</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">start-camera</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">delay</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">10m</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">app</span><span class="se">\&quot;</span><span class="s2">: {</span><span class="se">\&quot;</span><span class="s2">name</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">activate-camera</span><span class="se">\&quot;</span><span class="s2">}}]}&quot;</span>
+    <span class="p">)</span> <span class="p">{</span>
+        <span class="n">success</span><span class="p">,</span>
+        <span class="n">errors</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="shell.html" class="btn btn-neutral float-right" title="Shell Service" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="monitor-service.html" class="btn btn-neutral" title="Monitor Service" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="API documentation for the Rust `novatel_oem6_api` crate."><meta name="keywords" content="rust, rustlang, rust-lang, novatel_oem6_api"><title>novatel_oem6_api - Rust</title><link rel="stylesheet" type="text/css" href="../normalize.css"><link rel="stylesheet" type="text/css" href="../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../dark.css"><link rel="stylesheet" type="text/css" href="../light.css" id="themeStyle"><script src="../storage.js"></script><noscript><link rel="stylesheet" href="../noscript.css"></noscript><link rel="shortcut icon" href="../favicon.ico"><style type="text/css">#crate-search{background-image:url("../down-arrow.svg");}</style></head><body class="rustdoc mod"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../novatel_oem6_api/index.html'><div class='logo-container'><img src='../rust-logo.png' alt='logo'></div></a><p class='location'>Crate novatel_oem6_api</p><div class="sidebar-elems"><a id='all-types' href='all.html'><p>See all novatel_oem6_api's items</p></a><div class="block items"><ul><li><a href="#modules">Modules</a></li><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#functions">Functions</a></li><li><a href="#types">Type Definitions</a></li></ul></div><p class='location'></p><script>window.sidebarCurrent = {name: 'novatel_oem6_api', ty: 'mod', relpath: '../'};</script></div></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../theme.js"></script><nav class="sub"><form class="search-form js-only"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../settings.html"><img src="../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><h1 class='fqn'><span class='out-of-band'><span id='render-detail'><a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class='inner'>&#x2212;</span>]</a></span><a class='srclink' href='../src/novatel_oem6_api/lib.rs.html#17-85' title='goto source code'>[src]</a></span><span class='in-band'>Crate <a class="mod" href=''>novatel_oem6_api</a></span></h1><div class='docblock'><p>Kubos API for interacting with <a href="https://www.novatel.com/products/gnss-receivers/oem-receiver-boards/oem6-receivers/">NovAtel OEM6 High Precision GNSS Receivers</a></p>
+<p>All work is done against an instantiated <a href="struct.OEM6.html"><code>OEM6</code></a> struct.</p>
+<p>More information about the device and it's behavior can be found in the following guides:</p>
+<ul>
+<li><a href="https://www.novatel.com/assets/documents/manuals/om-20000129.pdf">OEM6 Family Firmware Reference Manual</a></li>
+<li><a href="https://www.novatel.com/assets/Documents/Manuals/om-20000128.pdf">OEM6 Family Installation and Operation User Manual</a></li>
+</ul>
+<h1 id="examples" class="section-header"><a href="#examples">Examples</a></h1>
+<div class="example-wrap"><pre class="rust rust-example-rendered">
+<span class="kw">use</span> <span class="ident">novatel_oem6_api</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">thread</span>;
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">sync</span>::<span class="ident">mpsc</span>::<span class="ident">sync_channel</span>;
+
+<span class="comment">// Create communication channels to be used between the read thread and the main thread</span>
+<span class="kw">let</span> (<span class="ident">log_send</span>, <span class="ident">log_recv</span>) <span class="op">=</span> <span class="ident">sync_channel</span>(<span class="number">5</span>);
+<span class="kw">let</span> (<span class="ident">response_send</span>, <span class="ident">response_recv</span>) <span class="op">=</span> <span class="ident">sync_channel</span>(<span class="number">5</span>);
+<span class="kw">let</span> (<span class="ident">response_abbrv_send</span>, <span class="ident">response_abbrv_recv</span>) <span class="op">=</span> <span class="ident">sync_channel</span>(<span class="number">5</span>);
+
+<span class="comment">// Create the main connection to the device</span>
+<span class="kw">let</span> <span class="ident">oem</span> <span class="op">=</span> <span class="ident">OEM6</span>::<span class="ident">new</span>(<span class="string">&quot;/dev/ttyS5&quot;</span>, <span class="ident">BaudRate</span>::<span class="ident">Baud9600</span>, <span class="ident">log_recv</span>, <span class="ident">response_recv</span>, <span class="ident">response_abbrv_recv</span>).<span class="ident">unwrap</span>();
+
+<span class="comment">// Clone the connection mutex for the read thread</span>
+<span class="kw">let</span> <span class="ident">rx_conn</span> <span class="op">=</span> <span class="ident">oem</span>.<span class="ident">conn</span>.<span class="ident">clone</span>();
+
+<span class="comment">// Start up a read thread to consume messages from the device</span>
+<span class="ident">thread</span>::<span class="ident">spawn</span>(<span class="kw">move</span> <span class="op">|</span><span class="op">|</span> <span class="ident">read_thread</span>(<span class="kw-2">&amp;</span><span class="ident">rx_conn</span>, <span class="kw-2">&amp;</span><span class="ident">log_send</span>, <span class="kw-2">&amp;</span><span class="ident">response_send</span>, <span class="kw-2">&amp;</span><span class="ident">response_abbrv_send</span>));
+
+<span class="comment">// Request that the device send position information once per second</span>
+<span class="ident">oem</span>.<span class="ident">request_position</span>(<span class="number">1.0</span>, <span class="number">0.0</span>, <span class="bool-val">false</span>)<span class="question-mark">?</span>;
+
+<span class="comment">// Continually read the log messages</span>
+<span class="kw">loop</span> {
+    <span class="kw">let</span> <span class="ident">entry</span> <span class="op">=</span> <span class="ident">oem</span>.<span class="ident">get_log</span>()<span class="question-mark">?</span>;
+
+    <span class="kw">match</span> <span class="ident">entry</span> {
+        <span class="ident">Log</span>::<span class="ident">BestXYZ</span>(<span class="ident">log</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;Best XYZ Data:&quot;</span>);
+            <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;    Position: {:?}&quot;</span>, <span class="ident">log</span>.<span class="ident">position</span>);
+            <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;    Velocity: {:?}&quot;</span>, <span class="ident">log</span>.<span class="ident">velocity</span>);
+        }
+        <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> {},
+    }
+}</pre></div>
+</div><h2 id='modules' class='section-header'><a href="#modules">Modules</a></h2>
+<table><tr class='module-item'><td><a class="mod" href="mock/index.html" title='novatel_oem6_api::mock mod'>mock</a></td><td class='docblock-short'><p>Mock objects for use with unit tests</p>
+</td></tr></table><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
+<table><tr class='module-item'><td><a class="struct" href="struct.BestXYZLog.html" title='novatel_oem6_api::BestXYZLog struct'>BestXYZLog</a></td><td class='docblock-short'><p>Log message containing position information</p>
+</td></tr><tr class='module-item'><td><a class="struct" href="struct.Component.html" title='novatel_oem6_api::Component struct'>Component</a></td><td class='docblock-short'><p>Version information about a specific system component</p>
+</td></tr><tr class='module-item'><td><a class="struct" href="struct.Connection.html" title='novatel_oem6_api::Connection struct'>Connection</a></td><td class='docblock-short'><p>Wrapper for UART stream</p>
+</td></tr><tr class='module-item'><td><a class="struct" href="struct.OEM6.html" title='novatel_oem6_api::OEM6 struct'>OEM6</a></td><td class='docblock-short'><p>Structure for OEM6 device instance</p>
+</td></tr><tr class='module-item'><td><a class="struct" href="struct.ReceiverStatusFlags.html" title='novatel_oem6_api::ReceiverStatusFlags struct'>ReceiverStatusFlags</a></td><td class='docblock-short'><p>Receiver status flags</p>
+</td></tr><tr class='module-item'><td><a class="struct" href="struct.RxStatusEventLog.html" title='novatel_oem6_api::RxStatusEventLog struct'>RxStatusEventLog</a></td><td class='docblock-short'><p>Event/error log message</p>
+</td></tr><tr class='module-item'><td><a class="struct" href="struct.VersionLog.html" title='novatel_oem6_api::VersionLog struct'>VersionLog</a></td><td class='docblock-short'><p>Log message containing version information</p>
+</td></tr></table><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
+<table><tr class='module-item'><td><a class="enum" href="enum.BaudRate.html" title='novatel_oem6_api::BaudRate enum'>BaudRate</a></td><td class='docblock-short'><p>Serial port baud rates.</p>
+</td></tr><tr class='module-item'><td><a class="enum" href="enum.Log.html" title='novatel_oem6_api::Log enum'>Log</a></td><td class='docblock-short'><p>Supported log messages</p>
+</td></tr><tr class='module-item'><td><a class="enum" href="enum.MessageID.html" title='novatel_oem6_api::MessageID enum'>MessageID</a></td><td class='docblock-short'><p>Supported message types</p>
+</td></tr><tr class='module-item'><td><a class="enum" href="enum.OEMError.html" title='novatel_oem6_api::OEMError enum'>OEMError</a></td><td class='docblock-short'><p>Common Error for OEM Actions</p>
+</td></tr><tr class='module-item'><td><a class="enum" href="enum.ResponseID.html" title='novatel_oem6_api::ResponseID enum'>ResponseID</a></td><td class='docblock-short'><p>Response values returned after sending a command to the device.</p>
+</td></tr><tr class='module-item'><td><a class="enum" href="enum.UartError.html" title='novatel_oem6_api::UartError enum'>UartError</a></td><td class='docblock-short'><p>Custom errors for UART actions</p>
+</td></tr></table><h2 id='functions' class='section-header'><a href="#functions">Functions</a></h2>
+<table><tr class='module-item'><td><a class="fn" href="fn.read_thread.html" title='novatel_oem6_api::read_thread fn'>read_thread</a></td><td class='docblock-short'><p>Continually read messages from the OEM6 device</p>
+</td></tr></table><h2 id='types' class='section-header'><a href="#types">Type Definitions</a></h2>
+<table><tr class='module-item'><td><a class="type" href="type.OEMResult.html" title='novatel_oem6_api::OEMResult type'>OEMResult</a></td><td class='docblock-short'><p>Custom error type for OEM6 operations.</p>
+</td></tr></table></section><section id="search" class="content hidden"></section><section class="footer"></section><aside id="help" class="hidden"><div><h1 class="hidden">Help</h1><div class="shortcuts"><h2>Keyboard Shortcuts</h2><dl><dt><kbd>?</kbd></dt><dd>Show this help dialog</dd><dt><kbd>S</kbd></dt><dd>Focus the search field</dd><dt><kbd>↑</kbd></dt><dd>Move up in search results</dd><dt><kbd>↓</kbd></dt><dd>Move down in search results</dd><dt><kbd>↹</kbd></dt><dd>Switch tab</dd><dt><kbd>&#9166;</kbd></dt><dd>Go to active search result</dd><dt><kbd>+</kbd></dt><dd>Expand all sections</dd><dt><kbd>-</kbd></dt><dd>Collapse all sections</dd></dl></div><div class="infos"><h2>Search Tricks</h2><p>Prefix searches with a type followed by a colon (e.g., <code>fn:</code>) to restrict the search to a given type.</p><p>Accepted types are: <code>fn</code>, <code>mod</code>, <code>struct</code>, <code>enum</code>, <code>trait</code>, <code>type</code>, <code>macro</code>, and <code>const</code>.</p><p>Search functions by type signature (e.g., <code>vec -> usize</code> or <code>* -> vec</code>)</p><p>Search multiple things at once by splitting your query with comma (e.g., <code>str,u8</code> or <code>String,struct:Vec,test</code>)</p></div></div></aside><script>window.rootPath = "../";window.currentCrate = "novatel_oem6_api";</script><script src="../aliases.js"></script><script src="../main.js"></script><script defer src="../search-index.js"></script></body></html>

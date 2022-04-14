@@ -1,0 +1,82 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="API documentation for the Rust `kubos_service` crate."><meta name="keywords" content="rust, rustlang, rust-lang, kubos_service"><title>kubos_service - Rust</title><link rel="stylesheet" type="text/css" href="../normalize.css"><link rel="stylesheet" type="text/css" href="../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../dark.css"><link rel="stylesheet" type="text/css" href="../light.css" id="themeStyle"><script src="../storage.js"></script><noscript><link rel="stylesheet" href="../noscript.css"></noscript><link rel="shortcut icon" href="../favicon.ico"><style type="text/css">#crate-search{background-image:url("../down-arrow.svg");}</style></head><body class="rustdoc mod"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../kubos_service/index.html'><div class='logo-container'><img src='../rust-logo.png' alt='logo'></div></a><p class='location'>Crate kubos_service</p><div class="sidebar-elems"><a id='all-types' href='all.html'><p>See all kubos_service's items</p></a><div class="block items"><ul><li><a href="#modules">Modules</a></li><li><a href="#macros">Macros</a></li><li><a href="#structs">Structs</a></li></ul></div><p class='location'></p><script>window.sidebarCurrent = {name: 'kubos_service', ty: 'mod', relpath: '../'};</script></div></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../theme.js"></script><nav class="sub"><form class="search-form js-only"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../settings.html"><img src="../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><h1 class='fqn'><span class='out-of-band'><span id='render-detail'><a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class='inner'>&#x2212;</span>]</a></span><a class='srclink' href='../src/kubos_service/lib.rs.html#17-113' title='goto source code'>[src]</a></span><span class='in-band'>Crate <a class="mod" href=''>kubos_service</a></span></h1><div class='docblock'><p>A collection of structures and functions used to create hardware services
+in the Kubos Linux ecosystem.</p>
+<h1 id="use" class="section-header"><a href="#use">Use</a></h1>
+<p>The basic use of the kubos_service crate is through the Service structure.
+This structure provides an interface for creating a new service instance,
+configuring it with a hardware subsystem and Juniper Query/Mutation objects.
+It also provides a starting entry point and basic configuration file parsing.</p>
+<h2 id="in-services" class="section-header"><a href="#in-services">In Services</a></h2>
+<p>Services should only link to the <code>kubos_service</code> crate if they have a
+hardware device they want to expose over the service interface (currently GraphQL/HTTP).</p>
+<h2 id="configuration" class="section-header"><a href="#configuration">Configuration</a></h2>
+<p>Services which use this crate have the option of using a local configuration file
+or falling back on default config values. The service will search for the configuration
+file at this location <code>/etc/kubos-config.toml</code> unless otherwise specified with
+the <code>-c</code> flag at run time.</p>
+<p>The service configuration file uses the Toml format and is expected to use the
+following layout:</p>
+<pre><code class="language-toml,ignore">[service-name]
+config-key = &quot;value&quot;
+config-key2 = 123
+
+# This section and values are needed for all services
+[service-name.addr]
+ip = &quot;127.0.0.1&quot;
+port = 8082
+</code></pre>
+<p>The <code>[service-name.addr]</code> section is required for all services and is used to set
+the ip/port on which the service will listen for messages. Any service specific
+configuration values can be specified directly under the <code>[service-name]</code> section.
+Note - the <code>service-name</code> used in the sections must match the name used when creating
+the <code>Config</code> instance inside your service.</p>
+<h3 id="examples" class="section-header"><a href="#examples">Examples</a></h3><h1 id="creating-and-starting-a-simple-service" class="section-header"><a href="#creating-and-starting-a-simple-service">Creating and starting a simple service.</a></h1>
+<div class='information'><div class='tooltip ignore'>ⓘ<span class='tooltiptext'>This example is not tested</span></div></div><div class="example-wrap"><pre class="rust rust-example-rendered ignore">
+<span class="kw">use</span> <span class="ident">kubos_service</span>::{<span class="ident">Config</span>, <span class="ident">Service</span>};
+<span class="kw">use</span> <span class="ident">model</span>::<span class="ident">Subsystem</span>;
+<span class="kw">use</span> <span class="ident">schema</span>::{<span class="ident">MutationRoot</span>, <span class="ident">QueryRoot</span>};
+
+<span class="ident">Service</span>::<span class="ident">new</span>(
+    <span class="ident">Config</span>::<span class="ident">new</span>(<span class="string">&quot;service-name&quot;</span>).<span class="ident">unwrap</span>(),
+    <span class="ident">Subsystem</span>::<span class="ident">new</span>(),
+    <span class="ident">QueryRoot</span>,
+    <span class="ident">MutationRoot</span>,
+).<span class="ident">start</span>();</pre></div>
+<h1 id="using-the-service-config-info-to-configure-the-subsystem" class="section-header"><a href="#using-the-service-config-info-to-configure-the-subsystem">Using the service config info to configure the subsystem.</a></h1>
+<div class='information'><div class='tooltip ignore'>ⓘ<span class='tooltiptext'>This example is not tested</span></div></div><div class="example-wrap"><pre class="rust rust-example-rendered ignore">
+<span class="kw">use</span> <span class="ident">kubos_service</span>::{<span class="ident">Config</span>, <span class="ident">Service</span>};
+<span class="kw">use</span> <span class="ident">model</span>::<span class="ident">Subsystem</span>;
+<span class="kw">use</span> <span class="ident">schema</span>::{<span class="ident">MutationRoot</span>, <span class="ident">QueryRoot</span>};
+
+<span class="kw">let</span> <span class="ident">config</span> <span class="op">=</span> <span class="ident">Config</span>::<span class="ident">new</span>(<span class="string">&quot;example-service&quot;</span>).<span class="ident">unwrap</span>();
+<span class="kw">let</span> <span class="ident">subsystem</span> <span class="op">=</span> <span class="ident">Subsystem</span> { <span class="ident">bus</span> <span class="op">=</span> <span class="ident">config</span>[<span class="string">&quot;bus&quot;</span>] ) };
+<span class="ident">Service</span>::<span class="ident">new</span>(
+    <span class="ident">config</span>,
+    <span class="ident">subsystem</span>,
+    <span class="ident">query</span>,
+    <span class="ident">mutation</span>
+).<span class="ident">start</span>();</pre></div>
+<h1 id="running-a-service-with-the-default-config-file-etckubos-configtoml" class="section-header"><a href="#running-a-service-with-the-default-config-file-etckubos-configtoml">Running a service with the default config file (<code>/etc/kubos-config.toml</code>).</a></h1>
+<pre><code class="language-bash">$ ./example-service
+</code></pre>
+<h1 id="running-a-service-with-a-custom-config-file" class="section-header"><a href="#running-a-service-with-a-custom-config-file">Running a service with a custom config file.</a></h1>
+<pre><code class="language-bash">$ ./example-service -c config.toml
+</code></pre>
+</div><h2 id='modules' class='section-header'><a href="#modules">Modules</a></h2>
+<table><tr class='module-item'><td><a class="mod" href="Logger/index.html" title='kubos_service::Logger mod'>Logger</a></td><td class='docblock-short'><p>Common structure and functions for setting up service logging</p>
+</td></tr></table><h2 id='macros' class='section-header'><a href="#macros">Macros</a></h2>
+<table><tr class='module-item'><td><a class="macro" href="macro.process_errors.html" title='kubos_service::process_errors macro'>process_errors</a></td><td class='docblock-short'><p>Iterate through a failure::Error and concatenate the error
+and all its causes into a single string</p>
+</td></tr><tr class='module-item'><td><a class="macro" href="macro.push_err.html" title='kubos_service::push_err macro'>push_err</a></td><td class='docblock-short'><p>Convenience macro to push an error string onto the master errors vector</p>
+</td></tr><tr class='module-item'><td><a class="macro" href="macro.run.html" title='kubos_service::run macro'>run</a></td><td class='docblock-short'><p>Execute a function and return <code>Result&lt;func_data, String&gt;</code>
+Optionally:
+Add the error string to the master error string for later consumption,
+prefixed with the name of the function being called</p>
+</td></tr></table><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
+<table><tr class='module-item'><td><a class="struct" href="struct.Config.html" title='kubos_service::Config struct'>Config</a></td><td class='docblock-short'><p>KubOS config used by either Apps or Services. KubOS config files use the TOML format, and can
+may contain multiple named Categories. Typically each category corresponds to an App or Service
+name. This allows one config file to store configuration for multiple Apps / Services at a
+time.</p>
+</td></tr><tr class='module-item'><td><a class="struct" href="struct.Context.html" title='kubos_service::Context struct'>Context</a></td><td class='docblock-short'><p>Context struct used by a service to provide Juniper context,
+subsystem access and persistent storage.</p>
+</td></tr><tr class='module-item'><td><a class="struct" href="struct.Service.html" title='kubos_service::Service struct'>Service</a></td><td class='docblock-short'><p>This structure represents a hardware service.</p>
+</td></tr></table></section><section id="search" class="content hidden"></section><section class="footer"></section><aside id="help" class="hidden"><div><h1 class="hidden">Help</h1><div class="shortcuts"><h2>Keyboard Shortcuts</h2><dl><dt><kbd>?</kbd></dt><dd>Show this help dialog</dd><dt><kbd>S</kbd></dt><dd>Focus the search field</dd><dt><kbd>↑</kbd></dt><dd>Move up in search results</dd><dt><kbd>↓</kbd></dt><dd>Move down in search results</dd><dt><kbd>↹</kbd></dt><dd>Switch tab</dd><dt><kbd>&#9166;</kbd></dt><dd>Go to active search result</dd><dt><kbd>+</kbd></dt><dd>Expand all sections</dd><dt><kbd>-</kbd></dt><dd>Collapse all sections</dd></dl></div><div class="infos"><h2>Search Tricks</h2><p>Prefix searches with a type followed by a colon (e.g., <code>fn:</code>) to restrict the search to a given type.</p><p>Accepted types are: <code>fn</code>, <code>mod</code>, <code>struct</code>, <code>enum</code>, <code>trait</code>, <code>type</code>, <code>macro</code>, and <code>const</code>.</p><p>Search functions by type signature (e.g., <code>vec -> usize</code> or <code>* -> vec</code>)</p><p>Search multiple things at once by splitting your query with comma (e.g., <code>str,u8</code> or <code>String,struct:Vec,test</code>)</p></div></div></aside><script>window.rootPath = "../";window.currentCrate = "kubos_service";</script><script src="../aliases.js"></script><script src="../main.js"></script><script defer src="../search-index.js"></script></body></html>

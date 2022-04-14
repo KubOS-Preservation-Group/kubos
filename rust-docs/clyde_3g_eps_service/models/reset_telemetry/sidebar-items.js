@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["Type","Reset types"]],"struct":[["Data","Reset count telemetry structure used by each reset type"],["Telemetry","High-level reset telemetry structure"]]});

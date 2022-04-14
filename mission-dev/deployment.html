@@ -1,0 +1,326 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Deployment Application Guide &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../index.html"/>
+        <link rel="up" title="Kubos Mission Development" href="index.html"/>
+        <link rel="next" title="Preparing for Flight Readiness" href="flight-ready.html"/>
+        <link rel="prev" title="Typical Required Mission Applications" href="mission-needs.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../obc-docs/index.html">Working with an OBC</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Mission Development</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#hardware-integrations">1. Hardware Integrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#payload-integration-s">2. Payload Integration(s)</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#mission-applications">3. Mission Applications</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="mission-needs.html">Typical Required Mission Applications</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Deployment Application Guide</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#what-is-the-deployment-sequence">What is the Deployment Sequence?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hold-time-tracking">Hold Time Tracking</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#scheduling-tasks">4. Scheduling Tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#update-and-recovery">5. Update and Recovery</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#flight-readiness">6. Flight Readiness</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ecosystem/index.html">KubOS Ecosystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deep-dive/index.html">Under the Hood</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sdk-docs/index.html">Kubos SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing to KubOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Kubos Mission Development</a> &raquo;</li>
+        
+      <li>Deployment Application Guide</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/mission-dev/deployment.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="deployment-application-guide">
+<h1>Deployment Application Guide<a class="headerlink" href="#deployment-application-guide" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>The deployment sequence in KubOS is handled by a mission application. This is a
+guide for best practices for how to control deployment in the safest and most
+reliable way within that mission application.</p>
+</div>
+<div class="section" id="what-is-the-deployment-sequence">
+<h2>What is the Deployment Sequence?<a class="headerlink" href="#what-is-the-deployment-sequence" title="Permalink to this headline">¶</a></h2>
+<p>A deployment sequence is the initial tasks that need to be handled after initial
+deployment on orbit. These are typically:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>Keeping track of hold time required by launch provider</li>
+<li>Deployment of deployables (solar panels, antenna, etc.)</li>
+<li>Powering on radio and configuring appropriately for initial contact</li>
+<li>Detumbling and stabilization of spacecraft</li>
+</ol>
+</div></blockquote>
+<p>All of these tasks often need to occur completely autonomously on deployment
+from the launch vehicle. Since we are not focusing on a specific hardware
+configuration, we cannot cover the finer points of items 2-4. Item 1, however,
+is simply a persistent timer, and we will cover the recommended way to achieve
+this within the KubOS environment.</p>
+</div>
+<div class="section" id="hold-time-tracking">
+<h2>Hold Time Tracking<a class="headerlink" href="#hold-time-tracking" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This implementation requires an accurate realtime clock (RTC) to update
+the system time. These are currently present on all supported OBCs.</p>
+</div>
+<p>Tracking hold time through reboots is best achieved by using the most reliable
+persistent storage location on the OBC: the U-boot environment variables. These
+variables are always stored in the most reliable storage environment possible,
+due to the high degree of impact they have on the system. The variables used
+for deployment are:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">deployed</span></code>: boolean, indicates if deployment has been completed</li>
+<li><code class="docutils literal notranslate"><span class="pre">deploy_start</span></code>: string, seconds since unix epoch</li>
+<li><code class="docutils literal notranslate"><span class="pre">remove_before_flight</span></code>: boolean, indicates if deployment should be attempted</li>
+</ul>
+</div></blockquote>
+<p>The hold time itself should be configured within the application.</p>
+<p>Here is a state diagram to demonstrate the usage of these variables:</p>
+<div class="figure align-center">
+<img alt="../_images/deployment_sequence.png" src="../_images/deployment_sequence.png" />
+</div>
+<p>Notice how <code class="docutils literal notranslate"><span class="pre">deployed</span></code> is not set to <code class="docutils literal notranslate"><span class="pre">True</span></code> until all deployment tasks are
+completed successfully. This is to ensure that these are continually attempted
+until they are successfully completed so the satellite does not put itself into
+an unrecoverable state. This is only one possible way to implement the
+deployment hold time countdown within KubOS. It can be achieved in many other
+ways, depending on the mission’s needs!</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="flight-ready.html" class="btn btn-neutral float-right" title="Preparing for Flight Readiness" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="mission-needs.html" class="btn btn-neutral" title="Typical Required Mission Applications" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

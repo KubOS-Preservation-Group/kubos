@@ -1,0 +1,462 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Scheduling a Mission Application’s Execution &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../index.html"/>
+        <link rel="up" title="Tutorials" href="index.html"/>
+        <link rel="next" title="Fetching Telemetry Data" href="querying-telemetry.html"/>
+        <link rel="prev" title="Registering a Mission Application" href="app-register.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#mission-development-tutorials">Mission Development Tutorials</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#system-interaction-tutorials">System Interaction Tutorials</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="app-register.html">Registering an Application</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Scheduling an Application</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#setup">Setup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#graphiql">GraphiQL</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#creating-a-mode">Creating a Mode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#creating-and-importing-a-task-list">Creating and Importing a Task List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#activating-the-schedule">Activating the Schedule</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="querying-telemetry.html">Querying the System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="file-transfer.html">Transferring Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="shell.html">Creating a Shell Connection</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#advanced-tutorials">Advanced Tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#other-resources">Other Resources</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../obc-docs/index.html">Working with an OBC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ecosystem/index.html">KubOS Ecosystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deep-dive/index.html">Under the Hood</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sdk-docs/index.html">Kubos SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing to KubOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Tutorials</a> &raquo;</li>
+        
+      <li>Scheduling a Mission Application’s Execution</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/tutorials/schedule-app.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="scheduling-a-mission-application-s-execution">
+<h1>Scheduling a Mission Application’s Execution<a class="headerlink" href="#scheduling-a-mission-application-s-execution" title="Permalink to this headline">¶</a></h1>
+<p>The Kubos <a class="reference internal" href="../ecosystem/services/scheduler.html"><span class="doc">scheduler service</span></a> is
+responsible for scheduling applications for execution.</p>
+<p>This tutorial walks the user through:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Creating a new schedule mode</li>
+<li>Creating a task list specifying the application execution details</li>
+<li>Importing the task list into the scheduler for execution</li>
+<li>Activating the schedule mode to begin execution</li>
+</ul>
+</div></blockquote>
+<p>This tutorial is written to be run entirely within your local development
+environment, however, you may also interact with the scheduler service on
+your OBC by setting up its <a class="reference internal" href="../obc-docs/comms-setup.html#ethernet"><span class="std std-ref">ethernet connection</span></a>.</p>
+<div class="section" id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
+<p>This tutorial will build on the <a class="reference internal" href="app-register.html"><span class="doc">application registration tutorial</span></a>.
+It assumes the application, monitor, and telemetry services are running. It also assumes
+the <a class="reference internal" href="first-mission-app.html"><span class="doc">example mission application</span></a> exists and is registered
+with the application service.</p>
+<p>This tutorial will use the following example directories:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">/home/user/kubos</span></code> - Cloned copy of the kubos responsible</li>
+<li><code class="docutils literal notranslate"><span class="pre">/home/user/kubos/schedules</span></code> - Directory used by the schedules service
+to store schedule information</li>
+</ul>
+</div></blockquote>
+<ul>
+<li><p class="first">Navigate to <code class="docutils literal notranslate"><span class="pre">/home/user/kubos</span></code> (or your preferred copy of the kubos repo).</p>
+</li>
+<li><p class="first">Run the following command to start the scheduler service in the background
+(the service may need to be built first, which will take several minutes to complete):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cargo run -p scheduler-service -- -c tools/local_config.toml &amp;
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="graphiql">
+<h2>GraphiQL<a class="headerlink" href="#graphiql" title="Permalink to this headline">¶</a></h2>
+<p>All Kubos services which provide an HTTP interface have a special endpoint which
+can be used to send and receive GraphQL data via an in-browser graphical
+interface, GraphiQL.</p>
+<p>To access this endpoint for the scheduler service, make sure the service has
+started, then open a web browser and navigate to <code class="docutils literal notranslate"><span class="pre">http://127.0.0.1:8010/graphiql</span></code>.
+This URL assumes that the stock version of <code class="docutils literal notranslate"><span class="pre">local_config.toml</span></code> is in use.</p>
+</div>
+<div class="section" id="creating-a-mode">
+<h2>Creating a Mode<a class="headerlink" href="#creating-a-mode" title="Permalink to this headline">¶</a></h2>
+<p>Modes are the highest level of schedule organization. They are made up of lists of tasks
+which are loaded into the scheduler for future execution. Each mode is represented by a
+directory in the file system which can hold any number of task lists.</p>
+<p>To create a new scheduler mode, we use the service’s <code class="docutils literal notranslate"><span class="pre">createMode</span></code> mutation.
+It has the following schema:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>mutation {
+    createMode(name: String!) {
+        success: Boolean,
+        errors: String
+    }
+}
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">name</span></code> input specifies the name of the mode to be created.</p>
+<p>The creation action will create an empty, inactive mode that the scheduler
+may interact with.</p>
+<p>Our creation mutation should look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mutation</span> <span class="p">{</span>
+    <span class="n">createMode</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s2">&quot;nominal&quot;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">success</span>
+        <span class="n">errors</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The response should look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;createMode&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+            <span class="s2">&quot;errors&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="creating-and-importing-a-task-list">
+<h2>Creating and Importing a Task List<a class="headerlink" href="#creating-and-importing-a-task-list" title="Permalink to this headline">¶</a></h2>
+<p>Task lists are the individual files stored in modes which contain the actual
+schedule specification. Each task list contains a list of one or more tasks
+to be scheduled and executed.</p>
+<p>We’ll go ahead and create a new task list which schedules <code class="docutils literal notranslate"><span class="pre">my-mission-app</span></code>
+to execute every 10 seconds, after an initial 10 second delay.</p>
+<p>Create a new file called <code class="docutils literal notranslate"><span class="pre">my-mission.json</span></code> with the following contents:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;tasks&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Execute mission logic&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;delay&quot;</span><span class="p">:</span> <span class="s2">&quot;10s&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;period&quot;</span><span class="p">:</span> <span class="s2">&quot;10s&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;app&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;my-mission-app&quot;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">tasks</span></code> list is required in each task list and holds all task specifications.
+Each task requires a <code class="docutils literal notranslate"><span class="pre">description</span></code>, one of either <code class="docutils literal notranslate"><span class="pre">delay</span></code>, <code class="docutils literal notranslate"><span class="pre">period</span></code>, or
+<code class="docutils literal notranslate"><span class="pre">time</span></code> to specify execution time, and <code class="docutils literal notranslate"><span class="pre">app</span></code> to specify the details of the app
+execution. More details on the task list specification can be found
+<a class="reference internal" href="../ecosystem/services/scheduler.html#schedule-specification"><span class="std std-ref">here</span></a>.</p>
+<p>To import a task list, we use the service’s <code class="docutils literal notranslate"><span class="pre">importTaskList</span></code> mutation.
+It has the following schema:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>mutation {
+    importTaskList(path: String!, name: String!, mode:String!): {
+        success: Boolean,
+        errors: String
+    }
+}
+</pre></div>
+</div>
+<p>Our import mutation should look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mutation</span> <span class="p">{</span>
+    <span class="n">importTaskList</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s2">&quot;my-mission&quot;</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="s2">&quot;/home/user/kubos/my-mission.json&quot;</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="s2">&quot;nominal&quot;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">success</span>
+        <span class="n">errors</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The response should look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;importTaskList&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+            <span class="s2">&quot;errors&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="activating-the-schedule">
+<h2>Activating the Schedule<a class="headerlink" href="#activating-the-schedule" title="Permalink to this headline">¶</a></h2>
+<p>The scheduler may only have one active mode at a time. The active mode is the one whose
+tasks are loaded into the scheduler for future execution. New modes are inactive by default.
+In order to load up our new task list and execute our example mission app, we must activate
+the newly created mode.</p>
+<p>To activate a mode, we use the service’s <code class="docutils literal notranslate"><span class="pre">activateMode</span></code> mutation. It has the
+following schema:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>mutation {
+    activateMode(name: String!): {
+        success: Boolean,
+        errors: String
+    }
+}
+</pre></div>
+</div>
+<p>Our activation mutation should look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mutation</span> <span class="p">{</span>
+    <span class="n">activateMode</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s2">&quot;nominal&quot;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">success</span>
+        <span class="n">errors</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The response should look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;activateMode&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+            <span class="s2">&quot;errors&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>At this point our mode and task list have been loaded into the scheduler and will begin execution.
+The console where you started the app service should show the app’s execution messages after 10
+seconds and then every 10 seconds after that:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Successfully</span> <span class="n">pinged</span> <span class="n">monitor</span> <span class="n">service</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="querying-telemetry.html" class="btn btn-neutral float-right" title="Fetching Telemetry Data" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="app-register.html" class="btn btn-neutral" title="Registering a Mission Application" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

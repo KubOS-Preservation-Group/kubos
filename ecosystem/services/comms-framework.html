@@ -1,0 +1,547 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Communications Service Framework &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../../index.html"/>
+        <link rel="up" title="Core Services" href="core-services.html"/>
+        <link rel="next" title="File Transfer Service" href="file.html"/>
+        <link rel="prev" title="Kubos Applications Service" href="app-service.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../obc-docs/index.html">Working with an OBC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">KubOS Ecosystem</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#mission-applications">Mission Applications</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#services">Services</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="core-services.html">Core Services</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="app-service.html">Applications Service</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Communications Service</a></li>
+<li class="toctree-l4"><a class="reference internal" href="file.html">File Transfer Service</a></li>
+<li class="toctree-l4"><a class="reference internal" href="monitor-service.html">Monitor Service</a></li>
+<li class="toctree-l4"><a class="reference internal" href="scheduler.html">Scheduler Service</a></li>
+<li class="toctree-l4"><a class="reference internal" href="shell.html">Shell Service</a></li>
+<li class="toctree-l4"><a class="reference internal" href="telemetry-db.html">Telemetry Database Service</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="hardware-services.html">Hardware Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="payload-services.html">Payload Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="service-config.html">Service Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="service-dev.html">Service Development</a></li>
+<li class="toctree-l3"><a class="reference internal" href="service-outline-guide.html">KubOS Service Outline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphql.html">GraphQL</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#kubos-linux">Kubos Linux</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../deep-dive/index.html">Under the Hood</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sdk-docs/index.html">Kubos SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Contributing to KubOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">KubOS Ecosystem</a> &raquo;</li>
+        
+          <li><a href="core-services.html">Core Services</a> &raquo;</li>
+        
+      <li>Communications Service Framework</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/ecosystem/services/comms-framework.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="communications-service-framework">
+<h1>Communications Service Framework<a class="headerlink" href="#communications-service-framework" title="Permalink to this headline">¶</a></h1>
+<p>The hardware used to establish communication between a satellite and the ground varies wildly from
+mission to mission.
+As a result, KubOS provides a communications service framework which can be used by developers when
+creating their specific radio’s hardware service.
+This framework is used to simplify the process of reading messages from the ground, forwarding them
+to the appropriate internal destination, and then sending properly formatted messages back to the
+ground.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The communications service framework is currently only available in Rust. As a result, services
+wishing to utilize the framework should also be written in Rust.</p>
+</div>
+<div class="section" id="architecture">
+<h2>Architecture<a class="headerlink" href="#architecture" title="Permalink to this headline">¶</a></h2>
+<p class="plantuml">
+<img src="../../_images/plantuml-b91ce868eca1a6acb8bd2923407629362e19462e.png" alt="&#64;startuml
+
+skinparam linetype polyline
+skinparam linetype ortho
+left to right direction
+rectangle &quot;Telemetry Service&quot; as Telemetry
+rectangle &quot;Mission Application&quot; as App
+rectangle &quot;Radio&quot; as Radio
+
+package &quot;Communications Service&quot; {
+    rectangle &quot;Read Thread&quot; as Read
+    rectangle &quot;Message Handler&quot; as Message
+    rectangle &quot;Downlink Endpoint&quot; as Downlink
+}
+
+Radio -right-&gt; Read
+Downlink -up-&gt; Radio
+Message -left-&gt; Radio
+
+Telemetry .left.&gt; Message
+Message .right.&gt; Telemetry
+
+Telemetry .&gt; App
+App .&gt; Telemetry
+
+App .&gt; Downlink
+
+&#64;enduml"/>
+</p>
+<p class="plantuml">
+<img src="../../_images/plantuml-6b9b77de3b846c14b2b98e769b07cdc87f670eb4.png" alt="&#64;startuml
+
+hide footbox
+
+actor &quot;Ground Control&quot; as ground_control
+participant &quot;Radio&quot; as radio
+participant &quot;Communications Services&quot; as comms_service
+participant &quot;Flight Software&quot; as software
+
+ground_control -&gt; radio: 1. Send command to satellite
+radio -&gt; comms_service: 2. Read data packets from radio
+comms_service -&gt; software: 3. Send packet payload to appropriate service
+software -&gt; comms_service: 4. Send response back
+comms_service -&gt; radio: 5. Send data packet to radio with response
+radio -&gt; ground_control: 6. Send response to ground control
+
+&#64;enduml"/>
+</p>
+<div class="section" id="data-packets">
+<h3>Data Packets<a class="headerlink" href="#data-packets" title="Permalink to this headline">¶</a></h3>
+<p>All packets sent to/from the communication device, over the wire (or air),
+will be encapsulated in several layers.</p>
+<p class="plantuml">
+<img src="../../_images/plantuml-f8e8235d6cfca14a490ceab1a24fcf6d504583b2.png" alt="&#64;startuml
+
+package &quot;Radio Protocol&quot; {
+    package &quot;Space Packet&quot; {
+        rectangle &quot;Payload&quot;
+    }
+}
+
+&#64;enduml"/>
+</p>
+<p>The first layer will be whatever communication protocol the device requires.
+For example, AX.25 is frequently used as the header protocol for radio communication.</p>
+<p>Inside of this will be a <a href="https://public.ccsds.org/Pubs/133x0b1c2.pdf" target="_blank">Space Packet</a> containing one of the following payloads:</p>
+<ul class="simple">
+<li>GraphQL query or mutation</li>
+<li>JSON GraphQL responses</li>
+<li>File/shell service commands or data</li>
+<li>Any other application data or payload which can be passed over UDP</li>
+</ul>
+</div>
+<div class="section" id="ground-communication">
+<h3>Ground Communication<a class="headerlink" href="#ground-communication" title="Permalink to this headline">¶</a></h3>
+<p>The communications service maintains a constant read thread which listens for messages from the
+ground via the communications device. Once a message is received, the message’s Space Packet
+header is examined to determine the payload type. Currently the communications service framework
+supports two payload types: GrahpQL and UDP. The payload type determines how the message is
+passed on to the rest of the system.</p>
+<div class="section" id="graphql-payloads">
+<h4>GraphQL Payloads<a class="headerlink" href="#graphql-payloads" title="Permalink to this headline">¶</a></h4>
+<p>When a GraphQL message is received, a message handler thread is spawned. This message handler
+examines the port embedded in the message’s Space Packet header to determine the internal
+message destination and then makes an HTTP POST to the appropriate service.
+The handler then waits for a response (within a specified timeout duration), wraps the response
+in a Space Packet, and then sends the packet to the communications device for transmission.
+Once this transaction has completed, the message handler thread exits.</p>
+<p class="plantuml">
+<img src="../../_images/plantuml-c15ac494d3908dc66c8241d1a7ad1390c0951466.png" alt="&#64;startuml
+
+hide footbox
+
+actor Radio
+
+box &quot;Communications Service&quot; #LightBlue
+    participant &quot;Read Thread&quot; as read
+
+    Radio -&gt; read : 1. Read data packets from radio
+    read -&gt; read : 2. Deframe data packets
+    read -&gt; read : 3. Reassemble data packet
+
+    create &quot;Message Handler&quot; as handler
+    read -&gt; handler : 4. Spawn new message handler
+    activate handler
+end box
+
+participant &quot;Kubos Service&quot; as service
+
+handler -&gt; service : 5. Posts GraphQL query/mutation to service
+service -&gt; handler : 6. Return result of query/mutation
+handler -&gt; handler : 7. Wrap result in Space Packet
+handler -&gt; Radio : 8. Send response packet to radio
+destroy handler
+
+&#64;enduml"/>
+</p>
+</div>
+<div class="section" id="udp-payloads">
+<h4>UDP Payloads<a class="headerlink" href="#udp-payloads" title="Permalink to this headline">¶</a></h4>
+<p>When a UDP message is received, a message handler thread is spawned. This message handler
+examines the port embedded in the message’s Space Packet header to determine the internal
+message destination and then sends a UDP packet containing the message to the appropriate
+service. The message handler thread exits immediately after sending out the UDP packet.
+UDP payloads sent from the ground to flight are intended to act as a one-way passthrough.
+Any responses must be sent through the appropriate downlink endpoint.</p>
+<p class="plantuml">
+<img src="../../_images/plantuml-d3cf7e4d810920b8bc46afc14c4af9c7a9150e23.png" alt="&#64;startuml
+
+hide footbox
+
+actor Radio
+
+box &quot;Communications Service&quot; #LightBlue
+    participant &quot;Read Thread&quot; as read
+
+    Radio -&gt; read : 1. Read data packets from radio
+    read -&gt; read : 2. Deframe data packets
+    read -&gt; read : 3. Reassemble data packet
+
+    create &quot;Message Handler&quot; as handler
+    read -&gt; handler : 4. Spawn new message handler
+    activate handler
+end box
+
+participant &quot;Kubos Service&quot; as service
+
+handler -&gt; service : 5. Pass UDP packet to service
+destroy handler
+
+&#64;enduml"/>
+</p>
+</div>
+</div>
+<div class="section" id="downlink-endpoints">
+<h3>Downlink Endpoints<a class="headerlink" href="#downlink-endpoints" title="Permalink to this headline">¶</a></h3>
+<p>There are some instances where the satellite might need to send a message to the ground without
+first receiving a request for data.
+An example would be when sending a periodic health-and-status beacon.</p>
+<p>In this case, the communications service may be defined with a downlink endpoint thread (or multiple
+threads if more than one method may be used for downlink communication).</p>
+<p>Each endpoint is assigned its own UDP port and maintains a constant read thread which listens for
+messages from within the satellite which should be transmitted.</p>
+<p>When the endpoint’s read thread receives a message, it wraps it up in a Space Packet and then sends
+it to the communications device, via the user-defined write function.</p>
+<p class="plantuml">
+<img src="../../_images/plantuml-15802456c84da19ab969eff75f55bd640b324325.png" alt="&#64;startuml
+
+hide footbox
+
+actor &quot;Mission application&quot; as app
+participant &quot;Communications Service\nDownlink Endpoint&quot; as downlink
+participant Radio
+actor &quot;Ground Station&quot; as ground
+
+app -&gt; downlink : 1. Send data to downlink endpoint
+downlink -&gt; downlink : 2. Wrap data in Space Packet
+downlink -&gt; Radio : 3. Send Space Packet to radio
+Radio -&gt; ground : 4. Send Space Packet to ground
+
+&#64;enduml"/>
+</p>
+</div>
+</div>
+<div class="section" id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<p>Most missions tend to have a single communications device which communicates via a single uplink
+and single downlink method.
+However, some missions have more complex communications systems; for example, having a slower, but
+more reliable downlink method for transmitting a small health-and-status beacon and then a faster,
+but more error-prone method for transmitting more detailed telemetry information.</p>
+<p>The communications service framework provides mechanisms to handle these more complex
+configurations.</p>
+<p>The service’s <a class="reference internal" href="service-config.html"><span class="doc">config.toml</span></a> file should contain the following parameters:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">max_num_handlers</span></code> - (Default: 50) The maximum number of concurrent message handlers allowed</li>
+<li><code class="docutils literal notranslate"><span class="pre">downlink_ports</span></code> - (Optional) List of ports used by downlink endpoints that send messages to the
+ground. Each port in the list will be used by one downlink endpoint</li>
+<li><code class="docutils literal notranslate"><span class="pre">timeout</span></code> - (Default: 1500) Length of time a message handler should wait for a reply, in milliseconds</li>
+<li><code class="docutils literal notranslate"><span class="pre">ip</span></code> - (Required) IP address of the communications service</li>
+</ul>
+<p>The service which implements the framework should create a <a href="../../rust-docs/comms_service/struct.CommsControlBlock.html" target="_blank">CommsControlBlock</a>, which
+provides the final configuration to the main communication logic.
+It contains the following members:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">read_conn</span></code> - This is the connection structure which is used for reading from the communications
+device, for example a UART port or UDP socket</li>
+<li><code class="docutils literal notranslate"><span class="pre">write_conn</span></code> - This is the connection structure which is used for reading from the
+communications device, for example a UART port or UDP socket</li>
+<li><code class="docutils literal notranslate"><span class="pre">read</span></code> - (Optional) A pointer to the function which should be used to read a message from the
+communications device</li>
+<li><code class="docutils literal notranslate"><span class="pre">write</span></code> - A list of function pointers for all available ways that messages may be written to
+the communications device</li>
+<li><code class="docutils literal notranslate"><span class="pre">max_num_handlers</span></code> - Should be copied from the corresponding <cite>config.toml</cite> value</li>
+<li><code class="docutils literal notranslate"><span class="pre">downlink_ports</span></code> - Should be copied from the corresponding <cite>config.toml</cite> value or <code class="docutils literal notranslate"><span class="pre">None</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">timeout</span></code> - Should be copied from the corresponding <cite>config.toml</cite> value</li>
+<li><code class="docutils literal notranslate"><span class="pre">ip</span></code> - Should be copied from the corresponding <cite>config.toml</cite> value</li>
+</ul>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">If downlink endpoints are being used, the number of function pointers in the <code class="docutils literal notranslate"><span class="pre">write</span></code> list
+<strong>must be equal</strong> to the number of ports in the <code class="docutils literal notranslate"><span class="pre">downlink_ports</span></code> list.</p>
+</div>
+</div>
+<div class="section" id="implementation">
+<h2>Implementation<a class="headerlink" href="#implementation" title="Permalink to this headline">¶</a></h2>
+<p>Because communication methods may vary from mission to mission, it is up to the user to create the
+final hardware service/s which will be used for communication with the ground.</p>
+<p>The service which implements the communications service framework should utilize only a single
+communication device.
+If multiple devices are present in the system, a service should be created for each of them.</p>
+<p>The service should contain the following components:</p>
+<ul class="simple">
+<li>A function capable of reading messages from the communications device
+(note: this may be omitted in the case where the communications device will only be used for
+transmitting data)</li>
+<li>At least one function capable of writing messages to the communications device</li>
+<li>Initialized connection structure/s which will be used by the previous read and/or write functions</li>
+<li>A <a href="../../rust-docs/comms_service/struct.CommsControlBlock.html" target="_blank">CommsControlBlock</a> structure containing all of the communications configuration
+information</li>
+<li>A <a href="../../rust-docs/comms_service/struct.CommsTelemetry.html" target="_blank">CommsTelemetry</a> structure which will be used to gather communication statistics</li>
+</ul>
+<p>It is recommended that the service also follow the guidelines for
+<a class="reference internal" href="hardware-services.html"><span class="doc">normal hardware services</span></a>.</p>
+<p>Some support for communicating with specific hardware devices has been provided in various
+<a class="reference internal" href="../../deep-dive/apis/device-api-guide.html"><span class="doc">hardware APIs</span></a>.</p>
+<p>For more information about how to implement a communications service, please refer to the following
+resources:</p>
+<ul class="simple">
+<li><a href="../../rust-docs/comms_service/index.html" target="_blank">Framework Rust documentation</a></li>
+<li><a class="reference internal" href="../../tutorials/comms-service.html"><span class="doc">Comms service tutorial</span></a></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="file.html" class="btn btn-neutral float-right" title="File Transfer Service" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="app-service.html" class="btn btn-neutral" title="Kubos Applications Service" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

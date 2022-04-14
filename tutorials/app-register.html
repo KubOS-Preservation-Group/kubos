@@ -1,0 +1,657 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Registering a Mission Application &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../index.html"/>
+        <link rel="up" title="Tutorials" href="index.html"/>
+        <link rel="next" title="Scheduling a Mission Application’s Execution" href="schedule-app.html"/>
+        <link rel="prev" title="Running a KubOS Project on an OBC" href="first-obc-project.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#mission-development-tutorials">Mission Development Tutorials</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#system-interaction-tutorials">System Interaction Tutorials</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Registering an Application</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#setup">Setup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#graphiql">GraphiQL</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#registering">Registering</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#starting">Starting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#updating">Updating</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#verifying">Verifying</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="schedule-app.html">Scheduling an Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="querying-telemetry.html">Querying the System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="file-transfer.html">Transferring Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="shell.html">Creating a Shell Connection</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#advanced-tutorials">Advanced Tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#other-resources">Other Resources</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../obc-docs/index.html">Working with an OBC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ecosystem/index.html">KubOS Ecosystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deep-dive/index.html">Under the Hood</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sdk-docs/index.html">Kubos SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing to KubOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Tutorials</a> &raquo;</li>
+        
+      <li>Registering a Mission Application</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/tutorials/app-register.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="registering-a-mission-application">
+<h1>Registering a Mission Application<a class="headerlink" href="#registering-a-mission-application" title="Permalink to this headline">¶</a></h1>
+<p>The Kubos <a class="reference internal" href="../ecosystem/services/app-service.html"><span class="doc">applications service</span></a> is responsible for monitoring and
+managing all mission applications for a system.</p>
+<p>This tutorial walks the user through:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Registering a new application</li>
+<li>Sending a request to the applications service to start the application</li>
+<li>Updating the application to a newer version</li>
+<li>Verifying what versions of the application have been registered</li>
+</ul>
+</div></blockquote>
+<p>This tutorial is written to be run entirely within your local development environment, however, you
+may also interact with the applications service on your OBC by setting up its <a class="reference internal" href="../obc-docs/comms-setup.html#ethernet"><span class="std std-ref">ethernet connection</span></a>.</p>
+<div class="section" id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
+<p>We’ll be using the example application from the <a class="reference internal" href="first-mission-app.html"><span class="doc">mission application tutorial</span></a>.
+Make sure that the <cite>manifest.toml</cite> file is present in the same project directory.</p>
+<p>This tutorial will use the following example directories:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">/home/user/my-app</span></code> - Project directory</li>
+<li><code class="docutils literal notranslate"><span class="pre">/home/user/kubos</span></code> - Cloned copy of the kubos repo</li>
+<li><code class="docutils literal notranslate"><span class="pre">/home/user/kubos/app-registry</span></code> - Directory used by the applications service to store registered
+applications</li>
+</ul>
+</div></blockquote>
+<ul>
+<li><p class="first">Navigate to the <cite>kubos</cite> source directory</p>
+</li>
+<li><p class="first"><strong>If you are using the SDK</strong>, update all IP addresses in the <code class="docutils literal notranslate"><span class="pre">tools/local_config.toml</span></code> file,
+changing them from <code class="docutils literal notranslate"><span class="pre">127.0.0.1</span></code> to <code class="docutils literal notranslate"><span class="pre">0.0.0.0</span></code>, so that they are available <a class="reference internal" href="../sdk-docs/sdk-installing.html#sdk-port-forward"><span class="std std-ref">to your host machine</span></a>.</p>
+</li>
+<li><p class="first">Run the following command to start the applications service in the background (the service may
+need to be built first, which will take several minutes to complete):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cargo run --bin kubos-app-service -- -c tools/local_config.toml &amp;
+</pre></div>
+</div>
+</li>
+<li><p class="first">If you have stopped the monitor and telemetry services since going through the previous tutorial,
+you will need to start those as well:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cargo run --bin monitor-service -- -c tools/local_config.toml &amp;
+$ cargo run --bin telemetry-service -- -c tools/local_config.toml &amp;
+</pre></div>
+</div>
+</li>
+<li><p class="first">Navigate back out to the development directory of your choosing.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="graphiql">
+<span id="id1"></span><h2>GraphiQL<a class="headerlink" href="#graphiql" title="Permalink to this headline">¶</a></h2>
+<p>All Kubos services which provide an HTTP interface have a special endpoint which can be used to
+send and receive GraphQL data via an in-browser graphical interface, GraphiQL.</p>
+<p>This graphical interface makes it easier to create and consume more lengthy GraphQL requests.</p>
+<p>To access this endpoint, make sure that your desired service is running, then open a web browser and
+navigate to <code class="docutils literal notranslate"><span class="pre">http://{ip}:{port}/graphiql</span></code>.
+The <code class="docutils literal notranslate"><span class="pre">ip</span></code> and <code class="docutils literal notranslate"><span class="pre">port</span></code> parameters should match the values specified for the service in its
+<code class="docutils literal notranslate"><span class="pre">config.toml</span></code> file.</p>
+<p>The resulting interface should look like this:</p>
+<div class="figure">
+<img alt="../_images/graphiql.png" src="../_images/graphiql.png" />
+</div>
+<p>From here, you can enter any valid GraphQL query or mutation on the left-hand side and then run
+the request by clicking the triangle button.
+The resulting JSON response will be displayed on the right-hand side:</p>
+<div class="figure">
+<img alt="../_images/graphiql_ping.png" src="../_images/graphiql_ping.png" />
+</div>
+<p>Please navigate to <code class="docutils literal notranslate"><span class="pre">http://127.0.0.1:8000/graphiql</span></code> in order to communicate with the applications
+service for this tutorial.</p>
+<p>If you are using the SDK, replace <code class="docutils literal notranslate"><span class="pre">127.0.0.1</span></code> with the <a class="reference internal" href="../sdk-docs/sdk-installing.html#sdk-port-forward"><span class="std std-ref">IP address you defined</span></a>
+for your VM.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>You may also send GraphQL requests by using the <a class="reference external" href="https://linux.die.net/man/1/curl">curl</a>
+facility. Requests should be sent as POST operations, specifying the GraphQL request inside the
+body of the message under the “query” parameter. The content-type for the message should be
+“application/json”.</p>
+<p>For example:</p>
+<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span>$ curl 127.0.0.1:8004 -H &quot;Content-Type: application/json&quot; --data &quot;{\&quot;query\&quot;:\&quot;{ping}\&quot;}&quot;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="registering">
+<h2>Registering<a class="headerlink" href="#registering" title="Permalink to this headline">¶</a></h2>
+<p>To register an application, we use the service’s <code class="docutils literal notranslate"><span class="pre">register</span></code> mutation.
+It has the following schema:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>mutation {
+   register(path: String!) {
+       success: Bool!,
+       errors: String,
+       entry: {
+           app: {
+               name: String!,
+               version: String!,
+               author: String!,
+               executable: String!
+           },
+           active: Bool
+       }
+   }
+}
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">path</span></code> input parameter specifies the path to either a directory where the application and manifest files reside,
+or the path to a <code class="docutils literal notranslate"><span class="pre">.tgz</span></code> archive file containing the application and manifest in its root.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">When interacting with the applications service on an OBC, this <code class="docutils literal notranslate"><span class="pre">path</span></code> parameter refers to a
+location <em>on the OBC</em>, not in your local development environment</p>
+</div>
+<p>The registration process will copy all of the contents at that path, so care should be taken to
+ensure that only the desired application files are present.</p>
+<p>The mutation can return the following fields:</p>
+<blockquote>
+<div><ul>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">success</span></code> - Indicating the overall result of the register operation</p>
+</li>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">errors</span></code> - Any errors which were encountered while registering the application</p>
+</li>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">entry</span></code> - The registration information about the newly registered application.
+Will be empty if the registration process fails</p>
+<blockquote>
+<div><ul>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">app</span></code></p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">name</span></code> - The name of the registered application, taken from the manifest file</li>
+<li><code class="docutils literal notranslate"><span class="pre">version</span></code> - The version number of this particular iteration of the application, taken
+from the manifest file</li>
+<li><code class="docutils literal notranslate"><span class="pre">author</span></code> - The author information for the application, taken from the manifest file</li>
+<li><code class="docutils literal notranslate"><span class="pre">executable</span></code> - The absolute path of the file which will kick off execution of the
+newly registered application file</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">active</span></code> - Specifies whether the newly registered application is the current active version
+of the application which will be used when the service attempts to run it. This value should
+always be <code class="docutils literal notranslate"><span class="pre">true</span></code> when returned by this mutation</p>
+</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+<p>We’ll be interacting with our local applications service’s GraphiQL interface.
+Our service is using port 8000.</p>
+<p>Our registration mutation should look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mutation</span> <span class="p">{</span>
+  <span class="n">register</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="s2">&quot;/home/user/my-app&quot;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">success</span><span class="p">,</span>
+    <span class="n">errors</span><span class="p">,</span>
+    <span class="n">entry</span> <span class="p">{</span>
+      <span class="n">app</span> <span class="p">{</span>
+        <span class="n">name</span>
+        <span class="n">executable</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The response should like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;register&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+      <span class="s2">&quot;errors&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;entry&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;app&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;my-mission-app&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;executable&quot;</span><span class="p">:</span> <span class="s2">&quot;/home/user/kubos/app-registry/my-mission-app/1.0/my-mission-app.py&quot;</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We can break down the resulting executable path like so:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">/home/user/kubos/app-registry</span></code> - This is the directory that the applications service uses to
+save all registered applications. We previously specified it in our <code class="docutils literal notranslate"><span class="pre">config.toml</span></code> file</li>
+<li><code class="docutils literal notranslate"><span class="pre">my-mission-app</span></code> - The name of our application</li>
+<li><code class="docutils literal notranslate"><span class="pre">1.0</span></code> - Our manifest file specified that this was version 1.0 of our application</li>
+<li><code class="docutils literal notranslate"><span class="pre">my-mission-app.py</span></code> - Our application file</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="starting">
+<h2>Starting<a class="headerlink" href="#starting" title="Permalink to this headline">¶</a></h2>
+<p>We’ll go ahead and start our app now to verify it works using the <code class="docutils literal notranslate"><span class="pre">startApp</span></code> mutation.
+It has the following schema:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>mutation {
+    startApp(name: String!, config: String, args: [String]): {
+        success: Bool!
+        errors: String,
+        pid: Int
+    }
+}
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">name</span></code> input parameter specifies the name of the application which should be started.
+The <code class="docutils literal notranslate"><span class="pre">config</span></code> input parameter specifies a non-default configuration file which should be used.
+The <code class="docutils literal notranslate"><span class="pre">args</span></code> input parameter allows the user to pass additional arguments through to the underlying
+application.</p>
+<p>The mutation returns three fields:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">success</span></code> - Indicating the overall result of the operation</li>
+<li><code class="docutils literal notranslate"><span class="pre">errors</span></code> - Any errors which were encountered while starting the application</li>
+<li><code class="docutils literal notranslate"><span class="pre">pid</span></code> - The PID of the started application. This will be empty if the application
+immediately finishes, since the PID will already have been freed by the system and is no
+longer meaningful</li>
+</ul>
+</div></blockquote>
+<p>Our request should look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mutation</span> <span class="p">{</span>
+  <span class="n">startApp</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s2">&quot;my-mission-app&quot;</span><span class="p">,</span> <span class="n">config</span><span class="p">:</span><span class="s2">&quot;/home/user/kubos/tools/local_config.toml&quot;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">success</span><span class="p">,</span>
+    <span class="n">pid</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>And the response should look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;startApp&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+      <span class="s2">&quot;pid&quot;</span><span class="p">:</span> <span class="mi">575</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The console where you started the app service should show the app’s execution messages:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Current</span> <span class="n">available</span> <span class="n">memory</span><span class="p">:</span> <span class="mi">4390792</span> <span class="n">kB</span>
+<span class="n">Telemetry</span> <span class="n">insert</span> <span class="n">completed</span> <span class="n">successfully</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="updating">
+<h2>Updating<a class="headerlink" href="#updating" title="Permalink to this headline">¶</a></h2>
+<p>After looking at our output, it would be nice if our memory message included the timestamp of
+when the system was checked.</p>
+<p>Let’s add the <code class="docutils literal notranslate"><span class="pre">datetime</span></code> module to our file with <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">datetime</span></code> and then update the log line like so:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">: Successfully pinged monitor service&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())))</span>
+</pre></div>
+</div>
+<p>Since this is a new version of our application, we’ll then need to update our <code class="docutils literal notranslate"><span class="pre">manifest.toml</span></code>
+file to change the <code class="docutils literal notranslate"><span class="pre">version</span></code> key from <code class="docutils literal notranslate"><span class="pre">&quot;1.0&quot;</span></code> to <code class="docutils literal notranslate"><span class="pre">&quot;2.0&quot;</span></code>.</p>
+<p>After transferring both of the files into our remote folder, <code class="docutils literal notranslate"><span class="pre">/home/user/my-app</span></code>,
+we can register the updated application using the same <code class="docutils literal notranslate"><span class="pre">register</span></code> mutation as before:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mutation</span> <span class="p">{</span>
+  <span class="n">register</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="s2">&quot;/home/user/my-app&quot;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">success</span><span class="p">,</span>
+    <span class="n">errors</span><span class="p">,</span>
+    <span class="n">entry</span> <span class="p">{</span>
+      <span class="n">app</span> <span class="p">{</span>
+        <span class="n">name</span>
+        <span class="n">executable</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The response should look almost identical:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;errors&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;register&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+            <span class="s2">&quot;errors&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;entry&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;app&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;my-mission-app&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;executable&quot;</span><span class="p">:</span><span class="s2">&quot;/home/user/kubos/app-registry/my-mission-app/2.0/my-mission-app.py&quot;</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>After running our app again with the <code class="docutils literal notranslate"><span class="pre">startApp</span></code> mutation, our output should now look like this:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>2019-07-03 16:15:29.452626: Successfully pinged monitor service
+Telemetry insert completed successfully
+</pre></div>
+</div>
+</div>
+<div class="section" id="verifying">
+<h2>Verifying<a class="headerlink" href="#verifying" title="Permalink to this headline">¶</a></h2>
+<p>We can now query the service to see the registered versions of our application using the <code class="docutils literal notranslate"><span class="pre">registeredApps</span></code> query.</p>
+<p>The query has the following schema:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>{
+    registeredApps(name: String, version: String, active: Bool): [{
+        app: {
+            name: String!,
+            version: String!,
+            author: String!,
+            executable: String!
+        },
+        active: Bool
+    }]
+}
+</pre></div>
+</div>
+<p>By default, the query will return information about all versions of all registered applications.
+The queries input fields can be used to filter the results:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">name</span></code> - Returns entries with this specific application file name</li>
+<li><code class="docutils literal notranslate"><span class="pre">version</span></code> - Returns only entries with the specified version</li>
+<li><code class="docutils literal notranslate"><span class="pre">active</span></code> - Returns only the current active version of the particular application</li>
+</ul>
+</div></blockquote>
+<p>The query has the following response fields:</p>
+<blockquote>
+<div><ul>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">app</span></code></p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">name</span></code> - The name of the application</li>
+<li><code class="docutils literal notranslate"><span class="pre">version</span></code> - The version number of this particular iteration of the application</li>
+<li><code class="docutils literal notranslate"><span class="pre">author</span></code> - The author information for the application</li>
+<li><code class="docutils literal notranslate"><span class="pre">executable</span></code> - The absolute path of the file which will kick off execution of the
+registered application file</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">active</span></code> - Specifies whether this iteration of the application is the current active version
+which will be used when the service attempts to run it</p>
+</li>
+</ul>
+</div></blockquote>
+<p>We want to query the service to make sure that:</p>
+<blockquote>
+<div><ul class="simple">
+<li>We have two registered versions of our application</li>
+<li>Version 2.0 is the current active version</li>
+</ul>
+</div></blockquote>
+<p>Our request should look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="n">registeredApps</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s2">&quot;my-mission-app&quot;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">active</span>
+    <span class="n">app</span> <span class="p">{</span>
+      <span class="n">name</span>
+      <span class="n">version</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The response should look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;registeredApps&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;active&quot;</span><span class="p">:</span><span class="n">false</span><span class="p">,</span>
+                <span class="s2">&quot;app&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;my-mission-app&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;version&quot;</span><span class="p">:</span><span class="s2">&quot;1.0&quot;</span>
+                <span class="p">}</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;active&quot;</span><span class="p">:</span><span class="n">true</span><span class="p">,</span>
+                <span class="s2">&quot;app&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;my-mission-app&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;version&quot;</span><span class="p">:</span><span class="s2">&quot;2.0&quot;</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="schedule-app.html" class="btn btn-neutral float-right" title="Scheduling a Mission Application’s Execution" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="first-obc-project.html" class="btn btn-neutral" title="Running a KubOS Project on an OBC" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["KeplerElem","Structure for keplarian elements returned in the standard telemetry message"],["RotatingTelemetry","Structure to contain all possible variables which can be returned by the standard telemetry message's `rotating_variable` fields"]]});

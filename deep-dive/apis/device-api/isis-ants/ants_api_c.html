@@ -1,0 +1,743 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ISIS Antenna System API &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../../../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../../../../index.html"/>
+        <link rel="up" title="ISIS Anntenna System API" href="ants.html"/>
+        <link rel="next" title="ISIS Antenna Systems API" href="ants_api_rust.html"/>
+        <link rel="prev" title="ISIS Anntenna System API" href="ants.html"/> 
+
+  
+  <script src="../../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../getting-started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../obc-docs/index.html">Working with an OBC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ecosystem/index.html">KubOS Ecosystem</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Under the Hood</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../../index.html#apis">APIs</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../device-api-guide.html">Kubos Device API Creation Guide</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html">Device Interfaces</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../mai400.html">MAI-400 ADACS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../clydespace-3g-eps.html">Clyde Space 3G EPS</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="ants.html">ISIS Antenna Systems</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../isis-imtq/imtq.html">ISIS iMTQ</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../isis-trxvu/trxvu.html">ISIS TRXVU Radio</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../gomspace-p31u/p31u_api.html">GOMspace NanoPower P31u</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../novatel-oem6.html">NovAtel OEM6 GPS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../nsl-duplex-d2.html">NSL EyeStar-D2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../pumpkin-mcu.html">Pumpkin MCUs</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../obc-api/index.html">OBC APIs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../kubos-hal/index.html">Kubos HAL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../kubos-libs.html">Kubos Libraries</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#protocols">Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#kubos-linux">Kubos Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#design-decisions">Design Decisions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../sdk-docs/index.html">Kubos SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contributing/index.html">Contributing to KubOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../index.html">Under the Hood of KubOS</a> &raquo;</li>
+        
+          <li><a href="../index.html">Kubos Device APIs</a> &raquo;</li>
+        
+          <li><a href="ants.html">ISIS Anntenna System API</a> &raquo;</li>
+        
+      <li>ISIS Antenna System API</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../../_sources/deep-dive/apis/device-api/isis-ants/ants_api_c.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="isis-antenna-system-api">
+<h1>ISIS Antenna System API<a class="headerlink" href="#isis-antenna-system-api" title="Permalink to this headline">¶</a></h1>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Deployment Status Flags</p>
+<dl class="macro">
+<dt id="c.SYS_BURN_ACTIVE">
+<span class="target" id="group__ISIS__ANTS__API_1ga1ef6abbda6b90980ee8dd846ad556c2e"></span><code class="descname">SYS_BURN_ACTIVE</code><a class="headerlink" href="#c.SYS_BURN_ACTIVE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Antenna system independent burn is active. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.SYS_IGNORE_DEPLOY">
+<span class="target" id="group__ISIS__ANTS__API_1gafc40a0e304fc7f58cdfeed1e8915c64e"></span><code class="descname">SYS_IGNORE_DEPLOY</code><a class="headerlink" href="#c.SYS_IGNORE_DEPLOY" title="Permalink to this definition">¶</a></dt>
+<dd><p>Antenna system is ignoring the deployment switches. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.SYS_ARMED">
+<span class="target" id="group__ISIS__ANTS__API_1ga0705ee0e51d9f7d8303cefcbd86b9d8c"></span><code class="descname">SYS_ARMED</code><a class="headerlink" href="#c.SYS_ARMED" title="Permalink to this definition">¶</a></dt>
+<dd><p>Antenna system is armed. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ANT_1_NOT_DEPLOYED">
+<span class="target" id="group__ISIS__ANTS__API_1ga353295f464709405637007e713ec1b69"></span><code class="descname">ANT_1_NOT_DEPLOYED</code><a class="headerlink" href="#c.ANT_1_NOT_DEPLOYED" title="Permalink to this definition">¶</a></dt>
+<dd><p>Antenna 1 is not deployed. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ANT_1_STOPPED_TIME">
+<span class="target" id="group__ISIS__ANTS__API_1gaba30538544a1a6ed19d90aa67f1ad577"></span><code class="descname">ANT_1_STOPPED_TIME</code><a class="headerlink" href="#c.ANT_1_STOPPED_TIME" title="Permalink to this definition">¶</a></dt>
+<dd><p>Antenna 1 deployment time limit was reached. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ANT_1_ACTIVE">
+<span class="target" id="group__ISIS__ANTS__API_1gad7bf10e920a67c897b6104d4c5e4e62e"></span><code class="descname">ANT_1_ACTIVE</code><a class="headerlink" href="#c.ANT_1_ACTIVE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Antenna 1 deployment system is active. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ANT_2_NOT_DEPLOYED">
+<span class="target" id="group__ISIS__ANTS__API_1gaf89f7ad398bf8fa77a6e588079f5063a"></span><code class="descname">ANT_2_NOT_DEPLOYED</code><a class="headerlink" href="#c.ANT_2_NOT_DEPLOYED" title="Permalink to this definition">¶</a></dt>
+<dd><p>Antenna 2 is not deployed. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ANT_2_STOPPED_TIME">
+<span class="target" id="group__ISIS__ANTS__API_1ga17140f923d23a2c3bba547ac2522021b"></span><code class="descname">ANT_2_STOPPED_TIME</code><a class="headerlink" href="#c.ANT_2_STOPPED_TIME" title="Permalink to this definition">¶</a></dt>
+<dd><p>Antenna 2 deployment time limit was reached. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ANT_2_ACTIVE">
+<span class="target" id="group__ISIS__ANTS__API_1ga48e4d52726fb4e9964ca412e8f44401b"></span><code class="descname">ANT_2_ACTIVE</code><a class="headerlink" href="#c.ANT_2_ACTIVE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Antenna 2 deployment system is active. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ANT_3_NOT_DEPLOYED">
+<span class="target" id="group__ISIS__ANTS__API_1ga852cd0e08b42344da712110c62f7ff3b"></span><code class="descname">ANT_3_NOT_DEPLOYED</code><a class="headerlink" href="#c.ANT_3_NOT_DEPLOYED" title="Permalink to this definition">¶</a></dt>
+<dd><p>Antenna 3 is not deployed. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ANT_3_STOPPED_TIME">
+<span class="target" id="group__ISIS__ANTS__API_1ga83d54eaa769b05224b395cb63c23e88d"></span><code class="descname">ANT_3_STOPPED_TIME</code><a class="headerlink" href="#c.ANT_3_STOPPED_TIME" title="Permalink to this definition">¶</a></dt>
+<dd><p>Antenna 3 deployment time limit was reached. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ANT_3_ACTIVE">
+<span class="target" id="group__ISIS__ANTS__API_1ga74f8868d17554ecde5f02af4bbbb09a6"></span><code class="descname">ANT_3_ACTIVE</code><a class="headerlink" href="#c.ANT_3_ACTIVE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Antenna 3 deployment system is active. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ANT_4_NOT_DEPLOYED">
+<span class="target" id="group__ISIS__ANTS__API_1ga197d65f81be1bae9113e3fab1d061a2a"></span><code class="descname">ANT_4_NOT_DEPLOYED</code><a class="headerlink" href="#c.ANT_4_NOT_DEPLOYED" title="Permalink to this definition">¶</a></dt>
+<dd><p>Antenna 4 is not deployed. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ANT_4_STOPPED_TIME">
+<span class="target" id="group__ISIS__ANTS__API_1gaa78cb7442e065e3154bc1813adc9b556"></span><code class="descname">ANT_4_STOPPED_TIME</code><a class="headerlink" href="#c.ANT_4_STOPPED_TIME" title="Permalink to this definition">¶</a></dt>
+<dd><p>Antenna 4 deployment time limit was reached. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ANT_4_ACTIVE">
+<span class="target" id="group__ISIS__ANTS__API_1ga072064aa5734b0076d6f31712eb14e01"></span><code class="descname">ANT_4_ACTIVE</code><a class="headerlink" href="#c.ANT_4_ACTIVE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Antenna 4 deployment system is active. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Enums</p>
+<dl class="enum">
+<dt id="_CPPv411KANTSStatus">
+<span id="_CPPv311KANTSStatus"></span><span id="_CPPv211KANTSStatus"></span><span class="target" id="group__ISIS__ANTS__API_1ga3ff5cfd0645666015f01708ccff4004d"></span><em class="property">enum </em><code class="descname">KANTSStatus</code><a class="headerlink" href="#_CPPv411KANTSStatus" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Antenna function return values. </p>
+<p><em>Values:</em></p>
+<dl class="enumerator">
+<dt id="_CPPv47ANTS_OK">
+<span id="_CPPv37ANTS_OK"></span><span id="_CPPv27ANTS_OK"></span><span class="target" id="group__ISIS__ANTS__API_1gga3ff5cfd0645666015f01708ccff4004da1671ca7d7ddd30ffa2ca0d1f44f62610"></span><code class="descname">ANTS_OK</code><a class="headerlink" href="#_CPPv47ANTS_OK" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Requested function completed successfully. </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv410ANTS_ERROR">
+<span id="_CPPv310ANTS_ERROR"></span><span id="_CPPv210ANTS_ERROR"></span><span class="target" id="group__ISIS__ANTS__API_1gga3ff5cfd0645666015f01708ccff4004da46463f5b5a6a4274a0d9e865d63fadaa"></span><code class="descname">ANTS_ERROR</code><a class="headerlink" href="#_CPPv410ANTS_ERROR" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Generic error. </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv417ANTS_ERROR_CONFIG">
+<span id="_CPPv317ANTS_ERROR_CONFIG"></span><span id="_CPPv217ANTS_ERROR_CONFIG"></span><span class="target" id="group__ISIS__ANTS__API_1gga3ff5cfd0645666015f01708ccff4004da07ed805ecdc8bae27bb26bcf3f254568"></span><code class="descname">ANTS_ERROR_CONFIG</code><a class="headerlink" href="#_CPPv417ANTS_ERROR_CONFIG" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Configuration error. </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv426ANTS_ERROR_NOT_IMPLEMENTED">
+<span id="_CPPv326ANTS_ERROR_NOT_IMPLEMENTED"></span><span id="_CPPv226ANTS_ERROR_NOT_IMPLEMENTED"></span><span class="target" id="group__ISIS__ANTS__API_1gga3ff5cfd0645666015f01708ccff4004da15b52cfa3ce45d951a8a4d2d57d7407e"></span><code class="descname">ANTS_ERROR_NOT_IMPLEMENTED</code><a class="headerlink" href="#_CPPv426ANTS_ERROR_NOT_IMPLEMENTED" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Requested function has not been implemented for the subsystem. </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="enum">
+<dt id="_CPPv415KANTSController">
+<span id="_CPPv315KANTSController"></span><span id="_CPPv215KANTSController"></span><span class="target" id="group__ISIS__ANTS__API_1ga46aad251c98d9fec12a440c54f53d916"></span><em class="property">enum </em><code class="descname">KANTSController</code><a class="headerlink" href="#_CPPv415KANTSController" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Antenna microcontrollers. </p>
+<p><em>Values:</em></p>
+<dl class="enumerator">
+<dt id="_CPPv47PRIMARY">
+<span id="_CPPv37PRIMARY"></span><span id="_CPPv27PRIMARY"></span><span class="target" id="group__ISIS__ANTS__API_1gga46aad251c98d9fec12a440c54f53d916a5ce2e4adeaefc771566d91471561dba4"></span><code class="descname">PRIMARY</code><a class="headerlink" href="#_CPPv47PRIMARY" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Issue commands using the primary microcontroller. </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv49SECONDARY">
+<span id="_CPPv39SECONDARY"></span><span id="_CPPv29SECONDARY"></span><span class="target" id="group__ISIS__ANTS__API_1gga46aad251c98d9fec12a440c54f53d916ac0d9780ec13ea0e18c0ffd3b160e5ed8"></span><code class="descname">SECONDARY</code><a class="headerlink" href="#_CPPv49SECONDARY" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Issue commands using the secondary microcontroller (if available) </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="enum">
+<dt id="_CPPv48KANTSAnt">
+<span id="_CPPv38KANTSAnt"></span><span id="_CPPv28KANTSAnt"></span><span class="target" id="group__ISIS__ANTS__API_1gaeb8d5452769b955a50cf7c2ba3c1e0d0"></span><em class="property">enum </em><code class="descname">KANTSAnt</code><a class="headerlink" href="#_CPPv48KANTSAnt" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>System Antennas. </p>
+<p><em>Values:</em></p>
+<dl class="enumerator">
+<dt id="_CPPv45ANT_1">
+<span id="_CPPv35ANT_1"></span><span id="_CPPv25ANT_1"></span><span class="target" id="group__ISIS__ANTS__API_1ggaeb8d5452769b955a50cf7c2ba3c1e0d0af0b819739e4fb6af86c898f5f03c84fa"></span><code class="descname">ANT_1</code><a class="headerlink" href="#_CPPv45ANT_1" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Antenna 1. </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv45ANT_2">
+<span id="_CPPv35ANT_2"></span><span id="_CPPv25ANT_2"></span><span class="target" id="group__ISIS__ANTS__API_1ggaeb8d5452769b955a50cf7c2ba3c1e0d0ac0c684a855d8baa3a7d918759d6dad6a"></span><code class="descname">ANT_2</code><a class="headerlink" href="#_CPPv45ANT_2" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Antenna 2. </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv45ANT_3">
+<span id="_CPPv35ANT_3"></span><span id="_CPPv25ANT_3"></span><span class="target" id="group__ISIS__ANTS__API_1ggaeb8d5452769b955a50cf7c2ba3c1e0d0afdc0d84464c0578b9ec076486167f032"></span><code class="descname">ANT_3</code><a class="headerlink" href="#_CPPv45ANT_3" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Antenna 3. </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv45ANT_4">
+<span id="_CPPv35ANT_4"></span><span id="_CPPv25ANT_4"></span><span class="target" id="group__ISIS__ANTS__API_1ggaeb8d5452769b955a50cf7c2ba3c1e0d0a95ca93fbb253bb4548aa01a5f074a7d5"></span><code class="descname">ANT_4</code><a class="headerlink" href="#_CPPv45ANT_4" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Antenna 4. </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Functions</p>
+<dl class="function">
+<dt id="_CPPv411k_ants_initPc7uint8_t7uint8_t7uint8_t8uint32_t">
+<span id="_CPPv311k_ants_initPc7uint8_t7uint8_t7uint8_t8uint32_t"></span><span id="_CPPv211k_ants_initPc7uint8_t7uint8_t7uint8_t8uint32_t"></span><span id="k_ants_init__cP.uint8_t.uint8_t.uint8_t.uint32_t"></span><span class="target" id="group__ISIS__ANTS__API_1gaac0af7df6c3810de28ab3b499b61ba30"></span><a class="reference internal" href="#_CPPv411KANTSStatus" title="KANTSStatus">KANTSStatus</a> <code class="descname">k_ants_init</code><span class="sig-paren">(</span>char *<em>bus</em>, uint8_t <em>primary</em>, uint8_t <em>secondary</em>, uint8_t <em>ant_count</em>, uint32_t <em>timeout</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv411k_ants_initPc7uint8_t7uint8_t7uint8_t8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Initialize the antenna interface. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KANTSStatus ANTS_OK if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">bus</span></code>: I2C bus device the antenna systems device is connected to </li>
+<li><code class="docutils literal notranslate"><span class="pre">primary</span></code>: The I2C address of the device’s primary microcontroller </li>
+<li><code class="docutils literal notranslate"><span class="pre">secondary</span></code>: The I2C address of the device’s secondary/redundant microcontroller </li>
+<li><code class="docutils literal notranslate"><span class="pre">ant_count</span></code>: The number of antennas that the device can deploy </li>
+<li><code class="docutils literal notranslate"><span class="pre">timeout</span></code>: The watchdog timeout interval (in seconds) </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv416k_ants_terminatev">
+<span id="_CPPv316k_ants_terminatev"></span><span id="_CPPv216k_ants_terminatev"></span><span id="k_ants_terminate__void"></span><span class="target" id="group__ISIS__ANTS__API_1ga0b54acad1f37669b72d94ad2b1fdeb8f"></span>void <code class="descname">k_ants_terminate</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv416k_ants_terminatev" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Terminate the antenna interface. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv416k_ants_configure15KANTSController">
+<span id="_CPPv316k_ants_configure15KANTSController"></span><span id="_CPPv216k_ants_configure15KANTSController"></span><span id="k_ants_configure__KANTSController"></span><span class="target" id="group__ISIS__ANTS__API_1gaeb2f176149d8c122489b28b9fc97d903"></span><a class="reference internal" href="#_CPPv411KANTSStatus" title="KANTSStatus">KANTSStatus</a> <code class="descname">k_ants_configure</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv415KANTSController" title="KANTSController">KANTSController</a> <em>config</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv416k_ants_configure15KANTSController" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Configure the antenna. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KANTSStatus ANTS_OK if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">config</span></code>: Microntroller to use for system commanding </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv412k_ants_resetv">
+<span id="_CPPv312k_ants_resetv"></span><span id="_CPPv212k_ants_resetv"></span><span id="k_ants_reset__void"></span><span class="target" id="group__ISIS__ANTS__API_1ga66d46bcfce98088e65763fb30bb4b32e"></span><a class="reference internal" href="#_CPPv411KANTSStatus" title="KANTSStatus">KANTSStatus</a> <code class="descname">k_ants_reset</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv412k_ants_resetv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Reset both of the antenna’s microcontrollers. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KANTSStatus ANTS_OK if OK, error otherwise </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv410k_ants_armv">
+<span id="_CPPv310k_ants_armv"></span><span id="_CPPv210k_ants_armv"></span><span id="k_ants_arm__void"></span><span class="target" id="group__ISIS__ANTS__API_1ga05a0a670899d7ff8b4cd54ce49b0a84a"></span><a class="reference internal" href="#_CPPv411KANTSStatus" title="KANTSStatus">KANTSStatus</a> <code class="descname">k_ants_arm</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv410k_ants_armv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Arm the antenna. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KANTSStatus ANTS_OK if OK, error otherwise </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv413k_ants_disarmv">
+<span id="_CPPv313k_ants_disarmv"></span><span id="_CPPv213k_ants_disarmv"></span><span id="k_ants_disarm__void"></span><span class="target" id="group__ISIS__ANTS__API_1ga895b67c5efcc7bab6b31cee34a9da69a"></span><a class="reference internal" href="#_CPPv411KANTSStatus" title="KANTSStatus">KANTSStatus</a> <code class="descname">k_ants_disarm</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv413k_ants_disarmv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Disarm the antenna. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KANTSStatus ANTS_OK if OK, error otherwise </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv413k_ants_deploy8KANTSAntb7uint8_t">
+<span id="_CPPv313k_ants_deploy8KANTSAntb7uint8_t"></span><span id="_CPPv213k_ants_deploy8KANTSAntb7uint8_t"></span><span id="k_ants_deploy__KANTSAnt.b.uint8_t"></span><span class="target" id="group__ISIS__ANTS__API_1ga366430297b2d6997befdc8728105335e"></span><a class="reference internal" href="#_CPPv411KANTSStatus" title="KANTSStatus">KANTSStatus</a> <code class="descname">k_ants_deploy</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv48KANTSAnt" title="KANTSAnt">KANTSAnt</a> <em>antenna</em>, bool <em>override</em>, uint8_t <em>timeout</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv413k_ants_deploy8KANTSAntb7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Deploy an antenna. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KANTSStatus ANTS_OK if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">antenna</span></code>: Antenna to deploy </li>
+<li><code class="docutils literal notranslate"><span class="pre">override</span></code>: Indicates whether system should ignore previous successful deployment </li>
+<li><code class="docutils literal notranslate"><span class="pre">timeout</span></code>: Maximum time, in seconds, system should spend deploying the antenna </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv418k_ants_auto_deploy7uint8_t">
+<span id="_CPPv318k_ants_auto_deploy7uint8_t"></span><span id="_CPPv218k_ants_auto_deploy7uint8_t"></span><span id="k_ants_auto_deploy__uint8_t"></span><span class="target" id="group__ISIS__ANTS__API_1gab88112d6d4e4ed75536e3d36881c7444"></span><a class="reference internal" href="#_CPPv411KANTSStatus" title="KANTSStatus">KANTSStatus</a> <code class="descname">k_ants_auto_deploy</code><span class="sig-paren">(</span>uint8_t <em>timeout</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv418k_ants_auto_deploy7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Automatically deploy each antenna in sequence. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KANTSStatus ANTS_OK if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">timeout</span></code>: Maximum time, in seconds, system should spend deploying a single antenna </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv420k_ants_cancel_deployv">
+<span id="_CPPv320k_ants_cancel_deployv"></span><span id="_CPPv220k_ants_cancel_deployv"></span><span id="k_ants_cancel_deploy__void"></span><span class="target" id="group__ISIS__ANTS__API_1ga996d5c5d9a7ecb676e39fe19f1517926"></span><a class="reference internal" href="#_CPPv411KANTSStatus" title="KANTSStatus">KANTSStatus</a> <code class="descname">k_ants_cancel_deploy</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv420k_ants_cancel_deployv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Cancel all current deployment actions. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KANTSStatus <code class="docutils literal notranslate"><span class="pre">ANTS_OK</span></code> if OK, error otherwise </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv424k_ants_get_deploy_statusP8uint16_t">
+<span id="_CPPv324k_ants_get_deploy_statusP8uint16_t"></span><span id="_CPPv224k_ants_get_deploy_statusP8uint16_t"></span><span id="k_ants_get_deploy_status__uint16_tP"></span><span class="target" id="group__ISIS__ANTS__API_1ga8e96512b4fdf301d7be9eff206e7bdd0"></span><a class="reference internal" href="#_CPPv411KANTSStatus" title="KANTSStatus">KANTSStatus</a> <code class="descname">k_ants_get_deploy_status</code><span class="sig-paren">(</span>uint16_t *<em>resp</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv424k_ants_get_deploy_statusP8uint16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get current deployment status. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KANTSStatus <code class="docutils literal notranslate"><span class="pre">ANTS_OK</span></code> if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">resp</span></code>: Pointer to storage for data </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv417k_ants_get_uptimeP8uint32_t">
+<span id="_CPPv317k_ants_get_uptimeP8uint32_t"></span><span id="_CPPv217k_ants_get_uptimeP8uint32_t"></span><span id="k_ants_get_uptime__uint32_tP"></span><span class="target" id="group__ISIS__ANTS__API_1gab6001971e49c2e5b36f1dc4786e4163a"></span><a class="reference internal" href="#_CPPv411KANTSStatus" title="KANTSStatus">KANTSStatus</a> <code class="descname">k_ants_get_uptime</code><span class="sig-paren">(</span>uint32_t *<em>uptime</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv417k_ants_get_uptimeP8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get system uptime. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KANTSStatus <code class="docutils literal notranslate"><span class="pre">ANTS_OK</span></code> if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">uptime</span></code>: Pointer to storage for data </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv427k_ants_get_system_telemetryP14ants_telemetry">
+<span id="_CPPv327k_ants_get_system_telemetryP14ants_telemetry"></span><span id="_CPPv227k_ants_get_system_telemetryP14ants_telemetry"></span><span id="k_ants_get_system_telemetry__ants_telemetryP"></span><span class="target" id="group__ISIS__ANTS__API_1ga26cc640f3a2bb1e1793e82e779470bab"></span><a class="reference internal" href="#_CPPv411KANTSStatus" title="KANTSStatus">KANTSStatus</a> <code class="descname">k_ants_get_system_telemetry</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv414ants_telemetry" title="ants_telemetry">ants_telemetry</a> *<em>telem</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv427k_ants_get_system_telemetryP14ants_telemetry" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the current system telemetry. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KANTSStatus <code class="docutils literal notranslate"><span class="pre">ANTS_OK</span></code> if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">telem</span></code>: Pointer to <a class="reference internal" href="#structants__telemetry"><span class="std std-ref">ants_telemetry</span></a> structure </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv427k_ants_get_activation_count8KANTSAntP7uint8_t">
+<span id="_CPPv327k_ants_get_activation_count8KANTSAntP7uint8_t"></span><span id="_CPPv227k_ants_get_activation_count8KANTSAntP7uint8_t"></span><span id="k_ants_get_activation_count__KANTSAnt.uint8_tP"></span><span class="target" id="group__ISIS__ANTS__API_1gac74cc2c9e17bb6ae56fbf5d8b729d1db"></span><a class="reference internal" href="#_CPPv411KANTSStatus" title="KANTSStatus">KANTSStatus</a> <code class="descname">k_ants_get_activation_count</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv48KANTSAnt" title="KANTSAnt">KANTSAnt</a> <em>antenna</em>, uint8_t *<em>count</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv427k_ants_get_activation_count8KANTSAntP7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get an antenna’s activation count. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KANTSStatus <code class="docutils literal notranslate"><span class="pre">ANTS_OK</span></code> if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">antenna</span></code>: Antenna to query </li>
+<li><code class="docutils literal notranslate"><span class="pre">count</span></code>: Number of times antenna deployment has been attempted </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv426k_ants_get_activation_time8KANTSAntP8uint16_t">
+<span id="_CPPv326k_ants_get_activation_time8KANTSAntP8uint16_t"></span><span id="_CPPv226k_ants_get_activation_time8KANTSAntP8uint16_t"></span><span id="k_ants_get_activation_time__KANTSAnt.uint16_tP"></span><span class="target" id="group__ISIS__ANTS__API_1gaee2ec0bf6c180c319e21ca1c22c1ac32"></span><a class="reference internal" href="#_CPPv411KANTSStatus" title="KANTSStatus">KANTSStatus</a> <code class="descname">k_ants_get_activation_time</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv48KANTSAnt" title="KANTSAnt">KANTSAnt</a> <em>antenna</em>, uint16_t *<em>time</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv426k_ants_get_activation_time8KANTSAntP8uint16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get an antenna’s activation time. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KANTSStatus <code class="docutils literal notranslate"><span class="pre">ANTS_OK</span></code> if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">antenna</span></code>: Antenna to query </li>
+<li><code class="docutils literal notranslate"><span class="pre">time</span></code>: Amount of time spent deploying antenna in 50ms steps </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv420k_ants_watchdog_kickv">
+<span id="_CPPv320k_ants_watchdog_kickv"></span><span id="_CPPv220k_ants_watchdog_kickv"></span><span id="k_ants_watchdog_kick__void"></span><span class="target" id="group__ISIS__ANTS__API_1ga55c095a8858021613520fd3fb5d1530a"></span><a class="reference internal" href="#_CPPv411KANTSStatus" title="KANTSStatus">KANTSStatus</a> <code class="descname">k_ants_watchdog_kick</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv420k_ants_watchdog_kickv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Kick the AntS’s watchdogs once. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KANTSStatus <code class="docutils literal notranslate"><span class="pre">ANTS_OK</span></code> if OK, error otherwise </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv421k_ants_watchdog_startv">
+<span id="_CPPv321k_ants_watchdog_startv"></span><span id="_CPPv221k_ants_watchdog_startv"></span><span id="k_ants_watchdog_start__void"></span><span class="target" id="group__ISIS__ANTS__API_1ga397ba2f6a4cabe664413694f75fc0906"></span><a class="reference internal" href="#_CPPv411KANTSStatus" title="KANTSStatus">KANTSStatus</a> <code class="descname">k_ants_watchdog_start</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv421k_ants_watchdog_startv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Start a thread to kick the AntS’s watchdogs at an interval of (timeout/3) seconds. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KANTSStatus <code class="docutils literal notranslate"><span class="pre">ANTS_OK</span></code> if OK, error otherwise </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv420k_ants_watchdog_stopv">
+<span id="_CPPv320k_ants_watchdog_stopv"></span><span id="_CPPv220k_ants_watchdog_stopv"></span><span id="k_ants_watchdog_stop__void"></span><span class="target" id="group__ISIS__ANTS__API_1gaf14ec0097ca8c9f95adffedb9fff26ee"></span><a class="reference internal" href="#_CPPv411KANTSStatus" title="KANTSStatus">KANTSStatus</a> <code class="descname">k_ants_watchdog_stop</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv420k_ants_watchdog_stopv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Stop the watchdog thread. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KANTSStatus <code class="docutils literal notranslate"><span class="pre">ANTS_OK</span></code> if OK, error otherwise </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv418k_ants_passthroughPK7uint8_tiP7uint8_ti">
+<span id="_CPPv318k_ants_passthroughPK7uint8_tiP7uint8_ti"></span><span id="_CPPv218k_ants_passthroughPK7uint8_tiP7uint8_ti"></span><span id="k_ants_passthrough__uint8_tCP.i.uint8_tP.i"></span><span class="target" id="group__ISIS__ANTS__API_1gaa693aa10e49931f8e31f10a7608fd951"></span><a class="reference internal" href="#_CPPv411KANTSStatus" title="KANTSStatus">KANTSStatus</a> <code class="descname">k_ants_passthrough</code><span class="sig-paren">(</span><em class="property">const</em> uint8_t *<em>tx</em>, int <em>tx_len</em>, uint8_t *<em>rx</em>, int <em>rx_len</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv418k_ants_passthroughPK7uint8_tiP7uint8_ti" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Pass a command packet directly through to the antenna. </p>
+<p>Useful for executing commands which have not been implemented in either the generic or specific antenna APIs. <dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KANTSStatus ANTS_OK if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">tx</span></code>: Pointer to command packet to send </li>
+<li><code class="docutils literal notranslate"><span class="pre">tx_len</span></code>: Size of command packet </li>
+<li><code class="docutils literal notranslate"><span class="pre">rx</span></code>: Pointer to storage for command response </li>
+<li><code class="docutils literal notranslate"><span class="pre">rx_len</span></code>: Expected length of command response </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<dl class="class">
+<dt id="_CPPv414ants_telemetry">
+<span id="_CPPv314ants_telemetry"></span><span id="_CPPv214ants_telemetry"></span><span id="ants_telemetry"></span><span class="target" id="structants__telemetry"></span><em class="property">struct </em><code class="descname">ants_telemetry</code><a class="headerlink" href="#_CPPv414ants_telemetry" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;ants-api.h&gt;</em><p>System telemetry fields returned from <a class="reference internal" href="#group__ISIS__ANTS__API_1ga26cc640f3a2bb1e1793e82e779470bab"><span class="std std-ref">k_ants_get_system_telemetry</span></a>. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv4N14ants_telemetry8raw_tempE">
+<span id="_CPPv3N14ants_telemetry8raw_tempE"></span><span id="_CPPv2N14ants_telemetry8raw_tempE"></span><span id="ants_telemetry::raw_temp__uint16_t"></span><span class="target" id="structants__telemetry_1a08973f8799349e7e60888442eb924ffa"></span>uint16_t <code class="descname">raw_temp</code><a class="headerlink" href="#_CPPv4N14ants_telemetry8raw_tempE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Current temperature (raw value) </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N14ants_telemetry13deploy_statusE">
+<span id="_CPPv3N14ants_telemetry13deploy_statusE"></span><span id="_CPPv2N14ants_telemetry13deploy_statusE"></span><span id="ants_telemetry::deploy_status__uint16_t"></span><span class="target" id="structants__telemetry_1a7fc67ea92064fed49e0b84ee42de9e86"></span>uint16_t <code class="descname">deploy_status</code><a class="headerlink" href="#_CPPv4N14ants_telemetry13deploy_statusE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Current deployment status flags. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N14ants_telemetry6uptimeE">
+<span id="_CPPv3N14ants_telemetry6uptimeE"></span><span id="_CPPv2N14ants_telemetry6uptimeE"></span><span id="ants_telemetry::uptime__uint32_t"></span><span class="target" id="structants__telemetry_1adb8428da15277b52b0654c4df22362d9"></span>uint32_t <code class="descname">uptime</code><a class="headerlink" href="#_CPPv4N14ants_telemetry6uptimeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>System uptime (in seconds) </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ants_api_rust.html" class="btn btn-neutral float-right" title="ISIS Antenna Systems API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="ants.html" class="btn btn-neutral" title="ISIS Anntenna System API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../../../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

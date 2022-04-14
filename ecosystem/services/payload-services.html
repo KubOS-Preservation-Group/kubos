@@ -1,0 +1,695 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Payload Services &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../../index.html"/>
+        <link rel="up" title="KubOS Ecosystem" href="../index.html"/>
+        <link rel="next" title="Configuring Services in KubOS" href="service-config.html"/>
+        <link rel="prev" title="Hardware Services" href="hardware-services.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../obc-docs/index.html">Working with an OBC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">KubOS Ecosystem</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#mission-applications">Mission Applications</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#services">Services</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="core-services.html">Core Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hardware-services.html">Hardware Services</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Payload Services</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#python-service">Python Service</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rust-service">Rust Service</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="service-config.html">Service Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="service-dev.html">Service Development</a></li>
+<li class="toctree-l3"><a class="reference internal" href="service-outline-guide.html">KubOS Service Outline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphql.html">GraphQL</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#kubos-linux">Kubos Linux</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../deep-dive/index.html">Under the Hood</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sdk-docs/index.html">Kubos SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Contributing to KubOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">KubOS Ecosystem</a> &raquo;</li>
+        
+      <li>Payload Services</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/ecosystem/services/payload-services.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="payload-services">
+<h1>Payload Services<a class="headerlink" href="#payload-services" title="Permalink to this headline">¶</a></h1>
+<p>Payload services are essentially hardware services which have been custom designed
+for mission payload hardware. They share the same architecture as the hardware
+services, exposing low-level device APIs through a GraphQL interface.</p>
+<p>They primarily differ from hardware services in how they are integrated into the final system.
+Hardware services each have an accompanying Buildroot package, allowing them to be built into the base operating system image.
+This allows them to be covered by the operating system’s recovery process.
+Payload services are generally intended to have the ability to be easily updated on orbit, so they should be run as processes in the user partition that are started on boot.</p>
+<p>The <a class="reference external" href="https://github.com/kubos/kubos/tree/master/examples">examples folder of the Kubos repo</a> includes
+two example payload services: one written in <a class="reference external" href="https://github.com/kubos/kubos/tree/master/examples/python-service">Python</a>,
+and one written in <a class="reference external" href="https://github.com/kubos/kubos/tree/master/examples/rust-service">Rust</a>.</p>
+<div class="section" id="python-service">
+<span id="python-service-ref"></span><h2>Python Service<a class="headerlink" href="#python-service" title="Permalink to this headline">¶</a></h2>
+<p>Inside of the <a class="reference external" href="https://github.com/kubos/kubos/tree/master/examples/python-service">Python service example</a>
+you will find several files and a folder:</p>
+<ul>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">config.toml</span></code> - This TOML file holds <a class="reference internal" href="service-config.html"><span class="doc">configuration options</span></a>
+for the GraphQL/HTTP endpoint.</p>
+</li>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">README.rst</span></code> - Overview of the service project.</p>
+</li>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> - Python module requirements file with list of module/version dependencies.</p>
+</li>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">service.py</span></code> - Boilerplate service code which reads the config file and starts up the GraphQL/HTTP endpoint.</p>
+</li>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">service/</span></code> - This folder holds the guts of the service’s source. The service folder contains the main files which will need modifying when building a custom payload service:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> - This empty file belongs in the <cite>service/</cite> folder to give <cite>service.py</cite> access to the modules within.</li>
+<li><code class="docutils literal notranslate"><span class="pre">app.py</span></code> - Another boilerplate service file. This one should not require any customization.</li>
+<li><code class="docutils literal notranslate"><span class="pre">models.py</span></code> - Describes the hardware model exposed to GraphQL and contains calls down into lower level APIs.</li>
+<li><code class="docutils literal notranslate"><span class="pre">schema.py</span></code> - Contains the actual GraphQL models which are used to generate the GraphQL endpoint.</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<p>We will now take a closer look at <cite>models.py</cite> and <cite>schema.py</cite> to see what exactly it takes to expose a hardware
+API through the service.</p>
+<div class="section" id="models-py">
+<h3>models.py<a class="headerlink" href="#models-py" title="Permalink to this headline">¶</a></h3>
+<p>Inside of the example <cite>models.py</cite> file there are <cite>Subsystem</cite> and <cite>Status</cite> classes.
+Both of these classes must be subclasses of <a class="reference external" href="http://docs.graphene-python.org/en/latest/types/objecttypes/">graphql.ObjectType</a>
+from the <a class="reference external" href="http://docs.graphene-python.org/en/latest/">Graphene</a> module.</p>
+<p>The <cite>Subsystem</cite> class models the hardware that this service will be interacting with.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Subsystem</span><span class="p">(</span><span class="n">graphene</span><span class="o">.</span><span class="n">ObjectType</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Model encapsulating subsystem functionality.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">power_on</span> <span class="o">=</span> <span class="n">graphene</span><span class="o">.</span><span class="n">Boolean</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">refresh</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Will hold code for refreshing the status of the subsystem</span>
+<span class="sd">        model based on queries to the actual hardware.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">print</span> <span class="s2">&quot;Querying for subsystem status&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">power_on</span> <span class="o">=</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">power_on</span>
+
+    <span class="k">def</span> <span class="nf">set_power_on</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">power_on</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Controls the power state of the subsystem</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">print</span> <span class="s2">&quot;Sending new power state to subsystem&quot;</span>
+        <span class="k">print</span> <span class="s2">&quot;Previous State: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">power_on</span>
+        <span class="k">print</span> <span class="s2">&quot;New State: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">power_on</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">power_on</span> <span class="o">=</span> <span class="n">power_on</span>
+        <span class="k">return</span> <span class="n">Status</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">subsystem</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Member variables can be added if any persistent data needs to be stored.
+Member functions are called by the GraphQL schema and are used to call into low-level device API functions.</p>
+<p>The <cite>Status</cite> class is used to model any important information gathered from calling device API functions.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Status</span><span class="p">(</span><span class="n">graphene</span><span class="o">.</span><span class="n">ObjectType</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Model representing execution status. This allows us to return</span>
+<span class="sd">    the status of the mutation function alongside the state of</span>
+<span class="sd">    the model affected.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">status</span> <span class="o">=</span> <span class="n">graphene</span><span class="o">.</span><span class="n">Boolean</span><span class="p">()</span>
+    <span class="n">subsystem</span> <span class="o">=</span> <span class="n">graphene</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="n">Subsystem</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Right now it just contains a <cite>status</cite> member which represents the status of the function call and a <cite>subsystem</cite> member which represents the current state of the <cite>Subsystem</cite>.</p>
+</div>
+<div class="section" id="schema-py">
+<h3>schema.py<a class="headerlink" href="#schema-py" title="Permalink to this headline">¶</a></h3>
+<p>Now lets look inside of <cite>schema.py</cite>. This file contains the models used by <cite>Graphene</cite> to create our GraphQL endpoint.</p>
+<div class="section" id="queries">
+<h4>Queries<a class="headerlink" href="#queries" title="Permalink to this headline">¶</a></h4>
+<p>Queries allow us to fetch data from the subsystem. There is only one <cite>Query</cite> class needed in the <cite>schema.py</cite> file.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Query</span><span class="p">(</span><span class="n">graphene</span><span class="o">.</span><span class="n">ObjectType</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Creates query endpoints exposed by graphene.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">subsystem</span> <span class="o">=</span> <span class="n">graphene</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="n">Subsystem</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">resolve_subsystem</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">info</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Handles request for subsystem query.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">_subsystem</span><span class="o">.</span><span class="n">refresh</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">_subsystem</span>
+</pre></div>
+</div>
+<p>Any member variables of the type <cite>graphene.Field</cite> become top-level fields accessible by queries.
+Because we are using the <cite>Subsystem</cite> class, which is also a <cite>graphene.ObjectType</cite>, members of that class become accessible by queries.
+Each Graphene field requires a resolver function named <cite>resolve_fieldname</cite> which returns back an object of the field’s class type.
+In this case, we call <cite>_subsystem.refresh()</cite> to load the latest data into the global <cite>_subsystem</cite> object and return it.</p>
+<p>The above class would enable the following query for subsystem power status:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="n">subsystem</span> <span class="p">{</span>
+        <span class="n">powerOn</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="mutations">
+<h4>Mutations<a class="headerlink" href="#mutations" title="Permalink to this headline">¶</a></h4>
+<p>Mutations allow us to call functions on the subsystem which cause change or perform some action.
+Like the <cite>Query</cite> class we will only need one top level <cite>Mutation</cite> class.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Mutation</span><span class="p">(</span><span class="n">graphene</span><span class="o">.</span><span class="n">ObjectType</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Creates mutation endpoints exposed by Graphene.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">power_on</span> <span class="o">=</span> <span class="n">PowerOn</span><span class="o">.</span><span class="n">Field</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Like with the <cite>Query</cite>, each <cite>Field</cite> member becomes a top-level mutation.
+However for mutations we will create a new class for each mutation field.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">PowerOn</span><span class="p">(</span><span class="n">graphene</span><span class="o">.</span><span class="n">Mutation</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Creates mutation for Subsystem.PowerOn</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">class</span> <span class="nc">Arguments</span><span class="p">:</span>
+        <span class="n">power</span> <span class="o">=</span> <span class="n">graphene</span><span class="o">.</span><span class="n">Boolean</span><span class="p">()</span>
+
+    <span class="n">Output</span> <span class="o">=</span> <span class="n">Status</span>
+
+    <span class="k">def</span> <span class="nf">mutate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">info</span><span class="p">,</span> <span class="n">power</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Handles request for subsystem powerOn mutation</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">status</span> <span class="o">=</span> <span class="n">Status</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">subsystem</span><span class="o">=</span><span class="n">_subsystem</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">power</span> <span class="o">!=</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">status</span> <span class="o">=</span> <span class="n">_subsystem</span><span class="o">.</span><span class="n">set_power_on</span><span class="p">(</span><span class="n">power</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">status</span>
+</pre></div>
+</div>
+<p>The <cite>Arguments</cite> class describe any argument fields needed for this mutation.
+The line <code class="docutils literal notranslate"><span class="pre">Output</span> <span class="pre">=</span> <span class="pre">Status</span></code> describes the class type this mutation should return.
+The <code class="docutils literal notranslate"><span class="pre">mutate</span></code> function performs the actual work of the mutation and must return back an object of the type specified in the <code class="docutils literal notranslate"><span class="pre">Output</span></code> line.
+The above classes enable the following mutation:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mutation</span> <span class="p">{</span>
+    <span class="n">powerOn</span><span class="p">(</span><span class="n">power</span><span class="p">:</span><span class="n">false</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">status</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="running-the-example">
+<h3>Running the example<a class="headerlink" href="#running-the-example" title="Permalink to this headline">¶</a></h3>
+<p>Getting the example service up and running is fairly simple.
+First, you must make sure you have the necessary Python dependencies installed.
+If you are using the Kubos SDK Vagrant box then these will already be installed.
+Otherwise, you will need to run <code class="docutils literal notranslate"><span class="pre">pip3</span> <span class="pre">install</span> <span class="pre">-r</span> <span class="pre">requirements.txt</span></code>.</p>
+<p>Once the dependencies are in place, you can run <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">service.py</span></code> and the example service should begin.
+You will know that it is running if the command line output says <code class="docutils literal notranslate"><span class="pre">*</span> <span class="pre">Running</span> <span class="pre">on</span> <span class="pre">http://127.0.0.1:8123/</span> <span class="pre">(Press</span> <span class="pre">CTRL+C</span> <span class="pre">to</span> <span class="pre">quit)</span></code>.
+You can now point a web browser to <a class="reference external" href="http://127.0.0.1:8123/graphiql">http://127.0.0.1:8123/graphiql</a> to access a <a class="reference external" href="https://github.com/graphql/graphiql">graphical GraphQL interface</a>.
+Here you can run queries and mutations against the GraphQL endpoints and see the results.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you are running the example from within the Vagrant box then you may need
+some additional configuration.</p>
+</div>
+<p>By default the Vagrant box does not forward any ports. In order to access the HTTP
+interface of the service running inside of the Vagrant box we need to forward
+the port it is using. To do so you will need to add the following line to
+your <code class="docutils literal notranslate"><span class="pre">`Vagrantfile`</span></code> (after <code class="docutils literal notranslate"><span class="pre">Vagrant.configure(&quot;2&quot;)</span> <span class="pre">do</span> <span class="pre">|config|</span></code>):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">network</span> <span class="s2">&quot;forwarded_port&quot;</span><span class="p">,</span> <span class="n">guest</span><span class="p">:</span> <span class="mi">8123</span><span class="p">,</span> <span class="n">host</span><span class="p">:</span> <span class="mi">8123</span>
+</pre></div>
+</div>
+<p>Now restart the Vagrant box with <code class="docutils literal notranslate"><span class="pre">vagrant</span> <span class="pre">reload</span></code>. You should now have the ability
+to run the python service inside the Vagrant box and access it from the outside
+at <a class="reference external" href="http://127.0.0.1:8123">http://127.0.0.1:8123</a>.</p>
+</div>
+</div>
+<div class="section" id="rust-service">
+<span id="rust-service-ref"></span><h2>Rust Service<a class="headerlink" href="#rust-service" title="Permalink to this headline">¶</a></h2>
+<p>This is a quick overview of the payload service written in Rust.</p>
+<p>The current guide for working with Rust within the Kubos SDK can be
+found <a class="reference internal" href="../../sdk-docs/sdk-rust.html"><span class="doc">here</span></a>.</p>
+<div class="section" id="libraries">
+<h3>Libraries<a class="headerlink" href="#libraries" title="Permalink to this headline">¶</a></h3>
+<p>This payload service and future rust-based services will be written using
+the following external crate:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/graphql-rust/juniper">Juniper</a> - GraphQL server library</li>
+</ul>
+<p>And one internal helper crate:</p>
+<ul class="simple">
+<li><a class="reference external" href="../../rust-docs/kubos_service/index.html">Kubos Service</a> - HTTP service interface</li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">Cargo.toml</span></code> in the example payload service gives a good list of crate
+dependencies to start with.</p>
+</div>
+<div class="section" id="example-source">
+<h3>Example Source<a class="headerlink" href="#example-source" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://github.com/kubos/kubos/tree/master/examples/rust-service">Example Source - GitHub</a></p>
+<blockquote>
+<div><ul>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">Cargo.lock</span></code> - Cargo <a class="reference external" href="https://doc.Rust-lang.org/cargo/guide/cargo-toml-vs-cargo-lock.html">lock</a> file</p>
+</li>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">Cargo.toml</span></code> - Cargo <a class="reference external" href="https://doc.Rust-lang.org/cargo/reference/manifest.html">manifest</a> file</p>
+</li>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">src</span></code> - Contains the actual Rust source.</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">main.rs</span></code> - Contains setup code using the <code class="docutils literal notranslate"><span class="pre">kubos-service</span></code> crate. May need minor customization but not much.</li>
+<li><code class="docutils literal notranslate"><span class="pre">model.rs</span></code> - Describes the hardware model exposed to GraphQL and contains calls down to lowel-level APIs.</li>
+<li><code class="docutils literal notranslate"><span class="pre">schema.rs</span></code> - Contains the actual GraphQL schema models used to generate the GraphQL endpoint.</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+<p>We will now take a closer look at <code class="docutils literal notranslate"><span class="pre">model.rs</span></code> and <code class="docutils literal notranslate"><span class="pre">schema.rs</span></code> and break down
+the pieces required to expose hardware APIs through the service.</p>
+</div>
+<div class="section" id="model-rs">
+<h3>model.rs<a class="headerlink" href="#model-rs" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">model.rs</span></code> file contains structures and functions used to wrap low-level device APIs
+and provide abstractions for the GraphQL schema to call into. Looking inside of the <code class="docutils literal notranslate"><span class="pre">model.rs</span></code>
+file you will see several <code class="docutils literal notranslate"><span class="pre">struct</span></code> declarations. We’ll start with the <code class="docutils literal notranslate"><span class="pre">Subsystem</span></code>:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">pub</span><span class="w"> </span><span class="k">struct</span> <span class="nc">Subsystem</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Here we have a struct which is used to model a subsystem. In this example the struct
+is given no member variables for persistence. All data is obtained through function
+calls for real-time results.</p>
+<p>Here is an abbreviated set of functions implemented for the <code class="docutils literal notranslate"><span class="pre">Subsystem</span></code> struct:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">impl</span><span class="w"> </span><span class="n">Subsystem</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="sd">/// Creates new Subsystem structure instance</span>
+<span class="w">    </span><span class="sd">/// Code initializing subsystems communications</span>
+<span class="w">    </span><span class="sd">/// would likely be placed here</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">new</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="nc">Subsystem</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;getting new subsystem data&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// Here we would call into a hardware API</span>
+<span class="w">        </span><span class="n">Subsystem</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="sd">/// Power status getter</span>
+<span class="w">    </span><span class="sd">/// Code querying for new power value</span>
+<span class="w">    </span><span class="sd">/// could be placed here</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">power</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">Result</span><span class="o">&lt;</span><span class="kt">bool</span><span class="p">,</span><span class="w"> </span><span class="n">Error</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;Getting power&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// Low level query here</span>
+<span class="w">        </span><span class="nb">Ok</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="sd">/// Power state setter</span>
+<span class="w">    </span><span class="sd">/// Here we would call into the low level</span>
+<span class="w">    </span><span class="sd">/// device function</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">set_power</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">_power</span>: <span class="kt">bool</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">Result</span><span class="o">&lt;</span><span class="n">SetPower</span><span class="p">,</span><span class="w"> </span><span class="n">Error</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;Setting power state&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// Send command to device here</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">_power</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="nb">Ok</span><span class="p">(</span><span class="n">SetPower</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">power</span>: <span class="nc">true</span><span class="w"> </span><span class="p">})</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="nb">Err</span><span class="p">(</span><span class="n">Error</span>::<span class="n">new</span><span class="p">(</span><span class="w"></span>
+<span class="w">                </span><span class="n">ErrorKind</span>::<span class="n">PermissionDenied</span><span class="p">,</span><span class="w"></span>
+<span class="w">                </span><span class="s">&quot;I&#39;m sorry Dave, I afraid I can&#39;t do that&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="p">))</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="sd">/// Overriding the destructor</span>
+<span class="k">impl</span><span class="w"> </span><span class="nb">Drop</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">Subsystem</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="sd">/// Here is where we would clean up</span>
+<span class="w">    </span><span class="sd">/// any subsystem communications stuff</span>
+<span class="w">    </span><span class="k">fn</span> <span class="nf">drop</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="bp">self</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;Destructing subsystem&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">new</span></code> function is the <code class="docutils literal notranslate"><span class="pre">Subsystem</span></code> constructor. It can be used to establish
+a connection with the hardware if necessary. This function is called once per
+query or mutation and produces the struct instance used.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">power</span></code> function is an example of a function called during a query. These
+functions called by GraphQL functions must return the type <code class="docutils literal notranslate"><span class="pre">Result&lt;T,</span> <span class="pre">Error&gt;</span></code>
+in order to properly unpack valid data vs an error message.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">set_power</span></code> function is an example of a function called during a mutation.
+It is essentially the same as <code class="docutils literal notranslate"><span class="pre">power</span></code> but takes a parameter. Functions called
+during mutations must also return the type <code class="docutils literal notranslate"><span class="pre">Result&lt;T,</span> <span class="pre">Error&gt;</span></code>.</p>
+<p>The last function is the overridden destructor. This is not required but can be nice
+if you need to clean up any connections to the subsystem between queries.</p>
+<p>In the <code class="docutils literal notranslate"><span class="pre">model.rs</span></code> file there are also several other very simple structs which
+don’t have any functions implemented for them: <code class="docutils literal notranslate"><span class="pre">SetPower</span></code>, <code class="docutils literal notranslate"><span class="pre">ResetUptime</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">CalibrateThermometer</span></code>. These are used as wrappers around scalar values
+returned by various mutations in <code class="docutils literal notranslate"><span class="pre">schema.rs</span></code>.</p>
+</div>
+<div class="section" id="schema-rs">
+<h3>schema.rs<a class="headerlink" href="#schema-rs" title="Permalink to this headline">¶</a></h3>
+<p>Now we will take a look inside of <code class="docutils literal notranslate"><span class="pre">schema.rs</span></code>.  This file contains the query
+and mutation models used by <a class="reference external" href="https://graphql-rust.github.io/juniper/current/">Juniper</a> to create
+our GraphQL endpoints.</p>
+<div class="section" id="id1">
+<h4>Queries<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+<p>Queries allow us to fetch data from the subsystem. There is only one base <code class="docutils literal notranslate"><span class="pre">Query</span></code>
+struct needed in the <code class="docutils literal notranslate"><span class="pre">schema.rs</span></code> file.</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">pub</span><span class="w"> </span><span class="k">struct</span> <span class="nc">QueryRoot</span><span class="p">;</span><span class="w"></span>
+
+<span class="sd">/// Base GraphQL query model</span>
+<span class="n">graphql_object</span><span class="o">!</span><span class="p">(</span><span class="n">QueryRoot</span><span class="w"> </span>: <span class="nc">Context</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="s">&quot;Query&quot;</span><span class="w"> </span><span class="o">|&amp;</span><span class="bp">self</span><span class="o">|</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">field</span><span class="w"> </span><span class="n">subsystem</span><span class="p">(</span><span class="o">&amp;</span><span class="n">executor</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">FieldResult</span><span class="o">&lt;&amp;</span><span class="n">Subsystem</span><span class="o">&gt;</span><span class="w"></span>
+<span class="w">        </span><span class="k">as</span><span class="w"> </span><span class="s">&quot;Subsystem query&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nb">Ok</span><span class="p">(</span><span class="n">executor</span><span class="p">.</span><span class="n">context</span><span class="p">().</span><span class="n">get_subsystem</span><span class="p">())</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">});</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Inside of the <a class="reference external" href="https://graphql-rust.github.io/juniper/current/types/objects/complex_fields.html">graphql_object macro</a>
+we define each top-level query field. In this case there is just the one <code class="docutils literal notranslate"><span class="pre">subsystem</span></code> field.
+In order to allow GraphQL access to the member functions (or variables) of the <code class="docutils literal notranslate"><span class="pre">Subsystem</span></code>
+struct we also apply the <code class="docutils literal notranslate"><span class="pre">graphql_object</span></code> macro to it:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="sd">/// GraphQL model for Subsystem</span>
+<span class="n">graphql_object</span><span class="o">!</span><span class="p">(</span><span class="n">Subsystem</span>: <span class="nc">Context</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="s">&quot;Subsystem&quot;</span><span class="w"> </span><span class="o">|&amp;</span><span class="bp">self</span><span class="o">|</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">description</span>: <span class="s">&quot;Handler subsystem&quot;</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">field</span><span class="w"> </span><span class="n">power</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="nc">FieldResult</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="s">&quot;Power state of subsystem&quot;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nb">Ok</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">power</span><span class="p">()</span><span class="o">?</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">field</span><span class="w"> </span><span class="n">uptime</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="nc">FieldResult</span><span class="o">&lt;</span><span class="kt">i32</span><span class="o">&gt;</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="s">&quot;Uptime of subsystem&quot;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nb">Ok</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">uptime</span><span class="p">()</span><span class="o">?</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">field</span><span class="w"> </span><span class="n">temperature</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="nc">FieldResult</span><span class="o">&lt;</span><span class="kt">i32</span><span class="o">&gt;</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="s">&quot;Temperature of subsystem&quot;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nb">Ok</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">temperature</span><span class="p">()</span><span class="o">?</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">});</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Here we create GraphQL field wrappers around each member of the <code class="docutils literal notranslate"><span class="pre">Subsystem</span></code>
+struct that we want exposed. The syntax <code class="docutils literal notranslate"><span class="pre">Ok(self.func()?)</span></code> allows the
+translation of return type <code class="docutils literal notranslate"><span class="pre">Result&lt;T,</span> <span class="pre">Error&gt;</span></code> into <code class="docutils literal notranslate"><span class="pre">FieldResult&lt;T&gt;</span></code>.</p>
+</div>
+<div class="section" id="id2">
+<h4>Mutations<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
+<p>Mutations allow us to call functions on the subsystem which cause change or
+perform some action. Like the <code class="docutils literal notranslate"><span class="pre">QueryRoot</span></code> struct, we will only need one
+top-level <code class="docutils literal notranslate"><span class="pre">MutationRoot</span></code> struct:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">pub</span><span class="w"> </span><span class="k">struct</span> <span class="nc">MutationRoot</span><span class="p">;</span><span class="w"></span>
+
+<span class="sd">/// Base GraphQL mutation model</span>
+<span class="n">graphql_object</span><span class="o">!</span><span class="p">(</span><span class="n">MutationRoot</span><span class="w"> </span>: <span class="nc">Context</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="s">&quot;Mutation&quot;</span><span class="w"> </span><span class="o">|&amp;</span><span class="bp">self</span><span class="o">|</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Each field represents functionality available</span>
+<span class="w">    </span><span class="c1">// through the GraphQL mutations</span>
+<span class="w">    </span><span class="n">field</span><span class="w"> </span><span class="n">set_power</span><span class="p">(</span><span class="o">&amp;</span><span class="n">executor</span><span class="p">,</span><span class="w"> </span><span class="n">power</span><span class="w"> </span>: <span class="kt">bool</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">FieldResult</span><span class="o">&lt;</span><span class="n">SetPower</span><span class="o">&gt;</span><span class="w"></span>
+<span class="w">        </span><span class="k">as</span><span class="w"> </span><span class="s">&quot;Set subsystem power state&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nb">Ok</span><span class="p">(</span><span class="n">executor</span><span class="p">.</span><span class="n">context</span><span class="p">().</span><span class="n">get_subsystem</span><span class="p">().</span><span class="n">set_power</span><span class="p">(</span><span class="n">power</span><span class="p">)</span><span class="o">?</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="p">});</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Each top-level mutation is exposed as an individual field. For each mutation
+field there is a custom struct wrapping up the return values for that function.
+Each of these structs must also have the graphql_object macro applied to them.</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="sd">/// GraphQL model for SetPower return</span>
+<span class="n">graphql_object</span><span class="o">!</span><span class="p">(</span><span class="n">SetPower</span>: <span class="nc">Context</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="s">&quot;SetPower&quot;</span><span class="w"> </span><span class="o">|&amp;</span><span class="bp">self</span><span class="o">|</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">description</span>: <span class="s">&quot;Enable Power Return&quot;</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">field</span><span class="w"> </span><span class="n">power</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="nc">FieldResult</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="s">&quot;Power state of subsystem&quot;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nb">Ok</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">power</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">});</span><span class="w"></span>
+</pre></div>
+</div>
+<p>These structs define fields which can then be used in the mutation to specify
+which return data is desired.</p>
+</div>
+</div>
+<div class="section" id="building-and-running">
+<h3>Building and Running<a class="headerlink" href="#building-and-running" title="Permalink to this headline">¶</a></h3>
+<p>From inside of a Kubos SDK Vagrant box, navigate to the <code class="docutils literal notranslate"><span class="pre">service</span></code> folder of your
+copy of the Rust service example.</p>
+<p>Issue <code class="docutils literal notranslate"><span class="pre">cargo</span> <span class="pre">build</span></code> in order to build the service.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The <code class="docutils literal notranslate"><span class="pre">cargo</span> <span class="pre">build</span></code> command can be used to build any Rust service
+or crate from within the Vagrant box.</p>
+</div>
+<p>In order to run the service locally:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Verify that port 8123 is being forwarded out of your Vagrant box</li>
+<li>Issue <code class="docutils literal notranslate"><span class="pre">cargo</span> <span class="pre">run</span></code></li>
+</ul>
+</div></blockquote>
+<p>Once it is up and running you can use the GraphiQL endpoint to issue queries or mutations against
+the service.</p>
+<p>On your host machine, open a web browser and navigate to <cite>http://127.0.0.1:8123/graphiql</cite>.</p>
+<p>Note: If your service is using something other than the default IP address and/or port, you’ll need
+to update the address in the URL.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="service-config.html" class="btn btn-neutral float-right" title="Configuring Services in KubOS" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="hardware-services.html" class="btn btn-neutral" title="Hardware Services" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

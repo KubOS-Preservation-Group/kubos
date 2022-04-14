@@ -1,0 +1,464 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Developing a KubOS Service &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../../index.html"/>
+        <link rel="up" title="KubOS Ecosystem" href="../index.html"/>
+        <link rel="next" title="KubOS Service Outline" href="service-outline-guide.html"/>
+        <link rel="prev" title="Configuring Services in KubOS" href="service-config.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../obc-docs/index.html">Working with an OBC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">KubOS Ecosystem</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#mission-applications">Mission Applications</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#services">Services</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="core-services.html">Core Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hardware-services.html">Hardware Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="payload-services.html">Payload Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="service-config.html">Service Configuration</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Service Development</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#resources">Resources</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example-services">Example Services</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#recommended-libraries">Recommended Libraries</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#creating-the-schema">Creating the Schema</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#logging">Logging</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#service-configuration">Service Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#testing-your-service">Testing Your Service</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#creating-an-init-script">Creating an Init Script</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#installing-your-service">Installing Your Service</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="service-outline-guide.html">KubOS Service Outline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphql.html">GraphQL</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#kubos-linux">Kubos Linux</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../deep-dive/index.html">Under the Hood</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sdk-docs/index.html">Kubos SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Contributing to KubOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">KubOS Ecosystem</a> &raquo;</li>
+        
+      <li>Developing a KubOS Service</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/ecosystem/services/service-dev.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="developing-a-kubos-service">
+<h1>Developing a KubOS Service<a class="headerlink" href="#developing-a-kubos-service" title="Permalink to this headline">¶</a></h1>
+<p>This document goes over the basic components of creating a new service for KubOS.</p>
+<p>It assumes you already have a good base understanding of the KubOS ecosystem and is intended as more
+of a reference document, rather than a detailed tutorial.</p>
+<p>If you are unfamiliar with the system, we recommend first going through our
+<a class="reference internal" href="../../tutorials/index.html"><span class="doc">new user tutorials</span></a>.</p>
+<div class="section" id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference internal" href="graphql.html"><span class="doc">GraphQL</span></a></li>
+<li><a class="reference internal" href="service-outline-guide.html"><span class="doc">KubOS Service Outline</span></a></li>
+<li><a class="reference internal" href="service-config.html"><span class="doc">Service Configuration</span></a></li>
+<li><a class="reference internal" href="../../contributing/testing.html"><span class="doc">Testing Guide</span></a></li>
+<li><a class="reference internal" href="../../contributing/documentation.html"><span class="doc">Documentation Guide</span></a></li>
+</ul>
+</div>
+<div class="section" id="example-services">
+<h2>Example Services<a class="headerlink" href="#example-services" title="Permalink to this headline">¶</a></h2>
+<p>The underlying framework tends to be quite common between services.
+As a result, it will likely be useful to refer to an existing service when creating a new one.</p>
+<p>The following are recommended example services:</p>
+<div class="section" id="rust">
+<h3>Rust<a class="headerlink" href="#rust" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/kubos/kubos/tree/master/services/clyde-3g-eps-service">Clyde 3G 1U EPS Service</a></li>
+<li><a class="reference external" href="https://github.com/kubos/kubos/tree/master/services/nsl-duplex-d2-comms-service">NSL EyeStar-D2 Duplex Radio Service</a></li>
+</ul>
+</div>
+<div class="section" id="python">
+<h3>Python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/kubos/kubos/tree/master/services/pumpkin-mcu-service">Pumpkin MCU Service</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="recommended-libraries">
+<h2>Recommended Libraries<a class="headerlink" href="#recommended-libraries" title="Permalink to this headline">¶</a></h2>
+<p>There is existing tooling which we use internally and recommend you use when bringing up a new
+service.</p>
+<div class="section" id="id1">
+<h3>Python<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/kubos/kubos/tree/master/libs/kubos-service">kubos-service</a>  - Abstracts the
+process needed to create and start a GraphQL server over HTTP.
+It is built on top of <a class="reference external" href="https://github.com/graphql-python/flask-graphql">Flask</a> and
+automatically creates the the GraphQL and <a class="reference internal" href="../../tutorials/app-register.html#graphiql"><span class="std std-ref">GraphiQL</span></a> endpoints.</li>
+<li><a class="reference external" href="https://graphene-python.org/">Graphene</a> - Library for constructing the GraphQL schema</li>
+</ul>
+</div>
+<div class="section" id="id2">
+<h3>Rust<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first"><a class="reference external" href="https://github.com/kubos/kubos/tree/master/services/kubos-service">kubos-service</a></p>
+<blockquote>
+<div><ul class="simple">
+<li>Abstracts the process of starting a service. Automatically fetches the IP information from
+the config file and presents the GraphQL and <a class="reference internal" href="../../tutorials/app-register.html#graphiql"><span class="std std-ref">GraphiQL</span></a> endpoints</li>
+<li>Provides helper macros which can automatically collect and process errors when running
+operations against hardware</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first"><a class="reference external" href="https://graphql-rust.github.io/juniper/current/">Juniper</a> - Library for constructing the
+GraphQL schema</p>
+</li>
+<li><p class="first"><a class="reference external" href="https://github.com/rust-lang-nursery/failure">Failure</a> - Library used for error handling</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="creating-the-schema">
+<h2>Creating the Schema<a class="headerlink" href="#creating-the-schema" title="Permalink to this headline">¶</a></h2>
+<p>All services should implement the base service schema, as documented in the
+<a class="reference internal" href="service-outline-guide.html"><span class="doc">service outline</span></a> doc.</p>
+<p>At a high level, the service should present operations which can be broken into two categories:</p>
+<ul class="simple">
+<li>Queries allow users to fetch information about the state of the system and other telemetry items</li>
+<li>Mutations are operations which may affect the state of the system</li>
+</ul>
+<p>We recommend implementing the most basic operations first (ping, no-op, reset) to establish the
+initial service framework before moving on to the more complex (or unique) features.</p>
+<p>In general, we don’t bother to expose all possible functionality of a particular hardware device.
+Instead, we focus on the most common functionality as well as the specific operations we know we’ll
+need.
+This allows us to reduce the amount of development time required to create a new service.</p>
+<p>As a result, we make sure to include a <code class="docutils literal notranslate"><span class="pre">commandRaw</span></code> mutation in all hardware services.
+This allows the service to still be able to execute any functionality which wasn’t explicitly
+programmed.</p>
+</div>
+<div class="section" id="logging">
+<h2>Logging<a class="headerlink" href="#logging" title="Permalink to this headline">¶</a></h2>
+<p>We recommend logging any errors which your service encounters.
+These errors will likely also be returned in a GraphQL response, however we feel that this
+redudancy is important for maintaining overall system health.</p>
+<p>All log messages issued by the service should be routed to the system logs.
+You may also choose to echo the messages to <code class="docutils literal notranslate"><span class="pre">stdout</span></code>, however that is not a required behavior.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you choose to route messages to <code class="docutils literal notranslate"><span class="pre">stdout</span></code>, they will only appear in the console of the user
+who started the process. As a result, services which are started automatically at boot will not
+issue messages to <code class="docutils literal notranslate"><span class="pre">stdout</span></code> if you log into the OBC at a later time.</p>
+</div>
+<p>Services should use the daemon logging facility (rather than the user facility).
+This will cause all service log messages to be routed to the <cite>/var/log/kubos-*.log</cite> files.</p>
+<p>Please refer to the <a class="reference internal" href="../linux-docs/logging.html"><span class="doc">logging</span></a> doc for more information about the setup
+and behavior of log messages.</p>
+</div>
+<div class="section" id="service-configuration">
+<h2>Service Configuration<a class="headerlink" href="#service-configuration" title="Permalink to this headline">¶</a></h2>
+<p>By default, all services require that the IP address and port of their GraphQL endpoint be defined
+in the system’s <cite>config.toml</cite> file.
+It is generally assumed that any port which is not already listed in the config file is available
+for use, however there are some existing conventions:</p>
+<ul class="simple">
+<li>Kubos core services use ports 8000-8079</li>
+<li>Communications services use ports 8080-8099 for their downlink ports</li>
+<li>Hardware services use ports 8100 and up</li>
+</ul>
+<p>It may be useful for your service to have certain additional configurable settings.
+For instance, you might want to be able to adjust certain timeout values, or change which device
+bus your hardware is connected to.
+In this case, your service should read the needed configuration values from the system’s
+<cite>config.toml</cite> file.</p>
+<p>More information about setting and fetching configuration values can be found in the
+<a class="reference internal" href="service-config.html"><span class="doc">service config</span></a> doc.</p>
+</div>
+<div class="section" id="testing-your-service">
+<h2>Testing Your Service<a class="headerlink" href="#testing-your-service" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="../../tutorials/app-register.html#graphiql"><span class="std std-ref">GraphiQL</span></a> interface provides a good way to dynamically test each of your
+service’s operations.</p>
+<p>Unit and integration tests are a good way to ensure that your service remains functional and
+compatible with the KubOS ecosystem over time.
+More information about setting up testing can be found in our <a class="reference internal" href="../../contributing/testing.html"><span class="doc">testing</span></a>
+doc.</p>
+</div>
+<div class="section" id="creating-an-init-script">
+<h2>Creating an Init Script<a class="headerlink" href="#creating-an-init-script" title="Permalink to this headline">¶</a></h2>
+<p>If you would like your service to be automatically started at system boot, you will need to create
+an init script.
+KubOS uses BusyBox’s init system, so the init scripts will need to use the following naming
+convention: <code class="docutils literal notranslate"><span class="pre">S{run-level}{application-name}</span></code>. The run-level value should be between 1 and 99.
+The lower the value, the earlier it will be run in the system boot process.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The BusyBox init system does <em>not</em> require compliance with the <a class="reference external" href="https://wiki.debian.org/LSBInitScripts">LSB init script</a>
+standard.</p>
+</div>
+<p>For Rust-based services, the <a class="reference external" href="https://github.com/kubos/kubos-linux-build/blob/master/package/kubos/kubos-monitor/kubos-monitor">monitor service’s</a>
+init script provides a good example.
+Rust services (and other executables) should be started using <a class="reference external" href="http://man7.org/linux/man-pages/man8/start-stop-daemon.8.html">start-stop-daemon</a>.</p>
+<p>For Python-based services, please refer to the <a class="reference external" href="https://github.com/kubos/kubos-linux-build/blob/master/package/kubos/kubos-pumpkin-mcu/kubos-pumpkin-mcu">Pumpkin MCU service</a>
+init script for reference.
+Python services should be started by using the <cite>python</cite> command to start the service as a
+background process.</p>
+</div>
+<div class="section" id="installing-your-service">
+<h2>Installing Your Service<a class="headerlink" href="#installing-your-service" title="Permalink to this headline">¶</a></h2>
+<p>Once you have finished service development, you should install the service in its final location in
+your OBC.</p>
+<p>Custom services may either live in the user data partition or in the root file system.
+If the service interacts with core avionics or communications hardware, and is not expected to
+change after launch, we recommend including it in the root file system for recovery purposes.
+Only services included in the root file system are recovered automatically by the OS recovery
+process.
+Please refer to our <a class="reference internal" href="../linux-docs/kubos-linux-recovery.html"><span class="doc">recovery architecture doc</span></a> for
+more information about our OS recovery system.</p>
+<p>In either case, you will need to update your system’s <cite>config.toml</cite> file in order to define the
+IP address and port for your service’s GraphQL endpoint.</p>
+<div class="section" id="user-data-partition">
+<h3>User Data Partition<a class="headerlink" href="#user-data-partition" title="Permalink to this headline">¶</a></h3>
+<p>If your service will live in the user data partition, then there will be two steps needed to install
+the service.</p>
+<ol class="arabic simple">
+<li><a class="reference internal" href="../../obc-docs/comms-setup.html#file-transfer"><span class="std std-ref">Transfer</span></a> the service binary to <cite>/home/system/usr/bin</cite>. This is the
+preferred location for user executables and is in the system PATH.</li>
+<li>Transfer the service init script to <cite>/home/system/etc/init.d</cite>.</li>
+</ol>
+</div>
+<div class="section" id="root-file-system">
+<h3>Root File System<a class="headerlink" href="#root-file-system" title="Permalink to this headline">¶</a></h3>
+<p>In order for your service to be installed into the root file system, you will need to create a
+custom Buildroot package and then generate your own KubOS image.</p>
+<p>More information about creating custom packages can be found in the <a class="reference internal" href="../../deep-dive/klb/configuring-kubos.html#custom-packages"><span class="std std-ref">Configuring KubOS</span></a>
+doc.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="service-outline-guide.html" class="btn btn-neutral float-right" title="KubOS Service Outline" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="service-config.html" class="btn btn-neutral" title="Configuring Services in KubOS" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

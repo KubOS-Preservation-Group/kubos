@@ -1,0 +1,797 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>iOBC Supervisor API &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../../../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../../../../index.html"/>
+        <link rel="up" title="OBC APIs" href="../index.html"/>
+        <link rel="next" title="iOBC Checksum API" href="checksum.html"/>
+        <link rel="prev" title="OBC APIs" href="../index.html"/> 
+
+  
+  <script src="../../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../getting-started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../obc-docs/index.html">Working with an OBC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ecosystem/index.html">KubOS Ecosystem</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Under the Hood</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../../index.html#apis">APIs</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../device-api-guide.html">Kubos Device API Creation Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../device-api/index.html">Device Interfaces</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html">OBC APIs</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">iOBC Supervisor API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="checksum.html">iOBC Checksum API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../kubos-hal/index.html">Kubos HAL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../kubos-libs.html">Kubos Libraries</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#protocols">Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#kubos-linux">Kubos Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#design-decisions">Design Decisions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../sdk-docs/index.html">Kubos SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contributing/index.html">Contributing to KubOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../index.html">Under the Hood of KubOS</a> &raquo;</li>
+        
+          <li><a href="../index.html">OBC APIs</a> &raquo;</li>
+        
+      <li>iOBC Supervisor API</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../../_sources/deep-dive/apis/obc-api/isis-iobc/supervisor.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="iobc-supervisor-api">
+<h1>iOBC Supervisor API<a class="headerlink" href="#iobc-supervisor-api" title="Permalink to this headline">¶</a></h1>
+<dl class="group">
+<dt>
+<span class="target" id="group__iOBC-Supervisor"></span><em>group</em> <code class="descname">iOBC-Supervisor</code></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Defines</p>
+<dl class="macro">
+<dt id="c.LENGTH_EMERGENCY_RESET">
+<span class="target" id="group__iOBC-Supervisor_1gaca0f40dee473d893cf6f1fb98a81b652"></span><code class="descname">LENGTH_EMERGENCY_RESET</code><a class="headerlink" href="#c.LENGTH_EMERGENCY_RESET" title="Permalink to this definition">¶</a></dt>
+<dd><p>Length of emergency reset. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.LENGTH_RESET">
+<span class="target" id="group__iOBC-Supervisor_1ga2eda6c2ed1c155c539c9b848a57b183d"></span><code class="descname">LENGTH_RESET</code><a class="headerlink" href="#c.LENGTH_RESET" title="Permalink to this definition">¶</a></dt>
+<dd><p>Length of reset the IOBC PCU. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.LENGTH_POWER_CYCLE_IOBC">
+<span class="target" id="group__iOBC-Supervisor_1ga102ebd1e0475ddef82e1bd76c3e983b4"></span><code class="descname">LENGTH_POWER_CYCLE_IOBC</code><a class="headerlink" href="#c.LENGTH_POWER_CYCLE_IOBC" title="Permalink to this definition">¶</a></dt>
+<dd><p>Length of reset the IOBC PCU. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.LENGTH_TELEMETRY_HOUSEKEEPING">
+<span class="target" id="group__iOBC-Supervisor_1ga07f731e9a4926317463be8ded0a6e9b9"></span><code class="descname">LENGTH_TELEMETRY_HOUSEKEEPING</code><a class="headerlink" href="#c.LENGTH_TELEMETRY_HOUSEKEEPING" title="Permalink to this definition">¶</a></dt>
+<dd><p>Length of the telemetry housekeeping request. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.LENGTH_TELEMETRY_GET_VERSION">
+<span class="target" id="group__iOBC-Supervisor_1ga9cd4691d0bbdc8850eaee926d52d686f"></span><code class="descname">LENGTH_TELEMETRY_GET_VERSION</code><a class="headerlink" href="#c.LENGTH_TELEMETRY_GET_VERSION" title="Permalink to this definition">¶</a></dt>
+<dd><p>Length of the getting Version. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.LENGTH_TELEMETRY_SAMPLE_HOUSEKEEPING">
+<span class="target" id="group__iOBC-Supervisor_1gaf2dc47b2b154c127f63d5e66daf9d2f7"></span><code class="descname">LENGTH_TELEMETRY_SAMPLE_HOUSEKEEPING</code><a class="headerlink" href="#c.LENGTH_TELEMETRY_SAMPLE_HOUSEKEEPING" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reply length of the telemetry housekeeping sample. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.LENGTH_TELEMETRY_SAMPLE_VERSION">
+<span class="target" id="group__iOBC-Supervisor_1ga1f60dc97645ef93c32d66e3efa2f7bb3"></span><code class="descname">LENGTH_TELEMETRY_SAMPLE_VERSION</code><a class="headerlink" href="#c.LENGTH_TELEMETRY_SAMPLE_VERSION" title="Permalink to this definition">¶</a></dt>
+<dd><p>Length of the sampling the Version. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.LENGTH_TELEMETRY_DUMMY">
+<span class="target" id="group__iOBC-Supervisor_1gae1fb20957fe8c1139d4a9ec7753da730"></span><code class="descname">LENGTH_TELEMETRY_DUMMY</code><a class="headerlink" href="#c.LENGTH_TELEMETRY_DUMMY" title="Permalink to this definition">¶</a></dt>
+<dd><p>Length of the dummy. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.LENGTH_GENERIC_REPLY">
+<span class="target" id="group__iOBC-Supervisor_1ga21ca031700ef8eb66c324c14b9b6298d"></span><code class="descname">LENGTH_GENERIC_REPLY</code><a class="headerlink" href="#c.LENGTH_GENERIC_REPLY" title="Permalink to this definition">¶</a></dt>
+<dd><p>Length of the compile information. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.LENGTH_COMPILE_INFORMATION">
+<span class="target" id="group__iOBC-Supervisor_1ga7a4beef9bcff82fa670ff75a3bae35d3"></span><code class="descname">LENGTH_COMPILE_INFORMATION</code><a class="headerlink" href="#c.LENGTH_COMPILE_INFORMATION" title="Permalink to this definition">¶</a></dt>
+<dd><p>Length of the compile information. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.SUPERVISOR_NUMBER_OF_ADC_CHANNELS">
+<span class="target" id="group__iOBC-Supervisor_1ga4e4a38b1698c167827d3902f2e9c69cc"></span><code class="descname">SUPERVISOR_NUMBER_OF_ADC_CHANNELS</code><a class="headerlink" href="#c.SUPERVISOR_NUMBER_OF_ADC_CHANNELS" title="Permalink to this definition">¶</a></dt>
+<dd><p>The number of channels used in the Supervisor Controller. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Functions</p>
+<dl class="function">
+<dt id="_CPPv426supervisor_emergency_resetv">
+<span id="_CPPv326supervisor_emergency_resetv"></span><span id="_CPPv226supervisor_emergency_resetv"></span><span id="supervisor_emergency_reset"></span><span class="target" id="group__iOBC-Supervisor_1ga612e8ef81176ee6432074c1e3dc60178"></span>bool <code class="descname">supervisor_emergency_reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv426supervisor_emergency_resetv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Performs a software reset of the microcontroller directly without shutting down its components. </p>
+<p>As this command is considered unsafe for the hardware and the software of the IOBC-S, use <a class="reference internal" href="#group__iOBC-Supervisor_1ga1ec2952641cf586a1b46d98a8a879bc8"><span class="std std-ref">supervisor_reset()</span></a> instead.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>true if command is sent successfully, otherwise false </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv416supervisor_resetv">
+<span id="_CPPv316supervisor_resetv"></span><span id="_CPPv216supervisor_resetv"></span><span id="supervisor_reset"></span><span class="target" id="group__iOBC-Supervisor_1ga1ec2952641cf586a1b46d98a8a879bc8"></span>bool <code class="descname">supervisor_reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv416supervisor_resetv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Assert a reset to the IOBC-S and make sure that the conditions prior to reset operations are met. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>true if command is sent successfully, otherwise false </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv421supervisor_powercyclev">
+<span id="_CPPv321supervisor_powercyclev"></span><span id="_CPPv221supervisor_powercyclev"></span><span id="supervisor_powercycle"></span><span class="target" id="group__iOBC-Supervisor_1ga6ddc64aeb8b9f3ca99947fb7f49e419f"></span>bool <code class="descname">supervisor_powercycle</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv421supervisor_powercyclev" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Let the IOBC be power-cycled for around 4-5 seconds. </p>
+<p>Supervisor Controller power is not affected by this command.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>true if command is sent successfully, otherwise false </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv422supervisor_get_versionP20supervisor_version_t">
+<span id="_CPPv322supervisor_get_versionP20supervisor_version_t"></span><span id="_CPPv222supervisor_get_versionP20supervisor_version_t"></span><span id="supervisor_get_version__supervisor_version_tP"></span><span class="target" id="group__iOBC-Supervisor_1ga14379b838a42b7decca9d471de268f15"></span>bool <code class="descname">supervisor_get_version</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv420supervisor_version_t" title="supervisor_version_t">supervisor_version_t</a> *<em>version</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv422supervisor_get_versionP20supervisor_version_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getting Version from Supervisor Controller. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>true if command is sent and response has valid CRC, otherwise false </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">version</span></code>: Version and configuration read back from the Supervisor Controller. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv427supervisor_get_housekeepingP25supervisor_housekeeping_t">
+<span id="_CPPv327supervisor_get_housekeepingP25supervisor_housekeeping_t"></span><span id="_CPPv227supervisor_get_housekeepingP25supervisor_housekeeping_t"></span><span id="supervisor_get_housekeeping__supervisor_housekeeping_tP"></span><span class="target" id="group__iOBC-Supervisor_1gaaa5421d691c69642cc7972afb52d4f4a"></span>bool <code class="descname">supervisor_get_housekeeping</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv425supervisor_housekeeping_t" title="supervisor_housekeeping_t">supervisor_housekeeping_t</a> *<em>housekeeping</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv427supervisor_get_housekeepingP25supervisor_housekeeping_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getting Housekeeping from Supervisor Controller. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>true if command is sent and response has valid CRC, otherwise false </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">housekeeping</span></code>: Housekeeping read back from the Supervisor Controller. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<dl class="union">
+<dt id="_CPPv426supervisor_generic_reply_t">
+<span id="_CPPv326supervisor_generic_reply_t"></span><span id="_CPPv226supervisor_generic_reply_t"></span><span class="target" id="unionsupervisor__generic__reply__t"></span><em class="property">union </em><code class="descname">supervisor_generic_reply_t</code><a class="headerlink" href="#_CPPv426supervisor_generic_reply_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;supervisor.h&gt;</em><p>Generic reply from the Supervisor Controller. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv4N26supervisor_generic_reply_t9raw_valueE">
+<span id="_CPPv3N26supervisor_generic_reply_t9raw_valueE"></span><span id="_CPPv2N26supervisor_generic_reply_t9raw_valueE"></span><span id="supervisor_generic_reply_t::raw_value__uint8_tA"></span><span class="target" id="unionsupervisor__generic__reply__t_1a05268517a7eb70c6735076a5ba55c30d"></span>uint8_t <code class="descname">raw_value</code>[<code class="descname">LENGTH_GENERIC_REPLY</code>]<a class="headerlink" href="#_CPPv4N26supervisor_generic_reply_t9raw_valueE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Raw value of the generic reply bytes. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N26supervisor_generic_reply_t6fieldsE">
+<span id="_CPPv3N26supervisor_generic_reply_t6fieldsE"></span><span id="_CPPv2N26supervisor_generic_reply_t6fieldsE"></span><span id="supervisor_generic_reply_t::fields__supervisor_generic_reply_t::supervisor_generic_reply_fields_t"></span><span class="target" id="unionsupervisor__generic__reply__t_1a1344ba94f870fe3da2c71aff2814d03c"></span><em class="property">struct</em> <a class="reference internal" href="#_CPPv426supervisor_generic_reply_t" title="supervisor_generic_reply_t">supervisor_generic_reply_t</a>::<a class="reference internal" href="#_CPPv4N26supervisor_generic_reply_t33supervisor_generic_reply_fields_tE" title="supervisor_generic_reply_t::supervisor_generic_reply_fields_t">supervisor_generic_reply_fields_t</a> <code class="descname">fields</code><a class="headerlink" href="#_CPPv4N26supervisor_generic_reply_t6fieldsE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Individual reply fields. </p>
+</dd></dl>
+
+</div>
+<dl class="class">
+<dt id="_CPPv4N26supervisor_generic_reply_t33supervisor_generic_reply_fields_tE">
+<span id="_CPPv3N26supervisor_generic_reply_t33supervisor_generic_reply_fields_tE"></span><span id="_CPPv2N26supervisor_generic_reply_t33supervisor_generic_reply_fields_tE"></span><span id="supervisor_generic_reply_t::supervisor_generic_reply_fields_t"></span><span class="target" id="structsupervisor__generic__reply__t_1_1supervisor__generic__reply__fields__t"></span><em class="property">struct </em><code class="descname">supervisor_generic_reply_fields_t</code><a class="headerlink" href="#_CPPv4N26supervisor_generic_reply_t33supervisor_generic_reply_fields_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;supervisor.h&gt;</em><p>Individual reply fields. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv4N26supervisor_generic_reply_t33supervisor_generic_reply_fields_t5dummyE">
+<span id="_CPPv3N26supervisor_generic_reply_t33supervisor_generic_reply_fields_t5dummyE"></span><span id="_CPPv2N26supervisor_generic_reply_t33supervisor_generic_reply_fields_t5dummyE"></span><span id="supervisor_generic_reply_t::supervisor_generic_reply_fields_t::dummy__uint8_t"></span><span class="target" id="structsupervisor__generic__reply__t_1_1supervisor__generic__reply__fields__t_1a9547e934c80e360310c4a8e2f25ed04b"></span>uint8_t <code class="descname">dummy</code><a class="headerlink" href="#_CPPv4N26supervisor_generic_reply_t33supervisor_generic_reply_fields_t5dummyE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The first as always is a dummy byte. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N26supervisor_generic_reply_t33supervisor_generic_reply_fields_t18spi_command_statusE">
+<span id="_CPPv3N26supervisor_generic_reply_t33supervisor_generic_reply_fields_t18spi_command_statusE"></span><span id="_CPPv2N26supervisor_generic_reply_t33supervisor_generic_reply_fields_t18spi_command_statusE"></span><span id="supervisor_generic_reply_t::supervisor_generic_reply_fields_t::spi_command_status__uint8_t"></span><span class="target" id="structsupervisor__generic__reply__t_1_1supervisor__generic__reply__fields__t_1a79607655831320948598d2c62e993511"></span>uint8_t <code class="descname">spi_command_status</code><a class="headerlink" href="#_CPPv4N26supervisor_generic_reply_t33supervisor_generic_reply_fields_t18spi_command_statusE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The second is a SPI command status. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N26supervisor_generic_reply_t33supervisor_generic_reply_fields_t4crc8E">
+<span id="_CPPv3N26supervisor_generic_reply_t33supervisor_generic_reply_fields_t4crc8E"></span><span id="_CPPv2N26supervisor_generic_reply_t33supervisor_generic_reply_fields_t4crc8E"></span><span id="supervisor_generic_reply_t::supervisor_generic_reply_fields_t::crc8__uint8_t"></span><span class="target" id="structsupervisor__generic__reply__t_1_1supervisor__generic__reply__fields__t_1a5274876930dc25fceab9e18dba207bc7"></span>uint8_t <code class="descname">crc8</code><a class="headerlink" href="#_CPPv4N26supervisor_generic_reply_t33supervisor_generic_reply_fields_t4crc8E" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>CRC byte. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="union">
+<dt id="_CPPv420supervisor_version_t">
+<span id="_CPPv320supervisor_version_t"></span><span id="_CPPv220supervisor_version_t"></span><span class="target" id="unionsupervisor__version__t"></span><em class="property">union </em><code class="descname">supervisor_version_t</code><a class="headerlink" href="#_CPPv420supervisor_version_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;supervisor.h&gt;</em><p>Supervisor version and configuration bytes. </p>
+<p>Layout of fields: <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>     <span class="n">_________________________________</span>
+    <span class="o">|</span>                                 <span class="o">|</span>
+<span class="mi">000</span> <span class="o">|</span>             <span class="n">DUMMY</span>               <span class="o">|</span>
+    <span class="o">|</span><span class="n">_________________________________</span><span class="o">|</span>
+    <span class="o">|</span>                                 <span class="o">|</span>
+<span class="mi">001</span> <span class="o">|</span>        <span class="n">SPI</span> <span class="n">COMMAND</span> <span class="n">STATUS</span>       <span class="o">|</span>
+    <span class="o">|</span><span class="n">_________________________________</span><span class="o">|</span>
+    <span class="o">|</span>                                 <span class="o">|</span>
+<span class="mi">002</span> <span class="o">|</span>        <span class="n">INDEX</span> <span class="n">OF</span> <span class="n">SUBSYSTEM</span>       <span class="o">|</span>
+    <span class="o">|</span><span class="n">_________________________________</span><span class="o">|</span>
+    <span class="o">|</span>                                 <span class="o">|</span>
+<span class="mi">003</span> <span class="o">|</span>                                 <span class="o">|</span>
+<span class="o">...</span> <span class="o">|</span>           <span class="n">SW</span> <span class="n">VERSION</span>            <span class="o">|</span>
+<span class="mi">005</span> <span class="o">|</span><span class="n">_________________________________</span><span class="o">|</span>
+    <span class="o">|</span>                                 <span class="o">|</span>
+<span class="mi">006</span> <span class="o">|</span>                                 <span class="o">|</span>
+<span class="o">...</span> <span class="o">|</span>          <span class="n">HEAD</span> <span class="n">REVISION</span>          <span class="o">|</span>
+<span class="mi">009</span> <span class="o">|</span>                                 <span class="o">|</span>
+    <span class="o">|</span><span class="n">_________________________________</span><span class="o">|</span>
+    <span class="o">|</span>                                 <span class="o">|</span>
+<span class="mi">010</span> <span class="o">|</span>          <span class="n">SERIAL</span> <span class="n">NUMBER</span>          <span class="o">|</span>
+    <span class="o">|</span><span class="n">_________________________________</span><span class="o">|</span>
+    <span class="o">|</span>                                 <span class="o">|</span>
+    <span class="o">|</span>                                 <span class="o">|</span>
+    <span class="o">|</span>                                 <span class="o">|</span>
+<span class="mi">012</span> <span class="o">|</span>                                 <span class="o">|</span>
+<span class="o">...</span> <span class="o">|</span>       <span class="n">COMPILE</span> <span class="n">INFORMATION</span>       <span class="o">|</span>
+<span class="mi">030</span> <span class="o">|</span>                                 <span class="o">|</span>
+    <span class="o">|</span>                                 <span class="o">|</span>
+    <span class="o">|</span>                                 <span class="o">|</span>
+    <span class="o">|</span><span class="n">_________________________________</span><span class="o">|</span>
+    <span class="o">|</span>                                 <span class="o">|</span>
+<span class="mi">031</span> <span class="o">|</span>           <span class="n">CLOCK</span> <span class="n">SPEED</span>           <span class="o">|</span>
+    <span class="o">|</span><span class="n">_________________________________</span><span class="o">|</span>
+    <span class="o">|</span>                                 <span class="o">|</span>
+<span class="mi">032</span> <span class="o">|</span>         <span class="n">TEST</span> <span class="o">/</span> <span class="n">FLIGHT</span>           <span class="o">|</span>
+    <span class="o">|</span><span class="n">_________________________________</span><span class="o">|</span>
+    <span class="o">|</span>                                 <span class="o">|</span>
+<span class="mi">033</span> <span class="o">|</span>              <span class="n">CRC8</span>               <span class="o">|</span>
+    <span class="o">|</span><span class="n">_________________________________</span><span class="o">|</span>
+</pre></div>
+</div>
+ </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv4N20supervisor_version_t9raw_valueE">
+<span id="_CPPv3N20supervisor_version_t9raw_valueE"></span><span id="_CPPv2N20supervisor_version_t9raw_valueE"></span><span id="supervisor_version_t::raw_value__uint8_tA"></span><span class="target" id="unionsupervisor__version__t_1a63ed05630ecc89fd3f2ba3db4d102eb9"></span>uint8_t <code class="descname">raw_value</code>[<code class="descname">LENGTH_TELEMETRY_GET_VERSION</code>]<a class="headerlink" href="#_CPPv4N20supervisor_version_t9raw_valueE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Raw value of the version configuration bytes. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N20supervisor_version_t6fieldsE">
+<span id="_CPPv3N20supervisor_version_t6fieldsE"></span><span id="_CPPv2N20supervisor_version_t6fieldsE"></span><span id="supervisor_version_t::fields__supervisor_version_t::supervisor_version_fields_t"></span><span class="target" id="unionsupervisor__version__t_1a7e7e45e754affd05e7565bb43cdbaa26"></span><em class="property">struct</em> <a class="reference internal" href="#_CPPv420supervisor_version_t" title="supervisor_version_t">supervisor_version_t</a>::<a class="reference internal" href="#_CPPv4N20supervisor_version_t27supervisor_version_fields_tE" title="supervisor_version_t::supervisor_version_fields_t">supervisor_version_fields_t</a> <code class="descname">fields</code><a class="headerlink" href="#_CPPv4N20supervisor_version_t6fieldsE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Individual version fields. </p>
+</dd></dl>
+
+</div>
+<dl class="class">
+<dt id="_CPPv4N20supervisor_version_t27supervisor_version_fields_tE">
+<span id="_CPPv3N20supervisor_version_t27supervisor_version_fields_tE"></span><span id="_CPPv2N20supervisor_version_t27supervisor_version_fields_tE"></span><span id="supervisor_version_t::supervisor_version_fields_t"></span><span class="target" id="structsupervisor__version__t_1_1supervisor__version__fields__t"></span><em class="property">struct </em><code class="descname">supervisor_version_fields_t</code><a class="headerlink" href="#_CPPv4N20supervisor_version_t27supervisor_version_fields_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;supervisor.h&gt;</em><p>Individual version fields. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv4N20supervisor_version_t27supervisor_version_fields_t5dummyE">
+<span id="_CPPv3N20supervisor_version_t27supervisor_version_fields_t5dummyE"></span><span id="_CPPv2N20supervisor_version_t27supervisor_version_fields_t5dummyE"></span><span id="supervisor_version_t::supervisor_version_fields_t::dummy__uint8_t"></span><span class="target" id="structsupervisor__version__t_1_1supervisor__version__fields__t_1a5e5544da39892aebff8a6fab82e6b280"></span>uint8_t <code class="descname">dummy</code><a class="headerlink" href="#_CPPv4N20supervisor_version_t27supervisor_version_fields_t5dummyE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The first as always is a dummy byte. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N20supervisor_version_t27supervisor_version_fields_t18spi_command_statusE">
+<span id="_CPPv3N20supervisor_version_t27supervisor_version_fields_t18spi_command_statusE"></span><span id="_CPPv2N20supervisor_version_t27supervisor_version_fields_t18spi_command_statusE"></span><span id="supervisor_version_t::supervisor_version_fields_t::spi_command_status__uint8_t"></span><span class="target" id="structsupervisor__version__t_1_1supervisor__version__fields__t_1ac9fc14b3f2f772f4ed58d84da25e67b0"></span>uint8_t <code class="descname">spi_command_status</code><a class="headerlink" href="#_CPPv4N20supervisor_version_t27supervisor_version_fields_t18spi_command_statusE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The second is a SPI Command Status. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N20supervisor_version_t27supervisor_version_fields_t18index_of_subsystemE">
+<span id="_CPPv3N20supervisor_version_t27supervisor_version_fields_t18index_of_subsystemE"></span><span id="_CPPv2N20supervisor_version_t27supervisor_version_fields_t18index_of_subsystemE"></span><span id="supervisor_version_t::supervisor_version_fields_t::index_of_subsystem__uint8_t"></span><span class="target" id="structsupervisor__version__t_1_1supervisor__version__fields__t_1a566140baf9e2f1dd402cf6541b3df0ee"></span>uint8_t <code class="descname">index_of_subsystem</code><a class="headerlink" href="#_CPPv4N20supervisor_version_t27supervisor_version_fields_t18index_of_subsystemE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Index of ISIS Subsystem. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N20supervisor_version_t27supervisor_version_fields_t13major_versionE">
+<span id="_CPPv3N20supervisor_version_t27supervisor_version_fields_t13major_versionE"></span><span id="_CPPv2N20supervisor_version_t27supervisor_version_fields_t13major_versionE"></span><span id="supervisor_version_t::supervisor_version_fields_t::major_version__uint8_t"></span><span class="target" id="structsupervisor__version__t_1_1supervisor__version__fields__t_1ad248cbb973c09be28e912d503544555c"></span>uint8_t <code class="descname">major_version</code><a class="headerlink" href="#_CPPv4N20supervisor_version_t27supervisor_version_fields_t13major_versionE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Software major version. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N20supervisor_version_t27supervisor_version_fields_t13minor_versionE">
+<span id="_CPPv3N20supervisor_version_t27supervisor_version_fields_t13minor_versionE"></span><span id="_CPPv2N20supervisor_version_t27supervisor_version_fields_t13minor_versionE"></span><span id="supervisor_version_t::supervisor_version_fields_t::minor_version__uint8_t"></span><span class="target" id="structsupervisor__version__t_1_1supervisor__version__fields__t_1a715e54f656920dab953fa079c955a20e"></span>uint8_t <code class="descname">minor_version</code><a class="headerlink" href="#_CPPv4N20supervisor_version_t27supervisor_version_fields_t13minor_versionE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Software minor version. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N20supervisor_version_t27supervisor_version_fields_t13patch_versionE">
+<span id="_CPPv3N20supervisor_version_t27supervisor_version_fields_t13patch_versionE"></span><span id="_CPPv2N20supervisor_version_t27supervisor_version_fields_t13patch_versionE"></span><span id="supervisor_version_t::supervisor_version_fields_t::patch_version__uint8_t"></span><span class="target" id="structsupervisor__version__t_1_1supervisor__version__fields__t_1a351183723041a91fc0b0da9eb730401e"></span>uint8_t <code class="descname">patch_version</code><a class="headerlink" href="#_CPPv4N20supervisor_version_t27supervisor_version_fields_t13patch_versionE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Software patch version. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N20supervisor_version_t27supervisor_version_fields_t16git_head_versionE">
+<span id="_CPPv3N20supervisor_version_t27supervisor_version_fields_t16git_head_versionE"></span><span id="_CPPv2N20supervisor_version_t27supervisor_version_fields_t16git_head_versionE"></span><span id="supervisor_version_t::supervisor_version_fields_t::git_head_version__uint32_t"></span><span class="target" id="structsupervisor__version__t_1_1supervisor__version__fields__t_1af3a4c969b167e909205a49f6c08b4b6b"></span>uint32_t <code class="descname">git_head_version</code><a class="headerlink" href="#_CPPv4N20supervisor_version_t27supervisor_version_fields_t16git_head_versionE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Software git head version. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N20supervisor_version_t27supervisor_version_fields_t13serial_numberE">
+<span id="_CPPv3N20supervisor_version_t27supervisor_version_fields_t13serial_numberE"></span><span id="_CPPv2N20supervisor_version_t27supervisor_version_fields_t13serial_numberE"></span><span id="supervisor_version_t::supervisor_version_fields_t::serial_number__uint16_t"></span><span class="target" id="structsupervisor__version__t_1_1supervisor__version__fields__t_1a0421cba451174803d7eca76ebbc02dbe"></span>uint16_t <code class="descname">serial_number</code><a class="headerlink" href="#_CPPv4N20supervisor_version_t27supervisor_version_fields_t13serial_numberE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Serial number. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N20supervisor_version_t27supervisor_version_fields_t19compile_informationE">
+<span id="_CPPv3N20supervisor_version_t27supervisor_version_fields_t19compile_informationE"></span><span id="_CPPv2N20supervisor_version_t27supervisor_version_fields_t19compile_informationE"></span><span id="supervisor_version_t::supervisor_version_fields_t::compile_information__int8_tA"></span><span class="target" id="structsupervisor__version__t_1_1supervisor__version__fields__t_1ab34f14030b2af41af85057727879d000"></span>int8_t <code class="descname">compile_information</code>[<code class="descname">LENGTH_COMPILE_INFORMATION</code>]<a class="headerlink" href="#_CPPv4N20supervisor_version_t27supervisor_version_fields_t19compile_informationE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Compile information (time and date). </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N20supervisor_version_t27supervisor_version_fields_t11clock_speedE">
+<span id="_CPPv3N20supervisor_version_t27supervisor_version_fields_t11clock_speedE"></span><span id="_CPPv2N20supervisor_version_t27supervisor_version_fields_t11clock_speedE"></span><span id="supervisor_version_t::supervisor_version_fields_t::clock_speed__uint8_t"></span><span class="target" id="structsupervisor__version__t_1_1supervisor__version__fields__t_1a3caf28a48bf2ac45f6ddbd96d8be05cd"></span>uint8_t <code class="descname">clock_speed</code><a class="headerlink" href="#_CPPv4N20supervisor_version_t27supervisor_version_fields_t11clock_speedE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Clock speed of the Supervisor Controller (in MHz). </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N20supervisor_version_t27supervisor_version_fields_t9code_typeE">
+<span id="_CPPv3N20supervisor_version_t27supervisor_version_fields_t9code_typeE"></span><span id="_CPPv2N20supervisor_version_t27supervisor_version_fields_t9code_typeE"></span><span id="supervisor_version_t::supervisor_version_fields_t::code_type__int8_t"></span><span class="target" id="structsupervisor__version__t_1_1supervisor__version__fields__t_1ae2b73291bbe25bd623b2f2e8b56a3208"></span>int8_t <code class="descname">code_type</code><a class="headerlink" href="#_CPPv4N20supervisor_version_t27supervisor_version_fields_t9code_typeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Code type. </p>
+<p>Whether flight or test. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N20supervisor_version_t27supervisor_version_fields_t4crc8E">
+<span id="_CPPv3N20supervisor_version_t27supervisor_version_fields_t4crc8E"></span><span id="_CPPv2N20supervisor_version_t27supervisor_version_fields_t4crc8E"></span><span id="supervisor_version_t::supervisor_version_fields_t::crc8__uint8_t"></span><span class="target" id="structsupervisor__version__t_1_1supervisor__version__fields__t_1a0c202ec55f2b3933e2db6b32368251db"></span>uint8_t <code class="descname">crc8</code><a class="headerlink" href="#_CPPv4N20supervisor_version_t27supervisor_version_fields_t4crc8E" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>CRC byte. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="union">
+<dt id="_CPPv426supervisor_enable_status_t">
+<span id="_CPPv326supervisor_enable_status_t"></span><span id="_CPPv226supervisor_enable_status_t"></span><span class="target" id="unionsupervisor__enable__status__t"></span><em class="property">union </em><code class="descname">supervisor_enable_status_t</code><a class="headerlink" href="#_CPPv426supervisor_enable_status_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;supervisor.h&gt;</em><p>Enable status structure. </p>
+<p>Layout of fields: <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>     <span class="n">____________________________________________</span>
+    <span class="o">|</span>                                            <span class="o">|</span>
+<span class="mi">000</span> <span class="o">|</span>                   <span class="n">DUMMY</span>                    <span class="o">|</span>
+    <span class="o">|</span><span class="n">____________________________________________</span><span class="o">|</span>
+    <span class="o">|</span>                                            <span class="o">|</span>
+<span class="mi">001</span> <span class="o">|</span>             <span class="n">SPI</span> <span class="n">COMMAND</span> <span class="n">STATUS</span>             <span class="o">|</span>
+    <span class="o">|</span><span class="n">____________________________________________</span><span class="o">|</span>
+    <span class="o">|</span>                                            <span class="o">|</span>
+<span class="mi">002</span> <span class="o">|</span>               <span class="n">ENABLE</span> <span class="n">STATUS</span>                <span class="o">|</span>
+    <span class="o">|</span><span class="n">____________________________________________</span><span class="o">|</span>
+    <span class="o">|</span>                                            <span class="o">|</span>
+<span class="mi">003</span> <span class="o">|</span>                                            <span class="o">|</span>
+<span class="o">...</span> <span class="o">|</span>        <span class="n">SUPERVISOR</span> <span class="n">CONTROLLER</span> <span class="n">UPTIME</span>        <span class="o">|</span>
+<span class="mi">006</span> <span class="o">|</span>                                            <span class="o">|</span>
+    <span class="o">|</span><span class="n">____________________________________________</span><span class="o">|</span>
+    <span class="o">|</span>                                            <span class="o">|</span>
+<span class="mi">007</span> <span class="o">|</span>                                            <span class="o">|</span>
+<span class="o">...</span> <span class="o">|</span>                 <span class="n">IOBC</span> <span class="n">UPTIME</span>                <span class="o">|</span>
+<span class="mi">010</span> <span class="o">|</span>                                            <span class="o">|</span>
+    <span class="o">|</span><span class="n">____________________________________________</span><span class="o">|</span>
+    <span class="o">|</span>                                            <span class="o">|</span>
+<span class="mi">011</span> <span class="o">|</span>                                            <span class="o">|</span>
+<span class="o">...</span> <span class="o">|</span>               <span class="n">IOBC</span> <span class="n">RESET</span> <span class="n">COUNT</span>             <span class="o">|</span>
+<span class="mi">014</span> <span class="o">|</span>                                            <span class="o">|</span>
+    <span class="o">|</span><span class="n">____________________________________________</span><span class="o">|</span>
+    <span class="o">|</span>                                            <span class="o">|</span>
+    <span class="o">|</span>                                            <span class="o">|</span>
+<span class="mi">015</span> <span class="o">|</span>                                            <span class="o">|</span>
+<span class="o">...</span> <span class="o">|</span>                  <span class="n">ADC</span> <span class="n">DATA</span>                  <span class="o">|</span>
+<span class="mi">034</span> <span class="o">|</span>                                            <span class="o">|</span>
+    <span class="o">|</span>                                            <span class="o">|</span>
+    <span class="o">|</span>                                            <span class="o">|</span>
+    <span class="o">|</span><span class="n">____________________________________________</span><span class="o">|</span>
+    <span class="o">|</span>                                            <span class="o">|</span>
+<span class="mi">035</span> <span class="o">|</span>               <span class="n">ADC</span> <span class="n">UPDATE</span> <span class="n">FLAG</span>              <span class="o">|</span>
+    <span class="o">|</span><span class="n">____________________________________________</span><span class="o">|</span>
+    <span class="o">|</span>                                            <span class="o">|</span>
+<span class="mi">036</span> <span class="o">|</span>                   <span class="n">CRC8</span>                     <span class="o">|</span>
+    <span class="o">|</span><span class="n">____________________________________________</span><span class="o">|</span>
+</pre></div>
+</div>
+ </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv4N26supervisor_enable_status_t9raw_valueE">
+<span id="_CPPv3N26supervisor_enable_status_t9raw_valueE"></span><span id="_CPPv2N26supervisor_enable_status_t9raw_valueE"></span><span id="supervisor_enable_status_t::raw_value__uint8_t"></span><span class="target" id="unionsupervisor__enable__status__t_1a4337ca475c59c4b2b504763d57c58fac"></span>uint8_t <code class="descname">raw_value</code><a class="headerlink" href="#_CPPv4N26supervisor_enable_status_t9raw_valueE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Raw value of the version configuration bytes. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N26supervisor_enable_status_t6fieldsE">
+<span id="_CPPv3N26supervisor_enable_status_t6fieldsE"></span><span id="_CPPv2N26supervisor_enable_status_t6fieldsE"></span><span id="supervisor_enable_status_t::fields__supervisor_enable_status_t::supervisor_enable_status_fields_t"></span><span class="target" id="unionsupervisor__enable__status__t_1aaaec3599b9ae2b70f7f7a2b3591c4074"></span><em class="property">struct</em> <a class="reference internal" href="#_CPPv426supervisor_enable_status_t" title="supervisor_enable_status_t">supervisor_enable_status_t</a>::<a class="reference internal" href="#_CPPv4N26supervisor_enable_status_t33supervisor_enable_status_fields_tE" title="supervisor_enable_status_t::supervisor_enable_status_fields_t">supervisor_enable_status_fields_t</a> <code class="descname">fields</code><a class="headerlink" href="#_CPPv4N26supervisor_enable_status_t6fieldsE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Individual enable status fields. </p>
+</dd></dl>
+
+</div>
+<dl class="class">
+<dt id="_CPPv4N26supervisor_enable_status_t33supervisor_enable_status_fields_tE">
+<span id="_CPPv3N26supervisor_enable_status_t33supervisor_enable_status_fields_tE"></span><span id="_CPPv2N26supervisor_enable_status_t33supervisor_enable_status_fields_tE"></span><span id="supervisor_enable_status_t::supervisor_enable_status_fields_t"></span><span class="target" id="structsupervisor__enable__status__t_1_1supervisor__enable__status__fields__t"></span><em class="property">struct </em><code class="descname">supervisor_enable_status_fields_t</code><a class="headerlink" href="#_CPPv4N26supervisor_enable_status_t33supervisor_enable_status_fields_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;supervisor.h&gt;</em><p>Individual enable status fields. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv4N26supervisor_enable_status_t33supervisor_enable_status_fields_t9power_obcE">
+<span id="_CPPv3N26supervisor_enable_status_t33supervisor_enable_status_fields_t9power_obcE"></span><span id="_CPPv2N26supervisor_enable_status_t33supervisor_enable_status_fields_t9power_obcE"></span><span id="supervisor_enable_status_t::supervisor_enable_status_fields_t::power_obc__uint8_t"></span><span class="target" id="structsupervisor__enable__status__t_1_1supervisor__enable__status__fields__t_1a88be8b5dbd8919cf2e4d056c55ab1cb4"></span>uint8_t <code class="descname">power_obc</code><a class="headerlink" href="#_CPPv4N26supervisor_enable_status_t33supervisor_enable_status_fields_t9power_obcE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>OBC Power. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N26supervisor_enable_status_t33supervisor_enable_status_fields_t9power_rtcE">
+<span id="_CPPv3N26supervisor_enable_status_t33supervisor_enable_status_fields_t9power_rtcE"></span><span id="_CPPv2N26supervisor_enable_status_t33supervisor_enable_status_fields_t9power_rtcE"></span><span id="supervisor_enable_status_t::supervisor_enable_status_fields_t::power_rtc__uint8_t"></span><span class="target" id="structsupervisor__enable__status__t_1_1supervisor__enable__status__fields__t_1a231ae6ffee19ecbe6109a4c7a2d2325a"></span>uint8_t <code class="descname">power_rtc</code><a class="headerlink" href="#_CPPv4N26supervisor_enable_status_t33supervisor_enable_status_fields_t9power_rtcE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Output power to the RTC. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N26supervisor_enable_status_t33supervisor_enable_status_fields_t21is_in_supervisor_modeE">
+<span id="_CPPv3N26supervisor_enable_status_t33supervisor_enable_status_fields_t21is_in_supervisor_modeE"></span><span id="_CPPv2N26supervisor_enable_status_t33supervisor_enable_status_fields_t21is_in_supervisor_modeE"></span><span id="supervisor_enable_status_t::supervisor_enable_status_fields_t::is_in_supervisor_mode__uint8_t"></span><span class="target" id="structsupervisor__enable__status__t_1_1supervisor__enable__status__fields__t_1a14bdfe3fda5d460af2f74b38a666eda1"></span>uint8_t <code class="descname">is_in_supervisor_mode</code><a class="headerlink" href="#_CPPv4N26supervisor_enable_status_t33supervisor_enable_status_fields_t21is_in_supervisor_modeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Supervisor mode. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N26supervisor_enable_status_t33supervisor_enable_status_fields_t8busy_rtcE">
+<span id="_CPPv3N26supervisor_enable_status_t33supervisor_enable_status_fields_t8busy_rtcE"></span><span id="_CPPv2N26supervisor_enable_status_t33supervisor_enable_status_fields_t8busy_rtcE"></span><span id="supervisor_enable_status_t::supervisor_enable_status_fields_t::busy_rtc__uint8_t"></span><span class="target" id="structsupervisor__enable__status__t_1_1supervisor__enable__status__fields__t_1a008faee0c88bea61565ab47ea6e38830"></span>uint8_t <code class="descname">busy_rtc</code><a class="headerlink" href="#_CPPv4N26supervisor_enable_status_t33supervisor_enable_status_fields_t8busy_rtcE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>RTC is busy. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N26supervisor_enable_status_t33supervisor_enable_status_fields_t13power_off_rtcE">
+<span id="_CPPv3N26supervisor_enable_status_t33supervisor_enable_status_fields_t13power_off_rtcE"></span><span id="_CPPv2N26supervisor_enable_status_t33supervisor_enable_status_fields_t13power_off_rtcE"></span><span id="supervisor_enable_status_t::supervisor_enable_status_fields_t::power_off_rtc__uint8_t"></span><span class="target" id="structsupervisor__enable__status__t_1_1supervisor__enable__status__fields__t_1a7202f19f3ce71e0b9d54d0a16e7d87f2"></span>uint8_t <code class="descname">power_off_rtc</code><a class="headerlink" href="#_CPPv4N26supervisor_enable_status_t33supervisor_enable_status_fields_t13power_off_rtcE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>RTC is doing power off. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="union">
+<dt id="_CPPv425supervisor_housekeeping_t">
+<span id="_CPPv325supervisor_housekeeping_t"></span><span id="_CPPv225supervisor_housekeeping_t"></span><span class="target" id="unionsupervisor__housekeeping__t"></span><em class="property">union </em><code class="descname">supervisor_housekeeping_t</code><a class="headerlink" href="#_CPPv425supervisor_housekeeping_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;supervisor.h&gt;</em><p>Supervisor housekeeping. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv4N25supervisor_housekeeping_t9raw_valueE">
+<span id="_CPPv3N25supervisor_housekeeping_t9raw_valueE"></span><span id="_CPPv2N25supervisor_housekeeping_t9raw_valueE"></span><span id="supervisor_housekeeping_t::raw_value__uint8_tA"></span><span class="target" id="unionsupervisor__housekeeping__t_1a6943a2df5e9d401fbea05db9d3ba067a"></span>uint8_t <code class="descname">raw_value</code>[<code class="descname">LENGTH_TELEMETRY_HOUSEKEEPING</code>]<a class="headerlink" href="#_CPPv4N25supervisor_housekeeping_t9raw_valueE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Raw value of the version configuration bytes. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N25supervisor_housekeeping_t6fieldsE">
+<span id="_CPPv3N25supervisor_housekeeping_t6fieldsE"></span><span id="_CPPv2N25supervisor_housekeeping_t6fieldsE"></span><span id="supervisor_housekeeping_t::fields__supervisor_housekeeping_t::supervisor_housekeeping_fields_t"></span><span class="target" id="unionsupervisor__housekeeping__t_1a538d94cdf94b620cadd30d7a576d3545"></span><em class="property">struct</em> <a class="reference internal" href="#_CPPv425supervisor_housekeeping_t" title="supervisor_housekeeping_t">supervisor_housekeeping_t</a>::<a class="reference internal" href="#_CPPv4N25supervisor_housekeeping_t32supervisor_housekeeping_fields_tE" title="supervisor_housekeeping_t::supervisor_housekeeping_fields_t">supervisor_housekeeping_fields_t</a> <code class="descname">fields</code><a class="headerlink" href="#_CPPv4N25supervisor_housekeeping_t6fieldsE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Individual housekeeping fields. </p>
+</dd></dl>
+
+</div>
+<dl class="class">
+<dt id="_CPPv4N25supervisor_housekeeping_t32supervisor_housekeeping_fields_tE">
+<span id="_CPPv3N25supervisor_housekeeping_t32supervisor_housekeeping_fields_tE"></span><span id="_CPPv2N25supervisor_housekeeping_t32supervisor_housekeeping_fields_tE"></span><span id="supervisor_housekeeping_t::supervisor_housekeeping_fields_t"></span><span class="target" id="structsupervisor__housekeeping__t_1_1supervisor__housekeeping__fields__t"></span><em class="property">struct </em><code class="descname">supervisor_housekeeping_fields_t</code><a class="headerlink" href="#_CPPv4N25supervisor_housekeeping_t32supervisor_housekeeping_fields_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;supervisor.h&gt;</em><p>Individual housekeeping fields. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv4N25supervisor_housekeeping_t32supervisor_housekeeping_fields_t5dummyE">
+<span id="_CPPv3N25supervisor_housekeeping_t32supervisor_housekeeping_fields_t5dummyE"></span><span id="_CPPv2N25supervisor_housekeeping_t32supervisor_housekeeping_fields_t5dummyE"></span><span id="supervisor_housekeeping_t::supervisor_housekeeping_fields_t::dummy__uint8_t"></span><span class="target" id="structsupervisor__housekeeping__t_1_1supervisor__housekeeping__fields__t_1a0473113ad467fa7c2f2d01dd86614383"></span>uint8_t <code class="descname">dummy</code><a class="headerlink" href="#_CPPv4N25supervisor_housekeeping_t32supervisor_housekeeping_fields_t5dummyE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The first as always is a dummy byte. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N25supervisor_housekeeping_t32supervisor_housekeeping_fields_t18spi_command_statusE">
+<span id="_CPPv3N25supervisor_housekeeping_t32supervisor_housekeeping_fields_t18spi_command_statusE"></span><span id="_CPPv2N25supervisor_housekeeping_t32supervisor_housekeeping_fields_t18spi_command_statusE"></span><span id="supervisor_housekeeping_t::supervisor_housekeeping_fields_t::spi_command_status__uint8_t"></span><span class="target" id="structsupervisor__housekeeping__t_1_1supervisor__housekeeping__fields__t_1a87c726e00455b4f7f608f2d4a81802f0"></span>uint8_t <code class="descname">spi_command_status</code><a class="headerlink" href="#_CPPv4N25supervisor_housekeeping_t32supervisor_housekeeping_fields_t18spi_command_statusE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The second is a SPI Command Status. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N25supervisor_housekeeping_t32supervisor_housekeeping_fields_t13enable_statusE">
+<span id="_CPPv3N25supervisor_housekeeping_t32supervisor_housekeeping_fields_t13enable_statusE"></span><span id="_CPPv2N25supervisor_housekeeping_t32supervisor_housekeeping_fields_t13enable_statusE"></span><span id="supervisor_housekeeping_t::supervisor_housekeeping_fields_t::enable_status__supervisor_enable_status_t"></span><span class="target" id="structsupervisor__housekeeping__t_1_1supervisor__housekeeping__fields__t_1aa35a83d5969018ce3f29ed982508df92"></span><a class="reference internal" href="#_CPPv426supervisor_enable_status_t" title="supervisor_enable_status_t">supervisor_enable_status_t</a> <code class="descname">enable_status</code><a class="headerlink" href="#_CPPv4N25supervisor_housekeeping_t32supervisor_housekeeping_fields_t13enable_statusE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Enable status of the Supervisor Controller. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N25supervisor_housekeeping_t32supervisor_housekeeping_fields_t17supervisor_uptimeE">
+<span id="_CPPv3N25supervisor_housekeeping_t32supervisor_housekeeping_fields_t17supervisor_uptimeE"></span><span id="_CPPv2N25supervisor_housekeeping_t32supervisor_housekeeping_fields_t17supervisor_uptimeE"></span><span id="supervisor_housekeeping_t::supervisor_housekeeping_fields_t::supervisor_uptime__uint32_t"></span><span class="target" id="structsupervisor__housekeeping__t_1_1supervisor__housekeeping__fields__t_1a0ca1b624712d2842c2c73a2f54644003"></span>uint32_t <code class="descname">supervisor_uptime</code><a class="headerlink" href="#_CPPv4N25supervisor_housekeeping_t32supervisor_housekeeping_fields_t17supervisor_uptimeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Supervisor Controller Uptime. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N25supervisor_housekeeping_t32supervisor_housekeeping_fields_t11iobc_uptimeE">
+<span id="_CPPv3N25supervisor_housekeeping_t32supervisor_housekeeping_fields_t11iobc_uptimeE"></span><span id="_CPPv2N25supervisor_housekeeping_t32supervisor_housekeeping_fields_t11iobc_uptimeE"></span><span id="supervisor_housekeeping_t::supervisor_housekeeping_fields_t::iobc_uptime__uint32_t"></span><span class="target" id="structsupervisor__housekeeping__t_1_1supervisor__housekeeping__fields__t_1a648ae8519ca81a3555cc6162afdeb091"></span>uint32_t <code class="descname">iobc_uptime</code><a class="headerlink" href="#_CPPv4N25supervisor_housekeeping_t32supervisor_housekeeping_fields_t11iobc_uptimeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>IOBC Uptime as measured by Supervisor Controller. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N25supervisor_housekeeping_t32supervisor_housekeeping_fields_t16iobc_reset_countE">
+<span id="_CPPv3N25supervisor_housekeeping_t32supervisor_housekeeping_fields_t16iobc_reset_countE"></span><span id="_CPPv2N25supervisor_housekeeping_t32supervisor_housekeeping_fields_t16iobc_reset_countE"></span><span id="supervisor_housekeeping_t::supervisor_housekeeping_fields_t::iobc_reset_count__uint32_t"></span><span class="target" id="structsupervisor__housekeeping__t_1_1supervisor__housekeeping__fields__t_1a311bf2551789afd83ffa21c74fe3b511"></span>uint32_t <code class="descname">iobc_reset_count</code><a class="headerlink" href="#_CPPv4N25supervisor_housekeeping_t32supervisor_housekeeping_fields_t16iobc_reset_countE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>IOBC Reset Count. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N25supervisor_housekeeping_t32supervisor_housekeeping_fields_t8adc_dataE">
+<span id="_CPPv3N25supervisor_housekeeping_t32supervisor_housekeeping_fields_t8adc_dataE"></span><span id="_CPPv2N25supervisor_housekeeping_t32supervisor_housekeeping_fields_t8adc_dataE"></span><span id="supervisor_housekeeping_t::supervisor_housekeeping_fields_t::adc_data__uint16_tA"></span><span class="target" id="structsupervisor__housekeeping__t_1_1supervisor__housekeeping__fields__t_1a6739e564524e2510e0362407e4858c05"></span>uint16_t <code class="descname">adc_data</code>[<code class="descname">SUPERVISOR_NUMBER_OF_ADC_CHANNELS</code>]<a class="headerlink" href="#_CPPv4N25supervisor_housekeeping_t32supervisor_housekeeping_fields_t8adc_dataE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>ADC Data. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N25supervisor_housekeeping_t32supervisor_housekeeping_fields_t15adc_update_flagE">
+<span id="_CPPv3N25supervisor_housekeeping_t32supervisor_housekeeping_fields_t15adc_update_flagE"></span><span id="_CPPv2N25supervisor_housekeeping_t32supervisor_housekeeping_fields_t15adc_update_flagE"></span><span id="supervisor_housekeeping_t::supervisor_housekeeping_fields_t::adc_update_flag__uint8_t"></span><span class="target" id="structsupervisor__housekeeping__t_1_1supervisor__housekeeping__fields__t_1a6874f56bc37fdea537b718ecb26867c5"></span>uint8_t <code class="descname">adc_update_flag</code><a class="headerlink" href="#_CPPv4N25supervisor_housekeeping_t32supervisor_housekeeping_fields_t15adc_update_flagE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>ADC Update Flag. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N25supervisor_housekeeping_t32supervisor_housekeeping_fields_t4crc8E">
+<span id="_CPPv3N25supervisor_housekeeping_t32supervisor_housekeeping_fields_t4crc8E"></span><span id="_CPPv2N25supervisor_housekeeping_t32supervisor_housekeeping_fields_t4crc8E"></span><span id="supervisor_housekeeping_t::supervisor_housekeeping_fields_t::crc8__uint8_t"></span><span class="target" id="structsupervisor__housekeeping__t_1_1supervisor__housekeeping__fields__t_1a0ef49a94373ddd5422a2cf1feddca6ca"></span>uint8_t <code class="descname">crc8</code><a class="headerlink" href="#_CPPv4N25supervisor_housekeeping_t32supervisor_housekeeping_fields_t4crc8E" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>CRC byte. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="checksum.html" class="btn btn-neutral float-right" title="iOBC Checksum API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../index.html" class="btn btn-neutral" title="OBC APIs" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../../../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

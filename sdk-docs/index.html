@@ -1,0 +1,326 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Kubos SDK Docs &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../index.html"/>
+        <link rel="next" title="Installing the Kubos SDK" href="sdk-installing.html"/>
+        <link rel="prev" title="KubOS Design Decisions" href="../deep-dive/design-decisions.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../obc-docs/index.html">Working with an OBC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ecosystem/index.html">KubOS Ecosystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deep-dive/index.html">Under the Hood</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Kubos SDK</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sdk-installing.html">Installing the Kubos SDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sdk-rust.html">Using Rust with the Kubos SDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sdk-python.html">Using Python with the Kubos SDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sdk-c.html">Using C with the Kubos SDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sdk-upgrading.html">Upgrading the Kubos SDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sdk-advanced-cross-compiling.html">Advanced Rust Cross Compiling</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing to KubOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Kubos SDK Docs</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/sdk-docs/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="kubos-sdk-docs">
+<h1>Kubos SDK Docs<a class="headerlink" href="#kubos-sdk-docs" title="Permalink to this headline">¶</a></h1>
+<p>While the majority of KubOS development can be done locally on a host machine, we also provide a
+standalone SDK which can be used to assist with the development process.</p>
+<p>The “Kubos SDK” is a term used to describe all of the components used
+to build KubOS projects:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://www.vagrantup.com/">Vagrant</a> box - The VM that contains the “ready to run” Kubos development
+environment</li>
+<li>Kubos source modules - The underlying libraries on which KubOS projects
+are built</li>
+</ul>
+<p>Internally, we use this SDK in order to build KubOS releases and to host our CI tests.</p>
+<p>Externally, the SDK is most useful for:</p>
+<ul class="simple">
+<li>Windows users</li>
+<li>Users who do not want to muddle their host systems with all of the dependencies required to build
+and execute KubOS projects</li>
+<li>Users who want to build a <a class="reference internal" href="../deep-dive/index.html#custom-klb"><span class="std std-ref">custom KubOS image</span></a></li>
+</ul>
+<p class="plantuml">
+<img src="../_images/plantuml-a9261b2f9f7f94fb4344238d57baa0706b832a59.png" alt="&#64;startuml
+left to right direction
+
+actor User
+
+node &quot;Kubos SDK&quot; as sdk{
+    () &quot;init&quot; as init
+    folder &quot;kubos-proj&quot; as proj {
+        folder source {
+        }
+        () &quot;build&quot; as build
+        [binary]
+    }
+    folder &quot;Kubos Source&quot; as k_source {
+    }
+}
+
+() &quot;transfer&quot; as flash
+
+node &quot;OBC - Kubos Linux&quot; {
+    cloud &quot;kubos-proj&quot; as application
+    cloud &quot;App1&quot;
+    cloud &quot;App2&quot;
+}
+
+User -&gt; sdk : vagrant ssh
+init -&gt; proj
+k_source -&gt; build
+build &lt;- source
+[binary] &lt;- build
+[binary] -&gt; flash
+flash -&gt; application
+
+&#64;enduml"/>
+</p>
+<p>This documentation section contains the various guides related to using the Kubos SDK:</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference internal" href="sdk-installing.html"><span class="doc">Installing the Kubos SDK</span></a> - How to install the SDK onto your host machine</li>
+<li><a class="reference internal" href="sdk-c.html"><span class="doc">Using C with the Kubos SDK</span></a> - A guide to using C with the Kubos SDK</li>
+<li><a class="reference internal" href="sdk-rust.html"><span class="doc">Using Rust with the Kubos SDK</span></a> - How to develop and run Kubos projects using Rust</li>
+<li><a class="reference internal" href="sdk-python.html"><span class="doc">Using Python with the Kubos SDK</span></a> - How to develop and run Kubos projects using Python</li>
+<li><a class="reference internal" href="sdk-upgrading.html"><span class="doc">Upgrading Your Kubos Development Environment</span></a> - How to upgrade to the latest version of the Kubos SDK</li>
+<li><a class="reference internal" href="sdk-advanced-cross-compiling.html"><span class="doc">Advanced Rust Cross Compiling</span></a> - How to cross compile unsupported targets with Rust</li>
+</ul>
+</div></blockquote>
+<div class="toctree-wrapper compound">
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="sdk-installing.html" class="btn btn-neutral float-right" title="Installing the Kubos SDK" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../deep-dive/design-decisions.html" class="btn btn-neutral" title="KubOS Design Decisions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

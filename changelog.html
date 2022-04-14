@@ -1,0 +1,933 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Kubos Changelog &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="index.html"/>
+        <link rel="next" title="Kubos FAQs and Troubleshooting Tips" href="faq-troubleshooting.html"/>
+        <link rel="prev" title="Testing" href="contributing/testing.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="getting-started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="obc-docs/index.html">Working with an OBC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ecosystem/index.html">KubOS Ecosystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deep-dive/index.html">Under the Hood</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sdk-docs/index.html">Kubos SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing/index.html">Contributing to KubOS</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#v1-21-0-apr-2-2020">v1.21.0 - Apr 2 2020</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#bug-fixes">Bug Fixes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-20-0-nov-22-2019">v1.20.0 - Nov 22 2019</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#community-contributions">Community Contributions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Bug Fixes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-19-0-oct-30-2019">v1.19.0 - Oct 30 2019</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Bug Fixes:</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-18-0-sept-12-2019">v1.18.0 - Sept 12 2019</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-17-0-aug-15-2019">v1.17.0 - Aug 15 2019</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id3">Bug Fixes:</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-16-0-jul-10-2019">v1.16.0 - Jul 10 2019</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id4">Bug Fixes:</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-15-0-may-23-2019">v1.15.0 - May 23 2019</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id5">Bug Fixes:</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-14-0-apr-3-2019">v1.14.0 - Apr 3 2019</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id6">Bug Fixes:</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-13-0-feb-15-2019">v1.13.0 - Feb 15 2019</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-12-0-feb-1-2019">v1.12.0 - Feb 1 2019</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-11-0-jan-18-2019">v1.11.0 - Jan 18 2019</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id7">Community Contributions:</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-10-0-dec-20th-2018">v1.10.0 - Dec 20th 2018</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-9-0-dec-6th-2018">v1.9.0 - Dec 6th 2018</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id8">Bug Fixes:</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-8-0-nov-9th-2018">v1.8.0 - Nov 9th 2018</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id9">Bug Fixes:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">Community Contributions:</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-7-0-oct-12th-2018">v1.7.0 - Oct 12th 2018</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id11">Bug Fixes:</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-6-0-sept-28th-2018">v1.6.0 - Sept 28th 2018</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id12">Bug Fixes:</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-5-0-sep-7th-2018">v1.5.0 - Sep 7th 2018</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id13">Bug Fixes:</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-4-0-july-23-2018">v1.4.0 - July 23 2018</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-3-0-jun-21-2018">v1.3.0 - Jun 21 2018</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id14">Bug Fixes:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id15">Community Contributions:</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-2-0-mar-5-2018">v1.2.0 - Mar 5 2018</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-1-0-jan-24-2018">v1.1.0 - Jan 24 2018</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-0-1-aug-4-2017">v1.0.1 - Aug 4 2017</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-0-0-june-27-2017">v1.0.0 - June 27 2017</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v0-2-2-april-7-2017">v0.2.2 - April 7 2017</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v0-2-1-mar-7-2017">v0.2.1 - Mar 7 2017</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v0-2-feb-3-2017">v0.2 - Feb 3 2017</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v0-1-4-oct-14-2016">v0.1.4 - Oct 14 2016</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v0-1-3-sep-16-2016">v0.1.3 - Sep 16 2016</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v0-1-1-sep-2-2016">v0.1.1 - Sep 2 2016</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v0-1-0-aug-19-2016">v0.1.0 - Aug 19 2016</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v0-0-5-aug-05-2016">v0.0.5 - Aug 05 2016</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v0-0-4-jul-01-2016">v0.0.4 - Jul 01 2016</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v0-0-3-jun-17-2016">v0.0.3 - Jun 17 2016</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v0-0-2-jun-03-2016">v0.0.2 - Jun 03 2016</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Kubos Changelog</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/changelog.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="kubos-changelog">
+<h1>Kubos Changelog<a class="headerlink" href="#kubos-changelog" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="v1-21-0-apr-2-2020">
+<h2>v1.21.0 - Apr 2 2020<a class="headerlink" href="#v1-21-0-apr-2-2020" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="https://docs.kubos.com/1.21.0/ecosystem/services/file.html#configuration">Added new config options to help fine-tune file transfers</a></li>
+<li><a class="reference external" href="https://docs.kubos.com/1.21.0/obc-docs/porting-kubos.html#system-requirements">Added Kubos Linux system requirements description to docs</a></li>
+<li><a class="reference external" href="https://docs.kubos.com/1.21.0/sdk-docs/sdk-advanced-cross-compiling.html">Added basic instructions on how to cross-compile for targets which are not fully supported by Rust</a></li>
+<li>Improved first-time user instructions</li>
+</ul>
+<div class="section" id="bug-fixes">
+<h3>Bug Fixes<a class="headerlink" href="#bug-fixes" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Fixed scheduler service’s wait time after requesting an app be started</li>
+<li>Corrected Rust-based example mission app behavior when run locally</li>
+</ul>
+</div>
+</div>
+<div class="section" id="v1-20-0-nov-22-2019">
+<h2>v1.20.0 - Nov 22 2019<a class="headerlink" href="#v1-20-0-nov-22-2019" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="https://docs.kubos.com/1.20.0/ecosystem/services/app-service.html#registering">Added ability to register apps in a single archive file</a></li>
+<li>Upgraded Rust usage to v1.39.0</li>
+</ul>
+<div class="section" id="community-contributions">
+<h3>Community Contributions<a class="headerlink" href="#community-contributions" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Miscellaneous tutorial fixes</li>
+</ul>
+</div>
+<div class="section" id="id1">
+<h3>Bug Fixes<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference external" href="https://docs.kubos.com/1.20.0/deep-dive/klb/configuring-kubos.html#kubos-version-selection">Added instructions for changing the KubOS source version when building Kubos Linux</a></li>
+<li><a class="reference external" href="https://docs.kubos.com/1.20.0/faq-troubleshooting.html#updating-my-local-rust-installation">Added instructions for manually upgrading the Rust cross-compile toolchains</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="v1-19-0-oct-30-2019">
+<h2>v1.19.0 - Oct 30 2019<a class="headerlink" href="#v1-19-0-oct-30-2019" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><dl class="first docutils">
+<dt><a class="reference external" href="https://docs.kubos.com/1.19.0/ecosystem/scheduler.html">Added Scheduler Service</a></dt>
+<dd><ul class="first last">
+<li><strong>note</strong>: The scheduler service is currently not included in Kubos Linux builds for the iOBC.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li>Updated kubos-shell-client to allow single command execution</li>
+<li>Updated default <code class="docutils literal notranslate"><span class="pre">config.toml</span></code> location from <code class="docutils literal notranslate"><span class="pre">/home/system/etc/config.toml</span></code> to <code class="docutils literal notranslate"><span class="pre">/etc/kubos-config.toml</span></code></li>
+<li><a class="reference external" href="https://docs.kubos.com/master/1.19.0/ecosystem/services/service-dev.html#service-configuration">Migrated to new default service ports</a></li>
+<li>Removed run levels from apps and the associated app arg</li>
+<li>Changed app service uninstall logic to nicely kill a running app first</li>
+<li><a class="reference external" href="https://docs.kubos.com/1.19.0/getting-started/no-board.html">Added No Hardware doc</a></li>
+<li>Added <code class="docutils literal notranslate"><span class="pre">--stdout</span></code> flag to services for easy output on stdout</li>
+<li>Standardized the default service storage location in <code class="docutils literal notranslate"><span class="pre">tools/local_config.toml</span></code> for easier local development</li>
+<li>Miscellaneous doc improvements</li>
+</ul>
+<div class="section" id="id2">
+<h3>Bug Fixes:<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Fixed crashing file service &amp; client with bad defaults</li>
+<li>Fixed communications issue in ISIS Antenna Service</li>
+</ul>
+</div>
+</div>
+<div class="section" id="v1-18-0-sept-12-2019">
+<h2>v1.18.0 - Sept 12 2019<a class="headerlink" href="#v1-18-0-sept-12-2019" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="https://docs.kubos.com/1.18.0/ecosystem/services/app-service.html#application-execution-status">Added initial app monitoring capabilities</a></li>
+<li><a class="reference external" href="https://docs.kubos.com/1.18.0/ecosystem/services/app-service.html#stopping-an-application">Added ability to stop currently running applications</a></li>
+<li><a class="reference external" href="https://docs.kubos.com/1.18.0/ecosystem/services/telemetry-db.html#adding-entries-to-the-database-asynchronously">Added ability to do bulk telemetry database inserts asychronously</a></li>
+<li>Updated Docker and Vagrant configurations to use Python3.7</li>
+<li>Upgraded Rust usage to v1.37.0</li>
+<li>Miscellanous doc improvements</li>
+</ul>
+</div>
+<div class="section" id="v1-17-0-aug-15-2019">
+<h2>v1.17.0 - Aug 15 2019<a class="headerlink" href="#v1-17-0-aug-15-2019" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Added <a class="reference external" href="https://github.com/kubos/kubos/tree/master/apps/obc-hs">example OBC housekeeping mission app</a></li>
+<li>Updated the file transfer service to allow the downlink destination to be configurable</li>
+<li>Changed service configuration behavior to fail when config values cannot be read, rather than
+taking default values</li>
+<li>Documented <a class="reference external" href="https://docs.kubos.com/1.17.0/ecosystem/services/comms-framework.html">UDP passthrough behavior</a> for the comms service framework</li>
+<li>Documented <a class="reference external" href="https://docs.kubos.com/1.17.0/ecosystem/apps/app-guide.html#additional-arguments">arg passthrough behavior</a> in the app development guide</li>
+<li><a class="reference external" href="https://docs.kubos.com/master/1.17.0/getting-started/using-rust.html#making-rust-binaries-smaller">Added tips for reducing Rust binary sizes</a></li>
+<li>Tweaked how C-based libraries are included in our Rust workspace to improve the ability to use
+KubOS software in a local development environment</li>
+<li>Updated all Python packages to contain accurate <cite>requirements.txt</cite> files</li>
+<li>Updated all packages and libraries to contain Readme files</li>
+<li>Upgraded Rust usage to v1.36.0</li>
+<li>Upgraded base CI Docker image to Ubuntu 18.04</li>
+<li>Migrated all remaining tooling to Python3</li>
+</ul>
+<div class="section" id="id3">
+<h3>Bug Fixes:<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Miscellaneous fixes to support building and running KubOS from a MacOS development environment</li>
+</ul>
+</div>
+</div>
+<div class="section" id="v1-16-0-jul-10-2019">
+<h2>v1.16.0 - Jul 10 2019<a class="headerlink" href="#v1-16-0-jul-10-2019" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">The Great Docs Re-Org of 2019</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference external" href="https://docs.kubos.com/1.16.0/getting-started/local-setup.html">Added instructions for setting up a development environment without using the SDK</a></li>
+<li><a class="reference external" href="https://docs.kubos.com/1.16.0/getting-started/local-services.html">Added instructions for running KubOS core services within a local development environment</a></li>
+<li>Reworked tutorials for local execution</li>
+<li><a class="reference external" href="https://docs.kubos.com/1.16.0/obc-docs/porting-kubos.html">Added a high-level KubOS porting guide</a></li>
+<li><a class="reference external" href="https://docs.kubos.com/1.16.0/obc-docs/comms-setup.html">Added a more in-depth communications setup guide</a></li>
+<li><a class="reference external" href="https://docs.kubos.com/1.16.0/mission-dev/index.html">Added mission development guides</a></li>
+<li><a class="reference external" href="https://docs.kubos.com/1.16.0/ecosystem/services/service-dev.html">Added a service development guide</a></li>
+<li><a class="reference external" href="https://docs.kubos.com/1.16.0/contributing/index.html">Expanded community contribution guides</a></li>
+<li>Re-organized most docs in order to create a more accessible and intuitive user experience</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first"><a class="reference external" href="https://docs.kubos.com/1.16.0/ecosystem/services/comms-framework.html#data-packets">Updated the comms service framework to use SpacketPacket instead of UDP</a></p>
+</li>
+<li><p class="first">Added UDP passthrough to the comms service framework for non-GraphQL messages</p>
+</li>
+<li><p class="first"><a class="reference external" href="https://docs.kubos.com/1.16.0/ecosystem/services/telemetry-db.html#adding-multiple-entries-to-the-database">Added ability to perform bulk inserts with the telemetry database service</a></p>
+</li>
+<li><p class="first"><a class="reference external" href="https://github.com/kubos/kubos/blob/master/Cargo.toml">Improved size optimization for Rust executables when doing release builds</a></p>
+</li>
+</ul>
+<div class="section" id="id4">
+<h3>Bug Fixes:<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Fixed ability to pass a custom config file to Rust applications</li>
+<li>Fixed assorted timing issues with CI tests</li>
+</ul>
+</div>
+</div>
+<div class="section" id="v1-15-0-may-23-2019">
+<h2>v1.15.0 - May 23 2019<a class="headerlink" href="#v1-15-0-may-23-2019" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="https://docs.kubos.com/1.15.0/rust-docs/nsl_duplex_d2_comms_service/index.html">Added a comms service implementation for the NSL EyeStar-D2 Duplex radio</a></li>
+<li><a class="reference external" href="https://docs.kubos.com/1.15.0/services/comms-framework.html#data-packets">Updated comms service framework to use Space Packet Protocol</a></li>
+<li>Added ‘ping’ query to all Kubos services</li>
+<li><a class="reference external" href="https://docs.kubos.com/1.15.0/services/telemetry-db.html#querying-the-service">Added ability to query multiple telemetry fields in one request</a></li>
+<li>Updated docs to reflect use of latest Buildroot LTS release, 2019.02.2</li>
+<li><a class="reference external" href="https://cla-assistant.io/kubos/kubos">Migrated to new CLA site</a></li>
+<li>Expanded application unit tests</li>
+<li>Added inter-service integration tests</li>
+</ul>
+<div class="section" id="id5">
+<h3>Bug Fixes:<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Cleaning up orphaned files after app uninstall</li>
+<li>Changing current working directory to an app’s registered directory before starting it</li>
+</ul>
+</div>
+</div>
+<div class="section" id="v1-14-0-apr-3-2019">
+<h2>v1.14.0 - Apr 3 2019<a class="headerlink" href="#v1-14-0-apr-3-2019" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="https://docs.kubos.com/1.14.0/app-docs/app-service.html#starting-an-application">Added logic to the applications service to check if an app immediately fails after being started</a></li>
+<li><a class="reference external" href="https://docs.kubos.com/1.14.0/app-docs/app-service.html">Removed UUIDs from the applications service. Apps will now be referenced by name</a></li>
+<li><a class="reference external" href="https://docs.kubos.com/1.14.0/app-docs/app-service.html#de-registering">Added ability to uninstall all versions of an application</a></li>
+<li>Updated app registration process to clean up all files if registration fails</li>
+<li><a class="reference external" href="https://docs.kubos.com/1.14.0/app-docs/app-service.html#changing-versions">Added ability to manually set the active version of an application</a></li>
+<li><a class="reference external" href="https://docs.kubos.com/1.14.0/rust-docs/kubos_app/macro.app_main.html#arguments">Added parameter to Rust app API to allow minimum logging level to be controlled</a></li>
+<li><a class="reference external" href="https://docs.kubos.com/1.14.0/app-docs/python-app-api.html#app_api.logging_setup">Added parameter to Python app API to allow minimum logging level to be controlled</a></li>
+<li><a class="reference external" href="https://docs.kubos.com/1.14.0/services/comms-framework.html">Updated comms service framework to translate between UDP and HTTP</a></li>
+<li>Added comms service framework unit tests</li>
+<li><a class="reference external" href="https://docs.kubos.com/1.14.0/services/service-config.html">Added documentation for service configuration</a></li>
+<li><a class="reference external" href="https://github.com/kubos/kubos/blob/master/apis/pumpkin-mcu-api/mcu_api.py">Updated the Pumpkin supMCU API to match v4.22 of the firmware manual</a></li>
+<li><a class="reference external" href="https://docs.kubos.com/1.14.0/rust-docs/clyde_3g_eps_service/index.html">Added GraphQL service for the Clyde Space 3rd generation EPS</a></li>
+<li>Improved logging for all Kubos services</li>
+</ul>
+<div class="section" id="id6">
+<h3>Bug Fixes:<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Updated the comms service framework to correctly validate that a write function is present</li>
+<li>Updated the apps service to remove the parent directory if the last version of an app is uninstalled</li>
+<li>Updated app registration process to ensure current active version remains active if new registration fails</li>
+<li>Fixed Rust app API to use project name for logging</li>
+<li>Migrated the Kubos contributor’s agreement to <a class="reference external" href="https://cla-assistant.io/kubos/kubos">https://cla-assistant.io/kubos/kubos</a></li>
+<li><a class="reference external" href="https://docs.kubos.com/1.14.0/tutorials/file-transfer.html#syntax">Corrected the file transfer client syntax documentation</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="v1-13-0-feb-15-2019">
+<h2>v1.13.0 - Feb 15 2019<a class="headerlink" href="#v1-13-0-feb-15-2019" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="https://docs.kubos.com/1.13.0/tutorials/app-register.html#graphiql">Updated all Kubos services to use HTTP as their GraphQL front-end instead of UDP, allowing them to expose GraphiQL endpoints</a></li>
+<li>Removed all yotta usage. <a class="reference external" href="https://docs.kubos.com/1.13.0/sdk-docs/sdk-c.html">C-based projects are now compiled using CMake</a></li>
+<li>Pinning Rust version at v1.32.0 to prevent accidental version discrepancies</li>
+</ul>
+</div>
+<div class="section" id="v1-12-0-feb-1-2019">
+<h2>v1.12.0 - Feb 1 2019<a class="headerlink" href="#v1-12-0-feb-1-2019" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Updated all Python code to be compatible with Python3.5</li>
+<li><a class="reference external" href="https://docs.kubos.com/1.11.0/app-docs/python-app-api.html">Updated the Python App API doc to be more verbose</a></li>
+<li><a class="reference external" href="https://docs.kubos.com/1.11.0/apis/kubos-hal/i2c-hal/c-i2c/c-i2c.html">Updated the C HAL to directly use Linux conventions</a></li>
+<li>Removed CSP from the code base</li>
+<li>Removed remaining usage of yotta configuration constants</li>
+</ul>
+</div>
+<div class="section" id="v1-11-0-jan-18-2019">
+<h2>v1.11.0 - Jan 18 2019<a class="headerlink" href="#v1-11-0-jan-18-2019" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="https://docs.kubos.com/1.11.0/services/comms-framework.html">Added communications service framework overview doc</a></li>
+<li><a class="reference external" href="https://github.com/kubos/kubos/tree/master/examples/serial-comms-service">Added example communications service</a></li>
+<li><a class="reference external" href="https://docs.kubos.com/1.11.0/tutorials/comms-service.html">Added communications service tutorial</a></li>
+<li>Updated all Rust modules to use Rust 2018</li>
+</ul>
+<div class="section" id="id7">
+<h3>Community Contributions:<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference external" href="https://docs.kubos.com/1.11.0/services/comms-framework.html">Added communications service framework</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="v1-10-0-dec-20th-2018">
+<h2>v1.10.0 - Dec 20th 2018<a class="headerlink" href="#v1-10-0-dec-20th-2018" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="https://docs.kubos.com/1.10.0/os-docs/monitoring.html">Added process monitoring to most Kubos services</a></li>
+<li><a class="reference external" href="https://github.com/kubos/kubos-linux-build/blob/master/common/overlay/etc/rsyslog.conf#L31">Updated the default logging template to include message severity</a></li>
+<li><a class="reference external" href="https://docs.kubos.com/master/1.9.1+3/tutorials/first-mission-app.html#adding-logging">Updated the logging tutorial and examples to use the app API’s logging initialization</a></li>
+<li><a class="reference external" href="https://docs.kubos.com/master/1.9.1+3/installation-docs/installing-linux-bbb.html#flash-the-emmc">Updated the BBB and MBM2 installation instructions to use the new eMMC install script</a></li>
+</ul>
+</div>
+<div class="section" id="v1-9-0-dec-6th-2018">
+<h2>v1.9.0 - Dec 6th 2018<a class="headerlink" href="#v1-9-0-dec-6th-2018" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="https://docs.kubos.com/1.9.0/tutorials/first-mission-app.html#adding-logging">Added support for logging using rsyslog</a></li>
+<li>Updated all Kubos services to use new logging</li>
+<li><a class="reference external" href="https://docs.kubos.com/1.9.0/apis/kubos-libs/file-protocol.html#cleanup-request">Updated file transfer service to clean up temporary storage directories after successful transfer and on-request</a></li>
+<li><a class="reference external" href="https://docs.kubos.com/1.9.0/os-docs/using-kubos-linux.html#slip">Added SLIP support to all boards</a></li>
+<li>Updated the applications service to allow more than two files to be present in the directory used
+to register an application</li>
+</ul>
+<div class="section" id="id8">
+<h3>Bug Fixes:<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>File transfer client now returns error when it fails to communicate with the file service</li>
+<li>Updated all Kubos services’ GraphQL responses to follow the official response spec</li>
+</ul>
+</div>
+</div>
+<div class="section" id="v1-8-0-nov-9th-2018">
+<h2>v1.8.0 - Nov 9th 2018<a class="headerlink" href="#v1-8-0-nov-9th-2018" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/kubos/kubos/tree/master/services/shell-service">The shell service and client have both been rewritten into Rust</a></li>
+<li><a class="reference external" href="https://docs.kubos.com/1.8.0/app-docs/app-service.html">Updated the applications service’s schema to match the styling of the other services</a></li>
+<li>Added cleanup logic when the app service encounters a corrupted app entry</li>
+<li><a class="reference external" href="https://docs.kubos.com/1.8.0/app-docs/app-service.html#upgrading">Added the ability to upgrade an application with the applications service</a></li>
+<li><a class="reference external" href="https://docs.kubos.com/1.8.0/rust-docs/kubos_app/index.html">Updated the Rust app API to utilize exit codes</a></li>
+<li><a class="reference external" href="https://docs.kubos.com/master/1.7.1+14/os-docs/working-with-the-mbm2.html#rtc">Added Pumpkin MBM2 RTC support</a></li>
+</ul>
+<div class="section" id="id9">
+<h3>Bug Fixes:<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Updating telemetry database API to use a double to store the timestamp, rather than a 32-bit integer</li>
+</ul>
+</div>
+<div class="section" id="id10">
+<h3>Community Contributions:<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Updated link descriptions for Kubos Linux release files</li>
+</ul>
+</div>
+</div>
+<div class="section" id="v1-7-0-oct-12th-2018">
+<h2>v1.7.0 - Oct 12th 2018<a class="headerlink" href="#v1-7-0-oct-12th-2018" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="https://docs.kubos.com/1.7.0/services/monitor-service.html">Added overview documentation for the monitor service</a></li>
+<li><a class="reference external" href="https://docs.kubos.com/1.7.0/tutorials/index.html#mission-development-tutorials">Added tutorials to help new users write their first mission application</a></li>
+<li><a class="reference external" href="https://docs.kubos.com/1.7.0/tutorials/index.html#system-interaction-tutorials">Added tutorials to help new users interact with the telemetry database and file transfer services</a></li>
+</ul>
+<div class="section" id="id11">
+<h3>Bug Fixes:<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Updated the Python app API to accept an empty string in the ‘errors’ field of GraphQL responses</li>
+<li>Updated the file transfer service to not exit if an invalid data packet is received</li>
+<li>Updated the file transfer service’s log location</li>
+</ul>
+</div>
+</div>
+<div class="section" id="v1-6-0-sept-28th-2018">
+<h2>v1.6.0 - Sept 28th 2018<a class="headerlink" href="#v1-6-0-sept-28th-2018" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Added corrupted chunk and file hash mismatch error handling to the file transfer service</li>
+<li>Improved file transfer service multi-client handling</li>
+<li><a class="reference external" href="https://docs.kubos.com/1.6.0/services/file.html#configuration">Added timeout and chunk-size configuration options to the file transfer service</a></li>
+<li><a class="reference external" href="https://docs.kubos.com/1.6.0/services/telemetry-db.html#saving-results-for-later-processing">Updated the telemetry database service to allow query results to be written to an output file</a></li>
+<li><a class="reference external" href="https://docs.kubos.com/1.6.0/services/telemetry-db.html#adding-entries-to-the-database">Added insert and delete capabilities to the telemetry database service</a></li>
+<li>Increased telemetry database timestamp key resolution from seconds to milliseconds</li>
+<li><a class="reference external" href="https://docs.kubos.com/1.6.0/app-docs/app-guide.html#additional-arguments">Updated applications service to add ability to passthrough arguments to the application being called</a></li>
+<li><a class="reference external" href="https://github.com/kubos/kubos/tree/master/services/monitor-service">Added a basic system-resource monitoring service</a></li>
+</ul>
+<div class="section" id="id12">
+<h3>Bug Fixes:<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference external" href="https://docs.kubos.com/1.6.0/sdk-docs/sdk-rust.html#cross-compilation">Updated Rust cross-compiling instructions to handle new CC arg requirement</a></li>
+<li><a class="reference external" href="https://docs.kubos.com/1.6.0/services/hardware-services.html#pre-built-services">Added doc links to the pre-built hardware services’ documentation</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="v1-5-0-sep-7th-2018">
+<h2>v1.5.0 - Sep 7th 2018<a class="headerlink" href="#v1-5-0-sep-7th-2018" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="https://trello.com/b/pIWxmFua/kubos-community">Added a community Trello board for contributors and KubOS team members</a></li>
+<li><a class="reference external" href="https://github.com/kubos/kubos/tree/master/services/file-service">The file transfer service and client have both been rewritten into Rust</a></li>
+<li><a class="reference external" href="https://docs.kubos.com/1.5.0/app-docs/deployment.html">Added documentation for how to handle the deployment hold time countdown</a></li>
+<li>Updated the app APIs to commonize behaviour between the <a class="reference external" href="https://github.com/kubos/kubos/tree/master/apis/app-api/python">Python</a> and <a class="reference external" href="https://github.com/kubos/kubos/tree/master/apis/app-api/rust">Rust</a> versions</li>
+<li>Added example mission applications for both <a class="reference external" href="https://github.com/kubos/kubos/tree/master/examples/rust-mission-app">Rust</a> and <a class="reference external" href="https://github.com/kubos/kubos/tree/master/examples/python-mission-app">Python</a></li>
+<li><a class="reference external" href="https://github.com/kubos/kubos/tree/master/examples/python-mission-application">Added a verbose example mission application in Python for mission design</a></li>
+</ul>
+<div class="section" id="id13">
+<h3>Bug Fixes:<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Standardized usage of the Rust failure crate for version 0.1.2</li>
+</ul>
+</div>
+</div>
+<div class="section" id="v1-4-0-july-23-2018">
+<h2>v1.4.0 - July 23 2018<a class="headerlink" href="#v1-4-0-july-23-2018" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/kubos/kubos/tree/master/services/isis-ants-service">Added UDP/GraphQL service for ISIS Antenna Systems</a></li>
+<li><a class="reference external" href="https://github.com/kubos/kubos/tree/master/services/pumpkin-mcu-service">Updated Pumpkin MCU service to be compliant with the latest ICD</a></li>
+<li><a class="reference external" href="https://github.com/kubos/kubos/tree/master/services/app-service">Added initial version of the mission applications service</a></li>
+<li><a class="reference external" href="https://github.com/kubos/kubos/tree/master/apis/app-api">Added initial mission applications Rust API</a></li>
+<li><a class="reference external" href="https://github.com/kubos/kubos/tree/master/apis/python-app-api">Added initial mission applications Python API</a></li>
+<li><a class="reference external" href="https://github.com/kubos/kubos/tree/master/apis/system-api">Added system Rust API for system-wide common functionality</a></li>
+<li><a class="reference external" href="https://github.com/kubos/kubos/blob/master/.circleci/config.yml">Upgraded CircleCI automation config to use the 2.0 configuration format</a></li>
+<li>Updated docs to reflect changes in how auxiliary SD images are generated</li>
+</ul>
+</div>
+<div class="section" id="v1-3-0-jun-21-2018">
+<h2>v1.3.0 - Jun 21 2018<a class="headerlink" href="#v1-3-0-jun-21-2018" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/kubos/kubos/tree/master/services/communication-service">Added communication core service</a></li>
+<li><a class="reference external" href="https://github.com/kubos/kubos/tree/master/services/file-service">Added file transfer core service</a></li>
+<li><a class="reference external" href="https://github.com/kubos/kubos/tree/master/services/shell-service">Added shell core service</a></li>
+<li><a class="reference external" href="https://github.com/kubos/kubos/tree/master/services/telemetry-service">Added telemetry database core service</a></li>
+<li><a class="reference external" href="https://github.com/kubos/kubos/blob/master/services/novatel-oem6-service">Added Rust API and UDP/GraphQL service for NovAtel OEM6 High Precision GNSS Receiver</a></li>
+<li><a class="reference external" href="https://github.com/kubos/kubos/tree/master/services/pumpkin-mcu-service">Added Python API and UDP/GraphQL service for Pumpkin MCUs</a></li>
+<li><a class="reference external" href="https://github.com/kubos/kubos/tree/master/apis/clyde-3g-eps-api">Added Rust API for ClydeSpace 3G EPS</a></li>
+<li><a class="reference external" href="https://github.com/kubos/kubos/tree/master/services/mai400-service">Added Rust API and UDP/GraphQL service for Adcole Maryland Aerospace MAI-400 ADACS</a></li>
+<li><a class="reference external" href="https://github.com/kubos/kubos/blob/master/apis/gomspace-p31u-api">Added API for GOMspace NanoPower P31U</a></li>
+<li><a class="reference external" href="https://github.com/kubos/kubos/tree/master/apis/isis-ants-api">Added C and Rust APIs for ISIS Antenna Systems</a></li>
+<li><a class="reference external" href="https://github.com/kubos/kubos/tree/master/apis/isis-imtq-api">Added C and Rust APIs for ISIS iMTQ</a></li>
+<li><a class="reference external" href="https://github.com/kubos/kubos/tree/master/apis/isis-trxvu-api">Added C API for ISIS TRXVU radio</a></li>
+<li><a class="reference external" href="https://github.com/kubos/kubos/blob/master/libs/kubos-service">Added Python library for use when creating Kubos services</a></li>
+<li><a class="reference external" href="https://github.com/kubos/kubos/tree/master/services/kubos-service">Added Rust helper crate for use when creating Kubos services</a></li>
+<li><a class="reference external" href="https://github.com/kubos/kubos/tree/master/hal/python-hal/i2c">Added Python library for I2C HAL</a></li>
+<li><a class="reference external" href="https://github.com/kubos/kubos/tree/master/hal/rust-hal/rust-i2c">Added Rust crate for I2C HAL</a></li>
+<li>Upgraded Kubos SDK Vagrant and Docker images to use <a class="reference external" href="https://blog.rust-lang.org/2018/05/10/Rust-1.26.html">Rust 1.26</a></li>
+<li><a class="reference external" href="http://docs.kubos.co/master">Added link to nightly version of docs to main docs page</a></li>
+<li><a class="reference external" href="http://docs.kubos.co/1.3.0/os-docs/using-kubos-linux.html#ethernet">Added documentation for using ethernet as primary board-communication method</a></li>
+<li>Improved documentation about using Python and Rust for development with KubOS</li>
+</ul>
+<div class="section" id="id14">
+<h3>Bug Fixes:<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/kubos/kubos/blob/master/tools/dist/Dockerfile">Forcibly downgrading pip to &lt;v10 to prevent incompatibility issue with yotta</a></li>
+</ul>
+</div>
+<div class="section" id="id15">
+<h3>Community Contributions:<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/kubos/kubos/tree/master/hal/rust-hal/rust-uart">Added Rust crate for UART HAL</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="v1-2-0-mar-5-2018">
+<h2>v1.2.0 - Mar 5 2018<a class="headerlink" href="#v1-2-0-mar-5-2018" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/kubos/kubos/tree/c7bb5f1928aeb0aa3d45d649f90bd2cdccbe2bc5/hal/isis-iobc-supervisor">Added Rust crate for wrapping isis-iobc-supervisor</a></li>
+<li><a class="reference external" href="https://github.com/kubos/kubos/tree/master/services/iobc-supervisor-service">Added iOBC supervisor GraphQL service</a></li>
+<li>Migrating <code class="docutils literal notranslate"><span class="pre">cargo-kubos</span></code> into <a class="reference external" href="https://github.com/kubos/cargo-kubos">own repo</a></li>
+<li><a class="reference external" href="http://docs.kubos.co/1.2.0/os-docs/working-with-the-iobc.html#adc">Added iOBC ADC support and demo</a></li>
+<li><a class="reference external" href="http://docs.kubos.co/1.2.0/os-docs/working-with-the-iobc.html#adc">Added iOBC PWM support</a></li>
+<li><a class="reference external" href="https://github.com/kubos/kubos/tree/master/apis/nsl-duplex-d2">Added API for EyeStar-D2 Duplex radio</a></li>
+<li><a class="reference external" href="https://github.com/kubos/kubos/blob/master/services/telemetry-database-service">Adding telemetry database service</a></li>
+<li>Cleaning up doc generation warnings</li>
+<li>Finalizing name changes</li>
+</ul>
+</div>
+<div class="section" id="v1-1-0-jan-24-2018">
+<h2>v1.1.0 - Jan 24 2018<a class="headerlink" href="#v1-1-0-jan-24-2018" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="http://docs.kubos.co/1.1.0/os-docs/working-with-the-iobc.html#uart">Added iOBC UART support and demo</a></li>
+<li><a class="reference external" href="http://docs.kubos.co/1.1.0/os-docs/working-with-the-iobc.html#spi">Added iOBC SPI support</a></li>
+<li><a class="reference external" href="http://docs.kubos.co/1.1.0/os-docs/working-with-the-bbb.html#ethernet">Added Ethernet support for MBM2/BBB</a></li>
+<li><a class="reference external" href="http://docs.kubos.co/1.1.0/apis/device-api/radio.html">Added generic radio API</a></li>
+<li><a class="reference external" href="http://docs.kubos.co/1.1.0/apis/device-api/adcs.html">Added generic ADCS API</a></li>
+<li><a class="reference external" href="http://docs.kubos.co/1.1.0/apis/kubos-hal/i2c.html">Added an I2C HAL for Linux</a></li>
+<li>Decided on using GraphQL, Rust, and Python for services and applications</li>
+<li><a class="reference external" href="https://github.com/kubos/kubos/tree/1.1.0/examples/python-service">Added Python-based example subsystem handler</a></li>
+<li><a class="reference external" href="https://github.com/kubos/kubos/tree/1.1.0/examples/rust-service">Added Rust-based example subsystem handler</a></li>
+<li><a class="reference external" href="https://github.com/kubos/kubos/tree/1.1.0/cargo-kubos">Added ‘cargo kubos’ subcommand for Cargo–&gt;yotta integration</a></li>
+<li>Upgraded to BuildRoot LTS 2017.2.8</li>
+<li><a class="reference external" href="http://docs.kubos.co/1.1.0/installation-docs/sdk-installing.html#install-windows-powershell-v3-windows-7-sp1-only">Documented Windows PowerShell v3+ requirement</a></li>
+<li><a class="reference external" href="http://docs.kubos.co/1.1.0/architecture-overview.html">Updated architecture documentation</a></li>
+<li>Refactored the repo to remove deprecated code</li>
+<li>Re-organized the docs to have a more nested structure</li>
+<li><a class="reference external" href="http://docs.kubos.co/1.1.0/dev-docs/kubos-standards.html">Updated naming conventions and coding standards</a></li>
+</ul>
+</div>
+<div class="section" id="v1-0-1-aug-4-2017">
+<h2>v1.0.1 - Aug 4 2017<a class="headerlink" href="#v1-0-1-aug-4-2017" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Adding support for Beaglebone Black</li>
+<li>Adding support for Pumpkin MBM2</li>
+<li>Adding Windows Dev Environment guide</li>
+</ul>
+</div>
+<div class="section" id="v1-0-0-june-27-2017">
+<h2>v1.0.0 - June 27 2017<a class="headerlink" href="#v1-0-0-june-27-2017" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="https://kubostech.atlassian.net/browse/KUBOS-442">KUBOS-442</a>
+Added support for iOBC I2C bus</li>
+<li><a class="reference external" href="https://kubostech.atlassian.net/browse/KUBOS-445">KUBOS-445</a>
+Integrated iOBC supervisor</li>
+<li><a class="reference external" href="https://kubostech.atlassian.net/browse/KUBOS-274">KUBOS-274</a>
+Completed Kubos Telemetry integration into KubOS Linux</li>
+<li><a class="reference external" href="https://kubostech.atlassian.net/browse/KUBOS-487">KUBOS-487</a>
+Added support for tab-completion to Kubos CLI</li>
+<li><a class="reference external" href="https://github.com/kubos/kubos/tree/master/test/integration/linux">Created an initial QA integration test suite</a></li>
+<li>Migrated from Markdown to ReStructuredText as the documentation
+language of choice</li>
+<li>Migrated from only Doxygen to Sphinx and Doxygen as the documentation
+generation tools of choice</li>
+<li>Massively improved documentation basically everywhere</li>
+<li>Polished everything to a shiny gleam</li>
+</ul>
+</div>
+<div class="section" id="v0-2-2-april-7-2017">
+<h2>v0.2.2 - April 7 2017<a class="headerlink" href="#v0-2-2-april-7-2017" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="https://kubostech.atlassian.net/browse/KUBOS-350">KUBOS-350</a>
+Added multi-process communication support to telemetry library</li>
+<li><a class="reference external" href="https://kubostech.atlassian.net/browse/KUBOS-283">KUBOS-283</a>
+Created a background telemetry management service</li>
+<li><a class="reference external" href="https://kubostech.atlassian.net/browse/KUBOS-391">KUBOS-391</a>
+Created a background C&amp;C service</li>
+<li><a class="reference external" href="https://kubostech.atlassian.net/browse/KUBOS-409">KUBOS-409</a>
+Added logging to C&amp;C</li>
+<li><a class="reference external" href="https://kubostech.atlassian.net/browse/KUBOS-376">KUBOS-376</a>
+Added C&amp;C ‘build info’ command</li>
+<li><a class="reference external" href="https://kubostech.atlassian.net/browse/KUBOS-372">KUBOS-372</a>
+Added C&amp;C ‘reboot’ command</li>
+<li><a class="reference external" href="https://kubostech.atlassian.net/browse/KUBOS-338">KUBOS-338</a>
+Added KubOS Linux kernel rollback and recovery</li>
+<li><a class="reference external" href="https://kubostech.atlassian.net/browse/KUBOS-340">KUBOS-340</a>
+Added init script generation and flashing for KubOS Linux projects</li>
+</ul>
+</div>
+<div class="section" id="v0-2-1-mar-7-2017">
+<h2>v0.2.1 - Mar 7 2017<a class="headerlink" href="#v0-2-1-mar-7-2017" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="https://kubostech.atlassian.net/browse/KUBOS-388">KUBOS-388</a>
+Created initial Command &amp; Control framework</li>
+<li><a class="reference external" href="https://kubostech.atlassian.net/browse/KUBOS-350">KUBOS-350</a>
+Added support for inter-process communication between Kubos services</li>
+<li><a class="reference external" href="https://kubostech.atlassian.net/browse/KUBOS-313">KUBOS-313</a>
+Updated Kubos SDK to allow flashing of non-application files to iOBC</li>
+<li><a class="reference external" href="https://kubostech.atlassian.net/browse/KUBOS-321">KUBOS-321</a>
+Added ability to flash and install new KubOS Linux upgrade packages</li>
+<li><a class="reference external" href="https://kubostech.atlassian.net/browse/KUBOS-360">KUBOS-360</a>
+Added Kubos CLI integration testing</li>
+<li><a class="reference external" href="https://kubostech.atlassian.net/browse/KUBOS-363">KUBOS-363</a>
+Fixed Kubos CLI error reporting</li>
+</ul>
+</div>
+<div class="section" id="v0-2-feb-3-2017">
+<h2>v0.2 - Feb 3 2017<a class="headerlink" href="#v0-2-feb-3-2017" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Created KubOS Linux</li>
+<li>Major documentation updates</li>
+<li><a class="reference external" href="https://kubostech.atlassian.net/browse/KUBOS-170">KUBOS-170</a>
+Created Kubos CLI as primary Kubos SDK command tool</li>
+<li><a class="reference external" href="https://kubostech.atlassian.net/browse/KUBOS-175">KUBOS-175</a>
+Migrated from Docker to Vagrant for the Kubos SDK distribution system</li>
+<li><a class="reference external" href="https://kubostech.atlassian.net/browse/KUBOS-329">KUBOS-329</a>
+Added KubOS Linux support to Kubos SDK</li>
+<li><a class="reference external" href="https://kubostech.atlassian.net/browse/KUBOS-361">KUBOS-361</a>
+Added ability to use branched versions of Kubos code to Kubos CLI</li>
+<li><a class="reference external" href="https://kubostech.atlassian.net/browse/KUBOS-267">KUOBS-267</a>
+Added telemetry service libraries for both KubOS RT and KubOS Linux</li>
+<li><a class="reference external" href="https://kubostech.atlassian.net/browse/KUBOS-213">KUBOS-213</a>
+Added telemetry aggregation service libraries</li>
+<li><a class="reference external" href="https://kubostech.atlassian.net/browse/KUBOS-201">KUBOS-201</a>
+Added inter-subsystem communication libraries</li>
+</ul>
+</div>
+<div class="section" id="v0-1-4-oct-14-2016">
+<h2>v0.1.4 - Oct 14 2016<a class="headerlink" href="#v0-1-4-oct-14-2016" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="https://kubostech.atlassian.net/browse/KUBOS-81">KUBOS-81</a>
+Implemented FatFs SPI SD support (Current MSP430 only)</li>
+<li>A new <a class="reference external" href="https://github.com/kubos/kubos-sd-example">example using the FatFs SPI SD
+interface</a></li>
+</ul>
+</div>
+<div class="section" id="v0-1-3-sep-16-2016">
+<h2>v0.1.3 - Sep 16 2016<a class="headerlink" href="#v0-1-3-sep-16-2016" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="https://kubostech.atlassian.net/browse/KUBOS-132">KUBOS-132</a>
+Standardized status codes for I2C, SPI and UART HAL</li>
+<li><a class="reference external" href="https://kubostech.atlassian.net/browse/KUBOS-131">KUBOS-131</a>
+Added basic unit testing for Kubos-HAL-MSP430F5529 and updated MSP430
+documentation.</li>
+<li><a class="reference external" href="https://kubostech.atlassian.net/browse/KUBOS-62">KUBOS-62</a> Added
+preliminary OSX analytics tracking</li>
+</ul>
+</div>
+<div class="section" id="v0-1-1-sep-2-2016">
+<h2>v0.1.1 - Sep 2 2016<a class="headerlink" href="#v0-1-1-sep-2-2016" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Documentation updates</li>
+<li>Added basic unit testing for Kubos-HAL, Kubos-HAL-STM32F4 and
+Kubos-SDK</li>
+<li>Miscellaneous bug fixes</li>
+</ul>
+</div>
+<div class="section" id="v0-1-0-aug-19-2016">
+<h2>v0.1.0 - Aug 19 2016<a class="headerlink" href="#v0-1-0-aug-19-2016" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Implemented <a class="reference external" href="./kubos-hal/group__SPI.html">SPI</a> for the STM32F4.</li>
+<li>Added a new sensor interface:</li>
+<li><a class="reference external" href="./kubos-core/group__IMU.html">IMU</a></li>
+<li><a class="reference external" href="./kubos-core/group__ALTIMETER.html">Altimeter</a></li>
+<li><a class="reference external" href="./kubos-core/group__TEMPERATURE.html">Temperature</a></li>
+<li>A new <a class="reference external" href="https://github.com/kubos/kubos-sensor-example">sensor example
+application</a></li>
+<li>A new <a class="reference external" href="https://github.com/kubos/kubos-csp-example">example using CSP over
+uart</a></li>
+<li>Added the ability to link in local targets with KubOS-SDK</li>
+</ul>
+</div>
+<div class="section" id="v0-0-5-aug-05-2016">
+<h2>v0.0.5 - Aug 05 2016<a class="headerlink" href="#v0-0-5-aug-05-2016" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Added a <a class="reference external" href="./kubos-hal/group__SPI.html">SPI HAL API</a> for MSP430
+based targets (STM32F4 compatibility coming soon)</li>
+<li>Added a <a class="reference external" href="./kubos-hal/group__SDIO.html">SDIO HAL API</a> for STM32F4
+based targets</li>
+<li>Added filesystem support for FatFs based SD Cards, using SDIO
+(STM32F4 only)</li>
+<li>Added drivers for three sensors:</li>
+<li><a class="reference external" href="./kubos-core/group__HTU21D.html">HTU21D Temperature/Humidity</a></li>
+<li><a class="reference external" href="./kubos-core/group__BNO055.html">BNO055 IMU</a></li>
+<li><a class="reference external" href="./kubos-core/group__BME280.html">BME280
+Temperature/Humidity/Pressure</a></li>
+<li>Added support for CSP over the Kubos-HAL UART interface</li>
+<li>A new <a class="reference external" href="https://github.com/openkosmosorg/kubos-i2c-example">SPI example
+application</a>
+using the <a class="reference external" href="./kubos-core/group__BME280.html">driver for the BME280
+sensor</a></li>
+<li><a class="reference external" href="sdk-upgrading">Upgrade Instructions</a></li>
+<li><a class="reference external" href="https://github.com/openkosmosorg/kubos-manifest/blob/v0.0.5/docker-manifest.xml">Tagged repo
+manifest</a></li>
+</ul>
+</div>
+<div class="section" id="v0-0-4-jul-01-2016">
+<h2>v0.0.4 - Jul 01 2016<a class="headerlink" href="#v0-0-4-jul-01-2016" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Added a new I2C HAL API for both STM32F4 and MSP430 based targets
+(master mode only, slave coming soon)</li>
+<li>Simplified hardware debugging with GDB using the new <code class="docutils literal notranslate"><span class="pre">kubos</span> <span class="pre">debug</span></code>
+and <code class="docutils literal notranslate"><span class="pre">kubos</span> <span class="pre">server</span></code> commands</li>
+<li>A new <a class="reference external" href="https://github.com/openkosmosorg/kubos-i2c-example">I2C example
+application</a>
+with a <a class="reference external" href="https://github.com/rplauche/kubos-core/blob/1ca0d601e33ea0e0c85caa9d53b7f84a78d9c24a/source/modules/sensors/htu21d.c">WIP driver for the H2U1D temperature
+sensor</a></li>
+<li><a class="reference external" href="sdk-upgrading">Upgrade Instructions</a></li>
+<li><a class="reference external" href="https://github.com/openkosmosorg/kubos-manifest/blob/v0.0.4/docker-manifest.xml">Tagged repo
+manifest</a></li>
+</ul>
+</div>
+<div class="section" id="v0-0-3-jun-17-2016">
+<h2>v0.0.3 - Jun 17 2016<a class="headerlink" href="#v0-0-3-jun-17-2016" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Added support for NanoAvionics SatBus 3C0 OBC</li>
+<li>Implemented link support in KubOS-SDK for local development modules</li>
+<li>New KubOS-SDK projects are now based off our latest kubos-rt-example
+source</li>
+<li><a class="reference external" href="sdk-upgrading">Upgrade Instructions</a></li>
+<li><a class="reference external" href="https://github.com/openkosmosorg/kubos-manifest/blob/v0.0.3/docker-manifest.xml">Tagged repo
+manifest</a></li>
+</ul>
+</div>
+<div class="section" id="v0-0-2-jun-03-2016">
+<h2>v0.0.2 - Jun 03 2016<a class="headerlink" href="#v0-0-2-jun-03-2016" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Added support for STM32F405RG based PyBoard</li>
+<li>Improved support for yotta commands in KubOS-SDK</li>
+<li>Improved error handling in KubOS-SDK</li>
+<li><a class="reference external" href="sdk-upgrading">Upgrade Instructions</a></li>
+<li><a class="reference external" href="https://github.com/openkosmosorg/kubos-manifest/blob/v0.0.2/docker-manifest.xml">Tagged repo
+manifest</a></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="faq-troubleshooting.html" class="btn btn-neutral float-right" title="Kubos FAQs and Troubleshooting Tips" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="contributing/testing.html" class="btn btn-neutral" title="Testing" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

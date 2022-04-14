@@ -1,0 +1,532 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Porting KubOS to a New OBC &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../index.html"/>
+        <link rel="up" title="Working with KubOS and an OBC" href="index.html"/>
+        <link rel="next" title="Kubos Mission Development" href="../mission-dev/index.html"/>
+        <link rel="prev" title="Working with the Pumpkin MBM2" href="mbm2/working-with-the-mbm2.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Working with an OBC</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="cross-compile.html">Compiling Code for a Target OBC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="comms-setup.html">Communicating with an OBC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bbb/index.html">KubOS for the Beaglebone Black</a></li>
+<li class="toctree-l2"><a class="reference internal" href="iobc/index.html">KubOS for the ISIS-OBC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mbm2/index.html">KubOS for the Pumpkin MBM2</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Porting KubOS to a New OBC</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#resources">Resources</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#internal">Internal</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#external">External</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#system-requirements">System Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#system-layout">System Layout</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#buildroot">Buildroot</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#board-config">Board Config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#board-directory">Board Directory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#overlay">Overlay</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#image-creation">Image Creation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#u-boot">U-Boot</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#buildroot-config">Buildroot Config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#u-boot-config">U-Boot Config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#u-boot-board-package">U-Boot Board Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#installing-u-boot">Installing U-Boot</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#linux">Linux</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#config">Config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#device-tree">Device Tree</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#busybox">Busybox</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ecosystem/index.html">KubOS Ecosystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deep-dive/index.html">Under the Hood</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sdk-docs/index.html">Kubos SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing to KubOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Working with KubOS and an OBC</a> &raquo;</li>
+        
+      <li>Porting KubOS to a New OBC</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/obc-docs/porting-kubos.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="porting-kubos-to-a-new-obc">
+<h1>Porting KubOS to a New OBC<a class="headerlink" href="#porting-kubos-to-a-new-obc" title="Permalink to this headline">¶</a></h1>
+<p>The KubOS middleware and applications are intended to be able to run on any OBC which is running
+Kubos Linux. Unfortunately, while userland programs are completely portable between OBCs, the
+underlying operating system and bootloader are not.</p>
+<p>This doc is intended as a high-level overview of the work which needs to be done in order to get
+KubOS up and running on a new OBC.</p>
+<p>Note: The terms “board” and “OBC” are used interchangeably.</p>
+<div class="section" id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="internal">
+<h3>Internal<a class="headerlink" href="#internal" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference internal" href="../ecosystem/linux-docs/kubos-linux-overview.html"><span class="doc">Kubos Linux Overview</span></a></li>
+<li><a class="reference internal" href="../deep-dive/klb/configuring-kubos.html"><span class="doc">Configuring Kubos Linux</span></a></li>
+<li><a class="reference internal" href="../deep-dive/klb/kubos-linux-on-bbb.html"><span class="doc">Building KubOS</span></a></li>
+</ul>
+</div>
+<div class="section" id="external">
+<h3>External<a class="headerlink" href="#external" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference external" href="https://buildroot.org/downloads/manual/manual.html">Buildroot</a></li>
+<li><a class="reference external" href="http://www.denx.de/wiki/U-Boot">U-Boot</a></li>
+<li><a class="reference external" href="https://www.devicetree.org/">Device Trees</a></li>
+<li><a class="reference external" href="https://busybox.net/about.html">Busybox</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="system-requirements">
+<h2>System Requirements<a class="headerlink" href="#system-requirements" title="Permalink to this headline">¶</a></h2>
+<p>We recommend that any board being targeted for Kubos Linux have <strong>at least</strong> the following resources:</p>
+<ul class="simple">
+<li>400MHz processor with MMU</li>
+<li>64MB RAM (32MB is sufficient if Python is disabled)</li>
+<li>400MB storage for OS and upgrade partition (100MB is sufficient if Python is disabled)</li>
+</ul>
+</div>
+<div class="section" id="system-layout">
+<h2>System Layout<a class="headerlink" href="#system-layout" title="Permalink to this headline">¶</a></h2>
+<p>Before any work can be done, the system’s partition layout should be decided.</p>
+<p>The system should be composed of at least the following partitions:</p>
+<ul class="simple">
+<li>Boot partition - Contains U-Boot, the kernel, and the device tree (may be broken into multiple
+partitions)</li>
+<li>U-Boot envar partition - The environment variables which U-Boot uses in order to load and boot
+Kubos Linux. We recommend that this be placed in its own partition in order to help prevent
+corruption.</li>
+<li>Root FS - The Kubos Linux root file system</li>
+<li>Upgrade partition - This will hold the Kubos <a class="reference internal" href="../ecosystem/linux-docs/kubos-linux-upgrade.html"><span class="doc">upgrade/rollback</span></a>
+files</li>
+<li>User data partition - This will hold all of the user data. It is placed in its own partition to
+prevent it from being affected by a system upgrade or rollback.</li>
+</ul>
+<p>These partitions may be placed across multiple memory devices, if desired.
+For example, the partition containing U-Boot could be placed in a more secure memory device (ex.
+flash storage), while the root FS could be placed in a larger, but less secure location since it can
+be easily recovered.</p>
+</div>
+<div class="section" id="buildroot">
+<h2>Buildroot<a class="headerlink" href="#buildroot" title="Permalink to this headline">¶</a></h2>
+<p>Buildroot is responsible for building and assembling the OS components based on a given
+configuration file.</p>
+<p>Kubos’ Buildroot configurations and files are kept in the <a class="reference external" href="https://github.com/kubos/kubos-linux-build">KLB repo</a>
+and follow Buildroot’s recommended <a class="reference external" href="https://buildroot.org/downloads/manual/manual.html#outside-br-custom">external tree structure</a>.</p>
+<p>Clone the <a class="reference external" href="https://github.com/kubos/kubos-linux-build">KLB repo</a> repo to your local development
+environment.
+Almost all work done to port KubOS to a new OBC will be done here.</p>
+<div class="section" id="board-config">
+<h3>Board Config<a class="headerlink" href="#board-config" title="Permalink to this headline">¶</a></h3>
+<p>The high-level configuration file for the new OBC should be placed in <cite>kubos-linux-build/configs</cite>
+and should have a name which ends in “*_defconfig”.</p>
+<p>The <cite>kubos-linux-build/configs/generic-kubos_defconfig</cite> file gives a good starting place for your
+configuration. The “{target}” string should be replaced with your OBC’s name.</p>
+<p>The Kubos <a class="reference internal" href="../ecosystem/services/core-services.html"><span class="doc">core services</span></a> are included by default, so do
+not need to be manually specified in this file.</p>
+</div>
+<div class="section" id="board-directory">
+<h3>Board Directory<a class="headerlink" href="#board-directory" title="Permalink to this headline">¶</a></h3>
+<p>All other files needed for your OBC should be placed in a new directory under the
+<cite>kubos-linux-build/board</cite> directory.</p>
+<p>The normal convention is <cite>board/{company}/{obc}</cite>.</p>
+<p>You may add your OBC under the <cite>kubos</cite> directory or you may create a new directory for your
+organization.</p>
+<p>Files in this directory include:</p>
+<ul class="simple">
+<li>U-Boot configuration</li>
+<li>Linux configuration</li>
+<li>Linux device tree</li>
+<li>Image generation</li>
+<li>Board-specific overlay</li>
+<li>Board-specific patches</li>
+</ul>
+<p>These files will be covered in more detail in later sections of this doc.</p>
+</div>
+<div class="section" id="overlay">
+<h3>Overlay<a class="headerlink" href="#overlay" title="Permalink to this headline">¶</a></h3>
+<p>Board-specific overlay files should be given in a subdirectory, <cite>board/{company}/{obc}/overlay</cite>.</p>
+<p>These files should be located under the same directories as the file target file system.</p>
+<p>There are a few overlay files which should be common to all boards.</p>
+<div class="section" id="etc-network-interfaces">
+<h4>etc/network/interfaces<a class="headerlink" href="#etc-network-interfaces" title="Permalink to this headline">¶</a></h4>
+<p>This file defines the default ethernet connection (if one exists) as well as any other network
+connections. For example, a <a class="reference internal" href="comms-setup.html#slip"><span class="std std-ref">SLIP connection</span></a> might also be defined.</p>
+</div>
+<div class="section" id="etc-fstab">
+<h4>etc/fstab<a class="headerlink" href="#etc-fstab" title="Permalink to this headline">¶</a></h4>
+<p>This file defines all of the partitions which should be mounted at system boot.</p>
+</div>
+<div class="section" id="etc-fw-env-config">
+<h4>etc/fw_env.config<a class="headerlink" href="#etc-fw-env-config" title="Permalink to this headline">¶</a></h4>
+<p>This file defines the location of the U-Boot envar partition so that the envars can be accessed
+from Linux with the <code class="docutils literal notranslate"><span class="pre">fw_printenv</span></code> and <code class="docutils literal notranslate"><span class="pre">fw_setenv</span></code> commands.</p>
+</div>
+<div class="section" id="etc-inittab">
+<h4>etc/inittab<a class="headerlink" href="#etc-inittab" title="Permalink to this headline">¶</a></h4>
+<p>This file is responsible for running some boot-time activities and kicking off all the init scripts.</p>
+<p>Most importantly, it should be customized to run <code class="docutils literal notranslate"><span class="pre">fsck</span></code> on all system partitions and then to
+mount all relevant partitions.</p>
+</div>
+<div class="section" id="etc-monitrc">
+<h4>etc/monitrc<a class="headerlink" href="#etc-monitrc" title="Permalink to this headline">¶</a></h4>
+<p>This file controls the settings of <a class="reference external" href="https://mmonit.com/monit/documentation/monit.html">Monit</a>,
+the system’s <a class="reference internal" href="../ecosystem/linux-docs/monitoring.html"><span class="doc">process monitoring</span></a> tool.</p>
+<p>This file is customized for each board primarily due to the <code class="docutils literal notranslate"><span class="pre">SET</span> <span class="pre">HTTPD</span></code> command, which varies
+depending on whether or not the system has an ethernet connection available.</p>
+</div>
+</div>
+<div class="section" id="image-creation">
+<h3>Image Creation<a class="headerlink" href="#image-creation" title="Permalink to this headline">¶</a></h3>
+<p>Once the build process has been completed, a final OS image will likely need to be created so it
+can be loaded onto your target memory device/s.</p>
+<p>For the Beaglebone Black and Pumpkin MBM2 targets, this is controlled by the <cite>post-image.sh</cite> script,
+which calls <code class="docutils literal notranslate"><span class="pre">genimage</span></code> in order to create the image.
+It uses the <cite>genimage.cfg</cite> file in order to determine which partitions need to be created, what
+size the partitions need to be, and which files need to be placed inside of them.</p>
+<p><a class="reference external" href="https://github.com/pengutronix/genimage">genimage</a> is our preferred tool used to create system
+images, however it might not be compatible with all board layouts.</p>
+</div>
+</div>
+<div class="section" id="u-boot">
+<h2>U-Boot<a class="headerlink" href="#u-boot" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://www.denx.de/wiki/U-Boot">U-Boot</a> is the bootloader which is used for all boards.
+It is responsible for loading the operating system files into the appropriate storage locations and
+then kicking off the OS boot process.</p>
+<p>U-Boot configuration is a very manual process.
+The easiest way to determine what settings need to be used is to find example boards which are as
+close to your desired architecture as possible (frequently things like a processor’s evaluation kit
+board are available).</p>
+<p>Kubos has created a fork of U-Boot at <a class="reference external" href="https://github.com/kubos/uboot">https://github.com/kubos/uboot</a>.
+When adding a new board, users may do one of three things:</p>
+<ul class="simple">
+<li>Create a pull request which adds support for their board to Kubos’ U-Boot repo</li>
+<li>Create a patch which adds support and store it in their board’s Buildroot directory</li>
+<li>Create a custom fork of U-Boot</li>
+</ul>
+<div class="section" id="buildroot-config">
+<h3>Buildroot Config<a class="headerlink" href="#buildroot-config" title="Permalink to this headline">¶</a></h3>
+<p>A good portion of the U-Boot configuration is done with a configuration file, located in the board’s
+Buildroot directory.
+This file defines the high-level capabilities and the behavior of the U-Boot prompt.</p>
+<p>The following options should be enabled in order to build the Kubos OS recovery and
+upgrade system into the U-Boot binary:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">CONFIG_UPDATE_KUBOS</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">CONFIG_DFU</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">CONFIG_DFU_TFTP</span></code></li>
+<li>The <code class="docutils literal notranslate"><span class="pre">CONFIG_DFU_*</span></code> options which match the memory device type/s you are using (ex. <code class="docutils literal notranslate"><span class="pre">CONFIG_DFU_MMC</span></code>)</li>
+</ul>
+</div>
+<div class="section" id="u-boot-config">
+<h3>U-Boot Config<a class="headerlink" href="#u-boot-config" title="Permalink to this headline">¶</a></h3>
+<p>The remainder of a board’s configuration is done within U-Boot itself.</p>
+<p>You’ll need to create a new configuration header file in <cite>uboot/include/configs</cite>.</p>
+<p>This header file will define things like the location of the U-Boot envars, the default values for
+those envars, and the location and properties of various system resources.</p>
+<p>The file should have <code class="docutils literal notranslate"><span class="pre">#include</span> <span class="pre">&quot;kubos-common.h&quot;</span></code> in order to build in the resources needed for
+OS upgrade and recovery.</p>
+</div>
+<div class="section" id="u-boot-board-package">
+<h3>U-Boot Board Package<a class="headerlink" href="#u-boot-board-package" title="Permalink to this headline">¶</a></h3>
+<p>Next, you’ll need to create a new directory under <cite>uboot/board</cite>.
+Boards currently supported by Kubos are located under <cite>uboot/board/kubos</cite>.</p>
+<p>Within this directory should be at least two files:</p>
+<ul class="simple">
+<li>Kconfig - Defines the new board-specific configuration options, including a pointer to the
+previously mentioned configuration header file (<code class="docutils literal notranslate"><span class="pre">SYS_BOARD</span></code>)</li>
+<li>Makefile - Defines the board-specific drivers which need to be compiled into U-Boot</li>
+</ul>
+</div>
+<div class="section" id="installing-u-boot">
+<h3>Installing U-Boot<a class="headerlink" href="#installing-u-boot" title="Permalink to this headline">¶</a></h3>
+<p>Special care should be taken when determining where the final U-Boot binary should be installed.</p>
+<p>Many boards’ initial bootloaders expect the starting executable (U-Boot, in this case) to be located
+in a particular memory location.</p>
+<p>Note: This same care is not required for installing the rest of the system since you’ll be defining
+the location of the other major components (kernel, root FS, etc) within U-Boot.</p>
+</div>
+</div>
+<div class="section" id="linux">
+<h2>Linux<a class="headerlink" href="#linux" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="config">
+<h3>Config<a class="headerlink" href="#config" title="Permalink to this headline">¶</a></h3>
+<p>The Buildroot configuration supports having multiple “fragment” files for Linux configuration
+(<code class="docutils literal notranslate"><span class="pre">BR2_LINUX_KERNEL_CONFIG_FRAGMENT_FILES</span></code>).
+We take advantage of that by specifying common Linux options within the
+<cite>kubos-linux-build/common/linux-kubos.config</cite> file.</p>
+<p>Board-specific options should be specified within a separate config file under the board’s
+Buildroot directory.
+These options include things like model-specific peripheral drivers and processor-specific
+definitions.</p>
+</div>
+<div class="section" id="device-tree">
+<h3>Device Tree<a class="headerlink" href="#device-tree" title="Permalink to this headline">¶</a></h3>
+<p>The board’s device tree defines the particular hardware characteristics of the board.
+This includes things like specifying the pins allocated to a SPI bus, and the address of
+a particular bank of memory.</p>
+<p>Device tree development is one of the major pain points when bringing up a new OBC.</p>
+<p>We recommend the following debug tactics:</p>
+<ol class="arabic simple">
+<li>Turn your compiled device tree (*.dtb) back into the source tree to make sure that it’s getting
+assembled the way you want it to. <code class="docutils literal notranslate"><span class="pre">dtc</span> <span class="pre">-I</span> <span class="pre">dtb</span> <span class="pre">-O</span> <span class="pre">dts</span> <span class="pre">{buildroot}/output/images/{board}.dtb</span></code></li>
+<li>Start up Linux with debug printing enabled (Note: this will generate a huge amount of data, so
+you’re going to want to have it automatically saved off somewhere for you to review later):<ul>
+<li>Power up your board and hold down a key to go into the U-Boot console</li>
+<li>Enter <code class="docutils literal notranslate"><span class="pre">editenv</span> <span class="pre">bootargs</span></code></li>
+<li>Add <code class="docutils literal notranslate"><span class="pre">debug</span></code> to the end of the printed string and then press Enter</li>
+<li>Enter <code class="docutils literal notranslate"><span class="pre">run</span> <span class="pre">bootcmd</span></code></li>
+<li>This will start up Linux and spew out all kinds of stuff. Once it’s done booting (probably a
+minute or so), you can review the startup data. You’ll be looking for any kinds of issues
+assigning the desired pins to a particular device or loading the needed driver for a peripheral.</li>
+</ul>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="busybox">
+<h2>Busybox<a class="headerlink" href="#busybox" title="Permalink to this headline">¶</a></h2>
+<p>Currently, all OBCs supported by Kubos use a common Busybox configuration, located in
+<cite>kubos-linux-build/common/busybox-kubos.config</cite>.
+This config file specifies all the commands and utilities which are needed in order to run KubOS.</p>
+<p>Additional config fragment files may be specified, if desired, with the
+<code class="docutils literal notranslate"><span class="pre">BR2_PACKAGE_BUSYBOX_CONFIG_FRAGMENT_FILES</span></code> option.</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../mission-dev/index.html" class="btn btn-neutral float-right" title="Kubos Mission Development" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="mbm2/working-with-the-mbm2.html" class="btn btn-neutral" title="Working with the Pumpkin MBM2" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

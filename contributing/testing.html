@@ -1,0 +1,397 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Testing &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../index.html"/>
+        <link rel="up" title="Contributing to KubOS" href="index.html"/>
+        <link rel="next" title="Kubos Changelog" href="../changelog.html"/>
+        <link rel="prev" title="Documentation" href="documentation.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../obc-docs/index.html">Working with an OBC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ecosystem/index.html">KubOS Ecosystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deep-dive/index.html">Under the Hood</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sdk-docs/index.html">Kubos SDK</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Contributing to KubOS</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="reporting-bugs.html">Reporting Bugs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="feature-request.html">Requesting New Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contribution-process.html">Contributor Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kubos-standards.html">Coding and Documentation Standards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="documentation.html">Documentation Guides</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Testing Guides</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#standards">Standards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#guidelines">Guidelines</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#running-tests">Running Tests</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#unit-tests">Unit Tests</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#integration-tests">Integration Tests</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Contributing to KubOS</a> &raquo;</li>
+        
+      <li>Testing</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/contributing/testing.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="testing">
+<h1>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h1>
+<p>The testing of software is an essential part of developing a high-quality code base and
+ensuring that functionality remains intact as changes are introduced.</p>
+<p>This document details the testing standards and guidelines in place around KubOS.</p>
+<div class="section" id="standards">
+<h2>Standards<a class="headerlink" href="#standards" title="Permalink to this headline">¶</a></h2>
+<p>All software modules in the Kubos repo are expected to have some level of testing in place. The appropriate level
+of testing will vary from module to module.</p>
+<p>Libraries and APIs should have unit tests for private functionality and integration tests for public interfaces when possible.</p>
+<p>Binary services or applications should provide integration tests when possible.</p>
+<p>Project-level unit and integration tests should be included in the CI process. Branches <strong>must</strong> have
+all tests passing in CI to be accepted into master.</p>
+</div>
+<div class="section" id="guidelines">
+<h2>Guidelines<a class="headerlink" href="#guidelines" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="running-tests">
+<h3>Running Tests<a class="headerlink" href="#running-tests" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="rust">
+<h4>Rust<a class="headerlink" href="#rust" title="Permalink to this headline">¶</a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">cargo</span></code> tool has a built-in test runner under the <code class="docutils literal notranslate"><span class="pre">cargo</span> <span class="pre">test</span></code> subcommand.</p>
+<p>Running <code class="docutils literal notranslate"><span class="pre">cargo</span> <span class="pre">test</span></code> from within the crate’s folder will run all tests within the crate.</p>
+<p>Running <code class="docutils literal notranslate"><span class="pre">cargo</span> <span class="pre">test</span></code> from the root of the Kubos repo will run all Rust tests in the repo.</p>
+</div>
+<div class="section" id="python">
+<h4>Python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h4>
+<p>Tests for Python modules should be run under Python3 from within the module’s folder. The test files may exist as independent python scripts.</p>
+<p>Any additional dependencies needed for running the tests will need to be added to the module’s <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> file,
+in addition to the SDK and CI environments.</p>
+<p>If a new Python module has been created, the CI configuration will need to be changed for the
+new tests to be run in the CI process.
+The CI configuration file is <code class="docutils literal notranslate"><span class="pre">.circleci/config.yml</span></code>, and the job which will need to be edited is <code class="docutils literal notranslate"><span class="pre">non_rust_tests</span></code>.
+Add a new step to run the tests for the new module.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">non_rust_tests</span><span class="p">:</span>
+  <span class="nt">docker</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">kubos/kubos-dev:latest</span>
+  <span class="nt">steps</span><span class="p">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">...</span>
+  <span class="p p-Indicator">-</span> <span class="nt">run</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">cd apis/new-api; python3 test_api.py</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="c">
+<h4>C<a class="headerlink" href="#c" title="Permalink to this headline">¶</a></h4>
+<p>Unit tests can be run locally by navigating to the test folder under the module folder,
+creating a <code class="docutils literal notranslate"><span class="pre">build</span></code> dir in the test folder and running <code class="docutils literal notranslate"><span class="pre">cmake</span> <span class="pre">..</span> <span class="pre">&amp;&amp;</span> <span class="pre">make</span></code>.</p>
+<p>To run the tests the same way that CircleCI does, navigate to the top level of the Kubos repo and issue this command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python3 $PWD/tools/ci_c.py
+</pre></div>
+</div>
+<p>If a new C module has been created, it will need to be added to the <code class="docutils literal notranslate"><span class="pre">projects</span></code> list in <code class="docutils literal notranslate"><span class="pre">tools/ci_c.py</span></code>
+before the script will run the tests.</p>
+</div>
+</div>
+<div class="section" id="unit-tests">
+<h3>Unit Tests<a class="headerlink" href="#unit-tests" title="Permalink to this headline">¶</a></h3>
+<p>Unit tests should cover at least the following cases:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Good cases for all functions</li>
+<li>Null pointer cases for each function pointer argument (when writing C)</li>
+<li>Out-of-bounds cases for each function argument which is limited by more than its size (ex. <code class="docutils literal notranslate"><span class="pre">uint8_t</span></code> but max value of 3)</li>
+</ul>
+</div></blockquote>
+<p>When testing functionality which is tightly coupled with an external dependency (hardware device, network interface, etc),
+we suggest leveraging mocking to control and test with various dependency inputs and outputs.</p>
+<p>In general we suggest decoupling any business, decision-making, or parsing logic from external dependencies to ease
+the testing of these functional units.</p>
+<div class="section" id="id1">
+<h4>Rust<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+<p>Rust has <a class="reference external" href="https://doc.rust-lang.org/book/ch11-03-test-organization.html">native support for unit tests</a>.</p>
+<p>Mocking in Rust is done by creating a <code class="docutils literal notranslate"><span class="pre">trait</span></code> to abstract away functionality and inject mocked out dependencies.</p>
+<p>For instance, if you are writing a Radio API, and the device will communicate over UART, you can mock out the UART interface
+to simulate interactions with the radio.</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">pub</span><span class="w"> </span><span class="k">trait</span><span class="w"> </span><span class="n">UartDevice</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">fn</span> <span class="nf">read</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="nb">Result</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">u8</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="nb">String</span><span class="o">&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="k">fn</span> <span class="nf">write</span><span class="p">(</span><span class="n">data</span>: <span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">])</span><span class="w"> </span>-&gt; <span class="nb">Result</span><span class="o">&lt;</span><span class="p">(),</span><span class="w"> </span><span class="nb">String</span><span class="o">&gt;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="k">pub</span><span class="w"> </span><span class="k">struct</span> <span class="nc">RadioDevice</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">comms</span>: <span class="nb">Box</span><span class="o">&lt;</span><span class="n">UartDevice</span><span class="o">&gt;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="k">impl</span><span class="w"> </span><span class="n">RadioDevice</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">new</span><span class="p">(</span><span class="n">comms</span>: <span class="nb">Box</span><span class="o">&lt;</span><span class="n">UartDevice</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">Self</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">..</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>When writing tests, a mocked out implementation of the trait can be either generated by a mocking
+library, or manually implemented. This <a class="reference external" href="https://asomers.github.io/mock_shootout/">page</a> gives a good overview of mocking
+libraries currently available for Rust.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Many popular mocking libraries require unstable Rust, however KubOS uses stable rust.</p>
+</div>
+<p>Rust modules should include example code in the documentation. It is <cite>ok</cite> to use <code class="docutils literal notranslate"><span class="pre">no_run</span></code> when writing examples for docs,
+as sometimes these examples require external dependencies to actually run. However all examples should be buildable in
+the SDK and CI environment.</p>
+<p>The general convention for Rust tests is to include <cite>unit tests</cite> in the same file as the code under test, in a <cite>tests</cite> module, and to place <cite>integration tests</cite> in a <cite>tests</cite> folder at the top level of the crate. See the <a class="reference external" href="https://doc.rust-lang.org/book/ch11-03-test-organization.html">test organization</a> section of the book for more details on these conventions.</p>
+<p>The <a class="reference external" href="https://github.com/kubos/kubos/tree/master/services/app-service">app-service</a> is a great Rust project to look at for examples of Rust code under test.</p>
+</div>
+<div class="section" id="id2">
+<h4>Python<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
+<p>Python’s <code class="docutils literal notranslate"><span class="pre">unittest</span></code> and <code class="docutils literal notranslate"><span class="pre">mock</span></code> packages should be used to create unit tests
+for Python modules.</p>
+<p>The <a class="reference external" href="https://github.com/kubos/kubos/tree/master/apis/pumpkin-mcu-api">pumpkin-mcu-api</a>  is a great Python project to look at for an example of testing Python code using <code class="docutils literal notranslate"><span class="pre">mock</span></code>. The file <code class="docutils literal notranslate"><span class="pre">mcu_api.py</span></code> contains the Python class under test, while <code class="docutils literal notranslate"><span class="pre">test_mcu_api.py</span></code> contains the actual test code.</p>
+</div>
+<div class="section" id="id3">
+<h4>C<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
+<p>Unit tests for modules written in C are run using <a class="reference external" href="https://api.cmocka.org/">CMocka</a>, which gives testers the ability to use mocking in their testing.</p>
+<p>The C module should contain a <code class="docutils literal notranslate"><span class="pre">test</span></code> folder with a subfolder containing the test set/s (most modules will only have one test set).</p>
+<p>Within each test set should be three files:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">&lt;test-set&gt;.c</span></code> - The file containing the actual tests</li>
+<li><code class="docutils literal notranslate"><span class="pre">sysfs.c</span></code> - Stub functions for the underlying <cite>sysfs</cite> calls</li>
+<li><code class="docutils literal notranslate"><span class="pre">stubs.cmake</span></code> - Makes the stub functions available to the test builder/runner</li>
+</ul>
+</div></blockquote>
+<p>The <a class="reference external" href="https://github.com/kubos/kubos/tree/master/hal/kubos-hal">kubos-hal</a> is a great C project to look at for an example of C testing using <cite>CMocka</cite>. The file <code class="docutils literal notranslate"><span class="pre">source/i2c.c</span></code> contains the code under test, the folder <code class="docutils literal notranslate"><span class="pre">test/i2c</span></code> contains all of the test code.</p>
+</div>
+</div>
+<div class="section" id="integration-tests">
+<h3>Integration Tests<a class="headerlink" href="#integration-tests" title="Permalink to this headline">¶</a></h3>
+<p>Integration tests are built to exercise the public interfaces or end-to-end functionality of software. When writing these tests it is important to keep the end consumer of the software under test in mind.</p>
+<p>Typically integration tests are run alongside unit tests when running the KubOS repo’s test suite and can live in the project’s folder. However if an integration test is long running (30 seconds or more), it should be split out into an independent project in <code class="docutils literal notranslate"><span class="pre">test/integration</span></code> and run separately from the suite of unit tests.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../changelog.html" class="btn btn-neutral float-right" title="Kubos Changelog" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="documentation.html" class="btn btn-neutral" title="Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

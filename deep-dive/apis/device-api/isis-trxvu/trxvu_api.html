@@ -1,0 +1,1308 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ISIS TRXVU Radio API &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../../../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../../../../index.html"/>
+        <link rel="up" title="ISIS TRXVU Radio API" href="trxvu.html"/>
+        <link rel="next" title="GOMspace NanoPower P31u API" href="../gomspace-p31u/p31u_api.html"/>
+        <link rel="prev" title="ISIS TRXVU Radio API" href="trxvu.html"/> 
+
+  
+  <script src="../../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../getting-started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../obc-docs/index.html">Working with an OBC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ecosystem/index.html">KubOS Ecosystem</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Under the Hood</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../../index.html#apis">APIs</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../device-api-guide.html">Kubos Device API Creation Guide</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html">Device Interfaces</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../mai400.html">MAI-400 ADACS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../clydespace-3g-eps.html">Clyde Space 3G EPS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../isis-ants/ants.html">ISIS Antenna Systems</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../isis-imtq/imtq.html">ISIS iMTQ</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="trxvu.html">ISIS TRXVU Radio</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../gomspace-p31u/p31u_api.html">GOMspace NanoPower P31u</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../novatel-oem6.html">NovAtel OEM6 GPS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../nsl-duplex-d2.html">NSL EyeStar-D2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../pumpkin-mcu.html">Pumpkin MCUs</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../obc-api/index.html">OBC APIs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../kubos-hal/index.html">Kubos HAL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../kubos-libs.html">Kubos Libraries</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#protocols">Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#kubos-linux">Kubos Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#design-decisions">Design Decisions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../sdk-docs/index.html">Kubos SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contributing/index.html">Contributing to KubOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../index.html">Under the Hood of KubOS</a> &raquo;</li>
+        
+          <li><a href="../index.html">Kubos Device APIs</a> &raquo;</li>
+        
+          <li><a href="trxvu.html">ISIS TRXVU Radio API</a> &raquo;</li>
+        
+      <li>ISIS TRXVU Radio API</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../../_sources/deep-dive/apis/device-api/isis-trxvu/trxvu_api.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="isis-trxvu-radio-api">
+<h1>ISIS TRXVU Radio API<a class="headerlink" href="#isis-trxvu-radio-api" title="Permalink to this headline">¶</a></h1>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Telemetry Conversion Functions</p>
+<p>Convert raw ADC values into human-readable units </p>
+<dl class="function">
+<dt id="_CPPv411get_voltage8uint16_t">
+<span id="_CPPv311get_voltage8uint16_t"></span><span id="_CPPv211get_voltage8uint16_t"></span><span id="get_voltage__uint16_t"></span><span class="target" id="group__TRXVU__RADIO__API_1gaa288ac899e0b49bf2c4ea3d42cdd9540"></span>float <code class="descname">get_voltage</code><span class="sig-paren">(</span>uint16_t <em>raw</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv411get_voltage8uint16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>Voltage in volts </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">raw</span></code>: Raw ADC value </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv411get_current8uint16_t">
+<span id="_CPPv311get_current8uint16_t"></span><span id="_CPPv211get_current8uint16_t"></span><span id="get_current__uint16_t"></span><span class="target" id="group__TRXVU__RADIO__API_1ga521a959a6f9687ce231d7e02a16ef4a2"></span>float <code class="descname">get_current</code><span class="sig-paren">(</span>uint16_t <em>raw</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv411get_current8uint16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>Current in milliamps </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">raw</span></code>: Raw ADC value </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv415get_temperature8uint16_t">
+<span id="_CPPv315get_temperature8uint16_t"></span><span id="_CPPv215get_temperature8uint16_t"></span><span id="get_temperature__uint16_t"></span><span class="target" id="group__TRXVU__RADIO__API_1ga19232b1c4c5fa5e7273cf4981852f980"></span>float <code class="descname">get_temperature</code><span class="sig-paren">(</span>uint16_t <em>raw</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv415get_temperature8uint16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>Temperature in degrees Celsius </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">raw</span></code>: Raw ADC value </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv418get_doppler_offset8uint16_t">
+<span id="_CPPv318get_doppler_offset8uint16_t"></span><span id="_CPPv218get_doppler_offset8uint16_t"></span><span id="get_doppler_offset__uint16_t"></span><span class="target" id="group__TRXVU__RADIO__API_1gace28c3e90d00da1a773df0af92674fbc"></span>float <code class="descname">get_doppler_offset</code><span class="sig-paren">(</span>uint16_t <em>raw</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv418get_doppler_offset8uint16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>Doppler shift in hertz </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">raw</span></code>: Raw ADC value </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv419get_signal_strength8uint16_t">
+<span id="_CPPv319get_signal_strength8uint16_t"></span><span id="_CPPv219get_signal_strength8uint16_t"></span><span id="get_signal_strength__uint16_t"></span><span class="target" id="group__TRXVU__RADIO__API_1ga3553a1b0e1e8b683b22b127516dc05cc"></span>float <code class="descname">get_signal_strength</code><span class="sig-paren">(</span>uint16_t <em>raw</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419get_signal_strength8uint16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>Received signal strength power in decibel-milliwatts </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">raw</span></code>: Raw ADC value </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv416get_rf_power_dbm8uint16_t">
+<span id="_CPPv316get_rf_power_dbm8uint16_t"></span><span id="_CPPv216get_rf_power_dbm8uint16_t"></span><span id="get_rf_power_dbm__uint16_t"></span><span class="target" id="group__TRXVU__RADIO__API_1gab12f5141e6d8303200fe989608ff3ac7"></span>float <code class="descname">get_rf_power_dbm</code><span class="sig-paren">(</span>uint16_t <em>raw</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv416get_rf_power_dbm8uint16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>RF reflected power in decibel-milliwatts </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">raw</span></code>: Raw ADC value </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv415get_rf_power_mw8uint16_t">
+<span id="_CPPv315get_rf_power_mw8uint16_t"></span><span id="_CPPv215get_rf_power_mw8uint16_t"></span><span id="get_rf_power_mw__uint16_t"></span><span class="target" id="group__TRXVU__RADIO__API_1ga493f186ab1cb219b5a604ab695c9a338"></span>float <code class="descname">get_rf_power_mw</code><span class="sig-paren">(</span>uint16_t <em>raw</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv415get_rf_power_mw8uint16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>RF reflected power in milliwatts </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">raw</span></code>: Raw ADC value </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Typedefs</p>
+<dl class="type">
+<dt id="_CPPv412trxvu_uptime">
+<span id="_CPPv312trxvu_uptime"></span><span id="_CPPv212trxvu_uptime"></span><span id="trxvu_uptime"></span><span class="target" id="group__TRXVU__RADIO__API_1ga518377bc5a0fb0e0e09d29d0ea3cc5ef"></span><em class="property">typedef </em>uint32_t <code class="descname">trxvu_uptime</code><a class="headerlink" href="#_CPPv412trxvu_uptime" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Transmitter or receiver uptime value (in seconds) </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Enums</p>
+<dl class="enum">
+<dt id="_CPPv412KRadioStatus">
+<span id="_CPPv312KRadioStatus"></span><span id="_CPPv212KRadioStatus"></span><span class="target" id="group__TRXVU__RADIO__API_1ga36ee3afd6b38c95c2fe131c3512f46fd"></span><em class="property">enum </em><code class="descname">KRadioStatus</code><a class="headerlink" href="#_CPPv412KRadioStatus" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Radio function return values. </p>
+<p><em>Values:</em></p>
+<dl class="enumerator">
+<dt id="_CPPv48RADIO_OK">
+<span id="_CPPv38RADIO_OK"></span><span id="_CPPv28RADIO_OK"></span><span class="target" id="group__TRXVU__RADIO__API_1gga36ee3afd6b38c95c2fe131c3512f46fdaae9351843b15bf62064ad207513f14f2"></span><code class="descname">RADIO_OK</code> = 0<a class="headerlink" href="#_CPPv48RADIO_OK" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Function call completed successfully. </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv414RADIO_RX_EMPTY">
+<span id="_CPPv314RADIO_RX_EMPTY"></span><span id="_CPPv214RADIO_RX_EMPTY"></span><span class="target" id="group__TRXVU__RADIO__API_1gga36ee3afd6b38c95c2fe131c3512f46fdafd24e5944792edc4a5b5d5c9a2750a7d"></span><code class="descname">RADIO_RX_EMPTY</code><a class="headerlink" href="#_CPPv414RADIO_RX_EMPTY" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Radio receive buffer is empty. </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv411RADIO_ERROR">
+<span id="_CPPv311RADIO_ERROR"></span><span id="_CPPv211RADIO_ERROR"></span><span class="target" id="group__TRXVU__RADIO__API_1gga36ee3afd6b38c95c2fe131c3512f46fda2f196a4aab36590797b20bdbc3130889"></span><code class="descname">RADIO_ERROR</code><a class="headerlink" href="#_CPPv411RADIO_ERROR" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Generic radio error. </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv418RADIO_ERROR_CONFIG">
+<span id="_CPPv318RADIO_ERROR_CONFIG"></span><span id="_CPPv218RADIO_ERROR_CONFIG"></span><span class="target" id="group__TRXVU__RADIO__API_1gga36ee3afd6b38c95c2fe131c3512f46fda9cb3a481ed68aa164279d480384340c8"></span><code class="descname">RADIO_ERROR_CONFIG</code><a class="headerlink" href="#_CPPv418RADIO_ERROR_CONFIG" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Function input parameter is invalid. </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="enum">
+<dt id="_CPPv411KRadioReset">
+<span id="_CPPv311KRadioReset"></span><span id="_CPPv211KRadioReset"></span><span class="target" id="group__TRXVU__RADIO__API_1ga2a1a3254525780a33f6f18a5e8d06f5a"></span><em class="property">enum </em><code class="descname">KRadioReset</code><a class="headerlink" href="#_CPPv411KRadioReset" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Radio reset types. </p>
+<p><em>Values:</em></p>
+<dl class="enumerator">
+<dt id="_CPPv416RADIO_HARD_RESET">
+<span id="_CPPv316RADIO_HARD_RESET"></span><span id="_CPPv216RADIO_HARD_RESET"></span><span class="target" id="group__TRXVU__RADIO__API_1gga2a1a3254525780a33f6f18a5e8d06f5aaf17cf774e17c59deb5b4766c54cf09c9"></span><code class="descname">RADIO_HARD_RESET</code><a class="headerlink" href="#_CPPv416RADIO_HARD_RESET" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Perform hardware-level radio reset. </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv416RADIO_SOFT_RESET">
+<span id="_CPPv316RADIO_SOFT_RESET"></span><span id="_CPPv216RADIO_SOFT_RESET"></span><span class="target" id="group__TRXVU__RADIO__API_1gga2a1a3254525780a33f6f18a5e8d06f5aa9e8d21a87ee1a4ddace6542e41a75734"></span><code class="descname">RADIO_SOFT_RESET</code><a class="headerlink" href="#_CPPv416RADIO_SOFT_RESET" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Perform software radio reset. </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="enum">
+<dt id="_CPPv411RadioTXRate">
+<span id="_CPPv311RadioTXRate"></span><span id="_CPPv211RadioTXRate"></span><span class="target" id="group__TRXVU__RADIO__API_1ga04d986f4bb1103956a71f35e682e73d1"></span><em class="property">enum </em><code class="descname">RadioTXRate</code><a class="headerlink" href="#_CPPv411RadioTXRate" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Flags used to set radio transmission data rate. </p>
+<p><em>Values:</em></p>
+<dl class="enumerator">
+<dt id="_CPPv418RADIO_TX_RATE_1200">
+<span id="_CPPv318RADIO_TX_RATE_1200"></span><span id="_CPPv218RADIO_TX_RATE_1200"></span><span class="target" id="group__TRXVU__RADIO__API_1gga04d986f4bb1103956a71f35e682e73d1a850b91671eedb853e3bd7530615711a5"></span><code class="descname">RADIO_TX_RATE_1200</code> = 0x01<a class="headerlink" href="#_CPPv418RADIO_TX_RATE_1200" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Transmitter data rate 1200bps. </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv418RADIO_TX_RATE_2400">
+<span id="_CPPv318RADIO_TX_RATE_2400"></span><span id="_CPPv218RADIO_TX_RATE_2400"></span><span class="target" id="group__TRXVU__RADIO__API_1gga04d986f4bb1103956a71f35e682e73d1ab3a9b902ba0a1019967f7ef1398fad86"></span><code class="descname">RADIO_TX_RATE_2400</code> = 0x02<a class="headerlink" href="#_CPPv418RADIO_TX_RATE_2400" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Transmitter data rate 2400bps. </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv418RADIO_TX_RATE_4800">
+<span id="_CPPv318RADIO_TX_RATE_4800"></span><span id="_CPPv218RADIO_TX_RATE_4800"></span><span class="target" id="group__TRXVU__RADIO__API_1gga04d986f4bb1103956a71f35e682e73d1adde58e2061bdb6cbf92131db06f63d4c"></span><code class="descname">RADIO_TX_RATE_4800</code> = 0x04<a class="headerlink" href="#_CPPv418RADIO_TX_RATE_4800" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Transmitter data rate 4800bps. </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt>
+<span class="target" id="group__TRXVU__RADIO__API_1gga04d986f4bb1103956a71f35e682e73d1ab11f0c30d5bc5d86d1433eb70cd51c39"></span></dt>
+<dd><p>Transmitter data rate 9600bps. </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="enum">
+<dt id="_CPPv414RadioIdleState">
+<span id="_CPPv314RadioIdleState"></span><span id="_CPPv214RadioIdleState"></span><span class="target" id="group__TRXVU__RADIO__API_1gaea9035e8aeff07716c48c746db3e123c"></span><em class="property">enum </em><code class="descname">RadioIdleState</code><a class="headerlink" href="#_CPPv414RadioIdleState" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Flags used to set transmitter’s idle state. </p>
+<p><em>Values:</em></p>
+<dl class="enumerator">
+<dt id="_CPPv418RADIO_IDLE_UNKNOWN">
+<span id="_CPPv318RADIO_IDLE_UNKNOWN"></span><span id="_CPPv218RADIO_IDLE_UNKNOWN"></span><span class="target" id="group__TRXVU__RADIO__API_1ggaea9035e8aeff07716c48c746db3e123caa9111921c3b7c358b411772363e3ed32"></span><code class="descname">RADIO_IDLE_UNKNOWN</code> = 0<a class="headerlink" href="#_CPPv418RADIO_IDLE_UNKNOWN" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Dummy value to indicate no change should be made. </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv414RADIO_IDLE_OFF">
+<span id="_CPPv314RADIO_IDLE_OFF"></span><span id="_CPPv214RADIO_IDLE_OFF"></span><span class="target" id="group__TRXVU__RADIO__API_1ggaea9035e8aeff07716c48c746db3e123ca94f1f50e901cbe92e03b1468d42482a7"></span><code class="descname">RADIO_IDLE_OFF</code><a class="headerlink" href="#_CPPv414RADIO_IDLE_OFF" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Transmitter should turn off while idle. </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv413RADIO_IDLE_ON">
+<span id="_CPPv313RADIO_IDLE_ON"></span><span id="_CPPv213RADIO_IDLE_ON"></span><span class="target" id="group__TRXVU__RADIO__API_1ggaea9035e8aeff07716c48c746db3e123ca4fcba13af240abd0b033f3fe1f5a9b23"></span><code class="descname">RADIO_IDLE_ON</code><a class="headerlink" href="#_CPPv413RADIO_IDLE_ON" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Transmitter should remain on while idle. </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="enum">
+<dt id="_CPPv414RadioTelemType">
+<span id="_CPPv314RadioTelemType"></span><span id="_CPPv214RadioTelemType"></span><span class="target" id="group__TRXVU__RADIO__API_1ga1bcc847e1b6d2a67af5f50cf3aa0ad42"></span><em class="property">enum </em><code class="descname">RadioTelemType</code><a class="headerlink" href="#_CPPv414RadioTelemType" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Telemetry request types. </p>
+<p><em>Values:</em></p>
+<dl class="enumerator">
+<dt id="_CPPv418RADIO_TX_TELEM_ALL">
+<span id="_CPPv318RADIO_TX_TELEM_ALL"></span><span id="_CPPv218RADIO_TX_TELEM_ALL"></span><span class="target" id="group__TRXVU__RADIO__API_1gga1bcc847e1b6d2a67af5f50cf3aa0ad42a6b8c5185c273f7b50b7762478211ac44"></span><code class="descname">RADIO_TX_TELEM_ALL</code><a class="headerlink" href="#_CPPv418RADIO_TX_TELEM_ALL" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns the current measurements of all the transmitter’s telemetry channels. </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv419RADIO_TX_TELEM_LAST">
+<span id="_CPPv319RADIO_TX_TELEM_LAST"></span><span id="_CPPv219RADIO_TX_TELEM_LAST"></span><span class="target" id="group__TRXVU__RADIO__API_1gga1bcc847e1b6d2a67af5f50cf3aa0ad42a8b35a73b8d143a93a5ccd939929c3b82"></span><code class="descname">RADIO_TX_TELEM_LAST</code><a class="headerlink" href="#_CPPv419RADIO_TX_TELEM_LAST" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns the telemetry channels that were sampled during the last frame transmission. </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv415RADIO_TX_UPTIME">
+<span id="_CPPv315RADIO_TX_UPTIME"></span><span id="_CPPv215RADIO_TX_UPTIME"></span><span class="target" id="group__TRXVU__RADIO__API_1gga1bcc847e1b6d2a67af5f50cf3aa0ad42ae272dab4d4b476c6bcd4a54e3e326bc7"></span><code class="descname">RADIO_TX_UPTIME</code><a class="headerlink" href="#_CPPv415RADIO_TX_UPTIME" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns the amount of time, in seconds, that the transmitter portion of the radio has been active. </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv414RADIO_TX_STATE">
+<span id="_CPPv314RADIO_TX_STATE"></span><span id="_CPPv214RADIO_TX_STATE"></span><span class="target" id="group__TRXVU__RADIO__API_1gga1bcc847e1b6d2a67af5f50cf3aa0ad42a2df7b9be73121443413c3d01c91a450f"></span><code class="descname">RADIO_TX_STATE</code><a class="headerlink" href="#_CPPv414RADIO_TX_STATE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns the current state of the transmitter. </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv418RADIO_RX_TELEM_ALL">
+<span id="_CPPv318RADIO_RX_TELEM_ALL"></span><span id="_CPPv218RADIO_RX_TELEM_ALL"></span><span class="target" id="group__TRXVU__RADIO__API_1gga1bcc847e1b6d2a67af5f50cf3aa0ad42a98b1810933e8acf058183e76046acde5"></span><code class="descname">RADIO_RX_TELEM_ALL</code><a class="headerlink" href="#_CPPv418RADIO_RX_TELEM_ALL" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns the current measurements of all the receiver’s telemetry channels. </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv415RADIO_RX_UPTIME">
+<span id="_CPPv315RADIO_RX_UPTIME"></span><span id="_CPPv215RADIO_RX_UPTIME"></span><span class="target" id="group__TRXVU__RADIO__API_1gga1bcc847e1b6d2a67af5f50cf3aa0ad42ab641c0e2cd6ecdb2cbf3da5cd9bd961a"></span><code class="descname">RADIO_RX_UPTIME</code><a class="headerlink" href="#_CPPv415RADIO_RX_UPTIME" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns the amount of time, in seconds, that the receiver portion of the radio has been active. </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="enum">
+<dt id="_CPPv412RadioTXState">
+<span id="_CPPv312RadioTXState"></span><span id="_CPPv212RadioTXState"></span><span class="target" id="group__TRXVU__RADIO__API_1ga74e06b04950a401d9c913145e12f570b"></span><em class="property">enum </em><code class="descname">RadioTXState</code><a class="headerlink" href="#_CPPv412RadioTXState" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Radio TX state flags returned by <a class="reference internal" href="#group__TRXVU__RADIO__API_1gga1bcc847e1b6d2a67af5f50cf3aa0ad42a2df7b9be73121443413c3d01c91a450f"><span class="std std-ref">RADIO_TX_STATE</span></a> request. </p>
+<p><em>Values:</em></p>
+<dl class="enumerator">
+<dt id="_CPPv420RADIO_STATE_IDLE_OFF">
+<span id="_CPPv320RADIO_STATE_IDLE_OFF"></span><span id="_CPPv220RADIO_STATE_IDLE_OFF"></span><span class="target" id="group__TRXVU__RADIO__API_1gga74e06b04950a401d9c913145e12f570baa7532be867ddef6809125714412b9e98"></span><code class="descname">RADIO_STATE_IDLE_OFF</code> = 0x00<a class="headerlink" href="#_CPPv420RADIO_STATE_IDLE_OFF" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Transmitter will turn off when idle. </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv419RADIO_STATE_IDLE_ON">
+<span id="_CPPv319RADIO_STATE_IDLE_ON"></span><span id="_CPPv219RADIO_STATE_IDLE_ON"></span><span class="target" id="group__TRXVU__RADIO__API_1gga74e06b04950a401d9c913145e12f570ba43c4776f90388282bf1237b0c58385f7"></span><code class="descname">RADIO_STATE_IDLE_ON</code> = 0x01<a class="headerlink" href="#_CPPv419RADIO_STATE_IDLE_ON" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Transmitter will remain on when idle. </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv425RADIO_STATE_BEACON_ACTIVE">
+<span id="_CPPv325RADIO_STATE_BEACON_ACTIVE"></span><span id="_CPPv225RADIO_STATE_BEACON_ACTIVE"></span><span class="target" id="group__TRXVU__RADIO__API_1gga74e06b04950a401d9c913145e12f570bac5c0de88aa42186fea12415150e32853"></span><code class="descname">RADIO_STATE_BEACON_ACTIVE</code> = 0x02<a class="headerlink" href="#_CPPv425RADIO_STATE_BEACON_ACTIVE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Transmitter’s beacon is enabled. </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv421RADIO_STATE_RATE_1200">
+<span id="_CPPv321RADIO_STATE_RATE_1200"></span><span id="_CPPv221RADIO_STATE_RATE_1200"></span><span class="target" id="group__TRXVU__RADIO__API_1gga74e06b04950a401d9c913145e12f570baebfad8ffd9e2d6a657b66c54d8faab14"></span><code class="descname">RADIO_STATE_RATE_1200</code> = 0x00<a class="headerlink" href="#_CPPv421RADIO_STATE_RATE_1200" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Transmitter sending at 1200bps. </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv421RADIO_STATE_RATE_2400">
+<span id="_CPPv321RADIO_STATE_RATE_2400"></span><span id="_CPPv221RADIO_STATE_RATE_2400"></span><span class="target" id="group__TRXVU__RADIO__API_1gga74e06b04950a401d9c913145e12f570ba0efa6502210a33e91c51c5888c86865b"></span><code class="descname">RADIO_STATE_RATE_2400</code> = 0x01<a class="headerlink" href="#_CPPv421RADIO_STATE_RATE_2400" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Transmitter sending at 2400bps. </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv421RADIO_STATE_RATE_4800">
+<span id="_CPPv321RADIO_STATE_RATE_4800"></span><span id="_CPPv221RADIO_STATE_RATE_4800"></span><span class="target" id="group__TRXVU__RADIO__API_1gga74e06b04950a401d9c913145e12f570ba6237691d0426975d8dacbff0a763477c"></span><code class="descname">RADIO_STATE_RATE_4800</code> = 0x02<a class="headerlink" href="#_CPPv421RADIO_STATE_RATE_4800" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Transmitter sending at 4800bps. </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv421RADIO_STATE_RATE_9600">
+<span id="_CPPv321RADIO_STATE_RATE_9600"></span><span id="_CPPv221RADIO_STATE_RATE_9600"></span><span class="target" id="group__TRXVU__RADIO__API_1gga74e06b04950a401d9c913145e12f570ba2478c95ddad4c48ca0084cd4789b0852"></span><code class="descname">RADIO_STATE_RATE_9600</code> = 0x03<a class="headerlink" href="#_CPPv421RADIO_STATE_RATE_9600" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Transmitter sending at 9600bps. </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Functions</p>
+<dl class="function">
+<dt id="_CPPv421k_radio_watchdog_kickv">
+<span id="_CPPv321k_radio_watchdog_kickv"></span><span id="_CPPv221k_radio_watchdog_kickv"></span><span id="k_radio_watchdog_kick__void"></span><span class="target" id="group__TRXVU__RADIO__API_1gaea40fdd07f04214f193de69bd7884abe"></span><a class="reference internal" href="#_CPPv412KRadioStatus" title="KRadioStatus">KRadioStatus</a> <code class="descname">k_radio_watchdog_kick</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv421k_radio_watchdog_kickv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Kick the radio’s watchdogs once. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KRadioStatus <code class="docutils literal notranslate"><span class="pre">RADIO_OK</span></code> if OK, error otherwise </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv422k_radio_watchdog_startv">
+<span id="_CPPv322k_radio_watchdog_startv"></span><span id="_CPPv222k_radio_watchdog_startv"></span><span id="k_radio_watchdog_start__void"></span><span class="target" id="group__TRXVU__RADIO__API_1ga7efdfdedc8ef845c776ebe5747a6d4ba"></span><a class="reference internal" href="#_CPPv412KRadioStatus" title="KRadioStatus">KRadioStatus</a> <code class="descname">k_radio_watchdog_start</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv422k_radio_watchdog_startv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Start a thread to kick the radio’s watchdogs at an interval of (timeout/3) seconds. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KRadioStatus <code class="docutils literal notranslate"><span class="pre">RADIO_OK</span></code> if OK, error otherwise </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv421k_radio_watchdog_stopv">
+<span id="_CPPv321k_radio_watchdog_stopv"></span><span id="_CPPv221k_radio_watchdog_stopv"></span><span id="k_radio_watchdog_stop__void"></span><span class="target" id="group__TRXVU__RADIO__API_1ga68f572133bd2dc363b7278f111a94fee"></span><a class="reference internal" href="#_CPPv412KRadioStatus" title="KRadioStatus">KRadioStatus</a> <code class="descname">k_radio_watchdog_stop</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv421k_radio_watchdog_stopv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Stop the watchdog thread. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KRadioStatus <code class="docutils literal notranslate"><span class="pre">RADIO_OK</span></code> if OK, error otherwise </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv421k_radio_send_override13ax25_callsign13ax25_callsignPciP7uint8_t">
+<span id="_CPPv321k_radio_send_override13ax25_callsign13ax25_callsignPciP7uint8_t"></span><span id="_CPPv221k_radio_send_override13ax25_callsign13ax25_callsignPciP7uint8_t"></span><span id="k_radio_send_override__ax25_callsign.ax25_callsign.cP.i.uint8_tP"></span><span class="target" id="group__TRXVU__RADIO__API_1gad6143e3255e7d23d4758fad34d57e4d6"></span><a class="reference internal" href="#_CPPv412KRadioStatus" title="KRadioStatus">KRadioStatus</a> <code class="descname">k_radio_send_override</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv413ax25_callsign" title="ax25_callsign">ax25_callsign</a> <em>to</em>, <a class="reference internal" href="#_CPPv413ax25_callsign" title="ax25_callsign">ax25_callsign</a> <em>from</em>, char *<em>buffer</em>, int <em>len</em>, uint8_t *<em>response</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv421k_radio_send_override13ax25_callsign13ax25_callsignPciP7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Send a message to the transmit buffer, but use the specified call-signs instead of the defaults. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KRadioStatus <code class="docutils literal notranslate"><span class="pre">RADIO_OK</span></code> on success, otherwise error </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">to</span></code>: AX.25 call-sign for message sender </li>
+<li><code class="docutils literal notranslate"><span class="pre">from</span></code>: AX.25 call-sign for message destination </li>
+<li><code class="docutils literal notranslate"><span class="pre">buffer</span></code>: Pointer to message to send </li>
+<li><code class="docutils literal notranslate"><span class="pre">len</span></code>: Length of message to send </li>
+<li><code class="docutils literal notranslate"><span class="pre">response</span></code>: Pointer to storage area for response byte </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv427k_radio_set_beacon_override13ax25_callsign13ax25_callsign15radio_tx_beacon">
+<span id="_CPPv327k_radio_set_beacon_override13ax25_callsign13ax25_callsign15radio_tx_beacon"></span><span id="_CPPv227k_radio_set_beacon_override13ax25_callsign13ax25_callsign15radio_tx_beacon"></span><span id="k_radio_set_beacon_override__ax25_callsign.ax25_callsign.radio_tx_beacon"></span><span class="target" id="group__TRXVU__RADIO__API_1gaa57ebb95f20e62e1ebe0827f0c094230"></span><a class="reference internal" href="#_CPPv412KRadioStatus" title="KRadioStatus">KRadioStatus</a> <code class="descname">k_radio_set_beacon_override</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv413ax25_callsign" title="ax25_callsign">ax25_callsign</a> <em>to</em>, <a class="reference internal" href="#_CPPv413ax25_callsign" title="ax25_callsign">ax25_callsign</a> <em>from</em>, <a class="reference internal" href="#_CPPv415radio_tx_beacon" title="radio_tx_beacon">radio_tx_beacon</a> <em>beacon</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv427k_radio_set_beacon_override13ax25_callsign13ax25_callsign15radio_tx_beacon" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the automatic periodic beacon, but use the specified call-signs instead of the defaults. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KRadioStatus <code class="docutils literal notranslate"><span class="pre">RADIO_OK</span></code> on success, otherwise error </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">to</span></code>: AX.25 call-sign for message sender </li>
+<li><code class="docutils literal notranslate"><span class="pre">from</span></code>: AX.25 call-sign for message destination </li>
+<li><code class="docutils literal notranslate"><span class="pre">beacon</span></code>: <a class="reference internal" href="#structradio__tx__beacon"><span class="std std-ref">radio_tx_beacon</span></a> to send </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv420k_radio_clear_beaconv">
+<span id="_CPPv320k_radio_clear_beaconv"></span><span id="_CPPv220k_radio_clear_beaconv"></span><span id="k_radio_clear_beacon__void"></span><span class="target" id="group__TRXVU__RADIO__API_1gafe8e66b3c0b55ccb9259791d585c2e7c"></span><a class="reference internal" href="#_CPPv412KRadioStatus" title="KRadioStatus">KRadioStatus</a> <code class="descname">k_radio_clear_beacon</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv420k_radio_clear_beaconv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Clear/deactivate the automatic periodic beacon. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KRadioStatus <code class="docutils literal notranslate"><span class="pre">RADIO_OK</span></code> on success, otherwise error </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv412k_radio_initPc8trx_prop8trx_prop8uint16_t">
+<span id="_CPPv312k_radio_initPc8trx_prop8trx_prop8uint16_t"></span><span id="_CPPv212k_radio_initPc8trx_prop8trx_prop8uint16_t"></span><span id="k_radio_init__cP.trx_prop.trx_prop.uint16_t"></span><span class="target" id="group__TRXVU__RADIO__API_1gac996fa33b821071d309364153cd5bf07"></span><a class="reference internal" href="#_CPPv412KRadioStatus" title="KRadioStatus">KRadioStatus</a> <code class="descname">k_radio_init</code><span class="sig-paren">(</span>char *<em>bus</em>, <a class="reference internal" href="#_CPPv48trx_prop" title="trx_prop">trx_prop</a> <em>tx</em>, <a class="reference internal" href="#_CPPv48trx_prop" title="trx_prop">trx_prop</a> <em>rx</em>, uint16_t <em>timeout</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv412k_radio_initPc8trx_prop8trx_prop8uint16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Initialize the radio interface. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KRadioStatus RADIO_OK if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">bus</span></code>: The I2C bus device the radio is connected to </li>
+<li><code class="docutils literal notranslate"><span class="pre">tx</span></code>: The transmitter’s properties </li>
+<li><code class="docutils literal notranslate"><span class="pre">rx</span></code>: The receiver’s properties </li>
+<li><code class="docutils literal notranslate"><span class="pre">timeout</span></code>: The radio’s watchdog timeout (in seconds) </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv417k_radio_terminatev">
+<span id="_CPPv317k_radio_terminatev"></span><span id="_CPPv217k_radio_terminatev"></span><span id="k_radio_terminate__void"></span><span class="target" id="group__TRXVU__RADIO__API_1ga53a9bbbd8ae95d52b23a2df6657224d8"></span>void <code class="descname">k_radio_terminate</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv417k_radio_terminatev" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Terminate the radio interface. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv417k_radio_configureP12radio_config">
+<span id="_CPPv317k_radio_configureP12radio_config"></span><span id="_CPPv217k_radio_configureP12radio_config"></span><span id="k_radio_configure__radio_configP"></span><span class="target" id="group__TRXVU__RADIO__API_1gaa4552eb4622754506383ec94c26e9cb8"></span><a class="reference internal" href="#_CPPv412KRadioStatus" title="KRadioStatus">KRadioStatus</a> <code class="descname">k_radio_configure</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv412radio_config" title="radio_config">radio_config</a> *<em>config</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv417k_radio_configureP12radio_config" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Configure the radio. </p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>This function might not be implemented for all radios. See specific radio API documentation for configuration availability and structure </dd>
+<dt><strong>Return</strong></dt>
+<dd>KRadioStatus RADIO_OK if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">config</span></code>: Pointer to the radio configuration structure </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv413k_radio_reset11KRadioReset">
+<span id="_CPPv313k_radio_reset11KRadioReset"></span><span id="_CPPv213k_radio_reset11KRadioReset"></span><span id="k_radio_reset__KRadioReset"></span><span class="target" id="group__TRXVU__RADIO__API_1ga4fdf47845e10ef37e156630f50d2a2e4"></span><a class="reference internal" href="#_CPPv412KRadioStatus" title="KRadioStatus">KRadioStatus</a> <code class="descname">k_radio_reset</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv411KRadioReset" title="KRadioReset">KRadioReset</a> <em>type</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv413k_radio_reset11KRadioReset" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Reset the radio. </p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>This function might not be implemented for all radios </dd>
+<dt><strong>Return</strong></dt>
+<dd>KRadioStatus RADIO_OK if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">type</span></code>: Type of reset to perform (hard, soft, etc) </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv412k_radio_sendPciP7uint8_t">
+<span id="_CPPv312k_radio_sendPciP7uint8_t"></span><span id="_CPPv212k_radio_sendPciP7uint8_t"></span><span id="k_radio_send__cP.i.uint8_tP"></span><span class="target" id="group__TRXVU__RADIO__API_1ga46e06d414c27e878b32cd300a1f88054"></span><a class="reference internal" href="#_CPPv412KRadioStatus" title="KRadioStatus">KRadioStatus</a> <code class="descname">k_radio_send</code><span class="sig-paren">(</span>char *<em>buffer</em>, int <em>len</em>, uint8_t *<em>response</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv412k_radio_sendPciP7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Send a message to the radio’s transmit buffer. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KRadioStatus RADIO_OK if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">buffer</span></code>: Pointer to the message to send </li>
+<li><code class="docutils literal notranslate"><span class="pre">len</span></code>: Length of the message to send </li>
+<li><code class="docutils literal notranslate"><span class="pre">response</span></code>: Response value from radio (if supported) </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv412k_radio_recvP15radio_rx_headerP7uint8_tP7uint8_t">
+<span id="_CPPv312k_radio_recvP15radio_rx_headerP7uint8_tP7uint8_t"></span><span id="_CPPv212k_radio_recvP15radio_rx_headerP7uint8_tP7uint8_t"></span><span id="k_radio_recv__radio_rx_headerP.uint8_tP.uint8_tP"></span><span class="target" id="group__TRXVU__RADIO__API_1ga3399974f9f1a17f511edccf0f492ab72"></span><a class="reference internal" href="#_CPPv412KRadioStatus" title="KRadioStatus">KRadioStatus</a> <code class="descname">k_radio_recv</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv415radio_rx_header" title="radio_rx_header">radio_rx_header</a> *<em>frame</em>, uint8_t *<em>message</em>, uint8_t *<em>len</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv412k_radio_recvP15radio_rx_headerP7uint8_tP7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Receive a message from the radio’s receive buffer. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KRadioStatus RADIO_OK if a message was received successfully, RADIO_RX_EMPTY if there are no messages to receive, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">frame</span></code>: Pointer where the header properties should be stored </li>
+<li><code class="docutils literal notranslate"><span class="pre">message</span></code>: Pointer to where the message payload should be stored </li>
+<li><code class="docutils literal notranslate"><span class="pre">len</span></code>: Length of the received message </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv421k_radio_get_telemetryP11radio_telem14RadioTelemType">
+<span id="_CPPv321k_radio_get_telemetryP11radio_telem14RadioTelemType"></span><span id="_CPPv221k_radio_get_telemetryP11radio_telem14RadioTelemType"></span><span id="k_radio_get_telemetry__radio_telemP.RadioTelemType"></span><span class="target" id="group__TRXVU__RADIO__API_1gac00d8f1cce16d89c2958b26934b8b165"></span><a class="reference internal" href="#_CPPv412KRadioStatus" title="KRadioStatus">KRadioStatus</a> <code class="descname">k_radio_get_telemetry</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv411radio_telem" title="radio_telem">radio_telem</a> *<em>buffer</em>, <a class="reference internal" href="#_CPPv414RadioTelemType" title="RadioTelemType">RadioTelemType</a> <em>type</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv421k_radio_get_telemetryP11radio_telem14RadioTelemType" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Read radio telemetry values. </p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>See specific radio API documentation for available telemetry types </dd>
+<dt><strong>Return</strong></dt>
+<dd>KRadioStatus RADIO_OK if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">buffer</span></code>: Pointer to structure which data should be copied to </li>
+<li><code class="docutils literal notranslate"><span class="pre">type</span></code>: Telemetry packet to read </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv426kprv_radio_watchdog_threadPv">
+<span id="_CPPv326kprv_radio_watchdog_threadPv"></span><span id="_CPPv226kprv_radio_watchdog_threadPv"></span><span id="kprv_radio_watchdog_thread__voidP"></span><span class="target" id="group__TRXVU__RADIO__API_1gaefbb25804b58c4aa9ebd6bbcf0239d71"></span>void *<code class="descname">kprv_radio_watchdog_thread</code><span class="sig-paren">(</span>void *<em>args</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv426kprv_radio_watchdog_threadPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Thread which kicks the radio’s watchdogs every (timeout/3) seconds. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv424kprv_radio_tx_set_beacon8uint16_tPci">
+<span id="_CPPv324kprv_radio_tx_set_beacon8uint16_tPci"></span><span id="_CPPv224kprv_radio_tx_set_beacon8uint16_tPci"></span><span id="kprv_radio_tx_set_beacon__uint16_t.cP.i"></span><span class="target" id="group__TRXVU__RADIO__API_1ga2a9c8e6f2ac1efcabfd313e0389b4eed"></span><a class="reference internal" href="#_CPPv412KRadioStatus" title="KRadioStatus">KRadioStatus</a> <code class="descname">kprv_radio_tx_set_beacon</code><span class="sig-paren">(</span>uint16_t <em>rate</em>, char *<em>buffer</em>, int <em>len</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv424kprv_radio_tx_set_beacon8uint16_tPci" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the transmitter beacon’s interval and message. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KRadioStatus <code class="docutils literal notranslate"><span class="pre">RADIO_OK</span></code> on success, otherwise error </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">rate</span></code>: Interval (in seconds) at which to send beacon message </li>
+<li><code class="docutils literal notranslate"><span class="pre">buffer</span></code>: Pointer to beacon payload message </li>
+<li><code class="docutils literal notranslate"><span class="pre">len</span></code>: Length of beacon payload message </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv428kprv_radio_tx_set_default_to13ax25_callsign">
+<span id="_CPPv328kprv_radio_tx_set_default_to13ax25_callsign"></span><span id="_CPPv228kprv_radio_tx_set_default_to13ax25_callsign"></span><span id="kprv_radio_tx_set_default_to__ax25_callsign"></span><span class="target" id="group__TRXVU__RADIO__API_1ga83192349953badef7c000e3585d04661"></span><a class="reference internal" href="#_CPPv412KRadioStatus" title="KRadioStatus">KRadioStatus</a> <code class="descname">kprv_radio_tx_set_default_to</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv413ax25_callsign" title="ax25_callsign">ax25_callsign</a> <em>to</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv428kprv_radio_tx_set_default_to13ax25_callsign" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the transmitter’s default AX.25 sender call-sign. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KRadioStatus <code class="docutils literal notranslate"><span class="pre">RADIO_OK</span></code> on success, otherwise error </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">to</span></code>: Pointer to AX.25 call-sign structure </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv430kprv_radio_tx_set_default_from13ax25_callsign">
+<span id="_CPPv330kprv_radio_tx_set_default_from13ax25_callsign"></span><span id="_CPPv230kprv_radio_tx_set_default_from13ax25_callsign"></span><span id="kprv_radio_tx_set_default_from__ax25_callsign"></span><span class="target" id="group__TRXVU__RADIO__API_1ga2f541d7294baf215817037653b4497ec"></span><a class="reference internal" href="#_CPPv412KRadioStatus" title="KRadioStatus">KRadioStatus</a> <code class="descname">kprv_radio_tx_set_default_from</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv413ax25_callsign" title="ax25_callsign">ax25_callsign</a> <em>from</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv430kprv_radio_tx_set_default_from13ax25_callsign" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the transmitter’s default AX.25 destination call-sign. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KRadioStatus <code class="docutils literal notranslate"><span class="pre">RADIO_OK</span></code> on success, otherwise error </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">from</span></code>: Pointer to AX.25 call-sign structure </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv422kprv_radio_tx_set_idle14RadioIdleState">
+<span id="_CPPv322kprv_radio_tx_set_idle14RadioIdleState"></span><span id="_CPPv222kprv_radio_tx_set_idle14RadioIdleState"></span><span id="kprv_radio_tx_set_idle__RadioIdleState"></span><span class="target" id="group__TRXVU__RADIO__API_1ga6469a01278bf3f8873cf8a777c118ee5"></span><a class="reference internal" href="#_CPPv412KRadioStatus" title="KRadioStatus">KRadioStatus</a> <code class="descname">kprv_radio_tx_set_idle</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv414RadioIdleState" title="RadioIdleState">RadioIdleState</a> <em>state</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv422kprv_radio_tx_set_idle14RadioIdleState" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the transmitter’s idle state. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KRadioStatus <code class="docutils literal notranslate"><span class="pre">RADIO_OK</span></code> on success, otherwise error </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">state</span></code>: Idle state. Should be <a class="reference internal" href="#group__TRXVU__RADIO__API_1ggaea9035e8aeff07716c48c746db3e123ca4fcba13af240abd0b033f3fe1f5a9b23"><span class="std std-ref">RADIO_IDLE_ON</span></a> or <a class="reference internal" href="#group__TRXVU__RADIO__API_1ggaea9035e8aeff07716c48c746db3e123ca94f1f50e901cbe92e03b1468d42482a7"><span class="std std-ref">RADIO_IDLE_OFF</span></a> </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv422kprv_radio_tx_set_rate11RadioTXRate">
+<span id="_CPPv322kprv_radio_tx_set_rate11RadioTXRate"></span><span id="_CPPv222kprv_radio_tx_set_rate11RadioTXRate"></span><span id="kprv_radio_tx_set_rate__RadioTXRate"></span><span class="target" id="group__TRXVU__RADIO__API_1gac12130333a59031f20656154ac8c1e59"></span><a class="reference internal" href="#_CPPv412KRadioStatus" title="KRadioStatus">KRadioStatus</a> <code class="descname">kprv_radio_tx_set_rate</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv411RadioTXRate" title="RadioTXRate">RadioTXRate</a> <em>rate</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv422kprv_radio_tx_set_rate11RadioTXRate" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the transmitter’s data rate. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KRadioStatus <code class="docutils literal notranslate"><span class="pre">RADIO_OK</span></code> on success, otherwise error </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">rate</span></code>: Data rate. Should be <code class="docutils literal notranslate"><span class="pre">RADIO_TX_RATE_1200</span></code>, <code class="docutils literal notranslate"><span class="pre">RADIO_TX_RATE_2400</span></code>, <code class="docutils literal notranslate"><span class="pre">RADIO_TX_RATE_4800</span></code>, or <code class="docutils literal notranslate"><span class="pre">RADIO_TX_RATE_9600</span></code> </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv427kprv_radio_tx_get_telemetryP11radio_telem14RadioTelemType">
+<span id="_CPPv327kprv_radio_tx_get_telemetryP11radio_telem14RadioTelemType"></span><span id="_CPPv227kprv_radio_tx_get_telemetryP11radio_telem14RadioTelemType"></span><span id="kprv_radio_tx_get_telemetry__radio_telemP.RadioTelemType"></span><span class="target" id="group__TRXVU__RADIO__API_1ga0275cb3f8a4bae19f05d060c1208dcac"></span><a class="reference internal" href="#_CPPv412KRadioStatus" title="KRadioStatus">KRadioStatus</a> <code class="descname">kprv_radio_tx_get_telemetry</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv411radio_telem" title="radio_telem">radio_telem</a> *<em>buffer</em>, <a class="reference internal" href="#_CPPv414RadioTelemType" title="RadioTelemType">RadioTelemType</a> <em>type</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv427kprv_radio_tx_get_telemetryP11radio_telem14RadioTelemType" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get telemetry from transmitter. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KRadioStatus <code class="docutils literal notranslate"><span class="pre">RADIO_OK</span></code> on success, otherwise error </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">buffer</span></code>: Pointer to storage area. Should point to a <a class="reference internal" href="#structtrxvu__tx__telem__raw"><span class="std std-ref">trxvu_tx_telem_raw</span></a> structure if <a class="reference internal" href="#group__TRXVU__RADIO__API_1gga1bcc847e1b6d2a67af5f50cf3aa0ad42a6b8c5185c273f7b50b7762478211ac44"><span class="std std-ref">RADIO_TX_TELEM_ALL</span></a> or <a class="reference internal" href="#group__TRXVU__RADIO__API_1gga1bcc847e1b6d2a67af5f50cf3aa0ad42a8b35a73b8d143a93a5ccd939929c3b82"><span class="std std-ref">RADIO_TX_TELEM_LAST</span></a> is being requested </li>
+<li><code class="docutils literal notranslate"><span class="pre">type</span></code>: Telemetry type to fetch. Should be <a class="reference internal" href="#group__TRXVU__RADIO__API_1gga1bcc847e1b6d2a67af5f50cf3aa0ad42a6b8c5185c273f7b50b7762478211ac44"><span class="std std-ref">RADIO_TX_TELEM_ALL</span></a>, <a class="reference internal" href="#group__TRXVU__RADIO__API_1gga1bcc847e1b6d2a67af5f50cf3aa0ad42a8b35a73b8d143a93a5ccd939929c3b82"><span class="std std-ref">RADIO_TX_TELEM_LAST</span></a>, <a class="reference internal" href="#group__TRXVU__RADIO__API_1gga1bcc847e1b6d2a67af5f50cf3aa0ad42ae272dab4d4b476c6bcd4a54e3e326bc7"><span class="std std-ref">RADIO_TX_UPTIME</span></a>, or <a class="reference internal" href="#group__TRXVU__RADIO__API_1gga1bcc847e1b6d2a67af5f50cf3aa0ad42a2df7b9be73121443413c3d01c91a450f"><span class="std std-ref">RADIO_TX_STATE</span></a> </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv427kprv_radio_tx_watchdog_kickv">
+<span id="_CPPv327kprv_radio_tx_watchdog_kickv"></span><span id="_CPPv227kprv_radio_tx_watchdog_kickv"></span><span id="kprv_radio_tx_watchdog_kick__void"></span><span class="target" id="group__TRXVU__RADIO__API_1ga4415b8316300897594706d07c301d99c"></span><a class="reference internal" href="#_CPPv412KRadioStatus" title="KRadioStatus">KRadioStatus</a> <code class="descname">kprv_radio_tx_watchdog_kick</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv427kprv_radio_tx_watchdog_kickv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Kick the transmitter’s watchdog. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KRadioStatus <code class="docutils literal notranslate"><span class="pre">RADIO_OK</span></code> if OK, error otherwise </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv419kprv_radio_tx_reset11KRadioReset">
+<span id="_CPPv319kprv_radio_tx_reset11KRadioReset"></span><span id="_CPPv219kprv_radio_tx_reset11KRadioReset"></span><span id="kprv_radio_tx_reset__KRadioReset"></span><span class="target" id="group__TRXVU__RADIO__API_1ga1199f02dbe2a61e5efe6f74b97d2c52f"></span><a class="reference internal" href="#_CPPv412KRadioStatus" title="KRadioStatus">KRadioStatus</a> <code class="descname">kprv_radio_tx_reset</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv411KRadioReset" title="KRadioReset">KRadioReset</a> <em>type</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419kprv_radio_tx_reset11KRadioReset" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Reset the transmitter. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KRadioStatus <code class="docutils literal notranslate"><span class="pre">RADIO_OK</span></code> if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">type</span></code>: Type of reset to be performed. Should be <code class="docutils literal notranslate"><span class="pre">RADIO_RESET_SOFT</span></code> or <code class="docutils literal notranslate"><span class="pre">RADIO_RESET_HARD</span></code> </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv423kprv_radio_rx_get_countP7uint8_t">
+<span id="_CPPv323kprv_radio_rx_get_countP7uint8_t"></span><span id="_CPPv223kprv_radio_rx_get_countP7uint8_t"></span><span id="kprv_radio_rx_get_count__uint8_tP"></span><span class="target" id="group__TRXVU__RADIO__API_1ga1ff5ce79c597d9b8591ac1fb4e0bcea5"></span><a class="reference internal" href="#_CPPv412KRadioStatus" title="KRadioStatus">KRadioStatus</a> <code class="descname">kprv_radio_rx_get_count</code><span class="sig-paren">(</span>uint8_t *<em>count</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv423kprv_radio_rx_get_countP7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get number of frames in receive buffer. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KRadioStatus <code class="docutils literal notranslate"><span class="pre">RADIO_OK</span></code> if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">count</span></code>: Pointer to storage area for count value </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv426kprv_radio_rx_remove_framev">
+<span id="_CPPv326kprv_radio_rx_remove_framev"></span><span id="_CPPv226kprv_radio_rx_remove_framev"></span><span id="kprv_radio_rx_remove_frame__void"></span><span class="target" id="group__TRXVU__RADIO__API_1gab056dc8f84090191f19fcb9385557485"></span><a class="reference internal" href="#_CPPv412KRadioStatus" title="KRadioStatus">KRadioStatus</a> <code class="descname">kprv_radio_rx_remove_frame</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv426kprv_radio_rx_remove_framev" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Delete oldest frame from receive buffer. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KRadioStatus <code class="docutils literal notranslate"><span class="pre">RADIO_OK</span></code> if OK, error otherwise </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv423kprv_radio_rx_get_frameP15radio_rx_headerP7uint8_tP7uint8_t">
+<span id="_CPPv323kprv_radio_rx_get_frameP15radio_rx_headerP7uint8_tP7uint8_t"></span><span id="_CPPv223kprv_radio_rx_get_frameP15radio_rx_headerP7uint8_tP7uint8_t"></span><span id="kprv_radio_rx_get_frame__radio_rx_headerP.uint8_tP.uint8_tP"></span><span class="target" id="group__TRXVU__RADIO__API_1gab0b5024871c7b7b1ad8204efeda5e3b0"></span><a class="reference internal" href="#_CPPv412KRadioStatus" title="KRadioStatus">KRadioStatus</a> <code class="descname">kprv_radio_rx_get_frame</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv415radio_rx_header" title="radio_rx_header">radio_rx_header</a> *<em>frame</em>, uint8_t *<em>message</em>, uint8_t *<em>len</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv423kprv_radio_rx_get_frameP15radio_rx_headerP7uint8_tP7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Retrieve oldest frame from receive buffer. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KRadioStatus <code class="docutils literal notranslate"><span class="pre">RADIO_OK</span></code> if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">frame</span></code>: Pointer where the header properties should be stored </li>
+<li><code class="docutils literal notranslate"><span class="pre">message</span></code>: Pointer to where the message payload should be stored </li>
+<li><code class="docutils literal notranslate"><span class="pre">len</span></code>: Pointer to storage are for length of frame payload </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv427kprv_radio_rx_get_telemetryP11radio_telem14RadioTelemType">
+<span id="_CPPv327kprv_radio_rx_get_telemetryP11radio_telem14RadioTelemType"></span><span id="_CPPv227kprv_radio_rx_get_telemetryP11radio_telem14RadioTelemType"></span><span id="kprv_radio_rx_get_telemetry__radio_telemP.RadioTelemType"></span><span class="target" id="group__TRXVU__RADIO__API_1ga7205e8c3a9b149bb5652d22cb51fdb78"></span><a class="reference internal" href="#_CPPv412KRadioStatus" title="KRadioStatus">KRadioStatus</a> <code class="descname">kprv_radio_rx_get_telemetry</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv411radio_telem" title="radio_telem">radio_telem</a> *<em>buffer</em>, <a class="reference internal" href="#_CPPv414RadioTelemType" title="RadioTelemType">RadioTelemType</a> <em>type</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv427kprv_radio_rx_get_telemetryP11radio_telem14RadioTelemType" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get telemetry from receiver. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KRadioStatus <code class="docutils literal notranslate"><span class="pre">RADIO_OK</span></code> on success, otherwise error </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">buffer</span></code>: Pointer to storage area. Should point to a <a class="reference internal" href="#structtrxvu__rx__telem__raw"><span class="std std-ref">trxvu_rx_telem_raw</span></a> structure if <a class="reference internal" href="#group__TRXVU__RADIO__API_1gga1bcc847e1b6d2a67af5f50cf3aa0ad42a98b1810933e8acf058183e76046acde5"><span class="std std-ref">RADIO_RX_TELEM_ALL</span></a> is being requested </li>
+<li><code class="docutils literal notranslate"><span class="pre">type</span></code>: Telemetry type to fetch. Should be <a class="reference internal" href="#group__TRXVU__RADIO__API_1gga1bcc847e1b6d2a67af5f50cf3aa0ad42a98b1810933e8acf058183e76046acde5"><span class="std std-ref">RADIO_RX_TELEM_ALL</span></a> or <a class="reference internal" href="#group__TRXVU__RADIO__API_1gga1bcc847e1b6d2a67af5f50cf3aa0ad42ab641c0e2cd6ecdb2cbf3da5cd9bd961a"><span class="std std-ref">RADIO_RX_UPTIME</span></a> </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv427kprv_radio_rx_watchdog_kickv">
+<span id="_CPPv327kprv_radio_rx_watchdog_kickv"></span><span id="_CPPv227kprv_radio_rx_watchdog_kickv"></span><span id="kprv_radio_rx_watchdog_kick__void"></span><span class="target" id="group__TRXVU__RADIO__API_1ga126e9d1328d110ca272e791fb09bab40"></span><a class="reference internal" href="#_CPPv412KRadioStatus" title="KRadioStatus">KRadioStatus</a> <code class="descname">kprv_radio_rx_watchdog_kick</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv427kprv_radio_rx_watchdog_kickv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Kick the receiver’s watchdog. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KRadioStatus <code class="docutils literal notranslate"><span class="pre">RADIO_OK</span></code> if OK, error otherwise </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv419kprv_radio_rx_reset11KRadioReset">
+<span id="_CPPv319kprv_radio_rx_reset11KRadioReset"></span><span id="_CPPv219kprv_radio_rx_reset11KRadioReset"></span><span id="kprv_radio_rx_reset__KRadioReset"></span><span class="target" id="group__TRXVU__RADIO__API_1gaf1cf3fbd17e3d9fbdde0bf401e682c15"></span><a class="reference internal" href="#_CPPv412KRadioStatus" title="KRadioStatus">KRadioStatus</a> <code class="descname">kprv_radio_rx_reset</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv411KRadioReset" title="KRadioReset">KRadioReset</a> <em>type</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419kprv_radio_rx_reset11KRadioReset" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Reset the receiver. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KRadioStatus <code class="docutils literal notranslate"><span class="pre">RADIO_OK</span></code> if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">type</span></code>: Type of reset to be performed. Should be <code class="docutils literal notranslate"><span class="pre">RADIO_RESET_SOFT</span></code> or <code class="docutils literal notranslate"><span class="pre">RADIO_RESET_HARD</span></code> </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Variables</p>
+<dl class="member">
+<dt id="_CPPv49radio_bus">
+<span id="_CPPv39radio_bus"></span><span id="_CPPv29radio_bus"></span><span id="radio_bus__i"></span><span class="target" id="group__TRXVU__RADIO__API_1ga3220b3699b3ae70d7da6f4ed2090b8ba"></span>int <code class="descname">radio_bus</code><a class="headerlink" href="#_CPPv49radio_bus" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>File descriptor for the radio’s I2C bus. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv48radio_tx">
+<span id="_CPPv38radio_tx"></span><span id="_CPPv28radio_tx"></span><span id="radio_tx__trx_prop"></span><span class="target" id="group__TRXVU__RADIO__API_1ga9a2813ad615715db76abb90bcfa16b1d"></span><a class="reference internal" href="#_CPPv48trx_prop" title="trx_prop">trx_prop</a> <code class="descname">radio_tx</code><a class="headerlink" href="#_CPPv48radio_tx" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Radio transmitter properties. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv48radio_rx">
+<span id="_CPPv38radio_rx"></span><span id="_CPPv28radio_rx"></span><span id="radio_rx__trx_prop"></span><span class="target" id="group__TRXVU__RADIO__API_1ga47b82051599441c6c744540c41106033"></span><a class="reference internal" href="#_CPPv48trx_prop" title="trx_prop">trx_prop</a> <code class="descname">radio_rx</code><a class="headerlink" href="#_CPPv48radio_rx" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Radio receiver properties. </p>
+</dd></dl>
+
+</div>
+<dl class="class">
+<dt id="_CPPv48trx_prop">
+<span id="_CPPv38trx_prop"></span><span id="_CPPv28trx_prop"></span><span id="trx_prop"></span><span class="target" id="structtrx__prop"></span><em class="property">struct </em><code class="descname">trx_prop</code><a class="headerlink" href="#_CPPv48trx_prop" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;trxvu.h&gt;</em><p>TX/RX properties. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv4N8trx_prop4addrE">
+<span id="_CPPv3N8trx_prop4addrE"></span><span id="_CPPv2N8trx_prop4addrE"></span><span id="trx_prop::addr__uint8_t"></span><span class="target" id="structtrx__prop_1a5ed764cd11fe35494fa5b88baba6e32e"></span>uint8_t <code class="descname">addr</code><a class="headerlink" href="#_CPPv4N8trx_prop4addrE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>I2C address of component. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N8trx_prop8max_sizeE">
+<span id="_CPPv3N8trx_prop8max_sizeE"></span><span id="_CPPv2N8trx_prop8max_sizeE"></span><span id="trx_prop::max_size__uint16_t"></span><span class="target" id="structtrx__prop_1a6d3758208431fc58d4889c366d98b4a2"></span>uint16_t <code class="descname">max_size</code><a class="headerlink" href="#_CPPv4N8trx_prop8max_sizeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Maximum frame message size. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N8trx_prop10max_framesE">
+<span id="_CPPv3N8trx_prop10max_framesE"></span><span id="_CPPv2N8trx_prop10max_framesE"></span><span id="trx_prop::max_frames__uint16_t"></span><span class="target" id="structtrx__prop_1aa780d91d85df293455e7455d90c957c7"></span>uint16_t <code class="descname">max_frames</code><a class="headerlink" href="#_CPPv4N8trx_prop10max_framesE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Maximum number of frames that can be in the buffer. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv418trxvu_tx_telem_raw">
+<span id="_CPPv318trxvu_tx_telem_raw"></span><span id="_CPPv218trxvu_tx_telem_raw"></span><span id="trxvu_tx_telem_raw"></span><span class="target" id="structtrxvu__tx__telem__raw"></span><em class="property">struct </em><code class="descname">trxvu_tx_telem_raw</code><a class="headerlink" href="#_CPPv418trxvu_tx_telem_raw" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;trxvu.h&gt;</em><p>Transmitter raw telemetry fields returned from <a class="reference internal" href="#group__TRXVU__RADIO__API_1gga1bcc847e1b6d2a67af5f50cf3aa0ad42a6b8c5185c273f7b50b7762478211ac44"><span class="std std-ref">RADIO_TX_TELEM_ALL</span></a> and <a class="reference internal" href="#group__TRXVU__RADIO__API_1gga1bcc847e1b6d2a67af5f50cf3aa0ad42a8b35a73b8d143a93a5ccd939929c3b82"><span class="std std-ref">RADIO_TX_TELEM_LAST</span></a> requests. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv4N18trxvu_tx_telem_raw17inst_RF_reflectedE">
+<span id="_CPPv3N18trxvu_tx_telem_raw17inst_RF_reflectedE"></span><span id="_CPPv2N18trxvu_tx_telem_raw17inst_RF_reflectedE"></span><span id="trxvu_tx_telem_raw::inst_RF_reflected__uint16_t"></span><span class="target" id="structtrxvu__tx__telem__raw_1a8c4afa09ab320de355b46d742de3a9de"></span>uint16_t <code class="descname">inst_RF_reflected</code><a class="headerlink" href="#_CPPv4N18trxvu_tx_telem_raw17inst_RF_reflectedE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Instantaneous RF reflected power at transmitter port. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N18trxvu_tx_telem_raw15inst_RF_forwardE">
+<span id="_CPPv3N18trxvu_tx_telem_raw15inst_RF_forwardE"></span><span id="_CPPv2N18trxvu_tx_telem_raw15inst_RF_forwardE"></span><span id="trxvu_tx_telem_raw::inst_RF_forward__uint16_t"></span><span class="target" id="structtrxvu__tx__telem__raw_1a25330c7f4603600a5513f93a2196ad8f"></span>uint16_t <code class="descname">inst_RF_forward</code><a class="headerlink" href="#_CPPv4N18trxvu_tx_telem_raw15inst_RF_forwardE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Instantaneous RF forward power at transmitter port. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N18trxvu_tx_telem_raw14supply_voltageE">
+<span id="_CPPv3N18trxvu_tx_telem_raw14supply_voltageE"></span><span id="_CPPv2N18trxvu_tx_telem_raw14supply_voltageE"></span><span id="trxvu_tx_telem_raw::supply_voltage__uint16_t"></span><span class="target" id="structtrxvu__tx__telem__raw_1aef573a20cd1930f5935b323ddebefc5e"></span>uint16_t <code class="descname">supply_voltage</code><a class="headerlink" href="#_CPPv4N18trxvu_tx_telem_raw14supply_voltageE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Power bus voltage. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N18trxvu_tx_telem_raw14supply_currentE">
+<span id="_CPPv3N18trxvu_tx_telem_raw14supply_currentE"></span><span id="_CPPv2N18trxvu_tx_telem_raw14supply_currentE"></span><span id="trxvu_tx_telem_raw::supply_current__uint16_t"></span><span class="target" id="structtrxvu__tx__telem__raw_1a65ec3d426c5d85664def6ddb9a3191eb"></span>uint16_t <code class="descname">supply_current</code><a class="headerlink" href="#_CPPv4N18trxvu_tx_telem_raw14supply_currentE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Total supply current. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N18trxvu_tx_telem_raw14temp_power_ampE">
+<span id="_CPPv3N18trxvu_tx_telem_raw14temp_power_ampE"></span><span id="_CPPv2N18trxvu_tx_telem_raw14temp_power_ampE"></span><span id="trxvu_tx_telem_raw::temp_power_amp__uint16_t"></span><span class="target" id="structtrxvu__tx__telem__raw_1abe08e135a9ee692cb13d2000adf6547d"></span>uint16_t <code class="descname">temp_power_amp</code><a class="headerlink" href="#_CPPv4N18trxvu_tx_telem_raw14temp_power_ampE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Power amplifier temperature. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N18trxvu_tx_telem_raw15temp_oscillatorE">
+<span id="_CPPv3N18trxvu_tx_telem_raw15temp_oscillatorE"></span><span id="_CPPv2N18trxvu_tx_telem_raw15temp_oscillatorE"></span><span id="trxvu_tx_telem_raw::temp_oscillator__uint16_t"></span><span class="target" id="structtrxvu__tx__telem__raw_1a35edacce947d7a51714ab69a699d5d9f"></span>uint16_t <code class="descname">temp_oscillator</code><a class="headerlink" href="#_CPPv4N18trxvu_tx_telem_raw15temp_oscillatorE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Local oscillator temperature. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv413ax25_callsign">
+<span id="_CPPv313ax25_callsign"></span><span id="_CPPv213ax25_callsign"></span><span id="ax25_callsign"></span><span class="target" id="structax25__callsign"></span><em class="property">struct </em><code class="descname">ax25_callsign</code><a class="headerlink" href="#_CPPv413ax25_callsign" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;trxvu.h&gt;</em><p>AX.25 call-sign structure. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv4N13ax25_callsign5asciiE">
+<span id="_CPPv3N13ax25_callsign5asciiE"></span><span id="_CPPv2N13ax25_callsign5asciiE"></span><span id="ax25_callsign::ascii__uint8_tA"></span><span class="target" id="structax25__callsign_1a94f06f1545bd35afae16a6248133e433"></span>uint8_t <code class="descname">ascii</code>[6]<a class="headerlink" href="#_CPPv4N13ax25_callsign5asciiE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Six character station call-sign. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N13ax25_callsign4ssidE">
+<span id="_CPPv3N13ax25_callsign4ssidE"></span><span id="_CPPv2N13ax25_callsign4ssidE"></span><span id="ax25_callsign::ssid__uint8_t"></span><span class="target" id="structax25__callsign_1a9f4937e163f4f0bcd706f164161a71c5"></span>uint8_t <code class="descname">ssid</code><a class="headerlink" href="#_CPPv4N13ax25_callsign4ssidE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>One byte station SSID value. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv418trxvu_rx_telem_raw">
+<span id="_CPPv318trxvu_rx_telem_raw"></span><span id="_CPPv218trxvu_rx_telem_raw"></span><span id="trxvu_rx_telem_raw"></span><span class="target" id="structtrxvu__rx__telem__raw"></span><em class="property">struct </em><code class="descname">trxvu_rx_telem_raw</code><a class="headerlink" href="#_CPPv418trxvu_rx_telem_raw" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;trxvu.h&gt;</em><p>Receiver raw telemetry fields returned from <a class="reference internal" href="#group__TRXVU__RADIO__API_1gga1bcc847e1b6d2a67af5f50cf3aa0ad42a98b1810933e8acf058183e76046acde5"><span class="std std-ref">RADIO_RX_TELEM_ALL</span></a> telemetry request. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv4N18trxvu_rx_telem_raw19inst_doppler_offsetE">
+<span id="_CPPv3N18trxvu_rx_telem_raw19inst_doppler_offsetE"></span><span id="_CPPv2N18trxvu_rx_telem_raw19inst_doppler_offsetE"></span><span id="trxvu_rx_telem_raw::inst_doppler_offset__uint16_t"></span><span class="target" id="structtrxvu__rx__telem__raw_1a81fe9cb99f2ef688d5a995b076c78090"></span>uint16_t <code class="descname">inst_doppler_offset</code><a class="headerlink" href="#_CPPv4N18trxvu_rx_telem_raw19inst_doppler_offsetE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Instantaneous Doppler offset of signal at receiver port. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N18trxvu_rx_telem_raw14supply_currentE">
+<span id="_CPPv3N18trxvu_rx_telem_raw14supply_currentE"></span><span id="_CPPv2N18trxvu_rx_telem_raw14supply_currentE"></span><span id="trxvu_rx_telem_raw::supply_current__uint16_t"></span><span class="target" id="structtrxvu__rx__telem__raw_1aaf36052a78f2f743d008229f8bc325ce"></span>uint16_t <code class="descname">supply_current</code><a class="headerlink" href="#_CPPv4N18trxvu_rx_telem_raw14supply_currentE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Total supply current. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N18trxvu_rx_telem_raw14supply_voltageE">
+<span id="_CPPv3N18trxvu_rx_telem_raw14supply_voltageE"></span><span id="_CPPv2N18trxvu_rx_telem_raw14supply_voltageE"></span><span id="trxvu_rx_telem_raw::supply_voltage__uint16_t"></span><span class="target" id="structtrxvu__rx__telem__raw_1a46cab1339648c9f6c924dbf0085c8b54"></span>uint16_t <code class="descname">supply_voltage</code><a class="headerlink" href="#_CPPv4N18trxvu_rx_telem_raw14supply_voltageE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Power bus voltage. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N18trxvu_rx_telem_raw15temp_oscillatorE">
+<span id="_CPPv3N18trxvu_rx_telem_raw15temp_oscillatorE"></span><span id="_CPPv2N18trxvu_rx_telem_raw15temp_oscillatorE"></span><span id="trxvu_rx_telem_raw::temp_oscillator__uint16_t"></span><span class="target" id="structtrxvu__rx__telem__raw_1aa0c786e7e6f8bfaba306e19d2c55ef8b"></span>uint16_t <code class="descname">temp_oscillator</code><a class="headerlink" href="#_CPPv4N18trxvu_rx_telem_raw15temp_oscillatorE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Local oscillator temperature. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N18trxvu_rx_telem_raw14temp_power_ampE">
+<span id="_CPPv3N18trxvu_rx_telem_raw14temp_power_ampE"></span><span id="_CPPv2N18trxvu_rx_telem_raw14temp_power_ampE"></span><span id="trxvu_rx_telem_raw::temp_power_amp__uint16_t"></span><span class="target" id="structtrxvu__rx__telem__raw_1a92819b917f1f432a3a7fdb815b6cbafd"></span>uint16_t <code class="descname">temp_power_amp</code><a class="headerlink" href="#_CPPv4N18trxvu_rx_telem_raw14temp_power_ampE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Power amplifier temperature. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N18trxvu_rx_telem_raw20inst_signal_strengthE">
+<span id="_CPPv3N18trxvu_rx_telem_raw20inst_signal_strengthE"></span><span id="_CPPv2N18trxvu_rx_telem_raw20inst_signal_strengthE"></span><span id="trxvu_rx_telem_raw::inst_signal_strength__uint16_t"></span><span class="target" id="structtrxvu__rx__telem__raw_1a0eeb4f4e0c6b5fbd3d8ade3de3392c84"></span>uint16_t <code class="descname">inst_signal_strength</code><a class="headerlink" href="#_CPPv4N18trxvu_rx_telem_raw20inst_signal_strengthE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Instantaneous signal strength of the signal at the receiver. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="union">
+<dt id="_CPPv411radio_telem">
+<span id="_CPPv311radio_telem"></span><span id="_CPPv211radio_telem"></span><span class="target" id="unionradio__telem"></span><em class="property">union </em><code class="descname">radio_telem</code><a class="headerlink" href="#_CPPv411radio_telem" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;trxvu.h&gt;</em><p>High-level Unifying Radio Telemetry Structure. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv4N11radio_telem8tx_stateE">
+<span id="_CPPv3N11radio_telem8tx_stateE"></span><span id="_CPPv2N11radio_telem8tx_stateE"></span><span id="radio_telem::tx_state__uint8_t"></span><span class="target" id="unionradio__telem_1aaeef45539be45aaeaa259c2fd86918ea"></span>uint8_t <code class="descname">tx_state</code><a class="headerlink" href="#_CPPv4N11radio_telem8tx_stateE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returned by <a class="reference internal" href="#group__TRXVU__RADIO__API_1gga1bcc847e1b6d2a67af5f50cf3aa0ad42a2df7b9be73121443413c3d01c91a450f"><span class="std std-ref">RADIO_TX_STATE</span></a>. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N11radio_telem6uptimeE">
+<span id="_CPPv3N11radio_telem6uptimeE"></span><span id="_CPPv2N11radio_telem6uptimeE"></span><span id="radio_telem::uptime__trxvu_uptime"></span><span class="target" id="unionradio__telem_1a484aa98e0569582601665366723a3c75"></span><a class="reference internal" href="#_CPPv412trxvu_uptime" title="trxvu_uptime">trxvu_uptime</a> <code class="descname">uptime</code><a class="headerlink" href="#_CPPv4N11radio_telem6uptimeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returned by <a class="reference internal" href="#group__TRXVU__RADIO__API_1gga1bcc847e1b6d2a67af5f50cf3aa0ad42ae272dab4d4b476c6bcd4a54e3e326bc7"><span class="std std-ref">RADIO_TX_UPTIME</span></a> and <a class="reference internal" href="#group__TRXVU__RADIO__API_1gga1bcc847e1b6d2a67af5f50cf3aa0ad42ab641c0e2cd6ecdb2cbf3da5cd9bd961a"><span class="std std-ref">RADIO_RX_UPTIME</span></a>. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N11radio_telem8tx_telemE">
+<span id="_CPPv3N11radio_telem8tx_telemE"></span><span id="_CPPv2N11radio_telem8tx_telemE"></span><span id="radio_telem::tx_telem__trxvu_tx_telem_raw"></span><span class="target" id="unionradio__telem_1adae3e28026a7539e8b5a4b2302cf3930"></span><a class="reference internal" href="#_CPPv418trxvu_tx_telem_raw" title="trxvu_tx_telem_raw">trxvu_tx_telem_raw</a> <code class="descname">tx_telem</code><a class="headerlink" href="#_CPPv4N11radio_telem8tx_telemE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returned by <a class="reference internal" href="#group__TRXVU__RADIO__API_1gga1bcc847e1b6d2a67af5f50cf3aa0ad42a6b8c5185c273f7b50b7762478211ac44"><span class="std std-ref">RADIO_TX_TELEM_ALL</span></a> and <a class="reference internal" href="#group__TRXVU__RADIO__API_1gga1bcc847e1b6d2a67af5f50cf3aa0ad42a8b35a73b8d143a93a5ccd939929c3b82"><span class="std std-ref">RADIO_TX_TELEM_LAST</span></a>. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N11radio_telem8rx_telemE">
+<span id="_CPPv3N11radio_telem8rx_telemE"></span><span id="_CPPv2N11radio_telem8rx_telemE"></span><span id="radio_telem::rx_telem__trxvu_rx_telem_raw"></span><span class="target" id="unionradio__telem_1a8137fd87e14d18e76101cdee1fd6cd31"></span><a class="reference internal" href="#_CPPv418trxvu_rx_telem_raw" title="trxvu_rx_telem_raw">trxvu_rx_telem_raw</a> <code class="descname">rx_telem</code><a class="headerlink" href="#_CPPv4N11radio_telem8rx_telemE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returned by <a class="reference internal" href="#group__TRXVU__RADIO__API_1gga1bcc847e1b6d2a67af5f50cf3aa0ad42a98b1810933e8acf058183e76046acde5"><span class="std std-ref">RADIO_RX_TELEM_ALL</span></a>. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv415radio_tx_beacon">
+<span id="_CPPv315radio_tx_beacon"></span><span id="_CPPv215radio_tx_beacon"></span><span id="radio_tx_beacon"></span><span class="target" id="structradio__tx__beacon"></span><em class="property">struct </em><code class="descname">radio_tx_beacon</code><a class="headerlink" href="#_CPPv415radio_tx_beacon" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;trxvu.h&gt;</em><p>Transmitter automatic periodic beacon configuration. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv4N15radio_tx_beacon8intervalE">
+<span id="_CPPv3N15radio_tx_beacon8intervalE"></span><span id="_CPPv2N15radio_tx_beacon8intervalE"></span><span id="radio_tx_beacon::interval__uint16_t"></span><span class="target" id="structradio__tx__beacon_1ae292172c6249bb28f33f0dc3b1af9973"></span>uint16_t <code class="descname">interval</code><a class="headerlink" href="#_CPPv4N15radio_tx_beacon8intervalE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Interval (in seconds) at which the beacon message should be sent. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N15radio_tx_beacon3msgE">
+<span id="_CPPv3N15radio_tx_beacon3msgE"></span><span id="_CPPv2N15radio_tx_beacon3msgE"></span><span id="radio_tx_beacon::msg__cP"></span><span class="target" id="structradio__tx__beacon_1a70fc3ae5ccb0d82dce314e56a3654294"></span>char *<code class="descname">msg</code><a class="headerlink" href="#_CPPv4N15radio_tx_beacon3msgE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Pointer to beacon payload message to be sent. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N15radio_tx_beacon3lenE">
+<span id="_CPPv3N15radio_tx_beacon3lenE"></span><span id="_CPPv2N15radio_tx_beacon3lenE"></span><span id="radio_tx_beacon::len__uint8_t"></span><span class="target" id="structradio__tx__beacon_1a31ac5c965d809a9817a5668c77343e54"></span>uint8_t <code class="descname">len</code><a class="headerlink" href="#_CPPv4N15radio_tx_beacon3lenE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Length of beacon payload message. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv412radio_config">
+<span id="_CPPv312radio_config"></span><span id="_CPPv212radio_config"></span><span id="radio_config"></span><span class="target" id="structradio__config"></span><em class="property">struct </em><code class="descname">radio_config</code><a class="headerlink" href="#_CPPv412radio_config" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;trxvu.h&gt;</em><p>Radio transmitter configuration options. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv4N12radio_config9data_rateE">
+<span id="_CPPv3N12radio_config9data_rateE"></span><span id="_CPPv2N12radio_config9data_rateE"></span><span id="radio_config::data_rate__RadioTXRate"></span><span class="target" id="structradio__config_1aeabac8c2a2cb97fe9d0ecd3b5207c49b"></span><a class="reference internal" href="#_CPPv411RadioTXRate" title="RadioTXRate">RadioTXRate</a> <code class="descname">data_rate</code><a class="headerlink" href="#_CPPv4N12radio_config9data_rateE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Transmission data rate flag. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N12radio_config4idleE">
+<span id="_CPPv3N12radio_config4idleE"></span><span id="_CPPv2N12radio_config4idleE"></span><span id="radio_config::idle__RadioIdleState"></span><span class="target" id="structradio__config_1a0a8bbf66e3c897a29390f13358fb08f9"></span><a class="reference internal" href="#_CPPv414RadioIdleState" title="RadioIdleState">RadioIdleState</a> <code class="descname">idle</code><a class="headerlink" href="#_CPPv4N12radio_config4idleE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Transmitter’s state when idle. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N12radio_config6beaconE">
+<span id="_CPPv3N12radio_config6beaconE"></span><span id="_CPPv2N12radio_config6beaconE"></span><span id="radio_config::beacon__radio_tx_beacon"></span><span class="target" id="structradio__config_1a7fd61bc2e9d8e927701d2080633dc333"></span><a class="reference internal" href="#_CPPv415radio_tx_beacon" title="radio_tx_beacon">radio_tx_beacon</a> <code class="descname">beacon</code><a class="headerlink" href="#_CPPv4N12radio_config6beaconE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Transmitter beacon configuration. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N12radio_config2toE">
+<span id="_CPPv3N12radio_config2toE"></span><span id="_CPPv2N12radio_config2toE"></span><span id="radio_config::to__ax25_callsign"></span><span class="target" id="structradio__config_1ad2f9bddefc5792d61deb2de87e0bc376"></span><a class="reference internal" href="#_CPPv413ax25_callsign" title="ax25_callsign">ax25_callsign</a> <code class="descname">to</code><a class="headerlink" href="#_CPPv4N12radio_config2toE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Transmitter AX.25 sender call-sign. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N12radio_config4fromE">
+<span id="_CPPv3N12radio_config4fromE"></span><span id="_CPPv2N12radio_config4fromE"></span><span id="radio_config::from__ax25_callsign"></span><span class="target" id="structradio__config_1afd2b774ebc38ed772ad19187dd4bb587"></span><a class="reference internal" href="#_CPPv413ax25_callsign" title="ax25_callsign">ax25_callsign</a> <code class="descname">from</code><a class="headerlink" href="#_CPPv4N12radio_config4fromE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Transmitter AX.25 destination call-sign. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv415radio_rx_header">
+<span id="_CPPv315radio_rx_header"></span><span id="_CPPv215radio_rx_header"></span><span id="radio_rx_header"></span><span class="target" id="structradio__rx__header"></span><em class="property">struct </em><code class="descname">radio_rx_header</code><a class="headerlink" href="#_CPPv415radio_rx_header" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;trxvu.h&gt;</em><p>Radio receive frame structure. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv4N15radio_rx_header8msg_sizeE">
+<span id="_CPPv3N15radio_rx_header8msg_sizeE"></span><span id="_CPPv2N15radio_rx_header8msg_sizeE"></span><span id="radio_rx_header::msg_size__uint16_t"></span><span class="target" id="structradio__rx__header_1a6713c5afeebfff034f08510c2a357317"></span>uint16_t <code class="descname">msg_size</code><a class="headerlink" href="#_CPPv4N15radio_rx_header8msg_sizeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Size of the frame payload. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N15radio_rx_header14doppler_offsetE">
+<span id="_CPPv3N15radio_rx_header14doppler_offsetE"></span><span id="_CPPv2N15radio_rx_header14doppler_offsetE"></span><span id="radio_rx_header::doppler_offset__uint16_t"></span><span class="target" id="structradio__rx__header_1ab23effca55343f7874450d698a12a24f"></span>uint16_t <code class="descname">doppler_offset</code><a class="headerlink" href="#_CPPv4N15radio_rx_header14doppler_offsetE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>ADC value of doppler shift at receive time (convert with <a class="reference internal" href="#group__TRXVU__RADIO__API_1gace28c3e90d00da1a773df0af92674fbc"><span class="std std-ref">get_doppler_offset</span></a>) </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N15radio_rx_header15signal_strengthE">
+<span id="_CPPv3N15radio_rx_header15signal_strengthE"></span><span id="_CPPv2N15radio_rx_header15signal_strengthE"></span><span id="radio_rx_header::signal_strength__uint16_t"></span><span class="target" id="structradio__rx__header_1a92a6de6bebc577757b9ab2736cd62f96"></span>uint16_t <code class="descname">signal_strength</code><a class="headerlink" href="#_CPPv4N15radio_rx_header15signal_strengthE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>ADC value of signal strength at receive time (convert with <a class="reference internal" href="#group__TRXVU__RADIO__API_1ga3553a1b0e1e8b683b22b127516dc05cc"><span class="std std-ref">get_signal_strength</span></a>) </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../gomspace-p31u/p31u_api.html" class="btn btn-neutral float-right" title="GOMspace NanoPower P31u API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="trxvu.html" class="btn btn-neutral" title="ISIS TRXVU Radio API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../../../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

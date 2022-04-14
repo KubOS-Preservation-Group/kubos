@@ -1,0 +1,289 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="API documentation for the Rust `isis_ants_service` crate."><meta name="keywords" content="rust, rustlang, rust-lang, isis_ants_service"><title>isis_ants_service - Rust</title><link rel="stylesheet" type="text/css" href="../normalize.css"><link rel="stylesheet" type="text/css" href="../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../dark.css"><link rel="stylesheet" type="text/css" href="../light.css" id="themeStyle"><script src="../storage.js"></script><noscript><link rel="stylesheet" href="../noscript.css"></noscript><link rel="shortcut icon" href="../favicon.ico"><style type="text/css">#crate-search{background-image:url("../down-arrow.svg");}</style></head><body class="rustdoc mod"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../isis_ants_service/index.html'><div class='logo-container'><img src='../rust-logo.png' alt='logo'></div></a><p class='location'>Crate isis_ants_service</p><div class="sidebar-elems"><a id='all-types' href='all.html'><p>See all isis_ants_service's items</p></a><div class="block items"><ul><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#functions">Functions</a></li><li><a href="#types">Type Definitions</a></li></ul></div><p class='location'></p><script>window.sidebarCurrent = {name: 'isis_ants_service', ty: 'mod', relpath: '../'};</script></div></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../theme.js"></script><nav class="sub"><form class="search-form js-only"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../settings.html"><img src="../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><h1 class='fqn'><span class='out-of-band'><span id='render-detail'><a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class='inner'>&#x2212;</span>]</a></span><a class='srclink' href='../src/isis_ants_service/main.rs.html#17-443' title='goto source code'>[src]</a></span><span class='in-band'>Crate <a class="mod" href=''>isis_ants_service</a></span></h1><div class='docblock'><p>Kubos Service for interacting with <a href="https://www.isispace.nl/product-category/products/antenna-systems/">ISIS Antenna Systems</a></p>
+<h1 id="configuration" class="section-header"><a href="#configuration">Configuration</a></h1>
+<p>The service must be configured in <code>/etc/kubos-config.toml</code> with the following fields:</p>
+<ul>
+<li>
+<p><code>[isis-ants-service.addr]</code></p>
+<ul>
+<li><code>ip</code> - Specifies the service's IP address</li>
+<li><code>port</code> - Specifies the port on which the service will be listening for UDP packets</li>
+</ul>
+</li>
+<li>
+<p><code>[isis-ants-service]</code></p>
+<ul>
+<li><code>bus</code> - Specifies the I2C bus the antenna system is connected to</li>
+<li><code>primary</code> - Specifies the I2C address of the antenna system's primary microcontroller</li>
+<li><code>secondary</code> - Specifies the I2C address of the secondary microcontroller. If no secondary contoller is present, this value should be <code>&quot;0x00&quot;</code>.</li>
+<li><code>antennas</code> - Specifies the number of antennas present in the system. Expected value: 2 or 4.</li>
+<li><code>wd_timeout</code> - Specifies the interval at which the AntS watchdog should be automatically kicked. To disable automatic kicking, this value should be <code>0</code>.</li>
+</ul>
+</li>
+</ul>
+<p>For example:</p>
+<pre><code class="language-toml">[isis-ants-service.addr]
+ip = &quot;0.0.0.0&quot;
+port = 8006
+
+[isis-ants-service]
+bus = &quot;/dev/i2c-0&quot;
+primary = &quot;0x31&quot;
+secondary = &quot;0x32&quot;
+antennas = 4
+wd_timeout = 10
+</code></pre>
+<h1 id="starting-the-service" class="section-header"><a href="#starting-the-service">Starting the Service</a></h1>
+<p>The service should be started automatically by its init script, but may also be started manually:</p>
+<pre><code class="language-shell">$ isis-ants-service
+Kubos antenna systems service started
+Listening on: 0.0.0.0:8006
+</code></pre>
+<h1 id="queries" class="section-header"><a href="#queries">Queries</a></h1><h2 id="ping" class="section-header"><a href="#ping">Ping</a></h2>
+<p>Test query to verify service is running without attempting
+to communicate with the underlying subsystem</p>
+<pre><code class="language-json">{
+    ping: &quot;pong&quot;
+}
+</code></pre>
+<h2 id="ack" class="section-header"><a href="#ack">ACK</a></h2>
+<p>Get the last run mutation</p>
+<pre><code class="language-json">{
+    ack: AckCommand
+}
+</code></pre>
+<h2 id="errors" class="section-header"><a href="#errors">Errors</a></h2>
+<p>Get all errors encountered since the last time this field was queried</p>
+<pre><code class="language-json">{
+    errors: [String]
+}
+</code></pre>
+<h2 id="power-status" class="section-header"><a href="#power-status">Power Status</a></h2>
+<p>Get the current power state and uptime of the system</p>
+<pre><code class="language-json">{
+    power {
+        state: PowerState,
+        uptime: Int
+    }
+}
+</code></pre>
+<h2 id="configuration-1" class="section-header"><a href="#configuration-1">Configuration</a></h2>
+<p>Get the current microcontroller which commands will be sent to</p>
+<pre><code class="language-json">{
+    config: ConfigureController
+}
+</code></pre>
+<h2 id="telemetry" class="section-header"><a href="#telemetry">Telemetry</a></h2>
+<p>Get current telemetry information for the system</p>
+<pre><code class="language-json">{
+    telemetry {
+        nominal {
+            rawTemp: Int,
+            uptime: Int,
+            sysBurnActive: Boolean,
+            sysIgnoreDeploy: Boolean,
+            sysArmed: Boolean,
+            ant1NotDeployed: Boolean,
+            ant1StoppedTime: Boolean,
+            ant1Active: Boolean,
+            ant2NotDeployed: Boolean,
+            ant2StoppedTime: Boolean,
+            ant2Active: Boolean,
+            ant3NotDeployed: Boolean,
+            ant3StoppedTime: Boolean,
+            ant3Active: Boolean,
+            ant4NotDeployed: Boolean,
+            ant4StoppedTime: Boolean,
+            ant4Active: Boolean
+        },
+    	   debug {
+            ant1ActivationCount: Int,
+            ant1ActivationTime: Int,
+            ant2ActivationCount: Int,
+            ant2ActivationTime: Int,
+            ant3ActivationCount: Int,
+            ant3ActivationTime: Int,
+            ant4ActivationCount: Int,
+            ant4ActivationTime: Int,
+        }
+    }
+}
+</code></pre>
+<h2 id="test-results" class="section-header"><a href="#test-results">Test Results</a></h2>
+<p>Get the test results of the last run test</p>
+<p>Note: For this service, this actually just fetches the nominal
+and debug telemetry of the system, since there is no actual
+built-in test</p>
+<pre><code class="language-json">{
+    testResults{
+        success,
+        telemetryNominal{...},
+        telemetryDebug{...}
+    }
+}
+</code></pre>
+<h2 id="system-armed-status" class="section-header"><a href="#system-armed-status">System Armed Status</a></h2>
+<p>Get the current armed/disarmed status of the system</p>
+<pre><code class="language-json">{
+    armStatus: ArmStatus
+}
+</code></pre>
+<h2 id="system-deployment-status" class="section-header"><a href="#system-deployment-status">System deployment status</a></h2>
+<p>Get the current deployment status of the system</p>
+<pre><code class="language-json">{
+    deploymentStatus {
+        status: DeploymentStatus,
+        sysBurnActive: Boolean,
+        sysIgnoreDeploy: Boolean,
+        sysArmed: Boolean,
+        ant1NotDeployed: Boolean,
+        ant1StoppedTime: Boolean,
+        ant1Active: Boolean,
+        ant2NotDeployed: Boolean,
+        ant2StoppedTime: Boolean,
+        ant2Active: Boolean,
+        ant3NotDeployed: Boolean,
+        ant3StoppedTime: Boolean,
+        ant3Active: Boolean,
+        ant4NotDeployed: Boolean,
+        ant4StoppedTime: Boolean,
+        ant4Active: Boolean
+}
+</code></pre>
+<h1 id="mutations" class="section-header"><a href="#mutations">Mutations</a></h1><h2 id="errors-1" class="section-header"><a href="#errors-1">Errors</a></h2>
+<p>Get all errors encountered while processing this GraphQL request</p>
+<p>Note: This will only return errors thrown by fields which have
+already been processed, so it is recommended that this field be specified last.</p>
+<pre><code class="language-json">mutation {
+    errors: [String]
+}
+</code></pre>
+<h2 id="no-op" class="section-header"><a href="#no-op">No-Op</a></h2>
+<p>Execute a trivial command against the system</p>
+<pre><code class="language-json">mutation {
+    noop {
+        errors: String,
+        success: Boolean
+   }
+}
+</code></pre>
+<h2 id="set-power-state" class="section-header"><a href="#set-power-state">Set Power State</a></h2>
+<p>Control the power state of the system</p>
+<ul>
+<li>state: Power state the system should be changed to
+Note: The only valid input for this service is <code>RESET</code></li>
+</ul>
+<pre><code class="language-json">mutation {
+    controlPower(state: PowerState) {
+        errors: String,
+        success: Boolean,
+        power: PowerState
+    }
+}
+</code></pre>
+<h2 id="configuration-2" class="section-header"><a href="#configuration-2">Configuration</a></h2>
+<p>Configure the system</p>
+<ul>
+<li>config: Set which microcontroller future commands should be issued from</li>
+</ul>
+<pre><code class="language-json">mutation {
+    configureHardware(config: ConfigureController) {
+        errors: String,
+        success: Boolean,
+        config: ConfigureController
+   }
+}
+</code></pre>
+<h2 id="system-self-test" class="section-header"><a href="#system-self-test">System Self-Test</a></h2>
+<p>Run a system self-test</p>
+<ul>
+<li>test: Type of self-test to perform</li>
+</ul>
+<pre><code class="language-json">mutation {
+    testHardware(test: TestType) {
+        ... on IntegrationTestResults {
+            errors: String,
+            success: Boolean,
+            telemetryNominal{...},
+            telemetryDebug{...}
+        }
+        ... on HardwareTestResults {
+            errors: &quot;Not Implemented&quot;,
+            success: true,
+            data: Empty
+        }
+   }
+}
+</code></pre>
+<h2 id="passthrough" class="section-header"><a href="#passthrough">Passthrough</a></h2>
+<p>Pass a custom command through to the system</p>
+<ul>
+<li>command: String containing the hex values to be sent (ex. &quot;C3&quot;)
+It will be converted to a byte array before transfer.</li>
+<li>rxLen: Number of response bytes to read</li>
+</ul>
+<pre><code class="language-json">mutation {
+    issueRawCommand(command: String, rx_len: Int) {
+        errors: String,
+        success: Boolean,
+        response: String
+    }
+}
+</code></pre>
+<h2 id="armdisarm" class="section-header"><a href="#armdisarm">Arm/Disarm</a></h2>
+<p>Arm/Disarm the system</p>
+<ul>
+<li>state: Armed/Disarmed state the system should be changed to</li>
+</ul>
+<pre><code class="language-json">mutation {
+    arm(state: ArmState) {
+        errors: String,
+        success: Boolean
+   }
+</code></pre>
+<h2 id="deploy-antennas" class="section-header"><a href="#deploy-antennas">Deploy Antennas</a></h2>
+<p>Deploy antenna/s</p>
+<ul>
+<li>ant: (Default - All) Antenna to deploy</li>
+<li>force: (Default - false) Whether current deployment state should be ignored/overridden</li>
+<li>time: Maximum amount of time to spend attempting to deploy the antenna
+(for 'All', this is the amount of time spent for each antenna)</li>
+</ul>
+<pre><code class="language-json">mutation {
+    deploy(ant: DeployType = DeployType::All, force: Boolean = false, time: Int) {
+        errors: String,
+        success: Boolean
+   }
+}
+</code></pre>
+</div><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
+<table><tr class='module-item'><td><a class="struct" href="struct.AntennaStats.html" title='isis_ants_service::AntennaStats struct'>AntennaStats</a></td><td class='docblock-short'><p>Antenna status data</p>
+</td></tr><tr class='module-item'><td><a class="struct" href="struct.ConfigureHardwareResponse.html" title='isis_ants_service::ConfigureHardwareResponse struct'>ConfigureHardwareResponse</a></td><td class='docblock-short'><p>Response fields for 'configureHardware' mutation</p>
+</td></tr><tr class='module-item'><td><a class="struct" href="struct.ControlPowerResponse.html" title='isis_ants_service::ControlPowerResponse struct'>ControlPowerResponse</a></td><td class='docblock-short'><p>Response fields for 'controlPower' mutation</p>
+</td></tr><tr class='module-item'><td><a class="struct" href="struct.GenericResponse.html" title='isis_ants_service::GenericResponse struct'>GenericResponse</a></td><td class='docblock-short'><p>Common response fields structure for requests
+which don't return any specific data</p>
+</td></tr><tr class='module-item'><td><a class="struct" href="struct.GetDeployResponse.html" title='isis_ants_service::GetDeployResponse struct'>GetDeployResponse</a></td><td class='docblock-short'><p>Response fields for 'deploymentStatus' query</p>
+</td></tr><tr class='module-item'><td><a class="struct" href="struct.GetPowerResponse.html" title='isis_ants_service::GetPowerResponse struct'>GetPowerResponse</a></td><td class='docblock-short'><p>Response fields for 'power' query</p>
+</td></tr><tr class='module-item'><td><a class="struct" href="struct.HardwareTestResults.html" title='isis_ants_service::HardwareTestResults struct'>HardwareTestResults</a></td><td class='docblock-short'><p>Response fields for 'testHardware(test: HARDWARE)' mutation</p>
+</td></tr><tr class='module-item'><td><a class="struct" href="struct.IntegrationTestResults.html" title='isis_ants_service::IntegrationTestResults struct'>IntegrationTestResults</a></td><td class='docblock-short'><p>Response fields for 'testHardware(test: INTEGRATION)' mutation</p>
+</td></tr><tr class='module-item'><td><a class="struct" href="struct.RawCommandResponse.html" title='isis_ants_service::RawCommandResponse struct'>RawCommandResponse</a></td><td class='docblock-short'><p>Response fields for 'issueRawCommand' mutation</p>
+</td></tr><tr class='module-item'><td><a class="struct" href="struct.Telemetry.html" title='isis_ants_service::Telemetry struct'>Telemetry</a></td><td class='docblock-short'><p>Response fields for 'telemetry' query</p>
+</td></tr><tr class='module-item'><td><a class="struct" href="struct.TelemetryDebug.html" title='isis_ants_service::TelemetryDebug struct'>TelemetryDebug</a></td><td class='docblock-short'><p>Debug telemetry data</p>
+</td></tr><tr class='module-item'><td><a class="struct" href="struct.TelemetryNominal.html" title='isis_ants_service::TelemetryNominal struct'>TelemetryNominal</a></td><td class='docblock-short'><p>Nominal telemetry data</p>
+</td></tr></table><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
+<table><tr class='module-item'><td><a class="enum" href="enum.AckCommand.html" title='isis_ants_service::AckCommand enum'>AckCommand</a></td><td class='docblock-short'><p>Return field for 'ack' query</p>
+</td></tr><tr class='module-item'><td><a class="enum" href="enum.ArmState.html" title='isis_ants_service::ArmState enum'>ArmState</a></td><td class='docblock-short'><p>Input field for 'arm' mutation</p>
+</td></tr><tr class='module-item'><td><a class="enum" href="enum.ArmStatus.html" title='isis_ants_service::ArmStatus enum'>ArmStatus</a></td><td class='docblock-short'><p>Return field for 'armStatus' query</p>
+</td></tr><tr class='module-item'><td><a class="enum" href="enum.ConfigureController.html" title='isis_ants_service::ConfigureController enum'>ConfigureController</a></td><td class='docblock-short'><p>Input field for 'configureHardware' mutation</p>
+</td></tr><tr class='module-item'><td><a class="enum" href="enum.DeployType.html" title='isis_ants_service::DeployType enum'>DeployType</a></td><td class='docblock-short'><p>Input field for 'deploy' mutation</p>
+</td></tr><tr class='module-item'><td><a class="enum" href="enum.DeploymentStatus.html" title='isis_ants_service::DeploymentStatus enum'>DeploymentStatus</a></td><td class='docblock-short'><p>Enum for 'deployStatus' response field of 'deploymentStatus' query</p>
+</td></tr><tr class='module-item'><td><a class="enum" href="enum.PowerState.html" title='isis_ants_service::PowerState enum'>PowerState</a></td><td class='docblock-short'><p>Input field for 'controlPower' mutation and
+response field for 'power' query</p>
+</td></tr><tr class='module-item'><td><a class="enum" href="enum.TestResults.html" title='isis_ants_service::TestResults enum'>TestResults</a></td><td class='docblock-short'><p>Enum for the 'testHardware' mutation response union</p>
+</td></tr><tr class='module-item'><td><a class="enum" href="enum.TestType.html" title='isis_ants_service::TestType enum'>TestType</a></td><td class='docblock-short'><p>Input field for 'testHardware' mutation</p>
+</td></tr></table><h2 id='functions' class='section-header'><a href="#functions">Functions</a></h2>
+<table><tr class='module-item'><td><a class="fn" href="fn.get_stats.html" title='isis_ants_service::get_stats fn'>get_stats</a></td><td class='docblock-short'><p>Get status data for a particular antenna</p>
+</td></tr></table><h2 id='types' class='section-header'><a href="#types">Type Definitions</a></h2>
+<table><tr class='module-item'><td><a class="type" href="type.ArmResponse.html" title='isis_ants_service::ArmResponse type'>ArmResponse</a></td><td class='docblock-short'><p>Response fields for 'arm' mutation</p>
+</td></tr><tr class='module-item'><td><a class="type" href="type.DeployResponse.html" title='isis_ants_service::DeployResponse type'>DeployResponse</a></td><td class='docblock-short'><p>Response fields for 'deploy' mutation</p>
+</td></tr><tr class='module-item'><td><a class="type" href="type.NoopResponse.html" title='isis_ants_service::NoopResponse type'>NoopResponse</a></td><td class='docblock-short'><p>Response fields for 'noop' mutation</p>
+</td></tr></table></section><section id="search" class="content hidden"></section><section class="footer"></section><aside id="help" class="hidden"><div><h1 class="hidden">Help</h1><div class="shortcuts"><h2>Keyboard Shortcuts</h2><dl><dt><kbd>?</kbd></dt><dd>Show this help dialog</dd><dt><kbd>S</kbd></dt><dd>Focus the search field</dd><dt><kbd>↑</kbd></dt><dd>Move up in search results</dd><dt><kbd>↓</kbd></dt><dd>Move down in search results</dd><dt><kbd>↹</kbd></dt><dd>Switch tab</dd><dt><kbd>&#9166;</kbd></dt><dd>Go to active search result</dd><dt><kbd>+</kbd></dt><dd>Expand all sections</dd><dt><kbd>-</kbd></dt><dd>Collapse all sections</dd></dl></div><div class="infos"><h2>Search Tricks</h2><p>Prefix searches with a type followed by a colon (e.g., <code>fn:</code>) to restrict the search to a given type.</p><p>Accepted types are: <code>fn</code>, <code>mod</code>, <code>struct</code>, <code>enum</code>, <code>trait</code>, <code>type</code>, <code>macro</code>, and <code>const</code>.</p><p>Search functions by type signature (e.g., <code>vec -> usize</code> or <code>* -> vec</code>)</p><p>Search multiple things at once by splitting your query with comma (e.g., <code>str,u8</code> or <code>String,struct:Vec,test</code>)</p></div></div></aside><script>window.rootPath = "../";window.currentCrate = "isis_ants_service";</script><script src="../aliases.js"></script><script src="../main.js"></script><script defer src="../search-index.js"></script></body></html>

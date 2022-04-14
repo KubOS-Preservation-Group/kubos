@@ -1,0 +1,355 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Kubos Mission Development &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../index.html"/>
+        <link rel="next" title="Typical Required Mission Applications" href="mission-needs.html"/>
+        <link rel="prev" title="Porting KubOS to a New OBC" href="../obc-docs/porting-kubos.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../obc-docs/index.html">Working with an OBC</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Mission Development</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#hardware-integrations">1. Hardware Integrations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#radio-integrations">Radio Integrations</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#payload-integration-s">2. Payload Integration(s)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mission-applications">3. Mission Applications</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="mission-needs.html">Typical Required Mission Applications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deployment.html">Deployment Application Guide</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#scheduling-tasks">4. Scheduling Tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#update-and-recovery">5. Update and Recovery</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#updating-kubos">Updating KubOS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#recovery-in-kubos">Recovery in KubOS</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#flight-readiness">6. Flight Readiness</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="flight-ready.html">Preparing for Flight Readiness</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ecosystem/index.html">KubOS Ecosystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deep-dive/index.html">Under the Hood</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sdk-docs/index.html">Kubos SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing to KubOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Kubos Mission Development</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/mission-dev/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="kubos-mission-development">
+<h1>Kubos Mission Development<a class="headerlink" href="#kubos-mission-development" title="Permalink to this headline">¶</a></h1>
+<p>This section of the documentation walks through the necessary steps to get a satellite running KubOS from project initiation to flight ready.
+This <em>only</em> covers the software development and preparation of the system as it pertains to KubOS, and does not cover hardware testing, power/thermal design and profiling, or any other mission development aspects that aren’t software.
+The following steps don’t have to be done precisely in this order, but this is generally expected to be the optimal order.</p>
+<div class="section" id="hardware-integrations">
+<h2>1. Hardware Integrations<a class="headerlink" href="#hardware-integrations" title="Permalink to this headline">¶</a></h2>
+<p>Although there is already quite a bit of <a class="reference internal" href="../index.html"><span class="doc">supported hardware</span></a> in KubOS, your mission might have some hardware that is not yet supported, or unique to your mission (such as a payload).
+<a class="reference internal" href="../ecosystem/services/hardware-services.html"><span class="doc">Hardware services</span></a> must be developed for any hardware that is not already supported.</p>
+<div class="section" id="radio-integrations">
+<h3>Radio Integrations<a class="headerlink" href="#radio-integrations" title="Permalink to this headline">¶</a></h3>
+<p>Radios have an additional step that’s required to finish integrating them into the system.
+The hardware service only exposes the commands and telemetry for the radio hardware, but does not expose the uplink or downlink interface(s).
+To expose their downlink and uplink capability to the rest of the system, we provide a <a class="reference internal" href="../ecosystem/services/comms-framework.html"><span class="doc">communication service framework.</span></a></p>
+</div>
+</div>
+<div class="section" id="payload-integration-s">
+<h2>2. Payload Integration(s)<a class="headerlink" href="#payload-integration-s" title="Permalink to this headline">¶</a></h2>
+<p>Besides avionics hardware, you likely have a payload you want to integrate for your mission.
+KubOS provides a payload service guide for integrating payloads into KubOS in the <em>recommended</em> way:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../ecosystem/services/payload-services.html"><span class="doc">Payload Services</span></a></li>
+</ul>
+<p>We recommend all payload services follow this guide in order to keep system component interoperability simple and organized.
+However, there is no hard requirement forcing payloads to conform to our specifications.
+We want users to retain complete control over their systems and understand there may be cases where following our architecture isn’t the best option.
+For example, there might be a payload device which requires a lower latency than our communication flow provides.
+In this case, it would be better for the appropriate mission application to be able to directly communicate with the device, rather than via a payload service.</p>
+</div>
+<div class="section" id="mission-applications">
+<h2>3. Mission Applications<a class="headerlink" href="#mission-applications" title="Permalink to this headline">¶</a></h2>
+<p>In KubOS, services are used primarily to expose functionality of underlying hardware.
+They should be expected to only perform a minimal amount of decision-making (for example, kicking a watchdog at a pre-defined interval).
+Instead, we rely on <a class="reference internal" href="../ecosystem/index.html#app-docs"><span class="std std-ref">mission applications</span></a> to handle the decision making for the mission.
+Kubos has some mission applications that are open sourced in the repo, and others that we can offer to aid in mission development.
+We’ve listed the typical necessary applications:</p>
+<ul class="simple">
+<li><a class="reference internal" href="mission-needs.html"><span class="doc">Mission Needs</span></a></li>
+</ul>
+<div class="toctree-wrapper compound">
+</div>
+</div>
+<div class="section" id="scheduling-tasks">
+<h2>4. Scheduling Tasks<a class="headerlink" href="#scheduling-tasks" title="Permalink to this headline">¶</a></h2>
+<p>Applications in KubOS are generally designed to be single purpose and run relatively quickly.
+The application itself should not be concerned with when or how often it is run. That is where
+the scheduler comes in. We rely on the <a class="reference internal" href="../ecosystem/services/scheduler.html#scheduler-service"><span class="std std-ref">scheduler service</span></a> to schedule
+application execution at designated times or at pre-defined intervals.</p>
+<p>We recommend all missions develop a thorough safe mode to ship as the mission’s default schedule
+and to use in fail over situations. Each application area in the <a class="reference internal" href="mission-needs.html"><span class="doc">mission needs</span></a>
+doc should be considered for inclusion in the default safe mode schedule.</p>
+</div>
+<div class="section" id="update-and-recovery">
+<h2>5. Update and Recovery<a class="headerlink" href="#update-and-recovery" title="Permalink to this headline">¶</a></h2>
+<p>KubOS uses similar procedures for both updating and recovering the operating system.
+We <em>highly</em> recommend familiarizing yourself with both procedures during development, well before launch.</p>
+<div class="section" id="updating-kubos">
+<h3>Updating KubOS<a class="headerlink" href="#updating-kubos" title="Permalink to this headline">¶</a></h3>
+<p>The process for updating the operating system can be reviewed here: <a class="reference internal" href="../ecosystem/linux-docs/kubos-linux-upgrade.html"><span class="doc">KubOS update process.</span></a>
+The process for updating mission applications can be reviewed here: <a class="reference internal" href="../ecosystem/services/app-service.html"><span class="doc">application service guide.</span></a>
+Both should be reviewed and tested on your hardware prior to launch.</p>
+<p>Kubos offers <a class="reference external" href="https://www.kubos.com/kubos/">SLAs</a> to aid in this process.</p>
+</div>
+<div class="section" id="recovery-in-kubos">
+<h3>Recovery in KubOS<a class="headerlink" href="#recovery-in-kubos" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference internal" href="../ecosystem/linux-docs/kubos-linux-recovery.html"><span class="doc">KubOS recovery process</span></a> is defaulted to be configured for a development environment, where you have access to the hardware and are actively developing on it.
+As a result, it <strong>requires</strong> augmentation before being flight ready, as it is not initially configured for desired on-orbit behavior.
+The augmentation will likely be limited to changing the alternate boot behavior in the event of multiple failed boots.</p>
+<p>Before you finish development, we recommend studying the recovery process and augmenting it as necessary to cover any possible edge cases that your hardware or software might encounter.
+In addition, we also recommend doing several test cycles forcing the recovery to take place under various conditions, verifying that your mission specific code is effectively integrated into the recovery process.</p>
+<p>Kubos offers <a class="reference external" href="https://www.kubos.com/kubos/">SLAs</a> to aid in the augmentation of the process and/or auditing your mission’s recovery process.</p>
+</div>
+</div>
+<div class="section" id="flight-readiness">
+<h2>6. Flight Readiness<a class="headerlink" href="#flight-readiness" title="Permalink to this headline">¶</a></h2>
+<p>You have all the hardware integrated, you have all the required mission applications, and you’ve tested everything to your heart’s content…you’re ready for launch.
+We’ve created a checklist for the likely steps to the prepare the software to be launch-ready:</p>
+<ul class="simple">
+<li><a class="reference internal" href="flight-ready.html"><span class="doc">Flight Ready</span></a></li>
+</ul>
+<p>Please note that this is only a recommended list of steps, and will definitely change depending on your launch provider, mission requirements, and hardware configuration.</p>
+<div class="toctree-wrapper compound">
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="mission-needs.html" class="btn btn-neutral float-right" title="Typical Required Mission Applications" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../obc-docs/porting-kubos.html" class="btn btn-neutral" title="Porting KubOS to a New OBC" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

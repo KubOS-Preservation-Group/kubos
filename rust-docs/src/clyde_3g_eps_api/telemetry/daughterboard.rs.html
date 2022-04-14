@@ -1,0 +1,251 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `apis/clyde-3g-eps-api/src/telemetry/daughterboard.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>daughterboard.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../dark.css"><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script src="../../../storage.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="shortcut icon" href="../../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../../clyde_3g_eps_api/index.html'><div class='logo-container'><img src='../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../../theme.js"></script><nav class="sub"><form class="search-form js-only"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../../../settings.html"><img src="../../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
+<span id="2">  2</span>
+<span id="3">  3</span>
+<span id="4">  4</span>
+<span id="5">  5</span>
+<span id="6">  6</span>
+<span id="7">  7</span>
+<span id="8">  8</span>
+<span id="9">  9</span>
+<span id="10"> 10</span>
+<span id="11"> 11</span>
+<span id="12"> 12</span>
+<span id="13"> 13</span>
+<span id="14"> 14</span>
+<span id="15"> 15</span>
+<span id="16"> 16</span>
+<span id="17"> 17</span>
+<span id="18"> 18</span>
+<span id="19"> 19</span>
+<span id="20"> 20</span>
+<span id="21"> 21</span>
+<span id="22"> 22</span>
+<span id="23"> 23</span>
+<span id="24"> 24</span>
+<span id="25"> 25</span>
+<span id="26"> 26</span>
+<span id="27"> 27</span>
+<span id="28"> 28</span>
+<span id="29"> 29</span>
+<span id="30"> 30</span>
+<span id="31"> 31</span>
+<span id="32"> 32</span>
+<span id="33"> 33</span>
+<span id="34"> 34</span>
+<span id="35"> 35</span>
+<span id="36"> 36</span>
+<span id="37"> 37</span>
+<span id="38"> 38</span>
+<span id="39"> 39</span>
+<span id="40"> 40</span>
+<span id="41"> 41</span>
+<span id="42"> 42</span>
+<span id="43"> 43</span>
+<span id="44"> 44</span>
+<span id="45"> 45</span>
+<span id="46"> 46</span>
+<span id="47"> 47</span>
+<span id="48"> 48</span>
+<span id="49"> 49</span>
+<span id="50"> 50</span>
+<span id="51"> 51</span>
+<span id="52"> 52</span>
+<span id="53"> 53</span>
+<span id="54"> 54</span>
+<span id="55"> 55</span>
+<span id="56"> 56</span>
+<span id="57"> 57</span>
+<span id="58"> 58</span>
+<span id="59"> 59</span>
+<span id="60"> 60</span>
+<span id="61"> 61</span>
+<span id="62"> 62</span>
+<span id="63"> 63</span>
+<span id="64"> 64</span>
+<span id="65"> 65</span>
+<span id="66"> 66</span>
+<span id="67"> 67</span>
+<span id="68"> 68</span>
+<span id="69"> 69</span>
+<span id="70"> 70</span>
+<span id="71"> 71</span>
+<span id="72"> 72</span>
+<span id="73"> 73</span>
+<span id="74"> 74</span>
+<span id="75"> 75</span>
+<span id="76"> 76</span>
+<span id="77"> 77</span>
+<span id="78"> 78</span>
+<span id="79"> 79</span>
+<span id="80"> 80</span>
+<span id="81"> 81</span>
+<span id="82"> 82</span>
+<span id="83"> 83</span>
+<span id="84"> 84</span>
+<span id="85"> 85</span>
+<span id="86"> 86</span>
+<span id="87"> 87</span>
+<span id="88"> 88</span>
+<span id="89"> 89</span>
+<span id="90"> 90</span>
+<span id="91"> 91</span>
+<span id="92"> 92</span>
+<span id="93"> 93</span>
+<span id="94"> 94</span>
+<span id="95"> 95</span>
+<span id="96"> 96</span>
+<span id="97"> 97</span>
+<span id="98"> 98</span>
+<span id="99"> 99</span>
+<span id="100">100</span>
+<span id="101">101</span>
+<span id="102">102</span>
+<span id="103">103</span>
+<span id="104">104</span>
+<span id="105">105</span>
+<span id="106">106</span>
+<span id="107">107</span>
+<span id="108">108</span>
+<span id="109">109</span>
+<span id="110">110</span>
+<span id="111">111</span>
+<span id="112">112</span>
+<span id="113">113</span>
+<span id="114">114</span>
+<span id="115">115</span>
+<span id="116">116</span>
+<span id="117">117</span>
+<span id="118">118</span>
+<span id="119">119</span>
+<span id="120">120</span>
+<span id="121">121</span>
+<span id="122">122</span>
+<span id="123">123</span>
+<span id="124">124</span>
+</pre><div class="example-wrap"><pre class="rust ">
+<span class="comment">/*
+ * Copyright (C) 2018 Kubos Corporation
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */</span>
+
+<span class="doccomment">//! Daughterboard Telemetry</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! This module provides the enum, commands and parsers necessary for working</span>
+<span class="doccomment">//! with telemetry from the EPS daughterboard.</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! The macro `make_telemetry!` is responsibly for generating the enum `Type`, the</span>
+<span class="doccomment">//! `parse` function and the `command` function.</span>
+
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">telemetry</span>::<span class="ident">lib</span>::<span class="ident">get_adc_result</span>;
+<span class="kw">use</span> <span class="ident">eps_api</span>::<span class="ident">EpsResult</span>;
+<span class="kw">use</span> <span class="ident">rust_i2c</span>::<span class="ident">Command</span>;
+
+<span class="kw">const</span> <span class="ident">TELEM_CMD</span>: <span class="ident">u8</span> <span class="op">=</span> <span class="number">0x10</span>;
+
+<span class="macro">make_telemetry</span><span class="macro">!</span>(
+    <span class="doccomment">/// VBCR4 - Voltage feeding BRC4 (V)</span>
+    <span class="ident">VoltageFeedingBcr4</span> <span class="op">=</span><span class="op">&gt;</span> {<span class="macro">vec</span><span class="macro">!</span>[<span class="number">0xE1</span>, <span class="number">0x40</span>], <span class="op">|</span><span class="ident">d</span><span class="op">|</span> (<span class="number">0.032_233_143</span> <span class="op">*</span> <span class="ident">d</span>) <span class="op">+</span> <span class="number">0.022_840_592</span>},
+    <span class="doccomment">/// IBCR4A - Current BCR4, Connector SA4A (A)</span>
+    <span class="ident">CurrentBcr4Sa4a</span> <span class="op">=</span><span class="op">&gt;</span> {<span class="macro">vec</span><span class="macro">!</span>[<span class="number">0xE1</span>, <span class="number">0x44</span>], <span class="op">|</span><span class="ident">d</span><span class="op">|</span> (<span class="number">0.977_821_782</span> <span class="op">*</span> <span class="ident">d</span>) <span class="op">-</span> <span class="number">3.020_660_066</span>},
+    <span class="doccomment">/// IBCR4B - Current BCR4, Connection SA4B (A)</span>
+    <span class="ident">CurrentBcr4Sa4b</span> <span class="op">=</span><span class="op">&gt;</span> {<span class="macro">vec</span><span class="macro">!</span>[<span class="number">0xE1</span>, <span class="number">0x45</span>], <span class="op">|</span><span class="ident">d</span><span class="op">|</span> (<span class="number">0.982_567_819</span> <span class="op">*</span> <span class="ident">d</span>) <span class="op">+</span> <span class="number">0.388_437_306</span>},
+    <span class="doccomment">/// TBCR4A - Array Temp, Connector SA4A (*C)</span>
+    <span class="ident">ArrayTempSa4a</span> <span class="op">=</span><span class="op">&gt;</span> {<span class="macro">vec</span><span class="macro">!</span>[<span class="number">0xE1</span>, <span class="number">0x48</span>], <span class="op">|</span><span class="ident">d</span><span class="op">|</span> (<span class="number">0.356_573_44</span> <span class="op">*</span> <span class="ident">d</span>) <span class="op">-</span> <span class="number">273.884_02</span>},
+    <span class="doccomment">/// TBCR4B - Array Temp, Connector SA4B (*C)</span>
+    <span class="ident">ArrayTempSa4b</span> <span class="op">=</span><span class="op">&gt;</span> {<span class="macro">vec</span><span class="macro">!</span>[<span class="number">0xE1</span>, <span class="number">0x49</span>], <span class="op">|</span><span class="ident">d</span><span class="op">|</span> (<span class="number">0.356_573_44</span> <span class="op">*</span> <span class="ident">d</span>) <span class="op">-</span> <span class="number">273.884_02</span>},
+    <span class="doccomment">/// SDBCR4A - Sun Detector, Connector SA4A (W/m^2)</span>
+    <span class="ident">SunDetectorSa4a</span> <span class="op">=</span><span class="op">&gt;</span> {<span class="macro">vec</span><span class="macro">!</span>[<span class="number">0xE1</span>, <span class="number">0x4C</span>], <span class="op">|</span><span class="ident">d</span><span class="op">|</span> <span class="ident">d</span>},
+    <span class="doccomment">/// SDBCR4B - Sun Detector, Connector SA4B (W/m^2)</span>
+    <span class="ident">SunDetectorSa4b</span> <span class="op">=</span><span class="op">&gt;</span> {<span class="macro">vec</span><span class="macro">!</span>[<span class="number">0xE1</span>, <span class="number">0x4D</span>], <span class="op">|</span><span class="ident">d</span><span class="op">|</span> <span class="ident">d</span>},
+
+    <span class="doccomment">/// VBCR5 - Voltage Feeding BCR5 (V)</span>
+    <span class="ident">VoltageFeedingBcr5</span> <span class="op">=</span><span class="op">&gt;</span> {<span class="macro">vec</span><span class="macro">!</span>[<span class="number">0xE1</span>, <span class="number">0x50</span>], <span class="op">|</span><span class="ident">d</span><span class="op">|</span> (<span class="number">0.032_515_932</span> <span class="op">*</span> <span class="ident">d</span>) <span class="op">-</span> <span class="number">0.085_250_182</span>},
+    <span class="doccomment">/// IBCR5A - Current BCR5, Connection SA5A (A)</span>
+    <span class="ident">CurrentBcr5Sa5a</span> <span class="op">=</span><span class="op">&gt;</span> {<span class="macro">vec</span><span class="macro">!</span>[<span class="number">0xE1</span>, <span class="number">0x54</span>], <span class="op">|</span><span class="ident">d</span><span class="op">|</span> (<span class="number">0.977_821_782</span> <span class="op">*</span> <span class="ident">d</span>) <span class="op">-</span> <span class="number">1.065_016_502</span>},
+    <span class="doccomment">/// IBCR5B - Current BCR5, Connector SA5B (A)</span>
+    <span class="ident">CurrentBcr5Sa5b</span> <span class="op">=</span><span class="op">&gt;</span> {<span class="macro">vec</span><span class="macro">!</span>[<span class="number">0xE1</span>, <span class="number">0x55</span>], <span class="op">|</span><span class="ident">d</span><span class="op">|</span> (<span class="number">0.980_922_045</span> <span class="op">*</span> <span class="ident">d</span>) <span class="op">-</span> <span class="number">2.734_752_724</span>},
+    <span class="doccomment">/// TBCR5A - Array Temp, Connector SA5A (*C)</span>
+    <span class="ident">ArrayTempSa5a</span> <span class="op">=</span><span class="op">&gt;</span> {<span class="macro">vec</span><span class="macro">!</span>[<span class="number">0xE1</span>, <span class="number">0x58</span>], <span class="op">|</span><span class="ident">d</span><span class="op">|</span> (<span class="number">0.356_573_44</span> <span class="op">*</span> <span class="ident">d</span>) <span class="op">-</span> <span class="number">273.884_02</span>},
+    <span class="doccomment">/// TBCR5B - Array Temp, Connector SA5B (*C)</span>
+    <span class="ident">ArrayTempSa5b</span> <span class="op">=</span><span class="op">&gt;</span> {<span class="macro">vec</span><span class="macro">!</span>[<span class="number">0xE1</span>, <span class="number">0x59</span>], <span class="op">|</span><span class="ident">d</span><span class="op">|</span> (<span class="number">0.356_573_44</span> <span class="op">*</span> <span class="ident">d</span>) <span class="op">-</span> <span class="number">273.884_02</span>},
+    <span class="doccomment">/// SDBCR5A - Sun Detector, Connector SA5A (W/m^2)</span>
+    <span class="ident">SunDetectorSa5a</span> <span class="op">=</span><span class="op">&gt;</span> {<span class="macro">vec</span><span class="macro">!</span>[<span class="number">0xE1</span>, <span class="number">0x5C</span>], <span class="op">|</span><span class="ident">d</span><span class="op">|</span> <span class="ident">d</span>},
+    <span class="doccomment">/// SDBCR5B - Sun Detector, Connector SA5B (W/m^2)</span>
+    <span class="ident">SunDetectorSa5b</span> <span class="op">=</span><span class="op">&gt;</span> {<span class="macro">vec</span><span class="macro">!</span>[<span class="number">0xE1</span>, <span class="number">0x5D</span>], <span class="op">|</span><span class="ident">d</span><span class="op">|</span> <span class="ident">d</span>},
+
+    <span class="doccomment">/// VBCR6 - Voltage Feeding BCR6 (V)</span>
+    <span class="ident">VoltageFeedingBcr6</span> <span class="op">=</span><span class="op">&gt;</span> {<span class="macro">vec</span><span class="macro">!</span>[<span class="number">0xE1</span>, <span class="number">0x60</span>], <span class="op">|</span><span class="ident">d</span><span class="op">|</span> (<span class="number">0.032_338_203</span> <span class="op">*</span> <span class="ident">d</span>) <span class="op">+</span> <span class="number">0.063_747_86</span>},
+    <span class="doccomment">/// IBCR6A - Current BCR6, Connection SA6A (A)</span>
+    <span class="ident">CurrentBcr6Sa6a</span> <span class="op">=</span><span class="op">&gt;</span> {<span class="macro">vec</span><span class="macro">!</span>[<span class="number">0xE1</span>, <span class="number">0x64</span>], <span class="op">|</span><span class="ident">d</span><span class="op">|</span> (<span class="number">0.967_231_18</span> <span class="op">*</span> <span class="ident">d</span>) <span class="op">-</span> <span class="number">4.607_992_112</span>},
+    <span class="doccomment">/// IBCR6B - Current BCR6, Connector SA6B (A)</span>
+    <span class="ident">CurrentBcr6Sa6b</span> <span class="op">=</span><span class="op">&gt;</span> {<span class="macro">vec</span><span class="macro">!</span>[<span class="number">0xE1</span>, <span class="number">0x65</span>], <span class="op">|</span><span class="ident">d</span><span class="op">|</span> (<span class="number">0.985_693_552</span> <span class="op">*</span> <span class="ident">d</span>) <span class="op">-</span> <span class="number">10.183_288_41</span>},
+    <span class="doccomment">/// TBCR6A - Array Temp, Connector SA6A (*C)</span>
+    <span class="ident">ArrayTempSa6a</span> <span class="op">=</span><span class="op">&gt;</span> {<span class="macro">vec</span><span class="macro">!</span>[<span class="number">0xE1</span>, <span class="number">0x68</span>], <span class="op">|</span><span class="ident">d</span><span class="op">|</span> (<span class="number">0.356_573_44</span> <span class="op">*</span> <span class="ident">d</span>) <span class="op">-</span> <span class="number">273.884_02</span>},
+    <span class="doccomment">/// TBCR6B - Array Temp, Connector SA6B (*C)</span>
+    <span class="ident">ArrayTempSa6b</span> <span class="op">=</span><span class="op">&gt;</span> {<span class="macro">vec</span><span class="macro">!</span>[<span class="number">0xE1</span>, <span class="number">0x69</span>], <span class="op">|</span><span class="ident">d</span><span class="op">|</span> (<span class="number">0.356_573_44</span> <span class="op">*</span> <span class="ident">d</span>) <span class="op">-</span> <span class="number">273.884_02</span>},
+    <span class="doccomment">/// SDBCR6A - Sun Detector, Connector SA6A (W/m^2)</span>
+    <span class="ident">SunDetectorSa6a</span> <span class="op">=</span><span class="op">&gt;</span> {<span class="macro">vec</span><span class="macro">!</span>[<span class="number">0xE1</span>, <span class="number">0x6C</span>], <span class="op">|</span><span class="ident">d</span><span class="op">|</span> <span class="ident">d</span>},
+    <span class="doccomment">/// SDBCR6B - Sun Detector, Connector SA6B (W/m^2)</span>
+    <span class="ident">SunDetectorSa6b</span> <span class="op">=</span><span class="op">&gt;</span> {<span class="macro">vec</span><span class="macro">!</span>[<span class="number">0xE1</span>, <span class="number">0x6D</span>], <span class="op">|</span><span class="ident">d</span><span class="op">|</span> <span class="ident">d</span>},
+
+    <span class="doccomment">/// VBCR7 - Voltage Feeding BCR7 (V)</span>
+    <span class="ident">VoltageFeedingBcr7</span> <span class="op">=</span><span class="op">&gt;</span> {<span class="macro">vec</span><span class="macro">!</span>[<span class="number">0xE1</span>, <span class="number">0x70</span>], <span class="op">|</span><span class="ident">d</span><span class="op">|</span> (<span class="number">0.032_110_025</span> <span class="op">*</span> <span class="ident">d</span>) <span class="op">+</span> <span class="number">0.035_328_493</span>},
+    <span class="doccomment">/// IBCR7A - Current BCR7, Connection SA7A (A)</span>
+    <span class="ident">CurrentBcr7Sa7a</span> <span class="op">=</span><span class="op">&gt;</span> {<span class="macro">vec</span><span class="macro">!</span>[<span class="number">0xE1</span>, <span class="number">0x74</span>], <span class="op">|</span><span class="ident">d</span><span class="op">|</span> (<span class="number">0.984_719_536</span> <span class="op">*</span> <span class="ident">d</span>) <span class="op">-</span> <span class="number">4.746_679_562</span>},
+    <span class="doccomment">/// IBCR7B - Current BCR7, Connector SA7B (A)</span>
+    <span class="ident">CurrentBcr7Sa7b</span> <span class="op">=</span><span class="op">&gt;</span> {<span class="macro">vec</span><span class="macro">!</span>[<span class="number">0xE1</span>, <span class="number">0x75</span>], <span class="op">|</span><span class="ident">d</span><span class="op">|</span> (<span class="number">0.972_638_482</span> <span class="op">*</span> <span class="ident">d</span>) <span class="op">-</span> <span class="number">3.537_251_86</span>},
+    <span class="doccomment">/// TBCR7A - Array Temp, Connector SA7A (*C)</span>
+    <span class="ident">ArrayTempSa7a</span> <span class="op">=</span><span class="op">&gt;</span> {<span class="macro">vec</span><span class="macro">!</span>[<span class="number">0xE1</span>, <span class="number">0x78</span>], <span class="op">|</span><span class="ident">d</span><span class="op">|</span> (<span class="number">0.356_573_44</span> <span class="op">*</span> <span class="ident">d</span>) <span class="op">-</span> <span class="number">273.884_02</span>},
+    <span class="doccomment">/// TBCR7B - Array Temp, Connector SA7B (*C)</span>
+    <span class="ident">ArrayTempSa7b</span> <span class="op">=</span><span class="op">&gt;</span> {<span class="macro">vec</span><span class="macro">!</span>[<span class="number">0xE1</span>, <span class="number">0x79</span>], <span class="op">|</span><span class="ident">d</span><span class="op">|</span> (<span class="number">0.356_573_44</span> <span class="op">*</span> <span class="ident">d</span>) <span class="op">-</span> <span class="number">273.884_02</span>},
+    <span class="doccomment">/// SDBCR7A - Sun Detector, Connector SA7A (W/m^2)</span>
+    <span class="ident">SunDetectorSa7a</span> <span class="op">=</span><span class="op">&gt;</span> {<span class="macro">vec</span><span class="macro">!</span>[<span class="number">0xE1</span>, <span class="number">0x7C</span>], <span class="op">|</span><span class="ident">d</span><span class="op">|</span> <span class="ident">d</span>},
+    <span class="doccomment">/// SDBCR7B - Sun Detector, Connector SA7B (W/m^2)</span>
+    <span class="ident">SunDetectorSa7b</span> <span class="op">=</span><span class="op">&gt;</span> {<span class="macro">vec</span><span class="macro">!</span>[<span class="number">0xE1</span>, <span class="number">0x7D</span>], <span class="op">|</span><span class="ident">d</span><span class="op">|</span> <span class="ident">d</span>},
+
+    <span class="doccomment">/// VBCR8 - Voltage Feeding BCR8 (V)</span>
+    <span class="ident">VoltageFeedingBcr8</span> <span class="op">=</span><span class="op">&gt;</span> {<span class="macro">vec</span><span class="macro">!</span>[<span class="number">0xE1</span>, <span class="number">0x80</span>], <span class="op">|</span><span class="ident">d</span><span class="op">|</span> (<span class="number">0.032_396_988</span> <span class="op">*</span> <span class="ident">d</span>) <span class="op">-</span> <span class="number">0.081_490_692</span>},
+    <span class="doccomment">/// IBCR8A - Current BCR8, Connection SA8A (A)</span>
+    <span class="ident">CurrentBcr8Sa8a</span> <span class="op">=</span><span class="op">&gt;</span> {<span class="macro">vec</span><span class="macro">!</span>[<span class="number">0xE1</span>, <span class="number">0x84</span>], <span class="op">|</span><span class="ident">d</span><span class="op">|</span> (<span class="number">0.977_621_05</span> <span class="op">*</span> <span class="ident">d</span>) <span class="op">-</span> <span class="number">8.569_171_301</span>},
+    <span class="doccomment">/// IBCR8B - Current BCR8, Connector SA8B (A)</span>
+    <span class="ident">CurrentBcr8Sa8b</span> <span class="op">=</span><span class="op">&gt;</span> {<span class="macro">vec</span><span class="macro">!</span>[<span class="number">0xE1</span>, <span class="number">0x85</span>], <span class="op">|</span><span class="ident">d</span><span class="op">|</span> (<span class="number">0.987_950_139</span> <span class="op">*</span> <span class="ident">d</span>) <span class="op">-</span> <span class="number">4.917_313_019</span>},
+    <span class="doccomment">/// TBCR8A - Array Temp, Connector SA8A (*C)</span>
+    <span class="ident">ArrayTempSa8a</span> <span class="op">=</span><span class="op">&gt;</span> {<span class="macro">vec</span><span class="macro">!</span>[<span class="number">0xE1</span>, <span class="number">0x88</span>], <span class="op">|</span><span class="ident">d</span><span class="op">|</span> (<span class="number">0.356_573_44</span> <span class="op">*</span> <span class="ident">d</span>) <span class="op">-</span> <span class="number">273.884_02</span>},
+    <span class="doccomment">/// TBCR8B - Array Temp, Connector SA8B (*C)</span>
+    <span class="ident">ArrayTempSa8b</span> <span class="op">=</span><span class="op">&gt;</span> {<span class="macro">vec</span><span class="macro">!</span>[<span class="number">0xE1</span>, <span class="number">0x89</span>], <span class="op">|</span><span class="ident">d</span><span class="op">|</span> (<span class="number">0.356_573_44</span> <span class="op">*</span> <span class="ident">d</span>) <span class="op">-</span> <span class="number">273.884_02</span>},
+    <span class="doccomment">/// SDBCR8A - Sun Detector, Connector SA8A (W/m^2)</span>
+    <span class="ident">SunDetectorSa8a</span> <span class="op">=</span><span class="op">&gt;</span> {<span class="macro">vec</span><span class="macro">!</span>[<span class="number">0xE1</span>, <span class="number">0x8C</span>], <span class="op">|</span><span class="ident">d</span><span class="op">|</span> <span class="ident">d</span>},
+    <span class="doccomment">/// SDBCR8B - Sun Detector, Connector SA8B (W/m^2)</span>
+    <span class="ident">SunDetectorSa8b</span> <span class="op">=</span><span class="op">&gt;</span> {<span class="macro">vec</span><span class="macro">!</span>[<span class="number">0xE1</span>, <span class="number">0x8D</span>], <span class="op">|</span><span class="ident">d</span><span class="op">|</span> <span class="ident">d</span>},
+
+    <span class="doccomment">/// VBCR9 - Voltage Feeding BCR9 (V)</span>
+    <span class="ident">VoltageFeedingBcr9</span> <span class="op">=</span><span class="op">&gt;</span> {<span class="macro">vec</span><span class="macro">!</span>[<span class="number">0xE1</span>, <span class="number">0x90</span>], <span class="op">|</span><span class="ident">d</span><span class="op">|</span> (<span class="number">0.032_258_137</span> <span class="op">*</span> <span class="ident">d</span>) <span class="op">+</span> <span class="number">0.020_293_952</span>},
+    <span class="doccomment">/// IBCR9A - Current BC96, Connection SA9A (A)</span>
+    <span class="ident">CurrentBcr9Sa9a</span> <span class="op">=</span><span class="op">&gt;</span> {<span class="macro">vec</span><span class="macro">!</span>[<span class="number">0xE1</span>, <span class="number">0x94</span>], <span class="op">|</span><span class="ident">d</span><span class="op">|</span> (<span class="number">0.964_867_436</span> <span class="op">*</span> <span class="ident">d</span>) <span class="op">-</span> <span class="number">3.896_088_456</span>},
+    <span class="doccomment">/// IBCR9B - Current BCR9, Connector SA9B (A)</span>
+    <span class="ident">CurrentBcr9Sa9b</span> <span class="op">=</span><span class="op">&gt;</span> {<span class="macro">vec</span><span class="macro">!</span>[<span class="number">0xE1</span>, <span class="number">0x95</span>], <span class="op">|</span><span class="ident">d</span><span class="op">|</span> (<span class="number">0.991_113_02</span> <span class="op">*</span> <span class="ident">d</span>) <span class="op">-</span> <span class="number">10.112_293_11</span>},
+    <span class="doccomment">/// TBCR9A - Array Temp, Connector SA9A (*C)</span>
+    <span class="ident">ArrayTempSa9a</span> <span class="op">=</span><span class="op">&gt;</span> {<span class="macro">vec</span><span class="macro">!</span>[<span class="number">0xE1</span>, <span class="number">0x98</span>], <span class="op">|</span><span class="ident">d</span><span class="op">|</span> (<span class="number">0.356_573_44</span> <span class="op">*</span> <span class="ident">d</span>) <span class="op">-</span> <span class="number">273.884_02</span>},
+    <span class="doccomment">/// TBCR9B - Array Temp, Connector SA9B (*C)</span>
+    <span class="ident">ArrayTempSa9b</span> <span class="op">=</span><span class="op">&gt;</span> {<span class="macro">vec</span><span class="macro">!</span>[<span class="number">0xE1</span>, <span class="number">0x99</span>], <span class="op">|</span><span class="ident">d</span><span class="op">|</span> (<span class="number">0.356_573_44</span> <span class="op">*</span> <span class="ident">d</span>) <span class="op">-</span> <span class="number">273.884_02</span>},
+    <span class="doccomment">/// SDBCR9A - Sun Detector, Connector SA9A (W/m^2)</span>
+    <span class="ident">SunDetectorSa9a</span> <span class="op">=</span><span class="op">&gt;</span> {<span class="macro">vec</span><span class="macro">!</span>[<span class="number">0xE1</span>, <span class="number">0x9C</span>], <span class="op">|</span><span class="ident">d</span><span class="op">|</span> <span class="ident">d</span>},
+    <span class="doccomment">/// SDBCR9B - Sun Detector, Connector SA9B (W/m^2)</span>
+    <span class="ident">SunDetectorSa9b</span> <span class="op">=</span><span class="op">&gt;</span> {<span class="macro">vec</span><span class="macro">!</span>[<span class="number">0xE1</span>, <span class="number">0x9D</span>], <span class="op">|</span><span class="ident">d</span><span class="op">|</span> <span class="ident">d</span>},
+
+    <span class="doccomment">/// TLM_TBRD_DB - Board Temperature (*C)</span>
+    <span class="ident">BoardTemperature</span> <span class="op">=</span><span class="op">&gt;</span> {<span class="macro">vec</span><span class="macro">!</span>[<span class="number">0xE3</span>, <span class="number">0x88</span>], <span class="op">|</span><span class="ident">d</span><span class="op">|</span>  (<span class="number">0.356_573_44</span> <span class="op">*</span> <span class="ident">d</span>) <span class="op">-</span> <span class="number">273.884_02</span>},
+);
+</pre></div>
+</section><section id="search" class="content hidden"></section><section class="footer"></section><aside id="help" class="hidden"><div><h1 class="hidden">Help</h1><div class="shortcuts"><h2>Keyboard Shortcuts</h2><dl><dt><kbd>?</kbd></dt><dd>Show this help dialog</dd><dt><kbd>S</kbd></dt><dd>Focus the search field</dd><dt><kbd>↑</kbd></dt><dd>Move up in search results</dd><dt><kbd>↓</kbd></dt><dd>Move down in search results</dd><dt><kbd>↹</kbd></dt><dd>Switch tab</dd><dt><kbd>&#9166;</kbd></dt><dd>Go to active search result</dd><dt><kbd>+</kbd></dt><dd>Expand all sections</dd><dt><kbd>-</kbd></dt><dd>Collapse all sections</dd></dl></div><div class="infos"><h2>Search Tricks</h2><p>Prefix searches with a type followed by a colon (e.g., <code>fn:</code>) to restrict the search to a given type.</p><p>Accepted types are: <code>fn</code>, <code>mod</code>, <code>struct</code>, <code>enum</code>, <code>trait</code>, <code>type</code>, <code>macro</code>, and <code>const</code>.</p><p>Search functions by type signature (e.g., <code>vec -> usize</code> or <code>* -> vec</code>)</p><p>Search multiple things at once by splitting your query with comma (e.g., <code>str,u8</code> or <code>String,struct:Vec,test</code>)</p></div></div></aside><script>window.rootPath = "../../../";window.currentCrate = "clyde_3g_eps_api";</script><script src="../../../aliases.js"></script><script src="../../../main.js"></script><script src="../../../source-script.js"></script><script src="../../../source-files.js"></script><script defer src="../../../search-index.js"></script></body></html>

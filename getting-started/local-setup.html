@@ -1,0 +1,330 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Setting Up Your Local Environment &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../index.html"/>
+        <link rel="up" title="Getting Started with KubOS" href="index.html"/>
+        <link rel="next" title="Setting up a Dev Environment in Windows" href="windows-setup.html"/>
+        <link rel="prev" title="I Don’t Have Hardware Yet, What Can I Do?" href="no-board.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Getting Started</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="no-board.html">I Don’t Have Hardware Yet, What Can I Do?</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Setting Up Your Local Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="windows-setup.html">Setting up a Dev Environment in Windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="using-rust.html">Getting Started with KubOS and Rust</a></li>
+<li class="toctree-l2"><a class="reference internal" href="using-python.html">Getting Started with KubOS and Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="local-services.html">Running KubOS Core Services Locally</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../obc-docs/index.html">Working with an OBC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ecosystem/index.html">KubOS Ecosystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deep-dive/index.html">Under the Hood</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sdk-docs/index.html">Kubos SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing to KubOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Getting Started with KubOS</a> &raquo;</li>
+        
+      <li>Setting Up Your Local Environment</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/getting-started/local-setup.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="setting-up-your-local-environment">
+<h1>Setting Up Your Local Environment<a class="headerlink" href="#setting-up-your-local-environment" title="Permalink to this headline">¶</a></h1>
+<p>This document will lead you through the steps of setting up a local KubOS development environment. It is assumed that you are either running a Linux or macOS system. Windows users should refer to the <a class="reference internal" href="windows-setup.html"><span class="doc">Windows setup</span></a> guide.</p>
+<div class="section" id="development-dependencies">
+<span id="build-dependencies"></span><h2>Development Dependencies<a class="headerlink" href="#development-dependencies" title="Permalink to this headline">¶</a></h2>
+<p>The following tools and libraries will need to be installed in order to build and
+run existing and new KubOS projects. You can install these however you like, however
+we suggest using your distro’s package manager (<code class="docutils literal notranslate"><span class="pre">apt</span></code>, <code class="docutils literal notranslate"><span class="pre">dnf</span></code>, <code class="docutils literal notranslate"><span class="pre">snap</span></code>, etc) on Linux,
+and using Homebrew on macOS.</p>
+<ul>
+<li><p class="first">git</p>
+</li>
+<li><p class="first">curl</p>
+</li>
+<li><p class="first">Rust + Cargo (We suggest using <a class="reference external" href="https://rustup.rs/">rustup</a> to install)</p>
+<blockquote>
+<div><ul class="simple">
+<li>You will probably want to add <code class="docutils literal notranslate"><span class="pre">~/.cargo/bin</span></code> to your system’s <code class="docutils literal notranslate"><span class="pre">PATH</span></code></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Rust v1.39.0 (<code class="docutils literal notranslate"><span class="pre">rustup</span> <span class="pre">default</span> <span class="pre">1.39.0</span></code>)</p>
+</li>
+<li><p class="first">Clippy (<code class="docutils literal notranslate"><span class="pre">rustup</span> <span class="pre">component</span> <span class="pre">add</span> <span class="pre">clippy</span></code>)</p>
+</li>
+<li><p class="first">Rustfmt (<code class="docutils literal notranslate"><span class="pre">rustup</span> <span class="pre">component</span> <span class="pre">add</span> <span class="pre">rustfmt</span></code>)</p>
+</li>
+<li><p class="first">gcc</p>
+</li>
+<li><p class="first">pkg-config</p>
+</li>
+<li><p class="first">libssl-dev or openssl-dev (or openssl in macOS)</p>
+</li>
+<li><p class="first">sqlite <strong>and</strong> libsqlite3-dev (libsqlite3-dev is not needed in macOS)</p>
+</li>
+<li><p class="first">Python3.7</p>
+</li>
+<li><p class="first">pip3</p>
+</li>
+<li><p class="first">The Python3 libraries toml, mock, and responses (<code class="docutils literal notranslate"><span class="pre">pip3</span> <span class="pre">install</span> <span class="pre">toml</span> <span class="pre">mock</span> <span class="pre">responses</span></code>)</p>
+</li>
+</ul>
+<p>After installing these dependencies, we suggest fetching the latest copy of the <a class="reference external" href="https://github.com/kubos/kubos">KubOS source repo</a>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git clone https://github.com/kubos/kubos
+</pre></div>
+</div>
+<p>After fetching the KubOS source repo, we suggest installing the Python <code class="docutils literal notranslate"><span class="pre">app-api</span></code>, which is used in developing Python-based applications:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pushd kubos/apis/app-api/python &amp;&amp; pip3 install . --user &amp;&amp; popd
+</pre></div>
+</div>
+<p>We also suggest installing the Python <code class="docutils literal notranslate"><span class="pre">kubos-service</span></code> library, which is used in developing Python-based services:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pushd kubos/libs/kubos-service &amp;&amp; pip3 install . --user &amp;&amp; popd
+</pre></div>
+</div>
+<p>After installing all of these dependencies, we suggest running the following script
+from the base of the kubos repo to verify everything is installed correctly and working:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ./tools/kubos_verify.sh
+</pre></div>
+</div>
+</div>
+<div class="section" id="next-steps">
+<h2>Next Steps<a class="headerlink" href="#next-steps" title="Permalink to this headline">¶</a></h2>
+<p>Now that your environment is set up, you can get started developing your first KubOS project.</p>
+<p>We recommend that you look at the following documents next:</p>
+<ul class="simple">
+<li><a class="reference internal" href="using-python.html"><span class="doc">Getting Started with KubOS and Python</span></a></li>
+<li><a class="reference internal" href="using-rust.html"><span class="doc">Getting Started with KubOS and Rust</span></a></li>
+<li><a class="reference internal" href="../tutorials/index.html"><span class="doc">Tutorials</span></a></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="windows-setup.html" class="btn btn-neutral float-right" title="Setting up a Dev Environment in Windows" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="no-board.html" class="btn btn-neutral" title="I Don’t Have Hardware Yet, What Can I Do?" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

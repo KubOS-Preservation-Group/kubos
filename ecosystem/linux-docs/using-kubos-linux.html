@@ -1,0 +1,365 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Using Kubos Linux &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../../index.html"/>
+        <link rel="up" title="KubOS Ecosystem" href="../index.html"/>
+        <link rel="next" title="Logging" href="logging.html"/>
+        <link rel="prev" title="Kubos Linux Overview" href="kubos-linux-overview.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../obc-docs/index.html">Working with an OBC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">KubOS Ecosystem</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#mission-applications">Mission Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#services">Services</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#kubos-linux">Kubos Linux</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="kubos-linux-overview.html">Kubos Linux Overview</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Using Kubos Linux</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#reference-documents">Reference Documents</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#using-peripherals">Using Peripherals</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#user-accounts">User Accounts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#kubos-linux-file-system">Kubos Linux File System</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#resetting-the-boot-environment">Resetting the Boot Environment</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="monitoring.html">Process Monitoring</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubos-linux-upgrade.html">Kubos Linux Upgrades</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubos-linux-recovery.html">Kubos Linux Recovery</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../deep-dive/index.html">Under the Hood</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sdk-docs/index.html">Kubos SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Contributing to KubOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">KubOS Ecosystem</a> &raquo;</li>
+        
+      <li>Using Kubos Linux</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/ecosystem/linux-docs/using-kubos-linux.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="using-kubos-linux">
+<h1>Using Kubos Linux<a class="headerlink" href="#using-kubos-linux" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>This document is intended as a general guide for creating,
+loading, and using KubOS projects and other files within the user space
+of Kubos Linux.</p>
+</div>
+<div class="section" id="reference-documents">
+<h2>Reference Documents<a class="headerlink" href="#reference-documents" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="general-documentation">
+<h3>General Documentation<a class="headerlink" href="#general-documentation" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference internal" href="../../sdk-docs/sdk-installing.html"><span class="doc">Installing the Kubos SDK</span></a></li>
+<li><a class="reference internal" href="../../tutorials/first-mission-app.html"><span class="doc">Creating Your First Mission Application</span></a></li>
+</ul>
+</div>
+<div class="section" id="board-specific-documentation">
+<h3>Board-Specific Documentation<a class="headerlink" href="#board-specific-documentation" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference internal" href="../../obc-docs/bbb/index.html"><span class="doc">KubOS for the Beaglebone Black</span></a></li>
+<li><a class="reference internal" href="../../obc-docs/iobc/index.html"><span class="doc">KubOS for the ISIS-OBC</span></a></li>
+<li><a class="reference internal" href="../../obc-docs/mbm2/index.html"><span class="doc">KubOS for the Pumpkin MBM2</span></a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="using-peripherals">
+<h2>Using Peripherals<a class="headerlink" href="#using-peripherals" title="Permalink to this headline">¶</a></h2>
+<p>Each board has a variety of different ports available for interacting with
+peripheral devices. Currently, users should interact with these devices
+using the standard Linux functions. A Kubos HAL will be added in the
+future.</p>
+<p>Please refer to the appropriate <a class="reference internal" href="../../obc-docs/index.html"><span class="doc">Working with {board}</span></a> document for more
+information about the specific peripheral availability.</p>
+</div>
+<div class="section" id="user-accounts">
+<span id="id1"></span><h2>User Accounts<a class="headerlink" href="#user-accounts" title="Permalink to this headline">¶</a></h2>
+<p>In general, it is preferred to use a non-root user account to interact
+with a Linux system. A default user account ‘kubos’ is included with
+Kubos Linux. Other user accounts can be created using the standard Linux
+commands (<code class="docutils literal notranslate"><span class="pre">adduser</span></code>, <code class="docutils literal notranslate"><span class="pre">useradd</span></code>, etc).</p>
+<p>All user accounts should have a home directory in the format
+‘/home/{username}’.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">passwd</span></code> command can be used to change the password of existing user
+accounts.</p>
+</div>
+<div class="section" id="kubos-linux-file-system">
+<h2>Kubos Linux File System<a class="headerlink" href="#kubos-linux-file-system" title="Permalink to this headline">¶</a></h2>
+<p>There are a few key directories residing within the Kubos Linux user
+space.</p>
+<div class="section" id="home">
+<h3>/home<a class="headerlink" href="#home" title="Permalink to this headline">¶</a></h3>
+<p>All user-created files should reside under the /home directory. This
+directory maps to a separate partition from the root file system. As a
+result, all files here will remain unchanged if the system goes through
+a kernel upgrade or downgrade.</p>
+<p>The home directories of all user accounts, except root, should live
+under this directory.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Any files not residing under the /home directory will be destroyed
+during an upgrade/downgrade</p>
+</div>
+<div class="section" id="home-system-logs">
+<h4>/home/system/logs<a class="headerlink" href="#home-system-logs" title="Permalink to this headline">¶</a></h4>
+<p>All log files generated with <a class="reference internal" href="logging.html"><span class="doc">rsyslog</span></a> reside in this directory.
+A symlink has been set up to have <cite>/var/log</cite> route to this location.</p>
+</div>
+<div class="section" id="home-system-usr-bin">
+<h4>/home/system/usr/bin<a class="headerlink" href="#home-system-usr-bin" title="Permalink to this headline">¶</a></h4>
+<p>This directory is included in the system’s PATH, so applications placed
+here can be called directly from anywhere, without needing to know the
+full file path.</p>
+</div>
+<div class="section" id="home-system-etc-init-d">
+<h4>/home/system/etc/init.d<a class="headerlink" href="#home-system-etc-init-d" title="Permalink to this headline">¶</a></h4>
+<p>All user-application initialization scripts live under this directory.
+The naming format is ‘S{run-level}{application}’.</p>
+</div>
+</div>
+</div>
+<div class="section" id="resetting-the-boot-environment">
+<h2>Resetting the Boot Environment<a class="headerlink" href="#resetting-the-boot-environment" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This is a case which normal users should never encounter, but becomes more likely when initially testing custom Kubos Linux builds.
+Due to the blocking nature of the behavior, this information has been included in this doc in order to make it more prominent.</p>
+</div>
+<p>If the system goes through the <a class="reference internal" href="kubos-linux-recovery.html"><span class="doc">full recovery process</span></a> and the bootcount is still exceeded,
+it will present the U-Boot CLI instead of attempting to boot into Kubos Linux again.</p>
+<p>If this occurs, follow the <a class="reference internal" href="kubos-linux-overview.html#env-reset"><span class="std std-ref">instructions for resetting the boot environment</span></a>.</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="logging.html" class="btn btn-neutral float-right" title="Logging" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="kubos-linux-overview.html" class="btn btn-neutral" title="Kubos Linux Overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

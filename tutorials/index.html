@@ -1,0 +1,366 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Tutorials &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../index.html"/>
+        <link rel="next" title="Creating Your First Mission Application" href="first-mission-app.html"/>
+        <link rel="prev" title="Running KubOS Core Services Locally" href="../getting-started/local-services.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#mission-development-tutorials">Mission Development Tutorials</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="first-mission-app.html">Creating Your First Mission Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="first-obc-project.html">Running a KubOS Project on an OBC</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#system-interaction-tutorials">System Interaction Tutorials</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="app-register.html">Registering an Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="schedule-app.html">Scheduling an Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="querying-telemetry.html">Querying the System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="file-transfer.html">Transferring Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="shell.html">Creating a Shell Connection</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#advanced-tutorials">Advanced Tutorials</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="comms-service.html">Creating Your Communications Service</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#other-resources">Other Resources</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../obc-docs/index.html">Working with an OBC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ecosystem/index.html">KubOS Ecosystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deep-dive/index.html">Under the Hood</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sdk-docs/index.html">Kubos SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing to KubOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Tutorials</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/tutorials/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="tutorials">
+<h1>Tutorials<a class="headerlink" href="#tutorials" title="Permalink to this headline">¶</a></h1>
+<p>Kubos users develop custom flight software for their OBCs using the KubOS libraries.</p>
+<p>This custom software is then used to communicate with the various <a class="reference internal" href="../ecosystem/services/core-services.html"><span class="doc">core</span></a> and
+<a class="reference internal" href="../ecosystem/services/hardware-services.html"><span class="doc">hardware</span></a> services in order to interact with the system and execute
+mission logic.</p>
+<p class="plantuml">
+<img src="../_images/plantuml-a7d0dac859d45275a0b72700fa866b0e0078dc8d.png" alt="&#64;startuml
+left to right direction
+
+actor User
+
+folder &quot;Host Machine&quot; {
+    [kubos-proj1] as proj1
+    [kubos-proj2] as proj2
+}
+
+node &quot;OBC - KubOS&quot; {
+    frame &quot;App Registry&quot; {
+        cloud &quot;kubos-proj2&quot; as application
+        cloud &quot;App1&quot;
+        cloud &quot;App2&quot;
+    }
+
+    rectangle &quot;Process Monitor Service&quot; as monitor
+    rectangle &quot;Telemetry Database Service&quot; as telemdb
+    rectangle &quot;Hardware Service #1&quot; as hw1
+}
+
+User -&gt; proj1
+proj2 -&gt; application
+User -&gt; proj2
+application ..&gt; monitor
+application ..&gt; telemdb
+application ..&gt; hw1
+
+&#64;enduml"/>
+</p>
+<p>This series of tutorials will walk a new user through the major steps required to program a mission and then communicate with
+a system once it is in-flight.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You should be able to go through these tutorials from either a <a class="reference internal" href="../getting-started/local-setup.html"><span class="doc">local dev environment</span></a>
+or an instance of the <a class="reference internal" href="../sdk-docs/sdk-installing.html"><span class="doc">Kubos SDK</span></a></p>
+</div>
+<div class="section" id="mission-development-tutorials">
+<span id="id1"></span><h2>Mission Development Tutorials<a class="headerlink" href="#mission-development-tutorials" title="Permalink to this headline">¶</a></h2>
+<p>After the completion of these tutorials, the user will have created a mission application capable of querying their hardware for telemetry
+data and then storing that data into the telemetry database.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="first-mission-app.html">Creating Your First Mission Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="first-obc-project.html">Running a KubOS Project on an OBC</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="system-interaction-tutorials">
+<span id="id2"></span><h2>System Interaction Tutorials<a class="headerlink" href="#system-interaction-tutorials" title="Permalink to this headline">¶</a></h2>
+<p>These tutorials cover all of the ways a user might directly interact with a system from the ground.</p>
+<p>There is no coding required for these actions, however some scripting may used for example purposes.</p>
+<p>The first two tutorials may be run entirely locally.
+The file and shell service tutorials are written to be used with an OBC.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="app-register.html">Registering an Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="schedule-app.html">Scheduling an Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="querying-telemetry.html">Querying the System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="file-transfer.html">Transferring Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="shell.html">Creating a Shell Connection</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="advanced-tutorials">
+<span id="id3"></span><h2>Advanced Tutorials<a class="headerlink" href="#advanced-tutorials" title="Permalink to this headline">¶</a></h2>
+<p>Important system tutorials which should be approached after mastering basic system interaction.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="comms-service.html">Creating Your Communications Service</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="other-resources">
+<h2>Other Resources<a class="headerlink" href="#other-resources" title="Permalink to this headline">¶</a></h2>
+<p>These docs give more information about various components of KubOS:</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference internal" href="../kubos-design.html"><span class="doc">KubOS Design</span></a> - The high-level design of KubOS</li>
+<li><a class="reference internal" href="../getting-started/using-rust.html"><span class="doc">Getting Started with KubOS and Rust</span></a> - Instructions for using Rust with KubOS</li>
+<li><a class="reference internal" href="../ecosystem/apps/app-guide.html"><span class="doc">Application Dev Guides</span></a> - More in-depth instructions about
+creating mission applications</li>
+<li><a class="reference internal" href="../ecosystem/index.html#service-docs"><span class="std std-ref">Kubos Services</span></a> - Docs covering what services are,
+which services are availabe, and how to create your own services</li>
+<li><a class="reference internal" href="../mission-dev/index.html"><span class="doc">Mission Development Guide</span></a> - Docs covering the recommended
+components which should be developed for any given mission</li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="first-mission-app.html" class="btn btn-neutral float-right" title="Creating Your First Mission Application" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../getting-started/local-services.html" class="btn btn-neutral" title="Running KubOS Core Services Locally" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

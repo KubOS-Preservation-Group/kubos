@@ -1,0 +1,769 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Installing Kubos Linux on an ISIS-OBC &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../../index.html"/>
+        <link rel="up" title="KubOS for the ISIS-OBC" href="index.html"/>
+        <link rel="next" title="Working with the ISIS-OBC" href="working-with-the-iobc.html"/>
+        <link rel="prev" title="KubOS for the ISIS-OBC" href="index.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Working with an OBC</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../cross-compile.html">Compiling Code for a Target OBC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../comms-setup.html">Communicating with an OBC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bbb/index.html">KubOS for the Beaglebone Black</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">KubOS for the ISIS-OBC</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Installing Kubos Linux on an ISIS-OBC</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#reference-documents">Reference Documents</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#components">Components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#install-the-sd-card-files">Install the SD Card Files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#install-the-nor-flash-files">Install the NOR Flash Files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#reboot-the-system">Reboot the System</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#using-kubos-linux">Using Kubos Linux</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#non-default-installation-process">Non-Default Installation Process</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="working-with-the-iobc.html">Working with the ISIS-OBC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#reference-documents">Reference Documents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#debug-connection">Debug Connection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#peripherals">Peripherals</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../mbm2/index.html">KubOS for the Pumpkin MBM2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../porting-kubos.html">Porting KubOS to a New OBC</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ecosystem/index.html">KubOS Ecosystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deep-dive/index.html">Under the Hood</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sdk-docs/index.html">Kubos SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Contributing to KubOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Working with KubOS and an OBC</a> &raquo;</li>
+        
+          <li><a href="index.html">KubOS for the ISIS-OBC</a> &raquo;</li>
+        
+      <li>Installing Kubos Linux on an ISIS-OBC</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/obc-docs/iobc/installing-linux-iobc.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="installing-kubos-linux-on-an-isis-obc">
+<h1>Installing Kubos Linux on an ISIS-OBC<a class="headerlink" href="#installing-kubos-linux-on-an-isis-obc" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>This document covers the steps required to install Kubos Linux onto an iOBC.</p>
+</div>
+<div class="section" id="reference-documents">
+<h2>Reference Documents<a class="headerlink" href="#reference-documents" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="iobc-documentation">
+<h3>iOBC Documentation<a class="headerlink" href="#iobc-documentation" title="Permalink to this headline">¶</a></h3>
+<p>The <cite>ISIS-OBC Quickstart Guide</cite> should have been packaged with the iOBC
+and is a useful document for learning what each of the hardware
+components are, how to connect them, and what drivers need to be
+installed to support them.</p>
+</div>
+<div class="section" id="kubos-documentation">
+<h3>Kubos Documentation<a class="headerlink" href="#kubos-documentation" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference internal" href="../../tutorials/first-obc-project.html"><span class="doc">Running a KubOS Project on an OBC</span></a> - Basic tutorial for creating your first KubOS project</li>
+<li><a class="reference internal" href="../../ecosystem/linux-docs/using-kubos-linux.html"><span class="doc">Using Kubos Linux</span></a> - General guide for interacting with Kubos Linux</li>
+<li><a class="reference internal" href="working-with-the-iobc.html"><span class="doc">Working with the ISIS-OBC</span></a> - Guide for interacting with iOBC-specific features</li>
+<li><a class="reference internal" href="../../deep-dive/klb/kubos-linux-on-iobc.html"><span class="doc">Building Kubos Linux for the ISIS-OBC</span></a> - Steps to build Kubos Linux</li>
+</ul>
+</div>
+</div>
+<div class="section" id="components">
+<h2>Components<a class="headerlink" href="#components" title="Permalink to this headline">¶</a></h2>
+<p>The Kubos Linux installation process is composed of two high-level steps:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Flashing the SD card</li>
+<li>Flashing the on-board NOR flash</li>
+</ul>
+</div></blockquote>
+<p>To perform a default installation, three files are needed:</p>
+<blockquote>
+<div><ul class="simple">
+<li>A Kubos Linux SD card image</li>
+<li>u-boot.bin</li>
+<li>at91sam9g20isis.dtb</li>
+</ul>
+</div></blockquote>
+<p>All of these files can be obtained from <a class="reference external" href="https://github.com/kubos/kubos-linux-build/releases">our Kubos Linux Releases page on GitHub</a></p>
+<p>Download the latest <cite>KubOS-v{version}.tar.gz</cite> file and then unzip the files for the iOBC. They’re located in the <cite>KubOS-v{version}/iOBC</cite> folder.</p>
+</div>
+<div class="section" id="install-the-sd-card-files">
+<span id="install-sd"></span><h2>Install the SD Card Files<a class="headerlink" href="#install-the-sd-card-files" title="Permalink to this headline">¶</a></h2>
+<p>All users should install the SD card files using a distributed Kubos Linux image, unless they have
+created a custom Kubos Linux build. In that case, the SD card files can be installed by either
+flashing a complete Kubos Linux image onto an SD card or <a class="reference internal" href="#alt-sd-setup"><span class="std std-ref">by alternate means</span></a>.</p>
+<div class="section" id="pre-requisites">
+<h3>Pre-Requisites<a class="headerlink" href="#pre-requisites" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Obtain an SD card that is at least 4GB.</li>
+</ol>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The Kubos Linux SD images are created for a 4GB SD card. The image can be applied to a larger SD card, but the
+resulting system will still only have 4GB of space available to it.</p>
+</div>
+<ol class="arabic simple" start="2">
+<li>Install <a class="reference external" href="https://www.balena.io/etcher/">Etcher</a>. Other software to flash SD cards does exist,
+but Etcher is the Kubos software of choice.</li>
+<li>Obtain a Kubos Linux image</li>
+</ol>
+</div>
+<div class="section" id="flash-the-sd-card">
+<h3>Flash the SD Card<a class="headerlink" href="#flash-the-sd-card" title="Permalink to this headline">¶</a></h3>
+<p>Using <a class="reference external" href="https://www.balena.io/etcher/">Etcher</a>:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Select the Kubos Linux image to flash</li>
+<li>Make sure the SD card device is correct (may be auto-detected if there is only one SD card present
+in your system.)</li>
+<li>Click the “Flash!” button to start the flashing process</li>
+</ul>
+</div></blockquote>
+<div class="figure" id="id6">
+<img alt="Etcher Setup" src="../../_images/etcher1.png" />
+<p class="caption"><span class="caption-text">Etcher Setup</span></p>
+</div>
+<p>It should take roughly 10 minutes for a 4GB image to be loaded onto an SD card.</p>
+<p>Once the program has finished successfully, the SD card is ready to be inserted
+into the iOBC’s SD Card 0 slot.</p>
+</div>
+</div>
+<div class="section" id="install-the-nor-flash-files">
+<h2>Install the NOR Flash Files<a class="headerlink" href="#install-the-nor-flash-files" title="Permalink to this headline">¶</a></h2>
+<p>The NOR flash files will be loaded onto the iOBC using the Atmel SAM-BA software.</p>
+<p>This can be done by using the provided command line script or <a class="reference internal" href="#alt-nor-setup"><span class="std std-ref">using the SAM-BA GUI</span></a>.</p>
+<p>The SD card does not need to be inserted into the iOBC in order for this step to work.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last"><strong>The SAM-BA software currently only supports using the SAM-ICE JTAG with host machines
+running Windows. This means that you must use a Windows OS in order to initially flash
+the iOBC.</strong></p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Once Kubos Linux has been initially installed, future releases of the device tree
+can be installed using the <a class="reference internal" href="../../ecosystem/linux-docs/kubos-linux-upgrade.html#upgrade-installation"><span class="std std-ref">Upgrade Installation</span></a> process with a <cite>kpack-nor-*.itb</cite>
+file, rather than by manual flashing.</p>
+</div>
+<div class="section" id="id1">
+<h3>Pre-Requisites<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p class="first">Obtain an <a class="reference external" href="https://www.microchip.com/DevelopmentTools/ProductDetails/AT91SAM-ICE">Atmel SAM-ICE programmer/debugger</a>.</p>
+</li>
+<li><p class="first">Install programming drivers from <a class="reference external" href="https://www.segger.com/jlink-software.html">https://www.segger.com/jlink-software.html</a>.</p>
+</li>
+<li><p class="first">Install FTDI USB-to-serial drivers from <a class="reference external" href="http://www.ftdichip.com/Drivers/VCP.htm">http://www.ftdichip.com/Drivers/VCP.htm</a></p>
+</li>
+<li><p class="first">Install SAM-BA from the ISIS-OBC SDK installer.
+(Refer to Section 3.3 of the <cite>ISIS-OBC Quick Start Guide</cite>)</p>
+<p><strong>Note:</strong> You must use the ISIS version of SAM-BA, rather than the default
+Atmel installation. It includes several configuration files that are required
+to connect to the iOBC.</p>
+</li>
+<li><p class="first">Setup the iOBC board for serial connection and programming. (Refer to
+Chapter 4 of the <cite>ISIS-OBC Quick Start Guide</cite>)</p>
+</li>
+<li><p class="first">Connect the programming and serial connection cables to your
+computer.</p>
+</li>
+</ol>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Make sure the red jumper on the programming board is in place; it bypasses
+the watchdog. If you don’t, the board will continually reboot and you won’t be
+able to flash anything.</p>
+</div>
+<ol class="arabic" start="7">
+<li><p class="first">Turn on the board.</p>
+</li>
+<li><p class="first">Copy the <cite>kubos-nor-flash.tcl</cite> script from the <cite>tools/at91sam9g20isis</cite> folder in
+the <a class="reference external" href="https://github.com/kubos/kubos-linux-build">kubos-linux-build</a> repo
+into the SAM-BA application folder.</p>
+</li>
+<li><p class="first">Change line 44 in <cite>{path to SAM-BA}/tcl_lib/boards.tcl</cite> from this:</p>
+<p><code class="docutils literal notranslate"><span class="pre">&quot;at91sam9g20-ISISOBC&quot;</span>&#160;&#160;&#160; <span class="pre">&quot;at91sam9g20-ISISOBC/at91sam9g20-ISISOBC.tcl&quot;</span></code></p>
+<p>to this:</p>
+<p><code class="docutils literal notranslate"><span class="pre">&quot;at91sam9g20-isisobc&quot;</span>&#160;&#160;&#160; <span class="pre">&quot;at91sam9g20-ISISOBC/at91sam9g20-ISISOBC.tcl&quot;</span></code></p>
+<p>(the SAM-BA application converts everything to lower case, which will lead to
+a “board not found” error if you don’t change this file)</p>
+</li>
+</ol>
+</div>
+<div class="section" id="boot-into-u-boot">
+<h3>Boot into U-Boot<a class="headerlink" href="#boot-into-u-boot" title="Permalink to this headline">¶</a></h3>
+<p><strong>(Skip this section if you’ve never put Linux on your board before)</strong></p>
+<p>If you already have Linux running on your board, you’ll need to boot into the
+U-Boot console rather than the Linux console in order to be able to flash the
+board.</p>
+<p>You’ll need to establish a serial connection with the board in order to connect
+to the console.</p>
+<p>You can do this via a Kubos SDK Vagrant image with the <code class="docutils literal notranslate"><span class="pre">minicom</span> <span class="pre">kubos</span></code> command
+after booting the board.</p>
+<p>The default login information for an iOBC is kubos/Kubos123.</p>
+<p>Issue the <code class="docutils literal notranslate"><span class="pre">reboot</span></code> command in order to restart the system.</p>
+<p>Hold down any key while the board is restarting. This will exit out of the auto-boot and
+bring up the CLI.</p>
+<div class="figure" id="id7">
+<img alt="U-Boot Console" src="../../_images/uboot_console.png" />
+<p class="caption"><span class="caption-text">U-Boot Console</span></p>
+</div>
+<p>The board is now ready to be flashed.</p>
+</div>
+<div class="section" id="flash-the-files">
+<h3>Flash the Files<a class="headerlink" href="#flash-the-files" title="Permalink to this headline">¶</a></h3>
+<p>The flashing script can be called from the standard command prompt using this command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ {path to SAM-BA}/sam-ba.exe \jlink\ARM0 at91sam9g20-ISISOBC
+      {path to SAM-BA}/kubos-nor-flash.tcl {input arguments} [&gt; {logfile}]
+</pre></div>
+</div>
+<p>Where the input arguments are as follows:</p>
+<blockquote>
+<div><ul class="simple">
+<li>uboot={uboot file} - Path to U-Boot binary</li>
+<li>dtb={dtb file} - Path to Device Tree binary</li>
+<li>altos={alt file} - Path to alternate OS binary</li>
+</ul>
+</div></blockquote>
+<p>Multiple input arguments can be specified and should be space-separated.</p>
+<p>The optional logfile parameter is highly recommended, as the SAM-BA application will not
+give any other response to this command. The log file will contain all of the output as the
+script connects to the board and transfers the files.</p>
+<p>Example command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ C:/ISIS/applications/samba/sam-ba.exe /jlink/ARM0 at91sam9g20-ISISOBC
+      C:/ISIS/applications/samba/kubos-nor-flash.tcl uboot=new-u-boot.bin dtb=new-dtb.dtb
+      &gt; logfile.log
+</pre></div>
+</div>
+<p>If you’d like to confirm that the command ran successfully, open the log file. You should see
+this message for each file you attempted to flash:</p>
+<blockquote>
+<div><code class="docutils literal notranslate"><span class="pre">Sent</span> <span class="pre">file</span> <span class="pre">&amp;</span> <span class="pre">Memory</span> <span class="pre">area</span> <span class="pre">content</span> <span class="pre">(address:</span> <span class="pre">[...],</span> <span class="pre">size:</span> <span class="pre">[...]</span> <span class="pre">bytes)</span> <span class="pre">match</span> <span class="pre">exactly</span> <span class="pre">!</span></code></div></blockquote>
+</div>
+</div>
+<div class="section" id="reboot-the-system">
+<h2>Reboot the System<a class="headerlink" href="#reboot-the-system" title="Permalink to this headline">¶</a></h2>
+<p>If you have not already done so, insert the SD card into the iOBC’s first SD card
+slot while the board is <strong>not powered</strong>.</p>
+<p>After new files have been loaded, the board will need to be powered off and back
+on again in order to go through the normal boot process.</p>
+</div>
+<div class="section" id="using-kubos-linux">
+<h2>Using Kubos Linux<a class="headerlink" href="#using-kubos-linux" title="Permalink to this headline">¶</a></h2>
+<p>For information on how to create and run applications on your new Kubos Linux system, see the
+<a class="reference internal" href="working-with-the-iobc.html"><span class="doc">Working with the ISIS-OBC</span></a> guide.</p>
+</div>
+<div class="section" id="non-default-installation-process">
+<h2>Non-Default Installation Process<a class="headerlink" href="#non-default-installation-process" title="Permalink to this headline">¶</a></h2>
+<p>There are alternate ways to install Kubos Linux onto the board, in case you want to create a custom
+installation, or are having issues with the default installation work flow.</p>
+<div class="section" id="alternate-sd-card-setup">
+<span id="alt-sd-setup"></span><h3>Alternate SD Card Setup<a class="headerlink" href="#alternate-sd-card-setup" title="Permalink to this headline">¶</a></h3>
+<p>If you do not have a Kubos Linux image, you can load the required files onto an SD card:</p>
+<blockquote>
+<div><ul>
+<li><p class="first">by using our flashing script</p>
+<p>or</p>
+</li>
+<li><p class="first">manually</p>
+</li>
+</ul>
+</div></blockquote>
+<div class="section" id="id2">
+<h4>Pre-Requisites<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
+<p>Since you are not using a pre-built Kubos Linux image, you will need to go through the <a class="reference internal" href="../../deep-dive/klb/kubos-linux-on-iobc.html#build-os"><span class="std std-ref">OS build process</span></a>
+locally in order to create the kernel and rootfs files.</p>
+<p>In order to write the files to the SD card your build system needs be able to a)
+see the SD card device and b) read/write to multiple partitions.</p>
+<p>If you’re running Mac OS or Windows, you’ll need to pass the SD card through to
+your Vagrant box.</p>
+<ul class="simple">
+<li><a class="reference external" href="https://www.geekytidbits.com/mount-sd-card-virtualbox-from-mac-osx/">Mac OS X Instructions</a></li>
+<li><a class="reference external" href="http://rizwanansari.net/access-sd-card-on-linux-from-windows-using-virtualbox/">Windows Instructions</a></li>
+</ul>
+<p>If you’re running Linux, you can either pass through the SD card to your Vagrant
+box via the VirtualBox Manager, or run the whole build process natively.</p>
+</div>
+<div class="section" id="get-the-device-name">
+<h4>Get the Device Name<a class="headerlink" href="#get-the-device-name" title="Permalink to this headline">¶</a></h4>
+<p>To start, find the name of your SD card in your system:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo fdisk -l
+</pre></div>
+</div>
+<p>You should see a device that looks like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Disk</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">sdb</span><span class="p">:</span> <span class="mf">3.8</span> <span class="n">GiB</span><span class="p">,</span> <span class="mi">4025483264</span> <span class="nb">bytes</span><span class="p">,</span> <span class="mi">7862272</span> <span class="n">sectors</span>
+<span class="n">Units</span><span class="p">:</span> <span class="n">sectors</span> <span class="n">of</span> <span class="mi">1</span> <span class="o">*</span> <span class="mi">512</span> <span class="o">=</span> <span class="mi">512</span> <span class="nb">bytes</span>
+<span class="n">Sector</span> <span class="n">size</span> <span class="p">(</span><span class="n">logical</span><span class="o">/</span><span class="n">physical</span><span class="p">):</span> <span class="mi">512</span> <span class="nb">bytes</span> <span class="o">/</span> <span class="mi">512</span> <span class="nb">bytes</span>
+<span class="n">I</span><span class="o">/</span><span class="n">O</span> <span class="n">size</span> <span class="p">(</span><span class="n">minimum</span><span class="o">/</span><span class="n">optimal</span><span class="p">):</span> <span class="mi">512</span> <span class="nb">bytes</span> <span class="o">/</span> <span class="mi">512</span> <span class="nb">bytes</span>
+<span class="n">Disklabel</span> <span class="nb">type</span><span class="p">:</span> <span class="n">dos</span>
+<span class="n">Disk</span> <span class="n">identifier</span><span class="p">:</span> <span class="mh">0xf39e6ab1</span>
+</pre></div>
+</div>
+<p>In this example ‘/dev/sdb’ is the name of the SD card. You might also see
+‘/dev/mmcblk0’. You’ll need to use this name in all future commands.</p>
+</div>
+<div class="section" id="method-1-run-the-formatting-flashing-script">
+<h4>Method 1: Run the Formatting/Flashing Script<a class="headerlink" href="#method-1-run-the-formatting-flashing-script" title="Permalink to this headline">¶</a></h4>
+<p>A script is available to format the SD card and then load the latest
+Kubos Linux kernel and root filesystem.</p>
+<p>Navigate to the ‘kubos-linux-build/tools’ directory.</p>
+<p>Run the <code class="docutils literal notranslate"><span class="pre">format-sd.sh</span></code> script. You might need to run as root to get
+permissions for certain steps.</p>
+<p>The script has optional parameters:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">-d</span> <span class="pre">{device}</span></code> - Specify the name of the SD card device. The default is
+‘/dev/sdb’</li>
+<li><code class="docutils literal notranslate"><span class="pre">-s</span> <span class="pre">{size}</span></code> - Size, in MB, of the SD card. The default is 4000 (4GB).</li>
+<li><code class="docutils literal notranslate"><span class="pre">-w</span></code> - Specify that the SD card should be wiped before formatting. Useful
+if there was any data previously on the card. <strong>Note</strong> Wiping a 4GB SD card
+takes about 10 minutes.</li>
+<li><code class="docutils literal notranslate"><span class="pre">-p</span></code> - Specify that existing kpack-base.itb and kernel files should be
+copied into the appropriate partitions</li>
+<li><code class="docutils literal notranslate"><span class="pre">-pp</span></code> - Specify that the kpack-base.itb and kernel files should be built
+and then copied to their partitions</li>
+<li><code class="docutils literal notranslate"><span class="pre">-ppp</span></code> - Specify that the SD card should not be formatted. Only build and
+copy the kpack and kernel files.</li>
+<li><code class="docutils literal notranslate"><span class="pre">-b</span> <span class="pre">{branch}</span></code> - Specify the branch name of U-Boot that has been built. The
+default is ‘master’. This option should not need to be used outside of
+development.</li>
+</ul>
+<p>So if I wanted to wipe my SD card and then build and load the new kernel files,
+I would run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ./format-sd.sh -wpp
+</pre></div>
+</div>
+<p>Once the script has finished successfully, the SD card is ready to be inserted
+into the iOBC’s SD Card 0 slot.</p>
+</div>
+<div class="section" id="method-2-manual-format-flash-process">
+<h4>Method 2: Manual Format/Flash Process<a class="headerlink" href="#method-2-manual-format-flash-process" title="Permalink to this headline">¶</a></h4>
+<p>If for some reason you’d like to format the SD card and load the bare minimum
+files onto it manually, follow this process.</p>
+<div class="section" id="partition-the-sd-card">
+<h5>Partition the SD Card<a class="headerlink" href="#partition-the-sd-card" title="Permalink to this headline">¶</a></h5>
+<p>First, you’ll need to set up the partitions on the SD card (for readability,
+we’ll be using device name ‘/dev/sdb’. Be sure to replace with the device name
+of your SD card):</p>
+<p>Create a partition table</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo parted /dev/sdb mklabel msdos y
+</pre></div>
+</div>
+<p>Create the partitions</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo parted /dev/sdb mkpart primary ext4 4M 3856M
+$ sudo parted /dev/sdb mkpart extended 3856M 3996M
+$ sudo parted /dev/sdb mkpart logical fat16 3856M 3876M
+$ sudo parted /dev/sdb mkpart logical ext4 3876M 3896M
+$ sudo parted /dev/sdb mkpart logical ext4 3896M 3996M
+</pre></div>
+</div>
+<p>Configure the partitions (ex. /dev/sdb1)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo mkfs.ext4 /dev/sdb1
+$ sudo mkfs.fat /dev/sdb5
+$ sudo mkfs.ext4 /dev/sdb6
+$ sudo mkfs.ext4 /dev/sdb7
+</pre></div>
+</div>
+</div>
+<div class="section" id="create-the-kernel-file">
+<h5>Create the Kernel File<a class="headerlink" href="#create-the-kernel-file" title="Permalink to this headline">¶</a></h5>
+<p>The BuildRoot build process creates the zImage file, which is a self-extracting
+kernel image. In order to help detect corruption, we package that into an
+*.itb file, which includes a checksum value that can be validated during boot time.</p>
+<p>Navigate to your ‘kubos-linux-build’ folder and open the ‘tools’ directory.</p>
+<p>Run the <code class="docutils literal notranslate"><span class="pre">kubos-kernel.sh</span></code> script.</p>
+<p>The script has optional parameters (which are unlikely to be needed):</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">-i</span> <span class="pre">{input-file}</span></code> - Specify the name of the
+*.its file to use. This file describes the files that will be packaged and their usage configuration options. The default is ‘kubos-kernel.its’, which should also be located in the ‘tools’ directory.</li>
+<li><code class="docutils literal notranslate"><span class="pre">-b</span> <span class="pre">{branch}</span></code> - Specify the branch name of U-Boot that has been built.
+The default is ‘master’. This option should not need to be used outside of
+development.</li>
+</ul>
+<p>The script will create the ‘kubos-kernel.itb’ file.</p>
+</div>
+<div class="section" id="copy-the-files">
+<h5>Copy the files<a class="headerlink" href="#copy-the-files" title="Permalink to this headline">¶</a></h5>
+<p>Next, you’ll need to copy the kernel file into the boot partition and the rootfs
+into the rootfs partition</p>
+<p>From your project folder:</p>
+<p>Create mount folders</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ mkdir boot
+$ mkdir rootfs
+</pre></div>
+</div>
+<p>Mount the partitions (replace ‘/dev/sdb’ with the name of your SD card device)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo mount /dev/sdb5 boot
+$ sudo mount /dev/sdb6 rootfs
+</pre></div>
+</div>
+<p>Copy the kubos-kernel.itb file into partition 5. It will need to be renamed to
+‘kernel’.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo cp buildroot-2019.02.2/output/images/kubos-kernel.itb boot/kernel
+</pre></div>
+</div>
+<p>Untar the rootfs into partition 6</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo tar -xvf buildroot-2019.02.2/output/images/rootfs.tar -C rootfs
+</pre></div>
+</div>
+<p>Unmount the partitions</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo umount /dev/sdb5
+$ sudo umount /dev/sdb6
+</pre></div>
+</div>
+<p>Remove the SD card and insert it into iOBC SD card slot 0.</p>
+</div>
+</div>
+</div>
+<div class="section" id="alternate-nor-flash-setup">
+<span id="alt-nor-setup"></span><h3>Alternate NOR Flash Setup<a class="headerlink" href="#alternate-nor-flash-setup" title="Permalink to this headline">¶</a></h3>
+<p>You must still use the Atmel SAM-BA software on a Windows machine in order to flash the required files
+into the iOBC NOR flash. However, you can use the SAM-BA software directly to do so, rather than using
+the previously provided script.</p>
+<div class="section" id="id3">
+<h4>Pre-Requisites<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
+<ol class="arabic">
+<li><p class="first">Obtain an <a class="reference external" href="https://www.microchip.com/DevelopmentTools/ProductDetails/AT91SAM-ICE">Atmel SAM-ICE programmer/debugger</a>.</p>
+</li>
+<li><p class="first">Install programming drivers from <a class="reference external" href="https://www.segger.com/jlink-software.html">https://www.segger.com/jlink-software.html</a>.</p>
+</li>
+<li><p class="first">Install FTDI USB-to-serial drivers from <a class="reference external" href="http://www.ftdichip.com/Drivers/VCP.htm">http://www.ftdichip.com/Drivers/VCP.htm</a></p>
+</li>
+<li><p class="first">Install SAM-BA from the ISIS-OBC SDK installer.
+(Refer to Section 3.3 of the <cite>ISIS-OBC Quick Start Guide</cite>)</p>
+<p><strong>Note:</strong> You must use the ISIS version of SAM-BA, rather than the default
+Atmel installation. It includes several configuration files that are required
+to connect to the iOBC.</p>
+</li>
+<li><p class="first">Setup the iOBC board for serial connection and programming. (Refer to
+Chapter 4 of the <cite>ISIS-OBC Quick Start Guide</cite>)</p>
+</li>
+<li><p class="first">Connect the programming and serial connection cables to your
+computer.</p>
+</li>
+</ol>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Make sure the red jumper on the programming board is in place; it bypasses
+the watchdog. If you don’t, the board will continually reboot and you won’t be
+able to flash anything.</p>
+</div>
+<ol class="arabic" start="7">
+<li><p class="first">Turn on the board.</p>
+</li>
+<li><p class="first">Obtain the NOR flash files either from Kubos, or from your own <a class="reference internal" href="../../deep-dive/klb/kubos-linux-on-iobc.html#build-os"><span class="std std-ref">local build</span></a>:</p>
+<blockquote>
+<div><ul class="simple">
+<li>u-boot.bin</li>
+<li>at91sam9g20isis.dtb</li>
+</ul>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="id4">
+<h4>Boot into U-Boot<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h4>
+<p><strong>(Skip this section if you’ve never put Linux on your board before)</strong></p>
+<p>If you already have Linux running on your board, you’ll need to boot into the
+U-Boot console rather than the Linux console in order to be able to flash the
+board.</p>
+<p>You’ll need to establish a serial connection with the board in order to connect
+to the console.</p>
+<p>You can do this via a Kubos Vagrant image with the <code class="docutils literal notranslate"><span class="pre">minicom</span> <span class="pre">kubos</span></code> command
+after booting the board.</p>
+<p>The default login information for an iOBC is kubos/Kubos123.</p>
+<p>Issue the <code class="docutils literal notranslate"><span class="pre">reboot</span></code> command in order to restart the system.</p>
+<p>Hold down any key while the board is restarting. This will exit out of the auto-boot and
+bring up the CLI.</p>
+<div class="figure" id="id8">
+<img alt="U-Boot Console" src="../../_images/uboot_console.png" />
+<p class="caption"><span class="caption-text">U-Boot Console</span></p>
+</div>
+<p>The board is now ready to be flashed.</p>
+</div>
+<div class="section" id="installation">
+<h4>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="start-sam-ba">
+<h5>Start SAM-BA<a class="headerlink" href="#start-sam-ba" title="Permalink to this headline">¶</a></h5>
+<p>Start up SAM-BA. You’ll want to select the at91sam9g20-ISISOBC option from the
+‘Select your board’ drop-down.</p>
+<div class="figure" id="id9">
+<img alt="SAM-BA Connection Selection" src="../../_images/samba_connection_select.png" />
+<p class="caption"><span class="caption-text">SAM-BA Connection Selection</span></p>
+</div>
+</div>
+<div class="section" id="enable-flashing">
+<h5>Enable Flashing<a class="headerlink" href="#enable-flashing" title="Permalink to this headline">¶</a></h5>
+<p>Execute the ‘Enable NorFlash’ script. This will prep the board to enable
+flashing.</p>
+<div class="figure" id="id10">
+<img alt="SAM-BA Enable NorFlash" src="../../_images/samba_enable_norflash.png" />
+<p class="caption"><span class="caption-text">SAM-BA Enable NorFlash</span></p>
+</div>
+</div>
+<div class="section" id="flash-u-boot">
+<h5>Flash U-Boot<a class="headerlink" href="#flash-u-boot" title="Permalink to this headline">¶</a></h5>
+<p>Select the uboot.bin file in the ‘Send File Name’ field.</p>
+<p>Make sure that ‘Address’ is set to 0xA000.</p>
+<p>Click ‘Send File’</p>
+<div class="figure" id="id11">
+<img alt="SAM-BA Send U-Boot" src="../../_images/samba_send_uboot.png" />
+<p class="caption"><span class="caption-text">SAM-BA Send U-Boot</span></p>
+</div>
+<p>Click ‘Compare sent file with memory’ after the file transfer has completed to confirm
+that all data was sent successfully.</p>
+</div>
+<div class="section" id="flash-device-tree">
+<h5>Flash Device Tree<a class="headerlink" href="#flash-device-tree" title="Permalink to this headline">¶</a></h5>
+<p>Select the at91sam9g20isis.dtb file in the ‘Send File Name’ field (you’ll need
+to view all file types in order to see the .dtb file)</p>
+<p>Set ‘Address’ to 0x70000.</p>
+<p>Click ‘Send File’</p>
+<div class="figure" id="id12">
+<img alt="SAM-BA Send DTB" src="../../_images/samba_send_dtb.png" />
+<p class="caption"><span class="caption-text">SAM-BA Send DTB</span></p>
+</div>
+<p>Click ‘Compare sent file with memory’ after the file transfer has completed to confirm
+that all data was sent successfully.</p>
+</div>
+</div>
+</div>
+<div class="section" id="id5">
+<h3>Reboot the System<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<p>After new files have been loaded, the board will need to be powered off and back
+on again in order to go through the normal boot process.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="working-with-the-iobc.html" class="btn btn-neutral float-right" title="Working with the ISIS-OBC" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="KubOS for the ISIS-OBC" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

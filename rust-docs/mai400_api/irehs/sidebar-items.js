@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["IREHSTelemetry","IR Earth Horizon Sensor telemetry data"],["ThermopileFlags","Thermopile error flags"]]});

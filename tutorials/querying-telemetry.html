@@ -1,0 +1,495 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Fetching Telemetry Data &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../index.html"/>
+        <link rel="up" title="Tutorials" href="index.html"/>
+        <link rel="next" title="Transferring Files to an OBC" href="file-transfer.html"/>
+        <link rel="prev" title="Scheduling a Mission Application’s Execution" href="schedule-app.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#mission-development-tutorials">Mission Development Tutorials</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#system-interaction-tutorials">System Interaction Tutorials</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="app-register.html">Registering an Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="schedule-app.html">Scheduling an Application</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Querying the System</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#setup">Setup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#graphiql">GraphiQL</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#schema">Schema</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#querying-a-specific-subsystem">Querying a Specific Subsystem</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#querying-a-time-frame">Querying a Time Frame</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#limiting-the-results">Limiting the Results</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="file-transfer.html">Transferring Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="shell.html">Creating a Shell Connection</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#advanced-tutorials">Advanced Tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#other-resources">Other Resources</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../obc-docs/index.html">Working with an OBC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ecosystem/index.html">KubOS Ecosystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deep-dive/index.html">Under the Hood</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sdk-docs/index.html">Kubos SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing to KubOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Tutorials</a> &raquo;</li>
+        
+      <li>Fetching Telemetry Data</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/tutorials/querying-telemetry.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="fetching-telemetry-data">
+<h1>Fetching Telemetry Data<a class="headerlink" href="#fetching-telemetry-data" title="Permalink to this headline">¶</a></h1>
+<p>At some point, users will want to fetch data which was written to the telemetry database
+(for an example of this, see the <a class="reference internal" href="first-mission-app.html"><span class="doc">mission application</span></a> tutorial).</p>
+<p>This tutorial will walk the user through the process of communicating with the
+<a class="reference internal" href="../ecosystem/services/telemetry-db.html"><span class="doc">telemetry database service</span></a> in order to retrieve a desired set of
+telemetry information.</p>
+<div class="section" id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="../sdk-docs/sdk-installing.html"><span class="doc">Install the Kubos SDK</span></a> or set up the dependencies required for a
+<a class="reference internal" href="../getting-started/local-setup.html"><span class="doc">local dev environment</span></a></p>
+<p>If you have not done so already, create a clone of the <a class="reference external" href="https://github.com/kubos/kubos">KubOS source repo</a>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git clone https://github.com/kubos/kubos
+</pre></div>
+</div>
+<p><strong>If you are using the SDK</strong>, update all IP addresses in the <code class="docutils literal notranslate"><span class="pre">tools/local_config.toml</span></code> file,
+changing them from <code class="docutils literal notranslate"><span class="pre">127.0.0.1</span></code> to <code class="docutils literal notranslate"><span class="pre">0.0.0.0</span></code>, so that they are available <a class="reference internal" href="../sdk-docs/sdk-installing.html#sdk-port-forward"><span class="std std-ref">to your host machine</span></a>.</p>
+<p>Navigate to the <cite>kubos</cite> source directory and run the following commands to start the telemetry
+database service in the background (the services may need to be built first, which will take several
+minutes to complete):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cargo run --bin telemetry-service -- -c tools/local_config.toml &amp;
+</pre></div>
+</div>
+<p>In order to have something to query, we’ll need to seed the database.
+We’ll use <code class="docutils literal notranslate"><span class="pre">curl</span></code> to create some HTTP requests which will add data points to the telemetry
+database.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The example commands will be referencing the telemetry database service port which is defined
+in the <cite>kubos/tools/local_config.toml</cite> file, 8020</p>
+</div>
+<p>From your development environment, run the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ curl 0.0.0.0:8020 -H &quot;Content-Type: application/json&quot; --data &quot;{\&quot;query\&quot;:\&quot;mutation {insert(subsystem:\\\&quot;eps\\\&quot;,parameter:\\\&quot;voltage\\\&quot;,value:\\\&quot;5.0\\\&quot;){success}}\&quot;}&quot;
+$ curl 0.0.0.0:8020 -H &quot;Content-Type: application/json&quot; --data &quot;{\&quot;query\&quot;:\&quot;mutation {insert(subsystem:\\\&quot;eps\\\&quot;,parameter:\\\&quot;voltage\\\&quot;,value:\\\&quot;5.0\\\&quot;){success}}\&quot;}&quot;
+$ curl 0.0.0.0:8020 -H &quot;Content-Type: application/json&quot; --data &quot;{\&quot;query\&quot;:\&quot;mutation {insert(subsystem:\\\&quot;eps\\\&quot;,parameter:\\\&quot;current\\\&quot;,value:\\\&quot;0.1\\\&quot;){success}}\&quot;}&quot;
+$ curl 0.0.0.0:8020 -H &quot;Content-Type: application/json&quot; --data &quot;{\&quot;query\&quot;:\&quot;mutation {insert(subsystem:\\\&quot;eps\\\&quot;,parameter:\\\&quot;current\\\&quot;,value:\\\&quot;0.1\\\&quot;){success}}\&quot;}&quot;
+$ curl 0.0.0.0:8020 -H &quot;Content-Type: application/json&quot; --data &quot;{\&quot;query\&quot;:\&quot;mutation {insert(subsystem:\\\&quot;gps\\\&quot;,parameter:\\\&quot;voltage\\\&quot;,value:\\\&quot;3.3\\\&quot;){success}}\&quot;}&quot;
+</pre></div>
+</div>
+<p>Each of these commands should return the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s2">&quot;data&quot;</span><span class="p">:{</span><span class="s2">&quot;insert&quot;</span><span class="p">:{</span><span class="s2">&quot;success&quot;</span><span class="p">:</span><span class="n">true</span><span class="p">}}}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="graphiql">
+<h2>GraphiQL<a class="headerlink" href="#graphiql" title="Permalink to this headline">¶</a></h2>
+<p>Please navigate to <code class="docutils literal notranslate"><span class="pre">http://0.0.0.0:8020/graphiql</span></code> in order to communicate with the telemetry service
+for this tutorial.
+If you are using the SDK, replace <code class="docutils literal notranslate"><span class="pre">0.0.0.0</span></code> with the <a class="reference internal" href="../sdk-docs/sdk-installing.html#sdk-port-forward"><span class="std std-ref">IP address you defined</span></a>
+for your VM.</p>
+<p>More information about the GraphiQL interface can be found <a class="reference internal" href="app-register.html#graphiql"><span class="std std-ref">here</span></a>.</p>
+</div>
+<div class="section" id="schema">
+<h2>Schema<a class="headerlink" href="#schema" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">telemetry</span></code> query can be used to fetch a certain selection of data from the telemetry database.
+It will return an array of database entries.</p>
+<p>The query has the following schema:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>query {
+    telemetry(timestampGe: Float, timestampLe: Float, subsystem: String, parameter: String, parameters: [String], limit: Integer): [{
+        timestamp: Float!
+        subsystem: String!
+        parameter: String!
+        value: String!
+    }]
+}
+</pre></div>
+</div>
+<p>Each of the input arguments acts as a filter for the database query:</p>
+<blockquote>
+<div><ul class="simple">
+<li>timestampGe - Return entries with timestamps occurring on or after the given value</li>
+<li>timestampLe - Return entries with timestamps occurring on or before the given value</li>
+<li>subsystem - Return entries which match the given subsystem name</li>
+<li>parameter - (Mutually exlusive with <code class="docutils literal notranslate"><span class="pre">parameters</span></code>) Return entries which match the given
+parameter name</li>
+<li>parameters - (Mutually exlusive with <code class="docutils literal notranslate"><span class="pre">parameter</span></code>) Return entries which match any of the
+given parameter names</li>
+<li>limit - Return only the first <cite>n</cite> entries found</li>
+</ul>
+</div></blockquote>
+<p>Using the <code class="docutils literal notranslate"><span class="pre">telemetry</span></code> query without specifying any of the input arguments will result in all
+entries in the telemetry database being returned.</p>
+<p>The query returns an array of entries, each of which has the following response fields:</p>
+<blockquote>
+<div><ul class="simple">
+<li>timestamp - The system time when the entry was recorded, in milliseconds since UNIX epoch</li>
+<li>subsystem - The subsystem which generated the entry data</li>
+<li>parameter - The specific data point the entry corresponds to</li>
+<li>value - The value of the data point</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="querying-a-specific-subsystem">
+<h2>Querying a Specific Subsystem<a class="headerlink" href="#querying-a-specific-subsystem" title="Permalink to this headline">¶</a></h2>
+<p>In order to return only telemetry generated by a specific subsystem, we’ll send a query using the
+<code class="docutils literal notranslate"><span class="pre">subsystem</span></code> input parameter.</p>
+<p>For example, to get only telemetry from our (fake) EPS subsystem, we’ll send the following query:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="n">telemetry</span><span class="p">(</span><span class="n">subsystem</span><span class="p">:</span> <span class="s2">&quot;eps&quot;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">timestamp</span>
+    <span class="n">subsystem</span>
+    <span class="n">parameter</span>
+    <span class="n">value</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The request should return something like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;telemetry&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="mf">730.855591753</span><span class="p">,</span>
+        <span class="s2">&quot;subsystem&quot;</span><span class="p">:</span> <span class="s2">&quot;eps&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;parameter&quot;</span><span class="p">:</span> <span class="s2">&quot;current&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;0.1&quot;</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="mf">730.21144042</span><span class="p">,</span>
+        <span class="s2">&quot;subsystem&quot;</span><span class="p">:</span> <span class="s2">&quot;eps&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;parameter&quot;</span><span class="p">:</span> <span class="s2">&quot;current&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;0.1&quot;</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="mf">721.187618335</span><span class="p">,</span>
+        <span class="s2">&quot;subsystem&quot;</span><span class="p">:</span> <span class="s2">&quot;eps&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;parameter&quot;</span><span class="p">:</span> <span class="s2">&quot;voltage&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;5.0&quot;</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="mf">688.450861332</span><span class="p">,</span>
+        <span class="s2">&quot;subsystem&quot;</span><span class="p">:</span> <span class="s2">&quot;eps&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;parameter&quot;</span><span class="p">:</span> <span class="s2">&quot;voltage&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;5.0&quot;</span>
+      <span class="p">}</span>
+    <span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="querying-a-time-frame">
+<h2>Querying a Time Frame<a class="headerlink" href="#querying-a-time-frame" title="Permalink to this headline">¶</a></h2>
+<p>If we want to fetch the telemetry from a particular time frame, for example all telemetry occurring
+between 1pm and 2pm, we’ll use a combination of the <code class="docutils literal notranslate"><span class="pre">timestampGe</span></code> and <code class="docutils literal notranslate"><span class="pre">timestampLe</span></code> input
+arguments.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">In order to select a timeframe, it is helpful to know the current system time.
+This can be found by running the following command on the OBC: <code class="docutils literal notranslate"><span class="pre">date</span> <span class="pre">+%s</span></code>.
+The command gets the current number of seconds since UNIX epoch, which matches the telemetry
+timestamp units.</p>
+</div>
+<p>Our request should look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="n">telemetry</span><span class="p">(</span><span class="n">timestampGe</span><span class="p">:</span> <span class="mf">730.0</span><span class="p">,</span> <span class="n">timestampLe</span><span class="p">:</span> <span class="mf">731.0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">timestamp</span>
+    <span class="n">subsystem</span>
+    <span class="n">parameter</span>
+    <span class="n">value</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This queries the system for telemetry in a 1 second window between 730 and 731, inclusive.
+You will need to update the query for your specific timestamp range.</p>
+<p>The response should look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;telemetry&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="mf">730.855591753</span><span class="p">,</span>
+        <span class="s2">&quot;subsystem&quot;</span><span class="p">:</span> <span class="s2">&quot;eps&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;parameter&quot;</span><span class="p">:</span> <span class="s2">&quot;current&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;0.1&quot;</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="mf">730.21144042</span><span class="p">,</span>
+        <span class="s2">&quot;subsystem&quot;</span><span class="p">:</span> <span class="s2">&quot;eps&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;parameter&quot;</span><span class="p">:</span> <span class="s2">&quot;current&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;0.1&quot;</span>
+      <span class="p">}</span>
+    <span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="limiting-the-results">
+<h2>Limiting the Results<a class="headerlink" href="#limiting-the-results" title="Permalink to this headline">¶</a></h2>
+<p>Let’s say we only want to know the most recent voltage reading from our EPS subsystem.</p>
+<p>We’ll specify the <code class="docutils literal notranslate"><span class="pre">subsystem</span></code> and <code class="docutils literal notranslate"><span class="pre">parameter</span></code> input argument to narrow the filters down to the
+subsystem and parameter we want.
+We’ll then also use the <code class="docutils literal notranslate"><span class="pre">limit</span></code> input argument to tell the telemetry database service to only
+return the single most-recent entry.</p>
+<p>Our request should look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="n">telemetry</span><span class="p">(</span><span class="n">subsystem</span><span class="p">:</span> <span class="s2">&quot;eps&quot;</span><span class="p">,</span> <span class="n">parameter</span><span class="p">:</span> <span class="s2">&quot;voltage&quot;</span><span class="p">,</span> <span class="n">limit</span><span class="p">:</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">timestamp</span>
+    <span class="n">subsystem</span>
+    <span class="n">parameter</span>
+    <span class="n">value</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The response should look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;telemetry&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="mf">1573594014.6698866</span><span class="p">,</span>
+        <span class="s2">&quot;subsystem&quot;</span><span class="p">:</span> <span class="s2">&quot;eps&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;parameter&quot;</span><span class="p">:</span> <span class="s2">&quot;voltage&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;5.0&quot;</span>
+      <span class="p">}</span>
+    <span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="file-transfer.html" class="btn btn-neutral float-right" title="Transferring Files to an OBC" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="schedule-app.html" class="btn btn-neutral" title="Scheduling a Mission Application’s Execution" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

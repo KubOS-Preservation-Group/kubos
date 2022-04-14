@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["Type","Reset Telemetry Variants"]],"fn":[["command","Helper function storing telemetry command information"],["parse","Parses ResetTelemetry message"]],"struct":[["Data","Common Reset Telemetry Structure"]]});

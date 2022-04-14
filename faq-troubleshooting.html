@@ -1,0 +1,439 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Kubos FAQs and Troubleshooting Tips &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="index.html"/>
+        <link rel="prev" title="Kubos Changelog" href="changelog.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="getting-started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="obc-docs/index.html">Working with an OBC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ecosystem/index.html">KubOS Ecosystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deep-dive/index.html">Under the Hood</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sdk-docs/index.html">Kubos SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing/index.html">Contributing to KubOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">FAQs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#faqs">FAQs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#how-do-i-contact-y-all">How do I contact y’all?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-do-i-set-up-the-kubos-sdk">How do I set up the Kubos SDK?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-do-i-check-if-i-m-using-the-latest-version-of-the-kubos-vagrant-image">How do I check if I’m using the latest version of the Kubos Vagrant image?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-do-i-get-the-latest-version-of-the-kubos-vagrant-image">How do I get the latest version of the Kubos Vagrant image?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-do-i-see-the-debug-output-of-my-board">How do I see the debug output of my board?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-do-i-check-what-version-of-kubos-linux-i-m-running">How do I check what version of Kubos Linux I’m running?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#what-s-the-default-kubos-linux-login">What’s the default Kubos Linux login?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-do-i-make-rust-binaries-smaller">How do I make Rust binaries smaller?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#updating-my-local-rust-installation">Updating my local Rust installation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#troubleshooting">Troubleshooting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#kubos-sdk">Kubos SDK</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#the-vagrant-up-command-just-hangs">The <code class="docutils literal notranslate"><span class="pre">vagrant</span> <span class="pre">up</span></code> command just hangs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#i-ve-tried-other-steps-here-but-my-kubos-vagrant-image-is-still-behaving-weirdly">I’ve tried other steps here, but my Kubos Vagrant image is still behaving weirdly.</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#i-can-t-build-my-project-i-keep-getting-permission-denied-errors">I can’t build my project. I keep getting “Permission denied” errors</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#interacting-with-an-obc">Interacting with an OBC</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#can-t-connect-via-serial-debug">Can’t Connect via Serial Debug</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#can-t-connect-via-ssh">Can’t Connect via SSH</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#system-won-t-boot-into-linux">System Won’t Boot into Linux</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#the-obc-is-booting-from-the-emmc-instead-of-the-microsd-when-upgrading">The OBC is Booting from the eMMC Instead of the microSD when Upgrading</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#i-transferred-a-script-but-it-won-t-run">I transferred a script, but it won’t run</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Kubos FAQs and Troubleshooting Tips</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/faq-troubleshooting.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="kubos-faqs-and-troubleshooting-tips">
+<h1>Kubos FAQs and Troubleshooting Tips<a class="headerlink" href="#kubos-faqs-and-troubleshooting-tips" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#faqs" id="id1">FAQs</a><ul>
+<li><a class="reference internal" href="#how-do-i-contact-y-all" id="id2">How do I contact y’all?</a></li>
+<li><a class="reference internal" href="#how-do-i-set-up-the-kubos-sdk" id="id3">How do I set up the Kubos SDK?</a></li>
+<li><a class="reference internal" href="#how-do-i-check-if-i-m-using-the-latest-version-of-the-kubos-vagrant-image" id="id4">How do I check if I’m using the latest version of the Kubos Vagrant image?</a></li>
+<li><a class="reference internal" href="#how-do-i-get-the-latest-version-of-the-kubos-vagrant-image" id="id5">How do I get the latest version of the Kubos Vagrant image?</a></li>
+<li><a class="reference internal" href="#how-do-i-see-the-debug-output-of-my-board" id="id6">How do I see the debug output of my board?</a></li>
+<li><a class="reference internal" href="#how-do-i-check-what-version-of-kubos-linux-i-m-running" id="id7">How do I check what version of Kubos Linux I’m running?</a></li>
+<li><a class="reference internal" href="#what-s-the-default-kubos-linux-login" id="id8">What’s the default Kubos Linux login?</a></li>
+<li><a class="reference internal" href="#how-do-i-make-rust-binaries-smaller" id="id9">How do I make Rust binaries smaller?</a></li>
+<li><a class="reference internal" href="#updating-my-local-rust-installation" id="id10">Updating my local Rust installation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#troubleshooting" id="id11">Troubleshooting</a><ul>
+<li><a class="reference internal" href="#kubos-sdk" id="id12">Kubos SDK</a><ul>
+<li><a class="reference internal" href="#the-vagrant-up-command-just-hangs" id="id13">The <code class="docutils literal notranslate"><span class="pre">vagrant</span> <span class="pre">up</span></code> command just hangs</a></li>
+<li><a class="reference internal" href="#i-ve-tried-other-steps-here-but-my-kubos-vagrant-image-is-still-behaving-weirdly" id="id14">I’ve tried other steps here, but my Kubos Vagrant image is still behaving weirdly.</a></li>
+<li><a class="reference internal" href="#i-can-t-build-my-project-i-keep-getting-permission-denied-errors" id="id15">I can’t build my project. I keep getting “Permission denied” errors</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#interacting-with-an-obc" id="id16">Interacting with an OBC</a><ul>
+<li><a class="reference internal" href="#can-t-connect-via-serial-debug" id="id17">Can’t Connect via Serial Debug</a></li>
+<li><a class="reference internal" href="#can-t-connect-via-ssh" id="id18">Can’t Connect via SSH</a></li>
+<li><a class="reference internal" href="#system-won-t-boot-into-linux" id="id19">System Won’t Boot into Linux</a></li>
+<li><a class="reference internal" href="#the-obc-is-booting-from-the-emmc-instead-of-the-microsd-when-upgrading" id="id20">The OBC is Booting from the eMMC Instead of the microSD when Upgrading</a></li>
+<li><a class="reference internal" href="#i-transferred-a-script-but-it-won-t-run" id="id21">I transferred a script, but it won’t run</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="faqs">
+<h2><a class="toc-backref" href="#id1">FAQs</a><a class="headerlink" href="#faqs" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="how-do-i-contact-y-all">
+<h3><a class="toc-backref" href="#id2">How do I contact y’all?</a><a class="headerlink" href="#how-do-i-contact-y-all" title="Permalink to this headline">¶</a></h3>
+<p>Our community Slack: <a class="reference external" href="https://slack.kubos.co">slack.kubos.co</a></p>
+<p>Our email: <a class="reference external" href="mailto:info&#37;&#52;&#48;kubos&#46;co">info<span>&#64;</span>kubos<span>&#46;</span>co</a></p>
+</div>
+<div class="section" id="how-do-i-set-up-the-kubos-sdk">
+<h3><a class="toc-backref" href="#id3">How do I set up the Kubos SDK?</a><a class="headerlink" href="#how-do-i-set-up-the-kubos-sdk" title="Permalink to this headline">¶</a></h3>
+<p>See <a class="reference internal" href="sdk-docs/sdk-installing.html"><span class="doc">Installing the Kubos SDK</span></a></p>
+</div>
+<div class="section" id="how-do-i-check-if-i-m-using-the-latest-version-of-the-kubos-vagrant-image">
+<h3><a class="toc-backref" href="#id4">How do I check if I’m using the latest version of the Kubos Vagrant image?</a><a class="headerlink" href="#how-do-i-check-if-i-m-using-the-latest-version-of-the-kubos-vagrant-image" title="Permalink to this headline">¶</a></h3>
+<p>From your host machine, issue the <code class="docutils literal notranslate"><span class="pre">vagrant</span> <span class="pre">box</span> <span class="pre">outdated</span></code> command.</p>
+</div>
+<div class="section" id="how-do-i-get-the-latest-version-of-the-kubos-vagrant-image">
+<h3><a class="toc-backref" href="#id5">How do I get the latest version of the Kubos Vagrant image?</a><a class="headerlink" href="#how-do-i-get-the-latest-version-of-the-kubos-vagrant-image" title="Permalink to this headline">¶</a></h3>
+<p>From your host machine, issue the <code class="docutils literal notranslate"><span class="pre">vagrant</span> <span class="pre">box</span> <span class="pre">update</span></code> command.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This will overwrite all files in your existing image</p>
+</div>
+</div>
+<div class="section" id="how-do-i-see-the-debug-output-of-my-board">
+<h3><a class="toc-backref" href="#id6">How do I see the debug output of my board?</a><a class="headerlink" href="#how-do-i-see-the-debug-output-of-my-board" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">minicom</span> <span class="pre">kubos</span></code></p>
+</div>
+<div class="section" id="how-do-i-check-what-version-of-kubos-linux-i-m-running">
+<h3><a class="toc-backref" href="#id7">How do I check what version of Kubos Linux I’m running?</a><a class="headerlink" href="#how-do-i-check-what-version-of-kubos-linux-i-m-running" title="Permalink to this headline">¶</a></h3>
+<p>Issue the <code class="docutils literal notranslate"><span class="pre">uname</span> <span class="pre">-r</span></code> command on the target board to display the kernel information.
+The Kubos Linux version will be the <em>n.n.n</em> number after “KubOS”.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">uname</span> <span class="o">-</span><span class="n">r</span>
+<span class="mf">4.4</span><span class="o">.</span><span class="mi">23</span><span class="o">-</span><span class="n">KubOS</span><span class="o">-</span><span class="mf">1.0</span><span class="o">.</span><span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="what-s-the-default-kubos-linux-login">
+<h3><a class="toc-backref" href="#id8">What’s the default Kubos Linux login?</a><a class="headerlink" href="#what-s-the-default-kubos-linux-login" title="Permalink to this headline">¶</a></h3>
+<p>kubos/Kubos123</p>
+</div>
+<div class="section" id="how-do-i-make-rust-binaries-smaller">
+<h3><a class="toc-backref" href="#id9">How do I make Rust binaries smaller?</a><a class="headerlink" href="#how-do-i-make-rust-binaries-smaller" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="getting-started/using-rust.html#rust-opt"><span class="std std-ref">Check out our Rust optimization tips</span></a> for suggestions on how to make your compiled
+Rust projects smaller.</p>
+</div>
+<div class="section" id="updating-my-local-rust-installation">
+<h3><a class="toc-backref" href="#id10">Updating my local Rust installation</a><a class="headerlink" href="#updating-my-local-rust-installation" title="Permalink to this headline">¶</a></h3>
+<p>We keep the KubOS repo locked to specific Rust version. When this version changes
+you will need to update your local Rust version. You can do so by looking at the Rust version
+that KubOS is locked to (<a class="reference external" href="https://github.com/kubos/kubos/blob/master/rust-toolchain">found here</a>)
+and using that version number in the following commands.</p>
+<p>Updating the native Rust toolchain:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ rustup toolchain install 1.xx.y-x86_64-unknown-linux-gnu
+</pre></div>
+</div>
+<p>Updating the Rust cross compiler targets:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ rustup target add armv5te-unknown-linux-gnueabi --toolchain 1.xx.y
+$ rustup target add arm-unknown-linux-gnueabihf --toolchain 1.xx.y
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="troubleshooting">
+<h2><a class="toc-backref" href="#id11">Troubleshooting</a><a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="kubos-sdk">
+<h3><a class="toc-backref" href="#id12">Kubos SDK</a><a class="headerlink" href="#kubos-sdk" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="the-vagrant-up-command-just-hangs">
+<h4><a class="toc-backref" href="#id13">The <code class="docutils literal notranslate"><span class="pre">vagrant</span> <span class="pre">up</span></code> command just hangs</a><a class="headerlink" href="#the-vagrant-up-command-just-hangs" title="Permalink to this headline">¶</a></h4>
+<p>If you’re using Windows 7 SP1, make sure you are using the <a class="reference internal" href="sdk-docs/sdk-installing.html#powershell"><span class="std std-ref">correct version of
+Windows PowerShell</span></a>.</p>
+</div>
+<div class="section" id="i-ve-tried-other-steps-here-but-my-kubos-vagrant-image-is-still-behaving-weirdly">
+<h4><a class="toc-backref" href="#id14">I’ve tried other steps here, but my Kubos Vagrant image is still behaving weirdly.</a><a class="headerlink" href="#i-ve-tried-other-steps-here-but-my-kubos-vagrant-image-is-still-behaving-weirdly" title="Permalink to this headline">¶</a></h4>
+<p>Try logging out and restarting the VM using the <code class="docutils literal notranslate"><span class="pre">vagrant</span> <span class="pre">reload</span></code> command.</p>
+</div>
+<div class="section" id="i-can-t-build-my-project-i-keep-getting-permission-denied-errors">
+<h4><a class="toc-backref" href="#id15">I can’t build my project. I keep getting “Permission denied” errors</a><a class="headerlink" href="#i-can-t-build-my-project-i-keep-getting-permission-denied-errors" title="Permalink to this headline">¶</a></h4>
+<p>If you copied your project from another location, it’s possible that the files are set up with root permissions
+only. Change the project file permissions to allow the local <code class="docutils literal notranslate"><span class="pre">vagrant</span></code> user to have access.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">chown</span> <span class="n">vagrant</span><span class="p">:</span><span class="n">vagrant</span> <span class="o">.</span> <span class="o">-</span><span class="n">R</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="interacting-with-an-obc">
+<h3><a class="toc-backref" href="#id16">Interacting with an OBC</a><a class="headerlink" href="#interacting-with-an-obc" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="can-t-connect-via-serial-debug">
+<h4><a class="toc-backref" href="#id17">Can’t Connect via Serial Debug</a><a class="headerlink" href="#can-t-connect-via-serial-debug" title="Permalink to this headline">¶</a></h4>
+<p>If the SDK was unable to connect to the Kubos Linux target using <code class="docutils literal notranslate"><span class="pre">minicom</span> <span class="pre">kubos</span></code>:</p>
+<ul class="simple">
+<li>Check that the Kubos Linux target is turned on and connected to your computer</li>
+<li>Check that no other Vagrant images are running. Only one VM can have
+control of the USB, so it may be that another instance currently has
+control of the device. You can shutdown a Vagrant image with the
+command <code class="docutils literal notranslate"><span class="pre">vagrant</span> <span class="pre">halt</span></code></li>
+<li>Verify that the USB is showing up within the Vagrant environment with
+the <code class="docutils literal notranslate"><span class="pre">lsusb</span></code> command. You should see an FTDI device</li>
+<li>Verify that the USB has been mapped to a linux device. Issue the
+command <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">/dev</span></code>. You should see a /dev/ttyUSB* device. If you
+don’t, try rebooting your Vagrant image (<code class="docutils literal notranslate"><span class="pre">vagrant</span> <span class="pre">halt</span></code>,
+<code class="docutils literal notranslate"><span class="pre">vagrant</span> <span class="pre">up</span></code>)</li>
+</ul>
+</div>
+<div class="section" id="can-t-connect-via-ssh">
+<h4><a class="toc-backref" href="#id18">Can’t Connect via SSH</a><a class="headerlink" href="#can-t-connect-via-ssh" title="Permalink to this headline">¶</a></h4>
+<p>Log in to the board via the debug UART and verify the IP address matches what is expected with <code class="docutils literal notranslate"><span class="pre">ipaddr</span></code>.</p>
+<p>For more information, check out our documentation about <a class="reference internal" href="obc-docs/comms-setup.html#ethernet"><span class="std std-ref">ethernet connections</span></a>.</p>
+</div>
+<div class="section" id="system-won-t-boot-into-linux">
+<h4><a class="toc-backref" href="#id19">System Won’t Boot into Linux</a><a class="headerlink" href="#system-won-t-boot-into-linux" title="Permalink to this headline">¶</a></h4>
+<p>If the system goes through the <a class="reference internal" href="ecosystem/linux-docs/kubos-linux-recovery.html"><span class="doc">full recovery process</span></a> and the bootcount is still exceeded,
+it will present the U-Boot CLI instead of attempting to boot into Kubos Linux again.</p>
+<p>If this occurs, follow the <a class="reference internal" href="ecosystem/linux-docs/kubos-linux-overview.html#env-reset"><span class="std std-ref">instructions for resetting the boot environment</span></a>.</p>
+<p>Note: This is a case which normal users should never encounter, but becomes more likely when initially testing
+custom Kubos Linux builds.</p>
+</div>
+<div class="section" id="the-obc-is-booting-from-the-emmc-instead-of-the-microsd-when-upgrading">
+<h4><a class="toc-backref" href="#id20">The OBC is Booting from the eMMC Instead of the microSD when Upgrading</a><a class="headerlink" href="#the-obc-is-booting-from-the-emmc-instead-of-the-microsd-when-upgrading" title="Permalink to this headline">¶</a></h4>
+<p>If you see errors, or the OBC seems to be booting from the eMMC instead of the microSD, make sure your microSD is being read correctly by running <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">mcc</span> <span class="pre">0:1</span></code> at the U-Boot prompt. You should see the boot partition files listed (kernel, {board}.dtb, etc). If you are presented with errors, check that the microSD card is seated properly in the SD card slot.</p>
+</div>
+<div class="section" id="i-transferred-a-script-but-it-won-t-run">
+<h4><a class="toc-backref" href="#id21">I transferred a script, but it won’t run</a><a class="headerlink" href="#i-transferred-a-script-but-it-won-t-run" title="Permalink to this headline">¶</a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">scp</span></code> does not preserve file modes by default, however <code class="docutils literal notranslate"><span class="pre">scp</span> <span class="pre">-p</span></code> should preserve
+the execute bit. Check that your file has the appropriate execute permissions turned on.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="changelog.html" class="btn btn-neutral" title="Kubos Changelog" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

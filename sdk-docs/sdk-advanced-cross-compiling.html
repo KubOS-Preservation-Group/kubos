@@ -1,0 +1,327 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Advanced Rust Cross Compiling &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../index.html"/>
+        <link rel="up" title="Kubos SDK Docs" href="index.html"/>
+        <link rel="next" title="Contributing to KubOS" href="../contributing/index.html"/>
+        <link rel="prev" title="Upgrading Your Kubos Development Environment" href="sdk-upgrading.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../obc-docs/index.html">Working with an OBC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ecosystem/index.html">KubOS Ecosystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deep-dive/index.html">Under the Hood</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Kubos SDK</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="sdk-installing.html">Installing the Kubos SDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sdk-rust.html">Using Rust with the Kubos SDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sdk-python.html">Using Python with the Kubos SDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sdk-c.html">Using C with the Kubos SDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sdk-upgrading.html">Upgrading the Kubos SDK</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Advanced Rust Cross Compiling</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing to KubOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Kubos SDK Docs</a> &raquo;</li>
+        
+      <li>Advanced Rust Cross Compiling</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/sdk-docs/sdk-advanced-cross-compiling.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="advanced-rust-cross-compiling">
+<h1>Advanced Rust Cross Compiling<a class="headerlink" href="#advanced-rust-cross-compiling" title="Permalink to this headline">¶</a></h1>
+<p>In the future there may be the need to cross compile KubOS for targets
+not currently supported. This document gives instructions for setting
+up cross compiling support for those targets.</p>
+<p>First check the <a class="reference external" href="https://forge.rust-lang.org/release/platform-support.html">Rust Platform Support</a>
+for your target. If it is not in this list…then contact us via Slack.</p>
+<p>If it is in the list, then step one is to attempt to install the triple via <code class="docutils literal notranslate"><span class="pre">rustup</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ rustup target add target-triple-here
+</pre></div>
+</div>
+<p>If this installs correctly then all you need is a working gcc toolchain and you should be
+good to go! There is one piece of necessary <code class="docutils literal notranslate"><span class="pre">cargo</span></code> configuration needed. A cargo
+<a class="reference external" href="https://doc.rust-lang.org/cargo/reference/config.html">config file</a> named
+<code class="docutils literal notranslate"><span class="pre">config</span></code> in either <code class="docutils literal notranslate"><span class="pre">$HOME/.cargo</span></code> or <code class="docutils literal notranslate"><span class="pre">$PROJECT/.cargo</span></code> folder. Inside you’ll need to set
+the following options:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">target</span><span class="o">.</span><span class="n">target</span><span class="o">-</span><span class="n">triple</span><span class="p">]</span>
+<span class="n">linker</span> <span class="o">=</span> <span class="s2">&quot;$TOOLCHAIN/toolchain-name-gcc&quot;</span>
+<span class="n">ar</span> <span class="o">=</span> <span class="s2">&quot;$TOOLCHAIN/toolchain-name-ar&quot;</span>
+</pre></div>
+</div>
+<p>If the desired target is under <strong>Tier 2.5</strong> or <strong>Tier 3</strong> then it likely
+cannot be added directly via <code class="docutils literal notranslate"><span class="pre">rustup</span></code> and will required additional work.</p>
+<p>First these dependencies need to be installed:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cargo install xargo
+$ rustup default nightly-2020-01-29
+$ rustup component add rust-src
+</pre></div>
+</div>
+<p>You will also need a functional gcc cross-compiling toolchain in
+an accessible location that we’ll call $TOOLCHAIN.</p>
+<p>The environment variables <code class="docutils literal notranslate"><span class="pre">CC</span></code> and <code class="docutils literal notranslate"><span class="pre">CXX</span></code> need to be set prior
+to beginning to cross compile:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export CC=$TOOLCHAIN/bin/target-triple-gcc
+$ export CXX=$TOOLCHAIN/bin/target-triple-g++
+</pre></div>
+</div>
+<p>Now run this command in your Rust project:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ xargo build --target target-triple-here
+</pre></div>
+</div>
+<p>If you get an error about <code class="docutils literal notranslate"><span class="pre">can't</span> <span class="pre">find</span> <span class="pre">crate</span> <span class="pre">for</span> <span class="pre">'std'</span></code> then:</p>
+<p>Now create the following files in your Rust project:</p>
+<p><code class="docutils literal notranslate"><span class="pre">Xargo.toml</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">target</span><span class="o">.</span><span class="n">target</span><span class="o">-</span><span class="n">triple</span><span class="o">.</span><span class="n">std</span><span class="p">]</span>
+<span class="n">stage</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">.cargo/config</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">target</span><span class="o">.</span><span class="n">target</span><span class="o">-</span><span class="n">triple</span><span class="p">]</span>
+<span class="n">linker</span> <span class="o">=</span> <span class="s2">&quot;$TOOLCHAIN/toolchain-name-gcc&quot;</span>
+<span class="n">ar</span> <span class="o">=</span> <span class="s2">&quot;$TOOLCHAIN/toolchain-name-ar&quot;</span>
+</pre></div>
+</div>
+<p>And rebuild. You may also want to delete the <code class="docutils literal notranslate"><span class="pre">$HOME/.xargo</span></code> and <code class="docutils literal notranslate"><span class="pre">target</span></code>
+folders before rebuilding.</p>
+<p>If you get an error about <code class="docutils literal notranslate"><span class="pre">can't</span> <span class="pre">find</span> <span class="pre">a</span> <span class="pre">crate</span> <span class="pre">for</span> <span class="pre">'panic_unwind</span></code> then
+you may need to define a release profile and start building in release mode.</p>
+<p>Add this to <code class="docutils literal notranslate"><span class="pre">Cargo.toml</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">profile</span><span class="o">.</span><span class="n">release</span><span class="p">]</span>
+<span class="n">panic</span> <span class="o">=</span> <span class="s2">&quot;abort&quot;</span>
+</pre></div>
+</div>
+<p>Then build with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">xargo</span> <span class="n">build</span> <span class="o">--</span><span class="n">target</span> <span class="n">target</span> <span class="o">--</span><span class="n">release</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../contributing/index.html" class="btn btn-neutral float-right" title="Contributing to KubOS" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="sdk-upgrading.html" class="btn btn-neutral" title="Upgrading Your Kubos Development Environment" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

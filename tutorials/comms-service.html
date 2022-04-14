@@ -1,0 +1,1170 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Creating Your Communications Service &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../index.html"/>
+        <link rel="up" title="Tutorials" href="index.html"/>
+        <link rel="next" title="Working with KubOS and an OBC" href="../obc-docs/index.html"/>
+        <link rel="prev" title="Establishing a Shell Connection with an OBC" href="shell.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#mission-development-tutorials">Mission Development Tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#system-interaction-tutorials">System Interaction Tutorials</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#advanced-tutorials">Advanced Tutorials</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Creating Your Communications Service</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuration">Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#writing-the-service">Writing the Service</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#testing">Testing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#graphql">GraphQL</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#other-resources">Other Resources</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../obc-docs/index.html">Working with an OBC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ecosystem/index.html">KubOS Ecosystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deep-dive/index.html">Under the Hood</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sdk-docs/index.html">Kubos SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing to KubOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Tutorials</a> &raquo;</li>
+        
+      <li>Creating Your Communications Service</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/tutorials/comms-service.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="creating-your-communications-service">
+<h1>Creating Your Communications Service<a class="headerlink" href="#creating-your-communications-service" title="Permalink to this headline">¶</a></h1>
+<p>All satellites must be capable of communicating with the ground.
+The method used for this communication varies greatly from mission to mission.
+As a result, a communications service which facilitates passing messages between the radio/s and the
+rest of the satellite must be constructed on an individual basis.</p>
+<p>This tutorial walks the user through the process of using the
+<a class="reference internal" href="../ecosystem/services/comms-framework.html"><span class="doc">communications service framework</span></a> in order to create a basic
+hardware service for a radio.
+To allow testing, the radio connection will be simulated by a UART connection.</p>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p class="plantuml">
+<img src="../_images/plantuml-f61f361c1e53869077ebe7b72c9982848af88439.png" alt="&#64;startuml
+
+skinparam linetype polyline
+skinparam linetype ortho
+left to right direction
+rectangle &quot;Telemetry Service&quot; as Telemetry
+rectangle &quot;Mission Application&quot; as App
+rectangle &quot;Radio&quot; as Radio
+
+package &quot;Communications Service&quot; {
+    rectangle &quot;Read Thread&quot; as Read
+    rectangle &quot;Message Handler&quot; as Message
+    rectangle &quot;Downlink Endpoint&quot; as Downlink
+}
+
+Radio -right-&gt; Read
+Downlink -up-&gt; Radio
+Message -left-&gt; Radio
+
+Telemetry .left.&gt; Message
+Message .right.&gt; Telemetry
+
+Telemetry .&gt; App
+App .&gt; Telemetry
+
+App .&gt; Downlink
+
+&#64;enduml"/>
+</p>
+<p>The communications service works by maintaining a read thread which fetches incoming messages from
+the radio.
+It then parses the intended internal destination, forwards the message on, and waits for a response.
+Once a response is received, it can be sent to the radio, to then be transmitted to the ground.</p>
+<p>For this tutorial, we’ll be setting up the functions needed to read and write from a UART port
+(the “radio”), passing them to the standard communications service framework implementation, and
+then creating a GraphQL front-end to fetch communications statistics from.</p>
+<p>This tutorial will <em>not</em> cover:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Downlink endpoints</li>
+<li>Radio packet framing</li>
+</ul>
+</div></blockquote>
+<p>A more <a class="reference external" href="https://github.com/kubos/kubos/tree/master/examples/serial-comms-service">in-depth example</a>
+can be found in the Kubos repo.</p>
+</div>
+<div class="section" id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<p>Before we write any actual code, we want to update our system’s <a class="reference internal" href="../ecosystem/services/service-config.html"><span class="doc">config.toml</span></a>
+file.</p>
+<p>We’ll name our service <cite>radio-service</cite>.
+Under this new service name, we’ll be adding two sections:</p>
+<ul class="simple">
+<li>A <code class="docutils literal notranslate"><span class="pre">radio-service.addr</span></code> section to define the IP and port for the GraphQL endpoint of our service</li>
+<li>A <code class="docutils literal notranslate"><span class="pre">radio-service.comms</span></code> section to define our communications settings</li>
+</ul>
+<p>For the address section, we’ll use the internal IP address, <code class="docutils literal notranslate"><span class="pre">0.0.0.0</span></code>, and port 8150.</p>
+<p>In the comms section, we’ll define our satellite’s IP address as <code class="docutils literal notranslate"><span class="pre">0.0.0.0</span></code>, since internally our
+tutorial satellite’s services all use different ports on the same IP address.</p>
+<p>We’ll set our request timeout to one second.</p>
+<p>The other options will be omitted, so the default values will be used.
+This means that the service will be allowed to process up to 50 simultaneous incoming messages and
+no downlink endpoints will be created.</p>
+<p>The final <code class="docutils literal notranslate"><span class="pre">config.toml</span></code> section should look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">radio</span><span class="o">-</span><span class="n">service</span><span class="o">.</span><span class="n">addr</span><span class="p">]</span>
+<span class="n">ip</span> <span class="o">=</span> <span class="s2">&quot;0.0.0.0&quot;</span>
+<span class="n">port</span> <span class="o">=</span> <span class="mi">8150</span>
+
+<span class="p">[</span><span class="n">radio</span><span class="o">-</span><span class="n">service</span><span class="o">.</span><span class="n">comms</span><span class="p">]</span>
+<span class="n">timeout</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">ip</span> <span class="o">=</span> <span class="s2">&quot;0.0.0.0&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="writing-the-service">
+<h2>Writing the Service<a class="headerlink" href="#writing-the-service" title="Permalink to this headline">¶</a></h2>
+<p>Now we can start our actual tutorial project.
+All work will be done within a new Rust project, <code class="docutils literal notranslate"><span class="pre">radio-service</span></code>, which is created by running
+<code class="docutils literal notranslate"><span class="pre">cargo</span> <span class="pre">new</span> <span class="pre">--bin</span> <span class="pre">radio-service</span></code>.</p>
+<div class="section" id="cargo-toml">
+<h3>Cargo.toml<a class="headerlink" href="#cargo-toml" title="Permalink to this headline">¶</a></h3>
+<p>Edit the <code class="docutils literal notranslate"><span class="pre">Cargo.toml</span></code> file to have the following dependencies:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">comms</span><span class="o">-</span><span class="n">service</span> <span class="o">=</span> <span class="p">{</span> <span class="n">git</span> <span class="o">=</span> <span class="s2">&quot;https://github.com/kubos/kubos&quot;</span> <span class="p">}</span>
+<span class="n">failure</span> <span class="o">=</span> <span class="s2">&quot;0.1.2&quot;</span>
+<span class="n">juniper</span> <span class="o">=</span>  <span class="s2">&quot;0.11&quot;</span>
+<span class="n">kubos</span><span class="o">-</span><span class="n">service</span> <span class="o">=</span> <span class="p">{</span> <span class="n">git</span> <span class="o">=</span> <span class="s2">&quot;https://github.com/kubos/kubos&quot;</span> <span class="p">}</span>
+<span class="n">kubos</span><span class="o">-</span><span class="n">system</span> <span class="o">=</span> <span class="p">{</span> <span class="n">git</span> <span class="o">=</span> <span class="s2">&quot;https://github.com/kubos/kubos&quot;</span> <span class="p">}</span>
+<span class="n">log</span> <span class="o">=</span> <span class="s2">&quot;^0.4.0&quot;</span>
+<span class="n">serial</span> <span class="o">=</span> <span class="s2">&quot;0.4&quot;</span>
+</pre></div>
+</div>
+<p>All the dependencies, with the exception of <code class="docutils literal notranslate"><span class="pre">serial</span></code>, should be common to all services
+implementing the communications service framework.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">serial</span></code> dependency is included in order to provide support for UART communication.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This tutorial was written using the 2018 edition of Rust</p>
+</div>
+</div>
+<div class="section" id="helper-functions">
+<h3>Helper Functions<a class="headerlink" href="#helper-functions" title="Permalink to this headline">¶</a></h3>
+<p>There are a few helper functions which we’ll need to set up for our main program to use.</p>
+<p>There are three radio-specific functions which we’ll need to define: initialization, write, and read.</p>
+<p>Additionally, we’ll need to set up our logging so that status and error messages can be properly
+recorded.</p>
+<div class="section" id="logging">
+<h4>Logging<a class="headerlink" href="#logging" title="Permalink to this headline">¶</a></h4>
+<p>We’ll start by initializing our logging:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">use</span><span class="w"> </span><span class="n">kubos_service</span>::<span class="n">Logger</span><span class="p">;</span><span class="w"></span>
+<span class="k">use</span><span class="w"> </span><span class="n">log</span>::<span class="o">*</span><span class="p">;</span><span class="w"></span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Initialize logging for the service</span>
+<span class="w">    </span><span class="n">Logger</span>::<span class="n">init</span><span class="p">(</span><span class="s">&quot;radio-service&quot;</span><span class="p">).</span><span class="n">unwrap</span><span class="p">();</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="serial-initialization">
+<h4>Serial Initialization<a class="headerlink" href="#serial-initialization" title="Permalink to this headline">¶</a></h4>
+<p>The initialization function will need to create a connection to the serial port and set the port’s
+communication settings. It should return the final connection object in a mutex, since it will need
+to be shared across multiple threads.</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">use</span><span class="w"> </span><span class="n">std</span>::<span class="n">sync</span>::<span class="p">{</span><span class="n">Arc</span><span class="p">,</span><span class="w"> </span><span class="n">Mutex</span><span class="p">};</span><span class="w"></span>
+
+<span class="k">const</span><span class="w"> </span><span class="n">BUS</span>: <span class="kp">&amp;</span><span class="kt">str</span> <span class="o">=</span><span class="w"> </span><span class="s">&quot;/dev/ttyS2&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="k">const</span><span class="w"> </span><span class="n">TIMEOUT</span>: <span class="nc">Duration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Duration</span>::<span class="n">from_millis</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span><span class="w"></span>
+
+<span class="c1">// Initialize the serial bus connection for reading and writing from/to the &quot;radio&quot;</span>
+<span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">serial_init</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="nc">ServiceResult</span><span class="o">&lt;</span><span class="n">Arc</span><span class="o">&lt;</span><span class="n">Mutex</span><span class="o">&lt;</span><span class="n">RefCell</span><span class="o">&lt;</span><span class="n">serial</span>::<span class="n">SystemPort</span><span class="o">&gt;&gt;&gt;&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Define our serial settings</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">settings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">serial</span>::<span class="n">PortSettings</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">baud_rate</span>: <span class="nc">serial</span>::<span class="n">Baud115200</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="n">char_size</span>: <span class="nc">serial</span>::<span class="n">Bits8</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="n">parity</span>: <span class="nc">serial</span>::<span class="n">ParityNone</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="n">stop_bits</span>: <span class="nc">serial</span>::<span class="n">Stop1</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="n">flow_control</span>: <span class="nc">serial</span>::<span class="n">FlowNone</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="p">};</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Open a connection to the serial port</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">serial</span>::<span class="n">open</span><span class="p">(</span><span class="n">BUS</span><span class="p">)</span><span class="o">?</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Save our settings</span>
+<span class="w">    </span><span class="n">port</span><span class="p">.</span><span class="n">configure</span><span class="p">(</span><span class="o">&amp;</span><span class="n">settings</span><span class="p">)</span><span class="o">?</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">port</span><span class="p">.</span><span class="n">set_timeout</span><span class="p">(</span><span class="n">TIMEOUT</span><span class="p">)</span><span class="o">?</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Wrap the port in a mutex so that multiple threads can access it</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">conn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Arc</span>::<span class="n">new</span><span class="p">(</span><span class="n">Mutex</span>::<span class="n">new</span><span class="p">(</span><span class="n">RefCell</span>::<span class="n">new</span><span class="p">(</span><span class="n">port</span><span class="p">)));</span><span class="w"></span>
+
+<span class="w">    </span><span class="nb">Ok</span><span class="p">(</span><span class="n">conn</span><span class="p">)</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="write">
+<h4>Write<a class="headerlink" href="#write" title="Permalink to this headline">¶</a></h4>
+<p>Writing to the “radio” is straight-forward in this case.
+There’s no need to encapsulate the data in a radio-specific protocol (like AX.25) before writing it.</p>
+<p>Worth noting: if a mission’s radio <em>does</em> require some sort of additional framing, this would be the
+location where that wrapping logic would occur.</p>
+<p>The function should take two arguments: the data to write and the serial port to write to.
+We’ll need to take ownership of the mutex and then perform a UART write.</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="c1">// The write function that the comms service will use to write messages to the &quot;radio&quot;</span>
+<span class="c1">//</span>
+<span class="c1">// This function may be called from either a message handler thread or from a downlink endpoint</span>
+<span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">write</span><span class="p">(</span><span class="n">conn</span>: <span class="kp">&amp;</span><span class="nc">Arc</span><span class="o">&lt;</span><span class="n">Mutex</span><span class="o">&lt;</span><span class="n">RefCell</span><span class="o">&lt;</span><span class="n">serial</span>::<span class="n">SystemPort</span><span class="o">&gt;&gt;&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">msg</span>: <span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">])</span><span class="w"> </span>-&gt; <span class="nc">ServiceResult</span><span class="o">&lt;</span><span class="p">()</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">conn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="n">conn</span><span class="p">.</span><span class="n">lock</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nb">Ok</span><span class="p">(</span><span class="n">val</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">val</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nb">Err</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">bail</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;Failed to take mutex: {:?}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">),</span><span class="w"></span>
+<span class="w">    </span><span class="p">};</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">conn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">conn</span><span class="p">.</span><span class="n">try_borrow_mut</span><span class="p">()</span><span class="o">?</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">conn</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">msg</span><span class="p">).</span><span class="n">and_then</span><span class="p">(</span><span class="o">|</span><span class="n">num</span><span class="o">|</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">debug</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;Wrote {} bytes to radio&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">num</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="nb">Ok</span><span class="p">(())</span><span class="w"></span>
+<span class="w">    </span><span class="p">})</span><span class="o">?</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="nb">Ok</span><span class="p">(())</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="read">
+<h4>Read<a class="headerlink" href="#read" title="Permalink to this headline">¶</a></h4>
+<p>The read function will take ownership of the mutex and then wait for a message from the “radio”.</p>
+<p>It should continue to attempt to fetch messages until either:</p>
+<blockquote>
+<div><ol class="loweralpha simple">
+<li>A message is returned</li>
+<li>A non-timeout error is encountered</li>
+</ol>
+</div></blockquote>
+<p>The read loop should take care to free the mutex after each read attempt so that any threads wanting
+to perform write operations are not perpetually blocked.</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="c1">// The read function that the comms service read thread will call to wait for messages from the</span>
+<span class="c1">// &quot;radio&quot;</span>
+<span class="c1">//</span>
+<span class="c1">// Returns once a message has been received</span>
+<span class="k">const</span><span class="w"> </span><span class="n">MAX_READ</span>: <span class="kt">usize</span> <span class="o">=</span><span class="w"> </span><span class="mi">4096</span><span class="p">;</span><span class="w"></span>
+<span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">read</span><span class="p">(</span><span class="n">conn</span>: <span class="kp">&amp;</span><span class="nc">Arc</span><span class="o">&lt;</span><span class="n">Mutex</span><span class="o">&lt;</span><span class="n">RefCell</span><span class="o">&lt;</span><span class="n">serial</span>::<span class="n">SystemPort</span><span class="o">&gt;&gt;&gt;</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">ServiceResult</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">u8</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">loop</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// Note: These brackets force the program to release the serial port&#39;s mutex so that any</span>
+<span class="w">        </span><span class="c1">// threads waiting on it in order to perform a write may do so</span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="c1">// Take ownership of the serial port</span>
+<span class="w">            </span><span class="kd">let</span><span class="w"> </span><span class="n">conn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="n">conn</span><span class="p">.</span><span class="n">lock</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="nb">Ok</span><span class="p">(</span><span class="n">val</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">val</span><span class="p">,</span><span class="w"></span>
+<span class="w">                </span><span class="nb">Err</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                    </span><span class="n">error</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;Failed to take mutex: {:?}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">);</span><span class="w"></span>
+<span class="w">                    </span><span class="n">panic</span><span class="o">!</span><span class="p">();</span><span class="w"></span>
+<span class="w">                </span><span class="p">}</span><span class="w"></span>
+<span class="w">            </span><span class="p">};</span><span class="w"></span>
+<span class="w">            </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">conn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">conn</span><span class="p">.</span><span class="n">try_borrow_mut</span><span class="p">()</span><span class="o">?</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">            </span><span class="c1">// Try to get a message from the radio</span>
+<span class="w">            </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">packet</span>: <span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">u8</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vec</span><span class="o">!</span><span class="p">[</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">MAX_READ</span><span class="p">];</span><span class="w"></span>
+<span class="w">            </span><span class="k">match</span><span class="w"> </span><span class="n">conn</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="n">packet</span><span class="p">.</span><span class="n">as_mut_slice</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="nb">Ok</span><span class="p">(</span><span class="n">num</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                    </span><span class="n">packet</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">num</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">                    </span><span class="n">debug</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;Read {} bytes from radio&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">packet</span><span class="p">.</span><span class="n">len</span><span class="p">());</span><span class="w"></span>
+<span class="w">                    </span><span class="k">return</span><span class="w"> </span><span class="nb">Ok</span><span class="p">(</span><span class="n">packet</span><span class="p">);</span><span class="w"></span>
+<span class="w">                </span><span class="p">}</span><span class="w"></span>
+<span class="w">                </span><span class="nb">Err</span><span class="p">(</span><span class="k">ref</span><span class="w"> </span><span class="n">err</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="n">err</span><span class="p">.</span><span class="n">kind</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                    </span>::<span class="n">std</span>::<span class="n">io</span>::<span class="n">ErrorKind</span>::<span class="n">TimedOut</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
+<span class="w">                    </span><span class="n">other</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">bail</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;Radio read failed: {:?}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">other</span><span class="p">),</span><span class="w"></span>
+<span class="w">                </span><span class="p">},</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">        </span><span class="c1">// Sleep for a moment so that other threads have the chance to grab the serial port mutex</span>
+<span class="w">        </span><span class="n">thread</span>::<span class="n">sleep</span><span class="p">(</span><span class="n">Duration</span>::<span class="n">from_millis</span><span class="p">(</span><span class="mi">10</span><span class="p">));</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="section" id="beaglebone-black">
+<h5>Beaglebone Black<a class="headerlink" href="#beaglebone-black" title="Permalink to this headline">¶</a></h5>
+<p>The Beaglebone Black’s <a class="reference external" href="https://github.com/torvalds/linux/blob/master/drivers/tty/serial/8250/8250_omap.c">UART kernel driver</a>
+has a peculiar behavior where it will only read, at most, 48 bytes at a time before triggering an
+interrupt and returning the bytes to the <cite>read</cite> caller.</p>
+<p>As a result, we’ll need to modify our read function to continue to make <cite>read</cite> calls until either
+a) we read less than 48 bytes in one go, or b) the read call returns a timeout.</p>
+<p>The resulting function should look like this:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="c1">// The read function that the comms service read thread will call to wait for messages from the</span>
+<span class="c1">// &quot;radio&quot;</span>
+<span class="c1">//</span>
+<span class="c1">// Returns once a message has been received</span>
+<span class="k">const</span><span class="w"> </span><span class="n">MAX_READ</span>: <span class="kt">usize</span> <span class="o">=</span><span class="w"> </span><span class="mi">48</span><span class="p">;</span><span class="w"></span>
+<span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">read</span><span class="p">(</span><span class="n">conn</span>: <span class="kp">&amp;</span><span class="nc">Arc</span><span class="o">&lt;</span><span class="n">Mutex</span><span class="o">&lt;</span><span class="n">RefCell</span><span class="o">&lt;</span><span class="n">serial</span>::<span class="n">SystemPort</span><span class="o">&gt;&gt;&gt;</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">ServiceResult</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">u8</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">loop</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// Note: These brackets force the program to release the serial port&#39;s mutex so that any</span>
+<span class="w">        </span><span class="c1">// threads waiting on it in order to perform a write may do so</span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="c1">// Take ownership of the serial port</span>
+<span class="w">            </span><span class="kd">let</span><span class="w"> </span><span class="n">conn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="n">conn</span><span class="p">.</span><span class="n">lock</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="nb">Ok</span><span class="p">(</span><span class="n">val</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">val</span><span class="p">,</span><span class="w"></span>
+<span class="w">                </span><span class="nb">Err</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                    </span><span class="n">error</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;Failed to take mutex: {:?}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">);</span><span class="w"></span>
+<span class="w">                    </span><span class="n">panic</span><span class="o">!</span><span class="p">();</span><span class="w"></span>
+<span class="w">                </span><span class="p">}</span><span class="w"></span>
+<span class="w">            </span><span class="p">};</span><span class="w"></span>
+<span class="w">            </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">conn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">conn</span><span class="p">.</span><span class="n">try_borrow_mut</span><span class="p">()</span><span class="o">?</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">            </span><span class="c1">// Loop until either a full message has been received or a non-timeout error has occured</span>
+<span class="w">            </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">packet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vec</span><span class="o">!</span><span class="p">[];</span><span class="w"></span>
+<span class="w">            </span><span class="k">loop</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">buffer</span>: <span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">u8</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vec</span><span class="o">!</span><span class="p">[</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">MAX_READ</span><span class="p">];</span><span class="w"></span>
+<span class="w">                </span><span class="k">match</span><span class="w"> </span><span class="n">conn</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="n">buffer</span><span class="p">.</span><span class="n">as_mut_slice</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                    </span><span class="nb">Ok</span><span class="p">(</span><span class="n">num</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                        </span><span class="n">buffer</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">num</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
+<span class="w">                        </span><span class="n">packet</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="n">buffer</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">                        </span><span class="n">debug</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;Read {} bytes from radio&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">packet</span><span class="p">.</span><span class="n">len</span><span class="p">());</span><span class="w"></span>
+
+<span class="w">                        </span><span class="k">if</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">MAX_READ</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                            </span><span class="k">return</span><span class="w"> </span><span class="nb">Ok</span><span class="p">(</span><span class="n">packet</span><span class="p">);</span><span class="w"></span>
+<span class="w">                        </span><span class="p">}</span><span class="w"></span>
+<span class="w">                    </span><span class="p">}</span><span class="w"></span>
+<span class="w">                    </span><span class="nb">Err</span><span class="p">(</span><span class="k">ref</span><span class="w"> </span><span class="n">err</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="n">err</span><span class="p">.</span><span class="n">kind</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                        </span>::<span class="n">std</span>::<span class="n">io</span>::<span class="n">ErrorKind</span>::<span class="n">TimedOut</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                            </span><span class="k">if</span><span class="w"> </span><span class="n">packet</span><span class="p">.</span><span class="n">len</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                                </span><span class="k">return</span><span class="w"> </span><span class="nb">Ok</span><span class="p">(</span><span class="n">packet</span><span class="p">);</span><span class="w"></span>
+<span class="w">                            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                                </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="w">                            </span><span class="p">}</span><span class="w"></span>
+<span class="w">                        </span><span class="p">}</span><span class="w"></span>
+<span class="w">                        </span><span class="n">other</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">bail</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;Radio read failed: {:?}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">other</span><span class="p">),</span><span class="w"></span>
+<span class="w">                    </span><span class="p">},</span><span class="w"></span>
+<span class="w">                </span><span class="p">};</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">        </span><span class="c1">// Sleep for a moment so that other threads have the chance to grab the serial port mutex</span>
+<span class="w">        </span><span class="n">thread</span>::<span class="n">sleep</span><span class="p">(</span><span class="n">Duration</span>::<span class="n">from_millis</span><span class="p">(</span><span class="mi">10</span><span class="p">));</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="main-logic">
+<h3>Main Logic<a class="headerlink" href="#main-logic" title="Permalink to this headline">¶</a></h3>
+<p>Now that the helper functions are in place, we can set up our main service logic.</p>
+<p>Our project will need to:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Start logging</li>
+<li>Intialize the connection with the serial port</li>
+<li>Fetch the configuration settings from the <code class="docutils literal notranslate"><span class="pre">config.toml</span></code> file</li>
+<li>Setup the final communication configuration</li>
+<li>Start the communication service thread</li>
+<li>Start the GraphQL endpoint logic which will loop forever to keep program from ending</li>
+</ul>
+</div></blockquote>
+<div class="section" id="id1">
+<h4>Configuration<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+<p>After setting up logging, we’ll want to fetch our service’s configuration settings from the
+<code class="docutils literal notranslate"><span class="pre">config.toml</span></code> file and extract the communications settings:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="nc">ServiceResult</span><span class="o">&lt;</span><span class="p">()</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Initialize logging for the service</span>
+<span class="w">    </span><span class="n">Logger</span>::<span class="n">init</span><span class="p">(</span><span class="s">&quot;radio-service&quot;</span><span class="p">).</span><span class="n">unwrap</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Get the main service configuration from the system&#39;s config.toml file</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">service_config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">kubos_system</span>::<span class="n">Config</span>::<span class="n">new</span><span class="p">(</span><span class="s">&quot;radio-service&quot;</span><span class="p">)</span><span class="o">?</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Pull out our communication settings</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CommsConfig</span>::<span class="n">new</span><span class="p">(</span><span class="n">service_config</span><span class="p">)</span><span class="o">?</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="communication-initialization">
+<h4>Communication Initialization<a class="headerlink" href="#communication-initialization" title="Permalink to this headline">¶</a></h4>
+<p>Now we’ll be setting up our instance of the <a href="../rust-docs/comms_service/struct.CommsControlBlock.html" target="_blank">CommsControlBlock</a>, which is the main control
+structure used by the communications service framework in order to store all of the settings and
+communication components.</p>
+<p>The <a href="../rust-docs/comms_service/struct.CommsControlBlock.html" target="_blank">CommsControlBlock</a> contains five elements:</p>
+<blockquote>
+<div><ul class="simple">
+<li>A pointer to the function used to read messages from the radio</li>
+<li>A list of pointers to functions used to write messages to the radio</li>
+<li>The entity used to connect to the radio to read messages</li>
+<li>The entity used to connect to the radio to write messages</li>
+<li>The communication settings extracted in the previous step</li>
+</ul>
+</div></blockquote>
+<p>Since we’re using a single UART port for our communication, the read and write entities will be the
+same: the initialized port structure.</p>
+<p>Our read function pointer will correspond with the <code class="docutils literal notranslate"><span class="pre">read</span></code> helper function we created previously.</p>
+<p>The write function list will consist of a single entry: the <code class="docutils literal notranslate"><span class="pre">write</span></code> helper function.</p>
+<p>The initialization should look like this:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="nc">ServiceResult</span><span class="o">&lt;</span><span class="p">()</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Initialize logging for the service</span>
+<span class="w">    </span><span class="n">Logger</span>::<span class="n">init</span><span class="p">(</span><span class="s">&quot;radio-service&quot;</span><span class="p">).</span><span class="n">unwrap</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Get the main service configuration from the system&#39;s config.toml file</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">service_config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">kubos_system</span>::<span class="n">Config</span>::<span class="n">new</span><span class="p">(</span><span class="s">&quot;radio-service&quot;</span><span class="p">)</span><span class="o">?</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Pull out our communication settings</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CommsConfig</span>::<span class="n">new</span><span class="p">(</span><span class="n">service_config</span><span class="p">)</span><span class="o">?</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Initialize the serial port</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">conn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">serial_init</span><span class="p">()</span><span class="o">?</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// In this instance, reading and writing are done over the same connection,</span>
+<span class="w">    </span><span class="c1">// so we&#39;ll just clone the UART port connection</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">read_conn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">conn</span><span class="p">.</span><span class="n">clone</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">write_conn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">conn</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Tie everything together in our final control block</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">control</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CommsControlBlock</span>::<span class="n">new</span><span class="p">(</span><span class="w"></span>
+<span class="w">        </span><span class="nb">Some</span><span class="p">(</span><span class="n">Arc</span>::<span class="n">new</span><span class="p">(</span><span class="n">comms</span>::<span class="n">read</span><span class="p">)),</span><span class="w"></span>
+<span class="w">        </span><span class="n">vec</span><span class="o">!</span><span class="p">[</span><span class="n">Arc</span>::<span class="n">new</span><span class="p">(</span><span class="n">comms</span>::<span class="n">write</span><span class="p">)],</span><span class="w"></span>
+<span class="w">        </span><span class="n">read_conn</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="n">write_conn</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="n">config</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="p">)</span><span class="o">?</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="starting-communication">
+<h4>Starting Communication<a class="headerlink" href="#starting-communication" title="Permalink to this headline">¶</a></h4>
+<p>Finally, we can start our communication threads.
+We’ll use the <a href="../rust-docs/comms_service/struct.CommsService.html#method.start" target="_blank">CommsService::start</a> function, passing it our control block as well as a
+<a href="../rust-docs/comms_service/struct.CommsTelemetry.html" target="_blank">CommsTelemetry</a> instance to use for recording communication metrics.</p>
+<p>For the moment, we’ll put a loop at the end of our program to keep from exiting.</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="nc">ServiceResult</span><span class="o">&lt;</span><span class="p">()</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Initialize logging for the service</span>
+<span class="w">    </span><span class="n">Logger</span>::<span class="n">init</span><span class="p">(</span><span class="s">&quot;radio-service&quot;</span><span class="p">).</span><span class="n">unwrap</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Get the main service configuration from the system&#39;s config.toml file</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">service_config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">kubos_system</span>::<span class="n">Config</span>::<span class="n">new</span><span class="p">(</span><span class="s">&quot;radio-service&quot;</span><span class="p">)</span><span class="o">?</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Pull out our communication settings</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CommsConfig</span>::<span class="n">new</span><span class="p">(</span><span class="n">service_config</span><span class="p">)</span><span class="o">?</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Initialize the serial port</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">conn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">serial_init</span><span class="p">(</span><span class="n">BUS</span><span class="p">)</span><span class="o">?</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Set up the comms configuration</span>
+<span class="w">    </span><span class="c1">// In this instance, reading and writing are done over the same connection,</span>
+<span class="w">    </span><span class="c1">// so we&#39;ll just clone the UART port connection</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">read_conn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">conn</span><span class="p">.</span><span class="n">clone</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">write_conn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">conn</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">control</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CommsControlBlock</span>::<span class="n">new</span><span class="p">(</span><span class="w"></span>
+<span class="w">        </span><span class="nb">Some</span><span class="p">(</span><span class="n">Arc</span>::<span class="n">new</span><span class="p">(</span><span class="n">read</span><span class="p">)),</span><span class="w"></span>
+<span class="w">        </span><span class="n">vec</span><span class="o">!</span><span class="p">[</span><span class="n">Arc</span>::<span class="n">new</span><span class="p">(</span><span class="n">write</span><span class="p">)],</span><span class="w"></span>
+<span class="w">        </span><span class="n">read_conn</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="n">write_conn</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="n">config</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="p">)</span><span class="o">?</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Set up our communications telemetry structure</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">telemetry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Arc</span>::<span class="n">new</span><span class="p">(</span><span class="n">Mutex</span>::<span class="n">new</span><span class="p">(</span><span class="n">CommsTelemetry</span>::<span class="n">default</span><span class="p">()));</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Start the comms service thread</span>
+<span class="w">    </span><span class="n">CommsService</span>::<span class="n">start</span>::<span class="o">&lt;</span><span class="n">Arc</span><span class="o">&lt;</span><span class="n">Mutex</span><span class="o">&lt;</span><span class="n">RefCell</span><span class="o">&lt;</span><span class="n">serial</span>::<span class="n">SystemPort</span><span class="o">&gt;&gt;&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">SpacePacket</span><span class="o">&gt;</span><span class="p">(</span><span class="n">control</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">telemetry</span><span class="p">)</span><span class="o">?</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// TODO: Start the GraphQL service</span>
+<span class="w">    </span><span class="k">loop</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="final-code">
+<h3>Final Code<a class="headerlink" href="#final-code" title="Permalink to this headline">¶</a></h3>
+<p>All together, our code so far should look like this:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="c1">// Return type for this service.</span>
+<span class="k">type</span> <span class="nc">ServiceResult</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">Error</span><span class="o">&gt;</span><span class="p">;</span><span class="w"></span>
+
+<span class="k">use</span><span class="w"> </span><span class="n">comms_service</span>::<span class="o">*</span><span class="p">;</span><span class="w"></span>
+<span class="k">use</span><span class="w"> </span><span class="n">failure</span>::<span class="o">*</span><span class="p">;</span><span class="w"></span>
+<span class="k">use</span><span class="w"> </span><span class="n">kubos_service</span>::<span class="n">Logger</span><span class="p">;</span><span class="w"></span>
+<span class="k">use</span><span class="w"> </span><span class="n">log</span>::<span class="o">*</span><span class="p">;</span><span class="w"></span>
+<span class="k">use</span><span class="w"> </span><span class="n">serial</span><span class="p">;</span><span class="w"></span>
+<span class="k">use</span><span class="w"> </span><span class="n">serial</span>::<span class="n">prelude</span>::<span class="o">*</span><span class="p">;</span><span class="w"></span>
+<span class="k">use</span><span class="w"> </span><span class="n">std</span>::<span class="n">cell</span>::<span class="n">RefCell</span><span class="p">;</span><span class="w"></span>
+<span class="k">use</span><span class="w"> </span><span class="n">std</span>::<span class="n">io</span>::<span class="n">prelude</span>::<span class="o">*</span><span class="p">;</span><span class="w"></span>
+<span class="k">use</span><span class="w"> </span><span class="n">std</span>::<span class="n">sync</span>::<span class="p">{</span><span class="n">Arc</span><span class="p">,</span><span class="w"> </span><span class="n">Mutex</span><span class="p">};</span><span class="w"></span>
+<span class="k">use</span><span class="w"> </span><span class="n">std</span>::<span class="n">thread</span><span class="p">;</span><span class="w"></span>
+<span class="k">use</span><span class="w"> </span><span class="n">std</span>::<span class="n">time</span>::<span class="n">Duration</span><span class="p">;</span><span class="w"></span>
+
+<span class="k">const</span><span class="w"> </span><span class="n">BUS</span>: <span class="kp">&amp;</span><span class="kt">str</span> <span class="o">=</span><span class="w"> </span><span class="s">&quot;/dev/ttyS2&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="c1">// Maximum number of bytes to attempt to read at one time</span>
+<span class="k">const</span><span class="w"> </span><span class="n">MAX_READ</span>: <span class="kt">usize</span> <span class="o">=</span><span class="w"> </span><span class="mi">48</span><span class="p">;</span><span class="w"></span>
+<span class="k">const</span><span class="w"> </span><span class="n">TIMEOUT</span>: <span class="nc">Duration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Duration</span>::<span class="n">from_millis</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span><span class="w"></span>
+
+<span class="c1">// Initialize the serial bus connection for reading and writing from/to the &quot;radio&quot;</span>
+<span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">serial_init</span><span class="p">(</span><span class="n">bus</span>: <span class="kp">&amp;</span><span class="kt">str</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">ServiceResult</span><span class="o">&lt;</span><span class="n">Arc</span><span class="o">&lt;</span><span class="n">Mutex</span><span class="o">&lt;</span><span class="n">RefCell</span><span class="o">&lt;</span><span class="n">serial</span>::<span class="n">SystemPort</span><span class="o">&gt;&gt;&gt;&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">settings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">serial</span>::<span class="n">PortSettings</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">baud_rate</span>: <span class="nc">serial</span>::<span class="n">Baud115200</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="n">char_size</span>: <span class="nc">serial</span>::<span class="n">Bits8</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="n">parity</span>: <span class="nc">serial</span>::<span class="n">ParityNone</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="n">stop_bits</span>: <span class="nc">serial</span>::<span class="n">Stop1</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="n">flow_control</span>: <span class="nc">serial</span>::<span class="n">FlowNone</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="p">};</span><span class="w"></span>
+
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">serial</span>::<span class="n">open</span><span class="p">(</span><span class="n">bus</span><span class="p">)</span><span class="o">?</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">port</span><span class="p">.</span><span class="n">configure</span><span class="p">(</span><span class="o">&amp;</span><span class="n">settings</span><span class="p">)</span><span class="o">?</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">port</span><span class="p">.</span><span class="n">set_timeout</span><span class="p">(</span><span class="n">TIMEOUT</span><span class="p">)</span><span class="o">?</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Wrap the port in a mutex so that multiple threads can access it</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">conn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Arc</span>::<span class="n">new</span><span class="p">(</span><span class="n">Mutex</span>::<span class="n">new</span><span class="p">(</span><span class="n">RefCell</span>::<span class="n">new</span><span class="p">(</span><span class="n">port</span><span class="p">)));</span><span class="w"></span>
+
+<span class="w">    </span><span class="nb">Ok</span><span class="p">(</span><span class="n">conn</span><span class="p">)</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="c1">// The read function that the comms service read thread will call to wait for messages from the</span>
+<span class="c1">// &quot;radio&quot;</span>
+<span class="c1">//</span>
+<span class="c1">// Returns once a message has been received</span>
+<span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">read</span><span class="p">(</span><span class="n">conn</span>: <span class="kp">&amp;</span><span class="nc">Arc</span><span class="o">&lt;</span><span class="n">Mutex</span><span class="o">&lt;</span><span class="n">RefCell</span><span class="o">&lt;</span><span class="n">serial</span>::<span class="n">SystemPort</span><span class="o">&gt;&gt;&gt;</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">ServiceResult</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">u8</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">loop</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// Note: These brackets force the program to release the serial port&#39;s mutex so that any</span>
+<span class="w">        </span><span class="c1">// threads waiting on it in order to perform a write may do so</span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="c1">// Take ownership of the serial port</span>
+<span class="w">            </span><span class="kd">let</span><span class="w"> </span><span class="n">conn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="n">conn</span><span class="p">.</span><span class="n">lock</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="nb">Ok</span><span class="p">(</span><span class="n">val</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">val</span><span class="p">,</span><span class="w"></span>
+<span class="w">                </span><span class="nb">Err</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                    </span><span class="n">error</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;Failed to take mutex: {:?}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">);</span><span class="w"></span>
+<span class="w">                    </span><span class="n">panic</span><span class="o">!</span><span class="p">();</span><span class="w"></span>
+<span class="w">                </span><span class="p">}</span><span class="w"></span>
+<span class="w">            </span><span class="p">};</span><span class="w"></span>
+<span class="w">            </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">conn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">conn</span><span class="p">.</span><span class="n">try_borrow_mut</span><span class="p">()</span><span class="o">?</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">            </span><span class="c1">// Loop until either a full message has been received or a non-timeout error has occured</span>
+<span class="w">            </span><span class="c1">//</span>
+<span class="w">            </span><span class="c1">// Note: This program was written for the Beaglebone Black. The BBB UART driver</span>
+<span class="w">            </span><span class="c1">// (8250_omap.c) has a peculiar behavior where it will only read, at most, 48 bytes at</span>
+<span class="w">            </span><span class="c1">// a time before triggering an interrupt and returning the bytes to the `read` caller.</span>
+<span class="w">            </span><span class="c1">// As a result, we&#39;ll continue to make `read` calls until either a) we read less than</span>
+<span class="w">            </span><span class="c1">// 48 bytes in one go, or b) the read call returns a timeout</span>
+<span class="w">            </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">packet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vec</span><span class="o">!</span><span class="p">[];</span><span class="w"></span>
+<span class="w">            </span><span class="k">loop</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">buffer</span>: <span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">u8</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vec</span><span class="o">!</span><span class="p">[</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">MAX_READ</span><span class="p">];</span><span class="w"></span>
+<span class="w">                </span><span class="k">match</span><span class="w"> </span><span class="n">conn</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="n">buffer</span><span class="p">.</span><span class="n">as_mut_slice</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                    </span><span class="nb">Ok</span><span class="p">(</span><span class="n">num</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                        </span><span class="n">buffer</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">num</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
+<span class="w">                        </span><span class="n">packet</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="n">buffer</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">                        </span><span class="n">debug</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;Read {} bytes from radio&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">packet</span><span class="p">.</span><span class="n">len</span><span class="p">());</span><span class="w"></span>
+
+<span class="w">                        </span><span class="k">if</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">MAX_READ</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                            </span><span class="k">return</span><span class="w"> </span><span class="nb">Ok</span><span class="p">(</span><span class="n">packet</span><span class="p">);</span><span class="w"></span>
+<span class="w">                        </span><span class="p">}</span><span class="w"></span>
+<span class="w">                    </span><span class="p">}</span><span class="w"></span>
+<span class="w">                    </span><span class="nb">Err</span><span class="p">(</span><span class="k">ref</span><span class="w"> </span><span class="n">err</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="n">err</span><span class="p">.</span><span class="n">kind</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                        </span>::<span class="n">std</span>::<span class="n">io</span>::<span class="n">ErrorKind</span>::<span class="n">TimedOut</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                            </span><span class="k">if</span><span class="w"> </span><span class="n">packet</span><span class="p">.</span><span class="n">len</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                                </span><span class="k">return</span><span class="w"> </span><span class="nb">Ok</span><span class="p">(</span><span class="n">packet</span><span class="p">);</span><span class="w"></span>
+<span class="w">                            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                                </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="w">                            </span><span class="p">}</span><span class="w"></span>
+<span class="w">                        </span><span class="p">}</span><span class="w"></span>
+<span class="w">                        </span><span class="n">other</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">bail</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;Radio read failed: {:?}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">other</span><span class="p">),</span><span class="w"></span>
+<span class="w">                    </span><span class="p">},</span><span class="w"></span>
+<span class="w">                </span><span class="p">};</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">        </span><span class="c1">// Sleep for a moment so that other threads have the chance to grab the serial port mutex</span>
+<span class="w">        </span><span class="n">thread</span>::<span class="n">sleep</span><span class="p">(</span><span class="n">Duration</span>::<span class="n">from_millis</span><span class="p">(</span><span class="mi">10</span><span class="p">));</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="c1">// The write function that the comms service will use to write messages to the &quot;radio&quot;</span>
+<span class="c1">//</span>
+<span class="c1">// This function may be called from either a message handler thread or from a downlink endpoint</span>
+<span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">write</span><span class="p">(</span><span class="n">conn</span>: <span class="kp">&amp;</span><span class="nc">Arc</span><span class="o">&lt;</span><span class="n">Mutex</span><span class="o">&lt;</span><span class="n">RefCell</span><span class="o">&lt;</span><span class="n">serial</span>::<span class="n">SystemPort</span><span class="o">&gt;&gt;&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">msg</span>: <span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">])</span><span class="w"> </span>-&gt; <span class="nc">ServiceResult</span><span class="o">&lt;</span><span class="p">()</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">conn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="n">conn</span><span class="p">.</span><span class="n">lock</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nb">Ok</span><span class="p">(</span><span class="n">val</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">val</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nb">Err</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">bail</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;Failed to take mutex: {:?}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">),</span><span class="w"></span>
+<span class="w">    </span><span class="p">};</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">conn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">conn</span><span class="p">.</span><span class="n">try_borrow_mut</span><span class="p">()</span><span class="o">?</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">conn</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">msg</span><span class="p">).</span><span class="n">and_then</span><span class="p">(</span><span class="o">|</span><span class="n">num</span><span class="o">|</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">debug</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;Wrote {} bytes to radio&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">num</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="nb">Ok</span><span class="p">(())</span><span class="w"></span>
+<span class="w">    </span><span class="p">})</span><span class="o">?</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="nb">Ok</span><span class="p">(())</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="nc">ServiceResult</span><span class="o">&lt;</span><span class="p">()</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Initialize logging for the service</span>
+<span class="w">    </span><span class="n">Logger</span>::<span class="n">init</span><span class="p">(</span><span class="s">&quot;radio-service&quot;</span><span class="p">).</span><span class="n">unwrap</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Get the main service configuration from the system&#39;s config.toml file</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">service_config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">kubos_system</span>::<span class="n">Config</span>::<span class="n">new</span><span class="p">(</span><span class="s">&quot;test-comms&quot;</span><span class="p">)</span><span class="o">?</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Pull out our communication settings</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CommsConfig</span>::<span class="n">new</span><span class="p">(</span><span class="n">service_config</span><span class="p">)</span><span class="o">?</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Initialize the serial port</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">conn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">serial_init</span><span class="p">(</span><span class="n">BUS</span><span class="p">)</span><span class="o">?</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Set up the comms configuration</span>
+<span class="w">    </span><span class="c1">// In this instance, reading and writing are done over the same connection,</span>
+<span class="w">    </span><span class="c1">// so we&#39;ll just clone the UART port connection</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">read_conn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">conn</span><span class="p">.</span><span class="n">clone</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">write_conn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">conn</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">control</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CommsControlBlock</span>::<span class="n">new</span><span class="p">(</span><span class="w"></span>
+<span class="w">        </span><span class="nb">Some</span><span class="p">(</span><span class="n">Arc</span>::<span class="n">new</span><span class="p">(</span><span class="n">read</span><span class="p">)),</span><span class="w"></span>
+<span class="w">        </span><span class="n">vec</span><span class="o">!</span><span class="p">[</span><span class="n">Arc</span>::<span class="n">new</span><span class="p">(</span><span class="n">write</span><span class="p">)],</span><span class="w"></span>
+<span class="w">        </span><span class="n">read_conn</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="n">write_conn</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="n">config</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="p">)</span><span class="o">?</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Set up our communications telemetry structure</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">telemetry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Arc</span>::<span class="n">new</span><span class="p">(</span><span class="n">Mutex</span>::<span class="n">new</span><span class="p">(</span><span class="n">CommsTelemetry</span>::<span class="n">default</span><span class="p">()));</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Start the comms service thread</span>
+<span class="w">    </span><span class="n">CommsService</span>::<span class="n">start</span>::<span class="o">&lt;</span><span class="n">Arc</span><span class="o">&lt;</span><span class="n">Mutex</span><span class="o">&lt;</span><span class="n">RefCell</span><span class="o">&lt;</span><span class="n">serial</span>::<span class="n">SystemPort</span><span class="o">&gt;&gt;&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">SpacePacket</span><span class="o">&gt;</span><span class="p">(</span><span class="w"></span>
+<span class="w">        </span><span class="n">control</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">telemetry</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="p">)</span><span class="o">?</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// TODO: Start the GraphQL service</span>
+<span class="w">    </span><span class="k">loop</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
+<p>The SDK is packaged with a client to help test our new UART comms service,
+<a class="reference external" href="https://github.com/kubos/kubos/tree/master/clients/uart-comms-client">uart-comms-client</a>.</p>
+<p>This client program will take the input data, wrap it in a UDP packet, and then send it over the
+requested serial device.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you are using a local development environment, instead of an instance of the SDK, you’ll need
+to clone the repo and navigate to the uart-comms-client folder.
+You’ll then run the program with <code class="docutils literal notranslate"><span class="pre">cargo</span> <span class="pre">run</span> <span class="pre">--</span> <span class="pre">{command</span> <span class="pre">args}</span></code>.</p>
+</div>
+<p>The program has the following syntax:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">UART</span> <span class="n">Comms</span> <span class="n">Client</span>
+
+<span class="n">USAGE</span><span class="p">:</span>
+    <span class="n">uart</span><span class="o">-</span><span class="n">comms</span><span class="o">-</span><span class="n">client</span> <span class="p">[</span><span class="n">OPTIONS</span><span class="p">]</span> <span class="o">&lt;</span><span class="n">data</span><span class="o">&gt;</span> <span class="o">-</span><span class="n">b</span> <span class="o">&lt;</span><span class="n">bus</span><span class="o">&gt;</span> <span class="o">-</span><span class="n">p</span> <span class="o">&lt;</span><span class="n">port</span><span class="o">&gt;</span>
+
+<span class="n">FLAGS</span><span class="p">:</span>
+    <span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>       <span class="n">Prints</span> <span class="n">help</span> <span class="n">information</span>
+    <span class="o">-</span><span class="n">V</span><span class="p">,</span> <span class="o">--</span><span class="n">version</span>    <span class="n">Prints</span> <span class="n">version</span> <span class="n">information</span>
+
+<span class="n">OPTIONS</span><span class="p">:</span>
+    <span class="o">-</span><span class="n">b</span> <span class="o">&lt;</span><span class="n">bus</span><span class="o">&gt;</span>              <span class="n">Serial</span> <span class="n">Device</span>
+    <span class="o">-</span><span class="n">f</span> <span class="o">&lt;</span><span class="n">file</span><span class="o">&gt;</span>             <span class="n">File</span> <span class="n">containing</span> <span class="n">data</span> <span class="n">to</span> <span class="n">send</span>
+    <span class="o">-</span><span class="n">p</span> <span class="o">&lt;</span><span class="n">port</span><span class="o">&gt;</span>             <span class="n">Destination</span> <span class="n">port</span>
+
+<span class="n">ARGS</span><span class="p">:</span>
+    <span class="o">&lt;</span><span class="n">data</span><span class="o">&gt;</span>    <span class="n">Data</span> <span class="n">to</span> <span class="n">send</span>
+</pre></div>
+</div>
+<div class="section" id="setup">
+<h3>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="software">
+<h4>Software<a class="headerlink" href="#software" title="Permalink to this headline">¶</a></h4>
+<p>Build the comms service, being careful to cross-compile for the target OBC, then transfer the binary
+to the OBC.</p>
+<p>Information about building and transferring Rust projects can be found in the
+<a class="reference internal" href="../getting-started/using-rust.html"><span class="doc">Getting Started with KubOS and Rust</span></a> doc.</p>
+<p>Once transferred, log into the board and start the service.
+Leave this connection to the OBC open so that you can view the service’s output</p>
+</div>
+<div class="section" id="hardware">
+<h4>Hardware<a class="headerlink" href="#hardware" title="Permalink to this headline">¶</a></h4>
+<p>Connect an FTDI cable between the OBC’s UART port and your PC.
+At a minimum, the FTDI’s ground (black), TX (orange), and RX (yellow) lines should be connected.</p>
+<p>If you are using an instance of the SDK, the cable should automatically be detected by the SDK and
+given an alias of <code class="docutils literal notranslate"><span class="pre">/dev/FTDI</span></code>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you have more than one FTDI cable connected, you will have to identify and use the correct
+<code class="docutils literal notranslate"><span class="pre">/dev/ttyUSB*</span></code> device instead.</p>
+</div>
+<p>If you are using a local development environment, refer to the <a class="reference internal" href="../obc-docs/comms-setup.html"><span class="doc">comms setup</span></a> doc
+instead in order to set up communication.</p>
+</div>
+</div>
+<div class="section" id="execution">
+<h3>Execution<a class="headerlink" href="#execution" title="Permalink to this headline">¶</a></h3>
+<p>To start, we’ll send a simple telemetry request to the telemetry service running on the OBC.
+By default, the telemetry service uses port 8020 for GraphQL requests.</p>
+<p>From the SDK, run the following command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ uart-comms-client &quot;{telemetry(latest: 10){subsystem, parameter, value}&quot; -b /dev/FTDI -p 8020
+</pre></div>
+</div>
+<p>Or, from your local dev environment:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cargo run -- &quot;{telemetry(latest: 10){subsystem, parameter, value}&quot; -b /dev/FTDI -p 8020
+</pre></div>
+</div>
+<p>You should see the following output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Response</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;data&quot;</span><span class="p">:{</span><span class="s2">&quot;telemetry&quot;</span><span class="p">:[]},</span><span class="s2">&quot;errors&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">It is possible that data will be dropped during the transfer process.
+This will be indicated by an output message of <code class="docutils literal notranslate"><span class="pre">Error:</span> <span class="pre">ErrorMessage</span> <span class="pre">{</span> <span class="pre">msg:</span> <span class="pre">&quot;Checksum</span> <span class="pre">mismatch&quot;</span> <span class="pre">}</span></code>.
+If this occurs, re-run the client command.</p>
+</div>
+</div>
+<div class="section" id="troubleshooting">
+<h3>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h3>
+<p>If the client program times out (indicated by <code class="docutils literal notranslate"><span class="pre">Error:</span> <span class="pre">ErrorMessage</span> <span class="pre">{</span> <span class="pre">msg:</span> <span class="pre">&quot;Timed</span> <span class="pre">out</span> <span class="pre">waiting</span> <span class="pre">for</span> <span class="pre">response&quot;</span> <span class="pre">}</span></code>),
+check the following:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Communications service is running on the target OBC</li>
+<li>Telemetry service is running on the target OBC</li>
+<li>OBC’s UART port is correctly wired to the user’s PC</li>
+<li>Destination IP given to the client matches the <code class="docutils literal notranslate"><span class="pre">ip</span></code> parameter in the service</li>
+<li>Port given to the client matches the port of the telemetry service (this is defined in
+the systems <code class="docutils literal notranslate"><span class="pre">config.toml</span></code> file. The default location is <code class="docutils literal notranslate"><span class="pre">/etc/kubos-config.toml</span></code>)</li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="graphql">
+<h2>GraphQL<a class="headerlink" href="#graphql" title="Permalink to this headline">¶</a></h2>
+<p>To finish the communications service, we want to expose all telemetry data collected through a
+GraphQL front-end.</p>
+<p>The telemetry structure, <a href="../rust-docs/comms_service/struct.CommsTelemetry.html" target="_blank">CommsTelemetry</a>, has the following fields:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">packets_up</span></code> - Number of packets successfully uplinked (transferred from a client to the
+service)</li>
+<li><code class="docutils literal notranslate"><span class="pre">packets_down</span></code> - Number of packets successfully downlinked (transferred from the service to
+a client)</li>
+<li><code class="docutils literal notranslate"><span class="pre">failed_packets_up</span></code> - Number of bad packets received from a client</li>
+<li><code class="docutils literal notranslate"><span class="pre">failed_packets_down</span></code> - Number of packets the service failed to write to a client</li>
+<li><code class="docutils literal notranslate"><span class="pre">error</span></code> - General list of errors which have occurred within the service</li>
+</ul>
+</div></blockquote>
+<p>We’ll create two new files to handle the GraphQL portion of the service: <cite>model.rs</cite> and <cite>schema.rs</cite>.</p>
+<div class="section" id="schema">
+<h3>Schema<a class="headerlink" href="#schema" title="Permalink to this headline">¶</a></h3>
+<p>The schema file defines the front-end queries that will be available.
+We’ll also need to define a mutation section (which will remain empty for now) in order to be able
+to compile the program.</p>
+<p>The file should look like this:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">use</span><span class="w"> </span><span class="n">juniper</span>::<span class="n">FieldResult</span><span class="p">;</span><span class="w"></span>
+<span class="k">use</span><span class="w"> </span><span class="k">crate</span>::<span class="n">model</span>::<span class="n">Subsystem</span><span class="p">;</span><span class="w"></span>
+
+<span class="k">type</span> <span class="nc">Context</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">kubos_service</span>::<span class="n">Context</span><span class="o">&lt;</span><span class="n">Subsystem</span><span class="o">&gt;</span><span class="p">;</span><span class="w"></span>
+
+<span class="k">pub</span><span class="w"> </span><span class="k">struct</span> <span class="nc">QueryRoot</span><span class="p">;</span><span class="w"></span>
+
+<span class="n">graphql_object</span><span class="o">!</span><span class="p">(</span><span class="n">QueryRoot</span>: <span class="nc">Context</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="s">&quot;Query&quot;</span><span class="w"> </span><span class="o">|&amp;</span><span class="bp">self</span><span class="o">|</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Test query to verify service is running without attempting</span>
+<span class="w">    </span><span class="c1">// to communicate with the underlying subsystem</span>
+<span class="w">    </span><span class="n">field</span><span class="w"> </span><span class="n">ping</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="nc">FieldResult</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nb">Ok</span><span class="p">(</span><span class="nb">String</span>::<span class="n">from</span><span class="p">(</span><span class="s">&quot;pong&quot;</span><span class="p">))</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Request number of bad uplink packets</span>
+<span class="w">    </span><span class="n">field</span><span class="w"> </span><span class="n">failed_packets_up</span><span class="p">(</span><span class="o">&amp;</span><span class="n">executor</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">FieldResult</span><span class="o">&lt;</span><span class="kt">i32</span><span class="o">&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nb">Ok</span><span class="p">(</span><span class="n">executor</span><span class="p">.</span><span class="n">context</span><span class="p">().</span><span class="n">subsystem</span><span class="p">().</span><span class="n">failed_packets_up</span><span class="p">()</span><span class="o">?</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Request number of bad downlink packets</span>
+<span class="w">    </span><span class="n">field</span><span class="w"> </span><span class="n">failed_packets_down</span><span class="p">(</span><span class="o">&amp;</span><span class="n">executor</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">FieldResult</span><span class="o">&lt;</span><span class="kt">i32</span><span class="o">&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nb">Ok</span><span class="p">(</span><span class="n">executor</span><span class="p">.</span><span class="n">context</span><span class="p">().</span><span class="n">subsystem</span><span class="p">().</span><span class="n">failed_packets_down</span><span class="p">()</span><span class="o">?</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Request number of packets successfully uplinked</span>
+<span class="w">    </span><span class="n">field</span><span class="w"> </span><span class="n">packets_up</span><span class="p">(</span><span class="o">&amp;</span><span class="n">executor</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">FieldResult</span><span class="o">&lt;</span><span class="kt">i32</span><span class="o">&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nb">Ok</span><span class="p">(</span><span class="n">executor</span><span class="p">.</span><span class="n">context</span><span class="p">().</span><span class="n">subsystem</span><span class="p">().</span><span class="n">packets_up</span><span class="p">()</span><span class="o">?</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Request number of packets successfully downlinked</span>
+<span class="w">    </span><span class="n">field</span><span class="w"> </span><span class="n">packets_down</span><span class="p">(</span><span class="o">&amp;</span><span class="n">executor</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">FieldResult</span><span class="o">&lt;</span><span class="kt">i32</span><span class="o">&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nb">Ok</span><span class="p">(</span><span class="n">executor</span><span class="p">.</span><span class="n">context</span><span class="p">().</span><span class="n">subsystem</span><span class="p">().</span><span class="n">packets_down</span><span class="p">()</span><span class="o">?</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Request errors that have occured</span>
+<span class="w">    </span><span class="n">field</span><span class="w"> </span><span class="n">errors</span><span class="p">(</span><span class="o">&amp;</span><span class="n">executor</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">FieldResult</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nb">Ok</span><span class="p">(</span><span class="n">executor</span><span class="p">.</span><span class="n">context</span><span class="p">().</span><span class="n">subsystem</span><span class="p">().</span><span class="n">errors</span><span class="p">()</span><span class="o">?</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">});</span><span class="w"></span>
+
+<span class="k">pub</span><span class="w"> </span><span class="k">struct</span> <span class="nc">MutationRoot</span><span class="p">;</span><span class="w"></span>
+
+<span class="sd">/// Base GraphQL mutation model</span>
+<span class="n">graphql_object</span><span class="o">!</span><span class="p">(</span><span class="n">MutationRoot</span>: <span class="nc">Context</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="s">&quot;Mutation&quot;</span><span class="w"> </span><span class="o">|&amp;</span><span class="bp">self</span><span class="o">|</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+
+<span class="p">});</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="model">
+<h3>Model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h3>
+<p>The model file is used to define the back-end functions which fetch the actual data requested.</p>
+<p>Each function will take ownership of the telemetry structure’s mutex and then return a particular
+field.</p>
+<p>The file should look like this:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">use</span><span class="w"> </span><span class="n">comms_service</span>::<span class="n">CommsTelemetry</span><span class="p">;</span><span class="w"></span>
+<span class="k">use</span><span class="w"> </span><span class="n">std</span>::<span class="n">sync</span>::<span class="p">{</span><span class="n">Arc</span><span class="p">,</span><span class="w"> </span><span class="n">Mutex</span><span class="p">};</span><span class="w"></span>
+
+<span class="cp">#[derive(Clone)]</span><span class="w"></span>
+<span class="k">pub</span><span class="w"> </span><span class="k">struct</span> <span class="nc">Subsystem</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">telem</span>: <span class="nc">Arc</span><span class="o">&lt;</span><span class="n">Mutex</span><span class="o">&lt;</span><span class="n">CommsTelemetry</span><span class="o">&gt;&gt;</span><span class="p">,</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="k">impl</span><span class="w"> </span><span class="n">Subsystem</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">new</span><span class="p">(</span><span class="n">telem</span>: <span class="nc">Arc</span><span class="o">&lt;</span><span class="n">Mutex</span><span class="o">&lt;</span><span class="n">CommsTelemetry</span><span class="o">&gt;&gt;</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">Subsystem</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">Subsystem</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">telem</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">failed_packets_up</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">Result</span><span class="o">&lt;</span><span class="kt">i32</span><span class="p">,</span><span class="w"> </span><span class="nb">String</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">match</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">telem</span><span class="p">.</span><span class="n">lock</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="nb">Ok</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nb">Ok</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">failed_packets_up</span><span class="p">),</span><span class="w"></span>
+<span class="w">            </span><span class="nb">Err</span><span class="p">(</span><span class="n">_</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nb">Err</span><span class="p">(</span><span class="s">&quot;Failed to lock telemetry&quot;</span><span class="p">.</span><span class="n">to_owned</span><span class="p">()),</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">failed_packets_down</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">Result</span><span class="o">&lt;</span><span class="kt">i32</span><span class="p">,</span><span class="w"> </span><span class="nb">String</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">match</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">telem</span><span class="p">.</span><span class="n">lock</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="nb">Ok</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nb">Ok</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">failed_packets_down</span><span class="p">),</span><span class="w"></span>
+<span class="w">            </span><span class="nb">Err</span><span class="p">(</span><span class="n">_</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nb">Err</span><span class="p">(</span><span class="s">&quot;Failed to lock telemetry&quot;</span><span class="p">.</span><span class="n">to_owned</span><span class="p">()),</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">packets_up</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">Result</span><span class="o">&lt;</span><span class="kt">i32</span><span class="p">,</span><span class="w"> </span><span class="nb">String</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">match</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">telem</span><span class="p">.</span><span class="n">lock</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="nb">Ok</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nb">Ok</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">packets_up</span><span class="p">),</span><span class="w"></span>
+<span class="w">            </span><span class="nb">Err</span><span class="p">(</span><span class="n">_</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nb">Err</span><span class="p">(</span><span class="s">&quot;Failed to lock telemetry&quot;</span><span class="p">.</span><span class="n">to_owned</span><span class="p">()),</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">packets_down</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">Result</span><span class="o">&lt;</span><span class="kt">i32</span><span class="p">,</span><span class="w"> </span><span class="nb">String</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">match</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">telem</span><span class="p">.</span><span class="n">lock</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="nb">Ok</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nb">Ok</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">packets_down</span><span class="p">),</span><span class="w"></span>
+<span class="w">            </span><span class="nb">Err</span><span class="p">(</span><span class="n">_</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nb">Err</span><span class="p">(</span><span class="s">&quot;Failed to lock telemetry&quot;</span><span class="p">.</span><span class="n">to_owned</span><span class="p">()),</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">errors</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">Result</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="nb">String</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">match</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">telem</span><span class="p">.</span><span class="n">lock</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="nb">Ok</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="nb">Ok</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">errors</span><span class="p">.</span><span class="n">to_owned</span><span class="p">())</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">            </span><span class="nb">Err</span><span class="p">(</span><span class="n">_</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nb">Err</span><span class="p">(</span><span class="s">&quot;Failed to lock telemetry&quot;</span><span class="p">.</span><span class="n">to_owned</span><span class="p">()),</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h3>Main Logic<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>We can now define and start our GraphQL front-end in the main code:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="cp">#[macro_use]</span><span class="w"></span>
+<span class="k">extern</span><span class="w"> </span><span class="k">crate</span><span class="w"> </span><span class="n">juniper</span><span class="p">;</span><span class="w"></span>
+
+<span class="k">mod</span> <span class="nn">schema</span><span class="p">;</span><span class="w"></span>
+<span class="k">mod</span> <span class="nn">model</span><span class="p">;</span><span class="w"></span>
+
+<span class="k">use</span><span class="w"> </span><span class="k">crate</span>::<span class="n">model</span>::<span class="o">*</span><span class="p">;</span><span class="w"></span>
+<span class="k">use</span><span class="w"> </span><span class="k">crate</span>::<span class="n">schema</span>::<span class="o">*</span><span class="p">;</span><span class="w"></span>
+
+<span class="k">use</span><span class="w"> </span><span class="n">kubos_service</span>::<span class="p">{</span><span class="n">Logger</span><span class="p">,</span><span class="w"> </span><span class="n">Service</span><span class="p">};</span><span class="w"></span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="nc">ServiceResult</span><span class="o">&lt;</span><span class="p">()</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Initialize logging for the service</span>
+<span class="w">    </span><span class="n">Logger</span>::<span class="n">init</span><span class="p">(</span><span class="s">&quot;radio-service&quot;</span><span class="p">).</span><span class="n">unwrap</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Get the main service configuration from the system&#39;s config.toml file</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">service_config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">kubos_system</span>::<span class="n">Config</span>::<span class="n">new</span><span class="p">(</span><span class="s">&quot;radio-service&quot;</span><span class="p">)</span><span class="o">?</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Pull out our communication settings</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CommsConfig</span>::<span class="n">new</span><span class="p">(</span><span class="n">service_config</span><span class="p">.</span><span class="n">clone</span><span class="p">())</span><span class="o">?</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">debug</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;Config: {:?}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">config</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Initialize the serial port</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">conn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">serial_init</span><span class="p">(</span><span class="n">BUS</span><span class="p">)</span><span class="o">?</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Set up the comms configuration</span>
+<span class="w">    </span><span class="c1">// In this instance, reading and writing are done over the same connection,</span>
+<span class="w">    </span><span class="c1">// so we&#39;ll just clone the UART port connection</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">read_conn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">conn</span><span class="p">.</span><span class="n">clone</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">write_conn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">conn</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">control</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CommsControlBlock</span>::<span class="n">new</span><span class="p">(</span><span class="w"></span>
+<span class="w">        </span><span class="nb">Some</span><span class="p">(</span><span class="n">Arc</span>::<span class="n">new</span><span class="p">(</span><span class="n">read</span><span class="p">)),</span><span class="w"></span>
+<span class="w">        </span><span class="n">vec</span><span class="o">!</span><span class="p">[</span><span class="n">Arc</span>::<span class="n">new</span><span class="p">(</span><span class="n">write</span><span class="p">)],</span><span class="w"></span>
+<span class="w">        </span><span class="n">read_conn</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="n">write_conn</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="n">config</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">telemetry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Arc</span>::<span class="n">new</span><span class="p">(</span><span class="n">Mutex</span>::<span class="n">new</span><span class="p">(</span><span class="n">CommsTelemetry</span>::<span class="n">default</span><span class="p">()));</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Start the comms service thread</span>
+<span class="w">    </span><span class="n">CommsService</span>::<span class="n">start</span>::<span class="o">&lt;</span><span class="n">Arc</span><span class="o">&lt;</span><span class="n">Mutex</span><span class="o">&lt;</span><span class="n">RefCell</span><span class="o">&lt;</span><span class="n">serial</span>::<span class="n">SystemPort</span><span class="o">&gt;&gt;&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">SpacePacket</span><span class="o">&gt;</span><span class="p">(</span><span class="n">control</span><span class="p">,</span><span class="w"> </span><span class="n">telemetry</span><span class="p">.</span><span class="n">clone</span><span class="p">())</span><span class="o">?</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Start the GraphQL front-end</span>
+<span class="w">    </span><span class="n">Service</span>::<span class="n">new</span><span class="p">(</span><span class="n">service_config</span><span class="p">,</span><span class="w"> </span><span class="n">Subsystem</span>::<span class="n">new</span><span class="p">(</span><span class="n">telemetry</span><span class="p">),</span><span class="w"> </span><span class="n">QueryRoot</span><span class="p">,</span><span class="w"> </span><span class="n">MutationRoot</span><span class="p">).</span><span class="n">start</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">    </span><span class="nb">Ok</span><span class="p">(())</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h3>Testing<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>Now that the code is complete, we can use our communications service to send a query to itself:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ uart-comms-client -b /dev/FTDI -p 8150 &quot;{packetsUp,packetsDown,failedPacketsUp,failedPacketsDown,errors}&quot;
+Response: {&quot;data&quot;:{&quot;failedPacketsDown&quot;:0,&quot;failedPacketsUp&quot;:0,&quot;packetsDown&quot;:4,&quot;packetsUp&quot;:5},&quot;errors&quot;:[]}
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../obc-docs/index.html" class="btn btn-neutral float-right" title="Working with KubOS and an OBC" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="shell.html" class="btn btn-neutral" title="Establishing a Shell Connection with an OBC" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

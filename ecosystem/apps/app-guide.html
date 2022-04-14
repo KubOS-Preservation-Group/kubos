@@ -1,0 +1,383 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>KubOS Mission Applications Development Guide &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../../index.html"/>
+        <link rel="up" title="KubOS Ecosystem" href="../index.html"/>
+        <link rel="next" title="Python Applications API" href="python-app-api.html"/>
+        <link rel="prev" title="KubOS Ecosystem" href="../index.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../obc-docs/index.html">Working with an OBC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">KubOS Ecosystem</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#mission-applications">Mission Applications</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">KubOS Mission Applications Development Guide</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#apis">APIs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#additional-arguments">Additional Arguments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#application-manifest">Application Manifest</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#local-execution">Local Execution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#additional-resources">Additional Resources</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="python-app-api.html">Python Applications API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rust-app-api.html">Rust Applications API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#services">Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#kubos-linux">Kubos Linux</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../deep-dive/index.html">Under the Hood</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sdk-docs/index.html">Kubos SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Contributing to KubOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">KubOS Ecosystem</a> &raquo;</li>
+        
+      <li>KubOS Mission Applications Development Guide</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/ecosystem/apps/app-guide.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="kubos-mission-applications-development-guide">
+<h1>KubOS Mission Applications Development Guide<a class="headerlink" href="#kubos-mission-applications-development-guide" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>In order to be compatible with the applications service, mission applications must comply with the applications framework:</p>
+<ul class="simple">
+<li>The application should provide a <code class="docutils literal notranslate"><span class="pre">-h</span></code> command option for query the command line arguments</li>
+<li>The application should not define a <code class="docutils literal notranslate"><span class="pre">-c</span></code> command option (reserved for configuration setup)</li>
+<li>The application must be packaged with a manifest file which details the name, version, and author information for the binary</li>
+</ul>
+<p>Once an application has been built, it should be transferred to the system, along with its manifest, and then <a class="reference internal" href="../services/app-service.html#register-app"><span class="std std-ref">registered with the applications service</span></a>.</p>
+<p>For projects written in languages like Python, where there is no executable file, multiple files
+may be used for the application.</p>
+</div>
+<div class="section" id="apis">
+<h2>APIs<a class="headerlink" href="#apis" title="Permalink to this headline">¶</a></h2>
+<p>Users may write applications in the language of their choice.
+However, Kubos provides APIs to assist and simplify with application development for use with one of our preferred languages.</p>
+<p>Our supported languages for mission applications are:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="python-app-api.html">Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rust-app-api.html">Rust</a></li>
+</ul>
+</div>
+<p>These APIs abstract initial logging setup and provide helper functions for use when querying other system and hardware services.</p>
+</div>
+<div class="section" id="additional-arguments">
+<h2>Additional Arguments<a class="headerlink" href="#additional-arguments" title="Permalink to this headline">¶</a></h2>
+<p>Additional command line arguments may be used by the application. They will be automatically passed through to the application by the applications service.</p>
+<p>Under the covers, the application would be called like so:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mission</span><span class="o">-</span><span class="n">app</span> <span class="o">--</span><span class="n">verbose</span> <span class="o">--</span><span class="n">release</span>
+</pre></div>
+</div>
+<p>Where <code class="docutils literal notranslate"><span class="pre">--verbose</span></code> and <code class="docutils literal notranslate"><span class="pre">--release</span></code> are custom arguments for that particular application.</p>
+<p>Examples of how to define and structure additional arguments can be seen in the <a class="reference external" href="https://github.com/kubos/kubos/blob/master/examples/rust-mission-app/src/main.rs">Rust</a>
+and <a class="reference external" href="https://github.com/kubos/kubos/blob/master/examples/python-mission-application/mission-app.py">Python</a>
+example applications.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The <code class="docutils literal notranslate"><span class="pre">-c</span></code> option is pre-defined by the system to allow a custom config file to be used.</p>
+</div>
+</div>
+<div class="section" id="application-manifest">
+<span id="app-manifest"></span><h2>Application Manifest<a class="headerlink" href="#application-manifest" title="Permalink to this headline">¶</a></h2>
+<p>In order for the applications service to properly maintain versioning information, each application should be registered along with a manifest file, <cite>manifest.toml</cite>.</p>
+<p>This file must have the following key values:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">name</span></code> - The name of the application which will be called for execution</li>
+<li><code class="docutils literal notranslate"><span class="pre">version</span></code> - The version number of the application</li>
+<li><code class="docutils literal notranslate"><span class="pre">author</span></code> - The author of the application</li>
+</ul>
+<p>Optionally, the file may also specify the following values:</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">executable</span></code> key value allows you to specify which file should be called in order to begin
+execution of the application.
+If it’s omitted, the value of <code class="docutils literal notranslate"><span class="pre">name</span></code> will be used.
+This is particularly useful for Python applications, where the name of the application might not
+match the name of the file to be called.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">config</span></code> key value allows you to specify a custom file which the application should use in
+order to read <a class="reference internal" href="../services/service-config.html"><span class="doc">service configuration</span></a> information.
+If it is omitted, the default location <code class="docutils literal notranslate"><span class="pre">/etc/kubos-config.toml</span></code> will be used.</p>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;mission-app&quot;</span>
+<span class="n">executable</span> <span class="o">=</span> <span class="s2">&quot;app.py&quot;</span>
+<span class="n">version</span> <span class="o">=</span> <span class="s2">&quot;1.1&quot;</span>
+<span class="n">author</span> <span class="o">=</span> <span class="s2">&quot;Me&quot;</span>
+<span class="n">config</span> <span class="o">=</span> <span class="s2">&quot;/custom/config.toml&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="local-execution">
+<h2>Local Execution<a class="headerlink" href="#local-execution" title="Permalink to this headline">¶</a></h2>
+<p>If you would like to test your application locally and if it will communicate with any
+:doc`locally running services &lt;../../getting-started/local-services&gt;`, then you will need to
+include the <code class="docutils literal notranslate"><span class="pre">-c</span> <span class="pre">path/to/config.toml</span></code> argument when starting your application.</p>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ./app.py -c ../tools/default_config.toml
+</pre></div>
+</div>
+</div>
+<div class="section" id="additional-resources">
+<h2>Additional Resources<a class="headerlink" href="#additional-resources" title="Permalink to this headline">¶</a></h2>
+<p>Reference Docs:</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference internal" href="../services/app-service.html"><span class="doc">Applications Service Guide</span></a> - Goes over the basic capabilities
+of the applications service and how it can be customized</li>
+<li><a class="reference internal" href="../../mission-dev/deployment.html"><span class="doc">Deployment Application Guide</span></a> - Goes over the basic
+architecture required to execute a mission’s deployment logic</li>
+</ul>
+</div></blockquote>
+<p>Tutorials:</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference internal" href="../../tutorials/first-mission-app.html"><span class="doc">Creating Your First Mission Application</span></a> - Walks the user through the process of creating their
+first mission application which is capable of interacting with Kubos services</li>
+<li><a class="reference internal" href="../../tutorials/app-register.html"><span class="doc">Registering a Mission Application</span></a> - Walks the user through the process of registering a
+mission application with the applications service and then starting, updating, and verifying
+the application</li>
+</ul>
+</div></blockquote>
+<p>Example applications:</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference external" href="https://github.com/kubos/kubos/tree/master/examples/rust-mission-app">Basic application written in Rust</a> -
+Demonstrates the basic application framework and how passthrough arguments can be used</li>
+<li><a class="reference external" href="https://github.com/kubos/kubos/blob/master/examples/python-mission-framework/python-mission-app.py">Framework application written in Python</a> -
+Can be used as a starting template when creating Python applications</li>
+<li><a class="reference external" href="https://github.com/kubos/kubos/tree/master/examples/python-mission-application">Basic application wrtting in Python</a> -
+Demonstrates the basic application framework and how to communicate with Kubos services</li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="python-app-api.html" class="btn btn-neutral float-right" title="Python Applications API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../index.html" class="btn btn-neutral" title="KubOS Ecosystem" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

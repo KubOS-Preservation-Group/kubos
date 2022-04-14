@@ -1,0 +1,376 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>KubOS Ecosystem &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../index.html"/>
+        <link rel="next" title="KubOS Mission Applications Development Guide" href="apps/app-guide.html"/>
+        <link rel="prev" title="Preparing for Flight Readiness" href="../mission-dev/flight-ready.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../obc-docs/index.html">Working with an OBC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">KubOS Ecosystem</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#mission-applications">Mission Applications</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="apps/app-guide.html">KubOS Mission Applications Development Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="apps/python-app-api.html">Python Applications API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="apps/rust-app-api.html">Rust Applications API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#services">Services</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="services/core-services.html">Core Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="services/hardware-services.html">Hardware Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="services/payload-services.html">Payload Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="services/service-config.html">Service Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="services/service-dev.html">Service Development</a></li>
+<li class="toctree-l3"><a class="reference internal" href="services/service-outline-guide.html">KubOS Service Outline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="services/graphql.html">GraphQL</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#kubos-linux">Kubos Linux</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="linux-docs/kubos-linux-overview.html">Kubos Linux Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="linux-docs/using-kubos-linux.html">Using Kubos Linux</a></li>
+<li class="toctree-l3"><a class="reference internal" href="linux-docs/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="linux-docs/monitoring.html">Process Monitoring</a></li>
+<li class="toctree-l3"><a class="reference internal" href="linux-docs/kubos-linux-upgrade.html">Kubos Linux Upgrades</a></li>
+<li class="toctree-l3"><a class="reference internal" href="linux-docs/kubos-linux-recovery.html">Kubos Linux Recovery</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../deep-dive/index.html">Under the Hood</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sdk-docs/index.html">Kubos SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing to KubOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>KubOS Ecosystem</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/ecosystem/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="kubos-ecosystem">
+<h1>KubOS Ecosystem<a class="headerlink" href="#kubos-ecosystem" title="Permalink to this headline">¶</a></h1>
+<p>The KubOS system is designed to take care of every aspect of a satellite’s flight software.</p>
+<p>Rather than operating as a single, monolithic entity, KubOS is comprised of a series of independent,
+yet interoperating components.</p>
+<div class="figure align-center">
+<img alt="../_images/architecture_stack.png" src="../_images/architecture_stack.png" />
+</div>
+<ul class="simple">
+<li>Mission applications control and execute the logic necessary to accomplish mission goals</li>
+<li>Services expose hardware and system functionality with a controlled and uniform interface</li>
+<li>Kubos Linux provides the base operating system and the drivers needed to communicate with connected
+hardware devices</li>
+</ul>
+<p>Information about how to develop and tie all of these components together for a particular mission
+can be found in the <a class="reference internal" href="../mission-dev/index.html"><span class="doc">mission development</span></a> section.</p>
+<div class="section" id="mission-applications">
+<span id="app-docs"></span><h2>Mission Applications<a class="headerlink" href="#mission-applications" title="Permalink to this headline">¶</a></h2>
+<p>Applications are user-level programs which can either be run as one-off executions or continuous
+processes.</p>
+<p><em>Mission</em> applications are anything that governs the behavior of the satellite.
+They govern state management, accomplish scripted tasks, monitor on-board behavior, and are
+generally the brains of the system.</p>
+<p>Each application is typically dedicated to a certain mode or isolated task the satellite is supposed
+to accomplish to keep them lightweight and portable.
+They can be simple, such as a telemetry beacon app, or complex, such as a payload operations app.</p>
+<p>Details about how to get started developing applications can be found in the
+<a class="reference internal" href="apps/app-guide.html"><span class="doc">mission app dev guide</span></a>.</p>
+<p>If you prefer to learn by doing, check out our <a class="reference internal" href="../tutorials/index.html"><span class="doc">tutorials</span></a> section.</p>
+<p>For more information about what applications will need to be developed in order to accomplish all
+the required mission logic, check out our <a class="reference internal" href="../mission-dev/mission-needs.html"><span class="doc">Typical Required Mission Applications</span></a> doc.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="apps/app-guide.html">KubOS Mission Applications Development Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apps/python-app-api.html">Python Applications API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apps/rust-app-api.html">Rust Applications API</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="services">
+<span id="service-docs"></span><h2>Services<a class="headerlink" href="#services" title="Permalink to this headline">¶</a></h2>
+<p>Kubos services are defined as any persistent process that is used to interact with the satellite.
+Services rarely make decisions, but will allow the user to accomplish typical flight software tasks
+such as task scheduling, telemetry storage, file management, shell access, and hardware interaction.</p>
+<p>All services expose their functionality via HTTP endpoints which accept <a class="reference internal" href="services/graphql.html"><span class="doc">GraphQL</span></a>
+requests and return JSON responses.
+This behavior allows client programs which wish to communicate with a service to be written in any
+language.</p>
+<p>There are three distinct kinds of services:</p>
+<ul class="simple">
+<li>Core services, as the name implies, provide the core functionality of the system. They are
+OBC-independent and are automatically included in KubOS. These services include things like
+OBC monitoring, telemetry management, delay-tolerant file transfer and shell access,
+application management, and task scheduling.</li>
+<li>Hardware services expose the functionality of a connected hardware device (ADCS, GPS, radio, etc)
+to the rest of the bus. They should be re-usable between missions. KubOS comes with support for a
+certain selection of <a class="reference internal" href="../index.html#supported-hardware"><span class="std std-ref">pre-built hardware services</span></a>.</li>
+<li>Payload services are hardware services which have been custom designed for a specific mission’s
+payload hardware. They are not intended to be re-used between missions.</li>
+</ul>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="services/core-services.html">Core Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="services/hardware-services.html">Hardware Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="services/payload-services.html">Payload Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="services/service-config.html">Service Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="services/service-dev.html">Service Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="services/service-outline-guide.html">KubOS Service Outline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="services/graphql.html">GraphQL</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="kubos-linux">
+<span id="linux-docs"></span><h2>Kubos Linux<a class="headerlink" href="#kubos-linux" title="Permalink to this headline">¶</a></h2>
+<p>Kubos Linux is a custom Linux distribution designed with embedded devices in mind.</p>
+<p>It focuses on including only drivers that are useful for space applications (eg.
+I2C and SPI, rather than display drivers) and multi-layer system validation and
+recovery logic.</p>
+<p>Official Kubos Linux installation files can be found in the
+<a class="reference external" href="https://github.com/kubos/kubos-linux-build/releases">kubos-linux-build releases</a> page.</p>
+<p>Guides for installing and interacting with Kubos Linux on a target OBC can be found in the
+<a class="reference internal" href="../obc-docs/index.html"><span class="doc">Working with KubOS and an OBC</span></a> section.</p>
+<p>Information about creating a custom Kubos Linux build can be found in our <a class="reference internal" href="../deep-dive/index.html#custom-klb"><span class="std std-ref">Under the Hood</span></a>
+section.</p>
+<p>Tightly coupled with Kubos Linux is U-Boot, our bootloader of choice.
+U-Boot is responsible for loading Kubos Linux from permanent storage into RAM at boot
+time.
+It is also responsible for processing operating system <a class="reference internal" href="linux-docs/kubos-linux-upgrade.html"><span class="doc">upgrades</span></a>
+and <a class="reference internal" href="linux-docs/kubos-linux-recovery.html"><span class="doc">recovery</span></a>, when necessary.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="linux-docs/kubos-linux-overview.html">Kubos Linux Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linux-docs/using-kubos-linux.html">Using Kubos Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linux-docs/logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linux-docs/monitoring.html">Process Monitoring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linux-docs/kubos-linux-upgrade.html">Kubos Linux Upgrades</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linux-docs/kubos-linux-recovery.html">Kubos Linux Recovery</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="apps/app-guide.html" class="btn btn-neutral float-right" title="KubOS Mission Applications Development Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../mission-dev/flight-ready.html" class="btn btn-neutral" title="Preparing for Flight Readiness" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,305 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>I Don’t Have Hardware Yet, What Can I Do? &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../index.html"/>
+        <link rel="up" title="Getting Started with KubOS" href="index.html"/>
+        <link rel="next" title="Setting Up Your Local Environment" href="local-setup.html"/>
+        <link rel="prev" title="Getting Started with KubOS" href="index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Getting Started</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">I Don’t Have Hardware Yet, What Can I Do?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="local-setup.html">Setting Up Your Local Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="windows-setup.html">Setting up a Dev Environment in Windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="using-rust.html">Getting Started with KubOS and Rust</a></li>
+<li class="toctree-l2"><a class="reference internal" href="using-python.html">Getting Started with KubOS and Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="local-services.html">Running KubOS Core Services Locally</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../obc-docs/index.html">Working with an OBC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ecosystem/index.html">KubOS Ecosystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deep-dive/index.html">Under the Hood</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sdk-docs/index.html">Kubos SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing to KubOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Getting Started with KubOS</a> &raquo;</li>
+        
+      <li>I Don’t Have Hardware Yet, What Can I Do?</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/getting-started/no-board.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="i-don-t-have-hardware-yet-what-can-i-do">
+<h1>I Don’t Have Hardware Yet, What Can I Do?<a class="headerlink" href="#i-don-t-have-hardware-yet-what-can-i-do" title="Permalink to this headline">¶</a></h1>
+<p>Frequently mission projects are started with an idea of the intended mission architecture, but before
+hardware has been received.
+Hardware acquisition lead times can be quite long, in the realm of months, making it useful for
+mission engineers to be able to begin developing their system’s software before their hardware
+arrives.</p>
+<p>The Kubos SDK allows testing integration with <a class="reference internal" href="../ecosystem/services/core-services.html"><span class="doc">KubOS core services</span></a> and development of the high-level mission logic before
+integrating with the final hardware system.</p>
+<div class="section" id="what-can-be-done">
+<h2>What Can Be Done<a class="headerlink" href="#what-can-be-done" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Tutorials - The majority of the KubOS <a class="reference internal" href="../tutorials/index.html"><span class="doc">tutorials</span></a> can be completed
+without hardware. These tutorials will familiarize developers with basic system interactions and
+architecture</li>
+<li>Limited application development - High-level mission logic can be stubbed out and tested by running
+everything within a local development environment. Once hardware is acquired, the stubbed out
+code can be replaced with proper system calls.</li>
+<li>Core service testing - All <a class="reference internal" href="../ecosystem/services/core-services.html"><span class="doc">core service</span></a> can be run
+within a <a class="reference internal" href="local-services.html"><span class="doc">local development environment</span></a>, allowing service interactions to
+be developed and tested</li>
+</ul>
+</div>
+<div class="section" id="what-can-t-be-done">
+<h2>What Can’t Be Done<a class="headerlink" href="#what-can-t-be-done" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Full simulation of hardware interactions - Applications can be developed with functions which stub
+out hardware interactions which would occur, however the Kubos SDK does not currently support
+proper hardware simulation</li>
+<li>Interact with hardware in the same manner as the main OS - If you have peripheral hardware available
+before the main OBC, you may be able to communicate with it via USB, however the device bus name will
+be different than when the hardware is connected in its final configuration (ex. <code class="docutils literal notranslate"><span class="pre">/dev/ttyUSB0</span></code> vs
+<code class="docutils literal notranslate"><span class="pre">/dev/ttyS1</span></code>)</li>
+<li>Interact with logging in the same manner as the main OS - KubOS <a class="reference internal" href="../ecosystem/linux-docs/logging.html"><span class="doc">breaks out logging</span></a>
+into multiple files based on the severity level of the log message (debug, info, error) and the
+entity generating the message (app vs service). The Kubos SDK will route all log messages to
+<code class="docutils literal notranslate"><span class="pre">/var/log/syslog</span></code> instead</li>
+<li>Automatically start services - KubOS services are normally started automatically at boot time by
+init scripts. These scripts do not exist within the SDK, so the services will need to be
+<a class="reference internal" href="local-services.html"><span class="doc">started manually</span></a> for local testing</li>
+<li>Update and recovery testing - The KubOS <a class="reference internal" href="../ecosystem/linux-docs/kubos-linux-upgrade.html"><span class="doc">upgrade</span></a>
+and <a class="reference internal" href="../ecosystem/linux-docs/kubos-linux-recovery.html"><span class="doc">recovery</span></a> processes rely on the bootloader
+and specific partition configurations, so cannot be tested within a local environment</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="local-setup.html" class="btn btn-neutral float-right" title="Setting Up Your Local Environment" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Getting Started with KubOS" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

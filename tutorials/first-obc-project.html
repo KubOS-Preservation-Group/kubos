@@ -1,0 +1,469 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Running a KubOS Project on an OBC &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../index.html"/>
+        <link rel="up" title="Tutorials" href="index.html"/>
+        <link rel="next" title="Registering a Mission Application" href="app-register.html"/>
+        <link rel="prev" title="Creating Your First Mission Application" href="first-mission-app.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#mission-development-tutorials">Mission Development Tutorials</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="first-mission-app.html">Creating Your First Mission Application</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Running a KubOS Project on an OBC</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#setup">Setup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#setting-up-logging">Setting Up Logging</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#logging-in-to-kubos">Logging in to KubOS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#transferring-the-project-to-a-target-obc">Transferring the Project to a Target OBC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#running-the-project-on-the-target-obc">Running the Project on the Target OBC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#next-steps">Next Steps</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#system-interaction-tutorials">System Interaction Tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#advanced-tutorials">Advanced Tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#other-resources">Other Resources</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../obc-docs/index.html">Working with an OBC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ecosystem/index.html">KubOS Ecosystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deep-dive/index.html">Under the Hood</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sdk-docs/index.html">Kubos SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing to KubOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Tutorials</a> &raquo;</li>
+        
+      <li>Running a KubOS Project on an OBC</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/tutorials/first-obc-project.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="running-a-kubos-project-on-an-obc">
+<h1>Running a KubOS Project on an OBC<a class="headerlink" href="#running-a-kubos-project-on-an-obc" title="Permalink to this headline">¶</a></h1>
+<p>Once you have a KubOS project set up, you’ll eventually want to test it on actual hardware.</p>
+<p>This tutorial guides the user through the process of adding logging to a KubOS project
+(a crucial component when running in-flight) and then installing and running it on a target OBC.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The iOBC does not support Python. If this is the board which you are using,
+please refer to the <a class="reference internal" href="../getting-started/using-rust.html"><span class="doc">Getting Started with KubOS and Rust</span></a>
+doc to get your project built and running on the OBC.</p>
+</div>
+<div class="section" id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first"><a class="reference internal" href="../sdk-docs/sdk-installing.html"><span class="doc">Install the Kubos SDK</span></a> or set up the dependencies
+required for a <a class="reference internal" href="../getting-started/local-setup.html"><span class="doc">local dev environment</span></a></p>
+</li>
+<li><p class="first">Have an OBC available with both Python and SSH capabilities
+(preferably with an <a class="reference internal" href="../obc-docs/index.html"><span class="doc">installation of Kubos Linux</span></a>)</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference internal" href="../obc-docs/comms-setup.html#ethernet"><span class="std std-ref">Configuring Ethernet</span></a></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">We’ll start with the base project from the <a class="reference internal" href="first-mission-app.html"><span class="doc">first mission app</span></a> tutorial,
+except we’ll tweak our monitor service query to instead fetch the current amount of available
+memory</p>
+</li>
+</ul>
+</div>
+<div class="section" id="setting-up-logging">
+<h2>Setting Up Logging<a class="headerlink" href="#setting-up-logging" title="Permalink to this headline">¶</a></h2>
+<p>When our mission application is running in-flight, we likely won’t have constant access to <code class="docutils literal notranslate"><span class="pre">stdout</span></code>.</p>
+<p>As a result, it would be better if we were also routing our messages to a log file.
+That way we can check the status of our application at our discretion.</p>
+<p>Kubos Linux uses <a class="reference external" href="https://www.rsyslog.com/">rsyslog</a> to automatically route log messages to the
+appropriate log file and then rotate those files when they become too large.</p>
+<p>All user applications should setup their logging to write to the user facility.
+This will cause all log messages to be routed to files in <code class="docutils literal notranslate"><span class="pre">/home/system/log</span></code>,</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Log files are traditionally stored in <code class="docutils literal notranslate"><span class="pre">/var/log</span></code>. <code class="docutils literal notranslate"><span class="pre">/var/log</span></code> has been set up as a symlink to
+<code class="docutils literal notranslate"><span class="pre">/home/system/log</span></code>.</p>
+</div>
+<p>Within this directory, there may be several files:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">app-debug.log</span></code> - Records all log messages</li>
+<li><code class="docutils literal notranslate"><span class="pre">app-info.log</span></code> - Records log messages with a priority of <code class="docutils literal notranslate"><span class="pre">info</span></code> or higher</li>
+<li><code class="docutils literal notranslate"><span class="pre">app-warn.log</span></code> - Records log messages with a priority of <code class="docutils literal notranslate"><span class="pre">warn</span></code> or higher</li>
+</ul>
+</div></blockquote>
+<p>Additionally, there may be files which match one of the above names, but are suffixed with a time
+stamp.
+For example, <code class="docutils literal notranslate"><span class="pre">app-debug.log.2018.12.01-00.12.07</span></code>.
+These are archived log files. Each log file has a maximum file size.
+Once this size is reached, the current file is renamed as an archive file and a new log file is started.
+By default, nine archive files of each log type will be retained.
+If a new archive file is created and there are already nine files, the oldest will be deleted.</p>
+<p>More information about the logging infrastructure can be found in the
+<a class="reference internal" href="../ecosystem/linux-docs/logging.html"><span class="doc">Kubos Linux logging doc</span></a>.</p>
+<p>For ease-of-use, the Python applications API contains a helper function, <code class="docutils literal notranslate"><span class="pre">logging_setup</span></code>,
+which will make all of the system calls required in order to set up the logger for the application.
+All the user needs to do is specify the name of the application which should be used when generating
+log messages.</p>
+<p>Logging should be setup like so:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">app_api</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">app_api</span><span class="o">.</span><span class="n">logging_setup</span><span class="p">(</span><span class="s2">&quot;mission-app&quot;</span><span class="p">)</span>
+
+<span class="c1"># Write a test message</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Test Message&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We’ll update all informational messages to use <code class="docutils literal notranslate"><span class="pre">logger.info</span></code> instead of <code class="docutils literal notranslate"><span class="pre">print</span></code>, and then all
+error messages to use <code class="docutils literal notranslate"><span class="pre">logger.error</span></code>.</p>
+<p>Our resulting project code should look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python3</span>
+
+<span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">import</span> <span class="nn">app_api</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+
+    <span class="n">logger</span> <span class="o">=</span> <span class="n">app_api</span><span class="o">.</span><span class="n">logging_setup</span><span class="p">(</span><span class="s2">&quot;my-mission-app&quot;</span><span class="p">)</span>
+
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--config&#39;</span><span class="p">,</span> <span class="s1">&#39;-c&#39;</span><span class="p">)</span>
+
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">config</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">global</span> <span class="n">SERVICES</span>
+        <span class="n">SERVICES</span> <span class="o">=</span> <span class="n">app_api</span><span class="o">.</span><span class="n">Services</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">config</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">SERVICES</span> <span class="o">=</span> <span class="n">app_api</span><span class="o">.</span><span class="n">Services</span><span class="p">()</span>
+
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+
+    <span class="n">request</span> <span class="o">=</span> <span class="s1">&#39;{memInfo</span><span class="si">{available}</span><span class="s1">}&#39;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">SERVICES</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">service</span><span class="o">=</span><span class="s2">&quot;monitor-service&quot;</span><span class="p">,</span> <span class="n">query</span><span class="o">=</span><span class="n">request</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Something went wrong: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="p">[</span><span class="s2">&quot;memInfo&quot;</span><span class="p">]</span>
+    <span class="n">available</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;available&quot;</span><span class="p">]</span>
+
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Current available memory: </span><span class="si">%s</span><span class="s2"> kB&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">available</span><span class="p">))</span>
+
+    <span class="n">request</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">        mutation {</span>
+<span class="s1">            insert(subsystem: &quot;OBC&quot;, parameter: &quot;available_mem&quot;, value: &quot;</span><span class="si">%s</span><span class="s1">&quot;) {</span>
+<span class="s1">                success,</span>
+<span class="s1">                errors</span>
+<span class="s1">            }</span>
+<span class="s1">        }</span>
+<span class="s1">        &#39;&#39;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">available</span><span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">SERVICES</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">service</span><span class="o">=</span><span class="s2">&quot;telemetry-service&quot;</span><span class="p">,</span> <span class="n">query</span><span class="o">=</span><span class="n">request</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Something went wrong: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="p">[</span><span class="s2">&quot;insert&quot;</span><span class="p">]</span>
+    <span class="n">success</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;success&quot;</span><span class="p">]</span>
+    <span class="n">errors</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;errors&quot;</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">success</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Telemetry insert encountered errors: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">errors</span><span class="p">))</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Telemetry insert completed successfully&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="logging-in-to-kubos">
+<h2>Logging in to KubOS<a class="headerlink" href="#logging-in-to-kubos" title="Permalink to this headline">¶</a></h2>
+<p>By default, KubOS comes with a user account, <code class="docutils literal notranslate"><span class="pre">kubos</span></code>, with the default password <code class="docutils literal notranslate"><span class="pre">Kubos123</span></code>.</p>
+<p>Log into your OBC using SSH and its configured IP address. Enter the password when prompted.</p>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ssh kubos@10.0.2.20
+kubos@10.0.2.20&#39;s password: ********
+</pre></div>
+</div>
+<p>If this is your first time connecting to the board via SSH, you may be prompted to confirm
+the target IP’s authenticity. Enter “yes” if this occurs:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ssh root@10.0.2.20
+The authenticity of host &#39;10.0.2.20 (10.0.2.20)&#39; can&#39;t be established.
+ECDSA key fingerprint is SHA256:ir2TC+iML+MJ5Cb3cxTReWI69aX6EtPysFQzWleKc+8.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added &#39;10.0.2.20&#39; (ECDSA) to the list of known hosts.
+kubos@10.0.2.20&#39;s password: ********
+</pre></div>
+</div>
+<p>Please confirm that you are able to connect to the board via SSH from you development environment
+before proceeding with the next step. If you are unable to do so, please verify that your OBC’s
+network connection has been <a class="reference internal" href="../obc-docs/comms-setup.html#ethernet"><span class="std std-ref">successfully configured and activated</span></a>.</p>
+<p>Once you are logged in to the OBC, you can use the <code class="docutils literal notranslate"><span class="pre">exit</span></code> command to end the SSH connection and
+return to your host computer.</p>
+</div>
+<div class="section" id="transferring-the-project-to-a-target-obc">
+<h2>Transferring the Project to a Target OBC<a class="headerlink" href="#transferring-the-project-to-a-target-obc" title="Permalink to this headline">¶</a></h2>
+<p>We can now transfer the project to the <code class="docutils literal notranslate"><span class="pre">kubos</span></code> user home directory on the target OBC using SCP.
+From your local command line, run the following (be sure to replace <code class="docutils literal notranslate"><span class="pre">10.0.2.20</span></code> with your OBC’s
+IP address):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ scp my-mission-app.py kubos@10.0.2.20:/home/kubos
+kubos@10.0.2.20&#39;s password: ********
+my-mission-app.py                                     100% 1814     1.8KB/s   00:00
+</pre></div>
+</div>
+</div>
+<div class="section" id="running-the-project-on-the-target-obc">
+<h2>Running the Project on the Target OBC<a class="headerlink" href="#running-the-project-on-the-target-obc" title="Permalink to this headline">¶</a></h2>
+<p>Once the project has been transferred, we can log in to the OBC and run it:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ssh kubos@10.0.2.20
+kubos@10.0.2.20&#39;s password: ********
+/home/kubos # ./my-mission-app.py
+my-mission-app: Current available memory: 497060 kB
+my-mission-app: Telemetry insert completed successfully
+/home/kubos # cat /var/log/app-debug.log
+1970-01-01T03:23:13.246358+00:00 Kubos my-mission-app:&lt;info&gt; Current available memory: 497060 kB
+1970-01-01T03:23:13.867534+00:00 Kubos my-mission-app:&lt;info&gt; Telemetry insert completed successfully
+</pre></div>
+</div>
+</div>
+<div class="section" id="next-steps">
+<h2>Next Steps<a class="headerlink" href="#next-steps" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="app-register.html"><span class="doc">Registering a mission application with the applications service</span></a></p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="app-register.html" class="btn btn-neutral float-right" title="Registering a Mission Application" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="first-mission-app.html" class="btn btn-neutral" title="Creating Your First Mission Application" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

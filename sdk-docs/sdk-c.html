@@ -1,0 +1,409 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Using C with the Kubos SDK &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../index.html"/>
+        <link rel="up" title="Kubos SDK Docs" href="index.html"/>
+        <link rel="next" title="Upgrading Your Kubos Development Environment" href="sdk-upgrading.html"/>
+        <link rel="prev" title="Using Python with the Kubos SDK" href="sdk-python.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../obc-docs/index.html">Working with an OBC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ecosystem/index.html">KubOS Ecosystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deep-dive/index.html">Under the Hood</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Kubos SDK</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="sdk-installing.html">Installing the Kubos SDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sdk-rust.html">Using Rust with the Kubos SDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sdk-python.html">Using Python with the Kubos SDK</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Using C with the Kubos SDK</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#creating-a-project">Creating a Project</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#working-with-cmakelists-txt">Working with CMakeLists.txt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#building-a-project">Building a Project</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cross-compiling">Cross Compiling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#transferring">Transferring</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sdk-upgrading.html">Upgrading the Kubos SDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sdk-advanced-cross-compiling.html">Advanced Rust Cross Compiling</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing to KubOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Kubos SDK Docs</a> &raquo;</li>
+        
+      <li>Using C with the Kubos SDK</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/sdk-docs/sdk-c.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="using-c-with-the-kubos-sdk">
+<h1>Using C with the Kubos SDK<a class="headerlink" href="#using-c-with-the-kubos-sdk" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="creating-a-project">
+<h2>Creating a Project<a class="headerlink" href="#creating-a-project" title="Permalink to this headline">¶</a></h2>
+<p>Create a folder for your project with the <code class="docutils literal notranslate"><span class="pre">mkdir</span></code> command followed by
+the name of your project.</p>
+<p>Inside of this folder you will create three new folders:</p>
+<ul class="simple">
+<li><cite>project-name</cite> - This is where any header (<cite>*.h</cite>) files will go.</li>
+<li><cite>source</cite> - This is where any source (<cite>*.c</cite>) files will go.</li>
+<li><cite>test</cite> - This is where any test files will go.</li>
+</ul>
+<p>This is the skeleton folder structure of your C project.</p>
+<p>You also need to create a text file called <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code>. This is where
+the build instructions for your project will go.</p>
+<p>Here is a quick rundown of the files needed to start your project:</p>
+<p>Your final directory structure should look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">project</span><span class="o">-</span><span class="n">name</span>
+<span class="o">|</span><span class="n">_</span> <span class="n">CMakeLists</span><span class="o">.</span><span class="n">txt</span>
+<span class="o">|</span><span class="n">_</span> <span class="n">project</span><span class="o">-</span><span class="n">name</span>
+<span class="o">|</span><span class="n">_</span> <span class="n">source</span>
+<span class="o">|</span><span class="n">_</span> <span class="n">test</span>
+</pre></div>
+</div>
+<p>Kubos uses the CMake build system, along with our own folder conventions, for C projects.
+You can read more about CMake <a class="reference external" href="https://cmake.org/cmake-tutorial/">here</a>.</p>
+</div>
+<div class="section" id="working-with-cmakelists-txt">
+<h2>Working with CMakeLists.txt<a class="headerlink" href="#working-with-cmakelists-txt" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> file provides instructions to <code class="docutils literal notranslate"><span class="pre">cmake</span></code> on how
+to build the <code class="docutils literal notranslate"><span class="pre">C</span></code> project.</p>
+<p>All <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> files need to start with these two lines:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cmake_minimum_required</span><span class="p">(</span><span class="n">VERSION</span> <span class="mf">3.5</span><span class="p">)</span>
+<span class="n">project</span><span class="p">(</span><span class="n">project</span><span class="o">-</span><span class="n">name</span> <span class="n">VERSION</span> <span class="mf">0.1</span><span class="o">.</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Next, <code class="docutils literal notranslate"><span class="pre">cmake</span></code> must be told what type of project it is building
+and which source files to compile.</p>
+<p>If the project is a library, then the <code class="docutils literal notranslate"><span class="pre">add_library</span></code> command
+will be used:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">add_library</span><span class="p">(</span><span class="n">project</span><span class="o">-</span><span class="n">name</span>
+  <span class="n">source</span><span class="o">/</span><span class="n">lib</span><span class="o">.</span><span class="n">c</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>If the project is an executable, then the <code class="docutils literal notranslate"><span class="pre">add_executable</span></code>
+command will be used:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">add_executable</span><span class="p">(</span><span class="n">project</span><span class="o">-</span><span class="n">name</span>
+  <span class="n">source</span><span class="o">/</span><span class="n">main</span><span class="o">.</span><span class="n">c</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Lastly, the header folder needs to be added using the
+<code class="docutils literal notranslate"><span class="pre">target_include_directories</span></code> command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">target_include_directories</span><span class="p">(</span><span class="n">project</span><span class="o">-</span><span class="n">name</span>
+  <span class="n">PUBLIC</span> <span class="s2">&quot;${project-name_SOURCE_DIR}/project-name&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="building-a-project">
+<h2>Building a Project<a class="headerlink" href="#building-a-project" title="Permalink to this headline">¶</a></h2>
+<p>To build a Kubos C project, the <code class="docutils literal notranslate"><span class="pre">CMake</span></code> build mechanism needs to be invoked.</p>
+<p>First, a folder will be created to store the build artifacts:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ mkdir build
+$ cd build
+</pre></div>
+</div>
+<p>Next, <code class="docutils literal notranslate"><span class="pre">CMake</span></code> will be called and told where to find the build instructions:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cmake ..
+</pre></div>
+</div>
+<p>Lastly, <code class="docutils literal notranslate"><span class="pre">make</span></code> will be called to execute the build setup by <code class="docutils literal notranslate"><span class="pre">Cmake</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ make
+</pre></div>
+</div>
+<p>All build artifacts will be generated in the <code class="docutils literal notranslate"><span class="pre">build</span></code> folder.
+If the project is an executable, then the binary will be named <code class="docutils literal notranslate"><span class="pre">project-name</span></code>.
+If the project is a library, then the library file will be named <code class="docutils literal notranslate"><span class="pre">libproject-name.a</span></code>.</p>
+<p>To build a project from scratch, run <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">clean</span></code> to remove all prior
+build artifacts followed by <code class="docutils literal notranslate"><span class="pre">make</span></code>.</p>
+<p>To pick up on any changes to the project`s CMake files, run <code class="docutils literal notranslate"><span class="pre">cmake</span> <span class="pre">..</span></code>
+again, followed by <code class="docutils literal notranslate"><span class="pre">make</span></code>.</p>
+<p>To build a project without any of the prior <code class="docutils literal notranslate"><span class="pre">make</span></code> or <code class="docutils literal notranslate"><span class="pre">cmake</span></code> artifacts,
+remove the <code class="docutils literal notranslate"><span class="pre">build</span></code> directory with all of its contents and start the build
+process over.</p>
+</div>
+<div class="section" id="cross-compiling">
+<span id="id1"></span><h2>Cross Compiling<a class="headerlink" href="#cross-compiling" title="Permalink to this headline">¶</a></h2>
+<p>By default, CMake will compile with the local <code class="docutils literal notranslate"><span class="pre">gcc</span></code> toolchain found on the PATH.
+If you are working inside of the SDK VM, then the native target is x86 Linux.</p>
+<p>The SDK also provides cross-compiling toolchains for several different targets:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="53%" />
+<col width="34%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Vendor</th>
+<th class="head">Toolchain</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>ISIS</td>
+<td>/usr/bin/iobc_toolchain/usr/bin/arm-linux-gcc</td>
+<td>ISIS-OBC</td>
+</tr>
+<tr class="row-odd"><td>Pumpkin</td>
+<td>/usr/bin/bbb_toolchain/usr/bin/arm-linux-gcc</td>
+<td>Pumpkin Motherboard Module 2</td>
+</tr>
+<tr class="row-even"><td>Beaglebone</td>
+<td>/usr/bin/bbb_toolchain/usr/bin/arm-linux-gcc</td>
+<td>Beaglebone Black, Rev. C</td>
+</tr>
+<tr class="row-odd"><td>(Vagrant)</td>
+<td>/usr/bin/gcc</td>
+<td>Native x86 Linux</td>
+</tr>
+</tbody>
+</table>
+<p>If you would like to cross-compile for one of the supported embedded boards, then
+CMake will need to be informed about which cross-compiling toolchain to use. CMake
+looks at two environment variables when compiling to determine which toolchain it should use.
+These variables are <code class="docutils literal notranslate"><span class="pre">CC</span></code> and <code class="docutils literal notranslate"><span class="pre">CXX</span></code>.</p>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ mkdir build &amp;&amp; cd build
+$ export CC=/usr/bin/bbb_toolchain/usr/bin/arm-linux-gcc
+$ export CXX=/usr/bin/bbb_toolchain/usr/bin/arm-linux-g++
+$ cmake .. &amp;&amp; make
+</pre></div>
+</div>
+</div>
+<div class="section" id="transferring">
+<span id="c-transfer"></span><h2>Transferring<a class="headerlink" href="#transferring" title="Permalink to this headline">¶</a></h2>
+<p>Executables generated from C projects can be transferred to the target OBC <a class="reference internal" href="../obc-docs/comms-setup.html#file-transfer"><span class="std std-ref">via a supported file
+transfer method</span></a>.</p>
+<p>Binaries may be transferred to any location on the target board, however, they should be copied
+to <cite>/home/system/usr/bin</cite> if you would like them to be automatically accessible via the system PATH.</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="sdk-upgrading.html" class="btn btn-neutral float-right" title="Upgrading Your Kubos Development Environment" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="sdk-python.html" class="btn btn-neutral" title="Using Python with the Kubos SDK" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

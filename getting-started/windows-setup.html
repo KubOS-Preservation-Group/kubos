@@ -1,0 +1,372 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Setting up a Dev Environment in Windows &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../index.html"/>
+        <link rel="up" title="Getting Started with KubOS" href="index.html"/>
+        <link rel="next" title="Getting Started with KubOS and Rust" href="using-rust.html"/>
+        <link rel="prev" title="Setting Up Your Local Environment" href="local-setup.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Getting Started</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="no-board.html">I Don’t Have Hardware Yet, What Can I Do?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="local-setup.html">Setting Up Your Local Environment</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Setting up a Dev Environment in Windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="using-rust.html">Getting Started with KubOS and Rust</a></li>
+<li class="toctree-l2"><a class="reference internal" href="using-python.html">Getting Started with KubOS and Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="local-services.html">Running KubOS Core Services Locally</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../obc-docs/index.html">Working with an OBC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ecosystem/index.html">KubOS Ecosystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deep-dive/index.html">Under the Hood</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sdk-docs/index.html">Kubos SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing to KubOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Getting Started with KubOS</a> &raquo;</li>
+        
+      <li>Setting up a Dev Environment in Windows</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/getting-started/windows-setup.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="setting-up-a-dev-environment-in-windows">
+<h1>Setting up a Dev Environment in Windows<a class="headerlink" href="#setting-up-a-dev-environment-in-windows" title="Permalink to this headline">¶</a></h1>
+<p>Developing for a Linux-based target system from within a Windows-based host machine is difficult.
+The way Windows has architected its file systems and behaviors is fundamentally different from
+Linux, making it extremely difficult to run KubOS services and applications locally.</p>
+<p>As a result, we recommend that Windows users develop from within a Linux VM.
+We provide the Kubos SDK as a pre-built VM which comes with all the tooling needed to create, build,
+and run the KubOS components.</p>
+<p>This document covers the steps required to set up the Kubos SDK so that it can be used as a
+development environment for Windows users.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Microsoft has recently released the Windows Subsystem for Linux on Windows 10.
+It may be possible to set up a development environment using this new utility, however we have
+not currently gone through the effort to figure it out.
+If you happen to get it up and running smoothly, we would love for you to
+<a class="reference internal" href="../contributing/contribution-process.html"><span class="doc">tell us about it</span></a>!</p>
+</div>
+<div class="section" id="installing-the-kubos-sdk">
+<h2>Installing the Kubos SDK<a class="headerlink" href="#installing-the-kubos-sdk" title="Permalink to this headline">¶</a></h2>
+<p>Please refer to the <a class="reference internal" href="../sdk-docs/sdk-installing.html"><span class="doc">SDK installation guide</span></a> for information about
+installing the Kubos SDK and its dependencies.</p>
+</div>
+<div class="section" id="setting-up-a-shared-folder">
+<h2>Setting up a Shared Folder<a class="headerlink" href="#setting-up-a-shared-folder" title="Permalink to this headline">¶</a></h2>
+<p>It is strongly recommended that you create your projects in a directory on your host machine that is
+shared with your SDK instance.
+By keeping your project on your host it will protect them in the event your VM is destroyed or
+re-built.</p>
+<p>Additionally, developing out of a shared folder allows you to use your normal IDE for project
+development.
+You will just need to execute any commands related to building and running the project from the
+SDK’s command line.</p>
+<p>See the instructions on how to <a class="reference internal" href="../sdk-docs/sdk-installing.html#mount-directory"><span class="std std-ref">mount a host directory</span></a> in your VM for more
+information.</p>
+</div>
+<div class="section" id="create-a-network-ip-for-your-sdk">
+<h2>Create a Network IP for Your SDK<a class="headerlink" href="#create-a-network-ip-for-your-sdk" title="Permalink to this headline">¶</a></h2>
+<p>We recommend exposing your SDK to your host machine with a private IP address.</p>
+<p>See the instructions on how to <a class="reference internal" href="../sdk-docs/sdk-installing.html#sdk-port-forward"><span class="std std-ref">set up a private network address</span></a> in your VM for more
+information.</p>
+</div>
+<div class="section" id="allowing-udp-communication">
+<span id="windows-udp"></span><h2>Allowing UDP Communication<a class="headerlink" href="#allowing-udp-communication" title="Permalink to this headline">¶</a></h2>
+<p>There are certain scenarios where the SDK needs to be able to receive UDP packets from an OBC when
+connected via a local ethernet port.
+For example, when using the <a class="reference internal" href="../tutorials/file-transfer.html"><span class="doc">file transfer client</span></a>.</p>
+<p>In this case, Windows Firewall may need to be updated to allow this traffic.</p>
+<ol class="arabic simple">
+<li>Open ‘Windows Firewall with Advanced Security’. You can find this program by opening the start
+menu and searching for “firewall”</li>
+</ol>
+<img alt="../_images/windows_firewall.png" src="../_images/windows_firewall.png" />
+<ol class="arabic simple" start="2">
+<li>Click on “Inbound Rules”, then scroll down to the “VBoxHeadless” rules. Find the rule which blocks
+UDP traffic on Public networks.</li>
+</ol>
+<img alt="../_images/vbox_firewall_rule.png" src="../_images/vbox_firewall_rule.png" />
+<ol class="arabic simple" start="3">
+<li>Right-click on the rule and select “Disable Rule”</li>
+</ol>
+<img alt="../_images/vbox_firewall_rule_disable.png" src="../_images/vbox_firewall_rule_disable.png" />
+<ol class="arabic simple" start="4">
+<li>Right-click on “Inbound Rules” and select “New Rule”</li>
+</ol>
+<img alt="../_images/inbound_new_rule.png" src="../_images/inbound_new_rule.png" />
+<ol class="arabic simple" start="5">
+<li>Select “Custom” for the type of rule</li>
+</ol>
+<img alt="../_images/inbound_rule_custom.png" src="../_images/inbound_rule_custom.png" />
+<ol class="arabic simple" start="6">
+<li>Select “All programs”</li>
+</ol>
+<img alt="../_images/inbound_rule_programs.png" src="../_images/inbound_rule_programs.png" />
+<ol class="arabic simple" start="7">
+<li>Select “UDP” as the protocol type. Leave the “Local port” and “Remote port” settings as “All Ports”</li>
+</ol>
+<img alt="../_images/inbound_rule_ports.png" src="../_images/inbound_rule_ports.png" />
+<ol class="arabic simple" start="8">
+<li>Under “Which remote IP addresses does this rule apply to?”, click “These IP addresses”, then click
+“Add”</li>
+</ol>
+<img alt="../_images/inbound_rule_ip.png" src="../_images/inbound_rule_ip.png" />
+<ol class="arabic simple" start="9">
+<li>In the “This IP address or subnet” field, add the IP address of your OBC, then click “OK”, then
+click “Next”</li>
+</ol>
+<img alt="../_images/inbound_rule_new_ip.png" src="../_images/inbound_rule_new_ip.png" />
+<ol class="arabic simple" start="10">
+<li>Select “Allow the connection”</li>
+</ol>
+<img alt="../_images/inbound_rule_connection.png" src="../_images/inbound_rule_connection.png" />
+<ol class="arabic simple" start="11">
+<li>In the “When does this rule apply?” menu, leave all checkboxes selected</li>
+</ol>
+<img alt="../_images/inbound_rule_network.png" src="../_images/inbound_rule_network.png" />
+<ol class="arabic simple" start="12">
+<li>In the “Name” field, enter something descriptive for the rule. For example, “Allow UDP from OBC”.
+Then click “Finish” to finalize and activate the new rule.</li>
+</ol>
+<img alt="../_images/inbound_rule_name.png" src="../_images/inbound_rule_name.png" />
+</div>
+<div class="section" id="next-steps">
+<h2>Next Steps<a class="headerlink" href="#next-steps" title="Permalink to this headline">¶</a></h2>
+<p>Now that your environment is set up, you can get started developing your first KubOS project.</p>
+<p>We recommend that you look at the following documents next:</p>
+<ul class="simple">
+<li><a class="reference internal" href="using-python.html"><span class="doc">Getting Started with KubOS and Python</span></a></li>
+<li><a class="reference internal" href="using-rust.html"><span class="doc">Getting Started with KubOS and Rust</span></a></li>
+<li><a class="reference internal" href="../tutorials/index.html"><span class="doc">Tutorials</span></a></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="using-rust.html" class="btn btn-neutral float-right" title="Getting Started with KubOS and Rust" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="local-setup.html" class="btn btn-neutral" title="Setting Up Your Local Environment" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,384 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>KubOS Service Outline &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../../index.html"/>
+        <link rel="up" title="KubOS Ecosystem" href="../index.html"/>
+        <link rel="next" title="GraphQL" href="graphql.html"/>
+        <link rel="prev" title="Developing a KubOS Service" href="service-dev.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../obc-docs/index.html">Working with an OBC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">KubOS Ecosystem</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#mission-applications">Mission Applications</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#services">Services</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="core-services.html">Core Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hardware-services.html">Hardware Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="payload-services.html">Payload Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="service-config.html">Service Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="service-dev.html">Service Development</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">KubOS Service Outline</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#queries">Queries</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mutations">Mutations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="graphql.html">GraphQL</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#kubos-linux">Kubos Linux</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../deep-dive/index.html">Under the Hood</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sdk-docs/index.html">Kubos SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Contributing to KubOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">KubOS Ecosystem</a> &raquo;</li>
+        
+      <li>KubOS Service Outline</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/ecosystem/services/service-outline-guide.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="kubos-service-outline">
+<h1>KubOS Service Outline<a class="headerlink" href="#kubos-service-outline" title="Permalink to this headline">¶</a></h1>
+<p>This guide covers an outline for the base schema that should be implemented in all hardware services.
+Your service can and should implement more mutations and queries beyond those specified in the required base.
+For general information about hardware services, their role, and how they work, check out <a class="reference internal" href="hardware-services.html"><span class="doc">the hardware services documentation.</span></a></p>
+<p>All hardware services must follow the <a class="reference external" href="https://graphql.github.io/graphql-spec/">GraphQL spec</a>.
+All mutation and query responses will return the “data” and/or “errors” fields.
+The “errors” field will contain all errors encountered while executing the request, including those which are generated by the underlying hardware.
+See the GraphQL spec for further information on the behavior of these fields.
+If there is any functionality in the below schema that is unable to be implemented by the service, return an error with the string <code class="docutils literal notranslate"><span class="pre">&quot;Not</span> <span class="pre">Implemented&quot;</span></code>.</p>
+<div class="section" id="queries">
+<h2>Queries<a class="headerlink" href="#queries" title="Permalink to this headline">¶</a></h2>
+<p>The queries in the schema below are intended to give a standard interface for mission applications.
+Each query listed is used in the automated systems within KubOS to ease the mission development process.
+Omitting any of the following queries will cause compatibility issues with the rest of the KubOS ecosystem.
+Adding additional queries is highly encouraged, especially if it will further ease integration with the underlying hardware.
+For example, a <code class="docutils literal notranslate"><span class="pre">currentPosition</span></code> query on a GPS service could provide faster access to apps that need it.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>type Query {
+    # Used for doing regular health checks on the service
+    ping(): String
+    # Used for aggregating current bus configuration
+    config(): String
+    # Used for aggregating current bus state
+    power(): PowerState
+    # Used for automated telemetry collection and distribution
+    telemetry(): Telemetry
+}
+
+type PowerState {
+    state: PowerStateEnum
+    uptime: Int
+}
+
+type Telemetry {
+    # All key value telemetry items for the hardware
+    field1: Float
+    # field2: whatever type
+    # field3: whatever type
+    # ...
+}
+
+enum PowerStateEnum {
+    # Not all of these make sense for every kind of hardware, but implement to the best of your ability.
+    ON
+    OFF
+    RESET
+}
+</pre></div>
+</div>
+</div>
+<div class="section" id="mutations">
+<h2>Mutations<a class="headerlink" href="#mutations" title="Permalink to this headline">¶</a></h2>
+<p>Mutations are harder to standardize across all hardware, but make your best attempt to fully implement the short list of mutations below.
+As noted before, any that cannot be implemented must return a response: <code class="docutils literal notranslate"><span class="pre">{&quot;errors&quot;:</span> <span class="pre">[&quot;Not</span> <span class="pre">Implemented&quot;],</span> <span class="pre">&quot;data&quot;:</span> <span class="pre">null}</span></code>.
+The only exception to this rule is the <code class="docutils literal notranslate"><span class="pre">noop()</span></code> mutation, as it is essential for diagnosing hardware state and <strong>must</strong> be implemented.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>type Mutation {
+    # When the service receives a noop mutation, it should send a command
+    # and make sure it sees the appropriate response from the hardware.
+    noop(): Boolean
+    controlPower(
+        input: ControlPowerInput!
+    ): ControlPowerPayload
+    # Raw passthrough to the hardware for commands not implemented as mutations directly.
+    commandRaw(
+        input: CommandRawInput!
+    ): IssueRawCommandPayload
+}
+
+type ControlPowerPayload {
+    power: PowerState
+}
+
+input ControlPowerInput {
+    state: PowerStateEnum!
+}
+
+enum PowerStateEnum {
+    # Not all of these make sense for every kind of hardware, but implement to the best of your ability.
+    ON
+    OFF
+    RESET
+}
+
+input CommandRawInput {
+    # &quot;command&quot; must always be a UTF-8 string. Use &quot;format&quot; to encode as necessary.
+    command: String!
+    format: FormatEnum!
+    # Number of bytes to be read from the hardware as a response.
+    # Can be excluded if the hardware does not support it.
+    read: Int
+}
+
+enum FormatEnum {
+    HEX
+    STR
+}
+
+type IssueRawCommandPayload {
+    response: String
+    # Format that the response will be in. Use HEX to pass binary data.
+    format: FormatEnum
+}
+</pre></div>
+</div>
+<div class="section" id="commandraw-mutation">
+<h3><code class="docutils literal notranslate"><span class="pre">commandRaw</span></code> mutation<a class="headerlink" href="#commandraw-mutation" title="Permalink to this headline">¶</a></h3>
+<p>Direct hardware commands are often issued in binary format, which GraphQL does not directly support.
+As a result, we have added the FormatEnum type, which can be used to specify how the input string should be decoded before being passed to the hardware.
+The <code class="docutils literal notranslate"><span class="pre">HEX</span></code> format indicates that the input string is already in hexadecimal format.
+EG: passing a hex string: <code class="docutils literal notranslate"><span class="pre">74657374636f6d6d616e64</span></code>, causes the byte array: <code class="docutils literal notranslate"><span class="pre">[0x74,</span> <span class="pre">0x65,</span> <span class="pre">0x73,</span> <span class="pre">0x74,</span> <span class="pre">0x63,</span> <span class="pre">0x6f,</span> <span class="pre">0x6d,</span> <span class="pre">0x6d,</span> <span class="pre">0x61,</span> <span class="pre">0x6e,</span> <span class="pre">0x64]</span></code> to be passed to the hardware.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">STR</span></code> format indicates the input string requires no decoding.
+EG: the string <code class="docutils literal notranslate"><span class="pre">testcommand</span></code> gets passed to the hardware as the byte array: <code class="docutils literal notranslate"><span class="pre">[0x74,</span> <span class="pre">0x65,</span> <span class="pre">0x73,</span> <span class="pre">0x74,</span> <span class="pre">0x63,</span> <span class="pre">0x6f,</span> <span class="pre">0x6d,</span> <span class="pre">0x6d,</span> <span class="pre">0x61,</span> <span class="pre">0x6e,</span> <span class="pre">0x64]</span></code>.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="graphql.html" class="btn btn-neutral float-right" title="GraphQL" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="service-dev.html" class="btn btn-neutral" title="Developing a KubOS Service" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

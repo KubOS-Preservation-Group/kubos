@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["State","Current state of the file protocol transaction"]],"struct":[["Protocol","File protocol information structure"],["ProtocolConfig","Configuration data for Protocol"]]});

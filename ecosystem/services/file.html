@@ -1,0 +1,514 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>File Transfer Service &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../../index.html"/>
+        <link rel="up" title="Core Services" href="core-services.html"/>
+        <link rel="next" title="Monitor Service" href="monitor-service.html"/>
+        <link rel="prev" title="Communications Service Framework" href="comms-framework.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../obc-docs/index.html">Working with an OBC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">KubOS Ecosystem</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#mission-applications">Mission Applications</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#services">Services</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="core-services.html">Core Services</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="app-service.html">Applications Service</a></li>
+<li class="toctree-l4"><a class="reference internal" href="comms-framework.html">Communications Service</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">File Transfer Service</a></li>
+<li class="toctree-l4"><a class="reference internal" href="monitor-service.html">Monitor Service</a></li>
+<li class="toctree-l4"><a class="reference internal" href="scheduler.html">Scheduler Service</a></li>
+<li class="toctree-l4"><a class="reference internal" href="shell.html">Shell Service</a></li>
+<li class="toctree-l4"><a class="reference internal" href="telemetry-db.html">Telemetry Database Service</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="hardware-services.html">Hardware Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="payload-services.html">Payload Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="service-config.html">Service Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="service-dev.html">Service Development</a></li>
+<li class="toctree-l3"><a class="reference internal" href="service-outline-guide.html">KubOS Service Outline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphql.html">GraphQL</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#kubos-linux">Kubos Linux</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../deep-dive/index.html">Under the Hood</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sdk-docs/index.html">Kubos SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Contributing to KubOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">KubOS Ecosystem</a> &raquo;</li>
+        
+          <li><a href="core-services.html">Core Services</a> &raquo;</li>
+        
+      <li>File Transfer Service</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/ecosystem/services/file.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="file-transfer-service">
+<h1>File Transfer Service<a class="headerlink" href="#file-transfer-service" title="Permalink to this headline">¶</a></h1>
+<p>The file transfer service is used to transfer files between the mission
+operations center and the OBC. It may also be used to transfer files
+between a developer’s system and the OBC when in a development environment.</p>
+<p>The service provides file transfer functionality by implementing the
+<a class="reference internal" href="../../deep-dive/protocols/file-protocol.html"><span class="doc">file protocol</span></a>. The file protocol is UDP-based
+which means a connection is required between the OBC and ground segment
+capable of transferring UDP packets. This should be established using
+a standard network connection.</p>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p class="plantuml">
+<img src="../../_images/plantuml-715f47478851b6149cc986f621cf01930d811adb.png" alt="&#64;startuml
+
+hide empty description
+
+state &quot;Receive Message&quot; as Receive
+state &quot;Export Request&quot; as Export
+state &quot;Import Request&quot; as Import
+
+[*] --&gt; Receive
+Receive : Process transaction request from client
+
+Receive -down-&gt; Metadata
+Metadata : Save file metadata information
+Metadata --&gt; Done
+
+Receive -left-&gt; Export
+Export : Prepare to receive file from client
+Export --&gt; Receiving
+
+state Receiving {
+    state &quot;Chunk Message&quot; as Chunk
+    state &quot;Success&quot; as Receive_Success
+    state &quot;Failure&quot; as Receive_Failure
+    state &quot;Wait&quot; as Receive_Wait
+    state &quot;ACK&quot; as Receive_ACK
+    state &quot;NAK&quot; as Receive_NAK
+    state &quot;Timeout&quot; as Receive_Timeout
+
+    [*] -down-&gt; Verify
+    Verify : Check file status
+
+    Verify -right-&gt; Receive_ACK : All chunks received
+    Receive_ACK : Send ACK message to client
+    Receive_ACK --&gt; Finalize
+
+    Verify -left-&gt; Receive_NAK : Some chunks missing
+    Receive_NAK : Send NAK message to client
+
+    Receive_NAK --&gt; Receive_Wait
+    Receive_Wait : Wait for chunk data from client
+
+    Receive_Wait -down-&gt; Chunk
+    Chunk : Save chunk data
+    Chunk --&gt; Receive_Wait
+
+    Receive_Wait -right-&gt; Receive_Timeout
+    Receive_Timeout : Increase timeout counter
+    Receive_Timeout -up-&gt; Verify : Counter &lt; limit
+    Receive_Timeout --&gt; Finalize : Counter &gt;= limit
+
+    Finalize : Re-assemble chunks and verify integrity
+
+    Finalize --&gt; Receive_Success : Hash verification passed
+    Receive_Success : Send success message to client
+    Receive_Success --&gt; [*]
+
+    Finalize --&gt; Receive_Failure : Hash verification failed
+    Receive_Failure : Send failure message to client
+    Receive_Failure --&gt; [*]
+}
+Receiving --&gt; Done
+
+Receive -right-&gt; Import
+Import : Prepare to transmit file to client
+
+Import --&gt; Initialize
+Initialize : Import file into temporary storage and calculate hash
+
+Initialize --&gt; Transmit_Failure
+Transmit_Failure : Send failure message to client
+Transmit_Failure --&gt; Done
+
+Initialize --&gt; Transmit_Success
+Transmit_Success : Send success message to client with file metadata
+Transmit_Success --&gt; Transmitting
+
+state Transmitting {
+    state &quot;Success&quot; as Transmit_Success
+    state &quot;Failure&quot; as Transmit_Failure
+    state &quot;Wait&quot; as Transmit_Wait
+    state &quot;ACK&quot; as Transmit_ACK
+    state &quot;NAK&quot; as Transmit_NAK
+    state &quot;Timeout&quot; as Transmit_Timeout
+    state &quot;Send Chunk&quot; as Send
+
+    [*] --&gt; Transmit_Wait
+    Transmit_Wait : Wait for file status message from client
+
+    Transmit_Wait --&gt; Transmit_ACK
+    Transmit_ACK : Receive ACK from client
+    Transmit_ACK --&gt; [*]
+
+    Transmit_Wait --&gt; Transmit_NAK
+    Transmit_NAK : Receive NAK from client
+    Transmit_NAK -up-&gt; Send
+
+    Send --&gt; Send : For all missing chunks
+    Send : Send chunk data message to client
+    Send -left-&gt; Transmit_Wait
+
+    Transmit_Wait --&gt; Transmit_Timeout
+    Transmit_Timeout --&gt; Transmit_Wait : Counter &lt; limit
+    Transmit_Timeout : Increase timeout counter
+    Transmit_Timeout --&gt; [*] : Counter &gt;= limit
+}
+
+Transmitting --&gt; Done
+
+&#64;enduml"/>
+</p>
+<p>The file transfer service listens for requests on its configured UDP socket.</p>
+<p>When a message is received, it is then processed using the file protocol message engine.
+This logic keeps track of the current state of each client connection and takes
+the appropriate action depending on the current state and the particular message received.</p>
+<p>Actions may also be taken if the service experiences a timeout while waiting for
+a follow-up message from a client. For example, if a client initiates an export operation
+and then stops communicating while in the middle of sending file chunks, the service
+will timeout, check the current status of the file, and then send a NAK to the client
+with the current missing chunks. Receiving this NAK should cause the client to
+resume transmitting file chunk data.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This timeout is currently hardcoded to two seconds.</p>
+</div>
+<p>In order to support simultaneous client connections, whenever a message is received
+on the main UDP socket, a new socket is spawned in order to handle the rest
+of the transaction. As a result, after sending the initial import or export request,
+the transfer client should listen for a reply and then use the new socket
+as the destination for future transmissions.</p>
+</div>
+<div class="section" id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<p>The file transfer service has several configuration options which may be
+defined in the system’s <a class="reference internal" href="service-config.html"><span class="doc">config.toml</span></a> file:</p>
+<blockquote>
+<div><ul>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">[file-transfer-service]</span></code></p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">storage_dir</span></code> - <cite>Default: “file-transfer”.</cite> The directory which should be
+used for temporary storage of file chunks. Note: The directory will be
+created if it does not already exist.</li>
+<li><code class="docutils literal notranslate"><span class="pre">timeout</span></code> - <cite>Default: 2.</cite> The length of time, in seconds, for which the service
+should wait for new messages from the client once a file protocol transaction has
+been started</li>
+<li><code class="docutils literal notranslate"><span class="pre">transfer_chunk_size</span></code> - <cite>Default: 1024.</cite> Each file is broken up into equally sized
+chunks prior to transfer. This option specifies the size of those chunks
+in bytes.</li>
+<li><code class="docutils literal notranslate"><span class="pre">hash_chunk_size</span></code> - <cite>Default: 2048.</cite> Each file is broken up into equally sized
+chunks which are used to calculate the file’s hash. This option specifies the size
+of those chunks.</li>
+<li><code class="docutils literal notranslate"><span class="pre">hold_count</span></code> - <cite>Default: 5.</cite> The number of times the protocol waits for
+a new message before ending the transaction.</li>
+<li><code class="docutils literal notranslate"><span class="pre">downlink_ip</span></code> - <cite>Required.</cite> The IP address that the file service responds to.</li>
+<li><code class="docutils literal notranslate"><span class="pre">downlink_port</span></code> - <cite>Required.</cite> The port that the file service responds to.</li>
+<li><code class="docutils literal notranslate"><span class="pre">inter_chunk_delay</span></code> - <cite>Default: 1.</cite> The delay, in milliseconds, taken
+between the transmission of each chunk. This is to allow manual flow control.</li>
+<li><code class="docutils literal notranslate"><span class="pre">max_chunks_transmit</span></code> - <cite>Optional.</cite> The maximum number of chunks to transmit before
+waiting on a response. The default is to transmit the entire file.</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">[file-transfer-service.addr]</span></code></p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">ip</span></code> - Specifies the service’s IP address</li>
+<li><code class="docutils literal notranslate"><span class="pre">port</span></code> - Specifies the port on which the service will be listening for UDP packets</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">file</span><span class="o">-</span><span class="n">transfer</span><span class="o">-</span><span class="n">service</span><span class="p">]</span>
+<span class="n">storage_dir</span> <span class="o">=</span> <span class="s2">&quot;my/storage/directory&quot;</span>
+<span class="n">timeout</span> <span class="o">=</span> <span class="mi">3600</span>
+<span class="n">downlink_ip</span> <span class="o">=</span> <span class="s2">&quot;127.0.0.1&quot;</span>
+<span class="n">downlink_port</span> <span class="o">=</span> <span class="mi">8080</span>
+
+<span class="p">[</span><span class="n">file</span><span class="o">-</span><span class="n">transfer</span><span class="o">-</span><span class="n">service</span><span class="o">.</span><span class="n">addr</span><span class="p">]</span>
+<span class="n">ip</span> <span class="o">=</span> <span class="s2">&quot;0.0.0.0&quot;</span>
+<span class="n">port</span> <span class="o">=</span> <span class="mi">8040</span>
+</pre></div>
+</div>
+<p>Future configuration options:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Maximum number of timeout-retry attempts</li>
+<li>Non-default destination IP/port</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="running-the-service-from-kubos">
+<h2>Running the Service from KubOS<a class="headerlink" href="#running-the-service-from-kubos" title="Permalink to this headline">¶</a></h2>
+<p>The Kubos Linux distribution (as of v1.3.0) ships with the file transfer
+service installed and configured to run on boot. This can be verified by
+booting the KubOS system, running the <code class="docutils literal notranslate"><span class="pre">ps</span></code> command and looking for the
+<code class="docutils literal notranslate"><span class="pre">file-service</span></code> process. If the service is not running then it can
+be started like so:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ /etc/init.d/S90file-service start
+</pre></div>
+</div>
+</div>
+<div class="section" id="running-the-service-from-source">
+<h2>Running the Service from Source<a class="headerlink" href="#running-the-service-from-source" title="Permalink to this headline">¶</a></h2>
+<p>The file transfer service can also be run from source if required.
+The source is located in the folder <code class="docutils literal notranslate"><span class="pre">kubos/services/file-service</span></code>
+in the KubOS source repo. The service can be started like so:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd kubos/services/file-service
+$ cargo run -- -c config.toml
+</pre></div>
+</div>
+<p>The service will look for the given <code class="docutils literal notranslate"><span class="pre">config.toml</span></code> file in order to get the
+needed configuration options.</p>
+</div>
+<div class="section" id="communicating-with-the-file-service">
+<h2>Communicating with the File Service<a class="headerlink" href="#communicating-with-the-file-service" title="Permalink to this headline">¶</a></h2>
+<p>Users should establish a ground-side client which implements the <a class="reference internal" href="../../deep-dive/protocols/file-protocol.html"><span class="doc">file protocol</span></a>
+in order to transfer files over their communications device.</p>
+<p>Kubos provides an example <a class="reference external" href="https://github.com/kubos/kubos/tree/master/clients/kubos-file-client">file transfer client</a>
+to allow users to learn and experiment with the file transfer service prior to the formal file
+transfer client being developed.
+For more information, please refer to the <a class="reference internal" href="../../tutorials/file-transfer.html"><span class="doc">file transfer</span></a> tutorial.</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="monitor-service.html" class="btn btn-neutral float-right" title="Monitor Service" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="comms-framework.html" class="btn btn-neutral" title="Communications Service Framework" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

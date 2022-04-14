@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["Imtq","Structure for interacting with the ISIS iMTQ"]]});

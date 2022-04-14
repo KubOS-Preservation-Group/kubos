@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["Message","File protocol message types"],["ProtocolError","Errors which occur when using FileProtocol"]],"fn":[["parse_channel_id","Parse out just the channel ID from a message"]],"mod":[["protocol","File transfer protocol module"]]});

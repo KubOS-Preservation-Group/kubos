@@ -1,0 +1,463 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>C I2C API &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../../../../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../../../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../../../../../index.html"/>
+        <link rel="up" title="Using I2C in C" href="c-i2c.html"/>
+        <link rel="next" title="Python I2C" href="../python-i2c.html"/>
+        <link rel="prev" title="Using I2C in C" href="c-i2c.html"/> 
+
+  
+  <script src="../../../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../../../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../getting-started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../obc-docs/index.html">Working with an OBC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../ecosystem/index.html">KubOS Ecosystem</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../../index.html">Under the Hood</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../../../index.html#apis">APIs</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../../device-api-guide.html">Kubos Device API Creation Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../device-api/index.html">Device Interfaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../obc-api/index.html">OBC APIs</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../../index.html">Kubos HAL</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html">I2C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../uart-hal/index.html">UART</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../kubos-libs.html">Kubos Libraries</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../index.html#protocols">Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../index.html#kubos-linux">Kubos Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../index.html#design-decisions">Design Decisions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../sdk-docs/index.html">Kubos SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../contributing/index.html">Contributing to KubOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../../index.html">Under the Hood of KubOS</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Kubos HAL Documentation</a> &raquo;</li>
+        
+          <li><a href="../index.html">I2C HALs</a> &raquo;</li>
+        
+          <li><a href="c-i2c.html">Using I2C in C</a> &raquo;</li>
+        
+      <li>C I2C API</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../../../_sources/deep-dive/apis/kubos-hal/i2c-hal/c-i2c/c-i2c-api.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="c-i2c-api">
+<h1>C I2C API<a class="headerlink" href="#c-i2c-api" title="Permalink to this headline">¶</a></h1>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Defines</p>
+<dl class="macro">
+<dt id="c.I2C_MASTER">
+<span class="target" id="group__I2C_1gaa226465ed17b185a4da45c4792d309a8"></span><code class="descname">I2C_MASTER</code><a class="headerlink" href="#c.I2C_MASTER" title="Permalink to this definition">¶</a></dt>
+<dd><p>IOCTL master role value. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.I2C_SLAVE">
+<span class="target" id="group__I2C_1gab15137f7c592d05573de99f078516157"></span><code class="descname">I2C_SLAVE</code><a class="headerlink" href="#c.I2C_SLAVE" title="Permalink to this definition">¶</a></dt>
+<dd><p>IOCTL slave role value. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Enums</p>
+<dl class="enum">
+<dt id="_CPPv410KI2CStatus">
+<span id="_CPPv310KI2CStatus"></span><span id="_CPPv210KI2CStatus"></span><span class="target" id="group__I2C_1ga6e81957857530acce42531e4f17b7b2e"></span><em class="property">enum </em><code class="descname">KI2CStatus</code><a class="headerlink" href="#_CPPv410KI2CStatus" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>I2C function status. </p>
+<p><em>Values:</em></p>
+<dl class="enumerator">
+<dt id="_CPPv46I2C_OK">
+<span id="_CPPv36I2C_OK"></span><span id="_CPPv26I2C_OK"></span><span class="target" id="group__I2C_1gga6e81957857530acce42531e4f17b7b2eaeceba296bdda2b90e8835c431fe7a72a"></span><code class="descname">I2C_OK</code> = 0<a class="headerlink" href="#_CPPv46I2C_OK" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv49I2C_ERROR">
+<span id="_CPPv39I2C_ERROR"></span><span id="_CPPv29I2C_ERROR"></span><span class="target" id="group__I2C_1gga6e81957857530acce42531e4f17b7b2ea2e4932a1868432bff23103fac0127fdc"></span><code class="descname">I2C_ERROR</code><a class="headerlink" href="#_CPPv49I2C_ERROR" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv412I2C_ERROR_AF">
+<span id="_CPPv312I2C_ERROR_AF"></span><span id="_CPPv212I2C_ERROR_AF"></span><span class="target" id="group__I2C_1gga6e81957857530acce42531e4f17b7b2ea6089329dff3e8869b597ed419f559c57"></span><code class="descname">I2C_ERROR_AF</code><a class="headerlink" href="#_CPPv412I2C_ERROR_AF" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv422I2C_ERROR_ADDR_TIMEOUT">
+<span id="_CPPv322I2C_ERROR_ADDR_TIMEOUT"></span><span id="_CPPv222I2C_ERROR_ADDR_TIMEOUT"></span><span class="target" id="group__I2C_1gga6e81957857530acce42531e4f17b7b2ea0667ec4e58c61f5dfa1636dd384609a9"></span><code class="descname">I2C_ERROR_ADDR_TIMEOUT</code><a class="headerlink" href="#_CPPv422I2C_ERROR_ADDR_TIMEOUT" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv417I2C_ERROR_TIMEOUT">
+<span id="_CPPv317I2C_ERROR_TIMEOUT"></span><span id="_CPPv217I2C_ERROR_TIMEOUT"></span><span class="target" id="group__I2C_1gga6e81957857530acce42531e4f17b7b2ea7a8a638a6deda6c6943409e9e4cae099"></span><code class="descname">I2C_ERROR_TIMEOUT</code><a class="headerlink" href="#_CPPv417I2C_ERROR_TIMEOUT" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv414I2C_ERROR_NACK">
+<span id="_CPPv314I2C_ERROR_NACK"></span><span id="_CPPv214I2C_ERROR_NACK"></span><span class="target" id="group__I2C_1gga6e81957857530acce42531e4f17b7b2eadf06402ed34f3957258116a9ec97e4a3"></span><code class="descname">I2C_ERROR_NACK</code><a class="headerlink" href="#_CPPv414I2C_ERROR_NACK" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv421I2C_ERROR_TXE_TIMEOUT">
+<span id="_CPPv321I2C_ERROR_TXE_TIMEOUT"></span><span id="_CPPv221I2C_ERROR_TXE_TIMEOUT"></span><span class="target" id="group__I2C_1gga6e81957857530acce42531e4f17b7b2ea22887ee4300a984c033660ee26f4474c"></span><code class="descname">I2C_ERROR_TXE_TIMEOUT</code><a class="headerlink" href="#_CPPv421I2C_ERROR_TXE_TIMEOUT" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv421I2C_ERROR_BTF_TIMEOUT">
+<span id="_CPPv321I2C_ERROR_BTF_TIMEOUT"></span><span id="_CPPv221I2C_ERROR_BTF_TIMEOUT"></span><span class="target" id="group__I2C_1gga6e81957857530acce42531e4f17b7b2eaa991cef96a9a7773eee0fbc115be2e73"></span><code class="descname">I2C_ERROR_BTF_TIMEOUT</code><a class="headerlink" href="#_CPPv421I2C_ERROR_BTF_TIMEOUT" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv421I2C_ERROR_NULL_HANDLE">
+<span id="_CPPv321I2C_ERROR_NULL_HANDLE"></span><span id="_CPPv221I2C_ERROR_NULL_HANDLE"></span><span class="target" id="group__I2C_1gga6e81957857530acce42531e4f17b7b2ea02ba3051f6e2dfecc7fbb563e36c17a0"></span><code class="descname">I2C_ERROR_NULL_HANDLE</code><a class="headerlink" href="#_CPPv421I2C_ERROR_NULL_HANDLE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv416I2C_ERROR_CONFIG">
+<span id="_CPPv316I2C_ERROR_CONFIG"></span><span id="_CPPv216I2C_ERROR_CONFIG"></span><span class="target" id="group__I2C_1gga6e81957857530acce42531e4f17b7b2ea4d3123c41a15aeee87f4b65d5fa77cc0"></span><code class="descname">I2C_ERROR_CONFIG</code><a class="headerlink" href="#_CPPv416I2C_ERROR_CONFIG" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Functions</p>
+<dl class="function">
+<dt id="_CPPv410k_i2c_initPcPi">
+<span id="_CPPv310k_i2c_initPcPi"></span><span id="_CPPv210k_i2c_initPcPi"></span><span id="k_i2c_init__cP.iP"></span><span class="target" id="group__I2C_1ga12fa8100cfe7a113a227511a467af23a"></span><a class="reference internal" href="#_CPPv410KI2CStatus" title="KI2CStatus">KI2CStatus</a> <code class="descname">k_i2c_init</code><span class="sig-paren">(</span>char *<em>device</em>, int *<em>fp</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv410k_i2c_initPcPi" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Configures and enables an I2C bus. </p>
+<p>This function is used to configure and enable I2C buses for further usage (reading/writing). It is always the first required step before using any I2C peripheral. The k_i2c_init function takes an I2C device name and a pointer to where the returned file descriptor should be stored After correctly calling k_i2c_init, the returned file descriptor may be used with the k_i2c_read/k_i2c_write/k_i2c_terminate functions.</p>
+<p>Example usage: <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">int</span> <span class="n">bus</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="n">k_i2c_init</span><span class="p">(</span><span class="s2">&quot;/dev/i2c-1&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">bus</span><span class="p">);</span>
+</pre></div>
+</div>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KI2CStatus I2C_OK on success, otherwise return I2C_ERROR_* </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">device</span></code>: I2C device name to initialize </li>
+<li><code class="docutils literal notranslate"><span class="pre">fp</span></code>: Pointer to storage for file descriptor of I2C bus </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv415k_i2c_terminatePi">
+<span id="_CPPv315k_i2c_terminatePi"></span><span id="_CPPv215k_i2c_terminatePi"></span><span id="k_i2c_terminate__iP"></span><span class="target" id="group__I2C_1gac29361124eb57c6bf77a7a2152b5d865"></span>void <code class="descname">k_i2c_terminate</code><span class="sig-paren">(</span>int *<em>fp</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv415k_i2c_terminatePi" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Terminates an I2C bus. </p>
+<p>This fuction is used to terminate an active I2C bus connection. It takes a pointer to the file descriptor to be closed. After calling this function the device will <em>not</em> be available for usage in the reading/writing functions.</p>
+<p>Example usage: <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">//</span> <span class="n">initialize</span> <span class="n">bus</span>
+<span class="nb">int</span> <span class="n">bus</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="n">k_i2c_init</span><span class="p">(</span><span class="s2">&quot;/dev/i2c-1&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">bus</span><span class="p">);</span>
+<span class="o">//</span> <span class="n">read</span> <span class="n">some</span> <span class="n">data</span>
+<span class="n">k_i2c_read</span><span class="p">(</span><span class="n">bus</span><span class="p">,</span> <span class="n">addr</span><span class="p">,</span> <span class="n">buffer</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+<span class="o">//</span> <span class="n">shut</span> <span class="n">down</span> <span class="n">bus</span>
+<span class="n">k_i2C_terminate</span><span class="p">(</span><span class="n">bus</span><span class="p">);</span>
+</pre></div>
+</div>
+ <dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">fp</span></code>: Pointer to file descriptor of I2C bus which should be closed </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv411k_i2c_writei8uint16_tP7uint8_ti">
+<span id="_CPPv311k_i2c_writei8uint16_tP7uint8_ti"></span><span id="_CPPv211k_i2c_writei8uint16_tP7uint8_ti"></span><span id="k_i2c_write__i.uint16_t.uint8_tP.i"></span><span class="target" id="group__I2C_1ga2b5461d6dcab8b6b8565fef5c2274b38"></span><a class="reference internal" href="#_CPPv410KI2CStatus" title="KI2CStatus">KI2CStatus</a> <code class="descname">k_i2c_write</code><span class="sig-paren">(</span>int <em>i2c</em>, uint16_t <em>addr</em>, uint8_t *<em>ptr</em>, int <em>len</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv411k_i2c_writei8uint16_tP7uint8_ti" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Write data over the I2C bus to specified address. </p>
+<p>This function writes data over the specified I2C bus to the specified slave address. The actual low-level I2C writing is delegated to the hardware specific kprv_i2c_*_write functions. This function is intended to be used on an I2C bus which has already been initialized.</p>
+<p>Example usage: <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">int</span> <span class="n">bus</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="n">k_i2c_init</span><span class="p">(</span><span class="s2">&quot;/dev/i2c-1&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">bus</span><span class="p">);</span>
+<span class="n">uint8_t</span> <span class="n">cmd</span> <span class="o">=</span> <span class="mh">0x40</span><span class="p">;</span>
+<span class="n">uint16_t</span> <span class="n">slave_addr</span> <span class="o">=</span> <span class="mh">0x80</span><span class="p">;</span>
+<span class="n">KI2CStatus</span> <span class="n">write_status</span><span class="p">;</span>
+<span class="n">write_status</span> <span class="o">=</span> <span class="n">k_i2c_write</span><span class="p">(</span><span class="n">bus</span><span class="p">,</span> <span class="n">slave_addr</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">cmd</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+</pre></div>
+</div>
+</p>
+<p>In order to ensure safe I2C sharing, this function is semaphore locked. There is one semaphore per bus. This function will block indefinitely while waiting for the semaphore.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KI2CStatus I2C_OK on success, I2C_ERROR on error </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">i2c</span></code>: I2C bus to transmit over </li>
+<li><code class="docutils literal notranslate"><span class="pre">addr</span></code>: address of target I2C device </li>
+<li><code class="docutils literal notranslate"><span class="pre">ptr</span></code>: pointer to data buffer </li>
+<li><code class="docutils literal notranslate"><span class="pre">len</span></code>: length of data in buffer </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv410k_i2c_readi8uint16_tP7uint8_ti">
+<span id="_CPPv310k_i2c_readi8uint16_tP7uint8_ti"></span><span id="_CPPv210k_i2c_readi8uint16_tP7uint8_ti"></span><span id="k_i2c_read__i.uint16_t.uint8_tP.i"></span><span class="target" id="group__I2C_1ga1fdd38ecb77ba9d4ba815c5b8faac9e6"></span><a class="reference internal" href="#_CPPv410KI2CStatus" title="KI2CStatus">KI2CStatus</a> <code class="descname">k_i2c_read</code><span class="sig-paren">(</span>int <em>i2c</em>, uint16_t <em>addr</em>, uint8_t *<em>ptr</em>, int <em>len</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv410k_i2c_readi8uint16_tP7uint8_ti" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Read data over the I2C bus from specified address. </p>
+<p>This function reads data from the specified I2C bus from the specified slave address. The actual low-level I2C reading is delegated to the hardware specific kprv_i2c_*_read functions. This function is intended to be used on an I2C bus which has already been initialized.</p>
+<p>Example usage: <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">int</span> <span class="n">bus</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="n">k_i2c_init</span><span class="p">(</span><span class="s2">&quot;/dev/i2c-1&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">bus</span><span class="p">);</span>
+<span class="n">uint8_t</span> <span class="n">buffer</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+<span class="nb">int</span> <span class="n">read_len</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="n">uint16_t</span> <span class="n">slave_addr</span> <span class="o">=</span> <span class="mh">0x80</span><span class="p">;</span>
+<span class="n">KI2CStatus</span> <span class="n">read_status</span><span class="p">;</span>
+<span class="n">read_status</span> <span class="o">=</span> <span class="n">k_i2c_read</span><span class="p">(</span><span class="n">bus</span><span class="p">,</span> <span class="n">slave_addr</span><span class="p">,</span> <span class="n">buffer</span><span class="p">,</span> <span class="n">read_len</span><span class="p">);</span>
+</pre></div>
+</div>
+</p>
+<p>In order to ensure safe I2C sharing, this function is semaphore locked. There is one semaphore per bus. This function will block indefinitely while waiting for the semaphore.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KI2CStatus I2C_OK on success, I2C_ERROR on error </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">i2c</span></code>: I2C bus to read from </li>
+<li><code class="docutils literal notranslate"><span class="pre">addr</span></code>: address of target I2C device </li>
+<li><code class="docutils literal notranslate"><span class="pre">ptr</span></code>: pointer to data buffer </li>
+<li><code class="docutils literal notranslate"><span class="pre">len</span></code>: length of data to read </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../python-i2c.html" class="btn btn-neutral float-right" title="Python I2C" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="c-i2c.html" class="btn btn-neutral" title="Using I2C in C" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../../../../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,1 @@
+initSidebarItems({"constant":[["CHUNK_SIZE","Default chunk size used by shell protocol"],["PORT","Default port used by shell protocol"]],"mod":[["error","Shell protocol errors"],["messages","Shell protocol messages"]],"struct":[["ProcessHandler","Structure to handle lifetime and communications with child process"],["ShellProtocol","Shell Service Protocol structure"]]});

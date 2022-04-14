@@ -1,0 +1,2453 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ISIS iMTQ API &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../../../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../../../../index.html"/>
+        <link rel="up" title="ISIS iMTQ API" href="imtq.html"/>
+        <link rel="next" title="ISIS iMTQ API" href="imtq_api_rust.html"/>
+        <link rel="prev" title="ISIS iMTQ API" href="imtq.html"/> 
+
+  
+  <script src="../../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../getting-started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../obc-docs/index.html">Working with an OBC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ecosystem/index.html">KubOS Ecosystem</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Under the Hood</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../../index.html#apis">APIs</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../device-api-guide.html">Kubos Device API Creation Guide</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html">Device Interfaces</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../mai400.html">MAI-400 ADACS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../clydespace-3g-eps.html">Clyde Space 3G EPS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../isis-ants/ants.html">ISIS Antenna Systems</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="imtq.html">ISIS iMTQ</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../isis-trxvu/trxvu.html">ISIS TRXVU Radio</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../gomspace-p31u/p31u_api.html">GOMspace NanoPower P31u</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../novatel-oem6.html">NovAtel OEM6 GPS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../nsl-duplex-d2.html">NSL EyeStar-D2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../pumpkin-mcu.html">Pumpkin MCUs</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../obc-api/index.html">OBC APIs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../kubos-hal/index.html">Kubos HAL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../kubos-libs.html">Kubos Libraries</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#protocols">Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#kubos-linux">Kubos Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#design-decisions">Design Decisions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../sdk-docs/index.html">Kubos SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contributing/index.html">Contributing to KubOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../index.html">Under the Hood of KubOS</a> &raquo;</li>
+        
+          <li><a href="../index.html">Kubos Device APIs</a> &raquo;</li>
+        
+          <li><a href="imtq.html">ISIS iMTQ API</a> &raquo;</li>
+        
+      <li>ISIS iMTQ API</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../../_sources/deep-dive/apis/device-api/isis-imtq/imtq_api_c.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="isis-imtq-api">
+<h1>ISIS iMTQ API<a class="headerlink" href="#isis-imtq-api" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="core">
+<h2>Core<a class="headerlink" href="#core" title="Permalink to this headline">¶</a></h2>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Command Response Flags</p>
+<dl class="macro">
+<dt id="c.RESP_NEW">
+<span class="target" id="group__IMTQ__API_1gaeec1a7ed341e1f8910986e7526135156"></span><code class="descname">RESP_NEW</code><a class="headerlink" href="#c.RESP_NEW" title="Permalink to this definition">¶</a></dt>
+<dd><p>First time retrieving this response. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.RESP_IVA_X">
+<span class="target" id="group__IMTQ__API_1gaf6c7cedac66fb9efe177d2a8b7ae35cb"></span><code class="descname">RESP_IVA_X</code><a class="headerlink" href="#c.RESP_IVA_X" title="Permalink to this definition">¶</a></dt>
+<dd><p>X-axis measurement might be invalid. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.RESP_IVA_Y">
+<span class="target" id="group__IMTQ__API_1ga6b37125e8dbd85437a05a2556caf7c0a"></span><code class="descname">RESP_IVA_Y</code><a class="headerlink" href="#c.RESP_IVA_Y" title="Permalink to this definition">¶</a></dt>
+<dd><p>Y-axis measurement might be invalid. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.RESP_IVA_Z">
+<span class="target" id="group__IMTQ__API_1gafea48c251d52e6930caa2d94d993437a"></span><code class="descname">RESP_IVA_Z</code><a class="headerlink" href="#c.RESP_IVA_Z" title="Permalink to this definition">¶</a></dt>
+<dd><p>Z-axis measurement might be invalid. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Enums</p>
+<dl class="enum">
+<dt id="_CPPv411KADCSStatus">
+<span id="_CPPv311KADCSStatus"></span><span id="_CPPv211KADCSStatus"></span><span class="target" id="group__IMTQ__API_1gab0181a44d7da2197831fc488b9005881"></span><em class="property">enum </em><code class="descname">KADCSStatus</code><a class="headerlink" href="#_CPPv411KADCSStatus" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>ADCS function return values. </p>
+<p><em>Values:</em></p>
+<dl class="enumerator">
+<dt id="_CPPv47ADCS_OK">
+<span id="_CPPv37ADCS_OK"></span><span id="_CPPv27ADCS_OK"></span><span class="target" id="group__IMTQ__API_1ggab0181a44d7da2197831fc488b9005881a22e7847ee109e8d656051f0d44dac142"></span><code class="descname">ADCS_OK</code><a class="headerlink" href="#_CPPv47ADCS_OK" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv410ADCS_ERROR">
+<span id="_CPPv310ADCS_ERROR"></span><span id="_CPPv210ADCS_ERROR"></span><span class="target" id="group__IMTQ__API_1ggab0181a44d7da2197831fc488b9005881a3540f9e6f1e3254f9d8015bce1e8d768"></span><code class="descname">ADCS_ERROR</code><a class="headerlink" href="#_CPPv410ADCS_ERROR" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Generic error. </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv417ADCS_ERROR_CONFIG">
+<span id="_CPPv317ADCS_ERROR_CONFIG"></span><span id="_CPPv217ADCS_ERROR_CONFIG"></span><span class="target" id="group__IMTQ__API_1ggab0181a44d7da2197831fc488b9005881aac75c2b9613853596d8abdd59cb4ff07"></span><code class="descname">ADCS_ERROR_CONFIG</code><a class="headerlink" href="#_CPPv417ADCS_ERROR_CONFIG" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Configuration error. </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv422ADCS_ERROR_NO_RESPONSE">
+<span id="_CPPv322ADCS_ERROR_NO_RESPONSE"></span><span id="_CPPv222ADCS_ERROR_NO_RESPONSE"></span><span class="target" id="group__IMTQ__API_1ggab0181a44d7da2197831fc488b9005881ab7c02bf775b7923e802d0e12350a3156"></span><code class="descname">ADCS_ERROR_NO_RESPONSE</code><a class="headerlink" href="#_CPPv422ADCS_ERROR_NO_RESPONSE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>No response received from subsystem. </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv419ADCS_ERROR_INTERNAL">
+<span id="_CPPv319ADCS_ERROR_INTERNAL"></span><span id="_CPPv219ADCS_ERROR_INTERNAL"></span><span class="target" id="group__IMTQ__API_1ggab0181a44d7da2197831fc488b9005881a3ab847fc565b6dbb2a399864ae2c6da9"></span><code class="descname">ADCS_ERROR_INTERNAL</code><a class="headerlink" href="#_CPPv419ADCS_ERROR_INTERNAL" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>An error was thrown by the subsystem. </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv416ADCS_ERROR_MUTEX">
+<span id="_CPPv316ADCS_ERROR_MUTEX"></span><span id="_CPPv216ADCS_ERROR_MUTEX"></span><span class="target" id="group__IMTQ__API_1ggab0181a44d7da2197831fc488b9005881a127e4180a9011751ef9d565a31b15fe5"></span><code class="descname">ADCS_ERROR_MUTEX</code><a class="headerlink" href="#_CPPv416ADCS_ERROR_MUTEX" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Mutex-related error. </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv426ADCS_ERROR_NOT_IMPLEMENTED">
+<span id="_CPPv326ADCS_ERROR_NOT_IMPLEMENTED"></span><span id="_CPPv226ADCS_ERROR_NOT_IMPLEMENTED"></span><span class="target" id="group__IMTQ__API_1ggab0181a44d7da2197831fc488b9005881a9250e5fb61a0b630ffc36dfee3ceca66"></span><code class="descname">ADCS_ERROR_NOT_IMPLEMENTED</code><a class="headerlink" href="#_CPPv426ADCS_ERROR_NOT_IMPLEMENTED" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Requested function has not been implemented for the subsystem. </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="enum">
+<dt id="_CPPv411KIMTQStatus">
+<span id="_CPPv311KIMTQStatus"></span><span id="_CPPv211KIMTQStatus"></span><span class="target" id="group__IMTQ__API_1ga2ed9a9c3db458c62e9b0d5bc5a16793a"></span><em class="property">enum </em><code class="descname">KIMTQStatus</code><a class="headerlink" href="#_CPPv411KIMTQStatus" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>iMTQ Return Values Error codes which may be returned in the <a class="reference internal" href="#structimtq__resp__header_1ad19b3c9b069f99270f8ecc7eead55c77"><span class="std std-ref">imtq_resp_header.status</span></a> byte of a response message </p>
+<p><em>Values:</em></p>
+<dl class="enumerator">
+<dt id="_CPPv47IMTQ_OK">
+<span id="_CPPv37IMTQ_OK"></span><span id="_CPPv27IMTQ_OK"></span><span class="target" id="group__IMTQ__API_1gga2ed9a9c3db458c62e9b0d5bc5a16793aacdf97fbb9657c351268bf588a68b7aba"></span><code class="descname">IMTQ_OK</code><a class="headerlink" href="#_CPPv47IMTQ_OK" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv410IMTQ_ERROR">
+<span id="_CPPv310IMTQ_ERROR"></span><span id="_CPPv210IMTQ_ERROR"></span><span class="target" id="group__IMTQ__API_1gga2ed9a9c3db458c62e9b0d5bc5a16793aa13bb93d2277eb10a3983ed7ee025b0bb"></span><code class="descname">IMTQ_ERROR</code> = 0x01<a class="headerlink" href="#_CPPv410IMTQ_ERROR" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Generic error. </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv418IMTQ_ERROR_BAD_CMD">
+<span id="_CPPv318IMTQ_ERROR_BAD_CMD"></span><span id="_CPPv218IMTQ_ERROR_BAD_CMD"></span><span class="target" id="group__IMTQ__API_1gga2ed9a9c3db458c62e9b0d5bc5a16793aafef27f903aa27992bd87d1394c1d0be9"></span><code class="descname">IMTQ_ERROR_BAD_CMD</code> = 0x02<a class="headerlink" href="#_CPPv418IMTQ_ERROR_BAD_CMD" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Invalid command. </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv419IMTQ_ERROR_NO_PARAM">
+<span id="_CPPv319IMTQ_ERROR_NO_PARAM"></span><span id="_CPPv219IMTQ_ERROR_NO_PARAM"></span><span class="target" id="group__IMTQ__API_1gga2ed9a9c3db458c62e9b0d5bc5a16793aa219158a989a2d3a3b5f49c7505e10e02"></span><code class="descname">IMTQ_ERROR_NO_PARAM</code> = 0x03<a class="headerlink" href="#_CPPv419IMTQ_ERROR_NO_PARAM" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Parameter missing. </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv420IMTQ_ERROR_BAD_PARAM">
+<span id="_CPPv320IMTQ_ERROR_BAD_PARAM"></span><span id="_CPPv220IMTQ_ERROR_BAD_PARAM"></span><span class="target" id="group__IMTQ__API_1gga2ed9a9c3db458c62e9b0d5bc5a16793aae556969d4b085aa57b8d6cff6c165bd7"></span><code class="descname">IMTQ_ERROR_BAD_PARAM</code> = 0x04<a class="headerlink" href="#_CPPv420IMTQ_ERROR_BAD_PARAM" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Parameter invalid. </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv415IMTQ_ERROR_MODE">
+<span id="_CPPv315IMTQ_ERROR_MODE"></span><span id="_CPPv215IMTQ_ERROR_MODE"></span><span class="target" id="group__IMTQ__API_1gga2ed9a9c3db458c62e9b0d5bc5a16793aac7fd46a3189efaec4f5f2f99f9e756e6"></span><code class="descname">IMTQ_ERROR_MODE</code> = 0x05<a class="headerlink" href="#_CPPv415IMTQ_ERROR_MODE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Command unavailable in current mode. </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv419IMTQ_ERROR_RESERVED">
+<span id="_CPPv319IMTQ_ERROR_RESERVED"></span><span id="_CPPv219IMTQ_ERROR_RESERVED"></span><span class="target" id="group__IMTQ__API_1gga2ed9a9c3db458c62e9b0d5bc5a16793aa4b01872334b232ca5fbf476fbb5582d7"></span><code class="descname">IMTQ_ERROR_RESERVED</code> = 0x06<a class="headerlink" href="#_CPPv419IMTQ_ERROR_RESERVED" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>(Internal reserved value) </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv419IMTQ_ERROR_INTERNAL">
+<span id="_CPPv319IMTQ_ERROR_INTERNAL"></span><span id="_CPPv219IMTQ_ERROR_INTERNAL"></span><span class="target" id="group__IMTQ__API_1gga2ed9a9c3db458c62e9b0d5bc5a16793aaf6528d2dc07046a148d60be7309a9b69"></span><code class="descname">IMTQ_ERROR_INTERNAL</code> = 0x07<a class="headerlink" href="#_CPPv419IMTQ_ERROR_INTERNAL" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Internal error. </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="enum">
+<dt id="_CPPv48ADCSMode">
+<span id="_CPPv38ADCSMode"></span><span id="_CPPv28ADCSMode"></span><span class="target" id="group__IMTQ__API_1gae4c8e413eb009ad8230aab52e6dd909d"></span><em class="property">enum </em><code class="descname">ADCSMode</code><a class="headerlink" href="#_CPPv48ADCSMode" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Available iMTQ system modes. </p>
+<p><em>Values:</em></p>
+<dl class="enumerator">
+<dt id="_CPPv44IDLE">
+<span id="_CPPv34IDLE"></span><span id="_CPPv24IDLE"></span><span class="target" id="group__IMTQ__API_1ggae4c8e413eb009ad8230aab52e6dd909dafd6a0e4343048b10646dd2976cc5ad18"></span><code class="descname">IDLE</code><a class="headerlink" href="#_CPPv44IDLE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Idle mode. </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv48SELFTEST">
+<span id="_CPPv38SELFTEST"></span><span id="_CPPv28SELFTEST"></span><span class="target" id="group__IMTQ__API_1ggae4c8e413eb009ad8230aab52e6dd909da601d73c4216887ed380028f4b5b0a7e4"></span><code class="descname">SELFTEST</code><a class="headerlink" href="#_CPPv48SELFTEST" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Self-test mode. </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv48DETUMBLE">
+<span id="_CPPv38DETUMBLE"></span><span id="_CPPv28DETUMBLE"></span><span class="target" id="group__IMTQ__API_1ggae4c8e413eb009ad8230aab52e6dd909da1faebe1f6194ada0ca738abea6f9383e"></span><code class="descname">DETUMBLE</code><a class="headerlink" href="#_CPPv48DETUMBLE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Detumble mode. </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Functions</p>
+<dl class="function">
+<dt id="_CPPv411k_adcs_initPc8uint16_ti">
+<span id="_CPPv311k_adcs_initPc8uint16_ti"></span><span id="_CPPv211k_adcs_initPc8uint16_ti"></span><span id="k_adcs_init__cP.uint16_t.i"></span><span class="target" id="group__IMTQ__API_1ga5045cf11d78ac1818ef2a3e8921b6c91"></span><a class="reference internal" href="#_CPPv411KADCSStatus" title="KADCSStatus">KADCSStatus</a> <code class="descname">k_adcs_init</code><span class="sig-paren">(</span>char *<em>bus</em>, uint16_t <em>addr</em>, int <em>timeout</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv411k_adcs_initPc8uint16_ti" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Initialize the ADCS interface. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KADCSStatus ADCS_OK if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">bus</span></code>: I2C bus device name </li>
+<li><code class="docutils literal notranslate"><span class="pre">addr</span></code>: I2C address </li>
+<li><code class="docutils literal notranslate"><span class="pre">timeout</span></code>: Watchdog timeout in seconds </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv416k_adcs_terminatev">
+<span id="_CPPv316k_adcs_terminatev"></span><span id="_CPPv216k_adcs_terminatev"></span><span id="k_adcs_terminate__void"></span><span class="target" id="group__IMTQ__API_1ga8af193ad52ff97c11a512208e0fa3d5c"></span>void <code class="descname">k_adcs_terminate</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv416k_adcs_terminatev" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Terminate the ADCS interface. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv421k_imtq_watchdog_startv">
+<span id="_CPPv321k_imtq_watchdog_startv"></span><span id="_CPPv221k_imtq_watchdog_startv"></span><span id="k_imtq_watchdog_start__void"></span><span class="target" id="group__IMTQ__API_1ga0c61e8b9e598ea1ddf7e3829c866bcc9"></span><a class="reference internal" href="#_CPPv411KADCSStatus" title="KADCSStatus">KADCSStatus</a> <code class="descname">k_imtq_watchdog_start</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv421k_imtq_watchdog_startv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Start a thread to kick the iMTQ’s watchdog at an interval of <code class="docutils literal notranslate"><span class="pre">(timeout/3)</span></code> seconds (<code class="docutils literal notranslate"><span class="pre">timeout</span></code> specified in <code class="docutils literal notranslate"><span class="pre">k_adcs_init</span></code>) </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KADCSStatus <code class="docutils literal notranslate"><span class="pre">ADCS_OK</span></code> if OK, error otherwise </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv420k_imtq_watchdog_stopv">
+<span id="_CPPv320k_imtq_watchdog_stopv"></span><span id="_CPPv220k_imtq_watchdog_stopv"></span><span id="k_imtq_watchdog_stop__void"></span><span class="target" id="group__IMTQ__API_1ga61128b5afb38328e79d95e7df8e7b395"></span><a class="reference internal" href="#_CPPv411KADCSStatus" title="KADCSStatus">KADCSStatus</a> <code class="descname">k_imtq_watchdog_stop</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv420k_imtq_watchdog_stopv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Stop the watchdog thread. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KADCSStatus <code class="docutils literal notranslate"><span class="pre">ADCS_OK</span></code> if OK, error otherwise </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv412k_imtq_resetv">
+<span id="_CPPv312k_imtq_resetv"></span><span id="_CPPv212k_imtq_resetv"></span><span id="k_imtq_reset__void"></span><span class="target" id="group__IMTQ__API_1ga4d0a7bd31a84d95f532d76c7944d236c"></span><a class="reference internal" href="#_CPPv411KADCSStatus" title="KADCSStatus">KADCSStatus</a> <code class="descname">k_imtq_reset</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv412k_imtq_resetv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Reboot the iMTQ. </p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>All configuration options will be reset to their default values </dd>
+<dt><strong>Return</strong></dt>
+<dd>KADCSStatus <code class="docutils literal notranslate"><span class="pre">ADCS_OK</span></code> if OK, error otherwise </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv418k_adcs_passthroughPK7uint8_tiP7uint8_tiPK8timespec">
+<span id="_CPPv318k_adcs_passthroughPK7uint8_tiP7uint8_tiPK8timespec"></span><span id="_CPPv218k_adcs_passthroughPK7uint8_tiP7uint8_tiPK8timespec"></span><span id="k_adcs_passthrough__uint8_tCP.i.uint8_tP.i.timespecCP"></span><span class="target" id="group__IMTQ__API_1ga1a07cf72102154ba5e9d1ac703f17458"></span><a class="reference internal" href="#_CPPv411KADCSStatus" title="KADCSStatus">KADCSStatus</a> <code class="descname">k_adcs_passthrough</code><span class="sig-paren">(</span><em class="property">const</em> uint8_t *<em>tx</em>, int <em>tx_len</em>, uint8_t *<em>rx</em>, int <em>rx_len</em>, <em class="property">const</em> <em class="property">struct</em> timespec *<em>delay</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv418k_adcs_passthroughPK7uint8_tiP7uint8_tiPK8timespec" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Pass a command packet directly through to the ADCS. </p>
+<p>Useful for executing commands which have not been implemented in either the generic or specific ADCS APIs. <dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KADCSStatus ADCS_OK if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">tx</span></code>: Pointer to command packet to send </li>
+<li><code class="docutils literal notranslate"><span class="pre">tx_len</span></code>: Size of command packet </li>
+<li><code class="docutils literal notranslate"><span class="pre">rx</span></code>: Pointer to storage for command response </li>
+<li><code class="docutils literal notranslate"><span class="pre">rx_len</span></code>: Expected length of command response </li>
+<li><code class="docutils literal notranslate"><span class="pre">delay</span></code>: Time to wait inbetween sending the command packet and requesting a response </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv418kprv_imtq_transferPK7uint8_tiP7uint8_tiPK8timespec">
+<span id="_CPPv318kprv_imtq_transferPK7uint8_tiP7uint8_tiPK8timespec"></span><span id="_CPPv218kprv_imtq_transferPK7uint8_tiP7uint8_tiPK8timespec"></span><span id="kprv_imtq_transfer__uint8_tCP.i.uint8_tP.i.timespecCP"></span><span class="target" id="group__IMTQ__API_1ga1cd8d5d1a014654f61e2384bb4398414"></span><a class="reference internal" href="#_CPPv411KADCSStatus" title="KADCSStatus">KADCSStatus</a> <code class="descname">kprv_imtq_transfer</code><span class="sig-paren">(</span><em class="property">const</em> uint8_t *<em>tx</em>, int <em>tx_len</em>, uint8_t *<em>rx</em>, int <em>rx_len</em>, <em class="property">const</em> <em class="property">struct</em> timespec *<em>delay</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv418kprv_imtq_transferPK7uint8_tiP7uint8_tiPK8timespec" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Send an iMTQ request and fetch the response. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KADCSStatus <code class="docutils literal notranslate"><span class="pre">ADCS_OK</span></code> if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">tx</span></code>: Pointer to data to send </li>
+<li><code class="docutils literal notranslate"><span class="pre">tx_len</span></code>: Length of data to send </li>
+<li><code class="docutils literal notranslate"><span class="pre">rx</span></code>: Pointer to buffer for response data </li>
+<li><code class="docutils literal notranslate"><span class="pre">rx_len</span></code>: Length of data to read for response </li>
+<li><code class="docutils literal notranslate"><span class="pre">delay</span></code>: Delay between sending data to the iMTQ and reading the response. A value of <code class="docutils literal notranslate"><span class="pre">NULL</span></code> indicates that the default should be used. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv421kprv_imtq_check_error7uint8_t">
+<span id="_CPPv321kprv_imtq_check_error7uint8_t"></span><span id="_CPPv221kprv_imtq_check_error7uint8_t"></span><span id="kprv_imtq_check_error__uint8_t"></span><span class="target" id="group__IMTQ__API_1ga3d5c092c3675ff3e9e3839948f3b917c"></span><em class="property">static</em> <a class="reference internal" href="#_CPPv411KIMTQStatus" title="KIMTQStatus">KIMTQStatus</a> <code class="descname">kprv_imtq_check_error</code><span class="sig-paren">(</span>uint8_t <em>status</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv421kprv_imtq_check_error7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Extract the return code in a response status byte. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>Converted <a class="reference internal" href="#group__IMTQ__API_1ga2ed9a9c3db458c62e9b0d5bc5a16793a"><span class="std std-ref">KIMTQStatus</span></a> value </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">status</span></code>: A <a class="reference internal" href="#structimtq__resp__header_1ad19b3c9b069f99270f8ecc7eead55c77"><span class="std std-ref">imtq_resp_header.status</span></a> byte returned in a response message structure </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Variables</p>
+<dl class="member">
+<dt id="_CPPv410imtq_mutex">
+<span id="_CPPv310imtq_mutex"></span><span id="_CPPv210imtq_mutex"></span><span id="imtq_mutex__pthread_mutex_t"></span><span class="target" id="group__IMTQ__API_1gada0b60a0a4eaaa8665968a030a92d785"></span>pthread_mutex_t <code class="descname">imtq_mutex</code><a class="headerlink" href="#_CPPv410imtq_mutex" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>System mutex to preserve iMTQ command/response ordering. </p>
+</dd></dl>
+
+</div>
+<dl class="class">
+<dt id="_CPPv416imtq_resp_header">
+<span id="_CPPv316imtq_resp_header"></span><span id="_CPPv216imtq_resp_header"></span><span id="imtq_resp_header"></span><span class="target" id="structimtq__resp__header"></span><em class="property">struct </em><code class="descname">imtq_resp_header</code><a class="headerlink" href="#_CPPv416imtq_resp_header" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;imtq.h&gt;</em><p>Response header structure. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv4N16imtq_resp_header3cmdE">
+<span id="_CPPv3N16imtq_resp_header3cmdE"></span><span id="_CPPv2N16imtq_resp_header3cmdE"></span><span id="imtq_resp_header::cmd__uint8_t"></span><span class="target" id="structimtq__resp__header_1ac132fdbc0f993b7f6c0e281a00c17727"></span>uint8_t <code class="descname">cmd</code><a class="headerlink" href="#_CPPv4N16imtq_resp_header3cmdE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Command which produced this response. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N16imtq_resp_header6statusE">
+<span id="_CPPv3N16imtq_resp_header6statusE"></span><span id="_CPPv2N16imtq_resp_header6statusE"></span><span id="imtq_resp_header::status__uint8_t"></span><span class="target" id="structimtq__resp__header_1ad19b3c9b069f99270f8ecc7eead55c77"></span>uint8_t <code class="descname">status</code><a class="headerlink" href="#_CPPv4N16imtq_resp_header6statusE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Status byte. </p>
+<p>Contains command response flags, like <a class="reference internal" href="#group__IMTQ__API_1gaf6c7cedac66fb9efe177d2a8b7ae35cb"><span class="std std-ref">RESP_IVA_X</span></a>, and a return code which can be extracted with <a class="reference internal" href="#group__IMTQ__API_1ga3d5c092c3675ff3e9e3839948f3b917c"><span class="std std-ref">kprv_imtq_check_error</span></a> </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv414imtq_axis_data">
+<span id="_CPPv314imtq_axis_data"></span><span id="_CPPv214imtq_axis_data"></span><span id="imtq_axis_data"></span><span class="target" id="structimtq__axis__data"></span><em class="property">struct </em><code class="descname">imtq_axis_data</code><a class="headerlink" href="#_CPPv414imtq_axis_data" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;imtq.h&gt;</em><p>Generic structure for data relating to the axes. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv4N14imtq_axis_data1xE">
+<span id="_CPPv3N14imtq_axis_data1xE"></span><span id="_CPPv2N14imtq_axis_data1xE"></span><span id="imtq_axis_data::x__int16_t"></span><span class="target" id="structimtq__axis__data_1a338a638971a253f8fbb069cbcc00c9d5"></span>int16_t <code class="descname">x</code><a class="headerlink" href="#_CPPv4N14imtq_axis_data1xE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>X-axis. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N14imtq_axis_data1yE">
+<span id="_CPPv3N14imtq_axis_data1yE"></span><span id="_CPPv2N14imtq_axis_data1yE"></span><span id="imtq_axis_data::y__int16_t"></span><span class="target" id="structimtq__axis__data_1ae30db1267dd80f550ca0cc199fd23ea8"></span>int16_t <code class="descname">y</code><a class="headerlink" href="#_CPPv4N14imtq_axis_data1yE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Y-axis. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N14imtq_axis_data1zE">
+<span id="_CPPv3N14imtq_axis_data1zE"></span><span id="_CPPv2N14imtq_axis_data1zE"></span><span id="imtq_axis_data::z__int16_t"></span><span class="target" id="structimtq__axis__data_1a882ca7c96e0de0f9b77fd96f2ed9a50a"></span>int16_t <code class="descname">z</code><a class="headerlink" href="#_CPPv4N14imtq_axis_data1zE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Z-axis. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Magnetometer Configuration Parameter Codes</p>
+<dl class="macro">
+<dt id="c.MTM_SELECT">
+<span class="target" id="group__IMTQ__API_1ga14e7299d6dbebd9fd48fb2b51672e9a7"></span><code class="descname">MTM_SELECT</code><a class="headerlink" href="#c.MTM_SELECT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Select MTM to use for measurement. </p>
+<p>0 - Internal, 1 - External </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.MTM_INTERNAL_TIME">
+<span class="target" id="group__IMTQ__API_1gaf4c7ad1f58ad5ad5ab55ad5f56fa2cce"></span><code class="descname">MTM_INTERNAL_TIME</code><a class="headerlink" href="#c.MTM_INTERNAL_TIME" title="Permalink to this definition">¶</a></dt>
+<dd><p>Integration time selection for idle mode MTM measurements. </p>
+<p><em>Refer to Table 3-10 of the iMTQ User Manual for more information</em> </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.MTM_EXTERNAL_TIME">
+<span class="target" id="group__IMTQ__API_1gad7530863af7e45421c9cd9ba74224004"></span><code class="descname">MTM_EXTERNAL_TIME</code><a class="headerlink" href="#c.MTM_EXTERNAL_TIME" title="Permalink to this definition">¶</a></dt>
+<dd><p>Integration time selection for idle mode MTM measurements. </p>
+<p><em>Refer to Table 3-10 of the iMTQ User Manual for more information</em> </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.MTM_INTERNAL_MAP_X">
+<span class="target" id="group__IMTQ__API_1ga78898d6cb2a5f0c7f08297f1db4b1edd"></span><code class="descname">MTM_INTERNAL_MAP_X</code><a class="headerlink" href="#c.MTM_INTERNAL_MAP_X" title="Permalink to this definition">¶</a></dt>
+<dd><p>iMTQ axis to which the MTM x-axis is mapped </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.MTM_INTERNAL_MAP_Y">
+<span class="target" id="group__IMTQ__API_1gaf7101fdff2787cc61c59181656613b2b"></span><code class="descname">MTM_INTERNAL_MAP_Y</code><a class="headerlink" href="#c.MTM_INTERNAL_MAP_Y" title="Permalink to this definition">¶</a></dt>
+<dd><p>iMTQ axis to which the MTM y-axis is mapped </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.MTM_INTERNAL_MAP_Z">
+<span class="target" id="group__IMTQ__API_1ga26055b64814d59809087cc685250994f"></span><code class="descname">MTM_INTERNAL_MAP_Z</code><a class="headerlink" href="#c.MTM_INTERNAL_MAP_Z" title="Permalink to this definition">¶</a></dt>
+<dd><p>iMTQ axis to which the MTM z-axis is mapped </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.MTM_EXTERNAL_MAP_X">
+<span class="target" id="group__IMTQ__API_1ga1c51f7a655f0373e79a96e46578d9f3b"></span><code class="descname">MTM_EXTERNAL_MAP_X</code><a class="headerlink" href="#c.MTM_EXTERNAL_MAP_X" title="Permalink to this definition">¶</a></dt>
+<dd><p>iMTQ axis to which the MTM x-axis is mapped </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.MTM_EXTERNAL_MAP_Y">
+<span class="target" id="group__IMTQ__API_1ga28556cc18d9e8b82e857849660bbcf3d"></span><code class="descname">MTM_EXTERNAL_MAP_Y</code><a class="headerlink" href="#c.MTM_EXTERNAL_MAP_Y" title="Permalink to this definition">¶</a></dt>
+<dd><p>iMTQ axis to which the MTM y-axis is mapped </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.MTM_EXTERNAL_MAP_Z">
+<span class="target" id="group__IMTQ__API_1gacfeae74f0a726cc572a5d4b900070827"></span><code class="descname">MTM_EXTERNAL_MAP_Z</code><a class="headerlink" href="#c.MTM_EXTERNAL_MAP_Z" title="Permalink to this definition">¶</a></dt>
+<dd><p>iMTQ axis to which the MTM z-axis is mapped </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.MTM_MATRIX_R1_C1">
+<span class="target" id="group__IMTQ__API_1ga230f68155644b4f1a4569e6e437160e7"></span><code class="descname">MTM_MATRIX_R1_C1</code><a class="headerlink" href="#c.MTM_MATRIX_R1_C1" title="Permalink to this definition">¶</a></dt>
+<dd><p>MTM raw -&gt; corrected correction matrix (Row 1, Column 1) </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.MTM_MATRIX_R1_C2">
+<span class="target" id="group__IMTQ__API_1ga10162b923dd1cb87a858b2820781d2ec"></span><code class="descname">MTM_MATRIX_R1_C2</code><a class="headerlink" href="#c.MTM_MATRIX_R1_C2" title="Permalink to this definition">¶</a></dt>
+<dd><p>MTM raw -&gt; corrected correction matrix (Row 1, Column 2) </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.MTM_MATRIX_R1_C3">
+<span class="target" id="group__IMTQ__API_1ga235b60c604c94a0c008af66a312a0497"></span><code class="descname">MTM_MATRIX_R1_C3</code><a class="headerlink" href="#c.MTM_MATRIX_R1_C3" title="Permalink to this definition">¶</a></dt>
+<dd><p>MTM raw -&gt; corrected correction matrix (Row 1, Column 3) </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.MTM_MATRIX_R2_C1">
+<span class="target" id="group__IMTQ__API_1ga423e0c45401802eb41adf48cbe07b480"></span><code class="descname">MTM_MATRIX_R2_C1</code><a class="headerlink" href="#c.MTM_MATRIX_R2_C1" title="Permalink to this definition">¶</a></dt>
+<dd><p>MTM raw -&gt; corrected correction matrix (Row 2, Column 1) </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.MTM_MATRIX_R2_C2">
+<span class="target" id="group__IMTQ__API_1ga2f49fca7d01269dc2980362dd6053c8f"></span><code class="descname">MTM_MATRIX_R2_C2</code><a class="headerlink" href="#c.MTM_MATRIX_R2_C2" title="Permalink to this definition">¶</a></dt>
+<dd><p>MTM raw -&gt; corrected correction matrix (Row 2, Column 2) </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.MTM_MATRIX_R2_C3">
+<span class="target" id="group__IMTQ__API_1ga21e50947e34e4a7189238fd380f80b27"></span><code class="descname">MTM_MATRIX_R2_C3</code><a class="headerlink" href="#c.MTM_MATRIX_R2_C3" title="Permalink to this definition">¶</a></dt>
+<dd><p>MTM raw -&gt; corrected correction matrix (Row 2, Column 3) </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.MTM_MATRIX_R3_C1">
+<span class="target" id="group__IMTQ__API_1ga3ecfa94c8068e4e68545d50f396f4934"></span><code class="descname">MTM_MATRIX_R3_C1</code><a class="headerlink" href="#c.MTM_MATRIX_R3_C1" title="Permalink to this definition">¶</a></dt>
+<dd><p>MTM raw -&gt; corrected correction matrix (Row 3, Column 1) </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.MTM_MATRIX_R3_C2">
+<span class="target" id="group__IMTQ__API_1ga322047b1730415d854ca99b03b9e2371"></span><code class="descname">MTM_MATRIX_R3_C2</code><a class="headerlink" href="#c.MTM_MATRIX_R3_C2" title="Permalink to this definition">¶</a></dt>
+<dd><p>MTM raw -&gt; corrected correction matrix (Row 3, Column 2) </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.MTM_MATRIX_R3_C3">
+<span class="target" id="group__IMTQ__API_1gaa80d46f9fa3eff98e71a0c36857285ab"></span><code class="descname">MTM_MATRIX_R3_C3</code><a class="headerlink" href="#c.MTM_MATRIX_R3_C3" title="Permalink to this definition">¶</a></dt>
+<dd><p>MTM raw -&gt; corrected correction matrix (Row 3, Column 3) </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.MTM_BIAS_X">
+<span class="target" id="group__IMTQ__API_1ga35845fb68f80c64859448e8a2db3ccb1"></span><code class="descname">MTM_BIAS_X</code><a class="headerlink" href="#c.MTM_BIAS_X" title="Permalink to this definition">¶</a></dt>
+<dd><p>MTM raw -&gt; corrected correction bias vector (X-axis value) </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.MTM_BIAS_Y">
+<span class="target" id="group__IMTQ__API_1gac45e2b1691fae3aed90f053a008e9d9a"></span><code class="descname">MTM_BIAS_Y</code><a class="headerlink" href="#c.MTM_BIAS_Y" title="Permalink to this definition">¶</a></dt>
+<dd><p>MTM raw -&gt; corrected correction bias vector (Y-axis value) </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.MTM_BIAS_Z">
+<span class="target" id="group__IMTQ__API_1ga3b0819b8f823393d7be8e10b56dbe85f"></span><code class="descname">MTM_BIAS_Z</code><a class="headerlink" href="#c.MTM_BIAS_Z" title="Permalink to this definition">¶</a></dt>
+<dd><p>MTM raw -&gt; corrected correction bias vector (Z-axis value) </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Current/Temperature Measurement Configuration Parameter Codes</p>
+<dl class="macro">
+<dt id="c.ADC_COIL_CURRENT_BIAS_X">
+<span class="target" id="group__IMTQ__API_1gac9bda9f31d7df12b24cca200e54ef40a"></span><code class="descname">ADC_COIL_CURRENT_BIAS_X</code><a class="headerlink" href="#c.ADC_COIL_CURRENT_BIAS_X" title="Permalink to this definition">¶</a></dt>
+<dd><p>X-axis voltage bias for coil current ADC -&gt; engineering value conversion. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ADC_COIL_CURRENT_BIAS_Y">
+<span class="target" id="group__IMTQ__API_1gaceaabfea6778bad505979ac09e068034"></span><code class="descname">ADC_COIL_CURRENT_BIAS_Y</code><a class="headerlink" href="#c.ADC_COIL_CURRENT_BIAS_Y" title="Permalink to this definition">¶</a></dt>
+<dd><p>Y-axis voltage bias for coil current ADC -&gt; engineering value conversion. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ADC_COIL_CURRENT_BIAS_Z">
+<span class="target" id="group__IMTQ__API_1ga62ac0948b716e5bae2dce2f539e8e30a"></span><code class="descname">ADC_COIL_CURRENT_BIAS_Z</code><a class="headerlink" href="#c.ADC_COIL_CURRENT_BIAS_Z" title="Permalink to this definition">¶</a></dt>
+<dd><p>Z-axis voltage bias for coil current ADC -&gt; engineering value conversion. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ADC_COIL_CURRENT_MULT_X">
+<span class="target" id="group__IMTQ__API_1ga626b8c22a7eab7297e8cf7a4cd6817f0"></span><code class="descname">ADC_COIL_CURRENT_MULT_X</code><a class="headerlink" href="#c.ADC_COIL_CURRENT_MULT_X" title="Permalink to this definition">¶</a></dt>
+<dd><p>X-axis pre-multiplier for coil current ADC -&gt; engineering value conversion. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ADC_COIL_CURRENT_MULT_Y">
+<span class="target" id="group__IMTQ__API_1ga9850b4a17d8e1d7d0c79d649c72df87f"></span><code class="descname">ADC_COIL_CURRENT_MULT_Y</code><a class="headerlink" href="#c.ADC_COIL_CURRENT_MULT_Y" title="Permalink to this definition">¶</a></dt>
+<dd><p>Y-axis pre-multiplier for coil current ADC -&gt; engineering value conversion. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ADC_COIL_CURRENT_MULT_Z">
+<span class="target" id="group__IMTQ__API_1gaaf297fbcd670fe320cf213ed3511c1d8"></span><code class="descname">ADC_COIL_CURRENT_MULT_Z</code><a class="headerlink" href="#c.ADC_COIL_CURRENT_MULT_Z" title="Permalink to this definition">¶</a></dt>
+<dd><p>Z-axis pre-multiplier for coil current ADC -&gt; engineering value conversion. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ADC_COIL_CURRENT_DIV_X">
+<span class="target" id="group__IMTQ__API_1ga950d3320b44d342deed3002ff0d2f394"></span><code class="descname">ADC_COIL_CURRENT_DIV_X</code><a class="headerlink" href="#c.ADC_COIL_CURRENT_DIV_X" title="Permalink to this definition">¶</a></dt>
+<dd><p>X-axis post-divider for coil current ADC -&gt; engineering value conversion. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ADC_COIL_CURRENT_DIV_Y">
+<span class="target" id="group__IMTQ__API_1ga077b25a7c6a8c8298aa637f8501cf3c4"></span><code class="descname">ADC_COIL_CURRENT_DIV_Y</code><a class="headerlink" href="#c.ADC_COIL_CURRENT_DIV_Y" title="Permalink to this definition">¶</a></dt>
+<dd><p>Y-axis post-divider for coil current ADC -&gt; engineering value conversion. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ADC_COIL_CURRENT_DIV_Z">
+<span class="target" id="group__IMTQ__API_1ga2a6ab7578772bb106a5d997be71bbe32"></span><code class="descname">ADC_COIL_CURRENT_DIV_Z</code><a class="headerlink" href="#c.ADC_COIL_CURRENT_DIV_Z" title="Permalink to this definition">¶</a></dt>
+<dd><p>Z-axis post-divider for coil current ADC -&gt; engineering value conversion. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ADC_COIL_TEMP_BIAS_X">
+<span class="target" id="group__IMTQ__API_1gac8c76d223858ddd4f4015f07d4a19f25"></span><code class="descname">ADC_COIL_TEMP_BIAS_X</code><a class="headerlink" href="#c.ADC_COIL_TEMP_BIAS_X" title="Permalink to this definition">¶</a></dt>
+<dd><p>X-axis voltage bias for coil temperature ADC -&gt; engineering value conversion. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ADC_COIL_TEMP_BIAS_Y">
+<span class="target" id="group__IMTQ__API_1gaf99fbe54d6d1d83d2f9f11acb71a4bc0"></span><code class="descname">ADC_COIL_TEMP_BIAS_Y</code><a class="headerlink" href="#c.ADC_COIL_TEMP_BIAS_Y" title="Permalink to this definition">¶</a></dt>
+<dd><p>Y-axis voltage bias for coil temperature ADC -&gt; engineering value conversion. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ADC_COIL_TEMP_BIAS_Z">
+<span class="target" id="group__IMTQ__API_1gac9e25e49c2fe8f6db753c18d21ae2cae"></span><code class="descname">ADC_COIL_TEMP_BIAS_Z</code><a class="headerlink" href="#c.ADC_COIL_TEMP_BIAS_Z" title="Permalink to this definition">¶</a></dt>
+<dd><p>Z-axis voltage bias for coil temperature ADC -&gt; engineering value conversion. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ADC_COIL_TEMP_MULT_X">
+<span class="target" id="group__IMTQ__API_1gabf02315ef62a378283e93a94c4a7e41a"></span><code class="descname">ADC_COIL_TEMP_MULT_X</code><a class="headerlink" href="#c.ADC_COIL_TEMP_MULT_X" title="Permalink to this definition">¶</a></dt>
+<dd><p>X-axis pre-multiplier for coil temperature ADC -&gt; engineering value conversion. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ADC_COIL_TEMP_MULT_Y">
+<span class="target" id="group__IMTQ__API_1ga04dc38f755dc63398a0a238790a1e368"></span><code class="descname">ADC_COIL_TEMP_MULT_Y</code><a class="headerlink" href="#c.ADC_COIL_TEMP_MULT_Y" title="Permalink to this definition">¶</a></dt>
+<dd><p>Y-axis pre-multiplier for coil temperature ADC -&gt; engineering value conversion. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ADC_COIL_TEMP_MULT_Z">
+<span class="target" id="group__IMTQ__API_1ga7828dd1757c3ea9dfcd3f2783891d17d"></span><code class="descname">ADC_COIL_TEMP_MULT_Z</code><a class="headerlink" href="#c.ADC_COIL_TEMP_MULT_Z" title="Permalink to this definition">¶</a></dt>
+<dd><p>Z-axis pre-multiplier for coil temperature ADC -&gt; engineering value conversion. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ADC_COIL_TEMP_DIV_X">
+<span class="target" id="group__IMTQ__API_1gabbb00539338e95b64b8a6ec3ae7bc5fc"></span><code class="descname">ADC_COIL_TEMP_DIV_X</code><a class="headerlink" href="#c.ADC_COIL_TEMP_DIV_X" title="Permalink to this definition">¶</a></dt>
+<dd><p>X-axis post-divider for coil temperature ADC -&gt; engineering value conversion. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ADC_COIL_TEMP_DIV_Y">
+<span class="target" id="group__IMTQ__API_1gac49324224e54ad29625a85bcd7506a1b"></span><code class="descname">ADC_COIL_TEMP_DIV_Y</code><a class="headerlink" href="#c.ADC_COIL_TEMP_DIV_Y" title="Permalink to this definition">¶</a></dt>
+<dd><p>Y-axis post-divider for coil temperature ADC -&gt; engineering value conversion. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ADC_COIL_TEMP_DIV_Z">
+<span class="target" id="group__IMTQ__API_1ga70baeb3d1cbc442e0f4c699feeb73d28"></span><code class="descname">ADC_COIL_TEMP_DIV_Z</code><a class="headerlink" href="#c.ADC_COIL_TEMP_DIV_Z" title="Permalink to this definition">¶</a></dt>
+<dd><p>Z-axis post-divider for coil temperature ADC -&gt; engineering value conversion. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Detumble Configuration Parameter Codes</p>
+<dl class="macro">
+<dt id="c.DETUMBLE_FREQUENCY">
+<span class="target" id="group__IMTQ__API_1gab0901268047b4ebfc208763dbe0292c2"></span><code class="descname">DETUMBLE_FREQUENCY</code><a class="headerlink" href="#c.DETUMBLE_FREQUENCY" title="Permalink to this definition">¶</a></dt>
+<dd><p>Control frequency of the detumble mode control loop. </p>
+<p><em>Values: 1, 2, 4, or 8 Hz</em> </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.BDOT_GAIN">
+<span class="target" id="group__IMTQ__API_1gadd5f50cf29c6ad10d47478f67233e8f4"></span><code class="descname">BDOT_GAIN</code><a class="headerlink" href="#c.BDOT_GAIN" title="Permalink to this definition">¶</a></dt>
+<dd><p>B-Dot algorithm gain when converting from B-Dot to dipole. </p>
+<p>Value should be negative </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.MTM_FILTER_SENSITIVITY">
+<span class="target" id="group__IMTQ__API_1ga848370e5a3925ed08d7344b114b3c84f"></span><code class="descname">MTM_FILTER_SENSITIVITY</code><a class="headerlink" href="#c.MTM_FILTER_SENSITIVITY" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adaptive sensitivity of low-pass filter applied to calibrated MTM measurements during detumble mode. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.MTM_FILTER_WEIGHT">
+<span class="target" id="group__IMTQ__API_1ga287353927bc4eb50b5825b61384ba993"></span><code class="descname">MTM_FILTER_WEIGHT</code><a class="headerlink" href="#c.MTM_FILTER_WEIGHT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adaptive weight of low-pass filter applied to calibrated MTM measurements during detumble mode. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Dipole to Current Conversion Configuration Parameter Codes</p>
+<dl class="macro">
+<dt id="c.COIL_AREA_X">
+<span class="target" id="group__IMTQ__API_1ga7cfe07211669e013efe6cd3e35f00789"></span><code class="descname">COIL_AREA_X</code><a class="headerlink" href="#c.COIL_AREA_X" title="Permalink to this definition">¶</a></dt>
+<dd><p>X-axis area of the coil used to calculate the dipole from the current flowing through the coil. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.COIL_AREA_Y">
+<span class="target" id="group__IMTQ__API_1ga185826048e697305a5e11da647dc8f95"></span><code class="descname">COIL_AREA_Y</code><a class="headerlink" href="#c.COIL_AREA_Y" title="Permalink to this definition">¶</a></dt>
+<dd><p>Y-axis area of the coil used to calculate the dipole from the current flowing through the coil. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.COIL_AREA_Z">
+<span class="target" id="group__IMTQ__API_1gaf07497b64a2688e229b1675d35535649"></span><code class="descname">COIL_AREA_Z</code><a class="headerlink" href="#c.COIL_AREA_Z" title="Permalink to this definition">¶</a></dt>
+<dd><p>Z-axis area of the coil used to calculate the dipole from the current flowing through the coil. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.COIL_CURRENT_LIMIT">
+<span class="target" id="group__IMTQ__API_1ga73bd8857ba54b498bb10ab42511b2822"></span><code class="descname">COIL_CURRENT_LIMIT</code><a class="headerlink" href="#c.COIL_CURRENT_LIMIT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Maximum total coil current allowed for dipole generation (excluding idle current consumption) </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Current to Actuation-percentage Conversion Configuration Parameter Codes</p>
+<dl class="macro">
+<dt id="c.CURRENT_FEEDBACK_ENABLE">
+<span class="target" id="group__IMTQ__API_1ga222bd966dc8b843fd6546f14910403cd"></span><code class="descname">CURRENT_FEEDBACK_ENABLE</code><a class="headerlink" href="#c.CURRENT_FEEDBACK_ENABLE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Current feedback control. </p>
+<p>0 - Open-loop temperature-compensated, 1 - Software-based closed-loop </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.CURRENT_FEEDBACK_GAIN_X">
+<span class="target" id="group__IMTQ__API_1gad40ec5d3aa9a756e22d2bc5f7ecc0317"></span><code class="descname">CURRENT_FEEDBACK_GAIN_X</code><a class="headerlink" href="#c.CURRENT_FEEDBACK_GAIN_X" title="Permalink to this definition">¶</a></dt>
+<dd><p>X-axis feedback gain of the proportional difference controller. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.CURRENT_FEEDBACK_GAIN_Y">
+<span class="target" id="group__IMTQ__API_1ga85b3f8d484b6550c72bc8ac911e00c18"></span><code class="descname">CURRENT_FEEDBACK_GAIN_Y</code><a class="headerlink" href="#c.CURRENT_FEEDBACK_GAIN_Y" title="Permalink to this definition">¶</a></dt>
+<dd><p>Y-axis feedback gain of the proportional difference controller. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.CURRENT_FEEDBACK_GAIN_Z">
+<span class="target" id="group__IMTQ__API_1ga5b8311ae63034e9da341f4e0c2aad732"></span><code class="descname">CURRENT_FEEDBACK_GAIN_Z</code><a class="headerlink" href="#c.CURRENT_FEEDBACK_GAIN_Z" title="Permalink to this definition">¶</a></dt>
+<dd><p>Z-axis feedback gain of the proportional difference controller. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.CURRENT_MAP_TEMP_T1">
+<span class="target" id="group__IMTQ__API_1gaaaacff5e4ad1096ea74b0c7850f8e3ae"></span><code class="descname">CURRENT_MAP_TEMP_T1</code><a class="headerlink" href="#c.CURRENT_MAP_TEMP_T1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Current-map profile temperature 1 (lowest) </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.CURRENT_MAP_TEMP_T2">
+<span class="target" id="group__IMTQ__API_1gae0baa3f1b5fadf2ea32b616582039fbd"></span><code class="descname">CURRENT_MAP_TEMP_T2</code><a class="headerlink" href="#c.CURRENT_MAP_TEMP_T2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Current-map profile temperature 2. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.CURRENT_MAP_TEMP_T3">
+<span class="target" id="group__IMTQ__API_1ga3b242b4605c8c75ca41d872cb4310811"></span><code class="descname">CURRENT_MAP_TEMP_T3</code><a class="headerlink" href="#c.CURRENT_MAP_TEMP_T3" title="Permalink to this definition">¶</a></dt>
+<dd><p>Current-map profile temperature 3. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.CURRENT_MAP_TEMP_T4">
+<span class="target" id="group__IMTQ__API_1gaba1efef9d68cecca36de6cd9012ff377"></span><code class="descname">CURRENT_MAP_TEMP_T4</code><a class="headerlink" href="#c.CURRENT_MAP_TEMP_T4" title="Permalink to this definition">¶</a></dt>
+<dd><p>Current-map profile temperature 4. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.CURRENT_MAP_TEMP_T5">
+<span class="target" id="group__IMTQ__API_1ga4186b383ba7cb4b9bc20fdb805973792"></span><code class="descname">CURRENT_MAP_TEMP_T5</code><a class="headerlink" href="#c.CURRENT_MAP_TEMP_T5" title="Permalink to this definition">¶</a></dt>
+<dd><p>Current-map profile temperature 5. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.CURRENT_MAP_TEMP_T6">
+<span class="target" id="group__IMTQ__API_1ga1a494aa5e1a1c8daba12275d67dee279"></span><code class="descname">CURRENT_MAP_TEMP_T6</code><a class="headerlink" href="#c.CURRENT_MAP_TEMP_T6" title="Permalink to this definition">¶</a></dt>
+<dd><p>Current-map profile temperature 6. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.CURRENT_MAP_TEMP_T7">
+<span class="target" id="group__IMTQ__API_1ga287d802c5b37ac6b9237e38a623be4c1"></span><code class="descname">CURRENT_MAP_TEMP_T7</code><a class="headerlink" href="#c.CURRENT_MAP_TEMP_T7" title="Permalink to this definition">¶</a></dt>
+<dd><p>Current-map profile temperature 7 (highest) </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.CURRENT_MAX_X_T1">
+<span class="target" id="group__IMTQ__API_1ga24d4197cd3d985dc43d6f3c7ef77a5f0"></span><code class="descname">CURRENT_MAX_X_T1</code><a class="headerlink" href="#c.CURRENT_MAX_X_T1" title="Permalink to this definition">¶</a></dt>
+<dd><p>X-axis maximum current at temperature 1. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.CURRENT_MAX_X_T2">
+<span class="target" id="group__IMTQ__API_1gade8fa54c16555d46c90fb9c031d4f9f7"></span><code class="descname">CURRENT_MAX_X_T2</code><a class="headerlink" href="#c.CURRENT_MAX_X_T2" title="Permalink to this definition">¶</a></dt>
+<dd><p>X-axis maximum current at temperature 2. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.CURRENT_MAX_X_T3">
+<span class="target" id="group__IMTQ__API_1gac320e25344a3bac6ba448a15ad0cf99b"></span><code class="descname">CURRENT_MAX_X_T3</code><a class="headerlink" href="#c.CURRENT_MAX_X_T3" title="Permalink to this definition">¶</a></dt>
+<dd><p>X-axis maximum current at temperature 3. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.CURRENT_MAX_X_T4">
+<span class="target" id="group__IMTQ__API_1ga996892dff48fbc407043f4a16e62e34e"></span><code class="descname">CURRENT_MAX_X_T4</code><a class="headerlink" href="#c.CURRENT_MAX_X_T4" title="Permalink to this definition">¶</a></dt>
+<dd><p>X-axis maximum current at temperature 4. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.CURRENT_MAX_X_T5">
+<span class="target" id="group__IMTQ__API_1ga664c466d8c879e1a5dab121b3c392ca6"></span><code class="descname">CURRENT_MAX_X_T5</code><a class="headerlink" href="#c.CURRENT_MAX_X_T5" title="Permalink to this definition">¶</a></dt>
+<dd><p>X-axis maximum current at temperature 5. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.CURRENT_MAX_X_T6">
+<span class="target" id="group__IMTQ__API_1gaef9310845ca092d8bc51f433955e4e9b"></span><code class="descname">CURRENT_MAX_X_T6</code><a class="headerlink" href="#c.CURRENT_MAX_X_T6" title="Permalink to this definition">¶</a></dt>
+<dd><p>X-axis maximum current at temperature 6. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.CURRENT_MAX_X_T7">
+<span class="target" id="group__IMTQ__API_1ga6ebc2f58ea5a9d10ad91a93724207d3d"></span><code class="descname">CURRENT_MAX_X_T7</code><a class="headerlink" href="#c.CURRENT_MAX_X_T7" title="Permalink to this definition">¶</a></dt>
+<dd><p>X-axis maximum current at temperature 7. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.CURRENT_MAX_Y_T1">
+<span class="target" id="group__IMTQ__API_1gac4e192d1e1e101c3e2be956c709e7a71"></span><code class="descname">CURRENT_MAX_Y_T1</code><a class="headerlink" href="#c.CURRENT_MAX_Y_T1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Y-axis maximum current at temperature 1. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.CURRENT_MAX_Y_T2">
+<span class="target" id="group__IMTQ__API_1gae413d6ab7a585ed666350e5fb61f6f31"></span><code class="descname">CURRENT_MAX_Y_T2</code><a class="headerlink" href="#c.CURRENT_MAX_Y_T2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Y-axis maximum current at temperature 2. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.CURRENT_MAX_Y_T3">
+<span class="target" id="group__IMTQ__API_1ga0062630871c1897cf166432e482b47c1"></span><code class="descname">CURRENT_MAX_Y_T3</code><a class="headerlink" href="#c.CURRENT_MAX_Y_T3" title="Permalink to this definition">¶</a></dt>
+<dd><p>Y-axis maximum current at temperature 3. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.CURRENT_MAX_Y_T4">
+<span class="target" id="group__IMTQ__API_1ga1c9a954ac7a31f95f659caf1dbcd13a6"></span><code class="descname">CURRENT_MAX_Y_T4</code><a class="headerlink" href="#c.CURRENT_MAX_Y_T4" title="Permalink to this definition">¶</a></dt>
+<dd><p>Y-axis maximum current at temperature 4. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.CURRENT_MAX_Y_T5">
+<span class="target" id="group__IMTQ__API_1ga182008e87cb903cbf10c7a7ba08f5aad"></span><code class="descname">CURRENT_MAX_Y_T5</code><a class="headerlink" href="#c.CURRENT_MAX_Y_T5" title="Permalink to this definition">¶</a></dt>
+<dd><p>Y-axis maximum current at temperature 5. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.CURRENT_MAX_Y_T6">
+<span class="target" id="group__IMTQ__API_1gac96446b186fa64169648f59ed1acf9c4"></span><code class="descname">CURRENT_MAX_Y_T6</code><a class="headerlink" href="#c.CURRENT_MAX_Y_T6" title="Permalink to this definition">¶</a></dt>
+<dd><p>Y-axis maximum current at temperature 6. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.CURRENT_MAX_Y_T7">
+<span class="target" id="group__IMTQ__API_1ga49c5a85d94da065b999f08325483b55d"></span><code class="descname">CURRENT_MAX_Y_T7</code><a class="headerlink" href="#c.CURRENT_MAX_Y_T7" title="Permalink to this definition">¶</a></dt>
+<dd><p>Y-axis maximum current at temperature 7. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.CURRENT_MAX_Z_T1">
+<span class="target" id="group__IMTQ__API_1ga291bcc78860b63233871f566d2684d45"></span><code class="descname">CURRENT_MAX_Z_T1</code><a class="headerlink" href="#c.CURRENT_MAX_Z_T1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Z-axis maximum current at temperature 1. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.CURRENT_MAX_Z_T2">
+<span class="target" id="group__IMTQ__API_1gaed3b853cbdddfa72b090d6287b2def2b"></span><code class="descname">CURRENT_MAX_Z_T2</code><a class="headerlink" href="#c.CURRENT_MAX_Z_T2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Z-axis maximum current at temperature 2. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.CURRENT_MAX_Z_T3">
+<span class="target" id="group__IMTQ__API_1ga2d4e980e5ceedc32a52b0ab6670e7640"></span><code class="descname">CURRENT_MAX_Z_T3</code><a class="headerlink" href="#c.CURRENT_MAX_Z_T3" title="Permalink to this definition">¶</a></dt>
+<dd><p>Z-axis maximum current at temperature 3. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.CURRENT_MAX_Z_T4">
+<span class="target" id="group__IMTQ__API_1gae16bd388557d7bc0c953f7d6987eeb04"></span><code class="descname">CURRENT_MAX_Z_T4</code><a class="headerlink" href="#c.CURRENT_MAX_Z_T4" title="Permalink to this definition">¶</a></dt>
+<dd><p>Z-axis maximum current at temperature 4. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.CURRENT_MAX_Z_T5">
+<span class="target" id="group__IMTQ__API_1ga0d796770d5f72e6cdb89a673c1e79315"></span><code class="descname">CURRENT_MAX_Z_T5</code><a class="headerlink" href="#c.CURRENT_MAX_Z_T5" title="Permalink to this definition">¶</a></dt>
+<dd><p>Z-axis maximum current at temperature 5. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.CURRENT_MAX_Z_T6">
+<span class="target" id="group__IMTQ__API_1ga59a39778e3d05862bd8f5723eed7b627"></span><code class="descname">CURRENT_MAX_Z_T6</code><a class="headerlink" href="#c.CURRENT_MAX_Z_T6" title="Permalink to this definition">¶</a></dt>
+<dd><p>Z-axis maximum current at temperature 6. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.CURRENT_MAX_Z_T7">
+<span class="target" id="group__IMTQ__API_1ga185572378249f8e753ae714f4e8ff312"></span><code class="descname">CURRENT_MAX_Z_T7</code><a class="headerlink" href="#c.CURRENT_MAX_Z_T7" title="Permalink to this definition">¶</a></dt>
+<dd><p>Z-axis maximum current at temperature 7. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Read-Only Configuration Parameter Codes</p>
+<dl class="macro">
+<dt id="c.HW_CONFIG">
+<span class="target" id="group__IMTQ__API_1ga984e30b99ceb79650ac472b089a74bec"></span><code class="descname">HW_CONFIG</code><a class="headerlink" href="#c.HW_CONFIG" title="Permalink to this definition">¶</a></dt>
+<dd><p>iMTQ hardware configuration. </p>
+<p>0 - Internal config, 1 - External config </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.WATCHDOG_TIMEOUT">
+<span class="target" id="group__IMTQ__API_1gabf89628d486477bd0db5a5890cd38a05"></span><code class="descname">WATCHDOG_TIMEOUT</code><a class="headerlink" href="#c.WATCHDOG_TIMEOUT" title="Permalink to this definition">¶</a></dt>
+<dd><p>I<sup>2</sup>C watchdog timeout interval in seconds. </p>
+<p><em>Value of 0 indicates the watchdog is disabled</em> </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.SLAVE_ADDRESS">
+<span class="target" id="group__IMTQ__API_1gae2f0ff6faf548539a21b93a034e278e8"></span><code class="descname">SLAVE_ADDRESS</code><a class="headerlink" href="#c.SLAVE_ADDRESS" title="Permalink to this definition">¶</a></dt>
+<dd><p>iMTQ’s I<sup>2</sup>C address </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.SOFTWARE_VERSION">
+<span class="target" id="group__IMTQ__API_1ga0da03efb4b5b70a36c8d72b0bb213a50"></span><code class="descname">SOFTWARE_VERSION</code><a class="headerlink" href="#c.SOFTWARE_VERSION" title="Permalink to this definition">¶</a></dt>
+<dd><p>iMTQ’s software version. </p>
+<p><em>v[second byte].[third byte].[fourth byte]; first byte is ignored</em> </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Functions</p>
+<dl class="function">
+<dt id="_CPPv416k_adcs_configurePK8JsonNode">
+<span id="_CPPv316k_adcs_configurePK8JsonNode"></span><span id="_CPPv216k_adcs_configurePK8JsonNode"></span><span id="k_adcs_configure__JsonNodeCP"></span><span class="target" id="group__IMTQ__API_1ga9965ec8d7c06cde86c2f062a3abe1317"></span><a class="reference internal" href="#_CPPv411KADCSStatus" title="KADCSStatus">KADCSStatus</a> <code class="descname">k_adcs_configure</code><span class="sig-paren">(</span><em class="property">const</em> JsonNode *<em>config</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv416k_adcs_configurePK8JsonNode" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Configure the ADCS. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KADCSStatus ADCS_OK if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">config</span></code>: ADCS configuration structure </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv416k_imtq_get_param8uint16_tP16imtq_config_resp">
+<span id="_CPPv316k_imtq_get_param8uint16_tP16imtq_config_resp"></span><span id="_CPPv216k_imtq_get_param8uint16_tP16imtq_config_resp"></span><span id="k_imtq_get_param__uint16_t.imtq_config_respP"></span><span class="target" id="group__IMTQ__API_1gae1d8867b40a6c364290f4acf8ba6922c"></span><a class="reference internal" href="#_CPPv411KADCSStatus" title="KADCSStatus">KADCSStatus</a> <code class="descname">k_imtq_get_param</code><span class="sig-paren">(</span>uint16_t <em>param</em>, <a class="reference internal" href="#_CPPv416imtq_config_resp" title="imtq_config_resp">imtq_config_resp</a> *<em>response</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv416k_imtq_get_param8uint16_tP16imtq_config_resp" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the current value of a configuration parameter. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KADCSStatus <code class="docutils literal notranslate"><span class="pre">ADCS_OK</span></code> if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">param</span></code>: ID of parameter value to fetch </li>
+<li><code class="docutils literal notranslate"><span class="pre">response</span></code>: Pointer to storage for response message. Returns the current value of the parameter. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv416k_imtq_set_param8uint16_tPK17imtq_config_valueP16imtq_config_resp">
+<span id="_CPPv316k_imtq_set_param8uint16_tPK17imtq_config_valueP16imtq_config_resp"></span><span id="_CPPv216k_imtq_set_param8uint16_tPK17imtq_config_valueP16imtq_config_resp"></span><span id="k_imtq_set_param__uint16_t.imtq_config_valueCP.imtq_config_respP"></span><span class="target" id="group__IMTQ__API_1ga0fc67f300f8f92ef480713a765a412fe"></span><a class="reference internal" href="#_CPPv411KADCSStatus" title="KADCSStatus">KADCSStatus</a> <code class="descname">k_imtq_set_param</code><span class="sig-paren">(</span>uint16_t <em>param</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv417imtq_config_value" title="imtq_config_value">imtq_config_value</a> *<em>value</em>, <a class="reference internal" href="#_CPPv416imtq_config_resp" title="imtq_config_resp">imtq_config_resp</a> *<em>response</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv416k_imtq_set_param8uint16_tPK17imtq_config_valueP16imtq_config_resp" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the value of a configuration parameter. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KADCSStatus <code class="docutils literal notranslate"><span class="pre">ADCS_OK</span></code> if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">param</span></code>: ID of parameter to update </li>
+<li><code class="docutils literal notranslate"><span class="pre">value</span></code>: Pointer to new parameter value </li>
+<li><code class="docutils literal notranslate"><span class="pre">response</span></code>: Pointer to storage for response message. Returns the updated value of the parameter. If successful, the new value should match the requested value. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv418k_imtq_reset_param8uint16_tP16imtq_config_resp">
+<span id="_CPPv318k_imtq_reset_param8uint16_tP16imtq_config_resp"></span><span id="_CPPv218k_imtq_reset_param8uint16_tP16imtq_config_resp"></span><span id="k_imtq_reset_param__uint16_t.imtq_config_respP"></span><span class="target" id="group__IMTQ__API_1gad6287c0efeacf6923ebc8b5b6de0d7d5"></span><a class="reference internal" href="#_CPPv411KADCSStatus" title="KADCSStatus">KADCSStatus</a> <code class="descname">k_imtq_reset_param</code><span class="sig-paren">(</span>uint16_t <em>param</em>, <a class="reference internal" href="#_CPPv416imtq_config_resp" title="imtq_config_resp">imtq_config_resp</a> *<em>response</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv418k_imtq_reset_param8uint16_tP16imtq_config_resp" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Reset the value of a configuration parameter to its default. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KADCSStatus <code class="docutils literal notranslate"><span class="pre">ADCS_OK</span></code> if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">param</span></code>: ID of parameter value to reset </li>
+<li><code class="docutils literal notranslate"><span class="pre">response</span></code>: Pointer to storage for response message. Returns the new value of the parameter. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<dl class="union">
+<dt id="_CPPv417imtq_config_value">
+<span id="_CPPv317imtq_config_value"></span><span id="_CPPv217imtq_config_value"></span><span class="target" id="unionimtq__config__value"></span><em class="property">union </em><code class="descname">imtq_config_value</code><a class="headerlink" href="#_CPPv417imtq_config_value" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;imtq-config.h&gt;</em><p>Configuration value storage union Using a union allows one common variable type to be used for all configuration functions. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv4N17imtq_config_value8int8_valE">
+<span id="_CPPv3N17imtq_config_value8int8_valE"></span><span id="_CPPv2N17imtq_config_value8int8_valE"></span><span id="imtq_config_value::int8_val__int8_t"></span><span class="target" id="unionimtq__config__value_1a9d46389e98e0c54ce979a998318f3418"></span>int8_t <code class="descname">int8_val</code><a class="headerlink" href="#_CPPv4N17imtq_config_value8int8_valE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Storage for signed single-byte values. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N17imtq_config_value9uint8_valE">
+<span id="_CPPv3N17imtq_config_value9uint8_valE"></span><span id="_CPPv2N17imtq_config_value9uint8_valE"></span><span id="imtq_config_value::uint8_val__uint8_t"></span><span class="target" id="unionimtq__config__value_1abf92393cce51a572e8a65748858b8f8b"></span>uint8_t <code class="descname">uint8_val</code><a class="headerlink" href="#_CPPv4N17imtq_config_value9uint8_valE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Storage for unsigned single-byte values. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N17imtq_config_value9int16_valE">
+<span id="_CPPv3N17imtq_config_value9int16_valE"></span><span id="_CPPv2N17imtq_config_value9int16_valE"></span><span id="imtq_config_value::int16_val__int16_t"></span><span class="target" id="unionimtq__config__value_1abd056e176d79520a4a533e2e4e930359"></span>int16_t <code class="descname">int16_val</code><a class="headerlink" href="#_CPPv4N17imtq_config_value9int16_valE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Storage for signed byte-pair values. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N17imtq_config_value10uint16_valE">
+<span id="_CPPv3N17imtq_config_value10uint16_valE"></span><span id="_CPPv2N17imtq_config_value10uint16_valE"></span><span id="imtq_config_value::uint16_val__uint16_t"></span><span class="target" id="unionimtq__config__value_1a681606be08a0f1bfe792cce496b0def6"></span>uint16_t <code class="descname">uint16_val</code><a class="headerlink" href="#_CPPv4N17imtq_config_value10uint16_valE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Storage for unsigned byte-pair values. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N17imtq_config_value9int32_valE">
+<span id="_CPPv3N17imtq_config_value9int32_valE"></span><span id="_CPPv2N17imtq_config_value9int32_valE"></span><span id="imtq_config_value::int32_val__int32_t"></span><span class="target" id="unionimtq__config__value_1a7004735f087e06c47b7096dd87d16a33"></span>int32_t <code class="descname">int32_val</code><a class="headerlink" href="#_CPPv4N17imtq_config_value9int32_valE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Storage for signed four-byte values. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N17imtq_config_value10uint32_valE">
+<span id="_CPPv3N17imtq_config_value10uint32_valE"></span><span id="_CPPv2N17imtq_config_value10uint32_valE"></span><span id="imtq_config_value::uint32_val__uint32_t"></span><span class="target" id="unionimtq__config__value_1ac0ff7acf7af763dfa721bfb3d9e2734c"></span>uint32_t <code class="descname">uint32_val</code><a class="headerlink" href="#_CPPv4N17imtq_config_value10uint32_valE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Storage for unsigned four-byte values. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N17imtq_config_value9float_valE">
+<span id="_CPPv3N17imtq_config_value9float_valE"></span><span id="_CPPv2N17imtq_config_value9float_valE"></span><span id="imtq_config_value::float_val__float"></span><span class="target" id="unionimtq__config__value_1a7276dbbbe549460f9865f54ec5139b7c"></span>float <code class="descname">float_val</code><a class="headerlink" href="#_CPPv4N17imtq_config_value9float_valE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Storage for IEEE754 single-precision floating point values (four bytes) </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N17imtq_config_value9int64_valE">
+<span id="_CPPv3N17imtq_config_value9int64_valE"></span><span id="_CPPv2N17imtq_config_value9int64_valE"></span><span id="imtq_config_value::int64_val__int64_t"></span><span class="target" id="unionimtq__config__value_1aa426322b1abf9ab1ba7d23bddd9d9047"></span>int64_t <code class="descname">int64_val</code><a class="headerlink" href="#_CPPv4N17imtq_config_value9int64_valE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Storage for signed eight-byte values. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N17imtq_config_value10uint64_valE">
+<span id="_CPPv3N17imtq_config_value10uint64_valE"></span><span id="_CPPv2N17imtq_config_value10uint64_valE"></span><span id="imtq_config_value::uint64_val__uint64_t"></span><span class="target" id="unionimtq__config__value_1afa65ffdb606fa180efab959f4d2631d0"></span>uint64_t <code class="descname">uint64_val</code><a class="headerlink" href="#_CPPv4N17imtq_config_value10uint64_valE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Storage for unsigned eight-byte values. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N17imtq_config_value10double_valE">
+<span id="_CPPv3N17imtq_config_value10double_valE"></span><span id="_CPPv2N17imtq_config_value10double_valE"></span><span id="imtq_config_value::double_val__double"></span><span class="target" id="unionimtq__config__value_1a08fd52b8b230f83524ad31558e5adb9a"></span>double <code class="descname">double_val</code><a class="headerlink" href="#_CPPv4N17imtq_config_value10double_valE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Storage for IEEE754 double-precision floating point values (eight bytes) </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv416imtq_config_resp">
+<span id="_CPPv316imtq_config_resp"></span><span id="_CPPv216imtq_config_resp"></span><span id="imtq_config_resp"></span><span class="target" id="structimtq__config__resp"></span><em class="property">struct </em><code class="descname">imtq_config_resp</code><a class="headerlink" href="#_CPPv416imtq_config_resp" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;imtq-config.h&gt;</em><p>Message structure returned by all get/set/reset configuration requests. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv4N16imtq_config_resp3hdrE">
+<span id="_CPPv3N16imtq_config_resp3hdrE"></span><span id="_CPPv2N16imtq_config_resp3hdrE"></span><span id="imtq_config_resp::hdr__imtq_resp_header"></span><span class="target" id="structimtq__config__resp_1a83e2ae564ee5743ddabe71e8be873151"></span><a class="reference internal" href="#_CPPv416imtq_resp_header" title="imtq_resp_header">imtq_resp_header</a> <code class="descname">hdr</code><a class="headerlink" href="#_CPPv4N16imtq_config_resp3hdrE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Response message header. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N16imtq_config_resp5paramE">
+<span id="_CPPv3N16imtq_config_resp5paramE"></span><span id="_CPPv2N16imtq_config_resp5paramE"></span><span id="imtq_config_resp::param__uint16_t"></span><span class="target" id="structimtq__config__resp_1afacf7aed405f1b652dcd968bf20b6b23"></span>uint16_t <code class="descname">param</code><a class="headerlink" href="#_CPPv4N16imtq_config_resp5paramE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Echo of requested parameter ID. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N16imtq_config_resp5valueE">
+<span id="_CPPv3N16imtq_config_resp5valueE"></span><span id="_CPPv2N16imtq_config_resp5valueE"></span><span id="imtq_config_resp::value__imtq_config_value"></span><span class="target" id="structimtq__config__resp_1abee8d2a7c644d65225feb443cb8df6f3"></span><a class="reference internal" href="#_CPPv417imtq_config_value" title="imtq_config_value">imtq_config_value</a> <code class="descname">value</code><a class="headerlink" href="#_CPPv4N16imtq_config_resp5valueE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Current value of requested parameter. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="operations">
+<h2>Operations<a class="headerlink" href="#operations" title="Permalink to this headline">¶</a></h2>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Typedefs</p>
+<dl class="type">
+<dt id="_CPPv415adcs_mode_param">
+<span id="_CPPv315adcs_mode_param"></span><span id="_CPPv215adcs_mode_param"></span><span id="adcs_mode_param"></span><span class="target" id="group__IMTQ__API_1gac23b305f5c21dee048fb7c2e47eb612e"></span><em class="property">typedef </em>uint16_t <code class="descname">adcs_mode_param</code><a class="headerlink" href="#_CPPv415adcs_mode_param" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Parameter for <code class="docutils literal notranslate"><span class="pre">k_adcs_set_mode</span></code> </p>
+<p>For the iMTQ, exclusively used to specify the duration when entering <a class="reference internal" href="#group__IMTQ__API_1ggae4c8e413eb009ad8230aab52e6dd909da1faebe1f6194ada0ca738abea6f9383e"><span class="std std-ref">DETUMBLE</span></a> mode </p>
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv417adcs_test_results">
+<span id="_CPPv317adcs_test_results"></span><span id="_CPPv217adcs_test_results"></span><span id="adcs_test_results"></span><span class="target" id="group__IMTQ__API_1gae1e41767801ab74bc7121781d5f72acc"></span><em class="property">typedef </em>JsonNode *<code class="descname">adcs_test_results</code><a class="headerlink" href="#_CPPv417adcs_test_results" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Pointer to self-test results JSON structure created by <code class="docutils literal notranslate"><span class="pre">k_adcs_run_test</span></code> </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Enums</p>
+<dl class="enum">
+<dt id="_CPPv410KADCSReset">
+<span id="_CPPv310KADCSReset"></span><span id="_CPPv210KADCSReset"></span><span class="target" id="group__IMTQ__API_1ga38938305a78f14ac20b65babf33ab15d"></span><em class="property">enum </em><code class="descname">KADCSReset</code><a class="headerlink" href="#_CPPv410KADCSReset" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Available iMTQ system reset types. </p>
+<p><em>Values:</em></p>
+<dl class="enumerator">
+<dt id="_CPPv410SOFT_RESET">
+<span id="_CPPv310SOFT_RESET"></span><span id="_CPPv210SOFT_RESET"></span><span class="target" id="group__IMTQ__API_1gga38938305a78f14ac20b65babf33ab15da21233d9381e83bbd564833217f843486"></span><code class="descname">SOFT_RESET</code><a class="headerlink" href="#_CPPv410SOFT_RESET" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Software reset. </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="enum">
+<dt id="_CPPv412ADCSTestType">
+<span id="_CPPv312ADCSTestType"></span><span id="_CPPv212ADCSTestType"></span><span class="target" id="group__IMTQ__API_1gaed2e3c2b9e2fcc14ad0f7c3c3ab572af"></span><em class="property">enum </em><code class="descname">ADCSTestType</code><a class="headerlink" href="#_CPPv412ADCSTestType" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Self-Test Axis Options. </p>
+<p><em>Values:</em></p>
+<dl class="enumerator">
+<dt id="_CPPv48TEST_ALL">
+<span id="_CPPv38TEST_ALL"></span><span id="_CPPv28TEST_ALL"></span><span class="target" id="group__IMTQ__API_1ggaed2e3c2b9e2fcc14ad0f7c3c3ab572afa06ad94a981a9ce79f5aa71d61118ba95"></span><code class="descname">TEST_ALL</code><a class="headerlink" href="#_CPPv48TEST_ALL" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Test all axes. </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv410TEST_X_POS">
+<span id="_CPPv310TEST_X_POS"></span><span id="_CPPv210TEST_X_POS"></span><span class="target" id="group__IMTQ__API_1ggaed2e3c2b9e2fcc14ad0f7c3c3ab572afafaa7550c5b11b6725e2ff79010fef8ef"></span><code class="descname">TEST_X_POS</code><a class="headerlink" href="#_CPPv410TEST_X_POS" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Test positive x-axis. </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv410TEST_X_NEG">
+<span id="_CPPv310TEST_X_NEG"></span><span id="_CPPv210TEST_X_NEG"></span><span class="target" id="group__IMTQ__API_1ggaed2e3c2b9e2fcc14ad0f7c3c3ab572afac453725aa29dfe4e6e46da3beb5a21fe"></span><code class="descname">TEST_X_NEG</code><a class="headerlink" href="#_CPPv410TEST_X_NEG" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Test negative x-axis. </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv410TEST_Y_POS">
+<span id="_CPPv310TEST_Y_POS"></span><span id="_CPPv210TEST_Y_POS"></span><span class="target" id="group__IMTQ__API_1ggaed2e3c2b9e2fcc14ad0f7c3c3ab572afad995f1e7cea9fffff2d5b0ae874180a8"></span><code class="descname">TEST_Y_POS</code><a class="headerlink" href="#_CPPv410TEST_Y_POS" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Test positive y-axis. </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv410TEST_Y_NEG">
+<span id="_CPPv310TEST_Y_NEG"></span><span id="_CPPv210TEST_Y_NEG"></span><span class="target" id="group__IMTQ__API_1ggaed2e3c2b9e2fcc14ad0f7c3c3ab572afa4f88b32a89288ecee274ef4a2a7cc1cf"></span><code class="descname">TEST_Y_NEG</code><a class="headerlink" href="#_CPPv410TEST_Y_NEG" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Test negative y-axis. </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv410TEST_Z_POS">
+<span id="_CPPv310TEST_Z_POS"></span><span id="_CPPv210TEST_Z_POS"></span><span class="target" id="group__IMTQ__API_1ggaed2e3c2b9e2fcc14ad0f7c3c3ab572afaf1061466640fa2c8fa41be5b7b272857"></span><code class="descname">TEST_Z_POS</code><a class="headerlink" href="#_CPPv410TEST_Z_POS" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Test positive z-axis. </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv410TEST_Z_NEG">
+<span id="_CPPv310TEST_Z_NEG"></span><span id="_CPPv210TEST_Z_NEG"></span><span class="target" id="group__IMTQ__API_1ggaed2e3c2b9e2fcc14ad0f7c3c3ab572afaad14c6471e23f5f4f3750442b8019a4d"></span><code class="descname">TEST_Z_NEG</code><a class="headerlink" href="#_CPPv410TEST_Z_NEG" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Test negative z-axis. </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Functions</p>
+<dl class="function">
+<dt id="_CPPv411k_adcs_noopv">
+<span id="_CPPv311k_adcs_noopv"></span><span id="_CPPv211k_adcs_noopv"></span><span id="k_adcs_noop__void"></span><span class="target" id="group__IMTQ__API_1ga17b0516a8723df0948c1b5db706f46dd"></span><a class="reference internal" href="#_CPPv411KADCSStatus" title="KADCSStatus">KADCSStatus</a> <code class="descname">k_adcs_noop</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv411k_adcs_noopv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Execute ADCS no-op command. </p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>This function might not be implemented for all ADCSs. </dd>
+<dt><strong>Return</strong></dt>
+<dd>KADCSStatus ADCS_OK if OK, error otherwise </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv412k_adcs_reset10KADCSReset">
+<span id="_CPPv312k_adcs_reset10KADCSReset"></span><span id="_CPPv212k_adcs_reset10KADCSReset"></span><span id="k_adcs_reset__KADCSReset"></span><span class="target" id="group__IMTQ__API_1gadffde0a33c008df56b10b6cfef4092e0"></span><a class="reference internal" href="#_CPPv411KADCSStatus" title="KADCSStatus">KADCSStatus</a> <code class="descname">k_adcs_reset</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv410KADCSReset" title="KADCSReset">KADCSReset</a> <em>type</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv412k_adcs_reset10KADCSReset" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Reset the ADCS. </p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>This function might not be implemented for all ADCSs </dd>
+<dt><strong>Return</strong></dt>
+<dd>KADCSStatus ADCS_OK if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">type</span></code>: Type of reset to perform (hard, soft, etc) </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv415k_adcs_set_mode8ADCSModePK15adcs_mode_param">
+<span id="_CPPv315k_adcs_set_mode8ADCSModePK15adcs_mode_param"></span><span id="_CPPv215k_adcs_set_mode8ADCSModePK15adcs_mode_param"></span><span id="k_adcs_set_mode__ADCSMode.adcs_mode_paramCP"></span><span class="target" id="group__IMTQ__API_1ga6f601125c2bab196d40111db75daf793"></span><a class="reference internal" href="#_CPPv411KADCSStatus" title="KADCSStatus">KADCSStatus</a> <code class="descname">k_adcs_set_mode</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv48ADCSMode" title="ADCSMode">ADCSMode</a> <em>mode</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv415adcs_mode_param" title="adcs_mode_param">adcs_mode_param</a> *<em>params</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv415k_adcs_set_mode8ADCSModePK15adcs_mode_param" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the ADCS’s operating mode. </p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>See specific ADCS API documentation for available modes </dd>
+<dt><strong>Return</strong></dt>
+<dd>KADCSStatus ADCS_OK if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">mode</span></code>: Operating mode to change to </li>
+<li><code class="docutils literal notranslate"><span class="pre">params</span></code>: Pointer to optional parameters which may be needed to configure the new operational mode </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv415k_adcs_run_test12ADCSTestType17adcs_test_results">
+<span id="_CPPv315k_adcs_run_test12ADCSTestType17adcs_test_results"></span><span id="_CPPv215k_adcs_run_test12ADCSTestType17adcs_test_results"></span><span id="k_adcs_run_test__ADCSTestType.adcs_test_results"></span><span class="target" id="group__IMTQ__API_1ga0fdc375ec49a5188abb52cdedd36f5f2"></span><a class="reference internal" href="#_CPPv411KADCSStatus" title="KADCSStatus">KADCSStatus</a> <code class="descname">k_adcs_run_test</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv412ADCSTestType" title="ADCSTestType">ADCSTestType</a> <em>test</em>, <a class="reference internal" href="#_CPPv417adcs_test_results" title="adcs_test_results">adcs_test_results</a> <em>buffer</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv415k_adcs_run_test12ADCSTestType17adcs_test_results" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Run an ADCS self-test. </p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>This function might not be implemented for all ADCSs. See specific ADCS API documentation for available self-tests. </dd>
+<dt><strong>Return</strong></dt>
+<dd>KADCSStatus ADCS_OK if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">test</span></code>: Type of self-test to run </li>
+<li><code class="docutils literal notranslate"><span class="pre">buffer</span></code>: (Pointer to) structure which the test-results should be copied to </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv416k_imtq_cancel_opv">
+<span id="_CPPv316k_imtq_cancel_opv"></span><span id="_CPPv216k_imtq_cancel_opv"></span><span id="k_imtq_cancel_op__void"></span><span class="target" id="group__IMTQ__API_1ga0bc221e7148c566c0ad4002c5c92b770"></span><a class="reference internal" href="#_CPPv411KADCSStatus" title="KADCSStatus">KADCSStatus</a> <code class="descname">k_imtq_cancel_op</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv416k_imtq_cancel_opv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Switch to idle mode and cancel any ongoing actuation. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KADCSStatus <code class="docutils literal notranslate"><span class="pre">ADCS_OK</span></code> if OK, error otherwise </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv424k_imtq_start_measurementv">
+<span id="_CPPv324k_imtq_start_measurementv"></span><span id="_CPPv224k_imtq_start_measurementv"></span><span id="k_imtq_start_measurement__void"></span><span class="target" id="group__IMTQ__API_1gaa47a36674bac81909b1e9edbc827ffde"></span><a class="reference internal" href="#_CPPv411KADCSStatus" title="KADCSStatus">KADCSStatus</a> <code class="descname">k_imtq_start_measurement</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv424k_imtq_start_measurementv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Start a 3-axis measurement of the magnetic field using the MTM. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KADCSStatus <code class="docutils literal notranslate"><span class="pre">ADCS_OK</span></code> if OK, error otherwise </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv430k_imtq_start_actuation_current14imtq_axis_data8uint16_t">
+<span id="_CPPv330k_imtq_start_actuation_current14imtq_axis_data8uint16_t"></span><span id="_CPPv230k_imtq_start_actuation_current14imtq_axis_data8uint16_t"></span><span id="k_imtq_start_actuation_current__imtq_axis_data.uint16_t"></span><span class="target" id="group__IMTQ__API_1gab13949eaeaaf8c556d03ecf4f253ed55"></span><a class="reference internal" href="#_CPPv411KADCSStatus" title="KADCSStatus">KADCSStatus</a> <code class="descname">k_imtq_start_actuation_current</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv414imtq_axis_data" title="imtq_axis_data">imtq_axis_data</a> <em>current</em>, uint16_t <em>time</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv430k_imtq_start_actuation_current14imtq_axis_data8uint16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Turn on the coils by current. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KADCSStatus <code class="docutils literal notranslate"><span class="pre">ADCS_OK</span></code> if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">current</span></code>: Axes current values in [10<sup>-4</sup> Am<sup>2</sup>] </li>
+<li><code class="docutils literal notranslate"><span class="pre">time</span></code>: Amount of time coils should remain at the specified levels, in milliseconds. If time is zero, the coils will stay on until another command capable of changing the coils’ states/levels is run. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv429k_imtq_start_actuation_dipole14imtq_axis_data8uint16_t">
+<span id="_CPPv329k_imtq_start_actuation_dipole14imtq_axis_data8uint16_t"></span><span id="_CPPv229k_imtq_start_actuation_dipole14imtq_axis_data8uint16_t"></span><span id="k_imtq_start_actuation_dipole__imtq_axis_data.uint16_t"></span><span class="target" id="group__IMTQ__API_1gaaee4a4bad343b657f3a5d9a8879dc827"></span><a class="reference internal" href="#_CPPv411KADCSStatus" title="KADCSStatus">KADCSStatus</a> <code class="descname">k_imtq_start_actuation_dipole</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv414imtq_axis_data" title="imtq_axis_data">imtq_axis_data</a> <em>dipole</em>, uint16_t <em>time</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv429k_imtq_start_actuation_dipole14imtq_axis_data8uint16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Turn on the coils by desired dipole. </p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>If the specified values exceed the coils’ capabilities, the dipole will be scaled. The resulting values can be retrieved with <a class="reference internal" href="#group__IMTQ__API_1ga514ff26814b30a55711f2af099d3fc1e"><span class="std std-ref">k_imtq_get_dipole</span></a>. </dd>
+<dt><strong>Return</strong></dt>
+<dd>KADCSStatus <code class="docutils literal notranslate"><span class="pre">ADCS_OK</span></code> if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">dipole</span></code>: Axes dipole values in [10<sup>-4</sup> Am<sup>2</sup>] </li>
+<li><code class="docutils literal notranslate"><span class="pre">time</span></code>: Amount of time coils should remain at the specified levels, in milliseconds. If time is zero, the coils will stay on until another command capable of changing the coils’ states/levels is run. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv426k_imtq_start_actuation_PWM14imtq_axis_data8uint16_t">
+<span id="_CPPv326k_imtq_start_actuation_PWM14imtq_axis_data8uint16_t"></span><span id="_CPPv226k_imtq_start_actuation_PWM14imtq_axis_data8uint16_t"></span><span id="k_imtq_start_actuation_PWM__imtq_axis_data.uint16_t"></span><span class="target" id="group__IMTQ__API_1ga363d00d3384f7b243b414541585e5c99"></span><a class="reference internal" href="#_CPPv411KADCSStatus" title="KADCSStatus">KADCSStatus</a> <code class="descname">k_imtq_start_actuation_PWM</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv414imtq_axis_data" title="imtq_axis_data">imtq_axis_data</a> <em>pwm</em>, uint16_t <em>time</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv426k_imtq_start_actuation_PWM14imtq_axis_data8uint16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Turn on the coils by PWM duty cycle. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KADCSStatus <code class="docutils literal notranslate"><span class="pre">ADCS_OK</span></code> if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">pwm</span></code>: Axes PWM duty cycles in [0.1%]. <em>Max single-axis value: 1000 (100%)</em> </li>
+<li><code class="docutils literal notranslate"><span class="pre">time</span></code>: Amount of time coils should remain at the specified levels, in milliseconds. If time is zero, the coils will stay on until another command capable of changing the coils’ states/levels is run. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv417k_imtq_start_test12ADCSTestType">
+<span id="_CPPv317k_imtq_start_test12ADCSTestType"></span><span id="_CPPv217k_imtq_start_test12ADCSTestType"></span><span id="k_imtq_start_test__ADCSTestType"></span><span class="target" id="group__IMTQ__API_1ga3476c0db5c2a9c491d95fd3e73d20a40"></span><a class="reference internal" href="#_CPPv411KADCSStatus" title="KADCSStatus">KADCSStatus</a> <code class="descname">k_imtq_start_test</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv412ADCSTestType" title="ADCSTestType">ADCSTestType</a> <em>axis</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv417k_imtq_start_test12ADCSTestType" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Start axis self-test. </p>
+<p>Use <a class="reference internal" href="#group__IMTQ__API_1ga48af17137119568631d8a1743ade9f8c"><span class="std std-ref">k_imtq_get_test_results_single</span></a> or <a class="reference internal" href="#group__IMTQ__API_1ga121052e93038c76c4c503dd7f59056f7"><span class="std std-ref">k_imtq_get_test_results_all</span></a> to check the output <dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KADCSStatus <code class="docutils literal notranslate"><span class="pre">ADCS_OK</span></code> if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">axis</span></code>: Axis to test. Should be a <a class="reference internal" href="#group__IMTQ__API_1gaed2e3c2b9e2fcc14ad0f7c3c3ab572af"><span class="std std-ref">ADCSTestType</span></a> value (use <a class="reference internal" href="#group__IMTQ__API_1ggaed2e3c2b9e2fcc14ad0f7c3c3ab572afa06ad94a981a9ce79f5aa71d61118ba95"><span class="std std-ref">TEST_ALL</span></a> to text each axis sequentially) </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv421k_imtq_start_detumble8uint16_t">
+<span id="_CPPv321k_imtq_start_detumble8uint16_t"></span><span id="_CPPv221k_imtq_start_detumble8uint16_t"></span><span id="k_imtq_start_detumble__uint16_t"></span><span class="target" id="group__IMTQ__API_1ga3eb03948ae74014bf0b4e9132d0b9e81"></span><a class="reference internal" href="#_CPPv411KADCSStatus" title="KADCSStatus">KADCSStatus</a> <code class="descname">k_imtq_start_detumble</code><span class="sig-paren">(</span>uint16_t <em>time</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv421k_imtq_start_detumble8uint16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Switch to detumble mode. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KADCSStatus <code class="docutils literal notranslate"><span class="pre">ADCS_OK</span></code> if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">time</span></code>: Length of time to spend in detumble mode (seconds) </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="data-requests">
+<h2>Data Requests<a class="headerlink" href="#data-requests" title="Permalink to this headline">¶</a></h2>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Self-Test Error Byte Flags</p>
+<dl class="macro">
+<dt id="c.TEST_ERROR_I2C">
+<span class="target" id="group__IMTQ__API_1ga9d9b8ef0d75e39cc63b7d6028aba58bc"></span><code class="descname">TEST_ERROR_I2C</code><a class="headerlink" href="#c.TEST_ERROR_I2C" title="Permalink to this definition">¶</a></dt>
+<dd><p>I<sup>2</sup>C Failure. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.TEST_ERROR_SPI">
+<span class="target" id="group__IMTQ__API_1gad0f4e0778f333d349e33e32fc5db5749"></span><code class="descname">TEST_ERROR_SPI</code><a class="headerlink" href="#c.TEST_ERROR_SPI" title="Permalink to this definition">¶</a></dt>
+<dd><p>SPI Failure (MTM connectivity) </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.TEST_ERROR_ADC">
+<span class="target" id="group__IMTQ__API_1gab5a9564c7bb273deff626542ed5007d5"></span><code class="descname">TEST_ERROR_ADC</code><a class="headerlink" href="#c.TEST_ERROR_ADC" title="Permalink to this definition">¶</a></dt>
+<dd><p>ADC Failure (current/temp measurement) </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.TEST_ERROR_PWM">
+<span class="target" id="group__IMTQ__API_1ga6fcf2db6bcf01af9c12ece28c1498bf3"></span><code class="descname">TEST_ERROR_PWM</code><a class="headerlink" href="#c.TEST_ERROR_PWM" title="Permalink to this definition">¶</a></dt>
+<dd><p>PWM Failure (coil actuation) </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.TEST_ERROR_TC">
+<span class="target" id="group__IMTQ__API_1gaf17e77ff62e24318b9d6ff3ee172c6fc"></span><code class="descname">TEST_ERROR_TC</code><a class="headerlink" href="#c.TEST_ERROR_TC" title="Permalink to this definition">¶</a></dt>
+<dd><p>System Failure. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.TEST_ERROR_MTM">
+<span class="target" id="group__IMTQ__API_1ga867f2c611660044c88b75bd47eb10fa1"></span><code class="descname">TEST_ERROR_MTM</code><a class="headerlink" href="#c.TEST_ERROR_MTM" title="Permalink to this definition">¶</a></dt>
+<dd><p>MTM values outside of expected range. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.TEST_ERROR_COIL">
+<span class="target" id="group__IMTQ__API_1ga46552e025fab3e7dcf9baeeeb4dc39cf"></span><code class="descname">TEST_ERROR_COIL</code><a class="headerlink" href="#c.TEST_ERROR_COIL" title="Permalink to this definition">¶</a></dt>
+<dd><p>Coil currents outside of expected range. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Typedefs</p>
+<dl class="type">
+<dt id="_CPPv417adcs_power_status">
+<span id="_CPPv317adcs_power_status"></span><span id="_CPPv217adcs_power_status"></span><span id="adcs_power_status"></span><span class="target" id="group__IMTQ__API_1gaaf12b02e672771cb79c8dbd7a2a63e2e"></span><em class="property">typedef </em>uint32_t <code class="descname">adcs_power_status</code><a class="headerlink" href="#_CPPv417adcs_power_status" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>System uptime returned by <code class="docutils literal notranslate"><span class="pre">k_adcs_get_power_status</span></code> </p>
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv417imtq_coil_current">
+<span id="_CPPv317imtq_coil_current"></span><span id="_CPPv217imtq_coil_current"></span><span id="imtq_coil_current"></span><span class="target" id="group__IMTQ__API_1ga764c7a139ce970b4d1ea0d8ec33c94be"></span><em class="property">typedef </em><a class="reference internal" href="#_CPPv413imtq_axis_msg" title="imtq_axis_msg">imtq_axis_msg</a> <code class="descname">imtq_coil_current</code><a class="headerlink" href="#_CPPv417imtq_coil_current" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Coil currents in [10<sup>-4</sup> A] returned by <a class="reference internal" href="#group__IMTQ__API_1ga03826eb113ce879398d8b46cc377db05"><span class="std std-ref">k_imtq_get_coil_current</span></a>. </p>
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv414imtq_coil_temp">
+<span id="_CPPv314imtq_coil_temp"></span><span id="_CPPv214imtq_coil_temp"></span><span id="imtq_coil_temp"></span><span class="target" id="group__IMTQ__API_1gaf8b65c8948b33235ec0835634887c8d0"></span><em class="property">typedef </em><a class="reference internal" href="#_CPPv413imtq_axis_msg" title="imtq_axis_msg">imtq_axis_msg</a> <code class="descname">imtq_coil_temp</code><a class="headerlink" href="#_CPPv414imtq_coil_temp" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Coil temperatures in [<sup>o</sup>C] returned by <a class="reference internal" href="#group__IMTQ__API_1ga23105a3b4921916ec436f460b404a754"><span class="std std-ref">k_imtq_get_coil_temps</span></a>. </p>
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv411imtq_dipole">
+<span id="_CPPv311imtq_dipole"></span><span id="_CPPv211imtq_dipole"></span><span id="imtq_dipole"></span><span class="target" id="group__IMTQ__API_1gaccd89462494633da014b2a18a79f27b6"></span><em class="property">typedef </em><a class="reference internal" href="#_CPPv413imtq_axis_msg" title="imtq_axis_msg">imtq_axis_msg</a> <code class="descname">imtq_dipole</code><a class="headerlink" href="#_CPPv411imtq_dipole" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Commanded actuation dipole in [10<sup>-4</sup> Am<sup>2</sup>] returned by <a class="reference internal" href="#group__IMTQ__API_1ga514ff26814b30a55711f2af099d3fc1e"><span class="std std-ref">k_imtq_get_dipole</span></a>. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Enums</p>
+<dl class="enum">
+<dt id="_CPPv413ADCSTelemType">
+<span id="_CPPv313ADCSTelemType"></span><span id="_CPPv213ADCSTelemType"></span><span class="target" id="group__IMTQ__API_1ga181840fe8f8411ccb0f46f494bcf1da1"></span><em class="property">enum </em><code class="descname">ADCSTelemType</code><a class="headerlink" href="#_CPPv413ADCSTelemType" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Categories of telemetry which can be returned by <code class="docutils literal notranslate"><span class="pre">k_adcs_get_telemetry</span></code> </p>
+<p><em>Values:</em></p>
+<dl class="enumerator">
+<dt id="_CPPv47NOMINAL">
+<span id="_CPPv37NOMINAL"></span><span id="_CPPv27NOMINAL"></span><span class="target" id="group__IMTQ__API_1gga181840fe8f8411ccb0f46f494bcf1da1ae2bd7b57b3f0bb02e66e42dbacc5c7fc"></span><code class="descname">NOMINAL</code><a class="headerlink" href="#_CPPv47NOMINAL" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>System state, all system measurements. </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv45DEBUG">
+<span id="_CPPv35DEBUG"></span><span id="_CPPv25DEBUG"></span><span class="target" id="group__IMTQ__API_1gga181840fe8f8411ccb0f46f494bcf1da1a0593585da9181e972974c1274d8f2b4f"></span><code class="descname">DEBUG</code><a class="headerlink" href="#_CPPv45DEBUG" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>System state, current configuration, last test results. </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Functions</p>
+<dl class="function">
+<dt id="_CPPv423k_adcs_get_power_statusP17adcs_power_status">
+<span id="_CPPv323k_adcs_get_power_statusP17adcs_power_status"></span><span id="_CPPv223k_adcs_get_power_statusP17adcs_power_status"></span><span id="k_adcs_get_power_status__adcs_power_statusP"></span><span class="target" id="group__IMTQ__API_1gaeac20d2d24cf81154357d200ac71a396"></span><a class="reference internal" href="#_CPPv411KADCSStatus" title="KADCSStatus">KADCSStatus</a> <code class="descname">k_adcs_get_power_status</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv417adcs_power_status" title="adcs_power_status">adcs_power_status</a> *<em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv423k_adcs_get_power_statusP17adcs_power_status" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the ADCS’s power status. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KADCSStatus ADCS_OK if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">data</span></code>: Pointer to storage for returned system uptime. If the value is zero, then the ADCS is offline. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv415k_adcs_get_modeP8ADCSMode">
+<span id="_CPPv315k_adcs_get_modeP8ADCSMode"></span><span id="_CPPv215k_adcs_get_modeP8ADCSMode"></span><span id="k_adcs_get_mode__ADCSModeP"></span><span class="target" id="group__IMTQ__API_1gaf382e25d79353b195b16cb9f579ae9f2"></span><a class="reference internal" href="#_CPPv411KADCSStatus" title="KADCSStatus">KADCSStatus</a> <code class="descname">k_adcs_get_mode</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv48ADCSMode" title="ADCSMode">ADCSMode</a> *<em>mode</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv415k_adcs_get_modeP8ADCSMode" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the ADCS’s current operating mode. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KADCSStatus ADCS_OK if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">mode</span></code>: Pointer to storage which the mode value should be copied to </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv422k_adcs_get_orientationP11adcs_orient">
+<span id="_CPPv322k_adcs_get_orientationP11adcs_orient"></span><span id="_CPPv222k_adcs_get_orientationP11adcs_orient"></span><span id="k_adcs_get_orientation__adcs_orientP"></span><span class="target" id="group__IMTQ__API_1gae4952b31afcd6142feb6ee083c56d902"></span><a class="reference internal" href="#_CPPv411KADCSStatus" title="KADCSStatus">KADCSStatus</a> <code class="descname">k_adcs_get_orientation</code><span class="sig-paren">(</span>adcs_orient *<em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv422k_adcs_get_orientationP11adcs_orient" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the ADCS’s current orientation. </p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>This function might not be implemented for all ADCSs. </dd>
+<dt><strong>Return</strong></dt>
+<dd>KADCSStatus ADCS_OK if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">data</span></code>: Pointer to storage for returned data. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv415k_adcs_get_spinP9adcs_spin">
+<span id="_CPPv315k_adcs_get_spinP9adcs_spin"></span><span id="_CPPv215k_adcs_get_spinP9adcs_spin"></span><span id="k_adcs_get_spin__adcs_spinP"></span><span class="target" id="group__IMTQ__API_1gadb1c36b6a5fa04e641f64d1c66229448"></span><a class="reference internal" href="#_CPPv411KADCSStatus" title="KADCSStatus">KADCSStatus</a> <code class="descname">k_adcs_get_spin</code><span class="sig-paren">(</span>adcs_spin *<em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv415k_adcs_get_spinP9adcs_spin" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the ADCS’s current spin. </p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>This function might not be implemented for all ADCSs. </dd>
+<dt><strong>Return</strong></dt>
+<dd>KADCSStatus ADCS_OK if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">data</span></code>: Pointer to storage for returned data. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv420k_adcs_get_telemetry13ADCSTelemTypeP8JsonNode">
+<span id="_CPPv320k_adcs_get_telemetry13ADCSTelemTypeP8JsonNode"></span><span id="_CPPv220k_adcs_get_telemetry13ADCSTelemTypeP8JsonNode"></span><span id="k_adcs_get_telemetry__ADCSTelemType.JsonNodeP"></span><span class="target" id="group__IMTQ__API_1ga92b85b23b6659f94146740bd553524ec"></span><a class="reference internal" href="#_CPPv411KADCSStatus" title="KADCSStatus">KADCSStatus</a> <code class="descname">k_adcs_get_telemetry</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv413ADCSTelemType" title="ADCSTelemType">ADCSTelemType</a> <em>type</em>, JsonNode *<em>buffer</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv420k_adcs_get_telemetry13ADCSTelemTypeP8JsonNode" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Read ADCS telemetry values. </p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>See specific ADCS API documentation for available telemetry types </dd>
+<dt><strong>Return</strong></dt>
+<dd>KADCSStatus ADCS_OK if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">type</span></code>: Telemetry packet to read </li>
+<li><code class="docutils literal notranslate"><span class="pre">buffer</span></code>: (Pointer to) structure which data should be copied to </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv423k_imtq_get_system_stateP10imtq_state">
+<span id="_CPPv323k_imtq_get_system_stateP10imtq_state"></span><span id="_CPPv223k_imtq_get_system_stateP10imtq_state"></span><span id="k_imtq_get_system_state__imtq_stateP"></span><span class="target" id="group__IMTQ__API_1ga16f5a65b386662bcd9b29540ba8aa9da"></span><a class="reference internal" href="#_CPPv411KADCSStatus" title="KADCSStatus">KADCSStatus</a> <code class="descname">k_imtq_get_system_state</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv410imtq_state" title="imtq_state">imtq_state</a> *<em>state</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv423k_imtq_get_system_stateP10imtq_state" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get iMTQ system state. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KADCSStatus <code class="docutils literal notranslate"><span class="pre">ADCS_OK</span></code> if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">state</span></code>: Pointer to storage for state data </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv418k_imtq_get_raw_mtmP12imtq_mtm_msg">
+<span id="_CPPv318k_imtq_get_raw_mtmP12imtq_mtm_msg"></span><span id="_CPPv218k_imtq_get_raw_mtmP12imtq_mtm_msg"></span><span id="k_imtq_get_raw_mtm__imtq_mtm_msgP"></span><span class="target" id="group__IMTQ__API_1ga228067771b4bbe0568df64e33284ef64"></span><a class="reference internal" href="#_CPPv411KADCSStatus" title="KADCSStatus">KADCSStatus</a> <code class="descname">k_imtq_get_raw_mtm</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv412imtq_mtm_msg" title="imtq_mtm_msg">imtq_mtm_msg</a> *<em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv418k_imtq_get_raw_mtmP12imtq_mtm_msg" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get raw data values from MTM. </p>
+<p>Measurement units are in [7.5 * 10<sup>-9</sup> T], as documented in the <a class="reference external" href="http://www.compotrade.ru/Components/Sensixs/XEN1210.pdf">XEN1210 datasheet</a> <dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>The <a class="reference internal" href="#group__IMTQ__API_1gaa47a36674bac81909b1e9edbc827ffde"><span class="std std-ref">k_imtq_start_measurement</span></a> function must have been called in order for this function to be able to retrieve data </dd>
+<dt><strong>Return</strong></dt>
+<dd>KADCSStatus <code class="docutils literal notranslate"><span class="pre">ADCS_OK</span></code> if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">data</span></code>: Pointer to storage for data </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv420k_imtq_get_calib_mtmP12imtq_mtm_msg">
+<span id="_CPPv320k_imtq_get_calib_mtmP12imtq_mtm_msg"></span><span id="_CPPv220k_imtq_get_calib_mtmP12imtq_mtm_msg"></span><span id="k_imtq_get_calib_mtm__imtq_mtm_msgP"></span><span class="target" id="group__IMTQ__API_1ga9267a133ecca8ad8eff8674c86bd8fdc"></span><a class="reference internal" href="#_CPPv411KADCSStatus" title="KADCSStatus">KADCSStatus</a> <code class="descname">k_imtq_get_calib_mtm</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv412imtq_mtm_msg" title="imtq_mtm_msg">imtq_mtm_msg</a> *<em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv420k_imtq_get_calib_mtmP12imtq_mtm_msg" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get calibrated data values from MTM. </p>
+<p>Measurement units are in [10<sup>-9</sup> T] <dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>The <a class="reference internal" href="#group__IMTQ__API_1gaa47a36674bac81909b1e9edbc827ffde"><span class="std std-ref">k_imtq_start_measurement</span></a> function must have been called in order for this function to be able to retrieve data </dd>
+<dt><strong>Return</strong></dt>
+<dd>KADCSStatus <code class="docutils literal notranslate"><span class="pre">ADCS_OK</span></code> if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">data</span></code>: Pointer to storage for data </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv423k_imtq_get_coil_currentP17imtq_coil_current">
+<span id="_CPPv323k_imtq_get_coil_currentP17imtq_coil_current"></span><span id="_CPPv223k_imtq_get_coil_currentP17imtq_coil_current"></span><span id="k_imtq_get_coil_current__imtq_coil_currentP"></span><span class="target" id="group__IMTQ__API_1ga03826eb113ce879398d8b46cc377db05"></span><a class="reference internal" href="#_CPPv411KADCSStatus" title="KADCSStatus">KADCSStatus</a> <code class="descname">k_imtq_get_coil_current</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv417imtq_coil_current" title="imtq_coil_current">imtq_coil_current</a> *<em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv423k_imtq_get_coil_currentP17imtq_coil_current" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get coil currents. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KADCSStatus <code class="docutils literal notranslate"><span class="pre">ADCS_OK</span></code> if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">data</span></code>: Pointer to storage for data </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv421k_imtq_get_coil_tempsP14imtq_coil_temp">
+<span id="_CPPv321k_imtq_get_coil_tempsP14imtq_coil_temp"></span><span id="_CPPv221k_imtq_get_coil_tempsP14imtq_coil_temp"></span><span id="k_imtq_get_coil_temps__imtq_coil_tempP"></span><span class="target" id="group__IMTQ__API_1ga23105a3b4921916ec436f460b404a754"></span><a class="reference internal" href="#_CPPv411KADCSStatus" title="KADCSStatus">KADCSStatus</a> <code class="descname">k_imtq_get_coil_temps</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv414imtq_coil_temp" title="imtq_coil_temp">imtq_coil_temp</a> *<em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv421k_imtq_get_coil_tempsP14imtq_coil_temp" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get coil temperatures. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KADCSStatus <code class="docutils literal notranslate"><span class="pre">ADCS_OK</span></code> if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">data</span></code>: Pointer to storage for data </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv417k_imtq_get_dipoleP11imtq_dipole">
+<span id="_CPPv317k_imtq_get_dipoleP11imtq_dipole"></span><span id="_CPPv217k_imtq_get_dipoleP11imtq_dipole"></span><span id="k_imtq_get_dipole__imtq_dipoleP"></span><span class="target" id="group__IMTQ__API_1ga514ff26814b30a55711f2af099d3fc1e"></span><a class="reference internal" href="#_CPPv411KADCSStatus" title="KADCSStatus">KADCSStatus</a> <code class="descname">k_imtq_get_dipole</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv411imtq_dipole" title="imtq_dipole">imtq_dipole</a> *<em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv417k_imtq_get_dipoleP11imtq_dipole" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get commanded actuation dipole. </p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>Only applies to coil actuations started with <a class="reference internal" href="#group__IMTQ__API_1gaaee4a4bad343b657f3a5d9a8879dc827"><span class="std std-ref">k_imtq_start_actuation_dipole</span></a>. Can also be used in detumble mode to retrieve the latest actuation dipole </dd>
+<dt><strong>Return</strong></dt>
+<dd>KADCSStatus <code class="docutils literal notranslate"><span class="pre">ADCS_OK</span></code> if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">data</span></code>: Pointer to storage for data </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv430k_imtq_get_test_results_singleP23imtq_test_result_single">
+<span id="_CPPv330k_imtq_get_test_results_singleP23imtq_test_result_single"></span><span id="_CPPv230k_imtq_get_test_results_singleP23imtq_test_result_single"></span><span id="k_imtq_get_test_results_single__imtq_test_result_singleP"></span><span class="target" id="group__IMTQ__API_1ga48af17137119568631d8a1743ade9f8c"></span><a class="reference internal" href="#_CPPv411KADCSStatus" title="KADCSStatus">KADCSStatus</a> <code class="descname">k_imtq_get_test_results_single</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv423imtq_test_result_single" title="imtq_test_result_single">imtq_test_result_single</a> *<em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv430k_imtq_get_test_results_singleP23imtq_test_result_single" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get results from a single-axis self-test. </p>
+<p>The test can be started with <a class="reference internal" href="#group__IMTQ__API_1ga3476c0db5c2a9c491d95fd3e73d20a40"><span class="std std-ref">k_imtq_start_test</span></a> <dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KADCSStatus <code class="docutils literal notranslate"><span class="pre">ADCS_OK</span></code> if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">data</span></code>: Pointer to storage for data </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv427k_imtq_get_test_results_allP20imtq_test_result_all">
+<span id="_CPPv327k_imtq_get_test_results_allP20imtq_test_result_all"></span><span id="_CPPv227k_imtq_get_test_results_allP20imtq_test_result_all"></span><span id="k_imtq_get_test_results_all__imtq_test_result_allP"></span><span class="target" id="group__IMTQ__API_1ga121052e93038c76c4c503dd7f59056f7"></span><a class="reference internal" href="#_CPPv411KADCSStatus" title="KADCSStatus">KADCSStatus</a> <code class="descname">k_imtq_get_test_results_all</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv420imtq_test_result_all" title="imtq_test_result_all">imtq_test_result_all</a> *<em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv427k_imtq_get_test_results_allP20imtq_test_result_all" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get results from an all-axes self-test. </p>
+<p>The test can be started with <a class="reference internal" href="#group__IMTQ__API_1ga3476c0db5c2a9c491d95fd3e73d20a40"><span class="std std-ref">k_imtq_start_test</span></a> by specifying <a class="reference internal" href="#group__IMTQ__API_1ggaed2e3c2b9e2fcc14ad0f7c3c3ab572afa06ad94a981a9ce79f5aa71d61118ba95"><span class="std std-ref">TEST_ALL</span></a> <dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KADCSStatus <code class="docutils literal notranslate"><span class="pre">ADCS_OK</span></code> if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">data</span></code>: Pointer to storage for data </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv419k_imtq_get_detumbleP13imtq_detumble">
+<span id="_CPPv319k_imtq_get_detumbleP13imtq_detumble"></span><span id="_CPPv219k_imtq_get_detumbleP13imtq_detumble"></span><span id="k_imtq_get_detumble__imtq_detumbleP"></span><span class="target" id="group__IMTQ__API_1ga5502ca49c985e80f62a4f45a14594430"></span><a class="reference internal" href="#_CPPv411KADCSStatus" title="KADCSStatus">KADCSStatus</a> <code class="descname">k_imtq_get_detumble</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv413imtq_detumble" title="imtq_detumble">imtq_detumble</a> *<em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419k_imtq_get_detumbleP13imtq_detumble" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get detumble data. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KADCSStatus <code class="docutils literal notranslate"><span class="pre">ADCS_OK</span></code> if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">data</span></code>: Pointer to storage for data </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv427k_imtq_get_raw_housekeepingP21imtq_housekeeping_raw">
+<span id="_CPPv327k_imtq_get_raw_housekeepingP21imtq_housekeeping_raw"></span><span id="_CPPv227k_imtq_get_raw_housekeepingP21imtq_housekeeping_raw"></span><span id="k_imtq_get_raw_housekeeping__imtq_housekeeping_rawP"></span><span class="target" id="group__IMTQ__API_1ga864de2a79d50ba66fb851a6b7d9cf854"></span><a class="reference internal" href="#_CPPv411KADCSStatus" title="KADCSStatus">KADCSStatus</a> <code class="descname">k_imtq_get_raw_housekeeping</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv421imtq_housekeeping_raw" title="imtq_housekeeping_raw">imtq_housekeeping_raw</a> *<em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv427k_imtq_get_raw_housekeepingP21imtq_housekeeping_raw" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the housekeeping data of the iMTQ as raw ADC values. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KADCSStatus <code class="docutils literal notranslate"><span class="pre">ADCS_OK</span></code> if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">data</span></code>: Pointer to storage for data </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv427k_imtq_get_eng_housekeepingP21imtq_housekeeping_eng">
+<span id="_CPPv327k_imtq_get_eng_housekeepingP21imtq_housekeeping_eng"></span><span id="_CPPv227k_imtq_get_eng_housekeepingP21imtq_housekeeping_eng"></span><span id="k_imtq_get_eng_housekeeping__imtq_housekeeping_engP"></span><span class="target" id="group__IMTQ__API_1ga4f3c21e55ddb2d09ad9e0cacdfbf7026"></span><a class="reference internal" href="#_CPPv411KADCSStatus" title="KADCSStatus">KADCSStatus</a> <code class="descname">k_imtq_get_eng_housekeeping</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv421imtq_housekeeping_eng" title="imtq_housekeeping_eng">imtq_housekeeping_eng</a> *<em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv427k_imtq_get_eng_housekeepingP21imtq_housekeeping_eng" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the housekeeping data of the iMTQ in interpreted engineering units. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KADCSStatus <code class="docutils literal notranslate"><span class="pre">ADCS_OK</span></code> if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">data</span></code>: Pointer to storage for data </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv430kprv_adcs_get_status_telemetryP8JsonNode">
+<span id="_CPPv330kprv_adcs_get_status_telemetryP8JsonNode"></span><span id="_CPPv230kprv_adcs_get_status_telemetryP8JsonNode"></span><span id="kprv_adcs_get_status_telemetry__JsonNodeP"></span><span class="target" id="group__IMTQ__API_1ga98b33ef664b0f59819c11c1256fed997"></span><a class="reference internal" href="#_CPPv411KADCSStatus" title="KADCSStatus">KADCSStatus</a> <code class="descname">kprv_adcs_get_status_telemetry</code><span class="sig-paren">(</span>JsonNode *<em>buffer</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv430kprv_adcs_get_status_telemetryP8JsonNode" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the current system status and add it to the telemetry JSON. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KADCSStatus <code class="docutils literal notranslate"><span class="pre">ADCS_OK</span></code> if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">buffer</span></code>: Pointer to telemetry JSON structure </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv431kprv_adcs_get_nominal_telemetryP8JsonNode">
+<span id="_CPPv331kprv_adcs_get_nominal_telemetryP8JsonNode"></span><span id="_CPPv231kprv_adcs_get_nominal_telemetryP8JsonNode"></span><span id="kprv_adcs_get_nominal_telemetry__JsonNodeP"></span><span class="target" id="group__IMTQ__API_1gaf130d810b19b1f933ad7450b77206b31"></span><a class="reference internal" href="#_CPPv411KADCSStatus" title="KADCSStatus">KADCSStatus</a> <code class="descname">kprv_adcs_get_nominal_telemetry</code><span class="sig-paren">(</span>JsonNode *<em>buffer</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv431kprv_adcs_get_nominal_telemetryP8JsonNode" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the current system measurements and add them to the telemetry JSON. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KADCSStatus <code class="docutils literal notranslate"><span class="pre">ADCS_OK</span></code> if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">buffer</span></code>: Pointer to telemetry JSON structure </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv429kprv_adcs_get_debug_telemetryP8JsonNode">
+<span id="_CPPv329kprv_adcs_get_debug_telemetryP8JsonNode"></span><span id="_CPPv229kprv_adcs_get_debug_telemetryP8JsonNode"></span><span id="kprv_adcs_get_debug_telemetry__JsonNodeP"></span><span class="target" id="group__IMTQ__API_1ga07f79d6681595140f6c57a6057f26078"></span><a class="reference internal" href="#_CPPv411KADCSStatus" title="KADCSStatus">KADCSStatus</a> <code class="descname">kprv_adcs_get_debug_telemetry</code><span class="sig-paren">(</span>JsonNode *<em>buffer</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv429kprv_adcs_get_debug_telemetryP8JsonNode" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the current system configuration and last self-test results and add them to the telemetry JSON. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KADCSStatus <code class="docutils literal notranslate"><span class="pre">ADCS_OK</span></code> if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">buffer</span></code>: Pointer to telemetry JSON structure </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv422kprv_adcs_process_testP8JsonNode16imtq_test_result">
+<span id="_CPPv322kprv_adcs_process_testP8JsonNode16imtq_test_result"></span><span id="_CPPv222kprv_adcs_process_testP8JsonNode16imtq_test_result"></span><span id="kprv_adcs_process_test__JsonNodeP.imtq_test_result"></span><span class="target" id="group__IMTQ__API_1ga553f3754b17d9c454b2eebf54e9721ad"></span>void <code class="descname">kprv_adcs_process_test</code><span class="sig-paren">(</span>JsonNode *<em>parent</em>, <a class="reference internal" href="#_CPPv416imtq_test_result" title="imtq_test_result">imtq_test_result</a> <em>test</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv422kprv_adcs_process_testP8JsonNode16imtq_test_result" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Add a self-test result to the requested JSON structure. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>KADCSStatus <code class="docutils literal notranslate"><span class="pre">ADCS_OK</span></code> if OK, error otherwise </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">parent</span></code>: Pointer to JSON structure results should be added to </li>
+<li><code class="docutils literal notranslate"><span class="pre">test</span></code>: Self-test results to be parsed into JSON </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<dl class="class">
+<dt id="_CPPv410imtq_state">
+<span id="_CPPv310imtq_state"></span><span id="_CPPv210imtq_state"></span><span id="imtq_state"></span><span class="target" id="structimtq__state"></span><em class="property">struct </em><code class="descname">imtq_state</code><a class="headerlink" href="#_CPPv410imtq_state" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;imtq-data.h&gt;</em><p>iMTQ system state data returned by <a class="reference internal" href="#group__IMTQ__API_1ga16f5a65b386662bcd9b29540ba8aa9da"><span class="std std-ref">k_imtq_get_system_state</span></a> </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv4N10imtq_state3hdrE">
+<span id="_CPPv3N10imtq_state3hdrE"></span><span id="_CPPv2N10imtq_state3hdrE"></span><span id="imtq_state::hdr__imtq_resp_header"></span><span class="target" id="structimtq__state_1a6206f93670aa67d400231afbafb065df"></span><a class="reference internal" href="#_CPPv416imtq_resp_header" title="imtq_resp_header">imtq_resp_header</a> <code class="descname">hdr</code><a class="headerlink" href="#_CPPv4N10imtq_state3hdrE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Response message header. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N10imtq_state4modeE">
+<span id="_CPPv3N10imtq_state4modeE"></span><span id="_CPPv2N10imtq_state4modeE"></span><span id="imtq_state::mode__uint8_t"></span><span class="target" id="structimtq__state_1a63c94e691060c363e38874b2f712d186"></span>uint8_t <code class="descname">mode</code><a class="headerlink" href="#_CPPv4N10imtq_state4modeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Current system mode. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N10imtq_state5errorE">
+<span id="_CPPv3N10imtq_state5errorE"></span><span id="_CPPv2N10imtq_state5errorE"></span><span id="imtq_state::error__uint8_t"></span><span class="target" id="structimtq__state_1a55b13d1d3e8ee1601a705bef7203cf19"></span>uint8_t <code class="descname">error</code><a class="headerlink" href="#_CPPv4N10imtq_state5errorE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Error encountered during previous interation. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N10imtq_state6configE">
+<span id="_CPPv3N10imtq_state6configE"></span><span id="_CPPv2N10imtq_state6configE"></span><span id="imtq_state::config__uint8_t"></span><span class="target" id="structimtq__state_1a8b32a1121a2c1531d61862c54ce81008"></span>uint8_t <code class="descname">config</code><a class="headerlink" href="#_CPPv4N10imtq_state6configE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Parameter updated since system startup? 0 - No, 1 - Yes. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N10imtq_state6uptimeE">
+<span id="_CPPv3N10imtq_state6uptimeE"></span><span id="_CPPv2N10imtq_state6uptimeE"></span><span id="imtq_state::uptime__uint32_t"></span><span class="target" id="structimtq__state_1a2caa783c406bd35bbfe4fe0bbf41a515"></span>uint32_t <code class="descname">uptime</code><a class="headerlink" href="#_CPPv4N10imtq_state6uptimeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>System uptime in seconds. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv413imtq_mtm_data">
+<span id="_CPPv313imtq_mtm_data"></span><span id="_CPPv213imtq_mtm_data"></span><span id="imtq_mtm_data"></span><span class="target" id="structimtq__mtm__data"></span><em class="property">struct </em><code class="descname">imtq_mtm_data</code><a class="headerlink" href="#_CPPv413imtq_mtm_data" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;imtq-data.h&gt;</em><p>MTM measurements data structure. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv4N13imtq_mtm_data1xE">
+<span id="_CPPv3N13imtq_mtm_data1xE"></span><span id="_CPPv2N13imtq_mtm_data1xE"></span><span id="imtq_mtm_data::x__int32_t"></span><span class="target" id="structimtq__mtm__data_1a62e2a96b808ac40ab041ca2e2d2c6c34"></span>int32_t <code class="descname">x</code><a class="headerlink" href="#_CPPv4N13imtq_mtm_data1xE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>X-axis. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N13imtq_mtm_data1yE">
+<span id="_CPPv3N13imtq_mtm_data1yE"></span><span id="_CPPv2N13imtq_mtm_data1yE"></span><span id="imtq_mtm_data::y__int32_t"></span><span class="target" id="structimtq__mtm__data_1a4232c79d94478f9195b87c8640bf9e19"></span>int32_t <code class="descname">y</code><a class="headerlink" href="#_CPPv4N13imtq_mtm_data1yE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Y-axis. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N13imtq_mtm_data1zE">
+<span id="_CPPv3N13imtq_mtm_data1zE"></span><span id="_CPPv2N13imtq_mtm_data1zE"></span><span id="imtq_mtm_data::z__int32_t"></span><span class="target" id="structimtq__mtm__data_1a86a582805901028aef1e574430c5db8b"></span>int32_t <code class="descname">z</code><a class="headerlink" href="#_CPPv4N13imtq_mtm_data1zE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Z-axis. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv412imtq_mtm_msg">
+<span id="_CPPv312imtq_mtm_msg"></span><span id="_CPPv212imtq_mtm_msg"></span><span id="imtq_mtm_msg"></span><span class="target" id="structimtq__mtm__msg"></span><em class="property">struct </em><code class="descname">imtq_mtm_msg</code><a class="headerlink" href="#_CPPv412imtq_mtm_msg" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;imtq-data.h&gt;</em><p>MTM measurement returned by <a class="reference internal" href="#group__IMTQ__API_1ga228067771b4bbe0568df64e33284ef64"><span class="std std-ref">k_imtq_get_raw_mtm</span></a> and <a class="reference internal" href="#group__IMTQ__API_1ga9267a133ecca8ad8eff8674c86bd8fdc"><span class="std std-ref">k_imtq_get_calib_mtm</span></a>. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv4N12imtq_mtm_msg3hdrE">
+<span id="_CPPv3N12imtq_mtm_msg3hdrE"></span><span id="_CPPv2N12imtq_mtm_msg3hdrE"></span><span id="imtq_mtm_msg::hdr__imtq_resp_header"></span><span class="target" id="structimtq__mtm__msg_1a352065304ac5fd06f59c70dca2b62e9c"></span><a class="reference internal" href="#_CPPv416imtq_resp_header" title="imtq_resp_header">imtq_resp_header</a> <code class="descname">hdr</code><a class="headerlink" href="#_CPPv4N12imtq_mtm_msg3hdrE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Response message header. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N12imtq_mtm_msg4dataE">
+<span id="_CPPv3N12imtq_mtm_msg4dataE"></span><span id="_CPPv2N12imtq_mtm_msg4dataE"></span><span id="imtq_mtm_msg::data__imtq_mtm_data"></span><span class="target" id="structimtq__mtm__msg_1a02d39fa4e48c00061bf7b8bc1e8df344"></span><a class="reference internal" href="#_CPPv413imtq_mtm_data" title="imtq_mtm_data">imtq_mtm_data</a> <code class="descname">data</code><a class="headerlink" href="#_CPPv4N12imtq_mtm_msg4dataE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>MTM measurement data. </p>
+<p>Units dependent on function used </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N12imtq_mtm_msg10act_statusE">
+<span id="_CPPv3N12imtq_mtm_msg10act_statusE"></span><span id="_CPPv2N12imtq_mtm_msg10act_statusE"></span><span id="imtq_mtm_msg::act_status__uint8_t"></span><span class="target" id="structimtq__mtm__msg_1a5785e27c18024d03554873fec9a31e0f"></span>uint8_t <code class="descname">act_status</code><a class="headerlink" href="#_CPPv4N12imtq_mtm_msg10act_statusE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Coils actuation status during measurement. </p>
+<p>0 - Not actuating, 1 - Actuating </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv413imtq_axis_msg">
+<span id="_CPPv313imtq_axis_msg"></span><span id="_CPPv213imtq_axis_msg"></span><span id="imtq_axis_msg"></span><span class="target" id="structimtq__axis__msg"></span><em class="property">struct </em><code class="descname">imtq_axis_msg</code><a class="headerlink" href="#_CPPv413imtq_axis_msg" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;imtq-data.h&gt;</em><p>Generic structure for messages relating to the axes. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv4N13imtq_axis_msg3hdrE">
+<span id="_CPPv3N13imtq_axis_msg3hdrE"></span><span id="_CPPv2N13imtq_axis_msg3hdrE"></span><span id="imtq_axis_msg::hdr__imtq_resp_header"></span><span class="target" id="structimtq__axis__msg_1a909804f5d1d8cc102f2668c977728395"></span><a class="reference internal" href="#_CPPv416imtq_resp_header" title="imtq_resp_header">imtq_resp_header</a> <code class="descname">hdr</code><a class="headerlink" href="#_CPPv4N13imtq_axis_msg3hdrE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Response message header. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N13imtq_axis_msg4dataE">
+<span id="_CPPv3N13imtq_axis_msg4dataE"></span><span id="_CPPv2N13imtq_axis_msg4dataE"></span><span id="imtq_axis_msg::data__imtq_axis_data"></span><span class="target" id="structimtq__axis__msg_1accb5a97f0f890f56902c41481e13f6d9"></span><a class="reference internal" href="#_CPPv414imtq_axis_data" title="imtq_axis_data">imtq_axis_data</a> <code class="descname">data</code><a class="headerlink" href="#_CPPv4N13imtq_axis_msg4dataE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Axes data. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv416imtq_test_result">
+<span id="_CPPv316imtq_test_result"></span><span id="_CPPv216imtq_test_result"></span><span id="imtq_test_result"></span><span class="target" id="structimtq__test__result"></span><em class="property">struct </em><code class="descname">imtq_test_result</code><a class="headerlink" href="#_CPPv416imtq_test_result" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;imtq-data.h&gt;</em><p>Self-test step result structure. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv4N16imtq_test_result3hdrE">
+<span id="_CPPv3N16imtq_test_result3hdrE"></span><span id="_CPPv2N16imtq_test_result3hdrE"></span><span id="imtq_test_result::hdr__imtq_resp_header"></span><span class="target" id="structimtq__test__result_1acdc37a0224b23681c74b306c34d27e48"></span><a class="reference internal" href="#_CPPv416imtq_resp_header" title="imtq_resp_header">imtq_resp_header</a> <code class="descname">hdr</code><a class="headerlink" href="#_CPPv4N16imtq_test_result3hdrE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Response message header. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N16imtq_test_result5errorE">
+<span id="_CPPv3N16imtq_test_result5errorE"></span><span id="_CPPv2N16imtq_test_result5errorE"></span><span id="imtq_test_result::error__uint8_t"></span><span class="target" id="structimtq__test__result_1ac7b3608ceedeff21e375b273c9b3fdb4"></span>uint8_t <code class="descname">error</code><a class="headerlink" href="#_CPPv4N16imtq_test_result5errorE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Return code for the step. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N16imtq_test_result4stepE">
+<span id="_CPPv3N16imtq_test_result4stepE"></span><span id="_CPPv2N16imtq_test_result4stepE"></span><span id="imtq_test_result::step__uint8_t"></span><span class="target" id="structimtq__test__result_1a431067e4394d4872a03a3b8c70be86e8"></span>uint8_t <code class="descname">step</code><a class="headerlink" href="#_CPPv4N16imtq_test_result4stepE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Axis being tested. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N16imtq_test_result7mtm_rawE">
+<span id="_CPPv3N16imtq_test_result7mtm_rawE"></span><span id="_CPPv2N16imtq_test_result7mtm_rawE"></span><span id="imtq_test_result::mtm_raw__imtq_mtm_data"></span><span class="target" id="structimtq__test__result_1ac3be208a5cdf7293e1714b7dfc9fef88"></span><a class="reference internal" href="#_CPPv413imtq_mtm_data" title="imtq_mtm_data">imtq_mtm_data</a> <code class="descname">mtm_raw</code><a class="headerlink" href="#_CPPv4N16imtq_test_result7mtm_rawE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Raw MTM data in [7.5*10<sup>-9</sup> T] per count. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N16imtq_test_result9mtm_calibE">
+<span id="_CPPv3N16imtq_test_result9mtm_calibE"></span><span id="_CPPv2N16imtq_test_result9mtm_calibE"></span><span id="imtq_test_result::mtm_calib__imtq_mtm_data"></span><span class="target" id="structimtq__test__result_1aef4cf5864d5fa2fa9fdd9903f1fad4a0"></span><a class="reference internal" href="#_CPPv413imtq_mtm_data" title="imtq_mtm_data">imtq_mtm_data</a> <code class="descname">mtm_calib</code><a class="headerlink" href="#_CPPv4N16imtq_test_result9mtm_calibE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Calibrated MTM data in [10<sup>-9</sup> T]. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N16imtq_test_result12coil_currentE">
+<span id="_CPPv3N16imtq_test_result12coil_currentE"></span><span id="_CPPv2N16imtq_test_result12coil_currentE"></span><span id="imtq_test_result::coil_current__imtq_axis_data"></span><span class="target" id="structimtq__test__result_1a186146534bbfc84e7a5a3c9b1b25e3d7"></span><a class="reference internal" href="#_CPPv414imtq_axis_data" title="imtq_axis_data">imtq_axis_data</a> <code class="descname">coil_current</code><a class="headerlink" href="#_CPPv4N16imtq_test_result12coil_currentE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Coil currents in [10<sup>-4</sup> A]. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N16imtq_test_result9coil_tempE">
+<span id="_CPPv3N16imtq_test_result9coil_tempE"></span><span id="_CPPv2N16imtq_test_result9coil_tempE"></span><span id="imtq_test_result::coil_temp__imtq_axis_data"></span><span class="target" id="structimtq__test__result_1a6751034772f838c238d4b93584a93cbd"></span><a class="reference internal" href="#_CPPv414imtq_axis_data" title="imtq_axis_data">imtq_axis_data</a> <code class="descname">coil_temp</code><a class="headerlink" href="#_CPPv4N16imtq_test_result9coil_tempE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Coil temperatures in [<sup>o</sup>C]. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv423imtq_test_result_single">
+<span id="_CPPv323imtq_test_result_single"></span><span id="_CPPv223imtq_test_result_single"></span><span id="imtq_test_result_single"></span><span class="target" id="structimtq__test__result__single"></span><em class="property">struct </em><code class="descname">imtq_test_result_single</code><a class="headerlink" href="#_CPPv423imtq_test_result_single" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;imtq-data.h&gt;</em><p>Self-test single-axis result structure returned by <a class="reference internal" href="#group__IMTQ__API_1ga48af17137119568631d8a1743ade9f8c"><span class="std std-ref">k_imtq_get_test_results_single</span></a>. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv4N23imtq_test_result_single4initE">
+<span id="_CPPv3N23imtq_test_result_single4initE"></span><span id="_CPPv2N23imtq_test_result_single4initE"></span><span id="imtq_test_result_single::init__imtq_test_result"></span><span class="target" id="structimtq__test__result__single_1a5360bf4fbb775a67798392aeba3ef881"></span><a class="reference internal" href="#_CPPv416imtq_test_result" title="imtq_test_result">imtq_test_result</a> <code class="descname">init</code><a class="headerlink" href="#_CPPv4N23imtq_test_result_single4initE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Measurements before actuation. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N23imtq_test_result_single4stepE">
+<span id="_CPPv3N23imtq_test_result_single4stepE"></span><span id="_CPPv2N23imtq_test_result_single4stepE"></span><span id="imtq_test_result_single::step__imtq_test_result"></span><span class="target" id="structimtq__test__result__single_1a416392fa9c12da02ca58c72b313df2df"></span><a class="reference internal" href="#_CPPv416imtq_test_result" title="imtq_test_result">imtq_test_result</a> <code class="descname">step</code><a class="headerlink" href="#_CPPv4N23imtq_test_result_single4stepE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Measurements during actuation of requested axis. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N23imtq_test_result_single5finalE">
+<span id="_CPPv3N23imtq_test_result_single5finalE"></span><span id="_CPPv2N23imtq_test_result_single5finalE"></span><span id="imtq_test_result_single::final__imtq_test_result"></span><span class="target" id="structimtq__test__result__single_1ab7c2dc68184526b122dbcc915b79b99c"></span><a class="reference internal" href="#_CPPv416imtq_test_result" title="imtq_test_result">imtq_test_result</a> <code class="descname">final</code><a class="headerlink" href="#_CPPv4N23imtq_test_result_single5finalE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Measurements after actuation. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv420imtq_test_result_all">
+<span id="_CPPv320imtq_test_result_all"></span><span id="_CPPv220imtq_test_result_all"></span><span id="imtq_test_result_all"></span><span class="target" id="structimtq__test__result__all"></span><em class="property">struct </em><code class="descname">imtq_test_result_all</code><a class="headerlink" href="#_CPPv420imtq_test_result_all" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;imtq-data.h&gt;</em><p>Self-test all-axes result structure returned by <a class="reference internal" href="#group__IMTQ__API_1ga121052e93038c76c4c503dd7f59056f7"><span class="std std-ref">k_imtq_get_test_results_all</span></a>. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv4N20imtq_test_result_all4initE">
+<span id="_CPPv3N20imtq_test_result_all4initE"></span><span id="_CPPv2N20imtq_test_result_all4initE"></span><span id="imtq_test_result_all::init__imtq_test_result"></span><span class="target" id="structimtq__test__result__all_1a027969420c1d4fc345ce1cd4d938ed9c"></span><a class="reference internal" href="#_CPPv416imtq_test_result" title="imtq_test_result">imtq_test_result</a> <code class="descname">init</code><a class="headerlink" href="#_CPPv4N20imtq_test_result_all4initE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Measurements before actuation. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N20imtq_test_result_all5x_posE">
+<span id="_CPPv3N20imtq_test_result_all5x_posE"></span><span id="_CPPv2N20imtq_test_result_all5x_posE"></span><span id="imtq_test_result_all::x_pos__imtq_test_result"></span><span class="target" id="structimtq__test__result__all_1a136959699f699facf35a3c864d9221e1"></span><a class="reference internal" href="#_CPPv416imtq_test_result" title="imtq_test_result">imtq_test_result</a> <code class="descname">x_pos</code><a class="headerlink" href="#_CPPv4N20imtq_test_result_all5x_posE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Measurements during actuation of positive x-axis. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N20imtq_test_result_all5x_negE">
+<span id="_CPPv3N20imtq_test_result_all5x_negE"></span><span id="_CPPv2N20imtq_test_result_all5x_negE"></span><span id="imtq_test_result_all::x_neg__imtq_test_result"></span><span class="target" id="structimtq__test__result__all_1a23aba8aac574a4b49507ef415cc062e5"></span><a class="reference internal" href="#_CPPv416imtq_test_result" title="imtq_test_result">imtq_test_result</a> <code class="descname">x_neg</code><a class="headerlink" href="#_CPPv4N20imtq_test_result_all5x_negE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Measurements during actuation of negative x-axis. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N20imtq_test_result_all5y_posE">
+<span id="_CPPv3N20imtq_test_result_all5y_posE"></span><span id="_CPPv2N20imtq_test_result_all5y_posE"></span><span id="imtq_test_result_all::y_pos__imtq_test_result"></span><span class="target" id="structimtq__test__result__all_1a069ac859b480db88e9cfb13ea8b4226f"></span><a class="reference internal" href="#_CPPv416imtq_test_result" title="imtq_test_result">imtq_test_result</a> <code class="descname">y_pos</code><a class="headerlink" href="#_CPPv4N20imtq_test_result_all5y_posE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Measurements during actuation of positive y-axis. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N20imtq_test_result_all5y_negE">
+<span id="_CPPv3N20imtq_test_result_all5y_negE"></span><span id="_CPPv2N20imtq_test_result_all5y_negE"></span><span id="imtq_test_result_all::y_neg__imtq_test_result"></span><span class="target" id="structimtq__test__result__all_1a4764f2269bc264ba63748245b8871735"></span><a class="reference internal" href="#_CPPv416imtq_test_result" title="imtq_test_result">imtq_test_result</a> <code class="descname">y_neg</code><a class="headerlink" href="#_CPPv4N20imtq_test_result_all5y_negE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Measurements during actuation of negative y-axis. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N20imtq_test_result_all5z_posE">
+<span id="_CPPv3N20imtq_test_result_all5z_posE"></span><span id="_CPPv2N20imtq_test_result_all5z_posE"></span><span id="imtq_test_result_all::z_pos__imtq_test_result"></span><span class="target" id="structimtq__test__result__all_1a7fa2723142e0bd2d8a926e360fe7c4dc"></span><a class="reference internal" href="#_CPPv416imtq_test_result" title="imtq_test_result">imtq_test_result</a> <code class="descname">z_pos</code><a class="headerlink" href="#_CPPv4N20imtq_test_result_all5z_posE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Measurements during actuation of positive z-axis. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N20imtq_test_result_all5z_negE">
+<span id="_CPPv3N20imtq_test_result_all5z_negE"></span><span id="_CPPv2N20imtq_test_result_all5z_negE"></span><span id="imtq_test_result_all::z_neg__imtq_test_result"></span><span class="target" id="structimtq__test__result__all_1aab953c6e5d3a5f1fbf8a41803f06c298"></span><a class="reference internal" href="#_CPPv416imtq_test_result" title="imtq_test_result">imtq_test_result</a> <code class="descname">z_neg</code><a class="headerlink" href="#_CPPv4N20imtq_test_result_all5z_negE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Measurements during actuation of negative z-axis. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N20imtq_test_result_all5finalE">
+<span id="_CPPv3N20imtq_test_result_all5finalE"></span><span id="_CPPv2N20imtq_test_result_all5finalE"></span><span id="imtq_test_result_all::final__imtq_test_result"></span><span class="target" id="structimtq__test__result__all_1ae4cf60efb4785c9c7f142d0e68fe0028"></span><a class="reference internal" href="#_CPPv416imtq_test_result" title="imtq_test_result">imtq_test_result</a> <code class="descname">final</code><a class="headerlink" href="#_CPPv4N20imtq_test_result_all5finalE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Measurements after actuation. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv413imtq_detumble">
+<span id="_CPPv313imtq_detumble"></span><span id="_CPPv213imtq_detumble"></span><span id="imtq_detumble"></span><span class="target" id="structimtq__detumble"></span><em class="property">struct </em><code class="descname">imtq_detumble</code><a class="headerlink" href="#_CPPv413imtq_detumble" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;imtq-data.h&gt;</em><p>Detumble data returned by <a class="reference internal" href="#group__IMTQ__API_1ga5502ca49c985e80f62a4f45a14594430"><span class="std std-ref">k_imtq_get_detumble</span></a>. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv4N13imtq_detumble3hdrE">
+<span id="_CPPv3N13imtq_detumble3hdrE"></span><span id="_CPPv2N13imtq_detumble3hdrE"></span><span id="imtq_detumble::hdr__imtq_resp_header"></span><span class="target" id="structimtq__detumble_1a036450b21754661039d54da975149566"></span><a class="reference internal" href="#_CPPv416imtq_resp_header" title="imtq_resp_header">imtq_resp_header</a> <code class="descname">hdr</code><a class="headerlink" href="#_CPPv4N13imtq_detumble3hdrE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Response message header. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N13imtq_detumble9mtm_calibE">
+<span id="_CPPv3N13imtq_detumble9mtm_calibE"></span><span id="_CPPv2N13imtq_detumble9mtm_calibE"></span><span id="imtq_detumble::mtm_calib__imtq_mtm_data"></span><span class="target" id="structimtq__detumble_1a886c267298c65914b02eb6f515cdb80e"></span><a class="reference internal" href="#_CPPv413imtq_mtm_data" title="imtq_mtm_data">imtq_mtm_data</a> <code class="descname">mtm_calib</code><a class="headerlink" href="#_CPPv4N13imtq_detumble9mtm_calibE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Calibrated MTM data in [10<sup>-9</sup> T]. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N13imtq_detumble10mtm_filterE">
+<span id="_CPPv3N13imtq_detumble10mtm_filterE"></span><span id="_CPPv2N13imtq_detumble10mtm_filterE"></span><span id="imtq_detumble::mtm_filter__imtq_mtm_data"></span><span class="target" id="structimtq__detumble_1ac0233030f4aec43aa578e812b60b82c4"></span><a class="reference internal" href="#_CPPv413imtq_mtm_data" title="imtq_mtm_data">imtq_mtm_data</a> <code class="descname">mtm_filter</code><a class="headerlink" href="#_CPPv4N13imtq_detumble10mtm_filterE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Filtered MTM data in [10<sup>-9</sup> T]. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N13imtq_detumble4bdotE">
+<span id="_CPPv3N13imtq_detumble4bdotE"></span><span id="_CPPv2N13imtq_detumble4bdotE"></span><span id="imtq_detumble::bdot__imtq_mtm_data"></span><span class="target" id="structimtq__detumble_1af044007f1f6f8cb953030ead4a1707ce"></span><a class="reference internal" href="#_CPPv413imtq_mtm_data" title="imtq_mtm_data">imtq_mtm_data</a> <code class="descname">bdot</code><a class="headerlink" href="#_CPPv4N13imtq_detumble4bdotE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>B-Dot in [10<sup>-9</sup> T*s<sup>-1</sup>]. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N13imtq_detumble6dipoleE">
+<span id="_CPPv3N13imtq_detumble6dipoleE"></span><span id="_CPPv2N13imtq_detumble6dipoleE"></span><span id="imtq_detumble::dipole__imtq_axis_data"></span><span class="target" id="structimtq__detumble_1aaa2895b08ccbca86eccb023e9fdee07a"></span><a class="reference internal" href="#_CPPv414imtq_axis_data" title="imtq_axis_data">imtq_axis_data</a> <code class="descname">dipole</code><a class="headerlink" href="#_CPPv4N13imtq_detumble6dipoleE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Commanded actuation dipole in [10<sup>-4</sup> Am<sup>2</sup>]. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N13imtq_detumble11cmd_currentE">
+<span id="_CPPv3N13imtq_detumble11cmd_currentE"></span><span id="_CPPv2N13imtq_detumble11cmd_currentE"></span><span id="imtq_detumble::cmd_current__imtq_axis_data"></span><span class="target" id="structimtq__detumble_1a22e63a260fa82ef10e72cbe08888a721"></span><a class="reference internal" href="#_CPPv414imtq_axis_data" title="imtq_axis_data">imtq_axis_data</a> <code class="descname">cmd_current</code><a class="headerlink" href="#_CPPv4N13imtq_detumble11cmd_currentE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Command current in [10<sup>-4</sup> A]. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N13imtq_detumble12coil_currentE">
+<span id="_CPPv3N13imtq_detumble12coil_currentE"></span><span id="_CPPv2N13imtq_detumble12coil_currentE"></span><span id="imtq_detumble::coil_current__imtq_axis_data"></span><span class="target" id="structimtq__detumble_1a30452553a1bcbe018084cb82d9b7ba7c"></span><a class="reference internal" href="#_CPPv414imtq_axis_data" title="imtq_axis_data">imtq_axis_data</a> <code class="descname">coil_current</code><a class="headerlink" href="#_CPPv4N13imtq_detumble12coil_currentE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Coil currents in [10<sup>-4</sup> A]. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv418imtq_axis_data_raw">
+<span id="_CPPv318imtq_axis_data_raw"></span><span id="_CPPv218imtq_axis_data_raw"></span><span id="imtq_axis_data_raw"></span><span class="target" id="structimtq__axis__data__raw"></span><em class="property">struct </em><code class="descname">imtq_axis_data_raw</code><a class="headerlink" href="#_CPPv418imtq_axis_data_raw" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;imtq-data.h&gt;</em><p>Generic structure for raw ADC data relating to the axes. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv4N18imtq_axis_data_raw1xE">
+<span id="_CPPv3N18imtq_axis_data_raw1xE"></span><span id="_CPPv2N18imtq_axis_data_raw1xE"></span><span id="imtq_axis_data_raw::x__int16_t"></span><span class="target" id="structimtq__axis__data__raw_1a1ccf4af0cb5aa47e7cb5482d9b0903fc"></span>int16_t <code class="descname">x</code><a class="headerlink" href="#_CPPv4N18imtq_axis_data_raw1xE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>X-axis. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N18imtq_axis_data_raw1yE">
+<span id="_CPPv3N18imtq_axis_data_raw1yE"></span><span id="_CPPv2N18imtq_axis_data_raw1yE"></span><span id="imtq_axis_data_raw::y__int16_t"></span><span class="target" id="structimtq__axis__data__raw_1a522eb5ffaccb662a53a3cf9558e0ded2"></span>int16_t <code class="descname">y</code><a class="headerlink" href="#_CPPv4N18imtq_axis_data_raw1yE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Y-axis. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N18imtq_axis_data_raw1zE">
+<span id="_CPPv3N18imtq_axis_data_raw1zE"></span><span id="_CPPv2N18imtq_axis_data_raw1zE"></span><span id="imtq_axis_data_raw::z__int16_t"></span><span class="target" id="structimtq__axis__data__raw_1a6126bb894cbf848e81576b8b5d061d2c"></span>int16_t <code class="descname">z</code><a class="headerlink" href="#_CPPv4N18imtq_axis_data_raw1zE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Z-axis. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv421imtq_housekeeping_raw">
+<span id="_CPPv321imtq_housekeeping_raw"></span><span id="_CPPv221imtq_housekeeping_raw"></span><span id="imtq_housekeeping_raw"></span><span class="target" id="structimtq__housekeeping__raw"></span><em class="property">struct </em><code class="descname">imtq_housekeeping_raw</code><a class="headerlink" href="#_CPPv421imtq_housekeeping_raw" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;imtq-data.h&gt;</em><p>Housekeeping data (raw ADC values) returned by <a class="reference internal" href="#group__IMTQ__API_1ga864de2a79d50ba66fb851a6b7d9cf854"><span class="std std-ref">k_imtq_get_raw_housekeeping</span></a>. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv4N21imtq_housekeeping_raw3hdrE">
+<span id="_CPPv3N21imtq_housekeeping_raw3hdrE"></span><span id="_CPPv2N21imtq_housekeeping_raw3hdrE"></span><span id="imtq_housekeeping_raw::hdr__imtq_resp_header"></span><span class="target" id="structimtq__housekeeping__raw_1a35264ed068bf53f49a40069dcbbd95db"></span><a class="reference internal" href="#_CPPv416imtq_resp_header" title="imtq_resp_header">imtq_resp_header</a> <code class="descname">hdr</code><a class="headerlink" href="#_CPPv4N21imtq_housekeeping_raw3hdrE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Response message header. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N21imtq_housekeeping_raw9voltage_dE">
+<span id="_CPPv3N21imtq_housekeeping_raw9voltage_dE"></span><span id="_CPPv2N21imtq_housekeeping_raw9voltage_dE"></span><span id="imtq_housekeeping_raw::voltage_d__uint16_t"></span><span class="target" id="structimtq__housekeeping__raw_1a69d67bffc246c26f953a265cc3661b87"></span>uint16_t <code class="descname">voltage_d</code><a class="headerlink" href="#_CPPv4N21imtq_housekeeping_raw9voltage_dE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Digital supply voltage. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N21imtq_housekeeping_raw9voltage_aE">
+<span id="_CPPv3N21imtq_housekeeping_raw9voltage_aE"></span><span id="_CPPv2N21imtq_housekeeping_raw9voltage_aE"></span><span id="imtq_housekeeping_raw::voltage_a__uint16_t"></span><span class="target" id="structimtq__housekeeping__raw_1a80e7dbf1ff12fdeacf1f83e93964e259"></span>uint16_t <code class="descname">voltage_a</code><a class="headerlink" href="#_CPPv4N21imtq_housekeeping_raw9voltage_aE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Analog supply voltage. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N21imtq_housekeeping_raw9current_dE">
+<span id="_CPPv3N21imtq_housekeeping_raw9current_dE"></span><span id="_CPPv2N21imtq_housekeeping_raw9current_dE"></span><span id="imtq_housekeeping_raw::current_d__uint16_t"></span><span class="target" id="structimtq__housekeeping__raw_1a4012f6154348bfccd29b70cedd78d73e"></span>uint16_t <code class="descname">current_d</code><a class="headerlink" href="#_CPPv4N21imtq_housekeeping_raw9current_dE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Digital supply current. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N21imtq_housekeeping_raw9current_aE">
+<span id="_CPPv3N21imtq_housekeeping_raw9current_aE"></span><span id="_CPPv2N21imtq_housekeeping_raw9current_aE"></span><span id="imtq_housekeeping_raw::current_a__uint16_t"></span><span class="target" id="structimtq__housekeeping__raw_1a32c69ea6a6cbcb58bcd038080fb240ae"></span>uint16_t <code class="descname">current_a</code><a class="headerlink" href="#_CPPv4N21imtq_housekeeping_raw9current_aE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Analog supply current. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N21imtq_housekeeping_raw12coil_currentE">
+<span id="_CPPv3N21imtq_housekeeping_raw12coil_currentE"></span><span id="_CPPv2N21imtq_housekeeping_raw12coil_currentE"></span><span id="imtq_housekeeping_raw::coil_current__imtq_axis_data_raw"></span><span class="target" id="structimtq__housekeeping__raw_1a076ec9f5363244666c9006d0a35a52bc"></span><a class="reference internal" href="#_CPPv418imtq_axis_data_raw" title="imtq_axis_data_raw">imtq_axis_data_raw</a> <code class="descname">coil_current</code><a class="headerlink" href="#_CPPv4N21imtq_housekeeping_raw12coil_currentE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Coil currents. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N21imtq_housekeeping_raw9coil_tempE">
+<span id="_CPPv3N21imtq_housekeeping_raw9coil_tempE"></span><span id="_CPPv2N21imtq_housekeeping_raw9coil_tempE"></span><span id="imtq_housekeeping_raw::coil_temp__imtq_axis_data_raw"></span><span class="target" id="structimtq__housekeeping__raw_1af1b7607dbe39c10057b52db64b99ec4f"></span><a class="reference internal" href="#_CPPv418imtq_axis_data_raw" title="imtq_axis_data_raw">imtq_axis_data_raw</a> <code class="descname">coil_temp</code><a class="headerlink" href="#_CPPv4N21imtq_housekeeping_raw9coil_tempE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Coil temperatures. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N21imtq_housekeeping_raw8mcu_tempE">
+<span id="_CPPv3N21imtq_housekeeping_raw8mcu_tempE"></span><span id="_CPPv2N21imtq_housekeeping_raw8mcu_tempE"></span><span id="imtq_housekeeping_raw::mcu_temp__uint16_t"></span><span class="target" id="structimtq__housekeeping__raw_1aa4a199c6f93cce287367851af348d148"></span>uint16_t <code class="descname">mcu_temp</code><a class="headerlink" href="#_CPPv4N21imtq_housekeeping_raw8mcu_tempE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>MCU temperature. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv421imtq_housekeeping_eng">
+<span id="_CPPv321imtq_housekeeping_eng"></span><span id="_CPPv221imtq_housekeeping_eng"></span><span id="imtq_housekeeping_eng"></span><span class="target" id="structimtq__housekeeping__eng"></span><em class="property">struct </em><code class="descname">imtq_housekeeping_eng</code><a class="headerlink" href="#_CPPv421imtq_housekeeping_eng" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;imtq-data.h&gt;</em><p>Housekeeping data (engineering values) returned by <a class="reference internal" href="#group__IMTQ__API_1ga4f3c21e55ddb2d09ad9e0cacdfbf7026"><span class="std std-ref">k_imtq_get_eng_housekeeping</span></a>. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv4N21imtq_housekeeping_eng3hdrE">
+<span id="_CPPv3N21imtq_housekeeping_eng3hdrE"></span><span id="_CPPv2N21imtq_housekeeping_eng3hdrE"></span><span id="imtq_housekeeping_eng::hdr__imtq_resp_header"></span><span class="target" id="structimtq__housekeeping__eng_1aaeb52f33bf5c0f32fc28eba14f7ba72d"></span><a class="reference internal" href="#_CPPv416imtq_resp_header" title="imtq_resp_header">imtq_resp_header</a> <code class="descname">hdr</code><a class="headerlink" href="#_CPPv4N21imtq_housekeeping_eng3hdrE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Response message header. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N21imtq_housekeeping_eng9voltage_dE">
+<span id="_CPPv3N21imtq_housekeeping_eng9voltage_dE"></span><span id="_CPPv2N21imtq_housekeeping_eng9voltage_dE"></span><span id="imtq_housekeeping_eng::voltage_d__uint16_t"></span><span class="target" id="structimtq__housekeeping__eng_1a2e7cdf2523d2dc0499128d30ac797bd6"></span>uint16_t <code class="descname">voltage_d</code><a class="headerlink" href="#_CPPv4N21imtq_housekeeping_eng9voltage_dE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Digital supply voltage in [mV]. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N21imtq_housekeeping_eng9voltage_aE">
+<span id="_CPPv3N21imtq_housekeeping_eng9voltage_aE"></span><span id="_CPPv2N21imtq_housekeeping_eng9voltage_aE"></span><span id="imtq_housekeeping_eng::voltage_a__uint16_t"></span><span class="target" id="structimtq__housekeeping__eng_1a6a1458c765bd4b8b2ae825818b2fe2aa"></span>uint16_t <code class="descname">voltage_a</code><a class="headerlink" href="#_CPPv4N21imtq_housekeeping_eng9voltage_aE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Analog supply voltage in [mV]. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N21imtq_housekeeping_eng9current_dE">
+<span id="_CPPv3N21imtq_housekeeping_eng9current_dE"></span><span id="_CPPv2N21imtq_housekeeping_eng9current_dE"></span><span id="imtq_housekeeping_eng::current_d__uint16_t"></span><span class="target" id="structimtq__housekeeping__eng_1a060bf9ee1b34cb21bf1844c6a97c2313"></span>uint16_t <code class="descname">current_d</code><a class="headerlink" href="#_CPPv4N21imtq_housekeeping_eng9current_dE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Digital supply current in [10<sup>-4</sup> A]. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N21imtq_housekeeping_eng9current_aE">
+<span id="_CPPv3N21imtq_housekeeping_eng9current_aE"></span><span id="_CPPv2N21imtq_housekeeping_eng9current_aE"></span><span id="imtq_housekeeping_eng::current_a__uint16_t"></span><span class="target" id="structimtq__housekeeping__eng_1a0628238f782f70dd97483a3c51dc6961"></span>uint16_t <code class="descname">current_a</code><a class="headerlink" href="#_CPPv4N21imtq_housekeeping_eng9current_aE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Analog supply current in [10<sup>-4</sup> A]. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N21imtq_housekeeping_eng12coil_currentE">
+<span id="_CPPv3N21imtq_housekeeping_eng12coil_currentE"></span><span id="_CPPv2N21imtq_housekeeping_eng12coil_currentE"></span><span id="imtq_housekeeping_eng::coil_current__imtq_axis_data"></span><span class="target" id="structimtq__housekeeping__eng_1a0c8022e5f6c6a5083e5e1acb84471a3d"></span><a class="reference internal" href="#_CPPv414imtq_axis_data" title="imtq_axis_data">imtq_axis_data</a> <code class="descname">coil_current</code><a class="headerlink" href="#_CPPv4N21imtq_housekeeping_eng12coil_currentE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Coil currents in [10<sup>-4</sup> A]. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N21imtq_housekeeping_eng9coil_tempE">
+<span id="_CPPv3N21imtq_housekeeping_eng9coil_tempE"></span><span id="_CPPv2N21imtq_housekeeping_eng9coil_tempE"></span><span id="imtq_housekeeping_eng::coil_temp__imtq_axis_data"></span><span class="target" id="structimtq__housekeeping__eng_1a4e111ec68cf69f8d21e0e6a758ca60ce"></span><a class="reference internal" href="#_CPPv414imtq_axis_data" title="imtq_axis_data">imtq_axis_data</a> <code class="descname">coil_temp</code><a class="headerlink" href="#_CPPv4N21imtq_housekeeping_eng9coil_tempE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Coil temperatures in [<sup>o</sup>C]. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N21imtq_housekeeping_eng8mcu_tempE">
+<span id="_CPPv3N21imtq_housekeeping_eng8mcu_tempE"></span><span id="_CPPv2N21imtq_housekeeping_eng8mcu_tempE"></span><span id="imtq_housekeeping_eng::mcu_temp__int16_t"></span><span class="target" id="structimtq__housekeeping__eng_1ab9334adcc8965f4e166990713d70cd0d"></span>int16_t <code class="descname">mcu_temp</code><a class="headerlink" href="#_CPPv4N21imtq_housekeeping_eng8mcu_tempE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>MCU temperature in [<sup>o</sup>C]. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="imtq_api_rust.html" class="btn btn-neutral float-right" title="ISIS iMTQ API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="imtq.html" class="btn btn-neutral" title="ISIS iMTQ API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../../../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

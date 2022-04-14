@@ -1,0 +1,1 @@
+initSidebarItems({"mod":[["mutation","Service mutations"],["query","Service queries"]],"type":[["Context","Service context structure used to allow GraphQL requests to interact with the underlying EPS"]]});

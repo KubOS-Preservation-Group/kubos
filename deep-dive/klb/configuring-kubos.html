@@ -1,0 +1,394 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Configuring Kubos Linux &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../../index.html"/>
+        <link rel="up" title="Under the Hood of KubOS" href="../index.html"/>
+        <link rel="next" title="Building Kubos Linux for the Beaglebone Black" href="kubos-linux-on-bbb.html"/>
+        <link rel="prev" title="Shell Protocol" href="../protocols/shell-protocol.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../obc-docs/index.html">Working with an OBC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ecosystem/index.html">KubOS Ecosystem</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Under the Hood</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#apis">APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#protocols">Protocols</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#kubos-linux">Kubos Linux</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Configuring Kubos Linux</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#reference-documents">Reference Documents</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#kubos-version-selection">KubOS Version Selection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#selecting-hardware-services">Selecting Hardware Services</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#saving-the-configuration-for-re-use">Saving the Configuration for Re-Use</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#adding-custom-packages">Adding Custom Packages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuring-services">Configuring Services</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="kubos-linux-on-bbb.html">Building Kubos Linux for the Beaglebone Black</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubos-linux-on-iobc.html">Building Kubos Linux for the ISIS-OBC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubos-linux-on-mbm2.html">Building Kubos Linux for the Pumpkin MBM2</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#design-decisions">Design Decisions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../sdk-docs/index.html">Kubos SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Contributing to KubOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Under the Hood of KubOS</a> &raquo;</li>
+        
+      <li>Configuring Kubos Linux</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/deep-dive/klb/configuring-kubos.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="configuring-kubos-linux">
+<h1>Configuring Kubos Linux<a class="headerlink" href="#configuring-kubos-linux" title="Permalink to this headline">¶</a></h1>
+<p>The default build configurations included in the <a class="reference external" href="https://github.com/kubos/kubos-linux-build/tree/master/configs">kubos-linux-build</a> repo
+will include the <a class="reference internal" href="../../ecosystem/services/core-services.html"><span class="doc">Kubos core services</span></a>, but not any of the available <a class="reference internal" href="../../ecosystem/services/hardware-services.html"><span class="doc">hardware services</span></a>.</p>
+<p>As a result, customers will need to manually enable the services and packages corresponding to the devices present in their system.</p>
+<p>Additionally, customers may create and include their own <a class="reference internal" href="#custom-packages"><span class="std std-ref">system packages</span></a>.</p>
+<div class="section" id="reference-documents">
+<h2>Reference Documents<a class="headerlink" href="#reference-documents" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference internal" href="kubos-linux-on-bbb.html"><span class="doc">Building Kubos Linux for the Beaglebone Black</span></a></li>
+<li><a class="reference internal" href="kubos-linux-on-iobc.html"><span class="doc">Building Kubos Linux for the ISIS-OBC</span></a></li>
+<li><a class="reference internal" href="kubos-linux-on-mbm2.html"><span class="doc">Building Kubos Linux for the Pumpkin MBM2</span></a></li>
+<li><a class="reference external" href="https://buildroot.org/downloads/manual/manual.html#adding-packages">Adding New Packages to Buildroot</a></li>
+</ul>
+</div>
+<div class="section" id="kubos-version-selection">
+<h2>KubOS Version Selection<a class="headerlink" href="#kubos-version-selection" title="Permalink to this headline">¶</a></h2>
+<p>By default, each release of Kubos Linux will use the corresponding release of KubOS in the main
+<a class="reference external" href="https://github.com/kubos/kubos">kubos</a> repo.</p>
+<p>As a result, if you would like to use the latest code, or version lock on some prior version, the
+<code class="docutils literal notranslate"><span class="pre">BR2_KUBOS_VERSION</span></code> config option should be updated with the desired release number or branch
+name.</p>
+<p>From the <cite>buildroot-2019.02.2</cite> directory, run <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">make</span> <span class="pre">menuconfig</span></code>. This will bring up the graphical configuration interface.</p>
+<div class="figure" id="id1">
+<img alt="Buildroot Configuration Interface" src="../../_images/br_config.png" />
+<p class="caption"><span class="caption-text">Buildroot Configuration Interface</span></p>
+</div>
+<p>Using the down arrow key, navigate to <code class="docutils literal notranslate"><span class="pre">External</span> <span class="pre">Options</span></code>. Press the <cite>Enter</cite> key to enter the sub-menu.
+You should see the <code class="docutils literal notranslate"><span class="pre">Kubos</span> <span class="pre">Packages</span></code> option, which has already been enabled.</p>
+<p>From here, press <cite>Enter</cite> to go into the Kubos Packages sub-menu.</p>
+<p>The “Kubos Source Version” should be the top field present.
+Press the down arrow key and then <cite>Enter</cite> in order to update the field.</p>
+<p>Type in the desired version/branch and then press <cite>Enter</cite> to save the change.</p>
+<p>Use the right arrow key to select <code class="docutils literal notranslate"><span class="pre">&lt;Exit&gt;</span></code> and then press <cite>Enter</cite>.
+Repeat this until you are presented with the
+<cite>“Do you wish to save your new configuration”</cite> dialog. Press <cite>Enter</cite> to accept the changes.</p>
+<p>The new version of KubOS should be automatically built the next time you run <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">make</span></code>.</p>
+</div>
+<div class="section" id="selecting-hardware-services">
+<h2>Selecting Hardware Services<a class="headerlink" href="#selecting-hardware-services" title="Permalink to this headline">¶</a></h2>
+<p>Once the build environment has been set up, the build target has been set, and, optionally, a full build has been run,
+you may edit the build configuration to select additional packages.</p>
+<p>From the <cite>buildroot-2019.02.2</cite> directory, run <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">make</span> <span class="pre">menuconfig</span></code>. This will bring up the graphical configuration interface.</p>
+<div class="figure" id="id2">
+<img alt="Buildroot Configuration Interface" src="../../_images/br_config.png" />
+<p class="caption"><span class="caption-text">Buildroot Configuration Interface</span></p>
+</div>
+<p>Using the down arrow key, navigate to <code class="docutils literal notranslate"><span class="pre">External</span> <span class="pre">Options</span></code>. Press the <cite>Enter</cite> key to enter the sub-menu.
+You should see the <code class="docutils literal notranslate"><span class="pre">Kubos</span> <span class="pre">Packages</span></code> option, which has already been enabled.</p>
+<p>From here, press <cite>Enter</cite> to go into the Kubos Packages sub-menu. You should now see all the Kubos packages which can be enabled.</p>
+<p>Using the up/down arrow keys, navigate to the package you would like to include and then press the space bar to enable it.</p>
+<div class="figure" id="id3">
+<img alt="Kubos Package Selection" src="../../_images/br_kubos_packages.png" />
+<p class="caption"><span class="caption-text">Kubos Package Selection</span></p>
+</div>
+<p>You will notice that, once a package is selected, an arrow appears to the right of it. This indicates that a new sub-menu is now available.</p>
+<p>If you enter the sub-menu, you will be presented with the options for that particular package.
+For most Kubos services, this will be an option which allows you to specify the run level at which the service will be initialized
+during system startup, followed by any service-specific configuration values.
+For non-boolean options, select the option and then press <cite>Enter</cite> in order to update the field with the desired value.
+Press <cite>Enter</cite> again to save the new value and return to the previous menu.</p>
+<p>For more information about any of the options in this menu system, navigate to the option and then press <cite>Shift+?</cite>.
+This will display the option’s help information. Press the <cite>Enter</cite> key to exit.</p>
+<div class="figure" id="id4">
+<img alt="Buildroot Option Description" src="../../_images/br_package_help.png" />
+<p class="caption"><span class="caption-text">Buildroot Option Description</span></p>
+</div>
+<p>To navigate back up the menu tree, use the right arrow key to select <code class="docutils literal notranslate"><span class="pre">&lt;Exit&gt;</span></code> and then press <cite>Enter</cite>.</p>
+<p>Once you have selected all the desired packages and options, select <code class="docutils literal notranslate"><span class="pre">&lt;Exit&gt;</span></code> until you are presented with the
+<cite>“Do you wish to save your new configuration”</cite> dialog. Press <cite>Enter</cite> to accept the changes.</p>
+<p>Now that configuration is complete, run <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">make</span></code> in order to build the newly selected packages.</p>
+</div>
+<div class="section" id="saving-the-configuration-for-re-use">
+<h2>Saving the Configuration for Re-Use<a class="headerlink" href="#saving-the-configuration-for-re-use" title="Permalink to this headline">¶</a></h2>
+<p>If you would like to save the custom configuration you have created, run <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">make</span> <span class="pre">savedefconfig</span></code>.
+This will overwrite the configuration file you intially set for the build. For example, <code class="docutils literal notranslate"><span class="pre">kubos-linux-build/config/pumpkin-mbm2_defconfig</span></code>.</p>
+<p>Going forward, this new file can be fed into any new builds, removing the need to manually select the additional packages.</p>
+</div>
+<div class="section" id="adding-custom-packages">
+<span id="custom-packages"></span><h2>Adding Custom Packages<a class="headerlink" href="#adding-custom-packages" title="Permalink to this headline">¶</a></h2>
+<p>While some work has been done by Kubos in order to support <a class="reference internal" href="../../ecosystem/services/hardware-services.html"><span class="doc">hardware devices</span></a>,
+it is entirely possible that a customer might want to use a device which is not currently supported.
+In this case the customer should write their own support package, and then include it in their Kubos Linux build
+using the previous instructions.</p>
+<p>The Buildroot manual provides in-depth instructions about <a class="reference external" href="https://buildroot.org/downloads/manual/manual.html#adding-packages">how to create a package</a>.</p>
+<p>At a high-level, the instructions are:</p>
+<ul>
+<li><p class="first">Create a new folder, “your-package”, in <cite>kubos-linux-build/packages</cite> containing at least:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Config.in - The <a class="reference external" href="https://buildroot.org/downloads/manual/manual.html#writing-rules-config-in">KConfig file</a> defining <code class="docutils literal notranslate"><span class="pre">BR2_PACKAGE_{YOUR_PACKAGE}</span></code>,
+along with any additional configuration options</li>
+<li>{your-package}.mk - The Makefile defining the package and containing the build (<code class="docutils literal notranslate"><span class="pre">{YOUR_PACKAGE}_BUILD_CMDS</span></code>) and installation (<code class="docutils literal notranslate"><span class="pre">{YOUR_PACKAGE}_INSTALL_TARGET_CMDS</span></code>) commands.</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Update <cite>kubos-linux-build/Config.in</cite> to point to your new package’s <cite>Config.in</cite> file</p>
+</li>
+</ul>
+<p>Once these changes have been made, you can run <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">make</span> <span class="pre">menuconfig</span></code> in order to select the new package.</p>
+<p>Once selected, you can run <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">make</span></code> to do a full build, or <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">make</span> <span class="pre">{your-package}</span></code> in order to test building only your package.</p>
+<p>If you make changes to your package, you can run <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">make</span> <span class="pre">{your-package}-rebuild</span></code> in order to recompile it.</p>
+</div>
+<div class="section" id="configuring-services">
+<h2>Configuring Services<a class="headerlink" href="#configuring-services" title="Permalink to this headline">¶</a></h2>
+<p>The Kubos service system relies on a configuration file in <cite>/etc/kubos-config.toml</cite> in order to know which IP ports should be used for which service.
+This file is automatically generated during the OS build process, based on the options specified in
+the Buildroot configuration file (or updated by the <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">make</span> <span class="pre">menuconfig</span></code> process).</p>
+<p>Users may change these configuration options prior to building their Linux image by running
+<code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">make</span> <span class="pre">menuconfig</span></code>, navigating to the appropriate service package, and then changing the
+desired option.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>If you would like to change a configuration option after building the Kubos Linux image, you
+should go through the usual change process, then run <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">make</span> <span class="pre">{package}-reconfigure;</span> <span class="pre">sudo</span> <span class="pre">make</span></code>
+in order to pick up the configuration changes.</p>
+<p class="last">For example, if you wanted to change the telemetry database location, you would update the
+<code class="docutils literal notranslate"><span class="pre">BR2_KUBOS_CORE_TELEMETRY_DB_DATABASE</span></code> value, then run
+<code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">make</span> <span class="pre">kubos-core-telemetry-db-reconfigure;</span> <span class="pre">sudo</span> <span class="pre">make</span></code>.</p>
+</div>
+<p>More information about service configuration may be found in the <a class="reference internal" href="../../ecosystem/services/service-config.html"><span class="doc">service config doc</span></a></p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="kubos-linux-on-bbb.html" class="btn btn-neutral float-right" title="Building Kubos Linux for the Beaglebone Black" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../protocols/shell-protocol.html" class="btn btn-neutral" title="Shell Protocol" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

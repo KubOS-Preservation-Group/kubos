@@ -1,0 +1,303 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="API documentation for the Rust `clyde_3g_eps_service` crate."><meta name="keywords" content="rust, rustlang, rust-lang, clyde_3g_eps_service"><title>clyde_3g_eps_service - Rust</title><link rel="stylesheet" type="text/css" href="../normalize.css"><link rel="stylesheet" type="text/css" href="../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../dark.css"><link rel="stylesheet" type="text/css" href="../light.css" id="themeStyle"><script src="../storage.js"></script><noscript><link rel="stylesheet" href="../noscript.css"></noscript><link rel="shortcut icon" href="../favicon.ico"><style type="text/css">#crate-search{background-image:url("../down-arrow.svg");}</style></head><body class="rustdoc mod"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../clyde_3g_eps_service/index.html'><div class='logo-container'><img src='../rust-logo.png' alt='logo'></div></a><p class='location'>Crate clyde_3g_eps_service</p><div class="sidebar-elems"><a id='all-types' href='all.html'><p>See all clyde_3g_eps_service's items</p></a><div class="block items"><ul><li><a href="#modules">Modules</a></li></ul></div><p class='location'></p><script>window.sidebarCurrent = {name: 'clyde_3g_eps_service', ty: 'mod', relpath: '../'};</script></div></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../theme.js"></script><nav class="sub"><form class="search-form js-only"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../settings.html"><img src="../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><h1 class='fqn'><span class='out-of-band'><span id='render-detail'><a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class='inner'>&#x2212;</span>]</a></span><a class='srclink' href='../src/clyde_3g_eps_service/main.rs.html#17-453' title='goto source code'>[src]</a></span><span class='in-band'>Crate <a class="mod" href=''>clyde_3g_eps_service</a></span></h1><div class='docblock'><p>Service for interacting with a <a href="https://www.aac-clyde.space/satellite-bits/eps">Clyde Space 3G EPS</a></p>
+<h1 id="configuration" class="section-header"><a href="#configuration">Configuration</a></h1>
+<p>The service can be configured in the <code>/etc/kubos-config.toml</code> with the following fields:</p>
+<pre><code class="language-toml">[clyde-3g-eps-service]
+bus = &quot;/dev/i2c-1&quot;
+
+[clyde-3g-eps-service.addr]
+ip = &quot;127.0.0.1&quot;
+port = 8100
+</code></pre>
+<p>Where <code>bus</code> specifies the I2C bus the EPS is on, <code>ip</code> specifies the
+service's IP address, and <code>port</code> specifies the port on which the service will be
+listening for UDP packets.</p>
+<h1 id="running-the-service" class="section-header"><a href="#running-the-service">Running the Service</a></h1>
+<p>The service should be started automatically by its init script, but may also be started manually:</p>
+<pre><code class="language-bash">$ clyde-3g-eps-service
+Listening on: 127.0.0.1:8100
+</code></pre>
+<p>If no config file is specified, then the service will look at <code>/etc/kubos-config.toml</code>.
+An alternative config file may be specified on the command line at run time:</p>
+<pre><code class="language-bash">$ clyde-3g-eps-service -c config.toml
+</code></pre>
+<h1 id="panics" class="section-header"><a href="#panics">Panics</a></h1>
+<p>Attempts to grab <code>bus</code> from Configuration and will <code>panic!</code> if not found.</p>
+<h1 id="graphql-schema" class="section-header"><a href="#graphql-schema">GraphQL Schema</a></h1><h2 id="queries" class="section-header"><a href="#queries">Queries</a></h2><h3 id="ack" class="section-header"><a href="#ack">ACK</a></h3>
+<p>Fetch the last mutation which was executed by the service.
+Returns a <a href="models/subsystem/enum.Mutations.html">subsystem::Mutations</a> value.</p>
+<pre><code class="language-json">{
+	ack: Mutation!
+}
+</code></pre>
+<h3 id="errors" class="section-header"><a href="#errors">Errors</a></h3>
+<p>Fetch all errors encountered by the service since the last time this field was queried</p>
+<pre><code class="language-json">{
+	errors: [String]
+}
+</code></pre>
+<h3 id="power" class="section-header"><a href="#power">Power</a></h3>
+<p>Get the system power status.
+Returns a <a href="models/enum.PowerState.html">PowerState</a> value.</p>
+<pre><code class="language-json">{
+	power {
+		motherboard: PowerState,
+     	daughterboard: PowerState,
+   	}
+}
+</code></pre>
+<h3 id="telemetry" class="section-header"><a href="#telemetry">Telemetry</a></h3><h4 id="version-info" class="section-header"><a href="#version-info">Version Info</a></h4>
+<p>Fetch the version information for the EPS' motherboard and daughterboard (if present).</p>
+<pre><code class="language-json">{
+	telemetry {
+		version {
+			motherboard {
+				revision: Int!,
+				firmwareNumber: Int!
+			},
+			daughterboard {
+				revision: Int,
+				firmwareNumber: Int
+			}
+		}
+	}
+}
+</code></pre>
+<h4 id="reset-count" class="section-header"><a href="#reset-count">Reset Count</a></h4>
+<p>Get the number of board resets, by category.
+Note: If any value exceeds 255, it will automatically roll over to 0.</p>
+<pre><code class="language-json">{
+	telemetry {
+		reset {
+			brownOut
+				motherboard: Int!
+				daughterboard: Int
+			automaticSoftware
+				motherboard: Int!
+				daughterboard: Int
+			manual
+				motherboard: Int!
+				daughterboard: Int
+			watchdog
+				motherboard: Int!
+				daughterboard: Int
+		}
+	}
+}
+</code></pre>
+<h4 id="motherboard-telemetry" class="section-header"><a href="#motherboard-telemetry">Motherboard Telemetry</a></h4>
+<p>Fetch telemetry data for the motherboard. All returned values are automatically converted from their original raw data.
+Refer to Table 11-7 of the EPS' User Manual for more information.</p>
+<pre><code class="language-json">{
+   telemetry {
+   	motherboard {
+   		VoltageFeedingBcr1: Float!
+   		CurrentBcr1Sa1a: Float!
+   		CurrentBcr1Sa1b: Float!
+   		ArrayTempSa1a: Float!
+   		ArrayTempSa1b: Float!
+   		SunDetectorSa1a: Float!
+   		SunDetectorSa1b: Float!
+   		VoltageFeedingBcr2: Float!
+   		CurrentBcr2Sa2a: Float!
+   		CurrentBcr2Sa2b: Float!
+   		ArrayTempSa2a: Float!
+   		ArrayTempSa2b: Float!
+   		SunDetectorSa2a: Float!
+   		SunDetectorSa2b: Float!
+   		VoltageFeedingBcr3: Float!
+   		CurrentBcr3Sa3a: Float!
+   		CurrentBcr3Sa3b: Float!
+   		ArrayTempSa3a: Float!
+   		ArrayTempSa3b: Float!
+   		SunDetectorSa3a: Float!
+   		SunDetectorSa3b: Float!
+   		BcrOutputCurrent: Float!
+   		BcrOutputVoltage: Float!
+   		CurrentDraw3V3: Float!
+   		CurrentDraw5V: Float!
+   		OutputCurrent12V: Float!
+   		OutputVoltage12V: Float!
+   		OutputCurrentBattery: Float!
+   		OutputVoltageBattery: Float!
+   		OutputCurrent5v: Float!
+   		OutputVoltage5v: Float!
+   		OutputCurrent33v: Float!
+   		OutputVoltage33v: Float!
+   		OutputVoltageSwitch1: Float!
+   		OutputCurrentSwitch1: Float!
+   		OutputVoltageSwitch2: Float!
+   		OutputCurrentSwitch2: Float!
+   		OutputVoltageSwitch3: Float!
+   		OutputCurrentSwitch3: Float!
+   		OutputVoltageSwitch4: Float!
+   		OutputCurrentSwitch4: Float!
+   		OutputVoltageSwitch5: Float!
+   		OutputCurrentSwitch5: Float!
+   		OutputVoltageSwitch6: Float!
+   		OutputCurrentSwitch6: Float!
+   		OutputVoltageSwitch7: Float!
+   		OutputCurrentSwitch7: Float!
+   		OutputVoltageSwitch8: Float!
+   		OutputCurrentSwitch8: Float!
+   		OutputVoltageSwitch9: Float!
+   		OutputCurrentSwitch9: Float!
+   		OutputVoltageSwitch10: Float!
+   		OutputCurrentSwitch10: Float!
+   		BoardTemperature: Float!
+   	}
+   }
+}
+</code></pre>
+<h3 id="daughterboard-telemetry" class="section-header"><a href="#daughterboard-telemetry">Daughterboard Telemetry</a></h3>
+<p>Fetch telemetry data for the motherboard. All returned values are automatically converted from their original raw data.
+Refer to Table 11-8 of the EPS's User Manual for more information.</p>
+<pre><code class="language-json">{
+	telemetry {
+		daughterboard {
+			VoltageFeedingBcr4: Float
+			CurrentBcr4Sa4a: Float
+			CurrentBcr4Sa4b: Float
+			ArrayTempSa4a: Float
+			ArrayTempSa4b: Float
+			SunDetectorSa4a: Float
+			SunDetectorSa4b: Float
+			VoltageFeedingBcr5: Float
+			CurrentBcr5Sa5a: Float
+			CurrentBcr5Sa5b: Float
+			ArrayTempSa5a: Float
+			ArrayTempSa5b: Float
+			SunDetectorSa5a: Float
+			SunDetectorSa5b: Float
+			VoltageFeedingBcr6: Float
+			CurrentBcr6Sa6a: Float
+			CurrentBcr6Sa6b: Float
+			ArrayTempSa6a: Float
+			ArrayTempSa6b: Float
+			SunDetectorSa6a: Float
+			SunDetectorSa6b: Float
+			VoltageFeedingBcr7: Float
+			CurrentBcr7Sa7a: Float
+			CurrentBcr7Sa7b: Float
+			ArrayTempSa7a: Float
+			ArrayTempSa7b: Float
+			SunDetectorSa7a: Float
+			SunDetectorSa7b: Float
+			VoltageFeedingBcr8: Float
+			CurrentBcr8Sa8a: Float
+			CurrentBcr8Sa8b: Float
+			ArrayTempSa8a: Float
+			ArrayTempSa8b: Float
+			SunDetectorSa8a: Float
+			SunDetectorSa8b: Float
+			VoltageFeedingBcr9: Float
+			CurrentBcr9Sa9a: Float
+			CurrentBcr9Sa9b: Float
+			ArrayTempSa9a: Float
+			ArrayTempSa9b: Float
+			SunDetectorSa9a: Float
+			SunDetectorSa9b: Float
+			BoardTemperature: Float
+		}
+	}
+}
+</code></pre>
+<h4 id="watchdog-period" class="section-header"><a href="#watchdog-period">Watchdog Period</a></h4>
+<p>Fetch the current watchdog timeout period, in minutes</p>
+<pre><code class="language-json">{
+	telemetry {
+		watchdogPeriod: Int!
+	}
+}
+</code></pre>
+<h4 id="last-eps-error" class="section-header"><a href="#last-eps-error">Last EPS Error</a></h4>
+<p>Fetch the last error which was encountered by the system while executing a command.
+Returns a <a href="models/last_error/enum.Error.html">last_error::Error</a> value</p>
+<pre><code class="language-json">{
+	telemetry {
+		lastEpsError {
+			motherboard: Error!
+			daughterboard: Error
+		}
+	}
+}
+</code></pre>
+<h4 id="board-status" class="section-header"><a href="#board-status">Board Status</a></h4>
+<p>Check the status of the motherboard and daughterboard.
+Returns <a href="../clyde_3g_eps_api/struct.StatusCode.html">status flags</a> indicating any recent errors.</p>
+<pre><code class="language-json">{
+	telemetry {
+		boardStatus {
+			motherboard: Status!
+			daugherboard: Status
+		}
+	}
+}
+</code></pre>
+<h2 id="mutations" class="section-header"><a href="#mutations">Mutations</a></h2><h3 id="no-op" class="section-header"><a href="#no-op">No-Op</a></h3>
+<p>Execute a trivial command against the system.</p>
+<pre><code class="language-json">mutation {
+	noop {
+		success: Boolean!
+		errors: String!
+	}
+}
+</code></pre>
+<h3 id="manual-reset" class="section-header"><a href="#manual-reset">Manual Reset</a></h3>
+<p>Manually reset the EPS.</p>
+<pre><code class="language-json">mutation {
+	manualReset {
+		success: Boolean!
+		errors: String!
+	}
+}
+</code></pre>
+<h3 id="reset-watchdog" class="section-header"><a href="#reset-watchdog">Reset Watchdog</a></h3>
+<p>Reset the communications watchdog timer.</p>
+<pre><code class="language-json">mutation {
+	resetWatchdog {
+		success: Boolean!
+		errors: String!
+	}
+}
+</code></pre>
+<h3 id="set-watchdog-period" class="section-header"><a href="#set-watchdog-period">Set Watchdog Period</a></h3>
+<p>Set the communications watchdog timeout period.</p>
+<ul>
+<li>period: New timeout period, in minutes</li>
+</ul>
+<pre><code class="language-json">mutation {
+	setWatchdogPeriod(period: Int!) {
+		success: Boolean!
+		errors: String!
+	}
+}
+</code></pre>
+<h3 id="issue-raw-command" class="section-header"><a href="#issue-raw-command">Issue Raw Command</a></h3>
+<p>Pass a custom command through to the system</p>
+<ul>
+<li>command: Decimal value of the command byte to send</li>
+<li>data: Decimal values of the command parameters to send. Should be <code>[0]</code> if there are no additional parameters required.</li>
+</ul>
+<pre><code class="language-json">mutation {
+	issueRawCommand(command: Int!, data: [Int!]) {
+		success: Boolean!
+		errors: String!
+	}
+}
+</code></pre>
+<h3 id="test-hardware" class="section-header"><a href="#test-hardware">Test Hardware</a></h3>
+<p>Perform a system test</p>
+<ul>
+<li>test: Specific test to perform. Should be <code>HARDWARE</code></li>
+</ul>
+<pre><code class="language-json"> mutation {
+ 	testHardware(test: TestType) {
+ 		success: Boolean!
+ 		errors: String!
+ 	}
+ }
+</code></pre>
+</div><h2 id='modules' class='section-header'><a href="#modules">Modules</a></h2>
+<table><tr class='module-item'><td><a class="mod" href="models/index.html" title='clyde_3g_eps_service::models mod'>models</a></td><td class='docblock-short'><p>EPS system components</p>
+</td></tr><tr class='module-item'><td><a class="mod" href="schema/index.html" title='clyde_3g_eps_service::schema mod'>schema</a></td><td class='docblock-short'><p>Service schema</p>
+</td></tr></table></section><section id="search" class="content hidden"></section><section class="footer"></section><aside id="help" class="hidden"><div><h1 class="hidden">Help</h1><div class="shortcuts"><h2>Keyboard Shortcuts</h2><dl><dt><kbd>?</kbd></dt><dd>Show this help dialog</dd><dt><kbd>S</kbd></dt><dd>Focus the search field</dd><dt><kbd>↑</kbd></dt><dd>Move up in search results</dd><dt><kbd>↓</kbd></dt><dd>Move down in search results</dd><dt><kbd>↹</kbd></dt><dd>Switch tab</dd><dt><kbd>&#9166;</kbd></dt><dd>Go to active search result</dd><dt><kbd>+</kbd></dt><dd>Expand all sections</dd><dt><kbd>-</kbd></dt><dd>Collapse all sections</dd></dl></div><div class="infos"><h2>Search Tricks</h2><p>Prefix searches with a type followed by a colon (e.g., <code>fn:</code>) to restrict the search to a given type.</p><p>Accepted types are: <code>fn</code>, <code>mod</code>, <code>struct</code>, <code>enum</code>, <code>trait</code>, <code>type</code>, <code>macro</code>, and <code>const</code>.</p><p>Search functions by type signature (e.g., <code>vec -> usize</code> or <code>* -> vec</code>)</p><p>Search multiple things at once by splitting your query with comma (e.g., <code>str,u8</code> or <code>String,struct:Vec,test</code>)</p></div></div></aside><script>window.rootPath = "../";window.currentCrate = "clyde_3g_eps_service";</script><script src="../aliases.js"></script><script src="../main.js"></script><script defer src="../search-index.js"></script></body></html>

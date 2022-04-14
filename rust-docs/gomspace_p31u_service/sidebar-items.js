@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["AckCommand","Return field for 'ack' query"]],"struct":[["GenericResponse","Common response fields structure for requests which don't return any specific data"],["RawCommandResponse","Response fields for 'issueRawCommand' mutation"]]});

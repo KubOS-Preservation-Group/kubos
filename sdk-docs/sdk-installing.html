@@ -1,0 +1,460 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Installing the Kubos SDK &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../index.html"/>
+        <link rel="up" title="Kubos SDK Docs" href="index.html"/>
+        <link rel="next" title="Using Rust with the Kubos SDK" href="sdk-rust.html"/>
+        <link rel="prev" title="Kubos SDK Docs" href="index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../obc-docs/index.html">Working with an OBC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ecosystem/index.html">KubOS Ecosystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deep-dive/index.html">Under the Hood</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Kubos SDK</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Installing the Kubos SDK</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#prerequisites">Prerequisites</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#system-requirements">System Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#install-windows-powershell-v3-windows-7-sp1-only">Install Windows PowerShell v3+ (Windows 7 SP1 Only)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#install-virtualbox">Install VirtualBox</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#install-vagrant">Install Vagrant</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#setup">Setup</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#create-your-kubos-sdk-instance">Create your Kubos SDK Instance:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mounting-a-host-directory">Mounting a Host Directory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#exposing-network-ports">Exposing Network Ports</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#start-the-vagrant-box">Start the Vagrant Box</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sdk-rust.html">Using Rust with the Kubos SDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sdk-python.html">Using Python with the Kubos SDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sdk-c.html">Using C with the Kubos SDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sdk-upgrading.html">Upgrading the Kubos SDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sdk-advanced-cross-compiling.html">Advanced Rust Cross Compiling</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing to KubOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Kubos SDK Docs</a> &raquo;</li>
+        
+      <li>Installing the Kubos SDK</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/sdk-docs/sdk-installing.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="installing-the-kubos-sdk">
+<h1>Installing the Kubos SDK<a class="headerlink" href="#installing-the-kubos-sdk" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="system-requirements">
+<h3>System Requirements<a class="headerlink" href="#system-requirements" title="Permalink to this headline">¶</a></h3>
+<p>The Kubos SDK has several hardware requirements, including:</p>
+<ul class="simple">
+<li>64-bit processor with AMD-V or Intel VT-x virtualization support</li>
+<li>Mac OS (10.9 +), Windows 7 SP1 (or more recent), or a mainstream
+Linux distribution (see the <a class="reference external" href="https://www.virtualbox.org/manual/ch01.html#hostossupport">full
+list</a>
+of supported host OSes)</li>
+<li>8 GB RAM</li>
+<li>10 GB of free HDD space</li>
+</ul>
+</div>
+<div class="section" id="install-windows-powershell-v3-windows-7-sp1-only">
+<span id="powershell"></span><h3>Install Windows PowerShell v3+ (Windows 7 SP1 Only)<a class="headerlink" href="#install-windows-powershell-v3-windows-7-sp1-only" title="Permalink to this headline">¶</a></h3>
+<p>If you are running Windows 7 SP1, you <strong>must</strong> upgrade your version of
+Windows PowerShell to atleast v3.0.</p>
+<p>You can verify your current version by opening Windows Command Prompt
+and running the following commands:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$&gt;powershell
+Windows PowerShell
+Copyright (C) 2016 Microsoft Corporation. All rights reserved.
+
+PS $&gt; $PSVersionTable.PSVersion
+
+Major  Minor  Build  Revision
+-----  -----  -----  --------
+2      0      -1     -1
+
+
+PS $&gt; exit
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">Major</span></code> field should have a value of atleast <code class="docutils literal notranslate"><span class="pre">3</span></code>.</p>
+<p><a class="reference external" href="https://docs.microsoft.com/en-us/powershell/scripting/setup/installing-windows-powershell?view=powershell-5.1">Click here for instructions about upgrading PowerShell</a></p>
+</div>
+<div class="section" id="install-virtualbox">
+<h3>Install VirtualBox<a class="headerlink" href="#install-virtualbox" title="Permalink to this headline">¶</a></h3>
+<p>Vagrant requires a virtualization “provider”. Currently the only
+provider that Kubos officially supports is VirtualBox.</p>
+<ul class="simple">
+<li><a class="reference external" href="https://www.virtualbox.org/wiki/Downloads">Download VirtualBox</a></li>
+<li><a class="reference external" href="https://www.virtualbox.org/wiki/Downloads">Download</a> the
+VirtualBox Extension Pack to enable passing USB devices into a
+virtual machine.</li>
+</ul>
+<p>If you’re using Linux as your host operating system you will need to add
+yourself to the <code class="docutils literal notranslate"><span class="pre">vboxusers</span></code> group with the following command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">usermod</span> <span class="o">-</span><span class="n">aG</span> <span class="n">vboxusers</span> <span class="o">&lt;</span><span class="n">username</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>You will need to logout and log back in to your host computer, otherwise
+passing USB devices through to your development environment will not work correctly.</p>
+</div>
+<div class="section" id="install-vagrant">
+<h3>Install Vagrant<a class="headerlink" href="#install-vagrant" title="Permalink to this headline">¶</a></h3>
+<p>If you don’t already have Vagrant installed see the Vagrant
+<a class="reference external" href="https://www.vagrantup.com/docs/installation">installation
+documentation.</a></p>
+<p>If your Vagrant installation is set up correctly, running the following
+command should print something similar to the following output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ vagrant --version
+Vagrant 2.0.0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="create-your-kubos-sdk-instance">
+<h3>Create your Kubos SDK Instance:<a class="headerlink" href="#create-your-kubos-sdk-instance" title="Permalink to this headline">¶</a></h3>
+<p>To create an instance of the SDK box follow these steps:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ vagrant init kubos/kubos-dev
+$ vagrant up
+</pre></div>
+</div>
+<p>This will create a Vagrantfile in your current directory. Vagrantfiles
+are important as they contain the configuration details for specific
+boxes. Additionally, Vagrant environments are dependant on the directory
+they were created in. To interact with this box in the future you will
+need to navigate back to this directory.</p>
+<p>If the output of <code class="docutils literal notranslate"><span class="pre">vagrant</span> <span class="pre">up</span></code> mentions there’s a new version of the
+kubos-dev box available you can upgrade your box with the following
+command:</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">THIS WILL OVERWRITE ALL FILES IN YOUR EXISTING BOX</p>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ vagrant box update
+</pre></div>
+</div>
+</div>
+<div class="section" id="mounting-a-host-directory">
+<span id="mount-directory"></span><h3>Mounting a Host Directory<a class="headerlink" href="#mounting-a-host-directory" title="Permalink to this headline">¶</a></h3>
+<p>In the context of these documents, as well as virtual machines in
+general, the physical “main” computer is referred to as the “host”. The
+virtual machine inside of the host is referred to as the “guest”.</p>
+<p>It is strongly recommended that you create your project in a directory
+on your host that is shared with your box.
+By keeping your project on your host it will protect them in the event
+your box is destroyed or re-built.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Windows does not support Linux symlinks. If, for some reason, you need to create symlinks in
+your project, you will need to do so in a directory which lives entirely within the VM.</p>
+<p class="last">KubOS does not currently leverage any symlinks, so this should not be an issue for the average
+developer’s workflow.</p>
+</div>
+<p>To mount a specific directory from your host, open the Vagrantfile
+located in the directory from the previous step and look for the
+following lines:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Share an additional folder to the guest VM. The first argument is</span>
+<span class="c1"># the path on the host to the actual folder. The second argument is</span>
+<span class="c1"># the path on the guest to mount the folder. And the optional third</span>
+<span class="c1"># argument is a set of non-required options.</span>
+<span class="c1"># config.vm.synced_folder &quot;../data&quot;, &quot;/vagrant_data&quot;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The default home directory in the Kubos Vagrant boxes is <code class="docutils literal notranslate"><span class="pre">/home/vagrant</span></code></p>
+</div>
+<p>Uncomment the last line in this block and change the paths to match your
+host directory and a desired mount point in the box.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The path in the box must be an absolute path</p>
+</div>
+<p>After a volume is mounted into the box all of the data from the host
+path will be available at the path specified for the box. In the above
+example the host path (<code class="docutils literal notranslate"><span class="pre">../data</span></code>) would be exposed at
+<code class="docutils literal notranslate"><span class="pre">/vagrant_data</span></code> inside of the box. This allows you to use the text
+editor of your choosing to edit the project files from your host machine
+at the host directory path.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you make changes to the Vagrantfile after the box has been
+started you will need to run <code class="docutils literal notranslate"><span class="pre">vagrant</span> <span class="pre">reload</span></code> for these changes to
+take effect in the box.</p>
+</div>
+<hr class="docutils" />
+<p>For more information on mounting volumes see the following <a class="reference external" href="https://www.vagrantup.com/docs/synced-folders/basic_usage.html">guide</a></p>
+<hr class="docutils" />
+</div>
+<div class="section" id="exposing-network-ports">
+<span id="sdk-port-forward"></span><h3>Exposing Network Ports<a class="headerlink" href="#exposing-network-ports" title="Permalink to this headline">¶</a></h3>
+<p>If you would like to interact with Kubos services running inside an SDK instance from your host
+environment, you will need to update your Vagrantfile to expose either a single port, or your
+entire SDK as with a private network address.</p>
+<p>We recommend that you set up a <a class="reference external" href="https://www.vagrantup.com/docs/networking/private_network.html">private network</a>
+connection, since you may want to interact with multiple different network ports while developing
+with KubOS.</p>
+<p>To do so, enable the following line in your Vagrantfile:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">network</span> <span class="s2">&quot;private_network&quot;</span><span class="p">,</span> <span class="n">ip</span><span class="p">:</span> <span class="s2">&quot;192.168.33.10&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="start-the-vagrant-box">
+<h3>Start the Vagrant Box<a class="headerlink" href="#start-the-vagrant-box" title="Permalink to this headline">¶</a></h3>
+<p>To start the box, run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ vagrant up
+</pre></div>
+</div>
+<p>After the box has started you need to “ssh” into the machine to work
+with your projects.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ vagrant ssh
+</pre></div>
+</div>
+<p>This will start an SSH session in the Vagrant box with the Kubos CLI and
+all of the required dependencies installed.</p>
+<p>That’s it! From here see more on:</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference internal" href="../tutorials/first-mission-app.html"><span class="doc">Creating your first KubOS project</span></a></li>
+</ul>
+</div></blockquote>
+<p>After a little bit of usage you may want to look at <a class="reference internal" href="sdk-upgrading.html"><span class="doc">how to upgrade the
+Kubos SDK</span></a></p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="sdk-rust.html" class="btn btn-neutral float-right" title="Using Rust with the Kubos SDK" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Kubos SDK Docs" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

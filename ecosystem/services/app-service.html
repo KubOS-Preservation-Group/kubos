@@ -1,0 +1,680 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Kubos Applications Service &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../../index.html"/>
+        <link rel="up" title="Core Services" href="core-services.html"/>
+        <link rel="next" title="Communications Service Framework" href="comms-framework.html"/>
+        <link rel="prev" title="Core Services" href="core-services.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../obc-docs/index.html">Working with an OBC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">KubOS Ecosystem</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#mission-applications">Mission Applications</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#services">Services</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="core-services.html">Core Services</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Applications Service</a></li>
+<li class="toctree-l4"><a class="reference internal" href="comms-framework.html">Communications Service</a></li>
+<li class="toctree-l4"><a class="reference internal" href="file.html">File Transfer Service</a></li>
+<li class="toctree-l4"><a class="reference internal" href="monitor-service.html">Monitor Service</a></li>
+<li class="toctree-l4"><a class="reference internal" href="scheduler.html">Scheduler Service</a></li>
+<li class="toctree-l4"><a class="reference internal" href="shell.html">Shell Service</a></li>
+<li class="toctree-l4"><a class="reference internal" href="telemetry-db.html">Telemetry Database Service</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="hardware-services.html">Hardware Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="payload-services.html">Payload Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="service-config.html">Service Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="service-dev.html">Service Development</a></li>
+<li class="toctree-l3"><a class="reference internal" href="service-outline-guide.html">KubOS Service Outline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphql.html">GraphQL</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#kubos-linux">Kubos Linux</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../deep-dive/index.html">Under the Hood</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sdk-docs/index.html">Kubos SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Contributing to KubOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">KubOS Ecosystem</a> &raquo;</li>
+        
+          <li><a href="core-services.html">Core Services</a> &raquo;</li>
+        
+      <li>Kubos Applications Service</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/ecosystem/services/app-service.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="kubos-applications-service">
+<h1>Kubos Applications Service<a class="headerlink" href="#kubos-applications-service" title="Permalink to this headline">¶</a></h1>
+<p>The Kubos applications service is responsible for monitoring and managing all mission applications for a system.</p>
+<p>The service is capable of tracking multiple versions of each application, allowing users to easily
+upgrade and rollback their mission applications when necessary.</p>
+<p>Whenever a new application is registered with the service, its manifest file and all other files in
+the specified directory are copied into the service’s application registry.
+By default, this registry is stored under <cite>/home/system/kubos/apps</cite>.</p>
+<p class="plantuml">
+<img src="../../_images/plantuml-201ad4e32a899ec35fb3c6f98ed515307dfb8edf.png" alt="&#64;startuml
+
+frame &quot;App Service&quot; {
+
+    package &quot;Main Mission App&quot; {
+        rectangle [Version: 1.0\nActive: False]
+        rectangle [Version: 2.0\nActive: True]
+    }
+
+    package &quot;Payload App&quot; {
+        rectangle [Version: 0.1\nActive: False]
+    }
+}
+
+&#64;enduml"/>
+</p>
+<p>When an application is started by the service, a monitoring thread is spawned to watch the new
+process and record its eventual return code.</p>
+<div class="section" id="communicating-with-the-service">
+<h2>Communicating with the Service<a class="headerlink" href="#communicating-with-the-service" title="Permalink to this headline">¶</a></h2>
+<p>The applications service uses the same HTTP+GraphQL communication scheme as the <a class="reference internal" href="graphql.html"><span class="doc">other services</span></a>.</p>
+<p>Users will send GraphQL queries and mutations to the service’s HTTP listener port.
+The port number can be found in the system’s <a class="reference internal" href="service-config.html"><span class="doc">configuration file</span></a>
+in <cite>/etc/kubos-config.toml</cite></p>
+</div>
+<div class="section" id="querying">
+<h2>Querying<a class="headerlink" href="#querying" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="registered-applications">
+<h3>Registered Applications<a class="headerlink" href="#registered-applications" title="Permalink to this headline">¶</a></h3>
+<p>A current list of all available versions of all registered applications can be generated by using the <code class="docutils literal notranslate"><span class="pre">registeredApps</span></code> query.</p>
+<p>It has the following schema:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>{
+    registeredApps(name: String, version: String, active: Boolean) {
+        [
+            active: Boolean!,
+            app {
+                name: String!,
+                executable: String!,
+                version: String!,
+                author: String!,
+                config: String!
+            }
+        ]
+    }
+}
+</pre></div>
+</div>
+<p>The registered applications can be filtered by using the input parameters:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">name</span></code>: Returns app entries which have the specified application name</li>
+<li><code class="docutils literal notranslate"><span class="pre">version</span></code>: Returns app entries which have the specified version number</li>
+<li><code class="docutils literal notranslate"><span class="pre">active</span></code>: When <code class="docutils literal notranslate"><span class="pre">True</span></code>, returns only the “active” entry of a particular application, i.e, the
+version of the application which will be used when the application is run</li>
+</ul>
+<p>Queries return the following fields:</p>
+<ul>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">active</span></code>: Specifies whether this particular version of the application will be run when the
+<code class="docutils literal notranslate"><span class="pre">startApp</span></code> mutation is run with the given application name</p>
+</li>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">app</span></code>: Details of the application entry</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">name</span></code>: The name of the application</li>
+<li><code class="docutils literal notranslate"><span class="pre">executable</span></code>: The path to the file which will be executed when the <code class="docutils literal notranslate"><span class="pre">startApp</span></code> mutation is
+run for this application</li>
+<li><code class="docutils literal notranslate"><span class="pre">version</span></code>: The particular version number of this application entry</li>
+<li><code class="docutils literal notranslate"><span class="pre">author</span></code>: The creator/owner of this application entry</li>
+<li><code class="docutils literal notranslate"><span class="pre">config</span></code>: The <a class="reference internal" href="service-config.html"><span class="doc">configuration file</span></a> which will be passed to the
+application when it is run</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<p>An example query requesting the name, version number, and active status of all registered
+applications:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="n">registeredApps</span> <span class="p">{</span>
+        <span class="n">active</span><span class="p">,</span>
+        <span class="n">app</span> <span class="p">{</span>
+            <span class="n">name</span><span class="p">,</span>
+            <span class="n">version</span>
+        <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Using the example registry in the previous diagram, the data returned by the service would be:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;registeredApps&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;active&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+            <span class="s2">&quot;app&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;main-mission&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;active&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+            <span class="s2">&quot;app&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;main-mission&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.0&quot;</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;active&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+            <span class="s2">&quot;app&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;payload-app&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;0.1&quot;</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>To list all available versions of a specific application, specify the app’s name as an input parameter.</p>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="n">registeredApps</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s2">&quot;main-mission&quot;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">app</span> <span class="p">{</span>
+            <span class="n">name</span><span class="p">,</span>
+            <span class="n">version</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="application-execution-status">
+<span id="running-apps"></span><h3>Application Execution Status<a class="headerlink" href="#application-execution-status" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">appStatus</span></code> query can be used to fetch information about currently running applications, as
+well as information about the last time an application was run.</p>
+<p>It has the following schema:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>{
+    appStatus(name: String, version: String, running: Boolean) {
+        name: String!,
+        version: String!,
+        startTime: String!,
+        endTime: String,
+        running: Boolean!,
+        pid: Int,
+        lastRc: Int,
+        lastSignal: Int,
+        args: Vec&lt;String&gt;,
+        config: String
+    }
+}
+</pre></div>
+</div>
+<p>The applications can be filtered by using the input parameters:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">name</span></code>: Returns app entries which have the specified application name</li>
+<li><code class="docutils literal notranslate"><span class="pre">version</span></code>: Returns app entries which have the specified version number</li>
+<li><code class="docutils literal notranslate"><span class="pre">running</span></code>: Returns app entries which are/aren’t actively running</li>
+</ul>
+<p>Queries return the following fields:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">name</span></code>: Application name</li>
+<li><code class="docutils literal notranslate"><span class="pre">version</span></code>: Version of the application which was/is running</li>
+<li><code class="docutils literal notranslate"><span class="pre">startTime</span></code>: The time at which the application was started, in
+<a class="reference external" href="https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations">ISO 8601</a> format</li>
+<li><code class="docutils literal notranslate"><span class="pre">endTime</span></code>: If the application has finished executing, the time at which execution ended</li>
+<li><code class="docutils literal notranslate"><span class="pre">running</span></code>: Indicates if the application is currently executing</li>
+<li><code class="docutils literal notranslate"><span class="pre">pid</span></code>: If the application is still running, the process ID assigned to the running application</li>
+<li><code class="docutils literal notranslate"><span class="pre">lastRc</span></code>: If the application has finished executing, the return code emitted by the application.
+Mutually exclusive with <code class="docutils literal notranslate"><span class="pre">lastSignal</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">lastSignal</span></code>: If the application has finished executing and was stopped by a signal, the signal
+which was sent to the application. Mutually exlusive with <code class="docutils literal notranslate"><span class="pre">lastRc</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">args</span></code>: Any command-line arguments which were passed to the application executable. If no
+arguments were given, this field will not be returned</li>
+<li><code class="docutils literal notranslate"><span class="pre">config</span></code>: The non-default service configuration file which will be referenced by the application.
+If the default configuration is being used, this field will not be returned</li>
+</ul>
+<p>One app entry may exist per unique name/version/run-level combination.</p>
+<p>If a particular app entry is currently executing the <code class="docutils literal notranslate"><span class="pre">pid</span></code> field will be available.
+If the entry has finished executing, then the <code class="docutils literal notranslate"><span class="pre">endTime</span></code> and <code class="docutils literal notranslate"><span class="pre">lastRc</span></code>/<code class="docutils literal notranslate"><span class="pre">lastSignal</span></code> fields will
+be available.</p>
+</div>
+</div>
+<div class="section" id="registering">
+<span id="register-app"></span><h2>Registering<a class="headerlink" href="#registering" title="Permalink to this headline">¶</a></h2>
+<p>Once an application has been written and compiled, the application and its accompanying <a class="reference internal" href="../apps/app-guide.html#app-manifest"><span class="std std-ref">manifest.toml file</span></a>
+should be either transferred to a new directory or <code class="docutils literal notranslate"><span class="pre">.tgz</span></code> archive file on the OBC.
+This file transfer can be done using the <a class="reference internal" href="file.html"><span class="doc">file transfer service</span></a>.</p>
+<p>The application may be split into multiple files (which is useful for large Python apps), however,
+the name of the initial file which should be called for execution must exactly match the <code class="docutils literal notranslate"><span class="pre">name</span></code>
+property in the manifest file.</p>
+<p>The application can then be registered with the applications service using the <code class="docutils literal notranslate"><span class="pre">register</span></code> mutation by specifying
+the directory or <code class="docutils literal notranslate"><span class="pre">.tgz</span></code> archive containing the application files.</p>
+<p>The service will copy all of the contents from the specified path or archive into the apps registry.
+Once registered, users may delete the original application files.</p>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mutation</span> <span class="p">{</span>
+    <span class="n">register</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="s2">&quot;/home/kubos/payload-app&quot;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">success</span><span class="p">,</span>
+        <span class="n">errors</span><span class="p">,</span>
+        <span class="n">entry</span> <span class="p">{</span>
+            <span class="n">active</span><span class="p">,</span>
+            <span class="n">app</span> <span class="p">{</span>
+                <span class="n">name</span><span class="p">,</span>
+                <span class="n">version</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">success</span></code> response field is a boolean value which reflects whether the registration process
+completed successfully.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">true</span></code>, then the <code class="docutils literal notranslate"><span class="pre">entry</span></code> field will contain the registration information about the newly
+registered application.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">false,</span></code> then the <code class="docutils literal notranslate"><span class="pre">entry</span></code> field will be empty, and the <code class="docutils literal notranslate"><span class="pre">errors</span></code> field will contain an
+error message detailing what went wrong.</p>
+</div>
+<div class="section" id="de-registering">
+<h2>De-Registering<a class="headerlink" href="#de-registering" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">uninstall</span></code> mutation can be used to either uninstall a single version of an application, or
+to uninstall all versions of an application.</p>
+<p>The mutation takes one required argument, <code class="docutils literal notranslate"><span class="pre">name</span></code>, specifying the name of the application to be
+removed.
+There is also one optional argument, <code class="docutils literal notranslate"><span class="pre">version</span></code>, which specifies a particular version of the
+application which should be uninstalled.
+If <code class="docutils literal notranslate"><span class="pre">version</span></code> is omitted, then all known versions of the application are uninstalled.</p>
+<p>The mutation returns two fields:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">success</span></code> - Indicating the overall result of the uninstall operation</li>
+<li><code class="docutils literal notranslate"><span class="pre">errors</span></code> - Any errors which were encountered during the uninstall process</li>
+</ul>
+</div></blockquote>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mutation</span> <span class="p">{</span>
+    <span class="n">uninstall</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s2">&quot;main-mission&quot;</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="s2">&quot;1.1&quot;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">success</span><span class="p">,</span>
+        <span class="n">errors</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If the version of the application being uninstalled is also the current active version, the
+<a class="reference internal" href="#set-version"><span class="std std-ref">setVersion</span></a> mutation should be used in order to manually roll back to a prior
+version first.
+If the active version is not changed, then the system will not know which version to use the next
+time the application is started.</p>
+<p>If the version of the application being uninstalled is currently running, it will be automatically
+stopped using the <code class="docutils literal notranslate"><span class="pre">SIGTERM</span></code> signal, followed by the more harsh <code class="docutils literal notranslate"><span class="pre">SIGKILL</span></code> signal two seconds
+later.
+We recommend using the <a class="reference internal" href="#kill-app"><span class="std std-ref">killApp</span></a> mutation to gracefully stop the application prior
+to making an <code class="docutils literal notranslate"><span class="pre">uninstall</span></code> request.</p>
+</div>
+<div class="section" id="starting-an-application">
+<span id="start-app"></span><h2>Starting an Application<a class="headerlink" href="#starting-an-application" title="Permalink to this headline">¶</a></h2>
+<p>To manually start an application, the <code class="docutils literal notranslate"><span class="pre">startApp</span></code> mutation can be used.</p>
+<p>The mutation should specify the name of the application to start.
+Only once instance of an application may be running at a time.</p>
+<p>The optional <code class="docutils literal notranslate"><span class="pre">config</span></code> input argument allows a custom <code class="docutils literal notranslate"><span class="pre">config.toml</span></code> file to be passed to the
+application. If the file is in the app’s directory when it is registered, then it may be specified
+with a relative path. Otherwise, we recommend that you use an absolute file path.</p>
+<p>The optional <code class="docutils literal notranslate"><span class="pre">args</span></code> input argument allows additional arguments to be passed through to the
+underlying application.</p>
+<p>The mutation will return three fields:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">success</span></code> - Indicating the overall result of the operation</li>
+<li><code class="docutils literal notranslate"><span class="pre">errors</span></code> - Any errors which were encountered while starting the application</li>
+<li><code class="docutils literal notranslate"><span class="pre">pid</span></code> - The PID of the started application. This will be empty if any errors are encountered</li>
+</ul>
+</div></blockquote>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mutation</span> <span class="p">{</span>
+    <span class="n">startApp</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s2">&quot;mission-app&quot;</span><span class="p">,</span> <span class="n">config</span><span class="p">:</span> <span class="s2">&quot;/home/kubos/config.toml&quot;</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;-m&quot;</span><span class="p">,</span> <span class="s2">&quot;safemode&quot;</span><span class="p">])</span> <span class="p">{</span>
+        <span class="n">success</span><span class="p">,</span>
+        <span class="n">errors</span><span class="p">,</span>
+        <span class="n">pid</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Under the covers, the service receives the mutation and identifies the current active version of the
+application specified.
+It then calls that version’s binary, passing along any additional arguments specified with <code class="docutils literal notranslate"><span class="pre">args</span></code>.</p>
+<p>If the application immediately fails, the <code class="docutils literal notranslate"><span class="pre">errors</span></code> field will contain a message with the
+application’s return code.</p>
+<p>If an instance of the application is currently running, the <code class="docutils literal notranslate"><span class="pre">startApp</span></code> request will be rejected
+and an error will be returned.</p>
+<div class="section" id="passing-additional-arguments">
+<h3>Passing Additional Arguments<a class="headerlink" href="#passing-additional-arguments" title="Permalink to this headline">¶</a></h3>
+<p>To pass additional arguments to the underlying application, the <code class="docutils literal notranslate"><span class="pre">args</span></code> input argument can be used.</p>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mutation</span> <span class="p">{</span>
+    <span class="n">startApp</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s2">&quot;mission-app&quot;</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;--verbose&quot;</span><span class="p">,</span> <span class="s2">&quot;--release&quot;</span><span class="p">])</span> <span class="p">{</span>
+        <span class="n">success</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Under the covers, the application would be called like so:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mission</span><span class="o">-</span><span class="n">app</span> <span class="o">--</span><span class="n">verbose</span> <span class="o">--</span><span class="n">release</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="stopping-an-application">
+<span id="kill-app"></span><h2>Stopping an Application<a class="headerlink" href="#stopping-an-application" title="Permalink to this headline">¶</a></h2>
+<p>Any application which has been started by the app service may be stopped with the <code class="docutils literal notranslate"><span class="pre">killApp</span></code>
+mutation.</p>
+<p>Two instances of an app may be running simultaneously, one with the “OnBoot” logic, and one with the
+“OnCommand” logic.
+As a result, the <code class="docutils literal notranslate"><span class="pre">killApp</span></code> mutation has two required input arguments: the name and run level
+associated with the app which should be stopped.</p>
+<p>Users may optionally specify the <a class="reference external" href="http://man7.org/linux/man-pages/man7/signal.7.html">signal value</a>
+which should be sent to the application.
+By default, the app service sends <code class="docutils literal notranslate"><span class="pre">SIGTERM</span></code> (signal value 15).
+This is the default when running Linux’s <code class="docutils literal notranslate"><span class="pre">kill</span></code> command, and allows the application to do any
+necessary cleanup before gracefully shutting down.</p>
+<p>The mutation returns two fields:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">success</span></code> - Indicating the overall result of the kill operation</li>
+<li><code class="docutils literal notranslate"><span class="pre">errors</span></code> - Any errors which were encountered during the kill process</li>
+</ul>
+</div></blockquote>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mutation</span> <span class="p">{</span>
+    <span class="n">killApp</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s2">&quot;main-mission&quot;</span><span class="p">,</span> <span class="n">runLevel</span><span class="p">:</span> <span class="s2">&quot;OnBoot&quot;</span><span class="p">,</span> <span class="n">signal</span><span class="p">:</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">success</span><span class="p">,</span>
+        <span class="n">errors</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you have any long-running applications which you expect will be stopped with the <code class="docutils literal notranslate"><span class="pre">killApp</span></code>
+mutation, we recommend that you program logic to catch the SIGTERM signal and then do all
+necessary cleanup before safely exitting.</p>
+</div>
+<p>As long as the application does not explicitly handle the signal, its execution will end and the
+<code class="docutils literal notranslate"><span class="pre">lastSignal</span></code> value in the corresponding <a class="reference internal" href="#running-apps"><span class="std std-ref">app monitoring entry</span></a> will be updated
+with the signal value.</p>
+</div>
+<div class="section" id="upgrading">
+<h2>Upgrading<a class="headerlink" href="#upgrading" title="Permalink to this headline">¶</a></h2>
+<p>Users may register a new version of an application without needing to remove the existing registration.</p>
+<p>To do this, they will re-use the <code class="docutils literal notranslate"><span class="pre">register</span></code> mutation.
+However, the version number specified in the <cite>manifest.toml</cite> file must be unique.
+If an application with the specified name and version already exists, the registration will be
+rejected.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mutation</span> <span class="p">{</span>
+    <span class="n">register</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="s2">&quot;/home/kubos/payload-app&quot;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">active</span><span class="p">,</span>
+        <span class="n">app</span> <span class="p">{</span>
+            <span class="n">name</span><span class="p">,</span>
+            <span class="n">version</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="changing-versions">
+<span id="set-version"></span><h2>Changing Versions<a class="headerlink" href="#changing-versions" title="Permalink to this headline">¶</a></h2>
+<p>Users may swap between different versions of an application by using the <code class="docutils literal notranslate"><span class="pre">setVersion</span></code> mutation.</p>
+<p>This is useful for manually rolling back to an older version of an application prior to uninstalling
+the current version.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mutation</span> <span class="p">{</span>
+    <span class="n">setVersion</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s2">&quot;mission-app&quot;</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">success</span><span class="p">,</span>
+        <span class="n">errors</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="customizing-the-applications-service">
+<h2>Customizing the Applications Service<a class="headerlink" href="#customizing-the-applications-service" title="Permalink to this headline">¶</a></h2>
+<p>The configuration for the applications service is saved in <cite>/etc/kubos-config.toml</cite>.
+This file can be editted to add or modify the following fields:</p>
+<ul>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">[app-service.addr]</span></code></p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">ip</span></code> - The IP address that the service will use</li>
+<li><code class="docutils literal notranslate"><span class="pre">port</span></code> - The port GraphQL requests should be sent to</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">[app-service]</span></code></p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">registry-dir</span></code> - <em>(Default: /home/system/kubos/apps)</em> The directory under which all registry entries should be stored</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="comms-framework.html" class="btn btn-neutral float-right" title="Communications Service Framework" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="core-services.html" class="btn btn-neutral" title="Core Services" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

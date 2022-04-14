@@ -1,0 +1,444 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Configuring Services in KubOS &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../../index.html"/>
+        <link rel="up" title="KubOS Ecosystem" href="../index.html"/>
+        <link rel="next" title="Developing a KubOS Service" href="service-dev.html"/>
+        <link rel="prev" title="Payload Services" href="payload-services.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../obc-docs/index.html">Working with an OBC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">KubOS Ecosystem</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#mission-applications">Mission Applications</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#services">Services</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="core-services.html">Core Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hardware-services.html">Hardware Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="payload-services.html">Payload Services</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Service Configuration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#discovering-config-options">Discovering Config Options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#common-config-options">Common Config Options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#using-custom-config-files">Using Custom Config Files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#creating-custom-config-options">Creating Custom Config Options</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="service-dev.html">Service Development</a></li>
+<li class="toctree-l3"><a class="reference internal" href="service-outline-guide.html">KubOS Service Outline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="graphql.html">GraphQL</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#kubos-linux">Kubos Linux</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../deep-dive/index.html">Under the Hood</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sdk-docs/index.html">Kubos SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Contributing to KubOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">KubOS Ecosystem</a> &raquo;</li>
+        
+      <li>Configuring Services in KubOS</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/ecosystem/services/service-config.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="configuring-services-in-kubos">
+<h1>Configuring Services in KubOS<a class="headerlink" href="#configuring-services-in-kubos" title="Permalink to this headline">¶</a></h1>
+<p>All Kubos services rely on a configuration file to determine certain runtime settings,
+referred to as the <code class="docutils literal notranslate"><span class="pre">config.toml</span></code> file.</p>
+<p>By default, this file lives in <code class="docutils literal notranslate"><span class="pre">/etc/kubos-config.toml</span></code>.</p>
+<div class="section" id="discovering-config-options">
+<h2>Discovering Config Options<a class="headerlink" href="#discovering-config-options" title="Permalink to this headline">¶</a></h2>
+<p>All Kubos <a class="reference internal" href="core-services.html"><span class="doc">core services</span></a> have a <cite>Configuration</cite> section in their repective
+doc page which details the available configuration options.</p>
+<p>All <a class="reference internal" href="hardware-services.html#pre-built-services"><span class="std std-ref">hardware services</span></a> provided by Kubos document their configuration
+options within their generated doc page.</p>
+</div>
+<div class="section" id="common-config-options">
+<h2>Common Config Options<a class="headerlink" href="#common-config-options" title="Permalink to this headline">¶</a></h2>
+<p>All Kubos services will have a <code class="docutils literal notranslate"><span class="pre">[{service}.addr]</span></code> section.</p>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">kubos</span><span class="o">-</span><span class="n">monitor</span><span class="o">.</span><span class="n">addr</span><span class="p">]</span>
+<span class="n">ip</span> <span class="o">=</span> <span class="s2">&quot;0.0.0.0&quot;</span>
+<span class="n">port</span> <span class="o">=</span> <span class="mi">8030</span>
+</pre></div>
+</div>
+<p>This section defines the IP address and port to be used for receiving <a class="reference internal" href="graphql.html"><span class="doc">GraphQL</span></a> requests over HTTP.</p>
+<p>In general, the ports being used follow the following convention:</p>
+<ul class="simple">
+<li>Kubos core services use ports 8000-8079</li>
+<li>Communications services use ports 8080-8099 for their downlink ports</li>
+<li>Hardware services use ports 8100 and up</li>
+</ul>
+<p>Many hardware services will utilize a <code class="docutils literal notranslate"><span class="pre">bus</span></code> parameter which defines the particular peripheral bus
+that the subsystem is connected to.</p>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">mai400</span><span class="o">-</span><span class="n">service</span><span class="p">]</span>
+<span class="n">bus</span> <span class="o">=</span> <span class="s2">&quot;/dev/ttyS5&quot;</span>
+</pre></div>
+</div>
+<p>This tells the MAI-400 service that the device is connected to the UART bus <code class="docutils literal notranslate"><span class="pre">ttyS5</span></code></p>
+</div>
+<div class="section" id="using-custom-config-files">
+<h2>Using Custom Config Files<a class="headerlink" href="#using-custom-config-files" title="Permalink to this headline">¶</a></h2>
+<p>By default, all services will attempt to read their configuration options from
+<code class="docutils literal notranslate"><span class="pre">/etc/kubos-config.toml</span></code>.
+This file is auto-generated when the KubOS image is built and lives in the root file system so that
+it can be restored during the <a class="reference internal" href="../linux-docs/kubos-linux-recovery.html"><span class="doc">OS recovery process</span></a>.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Any ad-hoc config changes made to the <code class="docutils literal notranslate"><span class="pre">/etc/kubos-config.toml</span></code> file will be lost if the OS is
+upgraded or restored.</p>
+</div>
+<p>As a result, if you would like to add or change any configuration options outside of the
+<a class="reference internal" href="../../deep-dive/klb/configuring-kubos.html"><span class="doc">KubOS build process</span></a>, you should create a custom
+config file within the user data partition.</p>
+<p>This custom file location may be provided by specifying the path in the <code class="docutils literal notranslate"><span class="pre">-c</span></code> option when starting
+a service.</p>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ /usr/sbin/kubos-monitor-service -c /home/kubos/my-config.toml
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>When starting a Rust-based service from within the Kubos SDK, the config file should be passed
+like so:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cargo run -- -c /home/kubos/my-config.toml
+</pre></div>
+</div>
+<p class="last">The <code class="docutils literal notranslate"><span class="pre">--</span></code> characters make sure that the following parameters are passed to the underlying
+program, rather than to <code class="docutils literal notranslate"><span class="pre">cargo</span></code>.</p>
+</div>
+</div>
+<div class="section" id="creating-custom-config-options">
+<h2>Creating Custom Config Options<a class="headerlink" href="#creating-custom-config-options" title="Permalink to this headline">¶</a></h2>
+<p>Custom configuration options may be added to the <code class="docutils literal notranslate"><span class="pre">config.toml</span></code> file by following the
+<a class="reference external" href="https://en.wikipedia.org/wiki/TOML">TOML format</a>.</p>
+<p>This format is intended to help create a simple, easy-to-read, configuration file.</p>
+<p>All options should be placed under the header of the service which will be using them.
+Sub-headers may be added as desired.</p>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">my</span><span class="o">-</span><span class="n">payload</span><span class="o">-</span><span class="n">service</span><span class="p">]</span>
+<span class="n">watchdog</span><span class="o">-</span><span class="n">timeout</span> <span class="o">=</span> <span class="mi">60</span>
+
+<span class="p">[</span><span class="n">my</span><span class="o">-</span><span class="n">payload</span><span class="o">-</span><span class="n">service</span><span class="o">.</span><span class="n">addr</span><span class="p">]</span>
+<span class="n">ip</span> <span class="o">=</span> <span class="s2">&quot;0.0.0.0&quot;</span>
+<span class="n">port</span> <span class="o">=</span> <span class="mi">8100</span>
+
+<span class="p">[</span><span class="n">my</span><span class="o">-</span><span class="n">payload</span><span class="o">-</span><span class="n">service</span><span class="o">.</span><span class="n">device</span><span class="p">]</span>
+<span class="n">bus</span> <span class="o">=</span> <span class="s2">&quot;/dev/i2c-1&quot;</span>
+<span class="n">addr</span> <span class="o">=</span> <span class="mi">60</span>
+</pre></div>
+</div>
+<p>In this configuration, we are defining several custom options for a hypothetical
+<a class="reference internal" href="payload-services.html"><span class="doc">payload service</span></a>, <code class="docutils literal notranslate"><span class="pre">my-payload-service</span></code>:</p>
+<blockquote>
+<div><ul>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">watchdog-timeout</span></code> defines the interval at which the service should kick the payload’s watchdog</p>
+</li>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">[my-payload-service.device]</span></code> denotes a subsection of options devoted to the payload’s I2C
+configuration</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">bus</span></code> is the I2C bus the payload is connected to</li>
+<li><code class="docutils literal notranslate"><span class="pre">addr</span></code> is the decimal value of the payload’s I2C address</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+<p>Our service can then use these configuration options like so:</p>
+<div class="section" id="python">
+<h3>Python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">kubos_service.config</span> <span class="kn">import</span> <span class="n">Config</span>
+<span class="kn">import</span> <span class="nn">i2c</span>
+<span class="kn">import</span> <span class="nn">threading</span>
+
+<span class="c1"># Get the configuration options for the service out of the `config.toml` file</span>
+<span class="n">config</span> <span class="o">=</span> <span class="n">Config</span><span class="p">(</span><span class="s2">&quot;my-payload-service&quot;</span><span class="p">)</span>
+
+<span class="c1"># Get the watchdog timeout value</span>
+<span class="n">timeout</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">raw</span><span class="p">[</span><span class="s1">&#39;watchdog-timeout&#39;</span><span class="p">]</span>
+
+<span class="c1"># Start a thread which will kick the watchdog at the given interval</span>
+<span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">watchdog_kick</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">timeout</span><span class="p">,))</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+<span class="c1"># Get the I2C information</span>
+<span class="n">bus</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">raw</span><span class="p">[</span><span class="s1">&#39;device&#39;</span><span class="p">][</span><span class="s1">&#39;bus&#39;</span><span class="p">]</span>
+<span class="n">addr</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">raw</span><span class="p">[</span><span class="s1">&#39;device&#39;</span><span class="p">][</span><span class="s1">&#39;addr&#39;</span><span class="p">]</span>
+
+<span class="c1"># Set up the bus connection (actually only needs the bus number, which is the last character)</span>
+<span class="n">i2c</span> <span class="o">=</span> <span class="n">i2c</span><span class="o">.</span><span class="n">I2C</span><span class="p">(</span><span class="n">bus</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="c1"># Send a command to the device</span>
+<span class="n">i2c</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">addr</span><span class="p">,</span> <span class="p">[</span><span class="mh">0x70</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="rust">
+<h3>Rust<a class="headerlink" href="#rust" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">use</span><span class="w"> </span><span class="n">kubos_service</span>::<span class="n">Config</span><span class="p">;</span><span class="w"></span>
+<span class="k">use</span><span class="w"> </span><span class="n">std</span>::<span class="n">thread</span><span class="p">;</span><span class="w"></span>
+<span class="k">use</span><span class="w"> </span><span class="n">std</span>::<span class="n">time</span>::<span class="n">Duration</span><span class="p">;</span><span class="w"></span>
+
+<span class="c1">// Get the configuration options for the service out of the `config.toml` file</span>
+<span class="kd">let</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Config</span>::<span class="n">new</span><span class="p">(</span><span class="s">&quot;my-payload-service&quot;</span><span class="p">).</span><span class="n">unwrap</span><span class="p">();</span><span class="w"></span>
+
+<span class="c1">// Get the watchdog timeout value</span>
+<span class="kd">let</span><span class="w"> </span><span class="n">timeout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">config</span><span class="w"></span>
+<span class="w">    </span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;watchdog-timeout&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">.</span><span class="n">and_then</span><span class="p">(</span><span class="o">|</span><span class="n">val</span><span class="o">|</span><span class="w"> </span><span class="n">val</span><span class="p">.</span><span class="n">as_integer</span><span class="p">())</span><span class="w"></span>
+<span class="w">    </span><span class="p">.</span><span class="n">expect</span><span class="p">(</span><span class="s">&quot;Unable to get timeout value&quot;</span><span class="p">);</span><span class="w"></span>
+
+<span class="c1">// Start a thread which will kick the watchdog at the given interval</span>
+<span class="n">thread</span>::<span class="n">spawn</span><span class="p">(</span><span class="k">move</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="k">loop</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">kick_watchdog</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">thread</span>::<span class="n">sleep</span><span class="p">(</span><span class="n">Duration</span>::<span class="n">from_secs</span><span class="p">(</span><span class="n">timeout</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="kt">u64</span><span class="p">));</span><span class="w"></span>
+<span class="p">});</span><span class="w"></span>
+
+<span class="c1">// Get the I2C information</span>
+<span class="kd">let</span><span class="w"> </span><span class="n">device</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">config</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;device&quot;</span><span class="p">).</span><span class="n">unwrap</span><span class="p">();</span><span class="w"></span>
+<span class="kd">let</span><span class="w"> </span><span class="n">bus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">device</span><span class="p">[</span><span class="s">&quot;bus&quot;</span><span class="p">].</span><span class="n">as_str</span><span class="p">().</span><span class="n">expect</span><span class="p">(</span><span class="s">&quot;Unable to get I2C bus&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="kd">let</span><span class="w"> </span><span class="n">addr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">device</span><span class="p">[</span><span class="s">&quot;addr&quot;</span><span class="p">].</span><span class="n">as_integer</span><span class="p">().</span><span class="n">expect</span><span class="p">(</span><span class="s">&quot;Unable to get I2C address&quot;</span><span class="p">);</span><span class="w"></span>
+
+<span class="c1">// Set up the bus connection</span>
+<span class="kd">let</span><span class="w"> </span><span class="n">i2c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rust_i2c</span>::<span class="n">Connection</span>::<span class="n">from_path</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bus</span><span class="p">,</span><span class="w"> </span><span class="n">addr</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="kt">u16</span><span class="p">);</span><span class="w"></span>
+
+<span class="c1">// Send a command to the device</span>
+<span class="kd">let</span><span class="w"> </span><span class="n">command</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rust_i2c</span>::<span class="n">Command</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">cmd</span>: <span class="mh">0x70</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">data</span>: <span class="nc">vec</span><span class="o">!</span><span class="p">[],</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+<span class="n">i2c</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">command</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="service-dev.html" class="btn btn-neutral float-right" title="Developing a KubOS Service" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="payload-services.html" class="btn btn-neutral" title="Payload Services" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

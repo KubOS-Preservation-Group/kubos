@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["BoardData","Board status flags"]]});

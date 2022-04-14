@@ -1,0 +1,348 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Under the Hood of KubOS &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../index.html"/>
+        <link rel="next" title="Kubos Device API Creation Guide" href="apis/device-api-guide.html"/>
+        <link rel="prev" title="Kubos Linux Recovery Architecture" href="../ecosystem/linux-docs/kubos-linux-recovery.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../obc-docs/index.html">Working with an OBC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ecosystem/index.html">KubOS Ecosystem</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Under the Hood</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#apis">APIs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="apis/device-api-guide.html">Kubos Device API Creation Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="apis/device-api/index.html">Device Interfaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="apis/obc-api/index.html">OBC APIs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="apis/kubos-hal/index.html">Kubos HAL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="apis/kubos-libs.html">Kubos Libraries</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#protocols">Protocols</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="protocols/file-protocol.html">File Protocol Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="protocols/shell-protocol.html">Shell Protocol Overview</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#kubos-linux">Kubos Linux</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="klb/configuring-kubos.html">Configuring Kubos Linux</a></li>
+<li class="toctree-l3"><a class="reference internal" href="klb/kubos-linux-on-bbb.html">Building Kubos Linux for the Beaglebone Black</a></li>
+<li class="toctree-l3"><a class="reference internal" href="klb/kubos-linux-on-iobc.html">Building Kubos Linux for the ISIS-OBC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="klb/kubos-linux-on-mbm2.html">Building Kubos Linux for the Pumpkin MBM2</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#design-decisions">Design Decisions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="design-decisions.html">KubOS Design Decisions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../sdk-docs/index.html">Kubos SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing to KubOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Under the Hood of KubOS</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/deep-dive/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="under-the-hood-of-kubos">
+<h1>Under the Hood of KubOS<a class="headerlink" href="#under-the-hood-of-kubos" title="Permalink to this headline">¶</a></h1>
+<p>These docs give a more detailed examination of the inner workings of KubOS</p>
+<div class="section" id="apis">
+<h2>APIs<a class="headerlink" href="#apis" title="Permalink to this headline">¶</a></h2>
+<p>Kubos provides a variety of APIs to help with the development of mission software:</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference internal" href="apis/device-api/index.html"><span class="doc">Device Interfaces</span></a> - APIs for external devices (ex. radio), built on top of the Kubos HAL</li>
+<li><a class="reference internal" href="apis/obc-api/index.html"><span class="doc">OBC APIs</span></a> - APIs for features which are internal to a particular OBC</li>
+<li><a class="reference internal" href="apis/kubos-hal/index.html"><span class="doc">Kubos HAL</span></a> - Hardware interface abstractions (I2C, SPI, etc)</li>
+<li><a class="reference internal" href="apis/kubos-libs.html"><span class="doc">Kubos Libraries</span></a> - Non-hardware libraries</li>
+</ul>
+</div></blockquote>
+<div class="toctree-wrapper compound">
+</div>
+</div>
+<div class="section" id="protocols">
+<h2>Protocols<a class="headerlink" href="#protocols" title="Permalink to this headline">¶</a></h2>
+<p>Intra-satellite communication is generally handled using HTTP over TCP/IP, with the packet payloads
+being structured as <a class="reference internal" href="../ecosystem/services/graphql.html"><span class="doc">GraphQL</span></a> requests or JSON responses.</p>
+<p>For procedures which require space-ground communication, special care has been taken to craft
+protocols which can handle higher rates of packet loss and function well in the more asynchronous
+comms environment.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">We are currently working on a dedicated Space Ground Interface Control Document to highlight
+this expected link behavior.</p>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="protocols/file-protocol.html">File Protocol Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="protocols/shell-protocol.html">Shell Protocol Overview</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="kubos-linux">
+<span id="custom-klb"></span><h2>Kubos Linux<a class="headerlink" href="#kubos-linux" title="Permalink to this headline">¶</a></h2>
+<p>While Kubos does create and distribute official releases of Kubos Linux, users are free to create
+their own builds.
+This allows KubOS to be easily customized on a per-mission basis.</p>
+<p>Users will most likely want to create their own builds when they create new hardware services which
+should be included in the OS’ root file system.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="klb/configuring-kubos.html">Configuring Kubos Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="klb/kubos-linux-on-bbb.html">Building Kubos Linux for the Beaglebone Black</a></li>
+<li class="toctree-l1"><a class="reference internal" href="klb/kubos-linux-on-iobc.html">Building Kubos Linux for the ISIS-OBC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="klb/kubos-linux-on-mbm2.html">Building Kubos Linux for the Pumpkin MBM2</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="design-decisions">
+<h2>Design Decisions<a class="headerlink" href="#design-decisions" title="Permalink to this headline">¶</a></h2>
+<p>When developing new features for KubOS, we frequently have to make a choice between two or more
+tools/libraries/frameworks which will most closely give us our desired characteristics.</p>
+<p>The design decisions doc give a quick summary of how we have decided on our particular toolset.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="design-decisions.html">KubOS Design Decisions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="design-decisions.html#linux-vs-rtos">Linux vs RTOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="design-decisions.html#buildroot">Buildroot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="design-decisions.html#graphql">GraphQL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="design-decisions.html#rust">Rust</a></li>
+<li class="toctree-l2"><a class="reference internal" href="design-decisions.html#python">Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="design-decisions.html#microservices">Microservices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="design-decisions.html#sqlite">SQLite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="design-decisions.html#busybox">Busybox</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="apis/device-api-guide.html" class="btn btn-neutral float-right" title="Kubos Device API Creation Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../ecosystem/linux-docs/kubos-linux-recovery.html" class="btn btn-neutral" title="Kubos Linux Recovery Architecture" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

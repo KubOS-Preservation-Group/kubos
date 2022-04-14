@@ -1,0 +1,387 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Logging &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../../index.html"/>
+        <link rel="up" title="KubOS Ecosystem" href="../index.html"/>
+        <link rel="next" title="Process Monitoring" href="monitoring.html"/>
+        <link rel="prev" title="Using Kubos Linux" href="using-kubos-linux.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../obc-docs/index.html">Working with an OBC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">KubOS Ecosystem</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#mission-applications">Mission Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#services">Services</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#kubos-linux">Kubos Linux</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="kubos-linux-overview.html">Kubos Linux Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="using-kubos-linux.html">Using Kubos Linux</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Logging</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#default-behavior">Default Behavior</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="monitoring.html">Process Monitoring</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubos-linux-upgrade.html">Kubos Linux Upgrades</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubos-linux-recovery.html">Kubos Linux Recovery</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../deep-dive/index.html">Under the Hood</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sdk-docs/index.html">Kubos SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Contributing to KubOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">KubOS Ecosystem</a> &raquo;</li>
+        
+      <li>Logging</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/ecosystem/linux-docs/logging.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="logging">
+<h1>Logging<a class="headerlink" href="#logging" title="Permalink to this headline">¶</a></h1>
+<p>Kubos Linux uses <a class="reference external" href="https://www.rsyslog.com/">rsyslog</a> to automatically route log messages to the
+appropriate log file and then rotate those files when they become too large.</p>
+<div class="section" id="default-behavior">
+<h2>Default Behavior<a class="headerlink" href="#default-behavior" title="Permalink to this headline">¶</a></h2>
+<p>Two logging policy files are included in <code class="docutils literal notranslate"><span class="pre">/etc/rsyslog.d/</span></code>:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">kubos-apps.conf</span></code> - Specifies the logging and rotation policies for mission applications</li>
+<li><code class="docutils literal notranslate"><span class="pre">kubos-services.conf</span></code> - Specifies the logging and rotation policies for services</li>
+</ul>
+</div></blockquote>
+<p>Within those files, and the main <code class="docutils literal notranslate"><span class="pre">/etc/rsyslog.conf</span></code> file which controls other system logs, each
+policy has the following format:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$outchannel {policy_name},/var/log/{destination_file},{max_size},{log_rotation_script}
+{facility}.{priority} :omfile:${policy_name}
+</pre></div>
+</div>
+<p>An example policy looks like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$outchannel service_debug,/var/log/kubos-debug.log,100000,/home/system/kubos/log-rotate.sh kubos-debug.log
+daemon.debug :omfile:$service_debug
+</pre></div>
+</div>
+<p>Any of these components may be updated within their respective files in order to change the policy
+to match the user’s desired behavior.</p>
+<div class="section" id="log-creation">
+<h3>Log Creation<a class="headerlink" href="#log-creation" title="Permalink to this headline">¶</a></h3>
+<p>Log files are traditionally stored in <code class="docutils literal notranslate"><span class="pre">/var/log</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">/var/log</span></code> has been set up as a symlink to <code class="docutils literal notranslate"><span class="pre">/home/system/log</span></code>.
+This way log files reside in permanent storage and will be preserved through OS upgrades.</p>
+<p>Messages written using the <cite>daemon</cite> facility will be routed to files with the naming scheme
+<code class="docutils literal notranslate"><span class="pre">kubos-*.log</span></code>.
+This facility is used by all <a class="reference internal" href="../index.html#service-docs"><span class="std std-ref">Kubos services</span></a>.</p>
+<p>Messages written using the <cite>user</cite> facility will be routed to files with the naming scheme
+<code class="docutils literal notranslate"><span class="pre">app-*.log</span></code>.
+This facility should be used by all <a class="reference internal" href="../../mission-dev/index.html"><span class="doc">mission applications</span></a>.</p>
+<p>For each of these naming schemes, the following files may be created:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">*-debug.log</span></code> - Records all log messages</li>
+<li><code class="docutils literal notranslate"><span class="pre">*-info.log</span></code> - Records log messages with a priority of <code class="docutils literal notranslate"><span class="pre">info</span></code> or higher</li>
+<li><code class="docutils literal notranslate"><span class="pre">*-warn.log</span></code> - Records log messages with a priority of <code class="docutils literal notranslate"><span class="pre">warn</span></code> or higher</li>
+</ul>
+<p>On the SDK, logs can be found in <code class="docutils literal notranslate"><span class="pre">/var/log/syslog</span></code>.</p>
+</div>
+<div class="section" id="log-rotation">
+<span id="id1"></span><h3>Log Rotation<a class="headerlink" href="#log-rotation" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">/home/system/kubos/log-rotate.sh</span></code> script is used to execute the rotation behavior.</p>
+<p>By default, all debug log files have a maximum size of 100KB and all other log files have a maximum
+size of 10KB.
+This value can be updated by changing the max size parameter of the appropriate logging policy.</p>
+<p>Once this size is reached, the current file is renamed as an archive file and a new log file is
+started. Archive files use their original name, but are suffixed with the current timestamp.
+For example, <code class="docutils literal notranslate"><span class="pre">kubos-debug.log.2018.12.01-00.12.07</span></code>.</p>
+<p>By default, nine archive files of each log type will be retained.
+If a new archive file is created and there are already five files, the oldest will be deleted.
+This value is controlled by the <code class="docutils literal notranslate"><span class="pre">MAX_COUNT</span></code> variable in the <code class="docutils literal notranslate"><span class="pre">log-rotate.sh</span></code> script.</p>
+</div>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>The following examples show how to set up and use the logging capabilities.</p>
+<div class="section" id="rust">
+<h3>Rust<a class="headerlink" href="#rust" title="Permalink to this headline">¶</a></h3>
+<p>Rust programs will use the standard <a class="reference external" href="https://docs.rs/log/0.4.6/log/">log framework crate</a> in
+conjunction with a crate capable of writing syslog messages. The <code class="docutils literal notranslate"><span class="pre">kubos-system</span></code> crate provides
+a <a class="reference external" href="https://github.com/kubos/kubos/blob/master/apis/system-api/src/logger.rs">common interface</a>
+for initializing the syslog interface. The <code class="docutils literal notranslate"><span class="pre">kubos-service</span></code> crate re-exports this
+interface for usage when building services:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">use</span><span class="w"> </span><span class="n">failure</span>::<span class="p">{</span><span class="n">Error</span><span class="p">,</span><span class="w"> </span><span class="n">SyncFailure</span><span class="p">};</span><span class="w"></span>
+<span class="k">use</span><span class="w"> </span><span class="n">kubos_service</span>::<span class="n">Logger</span><span class="p">;</span><span class="w"></span>
+<span class="k">use</span><span class="w"> </span><span class="n">log</span>::<span class="p">{</span><span class="n">debug</span><span class="p">,</span><span class="w"> </span><span class="n">error</span><span class="p">};</span><span class="w"></span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="nb">Result</span><span class="o">&lt;</span><span class="p">(),</span><span class="w"> </span><span class="n">Error</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Set the application/program name</span>
+<span class="w">    </span><span class="n">Logger</span>::<span class="n">init</span><span class="p">(</span><span class="s">&quot;log-test&quot;</span><span class="p">).</span><span class="n">unwrap</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">debug</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;this is a debug {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;message&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">error</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;this is an error!&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="nb">Ok</span><span class="p">(())</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Utilizing the <code class="docutils literal notranslate"><span class="pre">kubos_system::logger</span></code> interface also exposes two optional command line arguments:</p>
+<ul class="simple">
+<li>The <code class="docutils literal notranslate"><span class="pre">--stdout</span></code> flag will enable logging to stdout.</li>
+<li>The <code class="docutils literal notranslate"><span class="pre">-l</span> <span class="pre">log-level</span></code> flag will control the verbosity of the logging. The following
+log levels are available: <code class="docutils literal notranslate"><span class="pre">error</span></code>, <code class="docutils literal notranslate"><span class="pre">warn</span></code>, <code class="docutils literal notranslate"><span class="pre">info</span></code>, and <code class="docutils literal notranslate"><span class="pre">debug</span></code>.</li>
+</ul>
+</div>
+<div class="section" id="python">
+<h3>Python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h3>
+<p>Python programs will import two things: the main <a class="reference external" href="https://docs.python.org/3/library/logging.html">logging library</a>
+and the <a class="reference external" href="https://docs.python.org/3/library/logging.handlers.html#sysloghandler">SysLogHandler log handler</a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">logging.handlers</span> <span class="kn">import</span> <span class="n">SysLogHandler</span>
+
+<span class="c1"># Create a new logger. The name here is unimportant</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;log-test&#39;</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+
+<span class="c1"># We&#39;ll send our messages to the standard Unix domain socket for logging.</span>
+<span class="c1"># Since this is a user program, we&#39;ll use the LOG_USER facility</span>
+<span class="n">handler</span> <span class="o">=</span> <span class="n">SysLogHandler</span><span class="p">(</span><span class="n">address</span><span class="o">=</span><span class="s1">&#39;/dev/log&#39;</span><span class="p">,</span> <span class="n">facility</span><span class="o">=</span><span class="n">SysLogHandler</span><span class="o">.</span><span class="n">LOG_USER</span><span class="p">)</span>
+
+<span class="c1"># Prefix all messages with the application name so that SysLog will set the</span>
+<span class="c1"># programname and APP-NAME property values accordingly, allowing us to filter</span>
+<span class="c1"># by application, if we so choose</span>
+<span class="n">formatter</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">Formatter</span><span class="p">(</span><span class="s1">&#39;log-test: </span><span class="si">%(message)s</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">handler</span><span class="o">.</span><span class="n">formatter</span> <span class="o">=</span> <span class="n">formatter</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">handler</span><span class="p">)</span>
+
+<span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Test Message&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="monitoring.html" class="btn btn-neutral float-right" title="Process Monitoring" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="using-kubos-linux.html" class="btn btn-neutral" title="Using Kubos Linux" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,326 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Getting Started with KubOS &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../index.html"/>
+        <link rel="next" title="I Don’t Have Hardware Yet, What Can I Do?" href="no-board.html"/>
+        <link rel="prev" title="KubOS Design" href="../kubos-design.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="no-board.html">I Don’t Have Hardware Yet, What Can I Do?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="local-setup.html">Setting Up Your Local Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="windows-setup.html">Setting up a Dev Environment in Windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="using-rust.html">Getting Started with KubOS and Rust</a></li>
+<li class="toctree-l2"><a class="reference internal" href="using-python.html">Getting Started with KubOS and Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="local-services.html">Running KubOS Core Services Locally</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../obc-docs/index.html">Working with an OBC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ecosystem/index.html">KubOS Ecosystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deep-dive/index.html">Under the Hood</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sdk-docs/index.html">Kubos SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing to KubOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Getting Started with KubOS</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/getting-started/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="getting-started-with-kubos">
+<h1>Getting Started with KubOS<a class="headerlink" href="#getting-started-with-kubos" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<p>The <strong>KubOS</strong> platform provides satellite developers the tools and libraries necessary to quickly bring up space-ready software. The guides and docs referenced here will lead you through getting your environment setup and interacting with the core KubOS services.</p>
+<div class="section" id="try-kubos">
+<h2>Try KubOS<a class="headerlink" href="#try-kubos" title="Permalink to this headline">¶</a></h2>
+<p>The first step to trying out KubOS is getting the appropriate environment setup.</p>
+<div class="section" id="local-environment">
+<h3>Local Environment<a class="headerlink" href="#local-environment" title="Permalink to this headline">¶</a></h3>
+<p>Ready to get started setting up the Kubos development environment? Running a Linux or Mac system?
+This <a class="reference internal" href="local-setup.html"><span class="doc">guide</span></a> will walk you through the tools and libraries which need to be installed in order to build and run KubOS components.</p>
+</div>
+<div class="section" id="windows-environment">
+<h3>Windows Environment<a class="headerlink" href="#windows-environment" title="Permalink to this headline">¶</a></h3>
+<p>If you are running Windows on your local computer, then you will need to follow <a class="reference internal" href="windows-setup.html"><span class="doc">this guide</span></a> to get your
+local development environment up and running.</p>
+</div>
+<div class="section" id="sdk-environment">
+<h3>SDK Environment<a class="headerlink" href="#sdk-environment" title="Permalink to this headline">¶</a></h3>
+<p>Prefer to use a VM rather than install our development dependencies locally?
+You can also take advantage of our <a class="reference internal" href="../sdk-docs/index.html"><span class="doc">VM-based SDK</span></a> for an easy-to-setup, self-contained development environment.</p>
+</div>
+</div>
+<div class="section" id="interacting-with-kubos">
+<span id="id1"></span><h2>Interacting with KubOS<a class="headerlink" href="#interacting-with-kubos" title="Permalink to this headline">¶</a></h2>
+<p>After getting the appropriate local environment setup, it is time to begin running and interacting with the KubOS system.</p>
+<p>KubOS can support many different languages, however our preferred languages are Python and Rust.</p>
+<div class="section" id="using-python">
+<h3>Using Python<a class="headerlink" href="#using-python" title="Permalink to this headline">¶</a></h3>
+<p>Once your local or VM environment is setup, you are ready to begin developing and interacting with the KubOS system! Is Python your language of choice? Head over to the <a class="reference internal" href="using-python.html"><span class="doc">Python guide</span></a>.</p>
+</div>
+<div class="section" id="using-rust">
+<h3>Using Rust<a class="headerlink" href="#using-rust" title="Permalink to this headline">¶</a></h3>
+<p>More interested in using Rust for development? Take a look at the <a class="reference internal" href="using-rust.html"><span class="doc">Rust guide</span></a>.</p>
+</div>
+<div class="section" id="using-c">
+<h3>Using C<a class="headerlink" href="#using-c" title="Permalink to this headline">¶</a></h3>
+<p>If you would like to develop in C, we highly recommend you <a class="reference internal" href="../sdk-docs/sdk-installing.html"><span class="doc">install the SDK</span></a>
+and then refer to <a class="reference internal" href="../sdk-docs/sdk-c.html"><span class="doc">Using C with the Kubos SDK</span></a>.</p>
+</div>
+</div>
+<div class="section" id="learn-more-about-kubos">
+<h2>Learn more about KubOS<a class="headerlink" href="#learn-more-about-kubos" title="Permalink to this headline">¶</a></h2>
+<p>Once you are familiar with the basics of KubOS development and interaction, you may want to dig into deeper topics. These tutorials and guides will help you peel back the layers a bit.</p>
+<div class="section" id="design">
+<h3>Design<a class="headerlink" href="#design" title="Permalink to this headline">¶</a></h3>
+<p>Interested in seeing a high level explanation of KubOS? The <a class="reference internal" href="../kubos-design.html"><span class="doc">KubOS design doc</span></a> provides a great overview of the design behind KubOS.</p>
+</div>
+<div class="section" id="tutorials">
+<h3>Tutorials<a class="headerlink" href="#tutorials" title="Permalink to this headline">¶</a></h3>
+<p>Ready to dig deeper into KubOS development?</p>
+<p>Want to get a closer look at creating mission applications? Take a look at our <a class="reference internal" href="../tutorials/index.html#mission-development-tutorials"><span class="std std-ref">Mission Development Tutorials</span></a>.</p>
+<p>Ready to build your mission in KubOS? Read over our <a class="reference internal" href="../mission-dev/index.html"><span class="doc">mission development guide</span></a> for our walkthrough.</p>
+<p>Interested in how KubOS interacts with the ground? Take a look at our <a class="reference internal" href="../tutorials/index.html#system-interaction-tutorials"><span class="std std-ref">System Interaction Tutorials</span></a>.</p>
+<p>Want to dig even deeper into KubOS? Take a look at our <a class="reference internal" href="../tutorials/index.html#advanced-tutorials"><span class="std std-ref">Advanced Tutorials</span></a>.</p>
+</div>
+<div class="section" id="services">
+<h3>Services<a class="headerlink" href="#services" title="Permalink to this headline">¶</a></h3>
+<p>Interested in learning more about the services which make KubOS go? Check out the <a class="reference internal" href="../ecosystem/services/core-services.html"><span class="doc">core services guide</span></a>.</p>
+<p>Ready to begin developing your own service? Check out the <a class="reference internal" href="../ecosystem/services/service-dev.html"><span class="doc">service development guide</span></a>.</p>
+<p>The KubOS core services provide the base functionality that all KubOS systems rely on and interact with.
+The <a class="reference internal" href="local-services.html"><span class="doc">local services guide</span></a> will help you get the core services up and running in your development environment.</p>
+</div>
+</div>
+<div class="section" id="something-missing">
+<h2>Something Missing?<a class="headerlink" href="#something-missing" title="Permalink to this headline">¶</a></h2>
+<p>If something is missing in the documentation or if you found some part confusing, please <a class="reference external" href="https://github.com/kubos/kubos/issues/new/choose">file an issue in the kubos repo</a> with your suggestion for improvement or <a class="reference external" href="https://slack.kubos.com">contact us on slack</a>.</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="no-board.html" class="btn btn-neutral float-right" title="I Don’t Have Hardware Yet, What Can I Do?" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../kubos-design.html" class="btn btn-neutral" title="KubOS Design" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

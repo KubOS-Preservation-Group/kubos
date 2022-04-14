@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["serial_connection","Connection for communicating with actual Duplex-D2 hardware"]],"struct":[["DuplexD2","Structure for interacting with Duplex-D2 Radio API"],["File","Structure for files"],["GeoRecord","Struct for storing geo-records."],["StateOfHealth","Struct for storing state of health records"]]});

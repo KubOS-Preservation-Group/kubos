@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["UartError","Custom errors for UART actions"]],"mod":[["mock","Mock objects for use with unit tests"]],"struct":[["Connection","Wrapper for UART stream"]],"trait":[["Stream","This trait is used to represent streams and allows for mocking for api unit tests"]],"type":[["UartResult","Errors that occur while reading from and writing to stream"]]});

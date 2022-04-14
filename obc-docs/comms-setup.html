@@ -1,0 +1,658 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Communicating with an OBC &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../index.html"/>
+        <link rel="up" title="Working with KubOS and an OBC" href="index.html"/>
+        <link rel="next" title="KubOS for the Beaglebone Black" href="bbb/index.html"/>
+        <link rel="prev" title="Compiling Code for a Target OBC" href="cross-compile.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Working with an OBC</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="cross-compile.html">Compiling Code for a Target OBC</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Communicating with an OBC</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#debug-console">Debug Console</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#running-locally">Running Locally</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#using-the-sdk">Using the SDK</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#logging-in">Logging In</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#ethernet">Ethernet</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#determining-a-suitable-ip-address">Determining a Suitable IP Address</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuring-the-obc">Configuring the OBC</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#slip">SLIP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#communicating-via-ssh">Communicating via SSH</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#file-transfer">File Transfer</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#scp">SCP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">Minicom</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="bbb/index.html">KubOS for the Beaglebone Black</a></li>
+<li class="toctree-l2"><a class="reference internal" href="iobc/index.html">KubOS for the ISIS-OBC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mbm2/index.html">KubOS for the Pumpkin MBM2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="porting-kubos.html">Porting KubOS to a New OBC</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ecosystem/index.html">KubOS Ecosystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deep-dive/index.html">Under the Hood</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sdk-docs/index.html">Kubos SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing to KubOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Working with KubOS and an OBC</a> &raquo;</li>
+        
+      <li>Communicating with an OBC</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/obc-docs/comms-setup.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="communicating-with-an-obc">
+<h1>Communicating with an OBC<a class="headerlink" href="#communicating-with-an-obc" title="Permalink to this headline">¶</a></h1>
+<p>There are currently three primary methods for users to communicate directly with their OBCs:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Via a debug UART port</li>
+<li>Via SLIP using a UART port</li>
+<li>Via an ethernet port (not supported by all boards)</li>
+</ul>
+</div></blockquote>
+<div class="section" id="debug-console">
+<h2>Debug Console<a class="headerlink" href="#debug-console" title="Permalink to this headline">¶</a></h2>
+<p>Each board will have some debug port available, which will then be connected to your computer via
+USB.
+See the appropriate <cite>KubOS for the {OBC} &gt; Working with the {OBC}</cite> document for more information.</p>
+<div class="section" id="running-locally">
+<h3>Running Locally<a class="headerlink" href="#running-locally" title="Permalink to this headline">¶</a></h3>
+<p>If you are not using the Kubos SDK image and are instead running everything locally, you will need
+to manually set up a serial connection.</p>
+<p>Connect your OBC to your host computer and then determine the device name which it was assigned.
+It will likely be a <code class="docutils literal notranslate"><span class="pre">/dev/ttyUSB*</span></code> device for Linux users, a <code class="docutils literal notranslate"><span class="pre">dev/tty.usb*</span></code> device for OSX
+users, and a <code class="docutils literal notranslate"><span class="pre">COM*</span></code> device for Windows users.</p>
+<p>Open your terminal application of choice (PuTTY, minicom, etc) and set up a connection with the
+following configuration values:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="58%" />
+<col width="42%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Setting</th>
+<th class="head">Value</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Baudrate</td>
+<td>115200</td>
+</tr>
+<tr class="row-odd"><td>Bits</td>
+<td>8</td>
+</tr>
+<tr class="row-even"><td>Parity</td>
+<td>N</td>
+</tr>
+<tr class="row-odd"><td>Stop Bits</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="minicom">
+<h4>Minicom<a class="headerlink" href="#minicom" title="Permalink to this headline">¶</a></h4>
+<p>In case you have not ever set up a serial connection to a device before, here are the instructions
+to set up a connection using <a class="reference external" href="https://en.wikipedia.org/wiki/Minicom">minicom</a>:</p>
+<ul class="simple">
+<li>Execute this command: <cite>minicom -s</cite></li>
+<li>The “configuration” menu will be displayed. Use the arrow keys to navigate to “Serial port setup”
+and press Enter</li>
+<li>Press ‘A’ to navigate to the “Serial Device” field. Update the field with the serial debug device
+name. Press Enter to apply the change</li>
+<li>Press ‘F’ to toggle “Hardware Flow Control” to “No”</li>
+<li>Press Enter to exit this submenu</li>
+<li>Navigate down to “Exit” (not “Exit from Minicom”!) and press Enter to exit the configuration menu
+and start the serial connection</li>
+</ul>
+</div>
+</div>
+<div class="section" id="using-the-sdk">
+<h3>Using the SDK<a class="headerlink" href="#using-the-sdk" title="Permalink to this headline">¶</a></h3>
+<p>If the target board is correctly connected to your host computer, you should see a <cite>/dev/ttyUSB*</cite>
+device in your SDK instance.
+The VM is set up to automatically forward any FTDI cables that connect to a <cite>/dev/FTDI</cite> device for
+ease-of-use.</p>
+<p>The Vagrant image comes pre-packaged with a minicom serial connection configuration file.
+You can connect with this configuration file using this command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ minicom kubos
+</pre></div>
+</div>
+</div>
+<div class="section" id="logging-in">
+<h3>Logging In<a class="headerlink" href="#logging-in" title="Permalink to this headline">¶</a></h3>
+<p>Once connected, you can log in using either a user that you’ve created, the default <cite>kubos</cite> user,
+or <cite>root</cite>. The <cite>kubos</cite> and <cite>root</cite> users both have a default password of ‘Kubos123’.</p>
+<p>Fully logged in, the console should look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Welcome</span> <span class="n">to</span> <span class="n">Kubos</span> <span class="n">Linux</span>
+
+<span class="n">Kubos</span> <span class="n">login</span><span class="p">:</span> <span class="n">kubos</span>
+<span class="n">Password</span><span class="p">:</span>
+<span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">kubos</span> <span class="c1">#</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="ethernet">
+<span id="id1"></span><h2>Ethernet<a class="headerlink" href="#ethernet" title="Permalink to this headline">¶</a></h2>
+<p>Some OBCs support communication via an ethernet port. Once configured, this port can be used
+as an alternate method to access the board’s shell interface and to transfer files.</p>
+<div class="section" id="determining-a-suitable-ip-address">
+<h3>Determining a Suitable IP Address<a class="headerlink" href="#determining-a-suitable-ip-address" title="Permalink to this headline">¶</a></h3>
+<p>KubOS does not use DHCP, so all IP addresses are statically defined.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">All OBCs which support ethernet connections come with a predefined IP address.
+It is very likely that this default address will be incompatible with whatever network the OBC
+is connected to.
+As a result, you will need to do some research in order to determine a suitable IP address for
+your OBC.</p>
+</div>
+<p>If you are connecting your OBC to a network switch (which gives it the ability to access
+the internet and potentially be accessed remotely), find the IP address your host machine is using
+for the same network, and then pick a different host number (the last number in the IP address).</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you are connecting your OBC to a large corporate network, you might need to contact your IT
+department in order to be assigned an IP address.</p>
+</div>
+<p>If you are connecting your OBC directly to your host computer’s ethernet port, you’ll need to first
+determine and/or set the IP address of the host computer for that connection.</p>
+<p>Commands like <code class="docutils literal notranslate"><span class="pre">ifconfig</span></code> (or <code class="docutils literal notranslate"><span class="pre">ipconfig</span></code> for Windows users) should display the current address of
+the ethernet connection. Worth noting, it may be necessary to first connect the OBC to the host
+computer in order for the connection to appear in the command output.</p>
+<p>Please consult your relevant OS’ documentation for instructions on setting a static IP address.</p>
+</div>
+<div class="section" id="configuring-the-obc">
+<h3>Configuring the OBC<a class="headerlink" href="#configuring-the-obc" title="Permalink to this headline">¶</a></h3>
+<p>Connect an ethernet cable from the OBC to either your computer or an open network port.</p>
+<p>Log into the OBC using the debug console and then edit <code class="docutils literal notranslate"><span class="pre">/etc/network/interfaces</span></code>.
+Update the IP address field to be an address of your choosing.</p>
+<p>Once updated, run the following commands in order to make the OBC use the new address:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ifdown eth0; ifup eth0
+</pre></div>
+</div>
+<p>The address can be verified by running the <code class="docutils literal notranslate"><span class="pre">ipaddr</span></code> command</p>
+</div>
+</div>
+<div class="section" id="slip">
+<span id="id2"></span><h2>SLIP<a class="headerlink" href="#slip" title="Permalink to this headline">¶</a></h2>
+<p>Using <a class="reference external" href="https://en.wikipedia.org/wiki/Serial_Line_Internet_Protocol">SLIP</a> over a UART port allows
+users to communicate with a target OBC as though it has a normal network connection set up.
+This is most useful for communicating with OBCs which do not provide an ethernet port.</p>
+<p>All supported boards include a SLIP configuration in their <code class="docutils literal notranslate"><span class="pre">/etc/network/interfaces</span></code> file.</p>
+<p>In order to communicate with an OBC from the <a class="reference internal" href="../sdk-docs/index.html"><span class="doc">Kubos SDK</span></a>, or from a host
+machine running Linux, users will need to do the following:</p>
+<ul>
+<li><p class="first">Connect an FTDI cable to the pins of the UART port (please refer to the UART section of the
+appropriate <cite>KubOS for the {OBC} &gt; Working with the {OBC}</cite> document for details about the default
+SLIP UART port for the board)</p>
+<blockquote>
+<div><ul class="simple">
+<li>Ground -&gt; Ground</li>
+<li>TX -&gt; RX</li>
+<li>RX -&gt; TX</li>
+<li>RTS -&gt; CTS (Might not be available on all boards/UART ports)</li>
+<li>CTS -&gt; RTS (Might not be available on all boards/UART ports)</li>
+<li>Vcc -&gt; ignore</li>
+</ul>
+<p>FTDI cables typically have the following pinout:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="22%" />
+<col width="35%" />
+<col width="43%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Pin</th>
+<th class="head">Color</th>
+<th class="head">Function</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>1</td>
+<td>Black</td>
+<td>Ground</td>
+</tr>
+<tr class="row-odd"><td>2</td>
+<td>Brown</td>
+<td>CTS</td>
+</tr>
+<tr class="row-even"><td>3</td>
+<td>Red</td>
+<td>Vcc</td>
+</tr>
+<tr class="row-odd"><td>4</td>
+<td>Orange</td>
+<td>TX</td>
+</tr>
+<tr class="row-even"><td>5</td>
+<td>Yellow</td>
+<td>RX</td>
+</tr>
+<tr class="row-odd"><td>6</td>
+<td>Green</td>
+<td>RTS</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</li>
+<li><p class="first">Connect the USB portion of the FTDI cable to the host machine</p>
+</li>
+<li><p class="first">Issue <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">/dev</span></code> and identify the <code class="docutils literal notranslate"><span class="pre">/dev/ttyUSB*</span></code> device associated with the FTDI cable</p>
+</li>
+<li><p class="first">Set up the SLIP device</p>
+<blockquote>
+<div><ul>
+<li><p class="first">If the UART port has RTS/CTS available, issue the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo slattach -s 115200 -p cslip {USB-device} &amp;
+</pre></div>
+</div>
+</li>
+<li><p class="first">Otherwise, issue this command instead:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo slattach -FL -s 115200 -p cslip {USB-device} &amp;
+</pre></div>
+</div>
+</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Define a new network interface for the device:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo ifconfig sl0 192.168.0.1 pointopoint 192.168.0.2 up
+</pre></div>
+</div>
+</li>
+<li><p class="first">Finally, ensure that the SLIP traffic will be routed to the SDK’s host IP:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo route add 192.168.0.1 dev lo
+</pre></div>
+</div>
+</li>
+</ul>
+<p>Worth noting, the baud rate, protocol, and IP addresses may all be changed.
+In this case, the corresponding values in the OBC’s <code class="docutils literal notranslate"><span class="pre">/etc/network/interfaces</span></code> file should also be
+changed to match.</p>
+</div>
+<div class="section" id="communicating-via-ssh">
+<h2>Communicating via SSH<a class="headerlink" href="#communicating-via-ssh" title="Permalink to this headline">¶</a></h2>
+<p>Once a board has been given a valid IP address (via ethernet or SLIP), you can create an SSH connection to it.</p>
+<p>This can be done from either the SDK or your host machine.</p>
+<p>To connect from the command line, run <code class="docutils literal notranslate"><span class="pre">ssh</span> <span class="pre">kubos&#64;{ip-address}</span></code>.
+You will be prompted for the <cite>kubos</cite> account password.</p>
+<p>You can also use a tool, like PuTTY, to create an SSH connection.</p>
+<div class="section" id="file-transfer">
+<span id="id3"></span><h3>File Transfer<a class="headerlink" href="#file-transfer" title="Permalink to this headline">¶</a></h3>
+<p>Once your board is connected and running you can begin transferring files
+to it. There are two supported methods of file transfer: <code class="docutils literal notranslate"><span class="pre">scp</span></code> and ZMODEM over <code class="docutils literal notranslate"><span class="pre">minicom</span></code>.</p>
+</div>
+</div>
+<div class="section" id="scp">
+<h2>SCP<a class="headerlink" href="#scp" title="Permalink to this headline">¶</a></h2>
+<p>Transferring files using <code class="docutils literal notranslate"><span class="pre">scp</span></code> requires the board to have an IP
+connection using either ethernet or SLIP.</p>
+<p>Once the IP address has been set, you can transfer files to and from the stack using the <code class="docutils literal notranslate"><span class="pre">scp</span></code> command.
+This command can be run from either the SDK or your host machine.</p>
+<p>For example, if I wanted to send a file on my host machine, <cite>test.txt</cite>, to reside in the <cite>kubos</cite> account’s home directory,
+given a stack IP of <code class="docutils literal notranslate"><span class="pre">10.50.1.10</span></code>, I would enter:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ scp test.txt kubos@10.50.1.10:/home/kubos
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">While file transfer can be done over a SLIP connection, it is significantly faster and more
+reliable when done over an ethernet connection instead (for boards which have an ethernet port
+available)</p>
+</div>
+</div>
+<div class="section" id="id4">
+<h2>Minicom<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<p>If your board only has serial connections and there is no spare UART for SLIP,
+you can still transfer files over the debug serial console using <code class="docutils literal notranslate"><span class="pre">minicom</span></code>.</p>
+<p>Connect to the board through minicom (the file transfer protocol is not
+guaranteed to work with any other terminal program)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ minicom kubos
+</pre></div>
+</div>
+<p>Login to the board</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Welcome</span> <span class="n">to</span> <span class="n">minicom</span> <span class="mf">2.7</span>
+
+<span class="n">OPTIONS</span><span class="p">:</span> <span class="n">I18n</span>
+<span class="n">Compiled</span> <span class="n">on</span> <span class="n">Feb</span>  <span class="mi">7</span> <span class="mi">2016</span><span class="p">,</span> <span class="mi">13</span><span class="p">:</span><span class="mi">37</span><span class="p">:</span><span class="mf">27.</span>
+<span class="n">Port</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">FTDI</span><span class="p">,</span> <span class="mi">21</span><span class="p">:</span><span class="mi">26</span><span class="p">:</span><span class="mi">43</span>
+
+<span class="n">Press</span> <span class="n">CTRL</span><span class="o">-</span><span class="n">A</span> <span class="n">Z</span> <span class="k">for</span> <span class="n">help</span> <span class="n">on</span> <span class="n">special</span> <span class="n">keys</span>
+
+
+<span class="n">Welcome</span> <span class="n">to</span> <span class="n">Kubos</span> <span class="n">Linux</span>
+<span class="p">(</span><span class="n">none</span><span class="p">)</span> <span class="n">login</span><span class="p">:</span> <span class="n">root</span>
+<span class="n">Password</span><span class="p">:</span>
+<span class="n">Jan</span>  <span class="mi">1</span> <span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">11</span> <span class="n">login</span><span class="p">[</span><span class="mi">210</span><span class="p">]:</span> <span class="n">root</span> <span class="n">login</span> <span class="n">on</span> <span class="s1">&#39;ttyS0&#39;</span>
+<span class="o">~</span> <span class="c1">#</span>
+</pre></div>
+</div>
+<p>Navigate to the location you’d like the received file to go.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">~</span> <span class="c1"># mkdir righthere</span>
+<span class="o">~</span> <span class="c1"># cd righthere</span>
+<span class="o">~/</span><span class="n">righthere</span> <span class="c1">#</span>
+</pre></div>
+</div>
+<p>Issue the zModem command to prep the board to receive a file</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ rz -bZ
+</pre></div>
+</div>
+<p>Press <strong>Ctrl+a</strong>, then press <strong>s</strong> to open the minicom file transfer
+dialog.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">+-</span><span class="p">[</span><span class="n">Upload</span><span class="p">]</span><span class="o">--+</span>
+<span class="o">|</span> <span class="n">zmodem</span>    <span class="o">|</span>
+<span class="o">|</span> <span class="n">ymodem</span>    <span class="o">|</span>
+<span class="o">|</span> <span class="n">xmodem</span>    <span class="o">|</span>
+<span class="o">|</span> <span class="n">kermit</span>    <span class="o">|</span>
+<span class="o">|</span> <span class="n">ascii</span>     <span class="o">|</span>
+<span class="o">+-----------+</span>
+</pre></div>
+</div>
+<p>Select zmodem</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">+-------------------</span><span class="p">[</span><span class="n">Select</span> <span class="n">one</span> <span class="ow">or</span> <span class="n">more</span> <span class="n">files</span> <span class="k">for</span> <span class="n">upload</span><span class="p">]</span><span class="o">-------------------+</span>
+<span class="o">|</span><span class="n">Directory</span><span class="p">:</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">vagrant</span>                                                   <span class="o">|</span>
+<span class="o">|</span> <span class="p">[</span><span class="o">..</span><span class="p">]</span>                                                                      <span class="o">|</span>
+<span class="o">|</span> <span class="p">[</span><span class="n">linux</span><span class="p">]</span>                                                                   <span class="o">|</span>
+<span class="o">|</span> <span class="p">[</span><span class="n">newprj</span><span class="p">]</span>                                                                  <span class="o">|</span>
+<span class="o">|</span> <span class="n">minicom</span><span class="o">.</span><span class="n">log</span>                                                               <span class="o">|</span>
+<span class="o">|</span>                                                                           <span class="o">|</span>
+<span class="o">|</span>              <span class="p">(</span> <span class="n">Escape</span> <span class="n">to</span> <span class="n">exit</span><span class="p">,</span> <span class="n">Space</span> <span class="n">to</span> <span class="n">tag</span> <span class="p">)</span>                             <span class="o">|</span>
+<span class="o">+---------------------------------------------------------------------------+</span>
+
+               <span class="p">[</span><span class="n">Goto</span><span class="p">]</span>  <span class="p">[</span><span class="n">Prev</span><span class="p">]</span>  <span class="p">[</span><span class="n">Show</span><span class="p">]</span>   <span class="p">[</span><span class="n">Tag</span><span class="p">]</span>  <span class="p">[</span><span class="n">Untag</span><span class="p">]</span> <span class="p">[</span><span class="n">Okay</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Select the file to send:</p>
+<p>Press <code class="docutils literal notranslate"><span class="pre">g</span></code> to open the Goto dialog and navigate to the desired folder
+(full pathname required).</p>
+<p>Press enter to open the file selector dialog and specify the file you
+want within the current folder.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">+-------------------</span><span class="p">[</span><span class="n">Select</span> <span class="n">one</span> <span class="ow">or</span> <span class="n">more</span> <span class="n">files</span> <span class="k">for</span> <span class="n">upload</span><span class="p">]</span><span class="o">-------------------+</span>
+<span class="o">|</span><span class="n">Directory</span><span class="p">:</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">vagrant</span><span class="o">/</span><span class="n">linux</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">kubos</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">isis</span><span class="o">-</span><span class="n">gcc</span><span class="o">/</span><span class="n">source</span>           <span class="o">|</span>
+<span class="o">|</span> <span class="p">[</span><span class="o">..</span><span class="p">]</span>                                                                      <span class="o">|</span>
+<span class="o">|</span> <span class="p">[</span><span class="n">CMakeFiles</span><span class="p">]</span>                                                              <span class="o">|</span>
+<span class="o">|</span> <span class="n">CMakeLists</span><span class="o">.</span><span class="n">txt</span>                                                            <span class="o">|</span>
+<span class="o">|</span> <span class="n">CTestTestfile</span><span class="o">.</span><span class="n">cmake</span>                                                       <span class="o">|</span>
+<span class="o">|</span> <span class="n">cmake_install</span><span class="o">.</span><span class="n">cmake</span>                                                       <span class="o">|</span>
+<span class="o">|</span> <span class="n">linux</span>                                                                     <span class="o">|</span>
+<span class="o">|</span> <span class="n">linux</span><span class="o">.</span><span class="n">map</span>                                                                 <span class="o">|</span>
+<span class="o">|</span>                <span class="o">+-----------------------------------------+</span>                <span class="o">|</span>
+<span class="o">|</span>                <span class="o">|</span><span class="n">No</span> <span class="n">file</span> <span class="n">selected</span> <span class="o">-</span> <span class="n">enter</span> <span class="n">filename</span><span class="p">:</span>       <span class="o">|</span>                <span class="o">|</span>
+<span class="o">|</span>                <span class="o">|&gt;</span> <span class="n">linux</span>                                  <span class="o">|</span>                <span class="o">|</span>
+<span class="o">|</span>                <span class="o">+-----------------------------------------+</span>                <span class="o">|</span>
+<span class="o">|</span>                                                                           <span class="o">|</span>
+<span class="o">|</span>              <span class="p">(</span> <span class="n">Escape</span> <span class="n">to</span> <span class="n">exit</span><span class="p">,</span> <span class="n">Space</span> <span class="n">to</span> <span class="n">tag</span> <span class="p">)</span>                             <span class="o">|</span>
+<span class="o">+---------------------------------------------------------------------------+</span>
+
+               <span class="p">[</span><span class="n">Goto</span><span class="p">]</span>  <span class="p">[</span><span class="n">Prev</span><span class="p">]</span>  <span class="p">[</span><span class="n">Show</span><span class="p">]</span>   <span class="p">[</span><span class="n">Tag</span><span class="p">]</span>  <span class="p">[</span><span class="n">Untag</span><span class="p">]</span> <span class="p">[</span><span class="n">Okay</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>You should see a progress dialog as your file is transferred to the
+board.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">+-----------</span><span class="p">[</span><span class="n">zmodem</span> <span class="n">upload</span> <span class="o">-</span> <span class="n">Press</span> <span class="n">CTRL</span><span class="o">-</span><span class="n">C</span> <span class="n">to</span> <span class="n">quit</span><span class="p">]</span><span class="o">------------+</span>
+<span class="o">|^</span><span class="n">XB00000000000000rz</span> <span class="n">waiting</span> <span class="n">to</span> <span class="n">receive</span><span class="o">.</span><span class="n">Sending</span><span class="p">:</span> <span class="n">linux</span>        <span class="o">|</span>
+<span class="o">|</span><span class="n">Bytes</span> <span class="n">Sent</span><span class="p">:</span>  <span class="mi">41984</span><span class="o">/</span>  <span class="mi">99084</span>   <span class="n">BPS</span><span class="p">:</span><span class="mi">8905</span>     <span class="n">ETA</span> <span class="mi">00</span><span class="p">:</span><span class="mi">06</span>          <span class="o">|</span>
+<span class="o">|</span>                                                             <span class="o">|</span>
+<span class="o">|</span>                                                             <span class="o">|</span>
+<span class="o">|</span>                                                             <span class="o">|</span>
+<span class="o">|</span>                                                             <span class="o">|</span>
+<span class="o">|</span>                                                             <span class="o">|</span>
+<span class="o">+-------------------------------------------------------------+</span>
+</pre></div>
+</div>
+<p>Once file transfer is complete, you should be able to press enter and
+use your new file</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">+-----------</span><span class="p">[</span><span class="n">zmodem</span> <span class="n">upload</span> <span class="o">-</span> <span class="n">Press</span> <span class="n">CTRL</span><span class="o">-</span><span class="n">C</span> <span class="n">to</span> <span class="n">quit</span><span class="p">]</span><span class="o">------------+</span>
+<span class="o">|^</span><span class="n">XB00000000000000rz</span> <span class="n">waiting</span> <span class="n">to</span> <span class="n">receive</span><span class="o">.</span><span class="n">Sending</span><span class="p">:</span> <span class="n">linux</span>        <span class="o">|</span>
+<span class="o">|</span><span class="n">Bytes</span> <span class="n">Sent</span><span class="p">:</span>  <span class="mi">99084</span>   <span class="n">BPS</span><span class="p">:</span><span class="mi">7982</span>                                <span class="o">|</span>
+<span class="o">|</span>                                                             <span class="o">|</span>
+<span class="o">|</span><span class="n">Transfer</span> <span class="n">complete</span>                                            <span class="o">|</span>
+<span class="o">|</span>                                                             <span class="o">|</span>
+<span class="o">|</span> <span class="n">READY</span><span class="p">:</span> <span class="n">press</span> <span class="nb">any</span> <span class="n">key</span> <span class="n">to</span> <span class="k">continue</span><span class="o">...</span>                         <span class="o">|</span>
+<span class="o">|</span>                                                             <span class="o">|</span>
+<span class="o">+-------------------------------------------------------------+</span>
+</pre></div>
+</div>
+<p>Press <strong>Ctrl+a</strong>, then <strong>q</strong> to bring up the dialog to exit minicom. Hit
+enter to quit without reset.</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="bbb/index.html" class="btn btn-neutral float-right" title="KubOS for the Beaglebone Black" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="cross-compile.html" class="btn btn-neutral" title="Compiling Code for a Target OBC" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

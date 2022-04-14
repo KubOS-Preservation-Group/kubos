@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["build_module","Performs all the setup, build and configuration neccesary to compile and link a C-based cmake project under Cargo"]]});

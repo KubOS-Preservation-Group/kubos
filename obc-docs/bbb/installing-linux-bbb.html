@@ -1,0 +1,477 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Installing Kubos Linux on a Beaglebone Black &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../../index.html"/>
+        <link rel="up" title="KubOS for the Beaglebone Black" href="index.html"/>
+        <link rel="next" title="Working with the Beaglebone Black" href="working-with-the-bbb.html"/>
+        <link rel="prev" title="KubOS for the Beaglebone Black" href="index.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Working with an OBC</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../cross-compile.html">Compiling Code for a Target OBC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../comms-setup.html">Communicating with an OBC</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">KubOS for the Beaglebone Black</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Installing Kubos Linux on a Beaglebone Black</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#reference-documents">Reference Documents</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#components">Components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pre-requisites">Pre-Requisites</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#install-the-emmc-image">Install the eMMC Image</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#install-the-auxiliary-image">Install the Auxiliary Image</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#using-kubos-linux">Using Kubos Linux</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="working-with-the-bbb.html">Working with the Beaglebone Black</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#reference-documents">Reference Documents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#debug-console-connection">Debug Console Connection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#ethernet-connection">Ethernet Connection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#peripherals">Peripherals</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../iobc/index.html">KubOS for the ISIS-OBC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mbm2/index.html">KubOS for the Pumpkin MBM2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../porting-kubos.html">Porting KubOS to a New OBC</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ecosystem/index.html">KubOS Ecosystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deep-dive/index.html">Under the Hood</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sdk-docs/index.html">Kubos SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Contributing to KubOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Working with KubOS and an OBC</a> &raquo;</li>
+        
+          <li><a href="index.html">KubOS for the Beaglebone Black</a> &raquo;</li>
+        
+      <li>Installing Kubos Linux on a Beaglebone Black</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/obc-docs/bbb/installing-linux-bbb.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="installing-kubos-linux-on-a-beaglebone-black">
+<h1>Installing Kubos Linux on a Beaglebone Black<a class="headerlink" href="#installing-kubos-linux-on-a-beaglebone-black" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>This document covers the steps required to install Kubos Linux onto a Beaglebone Black.</p>
+</div>
+<div class="section" id="reference-documents">
+<h2>Reference Documents<a class="headerlink" href="#reference-documents" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="beaglebone-documentation">
+<h3>Beaglebone Documentation<a class="headerlink" href="#beaglebone-documentation" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference external" href="https://beagleboard.org/black">Beaglebone Black Web Page</a></li>
+<li><a class="reference external" href="http://elinux.org/Beagleboard:BeagleBoneBlack">Beaglebone Black Wiki</a></li>
+<li><a class="reference external" href="http://beagleboard.org/Support/bone101/#hardware">Beaglebone Black Hardware Diagrams</a></li>
+<li><a class="reference external" href="http://static6.arrow.com/aropdfconversion/8fff89aa85f5c451318cbdee2facd9c9fac36872/bbb_srm.pdf">Beaglebone Black System Reference Manual Rev C</a></li>
+</ul>
+</div>
+<div class="section" id="kubos-documentation">
+<h3>Kubos Documentation<a class="headerlink" href="#kubos-documentation" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference internal" href="../../tutorials/first-obc-project.html"><span class="doc">Running a KubOS Project on an OBC</span></a> - Basic tutorial for creating your first KubOS project</li>
+<li><a class="reference internal" href="../../ecosystem/linux-docs/using-kubos-linux.html"><span class="doc">Using Kubos Linux</span></a> - General guide for interacting with Kubos Linux</li>
+<li><a class="reference internal" href="working-with-the-bbb.html"><span class="doc">Working with the Beaglebone Black</span></a> - Guide for interacting with BBB-specific features</li>
+<li><a class="reference internal" href="../../deep-dive/klb/kubos-linux-on-bbb.html"><span class="doc">Building Kubos Linux for the Beaglebone Black</span></a> - Steps to build Kubos Linux</li>
+</ul>
+</div>
+</div>
+<div class="section" id="components">
+<h2>Components<a class="headerlink" href="#components" title="Permalink to this headline">¶</a></h2>
+<p>The Kubos Linux installation process is composed of two high-level steps:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Flashing the eMMC</li>
+<li>Flashing the microSD card</li>
+</ul>
+</div></blockquote>
+<p>To perform a full default installation, two files are needed:</p>
+<blockquote>
+<div><ul class="simple">
+<li>A Kubos Linux SD card image (kubos-linux.img)</li>
+<li>An Auxilliary SD card image (aux-sd.img)</li>
+</ul>
+</div></blockquote>
+<p>All of these files can be obtained from <a class="reference external" href="https://github.com/kubos/kubos-linux-build/releases">our Kubos Linux Releases page on GitHub</a></p>
+<p>Download the latest <cite>KubOS-v{version}.tar.gz</cite> file and then unzip the files for the Beaglebone Black. They’re located in the <cite>KubOS-v{version}/Beaglebone-Black</cite> folder.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The Beaglebone Black can also be used as a development board for the Pumpkin MBM2.
+If you would like to use it for this purpose, please follow the
+<a class="reference internal" href="../mbm2/installing-linux-mbm2.html"><span class="doc">Installing Kubos Linux on a Pumpkin Motherboard Module 2</span></a> instructions instead.</p>
+</div>
+</div>
+<div class="section" id="pre-requisites">
+<h2>Pre-Requisites<a class="headerlink" href="#pre-requisites" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Obtain a microSD card that is at least 4GB.</li>
+</ol>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The Kubos Linux SD images are created for a 4GB SD card. The image can be applied to a larger SD card, but the
+resulting system will still only have 4GB of space available to it.</p>
+</div>
+<ol class="arabic simple" start="2">
+<li>Install <a class="reference external" href="https://www.balena.io/etcher/">Etcher</a>. Other software to flash SD cards does exist,
+but Etcher is the Kubos software of choice.</li>
+<li>Obtain the SD card images</li>
+</ol>
+</div>
+<div class="section" id="install-the-emmc-image">
+<h2>Install the eMMC Image<a class="headerlink" href="#install-the-emmc-image" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="flash-the-sd-card">
+<h3>Flash the SD Card<a class="headerlink" href="#flash-the-sd-card" title="Permalink to this headline">¶</a></h3>
+<p>Using <a class="reference external" href="https://www.balena.io/etcher/">Etcher</a>:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Select the Kubos Linux image to flash</li>
+<li>Make sure the SD card device is correct (may be auto-detected if there is only one SD card present
+in your system.)</li>
+<li>Click the “Flash!” button to start the flashing process</li>
+</ul>
+</div></blockquote>
+<div class="figure" id="id1">
+<img alt="Etcher Setup" src="../../_images/etcher.png" />
+<p class="caption"><span class="caption-text">Etcher Setup</span></p>
+</div>
+<p>It should take roughly 10 minutes for a 4GB image to be loaded onto an SD card.</p>
+<p>Once the program has finished successfully, the SD card is ready to be inserted
+into the Beaglebone Black’s microSD slot.</p>
+</div>
+<div class="section" id="boot-into-u-boot">
+<h3>Boot into U-Boot<a class="headerlink" href="#boot-into-u-boot" title="Permalink to this headline">¶</a></h3>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">These instructions should work whether you’re currently running Kubos Linux
+or some other Linux distribution.</p>
+</div>
+<p>We now want to overwrite the eMMC, so we’ll need to use U-Boot in order to boot
+Kubos Linux from the microSD card.</p>
+<p>You’ll need to establish a serial connection with the board in order to connect
+to the console.</p>
+<p>Hold down any key while the board is booting. This will exit out of the auto-boot and
+bring up the CLI.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">U</span><span class="o">-</span><span class="n">Boot</span> <span class="mf">2016.09</span> <span class="p">(</span><span class="n">May</span> <span class="mi">23</span> <span class="mi">2019</span> <span class="o">-</span> <span class="mi">21</span><span class="p">:</span><span class="mi">19</span><span class="p">:</span><span class="mi">32</span> <span class="o">+</span><span class="mi">0000</span><span class="p">)</span>
+
+<span class="n">I2C</span><span class="p">:</span>   <span class="n">ready</span>
+<span class="n">DRAM</span><span class="p">:</span>  <span class="mi">512</span> <span class="n">MiB</span>
+<span class="n">MMC</span><span class="p">:</span>   <span class="n">OMAP</span> <span class="n">SD</span><span class="o">/</span><span class="n">MMC</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="n">OMAP</span> <span class="n">SD</span><span class="o">/</span><span class="n">MMC</span><span class="p">:</span> <span class="mi">1</span>
+<span class="n">Net</span><span class="p">:</span>   <span class="n">cpsw</span><span class="p">,</span> <span class="n">usb_ether</span>
+<span class="n">Hit</span> <span class="nb">any</span> <span class="n">key</span> <span class="n">to</span> <span class="n">stop</span> <span class="n">autoboot</span><span class="p">:</span>  <span class="mi">0</span>
+<span class="n">U</span><span class="o">-</span><span class="n">Boot</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Copy/paste these commands:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>setenv bootargs console=ttyS0,115200 root=/dev/mmcblk0p2 ext4 rootwait; fatload mmc 0:1 ${fdtaddr} /beaglebone-black.dtb; fatload mmc 0:1 ${loadaddr} /kernel; bootm ${loadaddr} - ${fdtaddr}
+</pre></div>
+</div>
+<p>This will cause the board to load Kubos Linux off of the microSD card, allowing us to flash
+the eMMC.</p>
+</div>
+<div class="section" id="alternative-boot">
+<h3>Alternative Boot<a class="headerlink" href="#alternative-boot" title="Permalink to this headline">¶</a></h3>
+<p>When loading Kubos Linux for the first time, the prior instructions may fail for boards which come
+from certain hardware providers.
+This failure will be indicated by the following error message:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Wrong</span> <span class="n">Image</span> <span class="n">Format</span> <span class="k">for</span> <span class="n">bootm</span> <span class="n">command</span>
+</pre></div>
+</div>
+<p>In this case, you will need to boot off of the microSD card by using the Beaglebone’s
+<a class="reference external" href="https://cdn-learn.adafruit.com/assets/assets/000/008/680/medium800/beaglebone_BeagleBoneBlack.jpeg">boot button</a>.
+Power off the board. Hold down the boot button and then apply power to the board.
+You may let go of the boot button once you start seeing boot messages from the debug port.</p>
+<p>The system will now boot off of the microSD card and into Kubos Linux.</p>
+</div>
+<div class="section" id="flash-the-emmc">
+<h3>Flash the eMMC<a class="headerlink" href="#flash-the-emmc" title="Permalink to this headline">¶</a></h3>
+<p>To flash the eMMC, log into the board using the default <cite>root</cite> user with password <cite>Kubos123</cite> and then run the
+installation script, <code class="docutils literal notranslate"><span class="pre">install-os</span></code>. It has been placed within the system PATH, so may be called from any location.</p>
+<p>A confirmation dialog will be issued. Enter <code class="docutils literal notranslate"><span class="pre">y</span></code> to proceed with the installation.</p>
+<p>You will see a variety of messages which will vary depending on the current state of the system
+(for example, whether you are currently running a version of Kubos Linux or some other distribution).</p>
+<p>It should be safe to ignore any messages which are issued prior to the actual copying of data.</p>
+<p>The installation script will produce a few informational messages prefixed with <code class="docutils literal notranslate"><span class="pre">OS</span> <span class="pre">Install</span></code>.</p>
+<p>The resulting installation messages should look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>~ # install-os
+** Warning ** This script will wipe out the current contents of the eMMC
+Are you sure you want to proceed? (y/N)
+y
+OS Install: Pausing monitoring
+OS Install: Stopping running services
+OS Install: Prepping the file system
+OS Install: Copying SD card contents over to eMMC. This process should take 10-15 minutes to complete
+</pre></div>
+</div>
+<p>The four status LEDs on the board should start flashing in a random pattern.
+This indicates that the eMMC is currently being flashed.</p>
+<p>The process should take roughly ten minutes, after which the LEDs should return to normal,
+with one LED blinking to indicate a successfully running Kubos Linux system.</p>
+<p>The console should show a summary of the transfer:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">7471104</span><span class="o">+</span><span class="mi">0</span> <span class="n">records</span> <span class="ow">in</span>
+<span class="mi">7471104</span><span class="o">+</span><span class="mi">0</span> <span class="n">records</span> <span class="n">out</span>
+<span class="mi">3825205248</span> <span class="nb">bytes</span> <span class="p">(</span><span class="mf">3.6</span><span class="n">GB</span><span class="p">)</span> <span class="n">copied</span><span class="p">,</span> <span class="mf">659.546105</span> <span class="n">seconds</span><span class="p">,</span> <span class="mf">5.5</span><span class="n">MB</span><span class="o">/</span><span class="n">s</span>
+</pre></div>
+</div>
+<p>After this process has completed, shutdown and de-power the system.</p>
+</div>
+</div>
+<div class="section" id="install-the-auxiliary-image">
+<h2>Install the Auxiliary Image<a class="headerlink" href="#install-the-auxiliary-image" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="re-flash-the-sd-card">
+<h3>Re-Flash the SD Card<a class="headerlink" href="#re-flash-the-sd-card" title="Permalink to this headline">¶</a></h3>
+<p>Now flash the microSD card with the auxiliary SD card image (<code class="docutils literal notranslate"><span class="pre">aux-sd.img</span></code>). This image contains the
+Kubos Linux upgrade partition and the second user data partition.</p>
+<p>Once the flash process has completed, put the card back into the microSD slot
+and boot up the system.</p>
+<div class="figure">
+<img alt="mount complaints during boot." src="../../_images/kubos_bbb_linux_mount_errors.png" />
+</div>
+<p>You will see messages as the data partitions are mounted. For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">EXT4</span><span class="o">-</span><span class="n">fs</span> <span class="p">(</span><span class="n">mmcblk0p2</span><span class="p">):</span> <span class="n">couldn</span><span class="s1">&#39;t mount as ext3 due to feature incompatibilities.</span>
+</pre></div>
+</div>
+<p>While they may seem like errors, they are a normal part of the boot process as
+the system detects the partition file type. If there are <em>actual</em> issues
+mounting a partition, the resulting error message will look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mount</span><span class="p">:</span> <span class="n">can</span><span class="s1">&#39;t find PARTUUID=41555820-02</span>
+</pre></div>
+</div>
+<p>This example message is given when the system is unable to find the axilliary
+SD card’s second partition. This might be due to no microSD card being present,
+or the microSD card not being properly flashed with the auxilliary SD image.</p>
+<p>If you see no such errors, the installation process is now complete.</p>
+</div>
+</div>
+<div class="section" id="using-kubos-linux">
+<h2>Using Kubos Linux<a class="headerlink" href="#using-kubos-linux" title="Permalink to this headline">¶</a></h2>
+<p>For information on how to create and run applications on your new Kubos Linux system, see the
+<a class="reference internal" href="../../ecosystem/linux-docs/using-kubos-linux.html"><span class="doc">Using Kubos Linux</span></a> and <a class="reference internal" href="working-with-the-bbb.html"><span class="doc">Working with the Beaglebone Black</span></a> guides.</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="working-with-the-bbb.html" class="btn btn-neutral float-right" title="Working with the Beaglebone Black" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="KubOS for the Beaglebone Black" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

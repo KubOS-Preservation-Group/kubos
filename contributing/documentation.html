@@ -1,0 +1,387 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Documentation &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../index.html"/>
+        <link rel="up" title="Contributing to KubOS" href="index.html"/>
+        <link rel="next" title="Testing" href="testing.html"/>
+        <link rel="prev" title="Kubos Coding and Documentation Standards" href="kubos-standards.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../obc-docs/index.html">Working with an OBC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ecosystem/index.html">KubOS Ecosystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deep-dive/index.html">Under the Hood</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sdk-docs/index.html">Kubos SDK</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Contributing to KubOS</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="reporting-bugs.html">Reporting Bugs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="feature-request.html">Requesting New Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contribution-process.html">Contributor Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kubos-standards.html">Coding and Documentation Standards</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Documentation Guides</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#generating-the-docs">Generating The Docs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#general-docs">General Docs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#documenting-rust">Documenting Rust</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#including-rust-docs">Including Rust Docs</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#documenting-python">Documenting Python</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#including-python-docs">Including Python Docs</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#documenting-c">Documenting C</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#including-c-docs">Including C Docs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html">Testing Guides</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Contributing to KubOS</a> &raquo;</li>
+        
+      <li>Documentation</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/contributing/documentation.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="documentation">
+<h1>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h1>
+<p>This doc details the structures and procedures used when writing documentation in
+and for Kubos products.</p>
+<p>Please refer to the <a class="reference internal" href="kubos-standards.html"><span class="doc">Kubos standards doc</span></a> for more detailed documentation
+standards regarding things like naming and grammar.</p>
+<div class="section" id="generating-the-docs">
+<h2>Generating The Docs<a class="headerlink" href="#generating-the-docs" title="Permalink to this headline">¶</a></h2>
+<p>The Kubos docs are generated using <a class="reference external" href="http://www.sphinx-doc.org/en/master/">Sphinx</a> in conjunction with a variety of tools including
+<a class="reference external" href="https://doc.rust-lang.org/rustdoc/what-is-rustdoc.html">rustdoc</a> and <a class="reference external" href="http://www.doxygen.nl/">Doxygen</a>.
+We suggest generating the docs from inside of the Kubos SDK environment, as it already has all dependencies installed.</p>
+<p>If you would like to generate the docs outside of the SDK environment, please refer to the following
+list of dependencies, in addition to the list of <a class="reference internal" href="../getting-started/local-setup.html#build-dependencies"><span class="std std-ref">build dependencies</span></a>.</p>
+<p>System dependencies:</p>
+<ul class="simple">
+<li>doxygen</li>
+<li>graphvis</li>
+<li>plantuml</li>
+<li>Python 3 + pip3</li>
+</ul>
+<p>Python dependencies (most likely installed with <code class="docutils literal notranslate"><span class="pre">pip3</span></code>):</p>
+<ul class="simple">
+<li>Sphinx v1.5.6</li>
+<li>breathe v4.12.0</li>
+<li>sphinx-rtd-theme v0.2.4</li>
+<li>sphinxcontrib-plantuml</li>
+<li>sphinxcontrib-versioning</li>
+<li>sphinx-jsondomain</li>
+</ul>
+<p>In order to generate the entirety of the documentation locally, navigate to the top level of your copy of the Kubos repo and run <code class="docutils literal notranslate"><span class="pre">tools/docs/gendocs.py</span></code>.</p>
+<p>The generated HTML files will be in the  <code class="docutils literal notranslate"><span class="pre">html</span></code> folder, which you can then use to verify your new docs display as intended.</p>
+<p>To verify your docs:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Make sure that any new <code class="docutils literal notranslate"><span class="pre">*.rst</span></code> files are accessible through normal page clicks if you start at the top-level <code class="docutils literal notranslate"><span class="pre">index.html</span></code></li>
+<li>Verify that any new hyperlinks work as intended</li>
+<li>Make sure that <code class="docutils literal notranslate"><span class="pre">tools/docs/gendocs.py</span></code> runs successfully without throwing any errors or warnings. Fix all warnings until the script runs cleanly.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="general-docs">
+<h2>General Docs<a class="headerlink" href="#general-docs" title="Permalink to this headline">¶</a></h2>
+<p>All docs files under <code class="docutils literal notranslate"><span class="pre">docs/</span></code> are written in the <a class="reference external" href="http://docutils.sourceforge.net/rst.html">reStructuredText</a> format.
+Please refer to the <a class="reference internal" href="kubos-standards.html"><span class="doc">standards doc</span></a> for more specific writing standards.</p>
+<p>All executable projects, such as clients, examples, or services, should have a <code class="docutils literal notranslate"><span class="pre">README.md</span></code> which explains the purpose of the project,
+basic usage, and any runtime configuration options.</p>
+</div>
+<div class="section" id="documenting-rust">
+<h2>Documenting Rust<a class="headerlink" href="#documenting-rust" title="Permalink to this headline">¶</a></h2>
+<p>The Rust book provides a pretty good overview of the standards for documenting Rust code <a class="reference external" href="https://doc.rust-lang.org/1.24.0/book/first-edition/documentation.html">here</a>.</p>
+<p>We leverage the <code class="docutils literal notranslate"><span class="pre">cargo</span> <span class="pre">doc</span></code> tool in generating our Rust documentation, so all Rust source is expected to conform
+to the standards laid out in the book.</p>
+<p>Documentation for any individual crate can be generated by running <code class="docutils literal notranslate"><span class="pre">cargo</span> <span class="pre">doc</span></code> from within that crate’s folder.
+The generated docs can be found in <code class="docutils literal notranslate"><span class="pre">kubos/target/doc/&lt;crate-name&gt;</span></code>.</p>
+<div class="section" id="including-rust-docs">
+<h3>Including Rust Docs<a class="headerlink" href="#including-rust-docs" title="Permalink to this headline">¶</a></h3>
+<p>The Rust docs generated by <code class="docutils literal notranslate"><span class="pre">cargo</span> <span class="pre">doc</span></code> will be placed in <code class="docutils literal notranslate"><span class="pre">kubos/target/doc/&lt;crate-name&gt;</span></code>. These files are not accessible to the rest of the docs, so the contents of <code class="docutils literal notranslate"><span class="pre">kubos/target/doc</span></code> are moved to <code class="docutils literal notranslate"><span class="pre">html/rust_docs</span></code> during the documentation generation process.</p>
+<p>Adding a reference to the Rust docs just means adding a link to the appropriate html file:</p>
+<div class="highlight-rst notranslate"><div class="highlight"><pre><span></span>This example references the |docs| for the file service.
+
+<span class="p">..</span> <span class="nt">|docs|</span> <span class="ow">raw</span><span class="p">::</span> html
+
+    &lt;a href=&quot;../rust-docs/file_service/index.html&quot; target=&quot;_blank&quot;&gt;docs&lt;/a&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="documenting-python">
+<h2>Documenting Python<a class="headerlink" href="#documenting-python" title="Permalink to this headline">¶</a></h2>
+<p>The Python source in the Kubos repo follows the <a class="reference external" href="https://www.python.org/dev/peps/pep-0257/">PEP 257</a> docstring conventions.</p>
+<p>Public facing functions, classes, and modules should all be documented with the appropriate, descriptive docstrings.</p>
+<div class="section" id="including-python-docs">
+<h3>Including Python Docs<a class="headerlink" href="#including-python-docs" title="Permalink to this headline">¶</a></h3>
+<p>Any new python modules will need to be added to the <code class="docutils literal notranslate"><span class="pre">python_modules</span></code> list in <a class="reference external" href="https://github.com/kubos/kubos/blob/master/docs/conf.py">docs/conf.py</a> file
+so that Sphinx picks them up in the docs generation process.</p>
+</div>
+</div>
+<div class="section" id="documenting-c">
+<h2>Documenting C<a class="headerlink" href="#documenting-c" title="Permalink to this headline">¶</a></h2>
+<p>Within the new modules’s folder, create a <code class="docutils literal notranslate"><span class="pre">docs</span></code> subfolder and add a <code class="docutils literal notranslate"><span class="pre">Doxyfile</span></code> file.
+Feel free to copy <code class="docutils literal notranslate"><span class="pre">Doxyfile</span></code> from another C module, just change the <code class="docutils literal notranslate"><span class="pre">PROJECT_NAME</span></code> value.</p>
+<p>Within each header file of the module, add the following block to the top of the file in order for Doxygen to be able to process it:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * @defgroup &lt;project-name&gt; &lt;Module description&gt;</span>
+<span class="cm"> * @addtogroup &lt;project-name&gt;</span>
+<span class="cm"> * @{</span>
+<span class="cm"> */</span>
+</pre></div>
+</div>
+<p>And then add this to the bottom of the file:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/* @} */</span>
+</pre></div>
+</div>
+<p>Within the header files, all items should be documented using <a class="reference external" href="http://www.doxygen.nl/manual/docblocks.html">Doxygen’s formatting</a>.</p>
+<div class="section" id="including-c-docs">
+<h3>Including C Docs<a class="headerlink" href="#including-c-docs" title="Permalink to this headline">¶</a></h3>
+<p>To include the new files in doc generation:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Add an entry to <code class="docutils literal notranslate"><span class="pre">breathe_projects</span></code> in <cite>docs/conf.py</cite></li>
+<li>Add an entry to <code class="docutils literal notranslate"><span class="pre">DOCS_DIRS</span></code> in <cite>tools/docs/gendocs.py</cite></li>
+</ul>
+</div></blockquote>
+<p>The <code class="docutils literal notranslate"><span class="pre">&lt;new-module&gt;.rst</span></code> doc should contain the declarations needed for the module documentation generated by
+Doxygen to be picked up and included in the final HTML:</p>
+<div class="highlight-rst notranslate"><div class="highlight"><pre><span></span><span class="p">..</span> <span class="ow">doxygenfile</span><span class="p">::</span> module-header.h
+    <span class="nc">:project:</span> <span class="nf">module-name</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="testing.html" class="btn btn-neutral float-right" title="Testing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="kubos-standards.html" class="btn btn-neutral" title="Kubos Coding and Documentation Standards" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="API documentation for the Rust `nsl_duplex_d2_comms_service` crate."><meta name="keywords" content="rust, rustlang, rust-lang, nsl_duplex_d2_comms_service"><title>nsl_duplex_d2_comms_service - Rust</title><link rel="stylesheet" type="text/css" href="../normalize.css"><link rel="stylesheet" type="text/css" href="../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../dark.css"><link rel="stylesheet" type="text/css" href="../light.css" id="themeStyle"><script src="../storage.js"></script><noscript><link rel="stylesheet" href="../noscript.css"></noscript><link rel="shortcut icon" href="../favicon.ico"><style type="text/css">#crate-search{background-image:url("../down-arrow.svg");}</style></head><body class="rustdoc mod"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../nsl_duplex_d2_comms_service/index.html'><div class='logo-container'><img src='../rust-logo.png' alt='logo'></div></a><p class='location'>Crate nsl_duplex_d2_comms_service</p><div class="sidebar-elems"><a id='all-types' href='all.html'><p>See all nsl_duplex_d2_comms_service's items</p></a><p class='location'></p><script>window.sidebarCurrent = {name: 'nsl_duplex_d2_comms_service', ty: 'mod', relpath: '../'};</script></div></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../theme.js"></script><nav class="sub"><form class="search-form js-only"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../settings.html"><img src="../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><h1 class='fqn'><span class='out-of-band'><span id='render-detail'><a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class='inner'>&#x2212;</span>]</a></span><a class='srclink' href='../src/nsl_duplex_d2_comms_service/main.rs.html#17-302' title='goto source code'>[src]</a></span><span class='in-band'>Crate <a class="mod" href=''>nsl_duplex_d2_comms_service</a></span></h1><div class='docblock'><p>Hardware service to allow for communications over a NSL Duplex D2 Radio.
+This service starts up a communication service to allow transfer of UDP
+packets over a serial link to and from the radio.</p>
+<h1 id="configuration" class="section-header"><a href="#configuration">Configuration</a></h1>
+<p>The service can be configured in the <code>config.toml</code> with the following fields:</p>
+<pre><code class="language-toml">[nsl-duplex-comms-service]
+bus = &quot;/dev/ttyUSB0&quot;
+ping_freq = 10
+
+[nsl-duplex-comms-service.comms]
+max_num_handlers = 10
+downlink_ports = [15001]
+timeout = 15000
+ip = &quot;127.0.0.2&quot;
+
+[nsl-duplex-comms-service.addr]
+ip = &quot;127.0.0.1&quot;
+port = 8140
+</code></pre>
+<p>The configuration of this service is split into three parts:</p>
+<ul>
+<li>
+<p>Service Specific</p>
+<p>This section is found under <code>[nsl-duplex-comms-service]</code></p>
+<ul>
+<li><code>bus</code> - Specifies which UART bus the Duplex is on</li>
+<li><code>ping_freq</code> - Specifies how frequently the service sends ping packets when the downlink queue is empty (seconds)</li>
+</ul>
+</li>
+<li>
+<p>Communications Service Configs</p>
+<p>This section is found under <code>[nsl-duplex-comms-service.comms]</code></p>
+<ul>
+<li><code>max_num_handlers</code> - Maximum number of concurrent message handlers</li>
+<li><code>downlink_ports</code> - Optional list of downlink endpoints</li>
+<li><code>timeout</code> - Timeout for completion of GraphQL requests</li>
+<li><code>ip</code> - Local IP of satellite</li>
+</ul>
+</li>
+<li>
+<p>GraphQL Server Configs</p>
+<p>This section is found under <code>[nsl-duplex-comms-service.addr]</code></p>
+<ul>
+<li><code>ip</code> - The service's IP address, used for its GraphQL interface</li>
+<li><code>port</code> - The service's port, used for its GraphQL interface</li>
+</ul>
+</li>
+</ul>
+<p>Where <code>bus</code> specifies the UART bus the Duplex is on, <code>ping_freq</code> specifies how often
+the downlink queue should be checked for queueing up pings, <code>ip</code> specifies the
+service's IP address, and <code>port</code> specifies the port on which the service will be
+listening for UDP packets.</p>
+<h1 id="running-the-service" class="section-header"><a href="#running-the-service">Running the Service</a></h1>
+<p>The service should be started automatically by its init script, but may also be started manually:</p>
+<pre><code class="language-bash">$ nsl-duplex-d2-comms-service
+NSL Duplex Communications Service starting on /dev/ttyUSB0
+</code></pre>
+<p>If no config file is specified, then the service will look at <code>/etc/kubos-config.toml</code>.
+An alternative config file may be specified on the command line at run time:</p>
+<pre><code class="language-bash">$ nsl-duplex-d2-comms-service -c config.toml
+</code></pre>
+<h1 id="panics" class="section-header"><a href="#panics">Panics</a></h1>
+<p>This service will panic on start if no config sections are found for the service or
+if the <code>bus</code> parameter is not provided.</p>
+<h1 id="graphql-schema" class="section-header"><a href="#graphql-schema">GraphQL Schema</a></h1><h2 id="queries" class="section-header"><a href="#queries">Queries</a></h2><h3 id="failed-packets-up" class="section-header"><a href="#failed-packets-up">Failed Packets Up</a></h3>
+<p>Request number of bad uplink packets</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered">
+{
+    <span class="ident">failedPacketsUp</span>: <span class="macro">Int</span><span class="macro">!</span>
+}</pre></div>
+<h3 id="failed-packets-down" class="section-header"><a href="#failed-packets-down">Failed Packets Down</a></h3>
+<p>Request number of bad downlink packets</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered">
+{
+    <span class="ident">failedPacketsDown</span>: <span class="macro">Int</span><span class="macro">!</span>
+}</pre></div>
+<h3 id="packets-up" class="section-header"><a href="#packets-up">Packets Up</a></h3>
+<p>Request number of packets successfully uplinked</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered">
+{
+    <span class="ident">packetsUp</span>: <span class="macro">Int</span><span class="macro">!</span>
+}</pre></div>
+<h3 id="packets-down" class="section-header"><a href="#packets-down">Packets Down</a></h3>
+<p>Request number of packets successfully downlinked</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered">
+{
+    <span class="ident">packetsDown</span>: <span class="macro">Int</span><span class="macro">!</span>
+}</pre></div>
+<h3 id="errors" class="section-header"><a href="#errors">Errors</a></h3>
+<p>Request errors that have occurred</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered">
+{
+    <span class="ident">errors</span>: [<span class="ident">String</span>]
+}</pre></div>
+<h3 id="modem-health" class="section-header"><a href="#modem-health">Modem Health</a></h3>
+<p>Request current modem health information</p>
+<pre><code class="language-json">{
+    modemHealth {
+        resetCount: Int!
+        currentTime: Int!
+        currentRssi: Int!
+        connectionStatus: Int!
+        globalstarGateway: Int!
+        lastContactTime: Int!
+        lastAttemptTime: Int!
+        callAttemptsSinceReset: Int!
+        successfulConnectsSinceReset: Int!
+        averageConnectionDuration: Int!
+        connectionDurationStdDev: Int!
+    }
+}
+</code></pre>
+<h3 id="geolocation" class="section-header"><a href="#geolocation">Geolocation</a></h3>
+<p>Request current geolocation data</p>
+<pre><code class="language-jso">{
+    geolocation {
+        lon: Float!
+        lat: Float!
+        time: Int!
+        maxError: Int!
+    }
+}
+</code></pre>
+<h3 id="downlink-queue-count" class="section-header"><a href="#downlink-queue-count">Downlink Queue Count</a></h3>
+<p>Request number of files in the downlink queue</p>
+<pre><code class="language-json">{
+    downlink_queue_count: Int!
+}
+</code></pre>
+<h3 id="is-alive" class="section-header"><a href="#is-alive">Is Alive</a></h3>
+<p>Queries the modem's 'is_alive' status</p>
+<pre><code class="language-json">{
+    alive: Boolean!
+}
+</code></pre>
+<h2 id="mutations" class="section-header"><a href="#mutations">Mutations</a></h2><h3 id="noop" class="section-header"><a href="#noop">NoOp</a></h3>
+<p>Execute a trivial command against the system</p>
+<pre><code class="language-json">mutation {
+    noop: Boolean!
+}
+</code></pre>
+</div></section><section id="search" class="content hidden"></section><section class="footer"></section><aside id="help" class="hidden"><div><h1 class="hidden">Help</h1><div class="shortcuts"><h2>Keyboard Shortcuts</h2><dl><dt><kbd>?</kbd></dt><dd>Show this help dialog</dd><dt><kbd>S</kbd></dt><dd>Focus the search field</dd><dt><kbd>↑</kbd></dt><dd>Move up in search results</dd><dt><kbd>↓</kbd></dt><dd>Move down in search results</dd><dt><kbd>↹</kbd></dt><dd>Switch tab</dd><dt><kbd>&#9166;</kbd></dt><dd>Go to active search result</dd><dt><kbd>+</kbd></dt><dd>Expand all sections</dd><dt><kbd>-</kbd></dt><dd>Collapse all sections</dd></dl></div><div class="infos"><h2>Search Tricks</h2><p>Prefix searches with a type followed by a colon (e.g., <code>fn:</code>) to restrict the search to a given type.</p><p>Accepted types are: <code>fn</code>, <code>mod</code>, <code>struct</code>, <code>enum</code>, <code>trait</code>, <code>type</code>, <code>macro</code>, and <code>const</code>.</p><p>Search functions by type signature (e.g., <code>vec -> usize</code> or <code>* -> vec</code>)</p><p>Search multiple things at once by splitting your query with comma (e.g., <code>str,u8</code> or <code>String,struct:Vec,test</code>)</p></div></div></aside><script>window.rootPath = "../";window.currentCrate = "nsl_duplex_d2_comms_service";</script><script src="../aliases.js"></script><script src="../main.js"></script><script defer src="../search-index.js"></script></body></html>

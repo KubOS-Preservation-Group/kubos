@@ -1,0 +1,453 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Kubos Device API Creation Guide &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../../index.html"/>
+        <link rel="up" title="Under the Hood of KubOS" href="../index.html"/>
+        <link rel="next" title="Kubos Device APIs" href="device-api/index.html"/>
+        <link rel="prev" title="Under the Hood of KubOS" href="../index.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../obc-docs/index.html">Working with an OBC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ecosystem/index.html">KubOS Ecosystem</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Under the Hood</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#apis">APIs</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Kubos Device API Creation Guide</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#research">Research</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#general-api-framework">General API Framework</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#file-location">File Location</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#coding-style">Coding Style</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#documentation">Documentation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#testing">Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="device-api/index.html">Device Interfaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="obc-api/index.html">OBC APIs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubos-hal/index.html">Kubos HAL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubos-libs.html">Kubos Libraries</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#protocols">Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#kubos-linux">Kubos Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#design-decisions">Design Decisions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../sdk-docs/index.html">Kubos SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Contributing to KubOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Under the Hood of KubOS</a> &raquo;</li>
+        
+      <li>Kubos Device API Creation Guide</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/deep-dive/apis/device-api-guide.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="kubos-device-api-creation-guide">
+<h1>Kubos Device API Creation Guide<a class="headerlink" href="#kubos-device-api-creation-guide" title="Permalink to this headline">¶</a></h1>
+<p>This guide covers the process developers should go through when writing an API for a new device.</p>
+<p>Our goal is to create an API which covers the <em>majority</em> of functions which a consumer might need.</p>
+<p>By not implementing all possible functionality, we save ourselves a potentially large amount of development
+time which can instead be put to better use.</p>
+<p>Most device APIs will be created to be consumed by services. They are used to abstract away the particular
+requirements of communicating with a particular device, making the service code much smaller and simpler and,
+therefore, more readable.</p>
+<div class="section" id="research">
+<h2>Research<a class="headerlink" href="#research" title="Permalink to this headline">¶</a></h2>
+<p>Read the hardware doc to get an idea of what commands are available.</p>
+<p>Refer to the correlating service outline doc to figure out which commands/functions are important.
+For example, when implementing a new ADCS API, refer to the ADCS service outline.</p>
+<p>Create a list of functions you expect to implement.
+If needed, create a list of potential functions you’re unsure about.</p>
+<p>Find a Kubos device API to model the new API’s structure and naming conventions after.
+Ideally, there will be an existing API within the same category as the new API;
+for example, the TRXVU API if you were implementing a new radio.</p>
+<p>If you have any questions about what should be implemented and how it should be structured,
+talk with other KubOS developers or the KubOS product manager.</p>
+</div>
+<div class="section" id="general-api-framework">
+<h2>General API Framework<a class="headerlink" href="#general-api-framework" title="Permalink to this headline">¶</a></h2>
+<p>Most APIs will likely implement most of these kinds of functions:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Init/terminate - Used to open/close the Linux device file</li>
+<li>Configuration - Run-time configuration</li>
+<li>Power - On, off, reset</li>
+<li>Action commands - (Highly device specific) Kick watchdog, send/receive message, deploy antenna, change orientation, etc</li>
+<li>Fetch Information - Get uptime, get system status, get system telemetry, get orientation, etc</li>
+</ul>
+</div></blockquote>
+<p>Any internal configuration required (for example, setting an I2C slave address) should be done dynamically.
+For example, by using an argument in the API’s <code class="docutils literal notranslate"><span class="pre">{API}::new()</span></code> function.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Historically, this kind of configuration has been done with <cite>config.json</cite> options, but this has been deprecated
+in favor of the dynamic configuration to make the interaction between C, Rust, and Python more smooth.</p>
+</div>
+</div>
+<div class="section" id="file-location">
+<h2>File Location<a class="headerlink" href="#file-location" title="Permalink to this headline">¶</a></h2>
+<p>New APIs should be located in a new folder within the <cite>apis</cite> folder of the <a class="reference external" href="https://github.com/kubos/kubos">Kubos repo</a>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">+--</span> <span class="n">apis</span>\
+<span class="o">|</span>   <span class="o">+--</span> <span class="n">adcs</span><span class="o">-</span><span class="n">api</span>\
+<span class="o">|</span>   <span class="o">+--</span> <span class="n">clyde</span><span class="o">-</span><span class="mi">3</span><span class="n">g</span><span class="o">-</span><span class="n">eps</span><span class="o">-</span><span class="n">api</span>\
+<span class="o">|</span>   <span class="o">+--</span> <span class="n">isis</span><span class="o">-</span><span class="n">trxvu</span><span class="o">-</span><span class="n">api</span>\
+<span class="o">|</span>   <span class="o">+--</span> <span class="o">&lt;</span><span class="n">new</span><span class="o">-</span><span class="n">api</span><span class="o">&gt;</span>\
+<span class="o">|</span>
+<span class="o">+--</span> <span class="n">cargo</span><span class="o">-</span><span class="n">kubos</span>\
+<span class="o">+--</span> <span class="n">ccan</span>\
+<span class="o">+--</span> <span class="n">cmocka</span>\
+</pre></div>
+</div>
+<p>APIs may be written in Rust, Python, or C. The language that the corresponding service will be written in should determine
+the language of choice for the API, as the service and the API will be tightly integrated.</p>
+</div>
+<div class="section" id="coding-style">
+<h2>Coding Style<a class="headerlink" href="#coding-style" title="Permalink to this headline">¶</a></h2>
+<p>While each API is highly device-specific, our goal is to keep the overall styling and layout as similar as possible.
+This makes the codebase much more maintainable and reduces the amount of effort required for a service developer
+to navigate between APIs.</p>
+<p>In addition to mimicking existing APIs, please refer to the <a class="reference internal" href="../../contributing/kubos-standards.html"><span class="doc">Kubos Coding and Documentation Standards</span></a> doc for more specific coding rules.</p>
+<div class="section" id="guidelines-for-rust-apis">
+<h3>Guidelines for Rust APIs<a class="headerlink" href="#guidelines-for-rust-apis" title="Permalink to this headline">¶</a></h3>
+<p>All relevant functionality should be implemented on a struct which owns any primitives used for device communications.</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">pub</span><span class="w"> </span><span class="k">struct</span> <span class="nc">RadioDevice</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">conn</span>: <span class="nc">UartConnection</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="k">impl</span><span class="w"> </span><span class="n">RadioDevice</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">new</span><span class="p">(</span><span class="n">uart_device</span>: <span class="kp">&amp;</span><span class="kt">str</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">RadioDevice</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">read</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">RadioResult</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">u8</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">write</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">data</span>: <span class="kp">&amp;</span><span class="p">[</span><span class="kt">u8</span><span class="p">])</span><span class="w"> </span>-&gt; <span class="nc">RadioResult</span><span class="o">&lt;</span><span class="p">()</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Each API should implement their own <code class="docutils literal notranslate"><span class="pre">Result</span></code> type and <code class="docutils literal notranslate"><span class="pre">Errors</span></code> enum.</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">pub</span><span class="w"> </span><span class="k">enum</span> <span class="nc">RadioError</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+
+<span class="k">pub</span><span class="w"> </span><span class="k">type</span> <span class="nc">RadioResult</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">RadioError</span><span class="o">&gt;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Please refer to the <a class="reference internal" href="../../sdk-docs/sdk-rust.html"><span class="doc">Using Rust with the Kubos SDK</span></a> doc for additional guidance on working with Rust.</p>
+</div>
+<div class="section" id="guidelines-for-c-apis">
+<h3>Guidelines for C APIs<a class="headerlink" href="#guidelines-for-c-apis" title="Permalink to this headline">¶</a></h3>
+<p>All relevant functionality should be exposed through public functions in a header file.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="c1">// radio_device.h</span>
+
+<span class="n">KRadioStatus</span> <span class="nf">k_radio_init</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span> <span class="n">bus</span><span class="p">);</span>
+
+<span class="n">KRadioStatus</span> <span class="nf">k_radio_read</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span> <span class="n">buffer</span><span class="p">);</span>
+
+<span class="n">KRadioStatus</span> <span class="nf">k_radio_write</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">data</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>All structures or primitives used for device communication should private
+and hidden in implementation files.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="c1">// radio_device.c</span>
+
+<span class="k">static</span> <span class="kt">int</span> <span class="n">radio_bus_handle</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Each API should implement its own <code class="docutils literal notranslate"><span class="pre">Status</span></code> enum.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="c1">// radio_device.h</span>
+
+<span class="k">typedef</span> <span class="k">enum</span> <span class="p">{</span>
+    <span class="n">RADIO_OK</span><span class="p">,</span>     <span class="cm">/** Everything is good */</span>
+    <span class="n">RADIO_ERROR</span><span class="p">,</span>  <span class="cm">/** Generic error */</span>
+    <span class="p">...</span>
+<span class="p">}</span> <span class="n">KRadioStatus</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Please refer to the <a class="reference internal" href="../../sdk-docs/sdk-c.html"><span class="doc">Using C with the Kubos SDK</span></a> doc for additional guidance on working with C.</p>
+</div>
+<div class="section" id="guidelines-for-python-apis">
+<h3>Guidelines for Python APIs<a class="headerlink" href="#guidelines-for-python-apis" title="Permalink to this headline">¶</a></h3>
+<p>All relevant functionality should be exposed through classes which store any data relevant to device communications.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">RadioDevice</span><span class="p">:</span>
+    <span class="n">connection</span> <span class="o">=</span> <span class="bp">None</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+        <span class="o">...</span>
+
+    <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="o">...</span>
+
+    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="o">...</span>
+</pre></div>
+</div>
+<p>Please refer to the <a class="reference internal" href="../../sdk-docs/sdk-python.html"><span class="doc">Using Python with the Kubos SDK</span></a> doc for additional guidance on working with Python.</p>
+</div>
+</div>
+<div class="section" id="documentation">
+<h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h2>
+<p>Documentation for new device APIs should be added to the <cite>docs/deep-dive/apis/device-api</cite> folder.</p>
+<p>Each API will have at least one doc:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">&lt;new-api&gt;.rst</span></code> - API’s users guide</li>
+</ul>
+</div></blockquote>
+<p>APIs which are written in C will require a second doc:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">&lt;new-api&gt;_api.rst</span></code> - Source-level API doc</li>
+</ul>
+</div></blockquote>
+<p>These docs should be added to the table of contents in <cite>docs/deep-dive/apis/device-api/index.rst</cite>.</p>
+<p>In addition to mimicking documentation for existing APIs, please refer to the <a class="reference internal" href="../../contributing/documentation.html"><span class="doc">Documentation</span></a> doc for more details on writing source-level documentation and verifying new documentation.</p>
+<div class="section" id="users-guide">
+<h3>Users Guide<a class="headerlink" href="#users-guide" title="Permalink to this headline">¶</a></h3>
+<p>The API’s users guide should give an overview of the capabilities of the API.</p>
+<p>It should cover things like:</p>
+<blockquote>
+<div><ul class="simple">
+<li>An overview of the hardware device</li>
+<li>Run-time configuration options</li>
+<li>Complex functions</li>
+<li>Available telemetry items (i.e. anything returned by a “get” function)</li>
+<li>A reference to the API’s source-level documentation</li>
+</ul>
+</div></blockquote>
+<p>The API’s main audience will be service developers, so write the documentation with them in mind.</p>
+</div>
+</div>
+<div class="section" id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
+<p>Despite the fact that it’s usually done last and frequently simply ignored in the face of time-constraints,
+creating the API’s unit and integration tests is still very important.</p>
+<p>The unit tests will be run by CircleCI with each code change.</p>
+<p>The integration tests will normally be run as an automated suite.</p>
+<p>In addition to mimicking tests in existing APIs, please refer to the <a class="reference internal" href="../../contributing/testing.html"><span class="doc">Testing</span></a> doc for more specific testing guidelines.</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="device-api/index.html" class="btn btn-neutral float-right" title="Kubos Device APIs" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../index.html" class="btn btn-neutral" title="Under the Hood of KubOS" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

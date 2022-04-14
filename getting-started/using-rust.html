@@ -1,0 +1,323 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Getting Started with KubOS and Rust &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../index.html"/>
+        <link rel="up" title="Getting Started with KubOS" href="index.html"/>
+        <link rel="next" title="Getting Started with KubOS and Python" href="using-python.html"/>
+        <link rel="prev" title="Setting up a Dev Environment in Windows" href="windows-setup.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Getting Started</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="no-board.html">I Don’t Have Hardware Yet, What Can I Do?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="local-setup.html">Setting Up Your Local Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="windows-setup.html">Setting up a Dev Environment in Windows</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Getting Started with KubOS and Rust</a></li>
+<li class="toctree-l2"><a class="reference internal" href="using-python.html">Getting Started with KubOS and Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="local-services.html">Running KubOS Core Services Locally</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../obc-docs/index.html">Working with an OBC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ecosystem/index.html">KubOS Ecosystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deep-dive/index.html">Under the Hood</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sdk-docs/index.html">Kubos SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing to KubOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Getting Started with KubOS</a> &raquo;</li>
+        
+      <li>Getting Started with KubOS and Rust</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/getting-started/using-rust.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="getting-started-with-kubos-and-rust">
+<h1>Getting Started with KubOS and Rust<a class="headerlink" href="#getting-started-with-kubos-and-rust" title="Permalink to this headline">¶</a></h1>
+<p>This document will cover getting started using Rust for local KubOS development.
+You will need to have the build dependencies listed in <a class="reference internal" href="local-setup.html#build-dependencies"><span class="std std-ref">local build dependencies</span></a>
+installed prior to using Rust. After these dependencies have been installed,
+you are ready to begin creating and running your own Rust projects.</p>
+<div class="section" id="new-project">
+<h2>New Project<a class="headerlink" href="#new-project" title="Permalink to this headline">¶</a></h2>
+<p>A new Rust project can be created by running the following command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cargo new project_name
+</pre></div>
+</div>
+<p>Cargo will create the project folder and a basic folder structure.
+It is suggested that you create custom mission applications or services
+outside of the Kubos source repo, preferably in your own project’s repo folder.</p>
+</div>
+<div class="section" id="compiling-and-running">
+<h2>Compiling and Running<a class="headerlink" href="#compiling-and-running" title="Permalink to this headline">¶</a></h2>
+<p>To compile the project use the normal Cargo build command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cargo build
+</pre></div>
+</div>
+<p>This command should be run from within the project’s directory, which was
+generated by the <code class="docutils literal notranslate"><span class="pre">cargo</span> <span class="pre">new</span></code> command.</p>
+<p>The resulting binary will be located in <cite>{project directory}/target/debug/{project name}</cite>.</p>
+<p>The binary can be run locally using the <code class="docutils literal notranslate"><span class="pre">cargo</span> <span class="pre">run</span></code> command.
+Any desired arguments can be passed to the underlying executable by placing them behind <code class="docutils literal notranslate"><span class="pre">--</span></code> like
+so:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cargo run -- -c config.toml
+</pre></div>
+</div>
+</div>
+<div class="section" id="making-rust-binaries-smaller">
+<span id="rust-opt"></span><h2>Making Rust Binaries Smaller<a class="headerlink" href="#making-rust-binaries-smaller" title="Permalink to this headline">¶</a></h2>
+<p>By default, Rust binaries can be quite large.
+These are some steps which we recommend in order to drastically shrink the size of your compiled
+application:</p>
+<ul>
+<li><p class="first">Do a release build, rather than a debug build (<code class="docutils literal notranslate"><span class="pre">cargo</span> <span class="pre">build</span> <span class="pre">--release</span></code>)</p>
+</li>
+<li><p class="first">Add the following optimization args to your <cite>Cargo.toml</cite> file and recompile:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">profile</span><span class="o">.</span><span class="n">release</span><span class="p">]</span>
+<span class="n">lto</span> <span class="o">=</span> <span class="n">true</span>
+<span class="n">opt</span><span class="o">-</span><span class="n">level</span> <span class="o">=</span> <span class="s2">&quot;z&quot;</span>
+<span class="n">panic</span> <span class="o">=</span> <span class="s2">&quot;abort&quot;</span>
+<span class="n">codegen</span><span class="o">-</span><span class="n">units</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">After the binary has been built, run <code class="docutils literal notranslate"><span class="pre">arm-linux-strip</span> <span class="pre">/path/to/binary</span></code></p>
+</li>
+</ul>
+</div>
+<div class="section" id="next-steps">
+<h2>Next Steps<a class="headerlink" href="#next-steps" title="Permalink to this headline">¶</a></h2>
+<p>Ready to create a mission application in Rust? Take a look at the <a class="reference internal" href="../tutorials/first-mission-app.html"><span class="doc">Python mission application</span></a>
+tutorial for guidance in the construction of a mission application.
+The <a class="reference external" href="https://github.com/kubos/kubos/tree/master/examples/rust-mission-app">example rust mission application</a> is a good model for a Rust-based mission application.</p>
+<p>Interested in cross-compiling your project for use on hardware? Take a look at the
+<a class="reference internal" href="../obc-docs/cross-compile.html"><span class="doc">local cross-compiling</span></a> guide.</p>
+<p>Interested in working on the KubOS Rust source or contributing back? Take a look at
+the <a class="reference internal" href="../contributing/index.html"><span class="doc">Contributing to KubOS</span></a> docs.</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="using-python.html" class="btn btn-neutral float-right" title="Getting Started with KubOS and Python" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="windows-setup.html" class="btn btn-neutral" title="Setting up a Dev Environment in Windows" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,434 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Building Kubos Linux for the Beaglebone Black &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../../index.html"/>
+        <link rel="up" title="Under the Hood of KubOS" href="../index.html"/>
+        <link rel="next" title="Building Kubos Linux for the ISIS-OBC" href="kubos-linux-on-iobc.html"/>
+        <link rel="prev" title="Configuring Kubos Linux" href="configuring-kubos.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../obc-docs/index.html">Working with an OBC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ecosystem/index.html">KubOS Ecosystem</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Under the Hood</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#apis">APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#protocols">Protocols</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#kubos-linux">Kubos Linux</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="configuring-kubos.html">Configuring Kubos Linux</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Building Kubos Linux for the Beaglebone Black</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#reference-documents">Reference Documents</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#software-components">Software Components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#kubos-linux-build-process">Kubos Linux Build Process</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#using-kubos-linux">Using Kubos Linux</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuring-kubos-linux">Configuring Kubos Linux</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="kubos-linux-on-iobc.html">Building Kubos Linux for the ISIS-OBC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubos-linux-on-mbm2.html">Building Kubos Linux for the Pumpkin MBM2</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#design-decisions">Design Decisions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../sdk-docs/index.html">Kubos SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Contributing to KubOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Under the Hood of KubOS</a> &raquo;</li>
+        
+      <li>Building Kubos Linux for the Beaglebone Black</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/deep-dive/klb/kubos-linux-on-bbb.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="building-kubos-linux-for-the-beaglebone-black">
+<h1>Building Kubos Linux for the Beaglebone Black<a class="headerlink" href="#building-kubos-linux-for-the-beaglebone-black" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>This supplementary document covers specific features and components of Kubos Linux for the Beaglebone Black.</p>
+<p>The <a class="reference internal" href="../../ecosystem/linux-docs/kubos-linux-overview.html"><span class="doc">Kubos Linux Overview</span></a> doc covers the major components of Kubos Linux.</p>
+<p>Additionally, this document covers the steps required in order to build Kubos Linux.</p>
+</div>
+<div class="section" id="reference-documents">
+<h2>Reference Documents<a class="headerlink" href="#reference-documents" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="beaglebone-documentation">
+<h3>Beaglebone Documentation<a class="headerlink" href="#beaglebone-documentation" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference external" href="https://beagleboard.org/black">Beaglebone Black Web Page</a></li>
+<li><a class="reference external" href="http://elinux.org/Beagleboard:BeagleBoneBlack">Beaglebone Black Wiki</a></li>
+<li><a class="reference external" href="http://beagleboard.org/Support/bone101/#hardware">Beaglebone Black Hardware Diagrams</a></li>
+<li><a class="reference external" href="http://static6.arrow.com/aropdfconversion/8fff89aa85f5c451318cbdee2facd9c9fac36872/bbb_srm.pdf">Beaglebone Black System Reference Manual Rev C</a></li>
+</ul>
+</div>
+<div class="section" id="kubos-documentation">
+<h3>Kubos Documentation<a class="headerlink" href="#kubos-documentation" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference internal" href="../../obc-docs/bbb/installing-linux-bbb.html"><span class="doc">Installing Kubos Linux on a Beaglebone Black</span></a> - Steps to install Kubos Linux</li>
+<li><a class="reference internal" href="../../ecosystem/linux-docs/using-kubos-linux.html"><span class="doc">Using Kubos Linux</span></a> - General guide for interacting with Kubos Linux</li>
+<li><a class="reference internal" href="../../obc-docs/bbb/working-with-the-bbb.html"><span class="doc">Working with the Beaglebone Black</span></a> - Guide for interacting with BBB-specific features</li>
+</ul>
+</div>
+</div>
+<div class="section" id="software-components">
+<h2>Software Components<a class="headerlink" href="#software-components" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="rom-bootloader">
+<h3>ROM Bootloader<a class="headerlink" href="#rom-bootloader" title="Permalink to this headline">¶</a></h3>
+<p>The ROM bootloader lives in a small section of ROM space. It should come
+pre-loaded on the board and should not need to be modified. It selects the
+next bootloader depending on whether the boot mode button is being held.
+If not held, it attempts to run the next boot step from eMMC storage;
+otherwise, it attempts to boot from the microSD card.</p>
+</div>
+<div class="section" id="u-boot">
+<h3>U-Boot<a class="headerlink" href="#u-boot" title="Permalink to this headline">¶</a></h3>
+<p>This board utilizes U-Boot’s SPL feature. A small boot file called “MLO” is
+run and that file then loads the main U-Boot image into SDRAM.</p>
+<p>The main U-Boot image iterates through the <cite>boot_targets</cite> variable to attempt
+to boot from an available MMC device. The partuuid of the first successful
+device is passed off to Linux to be used to mount the root filesystem.</p>
+<p>By default, the microSD card slot will be checked first, followed by the
+eMMC. This behavior can be changed by setting the <code class="docutils literal notranslate"><span class="pre">boot_dev</span></code> value to
+<code class="docutils literal notranslate"><span class="pre">1</span></code> to indicate that the eMMC should be tried first.</p>
+</div>
+</div>
+<div class="section" id="kubos-linux-build-process">
+<h2>Kubos Linux Build Process<a class="headerlink" href="#kubos-linux-build-process" title="Permalink to this headline">¶</a></h2>
+<p>If for some reason you want or need to modify and rebuild the Kubos Linux components, follow
+the steps in this section.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Kubos Linux should be built from within an instance of the Kubos SDK or some other native Linux
+environment.</p>
+</div>
+<div class="section" id="build-the-os-files">
+<span id="build-os-bbb"></span><h3>Build the OS Files<a class="headerlink" href="#build-the-os-files" title="Permalink to this headline">¶</a></h3>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The OS files cannot be built using a <a class="reference external" href="https://www.vagrantup.com/docs/synced-folders/">synced folder</a> in a Vagrant box (or regular VM).
+VirtualBox does not support hard links in shared folders, which are crucial in order to complete
+the build.</p>
+</div>
+<p><a class="reference internal" href="../../sdk-docs/sdk-installing.html"><span class="doc">SSH into a Kubos SDK box</span></a></p>
+<p>In order to build Kubos Linux, two components are needed:</p>
+<ul class="simple">
+<li>The <a class="reference external" href="https://github.com/kubos/kubos-linux-build">kubos-linux-build repo</a> - Contains the configurations, patches, and extra tools needed to build Kubos Linux</li>
+<li><a class="reference external" href="https://buildroot.org/">BuildRoot</a> - The actual build system</li>
+</ul>
+<p>These components should be setup as children of the same parent directory.
+There are several commands and variables in the build process which use relative file paths to navigate between the components.</p>
+<p>After the environment has been set up, all build commands will be run from the BuildRoot directory unless otherwise stated.</p>
+<p>To set up a build environment and build Kubos Linux:</p>
+<p>Create a new parent folder to contain the build environment</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ mkdir kubos-linux
+</pre></div>
+</div>
+<p>Enter the new folder</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd kubos-linux
+</pre></div>
+</div>
+<p>Download BuildRoot-2019.02.2 (more current versions of BuildRoot may work as well,
+but all testing has been done against 2019.02.2)</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">All Kubos documentation will refer to v2019.02.2, which is the latest version of the LTS release at the time of this writing.</p>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ wget https://buildroot.uclibc.org/downloads/buildroot-2019.02.2.tar.gz &amp;&amp; tar xvzf buildroot-2019.02.2.tar.gz &amp;&amp; rm buildroot-2019.02.2.tar.gz
+</pre></div>
+</div>
+<p>Pull the kubos-linux-build repo</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git clone http://github.com/kubos/kubos-linux-build
+</pre></div>
+</div>
+<p>Move into the buildroot directory</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd buildroot-2019.02.2
+</pre></div>
+</div>
+<p>Point BuildRoot to the external kubos-linux-build folder and tell it to build
+for the Beaglebone Black.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You will need to build with <code class="docutils literal notranslate"><span class="pre">sudo</span></code> if you are using the default
+configuration, since it points the output toolchain to “/usr/bin/bbb_toolchain”,
+which is a protected directory.</p>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo make BR2_EXTERNAL=../kubos-linux-build beaglebone-black_defconfig
+</pre></div>
+</div>
+<p>Build everything</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo make
+</pre></div>
+</div>
+<p>The full build process will take a while. Running on a Linux VM, it takes about
+an hour. Running in native Linux, it took about ten minutes. Once this build
+process has completed once, you can run other BuildRoot commands to rebuild
+only certain sections and it will go much more quickly (&lt;5 min).</p>
+<p>BuildRoot documentation can be found
+<a class="reference external" href="https://buildroot.org/docs.html">**here**</a></p>
+<p>The generated files will be located in buildroot-2019.02.2/output/images.
+The relevant files are:</p>
+<ul class="simple">
+<li>uboot.bin - The U-Boot binary</li>
+<li>kernel - The compressed Linux kernel file</li>
+<li>beaglebone-black.dtb - The Device Tree Binary that Linux uses to configure itself
+for the Beaglebone Black board</li>
+<li>rootfs.tar - The root file system. Contains BusyBox and other libraries</li>
+<li>kubos-linux.tar.gz - A compressed file containing the complete Kubos Linux SD card
+image, <code class="docutils literal notranslate"><span class="pre">kubos-linux.img</span></code>. It has a disk signature of 0x4B4C4E58 (“KLNX”).</li>
+<li>aux-sd.tar.gz - A compressed file containing the auxilliary SD card image which
+contains the upgrade partition and the <code class="docutils literal notranslate"><span class="pre">kpack-base.itb</span></code> file which is used for
+OS recovery. It has a disk signature of 0x41555820 (“AUX “).</li>
+</ul>
+<p>The <cite>kubos-linux.tar.gz</cite> and <cite>aux-sd.tar.gz</cite> files are the two final files which will be used to
+install Kubos Linux onto your target board.</p>
+<div class="section" id="changing-the-output-toolchain-directory-optional">
+<h4>Changing the Output Toolchain Directory (optional)<a class="headerlink" href="#changing-the-output-toolchain-directory-optional" title="Permalink to this headline">¶</a></h4>
+<p>If you would like to build your toolchain in somewhere other than the
+“/usr/bin/bbb_toolchain” directory, update the <code class="docutils literal notranslate"><span class="pre">BR2_HOST_DIR</span></code> variable in the
+“configs/bbb_defconfig” file.</p>
+<p>If you would like BuildRoot to just build the toolchain locally, you may remove
+the <code class="docutils literal notranslate"><span class="pre">BR2_HOST_DIR</span></code> variable entirely. The toolchain will then be built under the
+main “buildroot-2019.02.2” directory in a new “output/host” folder.</p>
+</div>
+</div>
+</div>
+<div class="section" id="using-kubos-linux">
+<h2>Using Kubos Linux<a class="headerlink" href="#using-kubos-linux" title="Permalink to this headline">¶</a></h2>
+<p>For information on how to create and run applications on your new Kubos Linux system, see the
+<a class="reference internal" href="../../obc-docs/bbb/working-with-the-bbb.html"><span class="doc">Working with the Beaglebone Black</span></a> guide.</p>
+</div>
+<div class="section" id="configuring-kubos-linux">
+<h2>Configuring Kubos Linux<a class="headerlink" href="#configuring-kubos-linux" title="Permalink to this headline">¶</a></h2>
+<p>For information on how to customize your build of Kubos Linux, see the
+<a class="reference internal" href="configuring-kubos.html"><span class="doc">Configuring Kubos Linux</span></a> guide.</p>
+<p>This guide covers things like including custom packages, enabling hardware services, and selecting
+a non-default version of the KubOS source.</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="kubos-linux-on-iobc.html" class="btn btn-neutral float-right" title="Building Kubos Linux for the ISIS-OBC" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="configuring-kubos.html" class="btn btn-neutral" title="Configuring Kubos Linux" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

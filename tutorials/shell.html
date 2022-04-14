@@ -1,0 +1,473 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Establishing a Shell Connection with an OBC &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../index.html"/>
+        <link rel="up" title="Tutorials" href="index.html"/>
+        <link rel="next" title="Creating Your Communications Service" href="comms-service.html"/>
+        <link rel="prev" title="Transferring Files to an OBC" href="file-transfer.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#mission-development-tutorials">Mission Development Tutorials</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#system-interaction-tutorials">System Interaction Tutorials</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="app-register.html">Registering an Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="schedule-app.html">Scheduling an Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="querying-telemetry.html">Querying the System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="file-transfer.html">Transferring Files</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Creating a Shell Connection</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pre-requisites">Pre-Requisites</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#syntax">Syntax</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#starting-a-new-shell-session">Starting a New Shell Session</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#listing-existing-shell-sessions">Listing Existing Shell Sessions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#joining-an-existing-shell-session">Joining an Existing Shell Session</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#killing-an-existing-shell-session">Killing an Existing Shell Session</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#running-a-single-remote-command">Running a Single Remote Command</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#advanced-tutorials">Advanced Tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#other-resources">Other Resources</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../obc-docs/index.html">Working with an OBC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ecosystem/index.html">KubOS Ecosystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deep-dive/index.html">Under the Hood</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sdk-docs/index.html">Kubos SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing to KubOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Tutorials</a> &raquo;</li>
+        
+      <li>Establishing a Shell Connection with an OBC</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/tutorials/shell.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="establishing-a-shell-connection-with-an-obc">
+<h1>Establishing a Shell Connection with an OBC<a class="headerlink" href="#establishing-a-shell-connection-with-an-obc" title="Permalink to this headline">¶</a></h1>
+<p>The <a class="reference internal" href="../ecosystem/services/shell.html"><span class="doc">shell service</span></a> is used to provide shell access and commanding from
+mission operations or a development environment to the OBC.</p>
+<div class="section" id="pre-requisites">
+<h2>Pre-Requisites<a class="headerlink" href="#pre-requisites" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first"><a class="reference internal" href="../sdk-docs/sdk-installing.html"><span class="doc">Install the Kubos SDK</span></a> or set up the dependencies
+required for a <a class="reference internal" href="../getting-started/local-setup.html"><span class="doc">local dev environment</span></a></p>
+</li>
+<li><p class="first">Have an OBC available with ethernet capabilities
+(preferably with an <a class="reference internal" href="../obc-docs/index.html"><span class="doc">installation of Kubos Linux</span></a>)</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference internal" href="../obc-docs/comms-setup.html#ethernet"><span class="std std-ref">Configuring Ethernet</span></a></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Have the shell service running on a target OBC (this happens by default when running KubOS)</p>
+</li>
+<li><p class="first">Windows users: <a class="reference internal" href="../getting-started/windows-setup.html#windows-udp"><span class="std std-ref">Make sure Windows is setup to allow UDP packets from the OBC</span></a></p>
+</li>
+</ul>
+<p>We’ll be using the <a class="reference external" href="https://github.com/kubos/kubos/tree/master/clients/kubos-shell-client">shell client</a>
+in order to communicate with the shell service on our OBC, which is automatically included
+with the Kubos SDK (as of v1.8.0).</p>
+<p>If you are using a local development environment, instead of an instance of the SDK, you’ll need to
+clone the repo and navigate to the <cite>clients/kubos-shell-client</cite> folder.
+You’ll then run the program with <code class="docutils literal notranslate"><span class="pre">cargo</span> <span class="pre">run</span> <span class="pre">--</span> <span class="pre">{command</span> <span class="pre">args}</span></code>.</p>
+</div>
+<div class="section" id="syntax">
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
+<p>The shell client has the following command syntax:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">kubos</span><span class="o">-</span><span class="n">shell</span><span class="o">-</span><span class="n">client</span> <span class="p">[</span><span class="n">options</span><span class="p">]</span> <span class="p">(</span><span class="n">start</span> <span class="o">|</span> <span class="n">run</span> <span class="o">|</span> <span class="nb">list</span> <span class="o">|</span> <span class="n">join</span> <span class="o">|</span> <span class="n">kill</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Required arguments:</p>
+<blockquote>
+<div><ul>
+<li><p class="first">Operation to perform</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">start</span></code> - Start a new shell session</li>
+<li><code class="docutils literal notranslate"><span class="pre">run</span></code> - Run single remote command</li>
+<li><code class="docutils literal notranslate"><span class="pre">list</span></code> - List current shell sessions</li>
+<li><code class="docutils literal notranslate"><span class="pre">join</span></code> - Join an existing shell session</li>
+<li><code class="docutils literal notranslate"><span class="pre">kill</span></code> - Kill an existing shell session</li>
+<li><code class="docutils literal notranslate"><span class="pre">help</span></code> - Display the help message</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+<p>Optional arguments:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">-i</span> <span class="pre">{remote</span> <span class="pre">IP}</span></code> - Default: <cite>0.0.0.0</cite>. IP address of the shell service to connect to.</li>
+<li><code class="docutils literal notranslate"><span class="pre">-p</span> <span class="pre">{remote</span> <span class="pre">port}</span></code> - Default: <cite>8050</cite>. UDP port of the shell service to connect to.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="starting-a-new-shell-session">
+<h2>Starting a New Shell Session<a class="headerlink" href="#starting-a-new-shell-session" title="Permalink to this headline">¶</a></h2>
+<p>We’ll start by creating a new shell session between our dev environment and the OBC.</p>
+<p>Our command should look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ kubos-shell-client -i 10.0.2.20 -p 8050 start
+</pre></div>
+</div>
+<p>Or, from your local dev environment:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cargo run --bin kubos-shell-client -- -i 10.0.2.20 -p 8050 start
+</pre></div>
+</div>
+<p>The output from the client should look like this:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Starting shell client -&gt; 10.0.2.20:8050
+Starting shell session -&gt; 672612
+Press enter to send input to the shell session
+Press Control-D to detach from the session
+$
+</pre></div>
+</div>
+<p>The shell service has spawned an instance of <code class="docutils literal notranslate"><span class="pre">/bin/bash</span></code> on the
+remote system. Any lines on input given to the shell client will be
+sent to the shell service and executed by the <code class="docutils literal notranslate"><span class="pre">bash</span></code> instance.</p>
+<p>A simple shell session would look like this:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Starting shell client -&gt; 10.0.2.20:8050
+Starting shell session -&gt; 672612
+Press enter to send input to the shell session
+Press Control-D to detach from the session
+$ cd /home/kubos
+$ pwd
+/home/kubos
+$ whoami
+kubos
+</pre></div>
+</div>
+<p>You can enter the <code class="docutils literal notranslate"><span class="pre">exit</span></code> command to quit this <code class="docutils literal notranslate"><span class="pre">bash</span></code> session,
+or you can hit Control-D to detach from the session.</p>
+</div>
+<div class="section" id="listing-existing-shell-sessions">
+<h2>Listing Existing Shell Sessions<a class="headerlink" href="#listing-existing-shell-sessions" title="Permalink to this headline">¶</a></h2>
+<p>Next we will look at listing the existing shell sessions on the OBC.</p>
+<p>Our command should look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ kubos-shell-client -i 10.0.2.20 -p 8050 list
+</pre></div>
+</div>
+<p>The output from the client will look like this because we just
+started a session in the previous step:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Starting shell client -&gt; 10.0.2.20:8050
+Fetching existing shell sessions:
+    672612   { path = &#39;/bin/bash&#39;, pid = 24939 }
+</pre></div>
+</div>
+<p>The entries in the sessions list are structured like so:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[channel-id] { path = [process-path], pid = [process-id] }
+</pre></div>
+</div>
+<p>The channel ID is the unique identifier which can be used with the shell
+client’s <code class="docutils literal notranslate"><span class="pre">join</span></code> and <code class="docutils literal notranslate"><span class="pre">kill</span></code> commands.
+The process path is the path to the executable running in the session.
+The process ID is the PID of the running executable on the remote system.</p>
+<p>If no sessions exist, then the output from the client will look like this:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Starting shell client -&gt; 10.0.2.20:8050
+Fetching existing shell sessions:
+    No active sessions found
+</pre></div>
+</div>
+</div>
+<div class="section" id="joining-an-existing-shell-session">
+<h2>Joining an Existing Shell Session<a class="headerlink" href="#joining-an-existing-shell-session" title="Permalink to this headline">¶</a></h2>
+<p>If sessions already exist on the OBC then we are able to join them using
+the <code class="docutils literal notranslate"><span class="pre">join</span></code> command.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">join</span></code> command has the following syntax:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">kubos</span><span class="o">-</span><span class="n">shell</span><span class="o">-</span><span class="n">client</span> <span class="n">join</span> <span class="o">-</span><span class="n">c</span> <span class="o">&lt;</span><span class="n">channel_id</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>The channel ID should belong to a shell session which was previously started.</p>
+<p>To join the session started earlier, our command will look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ kubos-shell-client -i 10.0.2.20 -p 8050 join -c 672612
+</pre></div>
+</div>
+<p>The output from the client should look like this:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Starting shell client -&gt; 10.0.2.20:8050
+Joining existing shell session 672612
+Press enter to send input to the shell session
+Press Control-D to detach from the session
+$
+</pre></div>
+</div>
+</div>
+<div class="section" id="killing-an-existing-shell-session">
+<h2>Killing an Existing Shell Session<a class="headerlink" href="#killing-an-existing-shell-session" title="Permalink to this headline">¶</a></h2>
+<p>If sessions already exist on the OBC then we are also able to end them
+using the <code class="docutils literal notranslate"><span class="pre">kill</span></code> command. Shell sessions will not end unless the
+process exits or the <code class="docutils literal notranslate"><span class="pre">kill</span></code> command is used.</p>
+<p>The kill command has the following syntax:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">kubos</span><span class="o">-</span><span class="n">shell</span><span class="o">-</span><span class="n">client</span> <span class="n">kill</span> <span class="o">-</span><span class="n">c</span> <span class="o">&lt;</span><span class="n">channel_id</span><span class="o">&gt;</span> <span class="p">[</span><span class="o">-</span><span class="n">s</span> <span class="n">signal</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>The kill command requires a channel ID to know which session to kill.
+Optionally, a signal number may also be passed in. If no signal is
+specified, then <code class="docutils literal notranslate"><span class="pre">SIGKILL</span></code> will be sent.</p>
+<p>Our command should look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ kubos-shell-client -i 10.0.2.20 -p 8050 kill -c 672612
+</pre></div>
+</div>
+<p>The output from the client should look like this:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Starting shell client -&gt; 10.0.2.20:8050
+Killing existing shell session -c 672712
+</pre></div>
+</div>
+</div>
+<div class="section" id="running-a-single-remote-command">
+<h2>Running a Single Remote Command<a class="headerlink" href="#running-a-single-remote-command" title="Permalink to this headline">¶</a></h2>
+<p>Sometimes only a single command needs to be run. In these cases it is
+not necessary to start a whole shell session. The run command will
+handle starting the shell session, running the remote command,
+retrieving the output, and terminating the shell session.</p>
+<p>The run command has the following syntax:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">kubos</span><span class="o">-</span><span class="n">shell</span><span class="o">-</span><span class="n">client</span> <span class="n">run</span> <span class="o">-</span><span class="n">c</span> <span class="s2">&quot;&lt;command&gt;&quot;</span>
+</pre></div>
+</div>
+<p>The run command requires a command string to know what to run.
+This command string must include the base command as well as
+any required arguments. The command string <strong>must</strong> be enclosed in <a href="#id1"><span class="problematic" id="id2">`</span></a>”<a href="#id3"><span class="problematic" id="id4">`</span></a>s.</p>
+<p>A good use case for this command is determining the contents of a directory.
+We will look at the contents of the <cite>/home</cite> directory. Our command should
+look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ kubos-shell-client -i 10.0.2.20 -p 8050 run -c &quot;ls /home&quot;
+</pre></div>
+</div>
+<p>The output from the client should look like this:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Starting shell client: -&gt; 10.0.2.20:8050
+Running remote command &#39;ls -l /home&#39;
+
+kubos
+system
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="comms-service.html" class="btn btn-neutral float-right" title="Creating Your Communications Service" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="file-transfer.html" class="btn btn-neutral" title="Transferring Files to an OBC" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,1 @@
+initSidebarItems({"macro":[["root_path","Generates a path from parts starting at `/`"]]});

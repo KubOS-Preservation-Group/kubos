@@ -1,0 +1,251 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="API documentation for the Rust `novatel_oem6_service` crate."><meta name="keywords" content="rust, rustlang, rust-lang, novatel_oem6_service"><title>novatel_oem6_service - Rust</title><link rel="stylesheet" type="text/css" href="../normalize.css"><link rel="stylesheet" type="text/css" href="../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../dark.css"><link rel="stylesheet" type="text/css" href="../light.css" id="themeStyle"><script src="../storage.js"></script><noscript><link rel="stylesheet" href="../noscript.css"></noscript><link rel="shortcut icon" href="../favicon.ico"><style type="text/css">#crate-search{background-image:url("../down-arrow.svg");}</style></head><body class="rustdoc mod"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../novatel_oem6_service/index.html'><div class='logo-container'><img src='../rust-logo.png' alt='logo'></div></a><p class='location'>Crate novatel_oem6_service</p><div class="sidebar-elems"><a id='all-types' href='all.html'><p>See all novatel_oem6_service's items</p></a><div class="block items"><ul><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li></ul></div><p class='location'></p><script>window.sidebarCurrent = {name: 'novatel_oem6_service', ty: 'mod', relpath: '../'};</script></div></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../theme.js"></script><nav class="sub"><form class="search-form js-only"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../settings.html"><img src="../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><h1 class='fqn'><span class='out-of-band'><span id='render-detail'><a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class='inner'>&#x2212;</span>]</a></span><a class='srclink' href='../src/novatel_oem6_service/main.rs.html#17-364' title='goto source code'>[src]</a></span><span class='in-band'>Crate <a class="mod" href=''>novatel_oem6_service</a></span></h1><div class='docblock'><p>Kubos Service for interacting with a <a href="https://www.novatel.com/products/gnss-receivers/oem-receiver-boards/oem6-receivers/">NovAtel OEM6 High Precision GNSS Receiver</a></p>
+<h1 id="configuration" class="section-header"><a href="#configuration">Configuration</a></h1>
+<p>The service can be configured in the <code>/etc/kubos-config.toml</code> with the following fields:</p>
+<ul>
+<li><code>bus</code> - Specifies the UART bus the OEM6 is connected to</li>
+<li><code>ip</code> - Specifies the service's IP address</li>
+<li><code>port</code> - Specifies the port on which the service will be listening for UDP packets</li>
+</ul>
+<p>For example:</p>
+<pre><code class="language-toml">[novatel-oem6-service]
+bus = &quot;/dev/ttyS4&quot;
+
+[novatel-oem6-service.addr]
+ip = &quot;127.0.0.1&quot;
+port = 8130
+</code></pre>
+<h1 id="starting-the-service" class="section-header"><a href="#starting-the-service">Starting the Service</a></h1>
+<p>The service should be started automatically by its init script, but may also be started manually:</p>
+<pre><code class="language-toml">$ novatel-oem6-service
+Kubos OEM6 service started
+Listening on: 10.63.1.20:8130
+</code></pre>
+<h1 id="queries" class="section-header"><a href="#queries">Queries</a></h1><h2 id="ping" class="section-header"><a href="#ping">Ping</a></h2>
+<p>Test query to verify service is running without attempting
+to communicate with the underlying subsystem</p>
+<pre><code class="language-json">{
+    ping: &quot;pong&quot;
+}
+</code></pre>
+<h2 id="ack" class="section-header"><a href="#ack">ACK</a></h2>
+<p>Get the last run mutation</p>
+<pre><code class="language-json">{
+    ack: AckCommand
+}
+</code></pre>
+<h2 id="errors" class="section-header"><a href="#errors">Errors</a></h2>
+<p>Get all errors encountered since the last time this field was queried</p>
+<pre><code class="language-json">{
+    errors: [String]
+}
+</code></pre>
+<h2 id="power-status" class="section-header"><a href="#power-status">Power Status</a></h2>
+<p>Get the current power state of the system</p>
+<p>Note: <code>uptime</code> is included as an available field in order to conform to
+the Kubos Service Outline, but cannot be implemented for this device,
+so the value will be 1 if the device is on and 0 if the device is off</p>
+<pre><code class="language-json">{
+    power {
+        state: PowerState,
+        uptime: Int
+    }
+}
+</code></pre>
+<h2 id="configuration-1" class="section-header"><a href="#configuration-1">Configuration</a></h2>
+<p>Get the current configuration of the system</p>
+<p>Stretch goal: implement the LOGLIST command</p>
+<pre><code class="language-json">{
+    config: &quot;Not Implemented&quot;
+}
+</code></pre>
+<h2 id="test-results" class="section-header"><a href="#test-results">Test Results</a></h2>
+<p>Get the test results of the last run test</p>
+<pre><code class="language-json">{
+    testResults{
+        success,
+        telemetryNominal{...},
+        telemetryDebug{...}
+    }
+}
+</code></pre>
+<h2 id="system-status" class="section-header"><a href="#system-status">System Status</a></h2>
+<p>Get the current system status and errors</p>
+<pre><code class="language-json">{
+    systemStatus {
+       errors: Vec&lt;String&gt;,
+       status: Vec&lt;String&gt;
+    }
+}
+</code></pre>
+<h2 id="lock-status" class="section-header"><a href="#lock-status">Lock Status</a></h2>
+<p>Get current status of position information gathering</p>
+<pre><code class="language-json">{
+    lockStatus {
+        positionStatus: SolutionStatus,
+          positionType: PosVelType,
+          time {
+            ms: Int,
+              week: Int
+          },
+        timeStatus: RefTimeStatus,
+        velocityStatus: SolutionStatus,
+          velocityType: PosVelType
+    }
+}
+</code></pre>
+<h2 id="lock-information" class="section-header"><a href="#lock-information">Lock Information</a></h2>
+<p>Get the last known good position information</p>
+<pre><code class="language-json">{
+    lockInfo {
+       position: Vec&lt;Float&gt;,
+       time {
+           ms: Int,
+           week: Int
+       },
+       velocity: Vec&lt;Float&gt;
+    }
+}
+</code></pre>
+<h2 id="telemetry" class="section-header"><a href="#telemetry">Telemetry</a></h2>
+<p>Get current telemetry information for the system</p>
+<pre><code class="language-json">{
+    telemetry{
+        debug {
+            components: [{
+                bootVersion: String,
+                compType: Int,
+                compileDate: String,
+                compileTime: String,
+                hwVersion: String,
+                model: String,
+                serialNum: String,
+                swVersion: String,
+            }],
+            numComponents: Int
+        },
+        nominal{
+            lockInfo {...},
+            lockStatus {...},
+            systemStatus: {
+               errors: Vec&lt;String&gt;,
+               status: Vec&lt;String&gt;
+            }
+        }
+    }
+}
+</code></pre>
+<h1 id="mutations" class="section-header"><a href="#mutations">Mutations</a></h1><h2 id="errors-1" class="section-header"><a href="#errors-1">Errors</a></h2>
+<p>Get all errors encountered while processing this GraphQL request</p>
+<p>Note: This will only return errors thrown by fields which have
+already been processed, so it is recommended that this field be specified last.</p>
+<pre><code class="language-json">mutation {
+    errors: [String]
+}
+</code></pre>
+<h2 id="no-op" class="section-header"><a href="#no-op">No-Op</a></h2>
+<p>Execute a trivial command against the system</p>
+<pre><code class="language-json">mutation {
+    noop {
+        errors: String,
+        success: Boolean
+   }
+}
+</code></pre>
+<h2 id="set-power-state" class="section-header"><a href="#set-power-state">Set Power State</a></h2>
+<p>Control the power state of the system</p>
+<p>Note: Power control of the GPS device will be done by the GPSRM service</p>
+<pre><code class="language-json">mutation {
+    controlPower: &quot;Not Implemented&quot;
+}
+</code></pre>
+<h2 id="configuration-2" class="section-header"><a href="#configuration-2">Configuration</a></h2>
+<p>Configure the system</p>
+<ul>
+<li>config: Vector of configuration requests (ConfigStruct)
+<ul>
+<li>option: Configuration operation which should be performed</li>
+<li>hold: For <code>LOG_*</code> requests, specifies whether this request should be excluded
+from removal by future 'UNLOG_ALL' requests.
+For <code>UNLOG_ALL</code> requests, specifies whether the 'hold' value in previous
+<code>LOG_*</code> requests should be ignored.</li>
+<li>interval: Interval at which log messages should be generated.
+Note: Only applies to <code>LOG_POSITION_DATA</code> requests. Ignored otherwise</li>
+<li>offset: Offset of interval at which log messages should be generated.
+Note: Only applies to <code>LOG_POSITION_DATA</code> requests. Ignored otherwise</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-json">mutation {
+    configureHardware(config: [{option: ConfigOption, hold: Boolean, interval: Float, offset: Float},...]) {
+        config: String
+        errors: String,
+        success: Boolean,
+    }
+}
+</code></pre>
+<h2 id="system-self-test" class="section-header"><a href="#system-self-test">System Self-Test</a></h2>
+<p>Run a system self-test</p>
+<ul>
+<li>test: Type of self-test to perform</li>
+</ul>
+<pre><code class="language-json">mutation {
+    testHardware(test: TestType) {
+        ... on IntegrationTestResults {
+            errors: String,
+            success: Boolean,
+            telemetryNominal{...},
+            telemetryDebug{...}
+        }
+        ... on HardwareTestResults {
+            errors: &quot;Not Implemented&quot;,
+            success: true,
+            data: Empty
+        }
+   }
+}
+</code></pre>
+<h2 id="passthrough" class="section-header"><a href="#passthrough">Passthrough</a></h2>
+<p>Pass a custom command through to the system</p>
+<ul>
+<li>command: String containing the hex values to be sent (ex. &quot;C3&quot;)
+It will be converted to a byte array before transfer.</li>
+</ul>
+<pre><code class="language-json">mutation {
+    issueRawCommand(command: String) {
+        errors: String,
+        success: Boolean,
+        response: String
+    }
+}
+</code></pre>
+</div><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
+<table><tr class='module-item'><td><a class="struct" href="struct.ConfigStruct.html" title='novatel_oem6_service::ConfigStruct struct'>ConfigStruct</a></td><td class='docblock-short'><p>Input structure for 'configureHardware' mutation</p>
+</td></tr><tr class='module-item'><td><a class="struct" href="struct.ConfigureHardwareResponse.html" title='novatel_oem6_service::ConfigureHardwareResponse struct'>ConfigureHardwareResponse</a></td><td class='docblock-short'><p>Response fields for 'configureHardware' mutation</p>
+</td></tr><tr class='module-item'><td><a class="struct" href="struct.GenericResponse.html" title='novatel_oem6_service::GenericResponse struct'>GenericResponse</a></td><td class='docblock-short'><p>Common response fields structure for requests
+which don't return any specific data</p>
+</td></tr><tr class='module-item'><td><a class="struct" href="struct.GetPowerResponse.html" title='novatel_oem6_service::GetPowerResponse struct'>GetPowerResponse</a></td><td class='docblock-short'><p>Response fields for 'power' query</p>
+</td></tr><tr class='module-item'><td><a class="struct" href="struct.HardwareTestResults.html" title='novatel_oem6_service::HardwareTestResults struct'>HardwareTestResults</a></td><td class='docblock-short'><p>Response fields for 'testHardware(test: HARDWARE)' mutation</p>
+</td></tr><tr class='module-item'><td><a class="struct" href="struct.IntegrationTestResults.html" title='novatel_oem6_service::IntegrationTestResults struct'>IntegrationTestResults</a></td><td class='docblock-short'><p>Response fields for 'testHardware(test: INTEGRATION)' mutation</p>
+</td></tr><tr class='module-item'><td><a class="struct" href="struct.LockInfo.html" title='novatel_oem6_service::LockInfo struct'>LockInfo</a></td><td class='docblock-short'><p>Current system lock information. Used in the response fields of
+the <code>lockInfo</code> query</p>
+</td></tr><tr class='module-item'><td><a class="struct" href="struct.LockStatus.html" title='novatel_oem6_service::LockStatus struct'>LockStatus</a></td><td class='docblock-short'><p>Response fields for <code>lockStatus</code> query</p>
+</td></tr><tr class='module-item'><td><a class="struct" href="struct.OEMTime.html" title='novatel_oem6_service::OEMTime struct'>OEMTime</a></td><td class='docblock-short'><p>Time structure for <code>lockStatus</code> and <code>lockInfo</code> response fields</p>
+</td></tr><tr class='module-item'><td><a class="struct" href="struct.ReceiverStatus.html" title='novatel_oem6_service::ReceiverStatus struct'>ReceiverStatus</a></td><td class='docblock-short'><p>Receiver status</p>
+</td></tr><tr class='module-item'><td><a class="struct" href="struct.SystemStatus.html" title='novatel_oem6_service::SystemStatus struct'>SystemStatus</a></td><td class='docblock-short'><p>Response fields for <code>systemStatus</code> query</p>
+</td></tr><tr class='module-item'><td><a class="struct" href="struct.Telemetry.html" title='novatel_oem6_service::Telemetry struct'>Telemetry</a></td><td class='docblock-short'><p>Response fields for <code>telemetry</code> query</p>
+</td></tr><tr class='module-item'><td><a class="struct" href="struct.TelemetryNominal.html" title='novatel_oem6_service::TelemetryNominal struct'>TelemetryNominal</a></td><td class='docblock-short'><p>Response fields for 'telemetry(telem: NOMINAL)' query</p>
+</td></tr><tr class='module-item'><td><a class="struct" href="struct.VersionComponent.html" title='novatel_oem6_service::VersionComponent struct'>VersionComponent</a></td><td class='docblock-short'><p>System component data</p>
+</td></tr><tr class='module-item'><td><a class="struct" href="struct.VersionInfo.html" title='novatel_oem6_service::VersionInfo struct'>VersionInfo</a></td><td class='docblock-short'><p>Version information about the device, returned as the
+<code>telemetryDebug</code> response field</p>
+</td></tr></table><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
+<table><tr class='module-item'><td><a class="enum" href="enum.AckCommand.html" title='novatel_oem6_service::AckCommand enum'>AckCommand</a></td><td class='docblock-short'><p>Return field for 'ack' query</p>
+</td></tr><tr class='module-item'><td><a class="enum" href="enum.ConfigOption.html" title='novatel_oem6_service::ConfigOption enum'>ConfigOption</a></td><td class='docblock-short'><p>Input field for 'configureHardware' mutation</p>
+</td></tr><tr class='module-item'><td><a class="enum" href="enum.PosVelType.html" title='novatel_oem6_service::PosVelType enum'>PosVelType</a></td><td class='docblock-short'><p>Enum for the <code>positionType</code> and <code>velocityType</code> response fields
+of the <code>lockStatus</code> query</p>
+</td></tr><tr class='module-item'><td><a class="enum" href="enum.PowerState.html" title='novatel_oem6_service::PowerState enum'>PowerState</a></td><td class='docblock-short'><p>Response field for 'power' query</p>
+</td></tr><tr class='module-item'><td><a class="enum" href="enum.RefTimeStatus.html" title='novatel_oem6_service::RefTimeStatus enum'>RefTimeStatus</a></td><td class='docblock-short'><p>Enum for the <code>TimeStatus</code> response field of the <code>lockStatus</code> query</p>
+</td></tr><tr class='module-item'><td><a class="enum" href="enum.SolutionStatus.html" title='novatel_oem6_service::SolutionStatus enum'>SolutionStatus</a></td><td class='docblock-short'><p>Enum for the <code>positionStatus</code> and <code>velocityStatus</code> response fields
+of the <code>lockStatus</code> query</p>
+</td></tr><tr class='module-item'><td><a class="enum" href="enum.TestResults.html" title='novatel_oem6_service::TestResults enum'>TestResults</a></td><td class='docblock-short'><p>Enum for the 'testHardware' mutation response union</p>
+</td></tr><tr class='module-item'><td><a class="enum" href="enum.TestType.html" title='novatel_oem6_service::TestType enum'>TestType</a></td><td class='docblock-short'><p>Input field for 'testHardware' mutation</p>
+</td></tr></table></section><section id="search" class="content hidden"></section><section class="footer"></section><aside id="help" class="hidden"><div><h1 class="hidden">Help</h1><div class="shortcuts"><h2>Keyboard Shortcuts</h2><dl><dt><kbd>?</kbd></dt><dd>Show this help dialog</dd><dt><kbd>S</kbd></dt><dd>Focus the search field</dd><dt><kbd>↑</kbd></dt><dd>Move up in search results</dd><dt><kbd>↓</kbd></dt><dd>Move down in search results</dd><dt><kbd>↹</kbd></dt><dd>Switch tab</dd><dt><kbd>&#9166;</kbd></dt><dd>Go to active search result</dd><dt><kbd>+</kbd></dt><dd>Expand all sections</dd><dt><kbd>-</kbd></dt><dd>Collapse all sections</dd></dl></div><div class="infos"><h2>Search Tricks</h2><p>Prefix searches with a type followed by a colon (e.g., <code>fn:</code>) to restrict the search to a given type.</p><p>Accepted types are: <code>fn</code>, <code>mod</code>, <code>struct</code>, <code>enum</code>, <code>trait</code>, <code>type</code>, <code>macro</code>, and <code>const</code>.</p><p>Search functions by type signature (e.g., <code>vec -> usize</code> or <code>* -> vec</code>)</p><p>Search multiple things at once by splitting your query with comma (e.g., <code>str,u8</code> or <code>String,struct:Vec,test</code>)</p></div></div></aside><script>window.rootPath = "../";window.currentCrate = "novatel_oem6_service";</script><script src="../aliases.js"></script><script src="../main.js"></script><script defer src="../search-index.js"></script></body></html>

@@ -1,0 +1,650 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Working with the Pumpkin MBM2 &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../../index.html"/>
+        <link rel="up" title="KubOS for the Pumpkin MBM2" href="index.html"/>
+        <link rel="next" title="Porting KubOS to a New OBC" href="../porting-kubos.html"/>
+        <link rel="prev" title="Installing Kubos Linux on a Pumpkin Motherboard Module 2" href="installing-linux-mbm2.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Working with an OBC</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../cross-compile.html">Compiling Code for a Target OBC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../comms-setup.html">Communicating with an OBC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bbb/index.html">KubOS for the Beaglebone Black</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../iobc/index.html">KubOS for the ISIS-OBC</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">KubOS for the Pumpkin MBM2</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="installing-linux-mbm2.html">Installing Kubos Linux on a Pumpkin Motherboard Module 2</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Working with the Pumpkin MBM2</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#reference-documents">Reference Documents</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#status-leds">Status LEDs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#usb-connection">USB Connection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#peripherals">Peripherals</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#user-data-partitions">User Data Partitions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#reference-documents">Reference Documents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#debug-connection">Debug Connection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#ethernet-connection">Ethernet Connection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#peripherals">Peripherals</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../porting-kubos.html">Porting KubOS to a New OBC</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ecosystem/index.html">KubOS Ecosystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deep-dive/index.html">Under the Hood</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sdk-docs/index.html">Kubos SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Contributing to KubOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Working with KubOS and an OBC</a> &raquo;</li>
+        
+          <li><a href="index.html">KubOS for the Pumpkin MBM2</a> &raquo;</li>
+        
+      <li>Working with the Pumpkin MBM2</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/obc-docs/mbm2/working-with-the-mbm2.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="working-with-the-pumpkin-mbm2">
+<h1>Working with the Pumpkin MBM2<a class="headerlink" href="#working-with-the-pumpkin-mbm2" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>This document covers the Kubos Linux features which are specific to the
+Pumpkin MBM2 target.</p>
+<p>Please refer to <a class="reference internal" href="../../ecosystem/linux-docs/using-kubos-linux.html"><span class="doc">Using Kubos Linux</span></a> for a general guide to using Kubos Linux.</p>
+</div>
+<div class="section" id="reference-documents">
+<h2>Reference Documents<a class="headerlink" href="#reference-documents" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="pumpkin-documentation">
+<h3>Pumpkin Documentation<a class="headerlink" href="#pumpkin-documentation" title="Permalink to this headline">¶</a></h3>
+<p>The <cite>CubeSat Kit Motherboard Module (MBM) 2</cite> reference document
+is available from Pumpkin and is a useful document for learning what
+each of the hardware components are and how they are connected.</p>
+</div>
+<div class="section" id="kubos-documentation">
+<h3>Kubos Documentation<a class="headerlink" href="#kubos-documentation" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference internal" href="../../tutorials/first-obc-project.html"><span class="doc">Running a KubOS Project on an OBC</span></a> - Basic tutorial for creating your first KubOS project</li>
+<li><a class="reference internal" href="../../ecosystem/linux-docs/using-kubos-linux.html"><span class="doc">Using Kubos Linux</span></a> - General guide for interacting with Kubos Linux</li>
+<li><a class="reference internal" href="../../deep-dive/klb/kubos-linux-on-mbm2.html"><span class="doc">Building Kubos Linux for the Pumpkin MBM2</span></a> - Steps to build Kubos Linux for the Pumpkin MBM2</li>
+<li><a class="reference internal" href="installing-linux-mbm2.html"><span class="doc">Installing Kubos Linux on a Pumpkin Motherboard Module 2</span></a> - Steps to install Kubos Linux</li>
+</ul>
+</div>
+</div>
+<div class="section" id="status-leds">
+<h2>Status LEDs<a class="headerlink" href="#status-leds" title="Permalink to this headline">¶</a></h2>
+<p>There are four LEDs present on the Pumpkin MBM2 which give some indication of what state
+the board is in. When there is only one blinking LED, the board is running Kubos Linux and
+the system is currently idle. The LEDs will blink in correspondence with CPU and MMC activity.
+If all LEDs are solid, then the system has reached some kind of locked error state.</p>
+</div>
+<div class="section" id="usb-connection">
+<h2>USB Connection<a class="headerlink" href="#usb-connection" title="Permalink to this headline">¶</a></h2>
+<p>The Pumpkin MBM2 should be shipped with a USB Debug Adapter board.</p>
+<p>The white connection cable should be plugged into the labeled “UART0”
+port on the edge of the board, with the exposed pins facing up.</p>
+<p>The USB cable can then be plugged into your computer. Any required
+drivers should be automatically installed.</p>
+<p>This connection will be passed through to a Kubos Vagrant image as
+<cite>/dev/FTDI</cite> and will be used for the serial console.</p>
+</div>
+<div class="section" id="peripherals">
+<span id="peripherals-mbm2"></span><h2>Peripherals<a class="headerlink" href="#peripherals" title="Permalink to this headline">¶</a></h2>
+<p>The Pumpkin MBM2 has several different ports available for interacting
+with peripheral devices. Currently, users should interact with these
+devices using the standard Linux functions. A Kubos HAL will be added
+in the future to abstract this process.</p>
+<div class="section" id="adc">
+<h3>ADC<a class="headerlink" href="#adc" title="Permalink to this headline">¶</a></h3>
+<p>The Pumpkin MBM2 has seven analog input pins available:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Pin</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>AIN0</td>
+<td>H2.8</td>
+</tr>
+<tr class="row-odd"><td>AIN1</td>
+<td>H2.7</td>
+</tr>
+<tr class="row-even"><td>AIN2</td>
+<td>H2.6</td>
+</tr>
+<tr class="row-odd"><td>AIN3</td>
+<td>H2.5</td>
+</tr>
+<tr class="row-even"><td>AIN4</td>
+<td>H2.4</td>
+</tr>
+<tr class="row-odd"><td>AIN5</td>
+<td>H2.3</td>
+</tr>
+<tr class="row-even"><td>AIN6</td>
+<td>H2.2</td>
+</tr>
+</tbody>
+</table>
+<p>The pins are available through the Linux device <code class="docutils literal notranslate"><span class="pre">/sys/bus/iio/devices/iio\:device0/</span></code>.</p>
+<p>A single raw output value can be read from each of the pins via
+<code class="docutils literal notranslate"><span class="pre">/sys/bus/iio/devices/iio\:device0/in_voltage{n}_raw</span></code>, where <cite>{n}</cite> corresponds to the
+AIN number of the pin.</p>
+<p>Information about setting up continuous data gathering can be found in
+<a class="reference external" href="http://processors.wiki.ti.com/index.php/Linux_Core_ADC_Users_Guide">this guide from TI</a>.</p>
+<p>To convert the raw ADC value to a voltage, use this equation:</p>
+<div class="math notranslate nohighlight">
+\[V_{in} = \frac{D * (2^n - 1)}{V_{ref}}\]</div>
+<p>Where:</p>
+<blockquote>
+<div><ul class="simple">
+<li><span class="math notranslate nohighlight">\(D\)</span> = Raw ADC value</li>
+<li><span class="math notranslate nohighlight">\(n\)</span> = Number of ADC resolution bits</li>
+<li><span class="math notranslate nohighlight">\(V_{ref}\)</span> =  Reference voltage</li>
+</ul>
+</div></blockquote>
+<p>The Pumpkin MBM2 uses 12 resolution bits and a reference voltage of 1.8V, so the
+resulting equation is</p>
+<div class="math notranslate nohighlight">
+\[V_{in} = \frac{D * (4095)}{1.8}\]</div>
+</div>
+<div class="section" id="ethernet">
+<h3>Ethernet<a class="headerlink" href="#ethernet" title="Permalink to this headline">¶</a></h3>
+<p>The Pumpkin MBM2, via the embedded Beaglebone Black, provides an ethernet
+port which can be used for things like inter-system communication.</p>
+<p>The ethernet port is configured to have support for static IPv4 addressing and
+can be used with SSH via the included <a class="reference external" href="https://en.wikipedia.org/wiki/Dropbear_(software)">Dropbear</a>
+package.</p>
+<p>Kubos Linux currently guarantees support for TCP, UDP, and SCTP.
+Other protocols might be supported by default, but have not been verified.</p>
+<div class="section" id="resources">
+<h4>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><a class="reference internal" href="../comms-setup.html#ethernet"><span class="std std-ref">Kubos Ethernet Communication Guide</span></a></li>
+<li><a class="reference external" href="http://www.linuxhowtos.org/C_C++/socket.htm">TCP tutorial</a></li>
+<li><a class="reference external" href="https://www.cs.rutgers.edu/~pxk/417/notes/sockets/udp.html">UDP tutorial</a></li>
+<li><a class="reference external" href="http://petanode.com/blog/posts/introduction-to-the-sctp-socket-api-in-linux.html">SCTP tutorial</a></li>
+<li><a class="reference external" href="https://packetsender.com/">Packet Sender</a> - A tool to send test packets between an OBC and a host computer</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">By default, Windows Firewall will block many incoming packet types. This may impact testing.</p>
+</div>
+</div>
+<div class="section" id="configuration">
+<h4>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h4>
+<p>The static IP address can be updated by editing the <cite>/etc/network/interfaces</cite> file.
+By default the address is <code class="docutils literal notranslate"><span class="pre">10.0.2.20</span></code>.</p>
+</div>
+<div class="section" id="examples">
+<h4>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h4>
+<p>A couple example programs using the ethernet port can be found in the <cite>examples</cite> folder of the <a class="reference external" href="https://github.com/kubos/kubos/tree/master/examples">kubos repo</a>:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/kubos/kubos/tree/master/examples/kubos-linux-tcprx">kubos-linux-tcprx</a> - Receive TCP packets and then reply to the sender</li>
+<li><a class="reference external" href="https://github.com/kubos/kubos/tree/master/examples/kubos-linux-tcptx">kubos-linux-tcptx</a> - Send TCP packets to specified IP address and port</li>
+</ul>
+</div>
+</div>
+<div class="section" id="gpio">
+<h3>GPIO<a class="headerlink" href="#gpio" title="Permalink to this headline">¶</a></h3>
+<p>The CSK headers have 6 GPIO pins available for use.
+These pins can be dynamically controlled via the <a class="reference external" href="https://www.kernel.org/doc/Documentation/gpio/sysfs.txt">Linux GPIO Sysfs
+Interface for Userspace</a>
+as long as they have not already been assigned to another peripheral.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="24%" />
+<col width="47%" />
+<col width="29%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">CSK Pin</th>
+<th class="head">Linux GPIO Value</th>
+<th class="head">Direction</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>H1.6</td>
+<td>65</td>
+<td>Input</td>
+</tr>
+<tr class="row-odd"><td>H2.18</td>
+<td>61</td>
+<td>Output</td>
+</tr>
+<tr class="row-even"><td>H2.21</td>
+<td>89</td>
+<td>Output</td>
+</tr>
+<tr class="row-odd"><td>H2.22</td>
+<td>87</td>
+<td>Output</td>
+</tr>
+<tr class="row-even"><td>H2.23</td>
+<td>86</td>
+<td>Output</td>
+</tr>
+<tr class="row-odd"><td>H2.24</td>
+<td>85</td>
+<td>Output</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="cli-and-script-interface">
+<h4>CLI and Script Interface<a class="headerlink" href="#cli-and-script-interface" title="Permalink to this headline">¶</a></h4>
+<p>To interact with a pin from the command line or from a script, the user will first need to
+generate the pin’s device name:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ echo {pin} &gt; /sys/class/gpio/export
+</pre></div>
+</div>
+<p>For example, to interact with pin H2.18, which corresponds with GPIO_61, the user will use:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ echo 61 &gt; /sys/class/gpio/export
+</pre></div>
+</div>
+<p>Once this command has been issued, the pin will be defined to the system
+as ‘/sys/class/gpio/gpio{pin}’. The user can then set and check the pins
+direction and value.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Set pin as output:
+$ echo out &gt; /sys/class/gpio/gpio61/direction
+
+Set pin&#39;s value to 1:
+$ echo 1 &gt; /sys/class/gpio/gpio61/value
+
+Get pins&#39;s value:
+$ cat /sys/class/gpio/gpio61/value
+</pre></div>
+</div>
+<p>Once finished, the pin can be released:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ echo {pin} &gt; /sys/class/gpio/unexport
+</pre></div>
+</div>
+</div>
+<div class="section" id="application-interface">
+<h4>Application Interface<a class="headerlink" href="#application-interface" title="Permalink to this headline">¶</a></h4>
+<p>This functionality can also be used from a user’s application with Linux’s sysfs
+interface.</p>
+<p>An example program might look like this:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;sys/stat.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;sys/types.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;fcntl.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="n">fd</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">pin</span> <span class="o">=</span> <span class="mi">61</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">value</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+<span class="cm">/* Define the pin to the system */</span>
+<span class="n">fd</span> <span class="o">=</span> <span class="n">open</span><span class="p">(</span><span class="s">&quot;/sys/class/gpio/export&quot;</span><span class="p">,</span> <span class="n">O_WRONLY</span><span class="p">);</span>
+<span class="n">write</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">pin</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">pin</span><span class="p">));</span>
+<span class="n">close</span><span class="p">(</span><span class="n">fd</span><span class="p">);</span>
+
+<span class="cm">/* Set the pin&#39;s direction */</span>
+<span class="n">fd</span> <span class="o">=</span> <span class="n">open</span><span class="p">(</span><span class="s">&quot;/sys/class/gpio/gpio45/direction&quot;</span><span class="p">,</span> <span class="n">O_WRONLY</span><span class="p">);</span>
+<span class="n">write</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="s">&quot;out&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+<span class="n">close</span><span class="p">(</span><span class="n">fd</span><span class="p">);</span>
+
+<span class="cm">/* Set the pin&#39;s value */</span>
+<span class="n">fd</span> <span class="o">=</span> <span class="n">open</span><span class="p">(</span><span class="s">&quot;/sys/class/gpio/gpio45/value&quot;</span><span class="p">,</span> <span class="n">O_WRONLY</span><span class="p">);</span>
+<span class="n">write</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">value</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="n">close</span><span class="p">(</span><span class="n">fd</span><span class="p">);</span>
+
+<span class="cm">/* Read the value back */</span>
+<span class="n">fd</span> <span class="o">=</span> <span class="n">open</span><span class="p">(</span><span class="s">&quot;/sys/class/gpio/gpio45/value&quot;</span><span class="p">,</span> <span class="n">O_RDONLY</span><span class="p">);</span>
+<span class="kt">char</span> <span class="n">strValue</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+<span class="n">read</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="n">strValue</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="n">value</span> <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">strValue</span><span class="p">);</span>
+<span class="n">close</span><span class="p">(</span><span class="n">fd</span><span class="p">);</span>
+
+<span class="cm">/* Release the pin */</span>
+<span class="n">fd</span> <span class="o">=</span> <span class="n">open</span><span class="p">(</span><span class="s">&quot;/sys/class/gpio/unexport&quot;</span><span class="p">,</span> <span class="n">O_WRONLY</span><span class="p">);</span>
+<span class="n">write</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">pin</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">pin</span><span class="p">));</span>
+<span class="n">close</span><span class="p">(</span><span class="n">fd</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="i2c">
+<h3>I2C<a class="headerlink" href="#i2c" title="Permalink to this headline">¶</a></h3>
+<p>The Pumpkin MBM2 has one user-accessible I2C bus, <code class="docutils literal notranslate"><span class="pre">/dev/i2c-1</span></code>
+Users can connect a new device to it via pins <strong>H1.43</strong> (SCL) and <strong>H1.41</strong> (SDA)
+of the CubeSat Kit Bus connectors.</p>
+<p><a class="reference external" href="http://www.nxp.com/documents/user_manual/UM10204.pdf">I2C Standards
+Doc</a></p>
+<p>Kubos Linux is currently configured to support the I2C standard-mode
+speed of 100kHz.</p>
+<p>For examples and instructions, see the <a class="reference internal" href="../../deep-dive/apis/kubos-hal/i2c-hal/index.html"><span class="doc">I2C HAL documentation</span></a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The I2C bus is available through the Kubos C HAL as <code class="docutils literal notranslate"><span class="pre">K_I2C1</span></code>.</p>
+</div>
+</div>
+<div class="section" id="rtc">
+<h3>RTC<a class="headerlink" href="#rtc" title="Permalink to this headline">¶</a></h3>
+<p>The Pumpkin MBM2 has a real-time clock (RTC) which is used to maintain system time.</p>
+<p>This clock can be queried or set using the <code class="docutils literal notranslate"><span class="pre">hwclock</span></code> command.</p>
+</div>
+<div class="section" id="uart">
+<h3>UART<a class="headerlink" href="#uart" title="Permalink to this headline">¶</a></h3>
+<p>The Pumpkin MBM2 has 5 UART ports available for use in varying capacities:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="36%" />
+<col width="15%" />
+<col width="15%" />
+<col width="17%" />
+<col width="17%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Linux Device</th>
+<th class="head">TX Pin</th>
+<th class="head">RX Pin</th>
+<th class="head">RTS Pin</th>
+<th class="head">CTS Pin</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>/dev/ttyS1</td>
+<td>H1.18</td>
+<td>H1.17</td>
+<td>H1.10</td>
+<td>H1.9</td>
+</tr>
+<tr class="row-odd"><td>/dev/ttyS2</td>
+<td>H1.8</td>
+<td>H1.7</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>/dev/ttyS3</td>
+<td>H1.5</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>/dev/ttyS4</td>
+<td>H1.16</td>
+<td>H1.15</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>/dev/ttyS5 (SLIP)</td>
+<td>H1.20</td>
+<td>H1.19</td>
+<td>H1.12</td>
+<td>H1.11</td>
+</tr>
+</tbody>
+</table>
+<p>Users can interact with these ports using Linux’s <a class="reference external" href="http://man7.org/linux/man-pages/man3/termios.3.html">termios</a> interface.</p>
+<p><a class="reference external" href="http://tldp.org/HOWTO/Serial-Programming-HOWTO/x115.html">A tutorial on this interface can be found here</a></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">/dev/ttyS5</span></code> device has been preconfigured to be used for SLIP connections.
+Please refer to the <a class="reference internal" href="../comms-setup.html#slip"><span class="std std-ref">SLIP instructions</span></a> for more information.</p>
+</div>
+</div>
+<div class="section" id="user-data-partitions">
+<h2>User Data Partitions<a class="headerlink" href="#user-data-partitions" title="Permalink to this headline">¶</a></h2>
+<p>The Pumpkin MBM2 has multiple user data partitions available, one on each storage
+device.</p>
+<div class="section" id="emmc">
+<h3>eMMC<a class="headerlink" href="#emmc" title="Permalink to this headline">¶</a></h3>
+<p>The user partition on the eMMC device is used as the primary user data storage area.
+All system-related <cite>/home/</cite> paths will reside here.</p>
+<div class="section" id="home-system-usr-bin">
+<h4>/home/system/usr/bin<a class="headerlink" href="#home-system-usr-bin" title="Permalink to this headline">¶</a></h4>
+<p>This directory is included in the system’s PATH, so applications placed
+here can be called directly from anywhere, without needing to know the
+full file path.</p>
+</div>
+<div class="section" id="home-system-etc-init-d">
+<h4>/home/system/etc/init.d<a class="headerlink" href="#home-system-etc-init-d" title="Permalink to this headline">¶</a></h4>
+<p>All user-application initialization scripts live under this directory.
+The naming format is ‘S{run-level}{application}’.</p>
+</div>
+</div>
+<div class="section" id="microsd">
+<h3>microSD<a class="headerlink" href="#microsd" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="home-microsd">
+<h4>/home/microsd<a class="headerlink" href="#home-microsd" title="Permalink to this headline">¶</a></h4>
+<p>This directory points to a partition on the microSD device included with the
+base Beaglebone Black board</p>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../porting-kubos.html" class="btn btn-neutral float-right" title="Porting KubOS to a New OBC" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="installing-linux-mbm2.html" class="btn btn-neutral" title="Installing Kubos Linux on a Pumpkin Motherboard Module 2" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

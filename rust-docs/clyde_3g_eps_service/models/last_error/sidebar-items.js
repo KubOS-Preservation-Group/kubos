@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["Error","Error variants which can be returned by the EPS"]],"struct":[["ErrorData","Last command status for the EPS"]]});

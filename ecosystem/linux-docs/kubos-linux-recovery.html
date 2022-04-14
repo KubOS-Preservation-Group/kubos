@@ -1,0 +1,439 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Kubos Linux Recovery Architecture &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../../index.html"/>
+        <link rel="up" title="KubOS Ecosystem" href="../index.html"/>
+        <link rel="next" title="Under the Hood of KubOS" href="../../deep-dive/index.html"/>
+        <link rel="prev" title="Upgrading Kubos Linux" href="kubos-linux-upgrade.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../obc-docs/index.html">Working with an OBC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">KubOS Ecosystem</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#mission-applications">Mission Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#services">Services</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#kubos-linux">Kubos Linux</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="kubos-linux-overview.html">Kubos Linux Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="using-kubos-linux.html">Using Kubos Linux</a></li>
+<li class="toctree-l3"><a class="reference internal" href="logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="monitoring.html">Process Monitoring</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubos-linux-upgrade.html">Kubos Linux Upgrades</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Kubos Linux Recovery</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#environment-variables">Environment Variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#boot-processing-diagram">Boot Processing Diagram</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#kubos-recovery">Kubos Recovery</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#alternate-boot">Alternate Boot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#u-boot-cli">U-Boot CLI</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../deep-dive/index.html">Under the Hood</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sdk-docs/index.html">Kubos SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Contributing to KubOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">KubOS Ecosystem</a> &raquo;</li>
+        
+      <li>Kubos Linux Recovery Architecture</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/ecosystem/linux-docs/kubos-linux-recovery.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="kubos-linux-recovery-architecture">
+<h1>Kubos Linux Recovery Architecture<a class="headerlink" href="#kubos-linux-recovery-architecture" title="Permalink to this headline">¶</a></h1>
+<p>Ideally, a space mission using Kubos Linux will run successfully until the end of its natural
+lifespan.
+However, space is unpredictable and systems can become corrupted. As a result, we’ve implemented a
+basic mechanism to help detect and recover from these random errors.</p>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>Each time the system attempts to boot, an internal counter is increased. On successful boot, a
+custom init script will reset this internal counter.</p>
+<p>If the system has failed to boot twice already, then the custom Kubos recovery code is attempted.
+If the Kubos recovery steps fail, then the system attempts to boot into an alternate operating
+system instead.
+If that fails, then the system is likely in a non-operational state.
+It will enter a state of attempting to boot the alternate OS, failing, then rebooting, to allow for
+the chance that a reboot might correct whatever problem has occurred.</p>
+<p>If, for some reason, the internal counter cannot be increased, the recovery system simply fails to
+take any action.</p>
+<p>The recovery system will also be triggered if U-Boot detects that the Kubos Linux kernel file has
+become corrupted, no matter what state the boot counter is in.</p>
+</div>
+<div class="section" id="environment-variables">
+<h2>Environment Variables<a class="headerlink" href="#environment-variables" title="Permalink to this headline">¶</a></h2>
+<p>There are several U-Boot environment variables that are used to track the state of a Kubos Linux
+system:</p>
+<ul class="simple">
+<li><cite>bootcmd</cite> - The usual set of commands that are used to boot into Kubos Linux.</li>
+<li><cite>altbootcmd</cite> - The alternate set of commands that are used if the system cannot successfully boot
+into Kubos Linux. They will be set up to attempt to boot into an alternate OS.</li>
+<li><cite>recovery_available</cite> - Indicates that recovery actions are available and should be taken, if
+necessary.</li>
+<li><cite>bootlimit</cite> - The number of bad boots allowed before the system attempts to use altbootcmd instead
+of bootcmd to boot.</li>
+<li><cite>bootcount</cite> - The number of boots that have been attempted.</li>
+<li><cite>kubos_curr_version</cite> - The name of the kpack *.itb file that the current Kubos Linux kernel and
+rootfs were loaded from.</li>
+<li><cite>kubos_prev_version</cite> - The name of the kpack *.itb file that was previously used to load the
+Kubos Linux kernel and rootfs.</li>
+<li><cite>kubos_curr_tried</cite> - Indicates that reloading the current version has been attempted.</li>
+</ul>
+<p>The default values for these variables can be found in the configuration header file for each board
+located in the <a class="reference external" href="https://github.com/kubos/uboot">U-Boot repo</a> under the ‘include/configs’ directory.</p>
+</div>
+<div class="section" id="boot-processing-diagram">
+<h2>Boot Processing Diagram<a class="headerlink" href="#boot-processing-diagram" title="Permalink to this headline">¶</a></h2>
+<div class="figure" id="id1">
+<img alt="Boot Processing Diagram" src="../../_images/uboot_boot.png" />
+<p class="caption"><span class="caption-text">Boot Processing Diagram</span></p>
+</div>
+<div class="figure" id="id2">
+<a class="reference internal image-reference" href="../../_images/kubos_linux_boot.png"><img alt="Linux Boot Verification Diagram" src="../../_images/kubos_linux_boot.png" style="width: 494.25px; height: 285.0px;" /></a>
+<p class="caption"><span class="caption-text">Boot Verification Diagram</span></p>
+</div>
+</div>
+<div class="section" id="kubos-recovery">
+<h2>Kubos Recovery<a class="headerlink" href="#kubos-recovery" title="Permalink to this headline">¶</a></h2>
+<div class="figure">
+<img alt="Recovery Process Diagram" src="../../_images/kubos_linux_recovery.png" />
+</div>
+<p>The Kubos recovery process has three main components:</p>
+<ul class="simple">
+<li>Attempt to reload the current version of Kubos Linux</li>
+<li>Attempt to load the previous version of Kubos Linux</li>
+<li>Attempt to load the base version of Kubos Linux</li>
+</ul>
+<p>The boot count will not be increased again until this full recovery process is determined to have
+failed.</p>
+<p>All of the files required for this process live in the board’s ‘upgrade’ partition.
+The base version of Kubos Linux (kpack-base.itb) should be pre-loaded into the partition.
+The current and previous versions are loaded into the partition as part of the system upgrade process.
+These versions follow a natural process.</p>
+<p>Brand new Kubos Linux system:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">kubos_curr_version</span> <span class="o">=</span> <span class="n">kpack</span><span class="o">-</span><span class="n">base</span><span class="o">.</span><span class="n">itb</span>
+<span class="n">kubos_prev_version</span> <span class="o">=</span> <span class="n">kpack</span><span class="o">-</span><span class="n">base</span><span class="o">.</span><span class="n">itb</span>
+</pre></div>
+</div>
+<p>After the first system upgrade:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">kubos_curr_version</span> <span class="o">=</span> <span class="n">kpack</span><span class="o">-</span><span class="n">upgrade1</span><span class="o">.</span><span class="n">itb</span>
+<span class="n">kubos_prev_version</span> <span class="o">=</span> <span class="n">kpack</span><span class="o">-</span><span class="n">base</span><span class="o">.</span><span class="n">itb</span>
+</pre></div>
+</div>
+<p>After the second system upgrade:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">kubos_curr_version</span> <span class="o">=</span> <span class="n">kpack</span><span class="o">-</span><span class="n">upgrade2</span><span class="o">.</span><span class="n">itb</span>
+<span class="n">kubos_prev_version</span> <span class="o">=</span> <span class="n">kpack</span><span class="o">-</span><span class="n">upgrade1</span><span class="o">.</span><span class="n">itb</span>
+</pre></div>
+</div>
+<p>Rolling back to a previous version of Kubos Linux uses the same mechanism as <a class="reference internal" href="kubos-linux-upgrade.html"><span class="doc">upgrading to a new version</span></a>.
+A kpack*.itb file is broken into its components and then the kernel image is written to the boot
+partition and the rootfs image is written to the rootfs partition.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This process will wipe out everything that was previously in the rootfs partition.
+As a result, all user files should be stored in the user space partition, which is mapped to the ‘/home’ directory.
+This user space partition should not be affected by the Kubos recovery process.</p>
+</div>
+<div class="section" id="manual-recovery">
+<h3>Manual Recovery<a class="headerlink" href="#manual-recovery" title="Permalink to this headline">¶</a></h3>
+<p>If for some reason your Kubos Linux system boots after an upgrade but has introduced some
+non-critical issue (like an incompatibility with a user application), you can manually rollback to a
+previously installed version.
+Previous packages are not deleted once they have been loaded.
+As a result, you can simply specify which package you would like to boot into and then restart your
+system.
+List the contents of the ‘/upgrade’ directory to see what files are available.</p>
+<p>From the Kubos Linux shell:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ls /upgrade
+    kpack-2017.02.20.itb    kpack-2017.03.21.itb    kpack-2017.04.11.itb
+$ fw_printenv kubos_updatefile kpack-{desired version}.itb
+$ reboot
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="alternate-boot">
+<h2>Alternate Boot<a class="headerlink" href="#alternate-boot" title="Permalink to this headline">¶</a></h2>
+<p>If the system has failed to boot more times than the ‘bootlimit’ value allows, the system will
+attempt to boot using the ‘altbootcmd’ environment variable.
+This variable contains all of the commands required to boot into an alternate operating system.
+Due to the low-portability of any commands that deal with memory, the exact format will change
+between boards (and potentially between missions), but should follow this rough format:</p>
+<ul class="simple">
+<li>Copy the alternate OS from persistent storage into SDRAM.</li>
+<li>Run the alternate OS from SDRAM.</li>
+</ul>
+<p>By default, ‘altbootcmd’ is setup to simply retry the normal boot commands.
+It should be updated once a plan for the secondary boot logic has been established.</p>
+<div class="section" id="generic-alternate-os-setup">
+<h3>Generic Alternate OS Setup<a class="headerlink" href="#generic-alternate-os-setup" title="Permalink to this headline">¶</a></h3>
+<p>The basic process for creating an alternate OS and loading it onto a board
+should be:</p>
+<ul class="simple">
+<li>Build an application that is capable of running on the board. Pay attention to the SDRAM address
+that the application is configured to run from. Frequently, this is a static address (likely the
+very beginning of SDRAM), so the application must end up running from this location.</li>
+<li>Load it into the appropriate persistent storage (NOR/NAND flash, SD card, etc)</li>
+<li>Update the altbootcmd variable with the address to copy the application from, the address to copy
+the application to, and the length of the application.
+Then add a command to trigger the boot process. This can be done from the U-Boot CLI with the
+<code class="docutils literal notranslate"><span class="pre">setenv</span></code> and <code class="docutils literal notranslate"><span class="pre">saveenv</span></code> commands, or from Kubos Linux with the <code class="docutils literal notranslate"><span class="pre">fw_setenv</span></code> command.</li>
+</ul>
+<p>The updated altbootcmd might look something like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">altbootcmd</span><span class="o">=</span><span class="n">cp</span><span class="o">.</span><span class="n">b</span> <span class="mh">0x10080000</span> <span class="mh">0x20000000</span> <span class="mh">0x70000</span><span class="p">;</span> <span class="n">go</span> <span class="mh">0x20000000</span>
+</pre></div>
+</div>
+<p>This command will do the following:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Copy 0x7000 bytes from address 0x10080000 (a permanent storage location) to address 0x20000000
+(the beginning of SDRAM)</li>
+<li>Use the <code class="docutils literal notranslate"><span class="pre">go</span></code> command to attempt to boot from address 0x20000000 (<code class="docutils literal notranslate"><span class="pre">go</span></code> is used for generic
+executables)</li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="u-boot-cli">
+<h2>U-Boot CLI<a class="headerlink" href="#u-boot-cli" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://www.denx.de/wiki/DULG/UBootCommandLineInterface">U-Boot CLI Documentation</a></p>
+<p>The U-Boot CLI provides a few commands which may be helpful for manually diagnosing and recovering
+from system problems.
+It has a very limited functionality, but should be better than nothing.</p>
+<p>If you want to avoid booting into an operating system for any reason and instead want to interact
+with the U-Boot CLI, you can abort the boot by creating a serial connection and then holding down
+any key while powering the board.
+This action will not increase the boot count.</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../deep-dive/index.html" class="btn btn-neutral float-right" title="Under the Hood of KubOS" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="kubos-linux-upgrade.html" class="btn btn-neutral" title="Upgrading Kubos Linux" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

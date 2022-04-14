@@ -1,0 +1,329 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Reporting Bugs &mdash; Kubos 1.21.0+13 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/kubos_favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Kubos 1.21.0+13 documentation" href="../index.html"/>
+        <link rel="up" title="Contributing to KubOS" href="index.html"/>
+        <link rel="next" title="Requesting New Features" href="feature-request.html"/>
+        <link rel="prev" title="Contributing to KubOS" href="index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Kubos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.21.0+13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../kubos-design.html">KubOS Design</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../obc-docs/index.html">Working with an OBC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mission-dev/index.html">Mission Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ecosystem/index.html">KubOS Ecosystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deep-dive/index.html">Under the Hood</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sdk-docs/index.html">Kubos SDK</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Contributing to KubOS</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Reporting Bugs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#creating-an-issue">Creating an Issue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#filling-out-the-template">Filling Out the Template</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fixing-the-problem">Fixing the Problem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#closing-the-report">Closing the Report</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="feature-request.html">Requesting New Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contribution-process.html">Contributor Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kubos-standards.html">Coding and Documentation Standards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="documentation.html">Documentation Guides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html">Testing Guides</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq-troubleshooting.html">FAQs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Kubos</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Contributing to KubOS</a> &raquo;</li>
+        
+      <li>Reporting Bugs</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/contributing/reporting-bugs.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="reporting-bugs">
+<h1>Reporting Bugs<a class="headerlink" href="#reporting-bugs" title="Permalink to this headline">¶</a></h1>
+<p>While all devs like to think that they write perfect code, we know that reality doesn’t quite agree.</p>
+<p>If you encounter a bug while using KubOS or while working with our source code, please open
+a <a class="reference external" href="https://github.com/kubos/kubos/issues/new/choose">GitHub issue</a> and tell us about it.</p>
+<p>Notes:</p>
+<ul class="simple">
+<li>This process does require that you have a GitHub account</li>
+<li>If you find a small bug that is very easily fixed (like a typo or one-line change), feel free to
+just correct it and submit a PR, instead of going through this full process</li>
+</ul>
+<div class="section" id="creating-an-issue">
+<h2>Creating an Issue<a class="headerlink" href="#creating-an-issue" title="Permalink to this headline">¶</a></h2>
+<p>In order to create a new bug report, navigate to the <a class="reference external" href="https://github.com/kubos/kubos">main Kubos repo</a>
+and click ‘Issues’, then click the ‘New issue’ button.</p>
+<p>Alternatively, use this shortcut link: <a class="reference external" href="https://github.com/kubos/kubos/issues/new/choose">https://github.com/kubos/kubos/issues/new/choose</a></p>
+<p>Once here, you should see a list of available issue templates.
+Click the ‘Get started’ button that belongs to the “Bug report” template.</p>
+<p>The issue title should be short, but descriptive.
+Ideally, it should name the area in which the error occurs, as well as a high-level overview of the
+problem.</p>
+<p>Examples:</p>
+<ul class="simple">
+<li>Monitor service failing to start</li>
+<li>Can’t change log level for Rust app</li>
+<li>Kubos Linux install instructions no longer valid</li>
+</ul>
+</div>
+<div class="section" id="filling-out-the-template">
+<h2>Filling Out the Template<a class="headerlink" href="#filling-out-the-template" title="Permalink to this headline">¶</a></h2>
+<p>GitHub will auto-populate the issue’s body with the bug report template.
+We appreciate all the information you’re able to provide, however we acknowledge that sometimes
+the information just isn’t available, or you might not have the time in order to create an in-depth
+report.</p>
+<p>The template sections should be self-explanatory (if they’re not, please open a bug report to
+correct the problem).</p>
+<p>Some sections should be included with all bug reports:</p>
+<ul class="simple">
+<li>Description</li>
+<li>Severity</li>
+</ul>
+<p>Some sections are only relevant if the problem is with a running process or system behavior:</p>
+<ul class="simple">
+<li>System Details</li>
+<li>To Reproduce</li>
+<li>Bug Output</li>
+<li>Workaround</li>
+</ul>
+</div>
+<div class="section" id="fixing-the-problem">
+<h2>Fixing the Problem<a class="headerlink" href="#fixing-the-problem" title="Permalink to this headline">¶</a></h2>
+<p>A Kubos team member should respond to the issue within one business day in order to request any
+additional information and lay out the next steps.</p>
+<p>The team (or potentially a community member!) will correct the issue in an appropriate timeframe.
+The exact timeframe required to complete this work will be dictated by current team resources, as
+well as the issue’s severity.</p>
+<p>Once code changes have been created, the relevant PR will be linked to the bug report.</p>
+</div>
+<div class="section" id="closing-the-report">
+<h2>Closing the Report<a class="headerlink" href="#closing-the-report" title="Permalink to this headline">¶</a></h2>
+<p>Once the bug has been fixed and the changes have been merged into the master branch, a Kubos team
+member will close the issue.</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="feature-request.html" class="btn btn-neutral float-right" title="Requesting New Features" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Contributing to KubOS" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, Kubos Corporation.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.21.0+13',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
